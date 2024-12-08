@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 const readline = require('readline'),
-	bubls = require('../lib/bubls');
+      Bubblescript = require('../lib/bubblescript');
+
+const bubls = new Bubblescript()
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -10,7 +12,7 @@ const rl = readline.createInterface({
 
 function r3pL() {
   rl.question("%< ", (xoxo) => {
-    console.log(bubls(xoxo));
+    console.log(bubls.eval(xoxo));
     r3pL();
   });
 }
