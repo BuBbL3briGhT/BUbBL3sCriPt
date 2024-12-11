@@ -2,11 +2,14 @@
 //const Lex = require('./lib/lexer.js');
 
 
-const symbols = Object.freeze({
-  '(':  Symbol('('),
-  ')':  Symbol(')'),
-  '+':  Symbol('+')
-});
+// const symbols = Object.freeze({
+//   '(':  Symbol('('),
+//   ')':  Symbol(')'),
+//   '+':  Symbol('+'),
+//   '-':  Symbol('-'),
+//   '*':  Symbol('*'),
+//   '/':  Symbol('/'),
+// });
 
 
 class Lexer {
@@ -28,7 +31,8 @@ class Lexer {
         case: [' ', "\t"]
           this.head++; // skip
           break;
-        case: ['(', ')', '[', ']', '{', '}', '.']
+        case: ['(', ')', '[', ']', '{', '}', 
+               '.', '+', '-', '*', '/']
           this.readHead();
           break;
         case: '"'
@@ -65,14 +69,14 @@ private readString() {
 
 
 private readNumber() {
-  let q = this.s.slice(this.head)
+  let     q = this.s.slice(this.head),
+      match = q.match(/^\d+(?:\.\d+)?/);
 
-  /\d+(.\d+)?/
-  result.push([
-    symbols.number
-
+  result.push(Number(match[0]);
+  this.head += match[0].length;
 }
 private readNewline() {
+
 }
 private readSymbol() {
 }
