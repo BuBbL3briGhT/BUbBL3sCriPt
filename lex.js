@@ -1,5 +1,5 @@
 
-const Lex = require('./lib/lexer.js');
+const Lexer = require('./lib/lexer.js');
 
 // class Lex {
 
@@ -16,6 +16,16 @@ const Lex = require('./lib/lexer.js');
 
 let s = "(+ 4 5)"
 let l = new Lexer;
+l.tokenize(s, (result) => {
+  console.log(result)
+});
+
+s = "puts \"Holà Lulà\""
+l.tokenize(s, (result) => {
+  console.log(result)
+});
+
+s = "puts \"Holà Lulà\"\n(/ 7 3)"
 l.tokenize(s, (result) => {
   console.log(result)
 });
