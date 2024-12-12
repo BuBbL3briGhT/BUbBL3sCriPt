@@ -1,6 +1,4 @@
-
 const Lexer = require('./lib/lexer.js');
-
 // class Lex {
 
 //   constructor(s, cb) {

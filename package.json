@@ -1,13 +1,9 @@
 {
   "name": "Bubblescript",
-  "dependencies": {
-    "concurrently": "^9.1.0"
+  "scripts": {
+    "test": "mocha"
   },
-"scripts": {
-    "test": "concurrently --kill-others-on-fail --prefix none npm:test:*",
-    "test:sw": "node --import ./test/setup.sw.mjs --test './src/sw/**/*.spec.*'",
-    "test:units": "node --import ./test/setup.units.mjs --test './src/app/**/*.spec.*'",
-    "test:ui": "node --import ./test/setup.ui.mjs --test './src/app/**/*.test.*'"
+  "devDependencies": {
+    "mocha": "^11.0.1"
   }
 }
-

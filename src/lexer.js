@@ -11,6 +11,7 @@ class Lexer {
       switch (this.head[0]) {
         case ' ':
         case "\t":
+        case "\n":
           this.advance();
           break;
         case '(':
@@ -41,9 +42,6 @@ class Lexer {
         case '9':
           this.tokenizeNumber()
           break;
-        case "\n":
-          this.tokenizeNewline();
-          break;
         default:
           this.tokenizeIdentifier();
           break;
@@ -65,12 +63,6 @@ class Lexer {
     let m = this.head.match(/^\d+(?:\.\d+)?/);
     // this.result.push([tokenTypes.number, Number(m[0])]);
     this.result.push(['number', Number(m[0])]);
-    this.advance(m[0].length);
-  }
-
-  tokenizeNewline() {
-    let m = this.head.match(/^\n+/);
-    this.result.push(['\n']);
     this.advance(m[0].length);
   }
 
