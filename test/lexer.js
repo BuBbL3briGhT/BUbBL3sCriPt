@@ -6,13 +6,13 @@ describe('Lexer', function () {
     it("should tokenize a string", function() {
       let lexer = new Lexer;
       lexer.tokenize("(+ 2 3)", function (tokens) {
-        // assert.equal(tokens, [
-        //     [ '(' ],
-        //     [ 'identifier', '+' ],
-        //     [ 'number', 2 ],
-        //     [ 'number', 3 ],
-        //     [ ')' ]
-        // ]);
+        assert.deepEqual(tokens, [
+            [ '(' ],
+            [ 'identifier', '+' ],
+            [ 'number', 2 ],
+            [ 'number', 3 ],
+            [ ')' ]
+        ]);
       });
     });
   });
