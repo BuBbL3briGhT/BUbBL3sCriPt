@@ -1,7 +1,28 @@
-
 // Bubblescript parser
+//
+// Formal grammar:
+//
+//     P -> L*
+//     L -> (I*)
+//     G -> [I*]
+//     Q -> 'I
+//     I -> IDENT|NUMBER|STRING|L|G|Q
+//
+
+const Lexer = require("./lexer");
+
 class Parser {
-  /// TOTO: Implement Parser
+
+  constructor(lexer = new Lexer) {
+    this.lexer = lexer;
+  }
+
+  parse(s, callback) {
+    this.lexer.tokenize(s, function(tokens) {
+      callback(tokens);
+    });
+  }
+
 }
 
 module.exports = Parser;
@@ -27,7 +48,7 @@ lc = null,
 progress = 0;
 
 
-parse(s, stack = []) {
+function parse(s, stack = []) {
 
   each(s.split(''), function(c) {
     if (stropen) {
