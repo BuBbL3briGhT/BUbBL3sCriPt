@@ -10,6 +10,7 @@
 //
 
 const Lexer = require("./lexer");
+const List  = require("./list");
 
 class Parser {
 
@@ -18,16 +19,18 @@ class Parser {
   }
 
   parse(s, callback) {
-    this.lexer.tokenize(s, function(tokens) {
-      this._parse(tokens, callback);
+    let that = this;
+    this.lexer.tokenize(s, function(tokens, values) {
+      that.#parse(tokens, values, callback);
     });
   }
 
-  _parse(tokens, callback) {
-    let ast = [];
-    tokens.each(function(t) {
-
-    });
+  #parse(tokens, values, callback) {
+    let tree = List.create();
+    for(const [i, token] of tokens) {
+      console.log(i);
+    }
+    callback();
   }
 
 }
