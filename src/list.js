@@ -135,22 +135,21 @@ class List  {
     yield this.pop();
   }
 
+  static create(...items) {
+    if (items.length == 0)
+      return this.emptyList;
+    else
+      return new List(...items);
+  }
+
 }
 
 class EmptyList extends List {
   get isEmpty() { return true; }
-  push(val) {
-    return new List(val);
-  }
-  toString() {
-    return "()";
-  }
-  reverse() {
-    return this;
-  }
-
+  toString() { return "()"; }
+  push(val) { return new List(val); }
+  reverse() { return this; }
   map() { return this; }
-
 }
 
 List.emptyList = new EmptyList;
