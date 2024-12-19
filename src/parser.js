@@ -1,6 +1,6 @@
 // Bubblescript parser
 //
-// Formal grammar:
+// Grammar:
 //
 //     P -> L*
 //     L -> (I*)
@@ -19,7 +19,14 @@ class Parser {
 
   parse(s, callback) {
     this.lexer.tokenize(s, function(tokens) {
-      callback(tokens);
+      this._parse(tokens, callback);
+    });
+  }
+
+  _parse(tokens, callback) {
+    let ast = [];
+    tokens.each(function(t) {
+
     });
   }
 

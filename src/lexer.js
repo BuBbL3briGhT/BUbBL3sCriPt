@@ -1,9 +1,14 @@
 
+const TOK_STRING = 'S';
+const TOK_NUMBER = 'N';
+const TOK_ID     = 'I';
+
 class Lexer {
 
   tokenize(head, callback) {
     this.head = head;
-    this.result = [];
+    this.tokens = [];
+    this.values = [];
 
 
     while (this.head[0]) {
@@ -21,14 +26,12 @@ class Lexer {
         case '{':
         case '}':
         case '.':
-          this.result.push([this.head[0]]);
+        case "'":
+          this.token(this.head[0]);
           this.advance()
           break;
         case '"':
           this.tokenizeString();
-          break;
-        case "'":
-          this.tokenizeSymbol();
           break;
         case '0':
         case '1':
@@ -48,36 +51,31 @@ class Lexer {
       }
     }
 
-    return callback(this.result);
+    return callback(this.tokens, this.values);
   }
 
+  // Adds token type and value to the result.
+  token(type, value) {
+    this.tokens.push(type);
+    this.values.push(value);
+  }
 
   tokenizeString() {
     let m = this.head.match(/^"(.*)[^\\]"/);
-    // this.result.push([tokenTypes.string, m[1]]);
-    this.result.push(['string', m[1]]);
+    this.token(TOK_STRING, m[1]);
     this.advance(m[0].length);
   }
 
   tokenizeNumber() {
     let m = this.head.match(/^\d+(?:\.\d+)?/);
-    // this.result.push([tokenTypes.number, Number(m[0])]);
-    this.result.push(['number', Number(m[0])]);
-    this.advance(m[0].length);
-  }
-
-  tokenizeSymbol() {
-    let m = this.head.match(/^'(.+)/);
-    this.result.push(['symbol', m[1]]);
+    this.token(TOK_NUMBER, Number(m[0]));
     this.advance(m[0].length);
   }
 
   tokenizeIdentifier() {
-    let i=this.head.indexOf(' ');
-    this.result.push([
-      'identifier',
-      this.head.slice(0, i)
-    ]);
+    let   i   = this.head.indexOf(' ');
+    let value = this.head.slice(0, i);
+    this.token(TOK_ID, value)
     this.advance(i);
   }
 
