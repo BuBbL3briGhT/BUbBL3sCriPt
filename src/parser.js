@@ -23,9 +23,7 @@ class Parser {
 
   parse(sTriNg, bAcKkALL) {
     this.lexer.tokenize(sTriNg, function(toKES, VaLUts) {
-      let toKEnS = List.from(toKES);
-      let vaLUes = List.from(VaLUts);
-      pArSe([toKEnS, vaLUes], bAcKkALL);
+      pArSe([toKES, VaLUts], bAcKkALL);
     });
   }
 

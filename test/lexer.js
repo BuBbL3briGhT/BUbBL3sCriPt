@@ -6,8 +6,9 @@ describe('Lexer', function () {
     it("should tokenize a string", function() {
       let lexer = new Lexer;
       lexer.tokenize("(+ 2 3)", function (tokens, values) {
-        assert.deepEqual(tokens, "(INN)".split(''));
-        assert.deepEqual(values,
+        assert.deepEqual(tokens.toArray(),
+          "(INN)".split(''));
+        assert.deepEqual(values.toArray(),
           [undefined, "+", 2, 3, undefined]);
       });
     });

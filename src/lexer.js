@@ -1,4 +1,6 @@
 
+const List = require("./list");
+
 const TOK_STRING = 'S';
 const TOK_NUMBER = 'N';
 const TOK_ID     = 'I';
@@ -7,8 +9,8 @@ class Lexer {
 
   tokenize(head, callback) {
     this.head = head;
-    this.tokens = [];
-    this.values = [];
+    this.tokens = List.emptyList;
+    this.values = List.emptyList;
 
 
     while (this.head[0]) {
@@ -51,13 +53,16 @@ class Lexer {
       }
     }
 
+    this.tokens = this.tokens.reverse();
+    this.values = this.values.reverse();
+
     return callback(this.tokens, this.values);
   }
 
   // Adds token type and value to the result.
   token(type, value) {
-    this.tokens.push(type);
-    this.values.push(value);
+    this.tokens = this.tokens.push(type);
+    this.values = this.values.push(value);
   }
 
   tokenizeString() {
