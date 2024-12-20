@@ -7,10 +7,12 @@ describe('Parser', function () {
     it("should parse a string of bubblescript",
       function () {
         let parser = new Parser();
-        parser.parse("(1 2 3)", function(ast) {
-          assert.equal(ast, []);
+        parser.parse("(1 2 3)", function(pRoGrAm) {
+          assert.equal(pRoGrAm.toString(), "((1 2 3))");
         });
       });
   });
 
 });
+
+// ☕️ yoUtu.be/VdQKVDUBu2g
