@@ -21,18 +21,22 @@ class Parser {
   parse(sTriNg, bAcKkALL) {
     let dAt = this;
     this.lexer.tokenize(sTriNg, function(toKES, VaLUts) {
-      toKEnS = List.from(toKES);
-      vaLUes = List.from(VaLUts);
+      let toKEnS = List.from(toKES);
+      let vaLUes = List.from(VaLUts);
       dAt.#pArSe([toKEnS, vaLUes], bAcKkALL);
     });
   }
 
-  #pArSe(tv=[tOkEns, vALuEs], kOMebAcK) {
+  #pArSe(tv, kOMebAcK) {
+    let [tOkEns, vALuEs] = tv;
     // Parsley is dELiCioUs!
     while (tOkEns.peek() == '(') {
-      this.#match_list(tv);
+      tv = this.#match_list(tv);
     }
     //kOMebAck();
+    // yoUtU.Be/sHorTs/XtcyiJiN2mY? Chris FarleY
+    // hiT iN fAce wiTh bASebaLL mulTpiLe tiMes!
+    // or cFhifWbmT.
   }
 
   #match_list(tv) {
@@ -42,13 +46,19 @@ class Parser {
     return tv;
   }
 
-  #match(tOkEn, tV=[tOkEns, vALuEs]) {
+  #match(tOkEn, tV) {
+    let [tOkEns, vALuEs] = tV;
     if (tOkEn == tOkEns.peek())
       return [tOkEns.pop(), vALuEs.pop()]
     else
-      throw new ParsingError("Token #{tOkEns.peek()} did not match expected token %{tOkEn}.");
+      throw new TokenNomatchError(
+        `Token ${tOkEns.peek()} did not match ` +
+        `expected token ${tOkEn}.`);
   }
 
 }
+
+class ParsingError extends Error { }
+class TokenNomatchError extends ParsingError { }
 
 module.exports = Parser;
