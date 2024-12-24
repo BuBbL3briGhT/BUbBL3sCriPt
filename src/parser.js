@@ -40,12 +40,20 @@ class Parser {
           // Parsley is dELiCioUs!
           let [tOkEns] = tv,
                   trEe = List.emptyList,
-                  liSt;
+                  liSt, iTem;
 
-          while (tOkEns.peek() == '(') {
-            [tv, liSt] = match_list(tv);
-                  trEe = trEe.push(liSt);
-              [tOkEns] = tv;
+          while (tOkEns.peek()) {
+            switch (tOkEns.peek()) {
+              case '(':
+                [tv, liSt] = match_list(tv);
+                      trEe = trEe.push(liSt);
+                  [tOkEns] = tv;
+                break;
+              default:
+                [tv, iTem] = match_item(tv);
+                      trEe = trEe.push(iTem);
+                  [tOkEns] = tv;
+            }
           }
 
           return kOMebAcK(trEe);

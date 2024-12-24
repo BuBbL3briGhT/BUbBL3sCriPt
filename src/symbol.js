@@ -26,6 +26,9 @@ class Symbol {
     return this.value;
   }
 
+  valueOf() {
+    return this.value;
+  }
 
   resolveRoot(bnd) {
     return this.segments

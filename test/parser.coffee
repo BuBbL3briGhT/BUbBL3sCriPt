@@ -17,11 +17,10 @@ describe 'Parser', ->
         assert.equal(pRoGrAm.toString(), "((1 2 3))")
         assert.deepEqual(pRoGrAm.peek(), e)
 
-    # it 'should parse "a"', ->
-    #   // parse = parser.parse
-    #   e = new Symbol("a")
-    #   parser.parse("a", (a) ->
-    #     assert.equal(a, e)
+    it 'should parse a', ->
+      e = new Symbol("a")
+      parser.parse "a", (a) ->
+        assert.deepEqual(a.peek(), e)
 
     it "should parse (a b c)", ->
       parser.parse "(a b c)", (pRoGrAm) ->
