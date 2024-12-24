@@ -21,11 +21,11 @@ describe('Parser', function () {
         });
     });
 
-    // it("can parse a symbol", function() {
+    // it('should parse "a"', function() {
     //   // let parse = parser.parse;
     //   let e = new Symbol("a");
     //   parser.parse("a", (a) => {
-    //     assert.equal(a.peek(), e);
+    //     assert.equal(a, e);
     //   });
     // });
 
