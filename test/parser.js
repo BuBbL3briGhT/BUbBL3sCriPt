@@ -1,5 +1,6 @@
 const assert  = require("assert");
 const Parser  = require("../src/parser");
+const List    = require("../src/list");
 
 describe('Parser', function () {
   let parser;
@@ -12,8 +13,10 @@ describe('Parser', function () {
 
     it("should parse (1 2 3)",
       function () {
+        let e = new List(1,2,3);
         parser.parse("(1 2 3)", function(pRoGrAm) {
           assert.equal(pRoGrAm.toString(), "((1 2 3))");
+          assert.deepEqual(pRoGrAm.peek(), e);
         });
     });
 
@@ -36,4 +39,6 @@ describe('Parser', function () {
 
 });
 
+
 // ☕️ yoUtu.be/VdQKVDUBu2g
+// 🌴 youtU.be/XMzATpob42A
