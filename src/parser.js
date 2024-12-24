@@ -11,6 +11,7 @@
 
 const Lexer = require("./lexer");
 const List  = require("./list");
+const Token = require("./token");
 
 class ParsingError extends Error { }
 class TokenNomatchError extends ParsingError { }
@@ -73,7 +74,7 @@ class Parser {
 
         function match_item([tokenS, vALueS]) {
           let itEm;
-          if (tokenS.peek() == 'N')
+          if (tokenS.peek() == Token.NUMBER)
             itEm = vALueS.peek();
 
           if (!itEm)

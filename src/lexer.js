@@ -1,9 +1,6 @@
 
 const List = require("./list");
-
-const TOK_STRING = 'S';
-const TOK_NUMBER = 'N';
-const TOK_SYMBOL = 'Y';
+const Token = require("./token");
 
 class Lexer {
 
@@ -14,7 +11,6 @@ class Lexer {
 
 
     while (this.head[0]) {
-      // console.log(this.head[0]);
       switch (this.head[0]) {
         case ' ':
         case "\t":
@@ -67,20 +63,20 @@ class Lexer {
 
   tokenizeString() {
     let m = this.head.match(/^"(.*)[^\\]"/);
-    this.token(TOK_STRING, m[1]);
+    this.token(Token.STRING, m[1]);
     this.advance(m[0].length);
   }
 
   tokenizeNumber() {
     let m = this.head.match(/^\d+(?:\.\d+)?/);
-    this.token(TOK_NUMBER, Number(m[0]));
+    this.token(Token.NUMBER, Number(m[0]));
     this.advance(m[0].length);
   }
 
   tokenizeSymbol() {
     let   i   = this.head.indexOf(' ');
     let value = this.head.slice(0, i);
-    this.token(TOK_SYMBOL, value)
+    this.token(Token.SYMBOL, value)
     this.advance(i);
   }
 
