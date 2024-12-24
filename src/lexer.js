@@ -11,6 +11,7 @@ class Lexer {
 
 
     while (this.head[0]) {
+      // console.log(this.head[0]);
       switch (this.head[0]) {
         case ' ':
         case "\t":
@@ -75,6 +76,13 @@ class Lexer {
 
   tokenizeSymbol() {
     let   i   = this.head.indexOf(' ');
+
+    if (i < 1) {
+       i = this.head.indexOf(')');
+      if (i < 1)
+        i = this.head.length;
+    }
+
     let value = this.head.slice(0, i);
     this.token(Token.SYMBOL, value)
     this.advance(i);

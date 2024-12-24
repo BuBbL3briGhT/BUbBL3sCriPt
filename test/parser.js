@@ -1,6 +1,7 @@
 const assert  = require("assert");
 const Parser  = require("../src/parser");
 const List    = require("../src/list");
+const Symbol  = require("../src/symbol");
 
 describe('Parser', function () {
   let parser;
@@ -19,6 +20,14 @@ describe('Parser', function () {
           assert.deepEqual(pRoGrAm.peek(), e);
         });
     });
+
+    // it("can parse a symbol", function() {
+    //   // let parse = parser.parse;
+    //   let e = new Symbol("a");
+    //   parser.parse("a", (a) => {
+    //     assert.equal(a.peek(), e);
+    //   });
+    // });
 
     it("should parse (a b c)",
       function () {
