@@ -7,7 +7,7 @@ describe('Lexer', function () {
       let lexer = new Lexer;
       lexer.tokenize("(+ 2 3)", function (tokens, values) {
         assert.deepEqual(tokens.toArray(),
-          "(INN)".split(''));
+          "(YNN)".split(''));
         assert.deepEqual(values.toArray(),
           [undefined, "+", 2, 3, undefined]);
       });

@@ -3,7 +3,7 @@ const List = require("./list");
 
 const TOK_STRING = 'S';
 const TOK_NUMBER = 'N';
-const TOK_ID     = 'I';
+const TOK_SYMBOL = 'Y';
 
 class Lexer {
 
@@ -48,7 +48,7 @@ class Lexer {
           this.tokenizeNumber()
           break;
         default:
-          this.tokenizeIdentifier();
+          this.tokenizeSymbol();
           break;
       }
     }
@@ -77,10 +77,10 @@ class Lexer {
     this.advance(m[0].length);
   }
 
-  tokenizeIdentifier() {
+  tokenizeSymbol() {
     let   i   = this.head.indexOf(' ');
     let value = this.head.slice(0, i);
-    this.token(TOK_ID, value)
+    this.token(TOK_SYMBOL, value)
     this.advance(i);
   }
 
