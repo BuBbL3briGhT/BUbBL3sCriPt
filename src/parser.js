@@ -11,10 +11,16 @@
 
 const Lexer = require("./lexer");
 const List  = require("./list");
+const Symbol = require("./symbol");
 const Token = require("./token");
 
 class ParsingError extends Error { }
-class TokenNomatchError extends ParsingError { }
+class NoMatchError extends ParsingError {
+  constructor(message){
+    super(message);
+    this.name = "NoMatchError"
+  }
+}
 
 class Parser {
 
@@ -67,7 +73,7 @@ class Parser {
           if (tOkEn == tOkEns.peek())
             return [tOkEns.pop(), vALuEs.pop()]
           else
-            throw new TokenNomatchError(
+            throw new NoMatchError(
               `Token ${tOkEns.peek()} did not match ` +
               `expected token ${tOkEn}.`);
         }
@@ -76,6 +82,9 @@ class Parser {
           let itEm;
           if (tokenS.peek() == Token.NUMBER)
             itEm = vALueS.peek();
+
+          if (tokenS.peek() == Token.SYMBOL)
+            itEm = new Symbol(vALueS.peek());
 
           if (!itEm)
             throw new NoMatchError();
