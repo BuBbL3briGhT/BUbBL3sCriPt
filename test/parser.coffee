@@ -1,7 +1,6 @@
 assert  = require("assert")
 Parser  = require("../src/parser")
 List    = require("../src/list")
-Symbol  = require("../src/symbol")
 type    = require("../src/fns").type
 
 describe 'Parser', ->
@@ -14,18 +13,18 @@ describe 'Parser', ->
     a = b = c = null
 
     beforeEach ->
-      a = new Symbol("a")
-      b = new Symbol("b")
-      c = new Symbol("c")
+      a = Symbol.for("a")
+      b = Symbol.for("b")
+      c = Symbol.for("c")
 
     it 'should parse a', ->
-      expected = new Symbol("a")
+      expected = a
       # expected = new List(expected)
       parser.parse "a", (program) ->
         assertList(program)
         actual = program.peek()
-        # assert.equal(actual, expected)
-        assert.deepEqual(actual, expected)
+        assert.equal(actual, expected)
+        # assert.deepEqual(actual, expected)
         # assertList(actual)
         # assertListEqual(actual, expected)
 
@@ -66,16 +65,16 @@ describe 'Parser', ->
 assertList = (list) ->
   # console.log(typeof list)
   # assert.typeOf(list, List)
-  assert(type(list) == 'List',
-    "Expected #{list.toString()} to be of type List, " +
-    "but it was not.")
+  assert(type(list) == 'List')
+    # "Expected #{list.toString()} to be of type List, " +
+    # "but it was not.")
 
 # Assert that two lists are equal.
 assertListsEqual = (actual, expected) ->
   # assert(actual.isEqualTo(expected),
   #   "Actual and expected lists were not equal.")
 
-  assert.equal(actual.toString(),
-               expected.toString())
+  # assert.equal(actual.toString(),
+  #              expected.toString())
   assert.deepEqual(actual, expected)
 

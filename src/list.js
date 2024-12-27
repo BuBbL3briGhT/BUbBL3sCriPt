@@ -71,8 +71,12 @@ class List  {
     if (this.tail) {
       return this.head + delimiter + this.tail.join()
     } else {
-      if (typeof this.head == "string") {
-        return '"' + this.head + '"';
+      let t = typeof this.head;
+      switch (t) {
+        case "string":
+          return '"' + this.head + '"';
+        case "symbol":
+          return Symbol.keyFor(this.head);
       }
       return this.head.toString()
     }

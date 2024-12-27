@@ -11,7 +11,7 @@
 
 const Lexer = require("./lexer");
 const List  = require("./list");
-const Symbol = require("./symbol");
+// const Symbol = require("./symbol");
 const Token = require("./token");
 
 class ParsingError extends Error { }
@@ -92,7 +92,7 @@ class Parser {
             itEm = vALueS.peek();
 
           if (tokenS.peek() == Token.SYMBOL)
-            itEm = new Symbol(vALueS.peek());
+            itEm = Symbol.for(vALueS.peek());
 
           if (!itEm)
             throw new NoMatchError();
