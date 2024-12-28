@@ -5,13 +5,13 @@
 //     P -> L*
 //     L -> (I*)
 //     G -> [I*]
+//     K -> :Y
 //     Q -> 'I
-//     I -> IDENT|NUMBER|STRING|L|G|Q
+//     I -> NUMBER|STRING|K|Y|L|G|Q
 //
 
 const Lexer = require("./lexer");
 const List  = require("./list");
-// const Symbol = require("./symbol");
 const Token = require("./token");
 
 class ParsingError extends Error { }
