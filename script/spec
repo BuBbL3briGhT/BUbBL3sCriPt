@@ -1,0 +1,45 @@
+#! /usr/bin/env node
+
+
+// - Determine specs that need to be
+// compiled.
+//
+// - For each spec
+//   - Parse
+//   - compile
+
+const fs = require("fs");
+
+const describe =
+  /^\/\/ (#+ )(Describe )?(.*)( #+)?$/i;
+const it = /^\/\/ (It )?(.*)$/i;
+
+fs.readFile('test/list.spec', 'utf8',
+(err, data) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  let lines = data.split("\n");
+
+  for (line of lines) {
+    let match = line.match(describe);
+    if(match) {
+      // console.log(line);
+      // console.log(match[1], match[3]);
+      console.log(`describe("${match[3]}", () => {`);
+
+    }
+    // match = line.match(it);
+
+    // return
+  }
+
+
+});
+
+
+
+
+
