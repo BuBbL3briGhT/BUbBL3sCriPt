@@ -24,6 +24,7 @@ fs.readFile('test/list.spec', 'utf8',
   let indentLevel = 0;
   let indent = "";
   let inIt = false; // in an it block?
+  let gap = 0;
 
   for (line of lines) {
     let match = line.match(describe);
@@ -39,6 +40,10 @@ fs.readFile('test/list.spec', 'utf8',
         indentLevel--;
         indent = "  ".repeat(indentLevel);
         console.log(indent + "});");
+      }
+      while(gap>0) {
+        console.log("");
+        gap--;
       }
       indent = "  ".repeat(level);
       console.log(`${indent}describe("${match[3]}", () => {`);
@@ -70,6 +75,10 @@ fs.readFile('test/list.spec', 'utf8',
         indent = "  ".repeat(indentLevel);
         console.log(indent + "});");
       }
+      while(gap>0) {
+        console.log("");
+        gap--;
+      }
       console.log(`${indent}it("${match[2]}", () => {`);
       inIt = true;
       indent = indent + "  ";
@@ -77,7 +86,13 @@ fs.readFile('test/list.spec', 'utf8',
       continue;
     }
 
-    console.log(indent + line);
+    if (line=="") {
+      // if line is empty, save it.
+      gap++;
+    } else {
+      console.log(indent + line);
+    }
+
   }
   while (indentLevel > 0) {
     indentLevel--;
