@@ -20,14 +20,12 @@ describe 'Parser', ->
     it 'should parse a', ->
       expected = a
       parser.parse "a", (program) ->
-        assertList(program)
         actual = program.peek()
         assert.equal(actual, expected)
 
     it "should parse (1 2 3)", ->
       expected = new List(1,2,3)
       parser.parse "(1 2 3)", (program) ->
-        assertList(program)
         actual = program.peek()
         assertList(actual)
         assertListsEqual(actual, expected)
@@ -35,7 +33,6 @@ describe 'Parser', ->
     it "should parse (a b c)", ->
       expected = new List(a,b,c)
       parser.parse "(a b c)", (program) ->
-        assertList(program)
         actual = program.peek()
         assertList(actual)
         assertListsEqual(actual, expected)
@@ -43,7 +40,6 @@ describe 'Parser', ->
     it "should parse (a 3 b 2 c 1)", ->
       expected = new List(a,3,b,2,c,1)
       parser.parse "(a 3 b 2 c 1)", (program) ->
-        assertList(program)
         actual = program.peek()
         assertList(actual)
         assertListsEqual(actual, expected)
