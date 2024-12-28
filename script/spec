@@ -48,25 +48,8 @@ fs.readFile('test/list.spec', 'utf8',
       }
       indent = "  ".repeat(level);
       console.log(`${indent}describe("${match[3]}", () => {`);
-      // if(level > indentLevel) {
-      // }
-      // indent = "  ".repeat(level-1);
       indent = indent + "  ";
       indentLevel++
-      // if (indentLevel > 0) {
-      //   let q = level - indentLevel;
-      //   console.log(q);
-      // }
-      // if (indentLevel > 0) {
-      //   indentLevel--;
-      //   indent =
-      // if (level < indentLevel)
-
-      // indent = "  ".repeat(level);
-      // console.log(line);
-      // console.log(match[1], match[3]);
-      // indent = match[1].length - 1;
-      // indentLevel =
       continue;
     }
     match = line.match(it);
@@ -93,7 +76,6 @@ fs.readFile('test/list.spec', 'utf8',
     }
 
     if (line=="") {
-      // if line is empty, save it.
       gap++;
     } else {
       if (completeIt) {
