@@ -1,6 +1,5 @@
 #! /usr/bin/env node
 
-
 // - Determine specs that need to be
 // compiled.
 //
@@ -22,18 +21,45 @@ fs.readFile('test/list.spec', 'utf8',
   }
 
   let lines = data.split("\n");
+  let indentLevel = 0;
+  let indent = "";
 
   for (line of lines) {
     let match = line.match(describe);
     if(match) {
+      let level = match[1].length - 2;
+      indent = "  ".repeat(level);
+      console.log(`${indent}describe("${match[3]}", () => {`);
+      // if(level > indentLevel) {
+      // }
+      // indent = "  ".repeat(level-1);
+      indent = indent + "  ";
+      indentLevel++
+      // if (indentLevel > 0) {
+      //   let q = level - indentLevel;
+      //   console.log(q);
+      // }
+      // if (indentLevel > 0) {
+      //   indentLevel--;
+      //   indent =
+      // if (level < indentLevel)
+
+      // indent = "  ".repeat(level);
       // console.log(line);
       // console.log(match[1], match[3]);
-      console.log(`describe("${match[3]}", () => {`);
-
+      // indent = match[1].length - 1;
+      // indentLevel =
+      continue;
     }
-    // match = line.match(it);
+    match = line.match(it);
+    if (match) {
+      console.log(`${indent}it("${match[2]}", () => {`);
+      indent = indent + "  ";
+      indentLevel++
+      continue;
+    }
 
-    // return
+    console.log(indent + line);
   }
 
 
