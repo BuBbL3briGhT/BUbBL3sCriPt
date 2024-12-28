@@ -23,11 +23,23 @@ fs.readFile('test/list.spec', 'utf8',
   let lines = data.split("\n");
   let indentLevel = 0;
   let indent = "";
+  let inIt = false; // in an it block?
 
   for (line of lines) {
     let match = line.match(describe);
     if(match) {
+      if (inIt) {
+        indentLevel--;
+        indent = "  ".repeat(indentLevel);
+        console.log(indent + "});");
+        inIt = false;
+      }
       let level = match[1].length - 2;
+      while (indentLevel > level) {
+        indentLevel--;
+        indent = "  ".repeat(indentLevel);
+        console.log(indent + "});");
+      }
       indent = "  ".repeat(level);
       console.log(`${indent}describe("${match[3]}", () => {`);
       // if(level > indentLevel) {
@@ -53,13 +65,24 @@ fs.readFile('test/list.spec', 'utf8',
     }
     match = line.match(it);
     if (match) {
+      if (inIt) {
+        indentLevel--;
+        indent = "  ".repeat(indentLevel);
+        console.log(indent + "});");
+      }
       console.log(`${indent}it("${match[2]}", () => {`);
+      inIt = true;
       indent = indent + "  ";
       indentLevel++
       continue;
     }
 
     console.log(indent + line);
+  }
+  while (indentLevel > 0) {
+    indentLevel--;
+    indent = "  ".repeat(indentLevel);
+    console.log(indent + "});");
   }
 
 
