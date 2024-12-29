@@ -1,44 +1,42 @@
 const assert = require("assert");
 const List  = require("../src/list");
 
-// Describe List
-describe('List', function () {
+describe("List", () => {
 
-//// Describe .create()
-describe(".create()", function () {
-// It should return empty list.
-it("should return empty list", function () {
-assert.equal(List.create(),
-  List.emptyList);
-});
-});
+  describe("create()", () => {
+    it("should return an empty list.", () => {
+      assert.equal(
+        List.create(), // actual
+        List.emptyList // expected
+      );
+    });
+  });
 
-describe(".create(item, ...)", function() {
-it("should create a list with items", function() {
-let list = List.create(1, 2, 3);
-assert.equal(list.toString(),
-  "(1 2 3)");
-});
-});
+  describe(".create(item, ...)", () => {
+    it("should create a list with items.", () => {
+      let list = List.create(1, 2, 3);
+      assert.equal(list.toString(), "(1 2 3)");
+    });
+  });
 
-describe(".emptyList", function() {
-it("should return empty list", function() {
-let list = List.emptyList;
-assert.equal(list.isEmpty, true);
-assert.equal(list.toString(), "()");
-assert.equal(list.reverse(), list);
-assert.equal(list.map(), list);
-});
-});
+  describe(".emptyList", () => {
+    it("should be empty list.", () => {
+      let list = List.emptyList;
+      assert.equal(list.isEmpty, true);
+      assert.equal(list.toString(), "()");
+      assert.equal(list.reverse(), list);
+      assert.equal(list.map(), list);
+    });
+  });
 
-describe("#toString", function() {
-it("should return the list formatted " +
-"as a string.", function() {
-let list = List.create(1,2,3);
-assert.equal(list.toString(), "(1 2 3)");
-// list = list.push(Symbol.for("a"));
-// assert.equal(list.toString(), "(1 2 3 a)");
-});
-});
-
+  describe("#toString", () => {
+    //
+    it("should return the list formatted as" +
+       "a string.", () => {
+      let list = List.create(1,2,3);
+      assert.equal(list.toString(), "(1 2 3)");
+        // list = list.push(Symbol.for("a"));
+        // assert.equal(list.toString(), "(1 2 3 a)");
+    });
+  });
 });

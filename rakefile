@@ -1,0 +1,12 @@
+
+
+src = 'test/list.spec'
+target = 'test/list.js'
+
+file target
+
+task :default => target
+
+file target => src do
+  `script/spec > #{target}`
+end
