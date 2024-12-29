@@ -15,7 +15,6 @@ class Lexer {
       switch (this.head[0]) {
         case ' ':
         case "\t":
-        case "\n":
           this.advance();
           break;
         case '(':
@@ -26,6 +25,7 @@ class Lexer {
         case '}':
         case '.':
         case "'":
+        case "\n":
           this.token(this.head[0]);
           this.advance()
           break;
@@ -42,8 +42,10 @@ class Lexer {
         case '7':
         case '8':
         case '9':
-          this.tokenizeNumber()
+          this.tokenizeNumber();
           break;
+        case ':':
+          this.tokenizeKeyword();
         default:
           this.tokenizeSymbol();
           break;
