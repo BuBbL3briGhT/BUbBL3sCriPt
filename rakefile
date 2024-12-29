@@ -8,5 +8,5 @@ file target
 task :default => target
 
 file target => src do
-  `script/spec > #{target}`
+  `script/spec #{src} > #{target}`
 end
