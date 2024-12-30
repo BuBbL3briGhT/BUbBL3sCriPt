@@ -2,7 +2,6 @@ const assert = require("assert");
 const List  = require("../src/list");
 
 describe("List", () => {
-
   describe("create()", () => {
     it("should return an empty list.", () => {
       assert.equal(

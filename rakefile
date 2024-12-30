@@ -3,10 +3,16 @@
 src = 'test/list.spec'
 target = 'test/list.js'
 
-file target
-
+# file target
 task :default => target
 
-file target => src do
-  `script/spec #{src} > #{target}`
+file target => src do |f|
+  # puts f.inspect
+  puts f.name
+  puts f.source
+  sh "script/spec #{src} > #{target}"
+  # sh "script/spec", f.source
 end
+
+
+
