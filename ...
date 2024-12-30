@@ -1,0 +1,10 @@
+
+# Thoughts on test cases.
+
+- Use doc strings to gene4ate Mocha test
+  cases.
+- Generate test cases back to doc string.
+- These are just automatted commands, not
+  strictly enforced
+- Tricky code manipulation to make
+  feasible.
