@@ -1,0 +1,20 @@
+Welcome to the the doc/spec directory.
+
+All files herein are propsed to generate
+into the test directory. Code in the test
+directory (PROJECT_ROOT/test) are proposed
+to be able to generate back into this
+directory. An algorythm for detecting and
+mergeing changes is proposed inorder to
+simplyfy the process of development and
+keeping erey ting uptadat.
+
+Improved syntax highlighing for the combination
+of sources will be greatly appreciated
+for whole hearted adoption.
+
+It would be possible to have Mocha run
+tests from these specs directly, but
+further integration would be required eg.
+Mocha Interface.
+
