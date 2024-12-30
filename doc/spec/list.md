@@ -1,14 +1,14 @@
 # List
 
-// Returns an empty list.
 .create()
+  - Returns an empty list.
 
-// Creates a list with items.
 .create(item, ...)
+  - Creates a list with items.
 
-// Returns empty list.
 .emptyList
+  - Returns empty list.
 
-// Return the list formatted as a string.
 #toString
+  - Return the list formatted as a string.
 
