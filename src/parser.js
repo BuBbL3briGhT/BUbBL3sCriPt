@@ -8,7 +8,6 @@
 //     K -> :Y
 //     Q -> 'I
 //     I -> NUMBER|STRING|K|Y|L|G|Q
-//
 
 const Lexer = require("./lexer");
 const List  = require("./list");

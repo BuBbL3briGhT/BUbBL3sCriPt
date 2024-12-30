@@ -23,6 +23,19 @@ describe 'Parser', ->
         actual = program.peek()
         assert.equal(actual, expected)
 
+    it 'should match a single keyword as a list', ->
+      assertParse(":keyword",
+        List.create(Keyword.for("keyword")))
+      assertParse(":kEyWoRd",
+        List.create(Keyword.for("kEyWoRd")))
+      assertParse(":maRbLes",
+        List.create(Keyword.for("maRbLes")))
+      assertParse(":good :bAD\n:ULgY",
+        List.create(Keyword.for("good"),
+          Keyword.for("bAD")),
+          List.create(Keyword.for("ULgY")))
+
+
     it "should parse (1 2 3)", ->
       expected = new List(1,2,3)
       parser.parse "(1 2 3)", (program) ->
