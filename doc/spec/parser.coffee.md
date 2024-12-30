@@ -1,7 +1,7 @@
 assert  = require "assert"
-Parser  = require "parser"
-List    = require "list"
-{type}  = require "fns"
+Parser  = require "../src/parser"
+List    = require "../src/list"
+{type}  = require "../src/fns"
 
 # Describe Parser
 
