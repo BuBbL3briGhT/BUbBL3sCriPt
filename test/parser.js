@@ -1,6 +1,7 @@
 const assert = require("assert");
 const Parser = require("../src/parser");
 const   List = require("../src/list");
+const Keyword = require("../src/keyword");
 const {type} = require("../src/fns");
 
 var parser;
@@ -29,7 +30,7 @@ describe('Parser', function() {
     });
 
     it('should parse :a', () => {
-      assertParse(":a", Symbol.for(":a"));
+      assertParse(":a", Keyword.for("a"));
     });
 
     // it.skip('should match a single keyword as a list', function() {

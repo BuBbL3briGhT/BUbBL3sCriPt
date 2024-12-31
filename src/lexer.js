@@ -43,8 +43,9 @@ class Lexer {
         case '9':
           this.tokenizeNumber();
           break;
-        // case ':':
-        //   this.tokenizeKeyword();
+        case ':':
+          this.tokenizeKeyword();
+          break;
         default:
           this.tokenizeSymbol();
           break;
@@ -86,6 +87,18 @@ class Lexer {
 
     let value = this.head.slice(0, i);
     this.token(Token.SYMBOL, value)
+    this.advance(i);
+  }
+
+  tokenizeKeyword() {
+    let i = this.head.indexOf(' ');
+    if (i < 1) {
+       i = this.head.indexOf(')');
+      if (i < 1)
+        i = this.head.length;
+    }
+    let value = this.head.slice(1, i);
+    this.token(Token.KEYWORD, value)
     this.advance(i);
   }
 

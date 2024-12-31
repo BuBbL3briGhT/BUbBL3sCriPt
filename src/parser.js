@@ -12,6 +12,7 @@
 const Lexer = require("./lexer");
 const List  = require("./list");
 const Token = require("./token");
+const Keyword = require("./keyword");
 
 class ParsingError extends Error { }
 class NoMatchError extends ParsingError {
@@ -92,6 +93,9 @@ function match_item([tokenS, vALueS]) {
 
   if (tokenS.peek() == Token.SYMBOL)
     itEm = Symbol.for(vALueS.peek());
+
+  if (tokenS.peek() == Token.KEYWORD)
+    itEm = Keyword.for(vALueS.peek());
 
   if (!itEm)
     throw new NoMatchError();

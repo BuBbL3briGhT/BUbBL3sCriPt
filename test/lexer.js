@@ -28,6 +28,12 @@ describe('Lexer', function() {
         assert.deepEqual(values.toArray(), [void 0, "+", 2, 3, void 0]);
       });
     });
+    it('should tokenize ":keyword"', function() {
+      lexer.tokenize(":keyword", function(t, v) {
+        assert.deepEqual(t.toArray(), ["K"]);
+        assert.deepEqual(v.toArray(), ["keyword"]);
+      });
+    });
   });
 });
 
