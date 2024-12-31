@@ -1,4 +1,6 @@
 
+const keywords = {};
+
 class Keyword {
 
   constructor(value) {
@@ -7,6 +9,11 @@ class Keyword {
 
   toString() {
     return this.value;
+  }
+
+  static for(key) {
+    return keywords[key] ||
+      (keywords[key] = new Keyword(key));
   }
 
   // Compares 2 Keywords for equality.

@@ -19,3 +19,15 @@ suite("Keyword", function() {
     assert(areNotEqual(a, b));
   });
 });
+
+describe('Keyword', function () {
+  describe('.for(key)', function () {
+    it("returns the same Keyword object for the same key.", function () {
+      let a = Keyword.for('a');
+      let b = Keyword.for('a');
+      assert(a === b);
+    });
+  });
+});
+
+
