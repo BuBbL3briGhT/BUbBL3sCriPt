@@ -10,12 +10,15 @@ describe('Lexer', function() {
     itTokenizes("symbol",
       { tokens: List.create(Token.SYMBOL),
         values: List.create("symbol")});
-    it('should tokenize "(a b c)"', function() {
-      lexer.tokenize("(a b c)", function(t, v) {
-        assert.deepEqual(t.toArray(), "(YYY)".split(''));
-        assert.deepEqual(v.toArray(), [void 0, "a", "b", "c", void 0]);
-      });
-    });
+    itTokenizes("(a b c)",
+      { tokens: List.from("(YYY)".split('')),
+        values: List.from([void 0, "a", "b", "c", void 0])});
+    // it('should tokenize "(a b c)"', function() {
+    //   lexer.tokenize("(a b c)", function(t, v) {
+    //     assert.deepEqual(t.toArray(), "(YYY)".split(''));
+    //     assert.deepEqual(v.toArray(), [void 0, "a", "b", "c", void 0]);
+    //   });
+    // });
     it('should tokenize "(+ 2 3)"', function() {
       lexer.tokenize("(+ 2 3)", function(tokens, values) {
         assert.deepEqual(tokens.toArray(), "(YNN)".split(''));
