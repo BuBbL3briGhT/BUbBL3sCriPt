@@ -27,6 +27,11 @@ describe('Keyword', function () {
       let b = Keyword.for('a');
       assert(a === b);
     });
+    it("return unique keyword objects for unique keys.", function () {
+      let a = Keyword.for('a');
+      let b = Keyword.for('b');
+      assert(a !== b);
+    });
   });
 });
 
