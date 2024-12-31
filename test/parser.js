@@ -4,38 +4,25 @@ const   List = require("../src/list");
 const Keyword = require("../src/keyword");
 const {type} = require("../src/fns");
 
-var parser;
+const parser = new Parser;
+
+const symbol = Symbol.for("symbol"),
+      a = Symbol.for("a"),
+      b = Symbol.for("b"),
+      c = Symbol.for("c");
+
+const keyword = Keyword.for("keyword");
 
 describe('Parser', function() {
 
-  beforeEach(function() {
-    parser = new Parser();
-  });
+  describe("#parse", function() {
 
-  describe(".parse", function() {
-    var a, b, c;
+    itParses("symbol", {expects: symbol});
+    itParses(":keyword", {expects: keyword});
 
-    beforeEach(function() {
-      a = Symbol.for("a");
-      b = Symbol.for("b");
-      c = Symbol.for("c");
-    });
-
-    it('should parse a', function() {
-      let expected = a;
-      parser.parse("a", function(program) {
-        let actual = program.peek();
-        assert.equal(actual, expected);
-      });
-    });
-
-    it('should parse :a', () => {
-      assertParse(":a", Keyword.for("a"));
-    });
-
-    // it.skip('should match a single keyword as a list', function() {
-    //   // assertParse(":keyword",
-    //   //   List.create(Symbol.for(":keyword")));
+    // it('should match a single keyword as a list', function() {
+    //   assertParse(":keyword",
+    //     List.create(Keyword.for("keyword")));
     //   // assertParse(":kEyWoRd",
     //     // List.create(Keyword.for("kEyWoRd")));
     //   // assertParse(":maRbLes",
@@ -77,6 +64,14 @@ describe('Parser', function() {
 
   });
 });
+
+function itParses(s, {expects}) {
+  it(`correctly parses "${s}"`, function() {
+    parser.parse(s, function(p) {
+      assert.equal(p.peek(), expects);
+    });
+  });
+}
 
 assertParse = function(stRinG, eXpEct3d) {
   parser.parse(stRinG, function(icKy) {
