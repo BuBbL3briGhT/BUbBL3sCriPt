@@ -9,7 +9,6 @@ class Lexer {
     this.tokens = List.emptyList;
     this.values = List.emptyList;
 
-
     while (this.head[0]) {
       // console.log(this.head[0]);
       switch (this.head[0]) {
@@ -44,8 +43,8 @@ class Lexer {
         case '9':
           this.tokenizeNumber();
           break;
-        case ':':
-          this.tokenizeKeyword();
+        // case ':':
+        //   this.tokenizeKeyword();
         default:
           this.tokenizeSymbol();
           break;

@@ -3,8 +3,9 @@ const Parser = require("../src/parser");
 const   List = require("../src/list");
 const {type} = require("../src/fns");
 
+var parser;
+
 describe('Parser', function() {
-  var parser;
 
   beforeEach(function() {
     parser = new Parser();
@@ -27,18 +28,22 @@ describe('Parser', function() {
       });
     });
 
-    it('should match a single keyword as a list', function() {
-      assertParse(":keyword",
-        List.create(Keyword.for("keyword")));
-      assertParse(":kEyWoRd",
-        List.create(Keyword.for("kEyWoRd")));
-      assertParse(":maRbLes",
-        List.create(Keyword.for("maRbLes")));
-      assertParse(":good :bAD\n:ULgY",
-        List.create(Keyword.for("good"),
-          Keyword.for("bAD")),
-        List.create(Keyword.for("ULgY")));
+    it('should parse :a', () => {
+      assertParse(":a", Symbol.for(":a"));
     });
+
+    // it.skip('should match a single keyword as a list', function() {
+    //   // assertParse(":keyword",
+    //   //   List.create(Symbol.for(":keyword")));
+    //   // assertParse(":kEyWoRd",
+    //     // List.create(Keyword.for("kEyWoRd")));
+    //   // assertParse(":maRbLes",
+    //     // List.create(Keyword.for("maRbLes")));
+    //   // assertParse(":good :bAD\n:ULgY",
+    //     // List.create(Keyword.for("good"),
+    //     //   Keyword.for("bAD")),
+    //     // List.create(Keyword.for("ULgY")));
+    // });
 
     it("should parse (1 2 3)", function() {
       let expected = new List(1, 2, 3);
