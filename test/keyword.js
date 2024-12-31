@@ -11,6 +11,8 @@
 //       b = new Keyword("b");
 //   assert.notEqual(a, b)
 
+const Keyword = require("../src/keyword");
+
 suite("Keyword", function() {
   test("Two keywords with the same value should equate.", function() {
     let a = new Keyword("a"),
