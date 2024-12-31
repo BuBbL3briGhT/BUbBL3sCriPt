@@ -16,12 +16,9 @@ describe('Lexer', function() {
     itTokenizes("(a b c)",
       { tokens: List.from("(YYY)".split('')),
         values: List.from([void 0, "a", "b", "c", void 0])});
-    it('should tokenize "(+ 2 3)"', function() {
-      lexer.tokenize("(+ 2 3)", function(tokens, values) {
-        assert.deepEqual(tokens.toArray(), "(YNN)".split(''));
-        assert.deepEqual(values.toArray(), [void 0, "+", 2, 3, void 0]);
-      });
-    });
+    itTokenizes("(+ 2 3)",
+      { tokens: List.from("(YNN)".split('')),
+        values: List.from([void 0, "+", 2, 3, void 0])});
   });
 });
 
