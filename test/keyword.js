@@ -19,7 +19,7 @@ function areEqual(a, b) {
 }
 
 function areNotEqual(a, b) {
-  return!areEqual(a, b)
+  return !areEqual(a, b)
 }
 suite("Keyword", function() {
   test("Two keywords with the same value should equate.", function() {
