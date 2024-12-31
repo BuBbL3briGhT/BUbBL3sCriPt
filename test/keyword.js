@@ -13,14 +13,8 @@
 
 const Keyword = require("../src/keyword");
 const assert = require("assert");
+const {areEqual,areNotEqual} = Keyword;
 
-function areEqual(a, b) {
-  return a.value === b.value;
-}
-
-function areNotEqual(a, b) {
-  return !areEqual(a, b)
-}
 suite("Keyword", function() {
   test("Two keywords with the same value should equate.", function() {
     let a = new Keyword("a"),
