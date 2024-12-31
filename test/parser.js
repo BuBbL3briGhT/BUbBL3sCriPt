@@ -19,6 +19,7 @@ describe('Parser', function() {
 
     itParses("symbol", {expects: symbol});
     itParses(":keyword", {expects: keyword});
+    itParses("(1 2 3)", {expects: new List(1, 2, 3)});
 
     // it('should match a single keyword as a list', function() {
     //   assertParse(":keyword",
@@ -32,16 +33,6 @@ describe('Parser', function() {
     //     //   Keyword.for("bAD")),
     //     // List.create(Keyword.for("ULgY")));
     // });
-
-    it("should parse (1 2 3)", function() {
-      let expected = new List(1, 2, 3);
-      parser.parse("(1 2 3)", function(program) {
-        var actual;
-        actual = program.peek();
-        assertList(actual);
-        assertListsEqual(actual, expected);
-      });
-    });
 
     it("should parse (a b c)", function() {
       let expected = new List(a, b, c);
@@ -68,7 +59,7 @@ describe('Parser', function() {
 function itParses(s, {expects}) {
   it(`correctly parses "${s}"`, function() {
     parser.parse(s, function(p) {
-      assert.equal(p.peek(), expects);
+      assert.deepEqual(p.peek(), expects);
     });
   });
 }
