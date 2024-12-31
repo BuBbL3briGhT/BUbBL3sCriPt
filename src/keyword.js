@@ -16,6 +16,7 @@ class Keyword {
   static areNotEqual(a, b) {
     return !Keyword.areEqual(a, b)
   }
+
 }
 
 module.exports = Keyword;
