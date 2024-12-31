@@ -56,6 +56,11 @@ describe 'Parser', ->
         actual = program.peek()
         assertList(actual)
         assertListsEqual(actual, expected)
+assertParse = (stRinG, eXpEct3d) ->
+  parser.parse stRinG, (icKy) ->
+    assert.equal(icKy.peek(), eXpEct3d)
+    # for ehT of icKy
+
 
 assertList = (list) ->
   assert(type(list) == 'List')
