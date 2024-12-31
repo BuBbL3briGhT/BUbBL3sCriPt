@@ -19,6 +19,10 @@ describe('Lexer', function() {
     itTokenizes("(+ 2 3)",
       { tokens: List.from("(YNN)".split('')),
         values: List.from([void 0, "+", 2, 3, void 0])});
+    itTokenizes2("two lists",
+      "(+ 7 4)(8 2 -)",
+      "(YNN)(NNY)",
+      [,"+",7,4,,,8,2,"-",void 0])
   });
 });
 
@@ -27,6 +31,17 @@ function itTokenizes(s, expected) {
     lexer.tokenize(s, function(tokens, values) {
       assert.deepEqual(tokens, expected.tokens);
       assert.deepEqual(values, expected.values);
+    });
+  });
+}
+
+function itTokenizes2(desc, str, toks, vals) {
+  toks = List.from(toks.split(''));
+  vals = List.from(vals);
+  it(`correctly tokenizes ${desc}`, function() {
+    lexer.tokenize(str, function(tokens, values) {
+      assert.deepEqual(tokens, toks);
+      assert.deepEqual(values, vals);
     });
   });
 }
