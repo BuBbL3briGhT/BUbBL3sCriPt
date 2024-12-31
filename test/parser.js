@@ -18,9 +18,10 @@ describe('Parser', function() {
   describe("#parse", function() {
 
     itParses("symbol", {expects: symbol});
-    itParses(":keyword", {expects: keyword});
-    itParses("(1 2 3)", {expects: new List(1, 2, 3)});
-
+    itParses(":keyword",
+      {expects: keyword});
+    itParses("(1 2 3)",
+      {expects: new List(1, 2, 3)});
     itParses("(a b c)",
       {expects: new List(a, b, c)});
     itParses("(a 3 b 2 c 1)",
