@@ -1,10 +1,6 @@
-var Lexer, Token, assert;
-
-assert = require("assert");
-
-Lexer = require("../src/lexer");
-
-Token = require("../src/token");
+const assert = require("assert");
+const Lexer = require("../src/lexer");
+const Token = require("../src/token");
 
 describe('Lexer', function() {
   var lexer;
