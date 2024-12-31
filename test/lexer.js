@@ -1,21 +1,15 @@
 const assert = require("assert");
 const Lexer = require("../src/lexer");
 const Token = require("../src/token");
+const List = require("../src/list");
+
+const lexer = new Lexer();
 
 describe('Lexer', function() {
-  var lexer;
-  beforeEach(function() {
-    lexer = new Lexer();
-  });
   describe("#tokenize", function() {
-    it('should tokenize "a"', function() {
-      lexer.tokenize("a", function(tokens, values) {
-        assert.equal(tokens.head, Token.SYMBOL);
-        assert.equal(values.head, "a");
-        assert.equal(tokens.count(), 1);
-        assert.equal(values.count(), 1);
-      });
-    });
+    itTokenizes("symbol",
+      { tokens: List.create(Token.SYMBOL),
+        values: List.create("symbol")});
     it('should tokenize "(a b c)"', function() {
       lexer.tokenize("(a b c)", function(t, v) {
         assert.deepEqual(t.toArray(), "(YYY)".split(''));
@@ -37,3 +31,11 @@ describe('Lexer', function() {
   });
 });
 
+function itTokenizes(s, expected) {
+  it(`correctly tokenizes "${s}"`, function() {
+    lexer.tokenize(s, function(tokens, values) {
+      assert.deepEqual(tokens, expected.tokens);
+      assert.deepEqual(values, expected.values);
+    });
+  });
+}
