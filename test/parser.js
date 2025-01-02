@@ -37,22 +37,11 @@ describe('Parser', function() {
       {expects: new List(a, 3, b, 2, c, 1)});
 
 
-    // itParses(fixtures.abs, {expects: 1});
-    it.skip("correctly parses a nested list", function () {
+    it("correctly parses a nested list", function () {
       console.log(fixtures.abs);
-      assertParse(fixtures.abs, 5);
+      assertParse(fixtures.abs);
     });
 
-    // fs.readFile("./test/fixtures/parser.yml", 'utf8', (err, data) => {
-    //   // console.log(data);
-    //   let fixtures = yaml.parse(data);
-    //   // console.log(fixtures);
-    //   // console.log(fixtures.abs);
-
-    //   itParses(fixtures.abs, {expects: 1});
-    //   it("is cool");
-
-    // });
 
     // it('should match a single keyword as a list', function() {
     //   assertParse(":keyword",
