@@ -1,4 +1,7 @@
 const assert = require("assert");
+const   fs   = require("fs");
+const  YAML  = require("yaml");
+
 const Parser = require("../src/parser");
 const   List = require("../src/list");
 const Keyword = require("../src/keyword");
@@ -12,8 +15,14 @@ const symbol = Symbol.for("symbol"),
       c = Symbol.for("c");
 
 const keyword = Keyword.for("keyword");
+var fixtures;
 
 describe('Parser', function() {
+
+  before(function()  {
+    data = fs.readFileSync("test/fixtures/parser.yml", 'utf8');
+    fixtures = YAML.parse(data);
+  });
 
   describe("#parse", function() {
 
@@ -26,6 +35,24 @@ describe('Parser', function() {
       {expects: new List(a, b, c)});
     itParses("(a 3 b 2 c 1)",
       {expects: new List(a, 3, b, 2, c, 1)});
+
+
+    // itParses(fixtures.abs, {expects: 1});
+    it.skip("correctly parses a nested list", function () {
+      console.log(fixtures.abs);
+      assertParse(fixtures.abs, 5);
+    });
+
+    // fs.readFile("./test/fixtures/parser.yml", 'utf8', (err, data) => {
+    //   // console.log(data);
+    //   let fixtures = yaml.parse(data);
+    //   // console.log(fixtures);
+    //   // console.log(fixtures.abs);
+
+    //   itParses(fixtures.abs, {expects: 1});
+    //   it("is cool");
+
+    // });
 
     // it('should match a single keyword as a list', function() {
     //   assertParse(":keyword",
