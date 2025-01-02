@@ -36,12 +36,7 @@ describe('Parser', function() {
     itParses("(a 3 b 2 c 1)",
       {expects: new List(a, 3, b, 2, c, 1)});
 
-
-    it("correctly parses a nested list", function () {
-      console.log(fixtures.abs);
-      assertParse(fixtures.abs);
-    });
-
+    itParsesFixture("abs", { expects: new List()});
 
     // it('should match a single keyword as a list', function() {
     //   assertParse(":keyword",
@@ -58,6 +53,15 @@ describe('Parser', function() {
 
   });
 });
+
+function itParsesFixture(key, {expects}) {
+  it(`correctly parses fixture "${key}"`, function() {
+    let s = fixtures[key];
+    parser.parse(s, function(p) {
+      assert.deepEqual(p.peek(), expects);
+    });
+  });
+}
 
 function itParses(s, {expects}) {
   it(`correctly parses "${s}"`, function() {
