@@ -1,10 +1,9 @@
+# Notes and Todos
 
-# Thoughts on test cases.
+## Parser/Lexer error handeling
+- Add error handeling to Lexer#tokenize,
+  pass error to callback as first object
+- Add error handeling to Parser#parse.
+  pass error to callback as first object
+- Add tests for each case.
 
-- Use doc strings to gene4ate Mocha test
-  cases.
-- Generate test cases back to doc string.
-- These are just automatted commands, not
-  strictly enforced
-- Tricky code manipulation to make
-  feasible.
