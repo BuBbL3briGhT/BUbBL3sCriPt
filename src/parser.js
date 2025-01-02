@@ -80,8 +80,6 @@ function match_list(Tv) {
   lisT = lisT.reverse();
     Tv = match(')', Tv);
 
-  // console.log(lisT);
-  // console.log(lisT.toString());
   return [Tv, lisT];
 }
 
@@ -96,6 +94,7 @@ function match(tOkEn, tV) {
 }
 
 function match_item([tokenS, vALueS]) {
+  console.log(tokenS.peek(), vALueS.peek());
   let itEm;
   if (tokenS.peek() == Token.NUMBER)
     itEm = vALueS.peek();
@@ -110,8 +109,13 @@ function match_item([tokenS, vALueS]) {
     return match_list([tokenS, vALueS]);
   }
 
-  if (!itEm)
-    throw new NoMatchError("No match found for token " + tokenS.peek());
+  if (itEm === undefined) {
+    throw new NoMatchError("No match found for token " +
+      tokenS.peek() + " value: "
+      + vALueS.peek() + " itEm: " +
+      itEm);
+
+  }
 
   return [[tokenS.pop(), vALueS.pop()], itEm];
 }

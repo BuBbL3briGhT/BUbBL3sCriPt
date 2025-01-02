@@ -61,8 +61,10 @@ function itParsesFixture(key, {expects}) {
   it(`correctly parses fixture "${key}"`, function() {
     let s = fixtures[key];
     parser.parse(s, function(error, p) {
-      if (error)
+      if (error) {
+        console.log(s);
         throw error;
+      }
       assert.deepEqual(p.peek(), expects);
     });
   });
