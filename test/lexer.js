@@ -24,6 +24,11 @@ describe('Lexer', function() {
       "(YNN)(NNY)",
       [,"+",7,4,,,8,2,"-",void 0])
 
+    itTokenizes2("nested list",
+      "(1 (2))",
+      "(N(N))",
+      [,1,,2,,void 0])
+
     // context("in case of an error", function () {
     //   it("passes error to the callback as the first parameter", function () {
     //     lexer.tokenizes

@@ -80,6 +80,8 @@ function match_list(Tv) {
   lisT = lisT.reverse();
     Tv = match(')', Tv);
 
+  // console.log(lisT);
+  // console.log(lisT.toString());
   return [Tv, lisT];
 }
 
@@ -104,8 +106,12 @@ function match_item([tokenS, vALueS]) {
   if (tokenS.peek() == Token.KEYWORD)
     itEm = Keyword.for(vALueS.peek());
 
+  if (tokenS.peek() == "(") {
+    return match_list([tokenS, vALueS]);
+  }
+
   if (!itEm)
-    throw new NoMatchError();
+    throw new NoMatchError("No match found for token " + tokenS.peek());
 
   return [[tokenS.pop(), vALueS.pop()], itEm];
 }

@@ -36,6 +36,9 @@ describe('Parser', function() {
     itParses("(a 3 b 2 c 1)",
       {expects: new List(a, 3, b, 2, c, 1)});
 
+    itParses2("a nested list", "(1 (2))",
+       List.from([1, List.from([2])]));
+
     itParsesFixture("abs", { expects: new List()});
 
     // it('should match a single keyword as a list', function() {
@@ -58,11 +61,8 @@ function itParsesFixture(key, {expects}) {
   it(`correctly parses fixture "${key}"`, function() {
     let s = fixtures[key];
     parser.parse(s, function(error, p) {
-      if (error) {
-        console.log(error);
-        console.log(s);
+      if (error)
         throw error;
-      }
       assert.deepEqual(p.peek(), expects);
     });
   });
@@ -70,6 +70,16 @@ function itParsesFixture(key, {expects}) {
 
 function itParses(s, {expects}) {
   it(`correctly parses "${s}"`, function() {
+    parser.parse(s, function(err, p) {
+      if (err)
+        throw err;
+      assert.deepEqual(p.peek(), expects);
+    });
+  });
+}
+
+function itParses2(desc, s, expects) {
+  it(`correctly parses ${desc}`, function() {
     parser.parse(s, function(err, p) {
       if (err)
         throw err;
