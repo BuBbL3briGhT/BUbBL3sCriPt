@@ -57,7 +57,12 @@ describe('Parser', function() {
 function itParsesFixture(key, {expects}) {
   it(`correctly parses fixture "${key}"`, function() {
     let s = fixtures[key];
-    parser.parse(s, function(p) {
+    parser.parse(s, function(error, p) {
+      if (error) {
+        console.log(error);
+        console.log(s);
+        return
+      }
       assert.deepEqual(p.peek(), expects);
     });
   });
