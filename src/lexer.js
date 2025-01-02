@@ -84,7 +84,7 @@ class Lexer {
     // let m = this.head.match(/^(\w[^ ()[\]\n]*)/);
     let m = this.head.match(/^([^\s()[\]]*)/);
     this.token(Token.SYMBOL, m[0]);
-    console.log(m);
+    // console.log(m);
     this.advance(m[0].length);
   }
 

@@ -39,7 +39,21 @@ describe('Parser', function() {
     itParses2("a nested list", "(1 (2))",
        List.from([1, List.from([2])]));
 
-    itParsesFixture("abs", { expects: new List()});
+    // (define (abs x)
+    //   (if (< x 0)
+    //       (- x)
+    //       x))
+    itParsesFixture("abs",
+      { expects:
+          List.from([Symbol.for("define"),
+            List.from([Symbol.for("abs"),
+                       Symbol.for("x")]),
+            List.from([Symbol.for("if"),
+              List.from([Symbol.for("<"),
+                Symbol.for("x"), 0]),
+              List.from([Symbol.for("-"),
+                Symbol.for("x")]),
+              Symbol.for("x")])])});
 
     // it('should match a single keyword as a list', function() {
     //   assertParse(":keyword",

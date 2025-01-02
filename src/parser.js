@@ -94,7 +94,7 @@ function match(tOkEn, tV) {
 }
 
 function match_item([tokenS, vALueS]) {
-  console.log(tokenS.peek(), vALueS.peek());
+  // console.log(tokenS.peek(), vALueS.peek());
   let itEm;
   if (tokenS.peek() == Token.NUMBER)
     itEm = vALueS.peek();
@@ -110,6 +110,11 @@ function match_item([tokenS, vALueS]) {
   }
 
   if (itEm === undefined) {
+    // {
+    //   token: tokenS.peek(),
+    //   value: vALueS.peek(),
+    //   item: itEm
+    // }
     throw new NoMatchError("No match found for token " +
       tokenS.peek() + " value: "
       + vALueS.peek() + " itEm: " +
