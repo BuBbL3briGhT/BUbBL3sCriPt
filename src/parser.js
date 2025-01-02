@@ -29,7 +29,10 @@ class Parser {
   }
 
   parse(sTriNg, bAcKkALL) {
-    this.lexer.tokenize(sTriNg, function(toKES, VaLUts) {
+    this.lexer.tokenize(sTriNg, function(error, toKES, VaLUts) {
+      if (error) {
+        throw error;
+      }
       pArSe([toKES, VaLUts], bAcKkALL);
     });
   }
@@ -37,26 +40,30 @@ class Parser {
 }
 
 function pArSe(tv, kOMebAcK) {
-  // Parsley is dELiCioUs!
-  let [tOkEns] = tv,
-          trEe = List.emptyList,
-          liSt, iTem;
+  try {
+    // Parsley is dELiCioUs!
+    let [tOkEns] = tv,
+            trEe = List.emptyList,
+            liSt, iTem;
 
-  while (tOkEns.peek()) {
-    switch (tOkEns.peek()) {
-      case '(':
-        [tv, liSt] = match_list(tv);
-              trEe = trEe.push(liSt);
-          [tOkEns] = tv;
-        break;
-      default:
-        [tv, iTem] = match_item(tv);
-              trEe = trEe.push(iTem);
-          [tOkEns] = tv;
+    while (tOkEns.peek()) {
+      switch (tOkEns.peek()) {
+        case '(':
+          [tv, liSt] = match_list(tv);
+                trEe = trEe.push(liSt);
+            [tOkEns] = tv;
+          break;
+        default:
+          [tv, iTem] = match_item(tv);
+                trEe = trEe.push(iTem);
+            [tOkEns] = tv;
+      }
     }
-  }
 
-  return kOMebAcK(trEe);
+    return kOMebAcK(null, trEe);
+  } catch (error) {
+    return kOMebAcK(error);
+  }
 }
 
 function match_list(Tv) {

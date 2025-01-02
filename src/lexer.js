@@ -5,57 +5,61 @@ const Token = require("./token");
 class Lexer {
 
   tokenize(head, callback) {
-    this.head = head;
-    this.tokens = List.emptyList;
-    this.values = List.emptyList;
+    try {
+      this.head = head;
+      this.tokens = List.emptyList;
+      this.values = List.emptyList;
 
-    while (this.head[0]) {
-      // console.log(this.head[0]);
-      switch (this.head[0]) {
-        case ' ':
-        case "\t":
-          this.advance();
-          break;
-        case '(':
-        case ')':
-        case '[':
-        case ']':
-        case '{':
-        case '}':
-        case '.':
-        case "'":
-        case "\n":
-          this.token(this.head[0]);
-          this.advance()
-          break;
-        case '"':
-          this.tokenizeString();
-          break;
-        case '0':
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-          this.tokenizeNumber();
-          break;
-        case ':':
-          this.tokenizeKeyword();
-          break;
-        default:
-          this.tokenizeSymbol();
-          break;
+      while (this.head[0]) {
+        // console.log(this.head[0]);
+        switch (this.head[0]) {
+          case ' ':
+          case "\t":
+            this.advance();
+            break;
+          case '(':
+          case ')':
+          case '[':
+          case ']':
+          case '{':
+          case '}':
+          case '.':
+          case "'":
+          case "\n":
+            this.token(this.head[0]);
+            this.advance()
+            break;
+          case '"':
+            this.tokenizeString();
+            break;
+          case '0':
+          case '1':
+          case '2':
+          case '3':
+          case '4':
+          case '5':
+          case '6':
+          case '7':
+          case '8':
+          case '9':
+            this.tokenizeNumber();
+            break;
+          case ':':
+            this.tokenizeKeyword();
+            break;
+          default:
+            this.tokenizeSymbol();
+            break;
+        }
       }
+
+      this.tokens = this.tokens.reverse();
+      this.values = this.values.reverse();
+
+      return callback(null, this.tokens, this.values);
+    } catch (error) {
+      return callback(error);
     }
-
-    this.tokens = this.tokens.reverse();
-    this.values = this.values.reverse();
-
-    return callback(this.tokens, this.values);
   }
 
   // Adds token type and value to the result.

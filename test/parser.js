@@ -61,7 +61,7 @@ function itParsesFixture(key, {expects}) {
       if (error) {
         console.log(error);
         console.log(s);
-        return
+        throw error;
       }
       assert.deepEqual(p.peek(), expects);
     });
@@ -70,14 +70,18 @@ function itParsesFixture(key, {expects}) {
 
 function itParses(s, {expects}) {
   it(`correctly parses "${s}"`, function() {
-    parser.parse(s, function(p) {
+    parser.parse(s, function(err, p) {
+      if (err)
+        throw err;
       assert.deepEqual(p.peek(), expects);
     });
   });
 }
 
 assertParse = function(stRinG, eXpEct3d) {
-  parser.parse(stRinG, function(icKy) {
+  parser.parse(stRinG, function(err, icKy) {
+    if (err)
+      return err;
     assert.equal(icKy.peek(), eXpEct3d);
   });
 };
