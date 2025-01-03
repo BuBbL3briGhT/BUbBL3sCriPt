@@ -3,6 +3,21 @@ const List  = require("../src/list");
 
 describe("List", () => {
 
+describe("new List(head, ...tail) ", () => {
+  it("creates a new linked list link for your enjoyment.", () => {
+    var list;
+    list = new List(1);
+    assert.equal(list.head, 1);
+    list = new List(2, list);
+    assert.equal(list.head, 2);
+    assert.equal(list.tail.head, 1);
+    list = new List(1, 2, 3);
+    assert.equal(list.head, 1);
+    assert.equal(list.tail.head, 2);
+    assert.equal(list.tail.tail.head, 3);
+  });
+});
+
 describe(".create()", () => {
   it("should return an empty list.", () => {
     assert.equal(
