@@ -7,7 +7,7 @@ const lexer = new Lexer();
 
 describe('Lexer', function() {
   describe("#tokenize", function() {
-    itTokenizes("symbol",
+    itOnlyTokenizes("symbol",
       { tokens: List.create(Token.SYMBOL),
         values: List.create("symbol")});
     itTokenizes(":keyword",
@@ -49,6 +49,16 @@ function itTokenizes(s, expected) {
   });
 }
 
+function itOnlyTokenizes(s, expected) {
+  it.only(`correctly tokenizes "${s}"`, function() {
+    lexer.tokenize(s, function(err, tokens, values) {
+      if (err)
+        throw err;
+      assert.deepEqual(tokens, expected.tokens);
+      assert.deepEqual(values, expected.values);
+    });
+  });
+}
 function itTokenizes2(desc, str, toks, vals) {
   toks = List.from(toks.split(''));
   vals = List.from(vals);

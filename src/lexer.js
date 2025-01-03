@@ -11,7 +11,6 @@ class Lexer {
       this.values = List.emptyList;
 
       while (this.head[0]) {
-        // console.log(this.head[0]);
         switch (this.head[0]) {
           case ' ':
           case "\t":
@@ -52,9 +51,10 @@ class Lexer {
             break;
         }
       }
-
+      console.log(this.tokens);
       this.tokens = this.tokens.reverse();
       this.values = this.values.reverse();
+      console.log(this.tokens);
 
       return callback(null, this.tokens, this.values);
     } catch (error) {
@@ -81,10 +81,9 @@ class Lexer {
   }
 
   tokenizeSymbol() {
-    // let m = this.head.match(/^(\w[^ ()[\]\n]*)/);
+    console.log(this.head[0]);
     let m = this.head.match(/^([^\s()[\]]*)/);
     this.token(Token.SYMBOL, m[0]);
-    // console.log(m);
     this.advance(m[0].length);
   }
 

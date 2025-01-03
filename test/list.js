@@ -19,9 +19,18 @@ describe("new List(head, tail) ", () => {
 
 describe("#reverse", () => {
   it("reverses the list", () => {
-    var list = new List(1);
-        list = new List(2, list);
-        list = new List(3, list);
+    var list;
+
+    list = List.emptyList;
+    list = list.reverse();
+    assert.equal(list, List.emptyList);
+
+    list = new List(1);
+    list = list.reverse();
+    assert.equal(list.head, 1);
+
+    list = new List(2, list);
+    list = new List(3, list);
 
     assert.equal(list.head, 3);
     list = list.reverse();
@@ -30,7 +39,7 @@ describe("#reverse", () => {
 });
 
 describe("#reduce", () => {
-  it("reduces the list", () => {
+  it.only("reduces the list", () => {
     var list, result;
 
     let add = (a, b) => { return b + a };
@@ -39,6 +48,9 @@ describe("#reduce", () => {
 
     result = list.reduce(add);
     assert.equal(result, undefined);
+
+    result = list.reduce(add, 0);
+    assert.equal(result, 0);
 
     list = new List(1);
     result = list.reduce(add);
@@ -92,7 +104,7 @@ describe(".emptyList", () => {
 });
 
 describe("#toString", () => {
-  it.only("formats the list as a string.", () => {
+  it("formats the list as a string.", () => {
     var list, result;
 
     list = List.emptyList;

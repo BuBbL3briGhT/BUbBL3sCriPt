@@ -53,11 +53,29 @@ class List  {
   }
 
   reverse() {
+    var list;
+
     if (this.isEmpty) return this;
-    var list = new List(this.head);
+
+    list = new List(this.head);
     return this.tail.reduce(function(memo, i) {
       return memo.push(i);
     }, list);
+  }
+
+  reverse() {
+    var list;
+
+    if (this.isEmpty) return this;
+
+    list = new List(this.head);
+    console.log(this.tail);
+
+    list = this.tail.reduce((memo, i) => {
+      return memo.push(i);
+    }, list);
+    console.log(list);
+    return list;
   }
 
   conj(val) {
@@ -129,42 +147,55 @@ class List  {
     return new List(head, tail);
   }
 
-  reduce(fn, memo) {
-    var a, b, c = this;
-    if (memo == undefined) {
-      a = this.head;
-      c = this.tail;
-      if (!c) {
-        return a;
-      } else {
-        b = c.head;
-        c = c.tail;
-        memo = fn(a, b);
-        if (!c)
-          return memo;
-      }
-    }
-    return c.push(memo).reduce(fn);
-  }
+  // reduce(fn, memo) {
+  //   var a, b, c = this;
+  //   if (memo == undefined) {
+  //     a = this.head;
+  //     c = this.tail;
+  //     if (!c) {
+  //       return a;
+  //     } else {
+  //       b = c.head;
+  //       c = c.tail;
+  //       memo = fn(a, b);
+  //       if (!c)
+  //         return memo;
+  //     }
+  //   }
+  //   return c.push(memo).reduce(fn);
+  // }
+  // reduce(fn, memo) {
+  //   if (this.isEmpty)
+  //     return this.head;
+
+  //   var a, b, c = this;
+  //   if (memo == undefined) {
+  //     a = this.head;
+  //     c = this.tail;
+  //     if (c.isEmpty) {
+  //       return a;
+  //     } else {
+  //       b = c.head;
+  //       c = c.tail;
+  //       memo = fn(a, b);
+  //       if (!c)
+  //         return memo;
+  //     }
+  //   }
+  //   return c.push(memo).reduce(fn);
+  // }
+
   reduce(fn, memo) {
     if (this.isEmpty)
-      return this.head;
+      return memo;
 
-    var a, b, c = this;
-    if (memo == undefined) {
-      a = this.head;
-      c = this.tail;
-      if (c.isEmpty) {
-        return a;
-      } else {
-        b = c.head;
-        c = c.tail;
-        memo = fn(a, b);
-        if (!c)
-          return memo;
-      }
+    if (memo === undefined) {
+      memo = this.head;
+    } else {
+      memo = fn(memo, this.head);
     }
-    return c.push(memo).reduce(fn);
+
+    return this.tail.reduce(fn, memo);
   }
 
   each(fn) {
@@ -190,10 +221,10 @@ class List  {
 
 class EmptyList extends List {
   get isEmpty() { return true; }
-  toString() { return "()"; }
-  push(val) { return new List(val); }
-  reverse() { return this; }
-  map() { return this; }
+  // toString() { return "()"; }
+  // push(val) { return new List(val); }
+  // reverse() { return this; }
+  // map() { return this; }
 }
 
 List.emptyList = new EmptyList;
