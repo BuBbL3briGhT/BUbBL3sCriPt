@@ -30,10 +30,10 @@ describe("#reverse", () => {
 });
 
 describe("#reduce", () => {
-  it("reduces the list", () => {
+  it.only("reduces the list", () => {
     var list, result;
 
-    let add = (a, b) => { return a + b };
+    let add = (a, b) => { return b + a };
 
     list = List.emptyList;
 
@@ -51,6 +51,18 @@ describe("#reduce", () => {
     list = new List(3, list);
     result = list.reduce(add);
     assert.equal(result, 6)
+
+    list = new List("a");
+    result = list.reduce(add);
+    assert.equal(result, "a");
+
+    list = new List("b", list);
+    result = list.reduce(add);
+    assert.equal(result, "ab");
+
+    list = new List("c", list);
+    result = list.reduce(add);
+    assert.equal(result, "abc");
   });
 });
 
@@ -80,10 +92,33 @@ describe(".emptyList", () => {
 });
 
 describe("#toString", () => {
-  it("should return the list formatted as" +
-     "a string.", () => {
-    let list = List.create(1,2,3);
-    assert.equal(list.toString(), "(1 2 3)");
+  it("formats the list as a string.", () => {
+    var list, result;
+
+    list = List.emptyList;
+    result = list.toString();
+    assert.equal(result, "()");
+
+    list = new List(1);
+    result = list.toString();
+    assert.equal(result, "(1)");
+
+    list = new List(2, list);
+    result = list.toString();
+    assert.equal(result, "(1 2)");
+
+    list = new List(3, list);
+    result = list.toString();
+    assert.equal(result, "(1 2 3)");
+
+    list = new List("string", list);
+    result = list.toString();
+    assert.equal(result, "(1 2 3 \"string\")");
+
+    list = new List(Symbol.for("symbol"), list);
+    result = list.toString();
+    assert.equal(result, "(1 2 3 \"string\" symbol)");
+
     // list = list.push(Symbol.for("a"));
     // assert.equal(list.toString(), "(1 2 3 a)");
   });

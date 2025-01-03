@@ -67,6 +67,9 @@ class List  {
   }
 
   join(delimiter = ' ') {
+    // if (this.isEmpty)
+    //   return '';
+
     if (this.tail) {
       return this.head + delimiter + this.tail.join()
     } else {
@@ -83,6 +86,30 @@ class List  {
 
   toString() {
     return "(" + this.join() + ")"
+  }
+
+  toString() {
+    let toString = (object) => {
+      console.log(typeof object, object);
+      switch (typeof object) {
+        case "string":
+          return '"' + object + '"';
+        case "symbol":
+          return Symbol.keyFor(object);
+        default:
+          return object.toString();
+      }
+    }
+    let listToString = (memo="", item) => {
+      console.log(item);
+      if (item.isEmpty)
+        return memo;
+      else if (memo == "")
+        return toString(item);
+      else
+        return toString(item) + " " + memo;
+    }
+    return "(" + this.reduce(listToString) + ")"
   }
 
   inspect() {
