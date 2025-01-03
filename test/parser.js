@@ -30,11 +30,11 @@ describe('Parser', function() {
     itParses(":keyword",
       {expects: keyword});
     itParses("(1 2 3)",
-      {expects: new List(1, 2, 3)});
+      {expects: List.create(1, 2, 3)});
     itParses("(a b c)",
-      {expects: new List(a, b, c)});
+      {expects: List.create(a, b, c)});
     itParses("(a 3 b 2 c 1)",
-      {expects: new List(a, 3, b, 2, c, 1)});
+      {expects: List.create(a, 3, b, 2, c, 1)});
 
     itParses2("a nested list", "(1 (2))",
        List.from([1, List.from([2])]));

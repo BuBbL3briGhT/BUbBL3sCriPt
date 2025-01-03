@@ -11,10 +11,6 @@ describe("new List(head, ...tail) ", () => {
     list = new List(2, list);
     assert.equal(list.head, 2);
     assert.equal(list.tail.head, 1);
-    list = new List(1, 2, 3);
-    assert.equal(list.head, 1);
-    assert.equal(list.tail.head, 2);
-    assert.equal(list.tail.tail.head, 3);
   });
 });
 

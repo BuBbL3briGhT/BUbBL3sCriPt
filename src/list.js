@@ -1,10 +1,9 @@
 
 class List  {
-  constructor(head, ...tail) {
+
+  constructor(head, tail) {
     this.head = head;
-    this.tail = tail[0];
-    if (tail.length > 1)
-      this.tail = List.from(tail);
+    this.tail = tail;
   }
 
   static from(a) {
@@ -143,7 +142,7 @@ class List  {
     if (items.length == 0)
       return this.emptyList;
     else
-      return new List(...items);
+      return List.from(items);
   }
 
 }
