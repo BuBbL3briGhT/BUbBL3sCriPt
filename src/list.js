@@ -3,7 +3,7 @@ class List  {
 
   constructor(head, tail) {
     this.head = head;
-    this.tail = tail;
+    this.tail = tail || List.emptyList;
   }
 
   static from(a) {
@@ -53,7 +53,7 @@ class List  {
   }
 
   reverse() {
-    if (!this.tail) return this;
+    if (this.isEmpty) return this;
     var list = new List(this.head);
     return this.tail.reduce(function(memo, i) {
       return memo.push(i);
@@ -114,6 +114,26 @@ class List  {
       a = this.head;
       c = this.tail;
       if (!c) {
+        return a;
+      } else {
+        b = c.head;
+        c = c.tail;
+        memo = fn(a, b);
+        if (!c)
+          return memo;
+      }
+    }
+    return c.push(memo).reduce(fn);
+  }
+  reduce(fn, memo) {
+    if (this.isEmpty)
+      return this.head;
+
+    var a, b, c = this;
+    if (memo == undefined) {
+      a = this.head;
+      c = this.tail;
+      if (c.isEmpty) {
         return a;
       } else {
         b = c.head;
