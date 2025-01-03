@@ -30,7 +30,7 @@ describe("#reverse", () => {
 });
 
 describe("#reduce", () => {
-  it.only("reduces the list", () => {
+  it("reduces the list", () => {
     var list, result;
 
     let add = (a, b) => { return b + a };
@@ -92,7 +92,7 @@ describe(".emptyList", () => {
 });
 
 describe("#toString", () => {
-  it("formats the list as a string.", () => {
+  it.only("formats the list as a string.", () => {
     var list, result;
 
     list = List.emptyList;
@@ -111,6 +111,7 @@ describe("#toString", () => {
     result = list.toString();
     assert.equal(result, "(1 2 3)");
 
+
     list = new List("string", list);
     result = list.toString();
     assert.equal(result, "(1 2 3 \"string\")");
@@ -118,9 +119,6 @@ describe("#toString", () => {
     list = new List(Symbol.for("symbol"), list);
     result = list.toString();
     assert.equal(result, "(1 2 3 \"string\" symbol)");
-
-    // list = list.push(Symbol.for("a"));
-    // assert.equal(list.toString(), "(1 2 3 a)");
   });
 });
 

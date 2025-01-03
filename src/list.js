@@ -89,27 +89,21 @@ class List  {
   }
 
   toString() {
-    let toString = (object) => {
-      console.log(typeof object, object);
-      switch (typeof object) {
+    let format = (item) => {
+      switch (typeof item) {
         case "string":
-          return '"' + object + '"';
+          return '"' + item + '"';
         case "symbol":
-          return Symbol.keyFor(object);
+          return Symbol.keyFor(item);
         default:
-          return object.toString();
+          return item.toString();
       }
+
     }
-    let listToString = (memo="", item) => {
-      console.log(item);
-      if (item.isEmpty)
-        return memo;
-      else if (memo == "")
-        return toString(item);
-      else
-        return toString(item) + " " + memo;
+    let join = (memo, item) => {
+      return item + " " + memo;
     }
-    return "(" + this.reduce(listToString) + ")"
+    return "(" + this.map(format).reduce(join) + ")";
   }
 
   inspect() {
