@@ -26,7 +26,9 @@ describe(".create()", () => {
 describe(".create(item, ...)", () => {
   it("should create a list with items.", () => {
     let list = List.create(1, 2, 3);
-    assert.equal(list.toString(), "(1 2 3)");
+    assert.equal(list.head, 1);
+    assert.equal(list.tail.head, 2);
+    assert.equal(list.tail.tail.head, 3);
   });
 });
 
