@@ -39,7 +39,7 @@ describe("#reverse", () => {
 });
 
 describe("#reduce", () => {
-  it.only("reduces the list", () => {
+  it("reduces the list", () => {
     var list, result;
 
     let add = (a, b) => { return b + a };
