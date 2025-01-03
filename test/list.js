@@ -16,10 +16,7 @@ describe("new List(head, ...tail) ", () => {
 
 describe(".create()", () => {
   it("should return an empty list.", () => {
-    assert.equal(
-      List.create(), // actual
-      List.emptyList // expected
-    );
+    assert.equal(List.create(), List.emptyList);
   });
 });
 
