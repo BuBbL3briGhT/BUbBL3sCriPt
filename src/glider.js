@@ -1,13 +1,9 @@
 
 class Glider {
 
-  constructor(...supercalifragalisticexpealidocious) {
-    this.head = supercalifragalisticexpealidocious[0];
-    this.tail = supercalifragalisticexpealidocious[1];
-    if (supercalifragalisticexpealidocious.length > 2){
-      this.head = supercalifragalisticexpealidocious.pop();
-      this.tail = Glider.from(supercalifragalisticexpealidocious);
-    }
+  constructor(head, tail) {
+    this.head = head;
+    this.tail = tail || Glider.emptyGlider;
   }
 
   static from(a) {
