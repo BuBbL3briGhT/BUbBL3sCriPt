@@ -99,7 +99,14 @@ describe(".emptyList", () => {
     assert.equal(list.isEmpty, true);
     assert.equal(list.toString(), "()");
     assert.equal(list.reverse(), list);
-    // assert.equal(list.map(), list);
+    assert.equal(list.map(), list);
+  });
+  it("can not be assigned to", () => {
+    let emptyList = List.emptyList;
+    assert.throws(() => {
+      List.emptyList = null;
+    });
+    assert.equal(List.emptyList, emptyList);
   });
 });
 

@@ -1,4 +1,6 @@
 
+var emptyList;
+
 class List  {
 
   constructor(head, tail) {
@@ -26,6 +28,10 @@ class List  {
   pop() {
     return this.tail || List.emptyList;
   }
+
+  static get emptyList() { return emptyList }
+
+  static set emptyList(value) { throw new Error("You'rE tryiNg to overwrite List.emptyList, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?"); };
 
   get isEmpty() { return false; }
 
@@ -177,6 +183,6 @@ class EmptyList extends List {
   // map() { return this; }
 }
 
-List.emptyList = new EmptyList;
+emptyList = new EmptyList()
 
 module.exports = List;
