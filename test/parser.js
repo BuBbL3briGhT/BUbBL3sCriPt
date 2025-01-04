@@ -1,6 +1,6 @@
 const assert = require("assert");
 const   fs   = require("fs");
-const  YAML  = require("yaml");
+const  Yaml  = require("yaml");
 
 const Parser = require("../src/parser");
 const   List = require("../src/list");
@@ -21,7 +21,7 @@ describe('Parser', function() {
 
   before(function()  {
     data = fs.readFileSync("test/fixtures/parser.yml", 'utf8');
-    fixtures = YAML.parse(data);
+    fixtures = Yaml.parse(data);
   });
 
   describe("#parse", function() {
