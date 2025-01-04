@@ -104,7 +104,7 @@ describe(".emptyList", () => {
 });
 
 describe("#map(fn)", () => {
-  it.only("maps the list through fn", ()=>{
+  it("maps the list through fn", ()=>{
     var list;
 
     let add7 = (item) => { return item+7 };
@@ -116,6 +116,17 @@ describe("#map(fn)", () => {
     list = new List(1);
     result = list.map(add7);
     assert.equal(result.head, 8);
+
+    list = new List(2, list);
+    result = list.map(add7);
+    assert.equal(result.head, 9);
+    assert.equal(result.tail.head, 8);
+
+    list = new List(3, list);
+    result = list.map(add7);
+    assert.equal(result.head, 10);
+    assert.equal(result.tail.head, 9);
+    assert.equal(result.tail.tail.head, 8);
   });
 });
 
