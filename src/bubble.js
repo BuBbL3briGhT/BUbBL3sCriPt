@@ -1,5 +1,5 @@
 
-var emptyBubble;
+var air;
 
 class Bubble  {
 
@@ -13,7 +13,7 @@ class Bubble  {
   static blow(...breaths) {
     var bubble = Bubble.air;
     if (items.length == 0)
-      return this.emptyBubble;
+      return this.air;
     else
       for (breath of breaths)
         bubble = new Bubble(breath);
@@ -47,30 +47,30 @@ class Bubble  {
 
   static set air(value) {
     switch (Math.trunc(Math.random() * 3)) {
-      case 0: throw new Error("You'rE tryiNg to overwrite Bubble.emptyBubble, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?");
+      case 0: throw new Error("You'rE tryiNg to overwrite Bubble.air, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?");
       case 1: throw new Error("👋 TheSe arE noT the dRoiDs yoU are LooKing for.");
       case 2: throw new Error("http://youtu.be/otCpCn0l4Wo");
     }
   };
 
-  get isEmpty() { return false; }
+  get isAir() { return false; }
 
   get first() {
-    return this.head;
+    return this.breath;
   }
   get rest() {
-    return this.tail;
+    return this.bubble;
   }
   get next() {
-    return this.tail.head;
+    return this.bubble.breath;
   }
   get last() {
-    return this.tail ? this.tail.last : this.head;
+    return this.bubble ? this.bubble.last : this.breath;
   }
 
   count() {
-    return this.reduce(function(memo, i) {
-      return memo + 1;
+    return this.reduce(function(count) {
+      return count++;
     }, 0);
   }
 
@@ -80,13 +80,10 @@ class Bubble  {
 
   reverse() {
     var bubble;
-
-    if (this.isEmpty) return this;
-
-    bubble = new Bubble(this.head);
-
-    bubble = this.tail.reduce((memo, i) => {
-      return memo.push(i);
+    if (this.isAir) return this;
+    bubble = new Bubble(this.breath);
+    bubble = this.bubble.reduce((bubble, breath) => {
+      return bubble.push(breath);
     }, bubble);
     return bubble;
   }
@@ -98,7 +95,7 @@ class Bubble  {
   }
 
   toString() {
-    if (this.isEmpty)
+    if (this.isAir)
       return "()";
 
     let format = (item) => {
@@ -128,17 +125,17 @@ class Bubble  {
   }
 
   toArray() {
-    if (this.tail) {
-      return [this.head].concat(this.tail.toArray());
+    if (this.bubble) {
+      return [this.breath].concat(this.bubble.toArray());
     } else {
-      return [this.head];
+      return [this.breath];
     }
   }
 
   map(fn) {
-    if (this.isEmpty)
+    if (this.isAir)
       return this;
-    return new Bubble(fn(this.head), this.tail.map(fn));
+    return new Bubble(fn(this.breath), this.bubble.map(fn));
   }
 
   reduce(fn, memo) {
@@ -146,18 +143,18 @@ class Bubble  {
       return memo;
 
     if (memo === undefined) {
-      memo = this.head;
+      memo = this.breath;
     } else {
-      memo = fn(memo, this.head);
+      memo = fn(memo, this.breath);
     }
 
-    return this.tail.reduce(fn, memo);
+    return this.bubble.reduce(fn, memo);
   }
 
   each(fn) {
-    var result = fn(this.head);
-    if (this.tail)
-      return this.tail.each(fn);
+    var result = fn(this.breath);
+    if (this.bubble)
+      return this.bubble.each(fn);
     return result;
   }
 
@@ -168,10 +165,10 @@ class Bubble  {
 
 }
 
-class EmptyBubble extends Bubble {
-  get isEmpty() { return true; }
+class Air extends Bubble {
+  get isAir() { return true; }
 }
 
-emptyBubble = new EmptyBubble()
+air = new Air()
 
 module.exports = Bubble;

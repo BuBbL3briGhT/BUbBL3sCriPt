@@ -3,17 +3,17 @@ const Bubble  = require("../src/bubble");
 
 describe("Bubble", () => {
 
-describe("new Bubble(head, tail) ", () => {
+describe("new Bubble(breath, bubble) ", () => {
   it("creates a new linked bubble link for your fun and profit.", () => {
     var bubble;
     bubble = new Bubble();
-    assert.equal(bubble.head, undefined);
-    assert.equal(bubble.tail, Bubble.emptyBubble);
+    assert.equal(bubble.breath, undefined);
+    assert.equal(bubble.bubble, Bubble.air);
     bubble = new Bubble(1);
-    assert.equal(bubble.head, 1);
+    assert.equal(bubble.breath, 1);
     bubble = new Bubble(2, bubble);
-    assert.equal(bubble.head, 2);
-    assert.equal(bubble.tail.head, 1);
+    assert.equal(bubble.breath, 2);
+    assert.equal(bubble.bubble.breath, 1);
   });
 });
 
@@ -21,20 +21,20 @@ describe("#reverse", () => {
   it("reverses the bubble", () => {
     var bubble;
 
-    bubble = Bubble.emptyBubble;
+    bubble = Bubble.air;
     bubble = bubble.reverse();
-    assert.equal(bubble, Bubble.emptyBubble);
+    assert.equal(bubble, Bubble.air);
 
     bubble = new Bubble(1);
     bubble = bubble.reverse();
-    assert.equal(bubble.head, 1);
+    assert.equal(bubble.breath, 1);
 
     bubble = new Bubble(2, bubble);
     bubble = new Bubble(3, bubble);
 
-    assert.equal(bubble.head, 3);
+    assert.equal(bubble.breath, 3);
     bubble = bubble.reverse();
-    assert.equal(bubble.head, 1)
+    assert.equal(bubble.breath, 1)
   });
 });
 
@@ -44,7 +44,7 @@ describe("#reduce", () => {
 
     let add = (a, b) => { return b + a };
 
-    bubble = Bubble.emptyBubble;
+    bubble = Bubble.air;
 
     result = bubble.reduce(add);
     assert.equal(result, undefined);
@@ -80,33 +80,33 @@ describe("#reduce", () => {
 
 describe(".create()", () => {
   it("should return an empty bubble.", () => {
-    assert.equal(Bubble.create(), Bubble.emptyBubble);
+    assert.equal(Bubble.create(), Bubble.air);
   });
 });
 
 describe(".create(item, ...)", () => {
   it("should create a bubble with items.", () => {
     let bubble = Bubble.create(1, 2, 3);
-    assert.equal(bubble.head, 1);
-    assert.equal(bubble.tail.head, 2);
-    assert.equal(bubble.tail.tail.head, 3);
+    assert.equal(bubble.breath, 1);
+    assert.equal(bubble.bubble.breath, 2);
+    assert.equal(bubble.bubble.bubble.breath, 3);
   });
 });
 
-describe(".emptyBubble", () => {
+describe(".air", () => {
   it("should be empty bubble.", () => {
-    let bubble = Bubble.emptyBubble;
+    let bubble = Bubble.air;
     assert.equal(bubble.isEmpty, true);
     assert.equal(bubble.toString(), "()");
     assert.equal(bubble.reverse(), bubble);
     assert.equal(bubble.map(), bubble);
   });
   it("can not be assigned to", () => {
-    let emptyBubble = Bubble.emptyBubble;
+    let air = Bubble.air;
     assert.throws(() => {
-      Bubble.emptyBubble = null;
+      Bubble.air = null;
     });
-    assert.equal(Bubble.emptyBubble, emptyBubble);
+    assert.equal(Bubble.air, air);
   });
 });
 
@@ -116,40 +116,40 @@ describe("#map(fn)", () => {
 
     let add7 = (item) => { return item+7 };
 
-    bubble = Bubble.emptyBubble;
+    bubble = Bubble.air;
     result = bubble.map(add7);
-    assert.equal(result, Bubble.emptyBubble);
+    assert.equal(result, Bubble.air);
 
     bubble = new Bubble(1);
     result = bubble.map(add7);
-    assert.equal(result.head, 8);
+    assert.equal(result.breath, 8);
 
     bubble = new Bubble(2, bubble);
     result = bubble.map(add7);
-    assert.equal(result.head, 9);
-    assert.equal(result.tail.head, 8);
+    assert.equal(result.breath, 9);
+    assert.equal(result.bubble.breath, 8);
 
     bubble = new Bubble(3, bubble);
     result = bubble.map(add7);
-    assert.equal(result.head, 10);
-    assert.equal(result.tail.head, 9);
-    assert.equal(result.tail.tail.head, 8);
+    assert.equal(result.breath, 10);
+    assert.equal(result.bubble.breath, 9);
+    assert.equal(result.bubble.bubble.breath, 8);
   });
 });
 
 describe("#push(item)", () => {
   it("pushes an item onto the bubble.", () => {
-    var bubble = Bubble.emptyBubble;
+    var bubble = Bubble.air;
     assert(bubble.isEmpty);
 
     bubble = bubble.push(1);
-    assert.equal(bubble.head, 1)
-    assert(bubble.tail.isEmpty);
+    assert.equal(bubble.breath, 1)
+    assert(bubble.bubble.isEmpty);
 
     bubble = bubble.push(2);
-    assert.equal(bubble.head, 2)
-    assert.equal(bubble.tail.head, 1)
-    assert(bubble.tail.tail.isEmpty);
+    assert.equal(bubble.breath, 2)
+    assert.equal(bubble.bubble.breath, 1)
+    assert(bubble.bubble.bubble.isEmpty);
   });
 });
 
@@ -158,7 +158,7 @@ describe("#toString", () => {
   it("formats the bubble as a string.", () => {
     var bubble, result;
 
-    bubble = Bubble.emptyBubble;
+    bubble = Bubble.air;
     result = bubble.toString();
     assert.equal(result, "()");
 
