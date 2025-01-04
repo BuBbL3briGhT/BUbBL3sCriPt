@@ -31,6 +31,7 @@ class List  {
 
   static get emptyList() { return emptyList }
 
+  // https://youtu.be/otCpCn0l4Wo
   static set emptyList(value) { throw new Error("You'rE tryiNg to overwrite List.emptyList, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?"); };
 
   get isEmpty() { return false; }

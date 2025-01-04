@@ -7,7 +7,7 @@ const lexer = new Lexer();
 
 describe('Lexer', function() {
   describe("#tokenize", function() {
-    itOnlyTokenizes("symbol",
+    itTokenizes("symbol",
       { tokens: List.create(Token.SYMBOL),
         values: List.create("symbol")});
     itTokenizes(":keyword",

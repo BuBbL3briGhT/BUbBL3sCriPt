@@ -51,10 +51,10 @@ class Lexer {
             break;
         }
       }
-      console.log(this.tokens);
+      // console.log(this.tokens);
       this.tokens = this.tokens.reverse();
       this.values = this.values.reverse();
-      console.log(this.tokens);
+      // console.log(this.tokens);
 
       return callback(null, this.tokens, this.values);
     } catch (error) {
@@ -81,7 +81,7 @@ class Lexer {
   }
 
   tokenizeSymbol() {
-    console.log(this.head[0]);
+    // console.log(this.head[0]);
     let m = this.head.match(/^([^\s()[\]]*)/);
     this.token(Token.SYMBOL, m[0]);
     this.advance(m[0].length);
