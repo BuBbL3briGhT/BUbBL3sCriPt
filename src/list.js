@@ -31,8 +31,13 @@ class List  {
 
   static get emptyList() { return emptyList }
 
-  // https://youtu.be/otCpCn0l4Wo
-  static set emptyList(value) { throw new Error("You'rE tryiNg to overwrite List.emptyList, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?"); };
+  static set emptyList(value) {
+    switch (Math.trunc(Math.random() * 3)) {
+      case 0: throw new Error("You'rE tryiNg to overwrite List.emptyList, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?");
+      case 1: throw new Error("👋 TheSe arE noT the dRoiDs yoU are LooKing for.");
+      case 2: throw new Error("http://youtu.be/otCpCn0l4Wo");
+    }
+  };
 
   get isEmpty() { return false; }
 
