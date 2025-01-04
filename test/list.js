@@ -130,6 +130,23 @@ describe("#map(fn)", () => {
   });
 });
 
+describe("#push(item)", () => {
+  it("pushes an item onto the list.", () => {
+    var list = List.emptyList;
+    assert(list.isEmpty);
+
+    list = list.push(1);
+    assert.equal(list.head, 1)
+    assert(list.tail.isEmpty);
+
+    list = list.push(2);
+    assert.equal(list.head, 2)
+    assert.equal(list.tail.head, 1)
+    assert(list.tail.tail.isEmpty);
+  });
+});
+
+
 describe("#toString", () => {
   it("formats the list as a string.", () => {
     var list, result;
