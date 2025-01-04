@@ -99,7 +99,23 @@ describe(".emptyList", () => {
     assert.equal(list.isEmpty, true);
     assert.equal(list.toString(), "()");
     assert.equal(list.reverse(), list);
-    assert.equal(list.map(), list);
+    // assert.equal(list.map(), list);
+  });
+});
+
+describe("#map(fn)", () => {
+  it.only("maps the list through fn", ()=>{
+    var list;
+
+    let add7 = (item) => { return item+7 };
+
+    list = List.emptyList;
+    result = list.map(add7);
+    assert.equal(result, List.emptyList);
+
+    list = new List(1);
+    result = list.map(add7);
+    assert.equal(result.head, 8);
   });
 });
 

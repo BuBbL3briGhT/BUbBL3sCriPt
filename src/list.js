@@ -82,29 +82,10 @@ class List  {
     }, this);
   }
 
-  join(delimiter = ' ') {
-    // if (this.isEmpty)
-    //   return '';
-
-    if (this.tail) {
-      return this.head + delimiter + this.tail.join()
-    } else {
-      let t = typeof this.head;
-      switch (t) {
-        case "string":
-          return '"' + this.head + '"';
-        case "symbol":
-          return Symbol.keyFor(this.head);
-      }
-      return this.head.toString()
-    }
-  }
-
   toString() {
-    return "(" + this.join() + ")"
-  }
+    if (this.isEmpty)
+      return "()";
 
-  toString() {
     let format = (item) => {
       switch (typeof item) {
         case "string":
@@ -114,12 +95,15 @@ class List  {
         default:
           return item.toString();
       }
-
     }
+
     let join = (memo, item) => {
       return item + " " + memo;
     }
-    return "(" + this.map(format).reduce(join) + ")";
+
+    return "(" +
+      this.map(format).reduce(join)
+         + ")";
   }
 
   inspect() {
@@ -143,6 +127,12 @@ class List  {
       tail = this.tail.map(fn);
     head = fn(this.head);
     return new List(head, tail);
+  }
+
+  map(fn) {
+    if (this.isEmpty)
+      return this;
+    return new List(fn(this.head), this.tail.map(fn));
   }
 
   reduce(fn, memo) {
@@ -181,10 +171,10 @@ class List  {
 
 class EmptyList extends List {
   get isEmpty() { return true; }
-  toString() { return "()"; }
-  push(val) { return new List(val); }
-  reverse() { return this; }
-  map() { return this; }
+  // toString() { return "()"; }
+  // push(val) { return new List(val); }
+  // reverse() { return this; }
+  // map() { return this; }
 }
 
 List.emptyList = new EmptyList;
