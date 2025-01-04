@@ -70,17 +70,6 @@ class List  {
     if (this.isEmpty) return this;
 
     list = new List(this.head);
-    return this.tail.reduce(function(memo, i) {
-      return memo.push(i);
-    }, list);
-  }
-
-  reverse() {
-    var list;
-
-    if (this.isEmpty) return this;
-
-    list = new List(this.head);
 
     list = this.tail.reduce((memo, i) => {
       return memo.push(i);
@@ -133,15 +122,6 @@ class List  {
   }
 
   map(fn) {
-    var tail = null,
-      head;
-    if (this.tail)
-      tail = this.tail.map(fn);
-    head = fn(this.head);
-    return new List(head, tail);
-  }
-
-  map(fn) {
     if (this.isEmpty)
       return this;
     return new List(fn(this.head), this.tail.map(fn));
@@ -183,10 +163,6 @@ class List  {
 
 class EmptyList extends List {
   get isEmpty() { return true; }
-  // toString() { return "()"; }
-  // push(val) { return new List(val); }
-  // reverse() { return this; }
-  // map() { return this; }
 }
 
 emptyList = new EmptyList()

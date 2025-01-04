@@ -1,7 +1,7 @@
 {
   "name": "Bubblescript",
   "scripts": {
-    "test": "mocha ./test/**/*.{js,coffee} --require coffeescript/register"
+    "test": "mocha ./test/**/*.js"
   },
   "dependencies": {
     "yaml": "^2.7.0"
