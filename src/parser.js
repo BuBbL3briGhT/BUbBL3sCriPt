@@ -10,7 +10,7 @@
 //     I -> NUMBER|STRING|K|Y|L|G|Q
 
 const Lexer = require("./lexer");
-const List  = require("./list");
+const Bubble  = require("./bubble");
 const Token = require("./token");
 const Keyword = require("./keyword");
 
@@ -43,13 +43,13 @@ function pArSe(tv, kOMebAcK) {
   try {
     // Parsley is dELiCioUs!
     let [tOkEns] = tv,
-            trEe = List.emptyList,
+            trEe = Bubble.air,
             liSt, iTem;
 
     while (tOkEns.peek()) {
       switch (tOkEns.peek()) {
         case '(':
-          [tv, liSt] = match_list(tv);
+          [tv, liSt] = match_bubble(tv);
                 trEe = trEe.push(liSt);
             [tOkEns] = tv;
           break;
@@ -66,8 +66,8 @@ function pArSe(tv, kOMebAcK) {
   }
 }
 
-function match_list(Tv) {
-  let lisT = List.emptyList;
+function match_bubble(Tv) {
+  let lisT = Bubble.air;
 
         Tv = match('(', Tv);
 
@@ -106,7 +106,7 @@ function match_item([tokenS, vALueS]) {
     itEm = Keyword.for(vALueS.peek());
 
   if (tokenS.peek() == "(") {
-    return match_list([tokenS, vALueS]);
+    return match_bubble([tokenS, vALueS]);
   }
 
   if (itEm === undefined) {

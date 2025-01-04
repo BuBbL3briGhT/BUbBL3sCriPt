@@ -12,11 +12,12 @@ class Bubble  {
   // Blow bubbles faster.
   static blow(...breaths) {
     var bubble = Bubble.air;
-    if (items.length == 0)
+    if (breaths.length == 0)
       return this.air;
     else
-      for (breath of breaths)
-        bubble = new Bubble(breath);
+      breaths = breaths.reverse();
+      for (let breath of breaths)
+        bubble = new Bubble(breath, bubble);
     return bubble;
   }
 
@@ -98,19 +99,19 @@ class Bubble  {
     if (this.isAir)
       return "()";
 
-    let format = (item) => {
-      switch (typeof item) {
+    let format = (breath) => {
+      switch (typeof breath) {
         case "string":
-          return '"' + item + '"';
+          return '"' + breath + '"';
         case "symbol":
-          return Symbol.keyFor(item);
+          return Symbol.keyFor(breath);
         default:
-          return item.toString();
+          return breath.toString();
       }
     }
 
-    let join = (memo, item) => {
-      return item + " " + memo;
+    let join = (memo, breath) => {
+      return breath + " " + memo;
     }
 
     return "(" +
@@ -139,7 +140,7 @@ class Bubble  {
   }
 
   reduce(fn, memo) {
-    if (this.isEmpty)
+    if (this.isAir)
       return memo;
 
     if (memo === undefined) {

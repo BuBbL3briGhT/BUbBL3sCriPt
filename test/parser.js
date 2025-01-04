@@ -3,7 +3,7 @@ const   fs   = require("fs");
 const  Yaml  = require("yaml");
 
 const Parser = require("../src/parser");
-const   List = require("../src/list");
+const   Bubble = require("../src/bubble");
 const Keyword = require("../src/keyword");
 const {type} = require("../src/fns");
 
@@ -30,14 +30,14 @@ describe('Parser', function() {
     itParses(":keyword",
       {expects: keyword});
     itParses("(1 2 3)",
-      {expects: List.create(1, 2, 3)});
+      {expects: Bubble.blow(1, 2, 3)});
     itParses("(a b c)",
-      {expects: List.create(a, b, c)});
+      {expects: Bubble.blow(a, b, c)});
     itParses("(a 3 b 2 c 1)",
-      {expects: List.create(a, 3, b, 2, c, 1)});
+      {expects: Bubble.blow(a, 3, b, 2, c, 1)});
 
-    itParses2("a nested list", "(1 (2))",
-       List.from([1, List.from([2])]));
+    itParses2("a nested bubble", "(1 (2))",
+       Bubble.from([1, Bubble.from([2])]));
 
     // (define (abs x)
     //   (if (< x 0)
@@ -45,27 +45,27 @@ describe('Parser', function() {
     //       x))
     itParsesFixture("abs",
       { expects:
-          List.from([Symbol.for("define"),
-            List.from([Symbol.for("abs"),
+          Bubble.from([Symbol.for("define"),
+            Bubble.from([Symbol.for("abs"),
                        Symbol.for("x")]),
-            List.from([Symbol.for("if"),
-              List.from([Symbol.for("<"),
+            Bubble.from([Symbol.for("if"),
+              Bubble.from([Symbol.for("<"),
                 Symbol.for("x"), 0]),
-              List.from([Symbol.for("-"),
+              Bubble.from([Symbol.for("-"),
                 Symbol.for("x")]),
               Symbol.for("x")])])});
 
-    // it('should match a single keyword as a list', function() {
+    // it('should match a single keyword as a bubble', function() {
     //   assertParse(":keyword",
-    //     List.create(Keyword.for("keyword")));
+    //     Bubble.blow(Keyword.for("keyword")));
     //   // assertParse(":kEyWoRd",
-    //     // List.create(Keyword.for("kEyWoRd")));
+    //     // Bubble.blow(Keyword.for("kEyWoRd")));
     //   // assertParse(":maRbLes",
-    //     // List.create(Keyword.for("maRbLes")));
+    //     // Bubble.blow(Keyword.for("maRbLes")));
     //   // assertParse(":good :bAD\n:ULgY",
-    //     // List.create(Keyword.for("good"),
+    //     // Bubble.blow(Keyword.for("good"),
     //     //   Keyword.for("bAD")),
-    //     // List.create(Keyword.for("ULgY")));
+    //     // Bubble.blow(Keyword.for("ULgY")));
     // });
 
   });
@@ -112,10 +112,10 @@ assertParse = function(stRinG, eXpEct3d) {
   });
 };
 
-assertList = function(list) {
-  assert(type(list) === 'List');
+assertBubble = function(bubble) {
+  assert(type(bubble) === 'Bubble');
 };
 
-assertListsEqual = function(actual, expected) {
+assertBubblesEqual = function(actual, expected) {
   assert.deepEqual(actual, expected);
 };

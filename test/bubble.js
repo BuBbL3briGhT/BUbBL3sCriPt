@@ -4,7 +4,7 @@ const Bubble  = require("../src/bubble");
 describe("Bubble", () => {
 
 describe("new Bubble(breath, bubble) ", () => {
-  it("creates a new linked bubble link for your fun and profit.", () => {
+  it("blows a new linked bubble link for your fun and profit.", () => {
     var bubble;
     bubble = new Bubble();
     assert.equal(bubble.breath, undefined);
@@ -78,15 +78,15 @@ describe("#reduce", () => {
   });
 });
 
-describe(".create()", () => {
+describe(".blow()", () => {
   it("should return an empty bubble.", () => {
-    assert.equal(Bubble.create(), Bubble.air);
+    assert.equal(Bubble.blow(), Bubble.air);
   });
 });
 
-describe(".create(item, ...)", () => {
-  it("should create a bubble with items.", () => {
-    let bubble = Bubble.create(1, 2, 3);
+describe(".blow(breath, ...)", () => {
+  it("blows a bubble with breaths.", () => {
+    let bubble = Bubble.blow(1, 2, 3);
     assert.equal(bubble.breath, 1);
     assert.equal(bubble.bubble.breath, 2);
     assert.equal(bubble.bubble.bubble.breath, 3);
@@ -96,7 +96,7 @@ describe(".create(item, ...)", () => {
 describe(".air", () => {
   it("should be empty bubble.", () => {
     let bubble = Bubble.air;
-    assert.equal(bubble.isEmpty, true);
+    assert.equal(bubble.isAir, true);
     assert.equal(bubble.toString(), "()");
     assert.equal(bubble.reverse(), bubble);
     assert.equal(bubble.map(), bubble);
@@ -114,7 +114,7 @@ describe("#map(fn)", () => {
   it("maps the bubble through fn", ()=>{
     var bubble;
 
-    let add7 = (item) => { return item+7 };
+    let add7 = (breath) => { return breath+7 };
 
     bubble = Bubble.air;
     result = bubble.map(add7);
@@ -137,19 +137,19 @@ describe("#map(fn)", () => {
   });
 });
 
-describe("#push(item)", () => {
-  it("pushes an item onto the bubble.", () => {
+describe("#push(breath)", () => {
+  it("pushes an breath onto the bubble.", () => {
     var bubble = Bubble.air;
-    assert(bubble.isEmpty);
+    assert(bubble.isAir);
 
     bubble = bubble.push(1);
     assert.equal(bubble.breath, 1)
-    assert(bubble.bubble.isEmpty);
+    assert(bubble.bubble.isAir);
 
     bubble = bubble.push(2);
     assert.equal(bubble.breath, 2)
     assert.equal(bubble.bubble.breath, 1)
-    assert(bubble.bubble.bubble.isEmpty);
+    assert(bubble.bubble.bubble.isAir);
   });
 });
 

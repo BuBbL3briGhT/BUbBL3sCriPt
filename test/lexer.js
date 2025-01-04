@@ -8,11 +8,11 @@ const lexer = new Lexer();
 describe('Lexer', function() {
   describe("#tokenize", function() {
     itTokenizes("symbol",
-      { tokens: Bubble.create(Token.SYMBOL),
-        values: Bubble.create("symbol")});
+      { tokens: Bubble.blow(Token.SYMBOL),
+        values: Bubble.blow("symbol")});
     itTokenizes(":keyword",
-      { tokens: Bubble.create(Token.KEYWORD),
-        values: Bubble.create("keyword")});
+      { tokens: Bubble.blow(Token.KEYWORD),
+        values: Bubble.blow("keyword")});
     itTokenizes("(a b c)",
       { tokens: Bubble.from("(YYY)".split('')),
         values: Bubble.from([void 0, "a", "b", "c", void 0])});
