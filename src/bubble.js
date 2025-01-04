@@ -1,39 +1,53 @@
 
-var emptyList;
+var emptyBubble;
 
-class List  {
+class Bubble  {
 
-  constructor(head, tail) {
-    this.head = head;
-    this.tail = tail || List.emptyList;
+  // Blow a bubble.
+  constructor(breath, bubble) {
+    this.breath = breath;
+    this.bubble = bubble || Bubble.air;
   }
 
-  static from(a) {
-    var list;
-    a = Array.from(a);
-    list = new List(a.pop());
-    while (a.length > 0) {
-      list = list.push(a.pop());
-    }
-    return list;
+  // Blow bubbles faster.
+  static blow(...breaths) {
+    var bubble = Bubble.air;
+    if (items.length == 0)
+      return this.emptyBubble;
+    else
+      for (breath of breaths)
+        bubble = new Bubble(breath);
+    return bubble;
   }
 
-  push(val) {
-    return new List(val, this);
+  // Blow a bunch of bubbles from an
+  // Javascript iterable or array-like
+  // object.
+  //
+  // Parameters are passed directly to
+  // Array.from and the result is then
+  // blown into bubbles.
+  static from(arryLike, mapFn, thisArg) {
+    let array = Array.from(arryLike, mapFn, thisArg);
+    return Bubble.blow(...array);
+  }
+
+  push(breath) {
+    return new Bubble(breath, this);
   }
 
   peek() {
-    return this.head;
+    return this.breath;
   }
   pop() {
-    return this.tail || List.emptyList;
+    return this.bubble;
   }
 
-  static get emptyList() { return emptyList }
+  static get air() { return air; }
 
-  static set emptyList(value) {
+  static set air(value) {
     switch (Math.trunc(Math.random() * 3)) {
-      case 0: throw new Error("You'rE tryiNg to overwrite List.emptyList, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?");
+      case 0: throw new Error("You'rE tryiNg to overwrite Bubble.emptyBubble, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?");
       case 1: throw new Error("👋 TheSe arE noT the dRoiDs yoU are LooKing for.");
       case 2: throw new Error("http://youtu.be/otCpCn0l4Wo");
     }
@@ -65,16 +79,16 @@ class List  {
   }
 
   reverse() {
-    var list;
+    var bubble;
 
     if (this.isEmpty) return this;
 
-    list = new List(this.head);
+    bubble = new Bubble(this.head);
 
-    list = this.tail.reduce((memo, i) => {
+    bubble = this.tail.reduce((memo, i) => {
       return memo.push(i);
-    }, list);
-    return list;
+    }, bubble);
+    return bubble;
   }
 
   conj(val) {
@@ -124,7 +138,7 @@ class List  {
   map(fn) {
     if (this.isEmpty)
       return this;
-    return new List(fn(this.head), this.tail.map(fn));
+    return new Bubble(fn(this.head), this.tail.map(fn));
   }
 
   reduce(fn, memo) {
@@ -152,19 +166,12 @@ class List  {
     yield this.pop();
   }
 
-  static create(...items) {
-    if (items.length == 0)
-      return this.emptyList;
-    else
-      return List.from(items);
-  }
-
 }
 
-class EmptyList extends List {
+class EmptyBubble extends Bubble {
   get isEmpty() { return true; }
 }
 
-emptyList = new EmptyList()
+emptyBubble = new EmptyBubble()
 
-module.exports = List;
+module.exports = Bubble;

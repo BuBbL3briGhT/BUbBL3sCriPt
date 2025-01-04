@@ -1,30 +1,30 @@
 const assert = require("assert");
 const Lexer = require("../src/lexer");
 const Token = require("../src/token");
-const List = require("../src/list");
+const Bubble = require("../src/bubble");
 
 const lexer = new Lexer();
 
 describe('Lexer', function() {
   describe("#tokenize", function() {
     itTokenizes("symbol",
-      { tokens: List.create(Token.SYMBOL),
-        values: List.create("symbol")});
+      { tokens: Bubble.create(Token.SYMBOL),
+        values: Bubble.create("symbol")});
     itTokenizes(":keyword",
-      { tokens: List.create(Token.KEYWORD),
-        values: List.create("keyword")});
+      { tokens: Bubble.create(Token.KEYWORD),
+        values: Bubble.create("keyword")});
     itTokenizes("(a b c)",
-      { tokens: List.from("(YYY)".split('')),
-        values: List.from([void 0, "a", "b", "c", void 0])});
+      { tokens: Bubble.from("(YYY)".split('')),
+        values: Bubble.from([void 0, "a", "b", "c", void 0])});
     itTokenizes("(+ 2 3)",
-      { tokens: List.from("(YNN)".split('')),
-        values: List.from([void 0, "+", 2, 3, void 0])});
-    itTokenizes2("two lists",
+      { tokens: Bubble.blow(..."(YNN)".split('')),
+        values: Bubble.blow(void 0, "+", 2, 3, void 0)});
+    itTokenizes2("two bubbles",
       "(+ 7 4)(8 2 -)",
       "(YNN)(NNY)",
       [,"+",7,4,,,8,2,"-",void 0])
 
-    itTokenizes2("nested list",
+    itTokenizes2("nested bubble",
       "(1 (2))",
       "(N(N))",
       [,1,,2,,void 0])
@@ -60,8 +60,8 @@ function itOnlyTokenizes(s, expected) {
   });
 }
 function itTokenizes2(desc, str, toks, vals) {
-  toks = List.from(toks.split(''));
-  vals = List.from(vals);
+  toks = Bubble.from(toks.split(''));
+  vals = Bubble.from(vals);
   it(`correctly tokenizes ${desc}`, function() {
     lexer.tokenize(str, function(err, tokens, values) {
       if (err)

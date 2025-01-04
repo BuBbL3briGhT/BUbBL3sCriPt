@@ -1,5 +1,5 @@
 
-const List = require("./list");
+const Bubble = require("./bubble");
 const Token = require("./token");
 
 class Lexer {
@@ -7,8 +7,8 @@ class Lexer {
   tokenize(head, callback) {
     try {
       this.head = head;
-      this.tokens = List.emptyList;
-      this.values = List.emptyList;
+      this.tokens =
+      this.values = Bubble.blow();
 
       while (this.head[0]) {
         switch (this.head[0]) {
