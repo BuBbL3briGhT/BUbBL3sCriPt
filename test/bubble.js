@@ -153,7 +153,6 @@ describe("#push(breath)", () => {
   });
 });
 
-
 describe("#toString", () => {
   it("formats the bubble as a string.", () => {
     var bubble, result;
@@ -182,6 +181,15 @@ describe("#toString", () => {
     bubble = new Bubble(Symbol.for("symbol"), bubble);
     result = bubble.toString();
     assert.equal(result, "(1 2 3 \"string\" symbol)");
+  });
+});
+
+describe("#get(index)", () => {
+  it.only("gets breath at index", () => {
+    let bubble = Bubble.blow(6,7,8);
+    assert.equal(bubble.get(0), 6);
+    assert.equal(bubble.get(1), 7);
+    assert.equal(bubble.get(2), 8);
   });
 });
 

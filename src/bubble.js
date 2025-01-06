@@ -1,7 +1,7 @@
 
 var air;
 
-class Bubble  {
+class Bubble {
 
   // Blow a bubble.
   constructor(breath, bubble) {
@@ -157,6 +157,12 @@ class Bubble  {
     if (this.bubble)
       return this.bubble.each(fn);
     return result;
+  }
+
+  get(index) {
+    if (index)
+      return this.bubble.get(--index);
+    return this.breath;
   }
 
   *[global.Symbol.iterator]() {
