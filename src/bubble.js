@@ -33,6 +33,16 @@ class Bubble {
     return Bubble.blow(...array);
   }
 
+  static skip(bubble, count) {
+    if (count)
+      return skip(bubble.bubble, --count);
+    return bubble;
+  }
+
+  static get(bubble, index) {
+    return skip(bubble, index).breath;
+  }
+
   push(breath) {
     return new Bubble(breath, this);
   }
@@ -160,19 +170,7 @@ class Bubble {
   }
 
   get(index) {
-    if (index)
-      return this.bubble.get(--index);
-    return this.breath;
-  }
-
-  static skip(bubble, count) {
-    if (count)
-      return Bubble.skip(bubble.bubble, --count);
-    return bubble;
-  }
-
-  static get(bubble, index) {
-    return Bubble.skip(bubble, index).breath;
+    return get(this, index);
   }
 
   *[global.Symbol.iterator]() {
@@ -181,6 +179,8 @@ class Bubble {
   }
 
 }
+
+const {get,skip} = Bubble;
 
 class Air extends Bubble {
   get isAir() { return true; }
