@@ -88,38 +88,14 @@ class Bubble {
     }, new Bubble(o.o))
   }
 
-  static invert(o) {
-    if (o.isAir) return o;
-    return reduce((bubble, o) => {
-      return push(bubble, o)
-    }, new Bubble(o.o))
+  static conj(o, oo) {
+    return oo.reduce(function(oo, o) {
+      return oo.push(o);
+    }, o);
   }
 
-  static invert(bubble) {
-    if (bubble.isAir) return bubble;
-    return reduce((bubble, o) => {
-      return push(bubble, o)
-    }, new Bubble(bubble.o))
-  }
-
-  static invert() {
-    var bubble;
-    if (this.isAir) return this;
-    bubble = new Bubble(this.o);
-    bubble = this.bubble.reduce((bubble, o) => {
-      return bubble.push(o);
-    }, bubble);
-    return bubble;
-  }
-
-  conj(val) {
-    return val.reduce(function(memo, i) {
-      return memo.push(i);
-    }, this);
-  }
-
-  toString() {
-    if (this.isAir)
+  static toString(o) {
+    if (o.x)
       return "()";
 
     let format = (o) => {
@@ -129,57 +105,49 @@ class Bubble {
         case "symbol":
           return Symbol.keyFor(o);
         default:
-          return o.toString();
+          return toString(o);
       }
     }
 
-    let join = (memo, o) => {
-      return o + " " + memo;
+    let join = (oo, o) => {
+      return o + " " + oo;
     }
 
     return "(" +
-      this.map(format).reduce(join)
+      o.map(format).reduce(join)
          + ")";
   }
 
-  inspect() {
-    "(" + map(function(q) {
-      q.inspect()
-    }).join() + ")"
+  static toArray(o) {
+    return reduce((oo, o) => {
+      oo.push(o); }, []);
   }
 
-  toArray() {
-    if (this.bubble) {
-      return [this.o].concat(this.bubble.toArray());
+  static map(o, fn) {
+    if (o.x)
+      return o;
+    return new Bubble(fn(o.o),
+      map(o.oo, fn));
+  }
+
+  static reduce(o, fn, oo) {
+    if (o.x)
+      return oo;
+
+    if (oo === undefined) {
+      oo = o.o;
     } else {
-      return [this.o];
-    }
-  }
-
-  map(fn) {
-    if (this.isAir)
-      return this;
-    return new Bubble(fn(this.o), this.bubble.map(fn));
-  }
-
-  reduce(fn, memo) {
-    if (this.isAir)
-      return memo;
-
-    if (memo === undefined) {
-      memo = this.o;
-    } else {
-      memo = fn(memo, this.o);
+      oo = fn(oo, o.o);
     }
 
-    return this.bubble.reduce(fn, memo);
+    return reduce(o.oo, fn, oo);
   }
 
-  each(fn) {
-    var result = fn(this.o);
-    if (this.bubble)
-      return this.bubble.each(fn);
-    return result;
+  static each(o, fn) {
+    let oo = fn(o.o);
+    if (o.oo)
+      return each(o.oo, fn);
+    return oo;
   }
   ////
 
