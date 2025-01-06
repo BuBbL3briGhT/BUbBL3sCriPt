@@ -71,6 +71,118 @@ class Bubble {
     return bubble.bubble;
   }
 
+  static count() {
+    return reduce(this, function(count) {
+      return count++;
+    }, 0);
+  }
+
+  static shift(o) {
+    return invert(pop(invert(o)));
+  }
+
+  static invert(o) {
+    if (o.x) return o;
+    return reduce((oo, o) => {
+      return push(oo, o)
+    }, new Bubble(o.o))
+  }
+
+  static invert(o) {
+    if (o.isAir) return o;
+    return reduce((bubble, o) => {
+      return push(bubble, o)
+    }, new Bubble(o.o))
+  }
+
+  static invert(bubble) {
+    if (bubble.isAir) return bubble;
+    return reduce((bubble, o) => {
+      return push(bubble, o)
+    }, new Bubble(bubble.o))
+  }
+
+  static invert() {
+    var bubble;
+    if (this.isAir) return this;
+    bubble = new Bubble(this.o);
+    bubble = this.bubble.reduce((bubble, o) => {
+      return bubble.push(o);
+    }, bubble);
+    return bubble;
+  }
+
+  conj(val) {
+    return val.reduce(function(memo, i) {
+      return memo.push(i);
+    }, this);
+  }
+
+  toString() {
+    if (this.isAir)
+      return "()";
+
+    let format = (o) => {
+      switch (typeof o) {
+        case "string":
+          return '"' + o + '"';
+        case "symbol":
+          return Symbol.keyFor(o);
+        default:
+          return o.toString();
+      }
+    }
+
+    let join = (memo, o) => {
+      return o + " " + memo;
+    }
+
+    return "(" +
+      this.map(format).reduce(join)
+         + ")";
+  }
+
+  inspect() {
+    "(" + map(function(q) {
+      q.inspect()
+    }).join() + ")"
+  }
+
+  toArray() {
+    if (this.bubble) {
+      return [this.o].concat(this.bubble.toArray());
+    } else {
+      return [this.o];
+    }
+  }
+
+  map(fn) {
+    if (this.isAir)
+      return this;
+    return new Bubble(fn(this.o), this.bubble.map(fn));
+  }
+
+  reduce(fn, memo) {
+    if (this.isAir)
+      return memo;
+
+    if (memo === undefined) {
+      memo = this.o;
+    } else {
+      memo = fn(memo, this.o);
+    }
+
+    return this.bubble.reduce(fn, memo);
+  }
+
+  each(fn) {
+    var result = fn(this.o);
+    if (this.bubble)
+      return this.bubble.each(fn);
+    return result;
+  }
+  ////
+
 
   push(o) { return push(this, o); }
   peek() { return peek(this); }
@@ -171,8 +283,8 @@ class Bubble {
   }
 
   *[global.Symbol.iterator]() {
-    yield this.peek();
-    yield this.pop();
+    yield peek(this);
+    yield pop(this);
   }
 
 }
