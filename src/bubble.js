@@ -22,7 +22,7 @@ class Bubble {
   // Blow a bubble.
   constructor(o, oo) {
     this.o=o;
-    this.oo=oo||air;
+    this.oo=oo;
   }
 
   // Blow bubbles faster.
@@ -107,7 +107,7 @@ class Bubble {
     }
 
     return "(" +
-      o.map(format).reduce(join)
+      reduce(map(o, format), join)
          + ")";
   }
 
@@ -124,9 +124,8 @@ class Bubble {
   }
 
   static reduce(o, fn, memo) {
-    if (o.x) return memo;
-    return reduce(pop(o),
-      fn, fn(memo, o.o));
+    return o? reduce(pop(o),
+      fn, fn(memo, peek(o))) : memo;
   }
 
   static each(o, fn) {

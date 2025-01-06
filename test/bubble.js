@@ -1,8 +1,8 @@
 const assert = require("assert");
 const Bubble  = require("../src/bubble");
 
-const {blow,get,invert,peek,push,skip} =
-  Bubble;
+const { blow, get, invert, peek, push,
+  reduce, skip} = Bubble;
 
 describe("Bubble", () => {
 
@@ -22,7 +22,7 @@ describe("new Bubble(o, bubble) ", () => {
 });
 
 describe("invert", () => {
-  it.only("inverts bubbles", () => {
+  it("inverts bubbles", () => {
     var o;
 
     o = Bubble.air;
@@ -42,42 +42,41 @@ describe("invert", () => {
   });
 });
 
-describe("#reduce", () => {
-  it("reduces the bubble", () => {
-    var bubble, result;
+describe("reduce", () => {
+  it.only("reduces the bubble", () => {
+    var o, result;
 
-    let add = (a, b) => { return b + a };
+    let add = (a=0,b) => { return b + a };
 
-    bubble = Bubble.air;
-
-    result = bubble.reduce(add);
+    result = reduce(o, add);
     assert.equal(result, undefined);
 
-    result = bubble.reduce(add, 0);
+    result = reduce(o, add, 0);
     assert.equal(result, 0);
 
-    bubble = new Bubble(1);
-    result = bubble.reduce(add);
+    o = push(o, 1);
+    result = reduce(o, add);
     assert.equal(result, 1);
 
-    bubble = new Bubble(2, bubble);
-    result = bubble.reduce(add);
+    o = push(o, 2);
+    console.log(o);
+    result = reduce(o, add);
     assert.equal(result, 3);
 
-    bubble = new Bubble(3, bubble);
-    result = bubble.reduce(add);
+    o = push(o, 3),
+    result = reduce(o, add)
     assert.equal(result, 6)
 
-    bubble = new Bubble("a");
-    result = bubble.reduce(add);
+    o = blow("a");
+    result = reduce(o, add);
     assert.equal(result, "a");
 
-    bubble = new Bubble("b", bubble);
-    result = bubble.reduce(add);
+    o = push(o, "b");
+    result = reduce(o, add);
     assert.equal(result, "ab");
 
-    bubble = new Bubble("c", bubble);
-    result = bubble.reduce(add);
+    o = push(o, "c");
+    result = reduce(o, add);
     assert.equal(result, "abc");
   });
 });
