@@ -49,7 +49,7 @@ class Bubble {
     return Bubble.blow(...array);
   }
 
-  static get(o,i) { return skip(o,i).o; }
+  static get(o,i) { return peek(skip(o,i)); }
 
   static skip(o, count) {
     if (count)
@@ -123,17 +123,10 @@ class Bubble {
       map(o.oo, fn));
   }
 
-  static reduce(o, fn, oo) {
-    if (o.x)
-      return oo;
-
-    if (oo === undefined) {
-      oo = o.o;
-    } else {
-      oo = fn(oo, o.o);
-    }
-
-    return reduce(o.oo, fn, oo);
+  static reduce(o, fn, memo) {
+    if (o.x) return memo;
+    return reduce(pop(o),
+      fn, fn(memo, o.o));
   }
 
   static each(o, fn) {

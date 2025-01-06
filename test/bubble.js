@@ -1,11 +1,11 @@
 const assert = require("assert");
 const Bubble  = require("../src/bubble");
-const {get,skip} = Bubble;
+const {blow,get,invert,peek,skip} = Bubble;
 
 describe("Bubble", () => {
 
 describe("new Bubble(o, bubble) ", () => {
-  it.only("blows a new bubble for your fun and profit.", () => {
+  it("blows a new bubble for your fun and profit.", () => {
     var o;
     o = new Bubble();
     assert.equal(get(o), undefined);
@@ -19,24 +19,24 @@ describe("new Bubble(o, bubble) ", () => {
   });
 });
 
-describe("#reverse", () => {
-  it("reverses the bubble", () => {
-    var bubble;
+describe("invert", () => {
+  it.only("inverts bubbles", () => {
+    var o;
 
-    bubble = Bubble.air;
-    bubble = bubble.reverse();
-    assert.equal(bubble, Bubble.air);
+    o = Bubble.air;
+    o = invert(o);
+    assert.equal(o, Bubble.air);
 
-    bubble = new Bubble(1);
-    bubble = bubble.reverse();
-    assert.equal(bubble.o, 1);
+    o = blow(1);
+    o = invert(o);
+    assert.equal(peek(o), 1);
 
-    bubble = new Bubble(2, bubble);
-    bubble = new Bubble(3, bubble);
+    o = push(o, 2);
+    o = push(o, 3);
 
-    assert.equal(bubble.o, 3);
-    bubble = bubble.reverse();
-    assert.equal(bubble.o, 1)
+    assert.equal(peek(o), 3);
+    bubble = invert(o);
+    assert.equal(peek(o), 1)
   });
 });
 
