@@ -1,6 +1,8 @@
 const assert = require("assert");
 const Bubble  = require("../src/bubble");
-const {blow,get,invert,peek,skip} = Bubble;
+
+const {blow,get,invert,peek,push,skip} =
+  Bubble;
 
 describe("Bubble", () => {
 
@@ -35,7 +37,7 @@ describe("invert", () => {
     o = push(o, 3);
 
     assert.equal(peek(o), 3);
-    bubble = invert(o);
+    o = invert(o);
     assert.equal(peek(o), 1)
   });
 });

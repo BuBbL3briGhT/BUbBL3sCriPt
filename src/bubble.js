@@ -57,8 +57,8 @@ class Bubble {
     return o;
   }
 
-  static push(o,oo) {
-    return new Bubble(oo,o);
+  static push(oo,o) {
+    return new Bubble(o,oo);
   }
 
   static peek(o) { return o.o; }
@@ -76,7 +76,7 @@ class Bubble {
 
   static invert(o) {
     if (o.x) return o;
-    return reduce((oo, o) => {
+    return reduce(o, (oo, o) => {
       return push(oo, o)
     }, new Bubble(o.o))
   }
