@@ -185,11 +185,21 @@ describe("#toString", () => {
 });
 
 describe("#get(index)", () => {
-  it.only("gets breath at index", () => {
+  it("gets breath at index", () => {
     let bubble = Bubble.blow(6,7,8);
     assert.equal(bubble.get(0), 6);
     assert.equal(bubble.get(1), 7);
     assert.equal(bubble.get(2), 8);
+  });
+});
+
+describe(".get(bubble, index)", () => {
+  it("gets breath at index", () => {
+    let {get} = Bubble;
+    let bubble = Bubble.blow(6,7,8);
+    assert.equal(get(bubble, 0), 6);
+    assert.equal(get(bubble, 1), 7);
+    assert.equal(get(bubble, 2), 8);
   });
 });
 

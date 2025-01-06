@@ -165,6 +165,12 @@ class Bubble {
     return this.breath;
   }
 
+  static get(bubble, index) {
+    if (index)
+      return Bubble.get(bubble.bubble, --index);
+    return bubble.breath;
+  }
+
   *[global.Symbol.iterator]() {
     yield this.peek();
     yield this.pop();
