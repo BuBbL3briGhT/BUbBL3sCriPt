@@ -3,6 +3,22 @@ var air;
 
 class Bubble {
 
+  static get air() { return air; }
+  static set air(value) {
+    switch (Math.trunc(Math.random() * 3)) {
+      case 0: throw new Error("You'rE tryiNg to overwrite Bubble.air, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?");
+      case 1: throw new Error("👋 TheSe arE noT the dRoiDs yoU are LooKing for.");
+      case 2: throw new Error("http://youtu.be/otCpCn0l4Wo");
+    }
+  };
+
+  get isAir() { return false; }
+  get first() { return this.o; }
+  get rest() { return pop(this); }
+  get next() { return this.bubble.o; }
+  get last() { return this.bubble ?
+      this.bubble.last : this.o; }
+
   // Blow a bubble.
   constructor(o, bubble) {
     this.o=o;
@@ -33,52 +49,32 @@ class Bubble {
     return Bubble.blow(...array);
   }
 
+  static get(bubble, index) {
+    return skip(bubble, index).o;
+  }
+
   static skip(bubble, count) {
     if (count)
       return skip(bubble.bubble, --count);
     return bubble;
   }
 
-  static get(bubble, index) {
-    return skip(bubble, index).o;
+  static push(bubble, o) {
+    return new Bubble(o, bubble);
   }
 
-  push(o) {
-    return new Bubble(o, this);
+  static peek(bubble) {
+    return bubble.o;
   }
 
-  peek() {
-    return this.o;
-  }
-  pop() {
-    return this.bubble;
+  static pop(bubble) {
+    return bubble.bubble;
   }
 
-  static get air() { return air; }
 
-  static set air(value) {
-    switch (Math.trunc(Math.random() * 3)) {
-      case 0: throw new Error("You'rE tryiNg to overwrite Bubble.air, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?");
-      case 1: throw new Error("👋 TheSe arE noT the dRoiDs yoU are LooKing for.");
-      case 2: throw new Error("http://youtu.be/otCpCn0l4Wo");
-    }
-  };
-
-  get isAir() { return false; }
-
-  get first() {
-    return this.o;
-  }
-  get rest() {
-    return this.bubble;
-  }
-  get next() {
-    return this.bubble.o;
-  }
-  get last() {
-    return this.bubble ?
-      this.bubble.last : this.o;
-  }
+  push(o) { return push(this, o); }
+  peek() { return peek(this); }
+  pop() { return pop(this); }
 
   count() {
     return this.reduce(function(count) {
@@ -181,7 +177,7 @@ class Bubble {
 
 }
 
-const {get,skip} = Bubble;
+const {get,peek,pop,push,skip} = Bubble;
 
 class Air extends Bubble {
   get isAir() { return true; }
