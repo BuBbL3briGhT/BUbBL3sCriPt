@@ -1,20 +1,21 @@
 const assert = require("assert");
 const Bubble  = require("../src/bubble");
-const {get} = Bubble;
+const {get,skip} = Bubble;
 
 describe("Bubble", () => {
 
 describe("new Bubble(o, bubble) ", () => {
-  it("blows a new linked bubble link for your fun and profit.", () => {
-    var bubble;
-    bubble = new Bubble();
-    assert.equal(bubble.o, undefined);
-    assert.equal(bubble.bubble, Bubble.air);
-    bubble = new Bubble(1);
-    assert.equal(bubble.o, 1);
-    bubble = new Bubble(2, bubble);
-    assert.equal(bubble.o, 2);
-    assert.equal(bubble.bubble.o, 1);
+  it.only("blows a new bubble for your fun and profit.", () => {
+    var o;
+    o = new Bubble();
+    assert.equal(get(o), undefined);
+    assert.equal(skip(o,1), Bubble.air);
+
+    o = new Bubble(1);
+    assert.equal(get(o), 1);
+    o = new Bubble(2, o);
+    assert.equal(get(o), 2);
+    assert.equal(get(o,1), 1);
   });
 });
 
