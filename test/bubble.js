@@ -203,4 +203,14 @@ describe(".get(bubble, index)", () => {
   });
 });
 
+describe(".skip(bubble, count)", () => {
+  it("skips count of bubbles", () => {
+    let {skip} = Bubble;
+    let bubble = Bubble.blow(6,7,8);
+    assert.equal(skip(bubble, 0).breath, 6);
+    assert.equal(skip(bubble, 1).breath, 7);
+    assert.equal(skip(bubble, 2).breath, 8);
+  });
+});
+
 });

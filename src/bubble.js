@@ -165,10 +165,14 @@ class Bubble {
     return this.breath;
   }
 
+  static skip(bubble, count) {
+    if (count)
+      return Bubble.skip(bubble.bubble, --count);
+    return bubble;
+  }
+
   static get(bubble, index) {
-    if (index)
-      return Bubble.get(bubble.bubble, --index);
-    return bubble.breath;
+    return Bubble.skip(bubble, index).breath;
   }
 
   *[global.Symbol.iterator]() {
