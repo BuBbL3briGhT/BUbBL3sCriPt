@@ -12,29 +12,29 @@ class Bubble {
     }
   };
 
-  get isAir() { return false; }
-  get first() { return this.o; }
-  get rest() { return pop(this); }
-  get next() { return this.bubble.o; }
-  get last() { return this.bubble ?
-      this.bubble.last : this.o; }
+  get x() { return false; }
+  // get first() { return peek(this); }
+  // get rest() { return pop(this); }
+  // get next() { return this.oo.o; }
+  // get last() { return this.oo ?
+  //     this.oo.last : this.o; }
 
   // Blow a bubble.
-  constructor(o, bubble) {
+  constructor(o, oo) {
     this.o=o;
-    this.bubble = bubble || Bubble.air;
+    this.oo=oo||air;
   }
 
   // Blow bubbles faster.
   static blow(...ooo) {
-    var bubble = Bubble.air;
+    var oo = air;
     if (ooo.length == 0)
-      return this.air;
+      return air;
     else
       ooo = ooo.reverse();
       for (let o of ooo)
-        bubble  = new Bubble(o, bubble);
-    return bubble;
+        oo  = new Bubble(o, oo);
+    return oo;
   }
 
   // Blow a bunch of bubbles from an
@@ -49,30 +49,23 @@ class Bubble {
     return Bubble.blow(...array);
   }
 
-  static get(bubble, index) {
-    return skip(bubble, index).o;
-  }
+  static get(o,i) { return skip(o,i).o; }
 
-  static skip(bubble, count) {
+  static skip(o, count) {
     if (count)
-      return skip(bubble.bubble, --count);
-    return bubble;
+      return skip(o.oo, --count);
+    return o;
   }
 
-  static push(bubble, o) {
-    return new Bubble(o, bubble);
+  static push(o,oo) {
+    return new Bubble(oo,o);
   }
 
-  static peek(bubble) {
-    return bubble.o;
-  }
+  static peek(o) { return o.o; }
+  static pop(o) { return o.oo; }
 
-  static pop(bubble) {
-    return bubble.bubble;
-  }
-
-  static count() {
-    return reduce(this, function(count) {
+  static count(o) {
+    return reduce(o, function(count) {
       return count++;
     }, 0);
   }
@@ -149,106 +142,24 @@ class Bubble {
       return each(o.oo, fn);
     return oo;
   }
-  ////
 
+  //// Members Only ////
 
-  push(o) { return push(this, o); }
+  count() { return count(this); }
+  conj(oo) { return conj(this, oo); }
+  each(fn) { return each(this, fn); }
+  get(i) { return get(this, i); }
+  invert() { return invert(this); }
+  map(fn) { return map(this, fn); }
   peek() { return peek(this); }
   pop() { return pop(this); }
-
-  count() {
-    return this.reduce(function(count) {
-      return count++;
-    }, 0);
-  }
-
-  shift() {
-    return this.reverse().pop().reverse();
-  }
-
-  reverse() {
-    var bubble;
-    if (this.isAir) return this;
-    bubble = new Bubble(this.o);
-    bubble = this.bubble.reduce((bubble, o) => {
-      return bubble.push(o);
-    }, bubble);
-    return bubble;
-  }
-
-  conj(val) {
-    return val.reduce(function(memo, i) {
-      return memo.push(i);
-    }, this);
-  }
-
-  toString() {
-    if (this.isAir)
-      return "()";
-
-    let format = (o) => {
-      switch (typeof o) {
-        case "string":
-          return '"' + o + '"';
-        case "symbol":
-          return Symbol.keyFor(o);
-        default:
-          return o.toString();
-      }
-    }
-
-    let join = (memo, o) => {
-      return o + " " + memo;
-    }
-
-    return "(" +
-      this.map(format).reduce(join)
-         + ")";
-  }
-
-  inspect() {
-    "(" + map(function(q) {
-      q.inspect()
-    }).join() + ")"
-  }
-
-  toArray() {
-    if (this.bubble) {
-      return [this.o].concat(this.bubble.toArray());
-    } else {
-      return [this.o];
-    }
-  }
-
-  map(fn) {
-    if (this.isAir)
-      return this;
-    return new Bubble(fn(this.o), this.bubble.map(fn));
-  }
-
+  push(o) { return push(this, o); }
   reduce(fn, memo) {
-    if (this.isAir)
-      return memo;
-
-    if (memo === undefined) {
-      memo = this.o;
-    } else {
-      memo = fn(memo, this.o);
-    }
-
-    return this.bubble.reduce(fn, memo);
-  }
-
-  each(fn) {
-    var result = fn(this.o);
-    if (this.bubble)
-      return this.bubble.each(fn);
-    return result;
-  }
-
-  get(index) {
-    return get(this, index);
-  }
+    return reduce(this, fn, memo); }
+  shift() { shift(this); }
+  skip(n) { skip(this, n) };
+  toString() { return toString(this); }
+  toArray() { return toArray(this); }
 
   *[global.Symbol.iterator]() {
     yield peek(this);
@@ -257,10 +168,12 @@ class Bubble {
 
 }
 
-const {get,peek,pop,push,skip} = Bubble;
+const {count, conj, each, get, invert,
+  map, peek, pop, push, reduce, shift,
+  skip, toString, toArray } = Bubble
 
 class Air extends Bubble {
-  get isAir() { return true; }
+  get x() { return true; }
 }
 
 air = new Air()

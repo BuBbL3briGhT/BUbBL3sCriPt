@@ -1,5 +1,6 @@
 const assert = require("assert");
 const Bubble  = require("../src/bubble");
+const {get} = Bubble;
 
 describe("Bubble", () => {
 
@@ -84,12 +85,12 @@ describe(".blow()", () => {
   });
 });
 
-describe(".blow(o, ...)", () => {
-  it("blows a bubble with os.", () => {
-    let bubble = Bubble.blow(1, 2, 3);
-    assert.equal(bubble.o, 1);
-    assert.equal(bubble.bubble.o, 2);
-    assert.equal(bubble.bubble.bubble.o, 3);
+describe(".blow(o...)", () => {
+  it("blows bubbles", () => {
+    let o = Bubble.blow(1, 2, 3);
+    assert.equal(get(o), 1);
+    assert.equal(get(o, 1), 2);
+    assert.equal(get(o, 2), 3);
   });
 });
 
