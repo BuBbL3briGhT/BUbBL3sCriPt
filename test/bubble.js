@@ -3,17 +3,17 @@ const Bubble  = require("../src/bubble");
 
 describe("Bubble", () => {
 
-describe("new Bubble(breath, bubble) ", () => {
+describe("new Bubble(o, bubble) ", () => {
   it("blows a new linked bubble link for your fun and profit.", () => {
     var bubble;
     bubble = new Bubble();
-    assert.equal(bubble.breath, undefined);
+    assert.equal(bubble.o, undefined);
     assert.equal(bubble.bubble, Bubble.air);
     bubble = new Bubble(1);
-    assert.equal(bubble.breath, 1);
+    assert.equal(bubble.o, 1);
     bubble = new Bubble(2, bubble);
-    assert.equal(bubble.breath, 2);
-    assert.equal(bubble.bubble.breath, 1);
+    assert.equal(bubble.o, 2);
+    assert.equal(bubble.bubble.o, 1);
   });
 });
 
@@ -27,14 +27,14 @@ describe("#reverse", () => {
 
     bubble = new Bubble(1);
     bubble = bubble.reverse();
-    assert.equal(bubble.breath, 1);
+    assert.equal(bubble.o, 1);
 
     bubble = new Bubble(2, bubble);
     bubble = new Bubble(3, bubble);
 
-    assert.equal(bubble.breath, 3);
+    assert.equal(bubble.o, 3);
     bubble = bubble.reverse();
-    assert.equal(bubble.breath, 1)
+    assert.equal(bubble.o, 1)
   });
 });
 
@@ -84,12 +84,12 @@ describe(".blow()", () => {
   });
 });
 
-describe(".blow(breath, ...)", () => {
-  it("blows a bubble with breaths.", () => {
+describe(".blow(o, ...)", () => {
+  it("blows a bubble with os.", () => {
     let bubble = Bubble.blow(1, 2, 3);
-    assert.equal(bubble.breath, 1);
-    assert.equal(bubble.bubble.breath, 2);
-    assert.equal(bubble.bubble.bubble.breath, 3);
+    assert.equal(bubble.o, 1);
+    assert.equal(bubble.bubble.o, 2);
+    assert.equal(bubble.bubble.bubble.o, 3);
   });
 });
 
@@ -114,7 +114,7 @@ describe("#map(fn)", () => {
   it("maps the bubble through fn", ()=>{
     var bubble;
 
-    let add7 = (breath) => { return breath+7 };
+    let add7 = (o) => { return o+7 };
 
     bubble = Bubble.air;
     result = bubble.map(add7);
@@ -122,33 +122,33 @@ describe("#map(fn)", () => {
 
     bubble = new Bubble(1);
     result = bubble.map(add7);
-    assert.equal(result.breath, 8);
+    assert.equal(result.o, 8);
 
     bubble = new Bubble(2, bubble);
     result = bubble.map(add7);
-    assert.equal(result.breath, 9);
-    assert.equal(result.bubble.breath, 8);
+    assert.equal(result.o, 9);
+    assert.equal(result.bubble.o, 8);
 
     bubble = new Bubble(3, bubble);
     result = bubble.map(add7);
-    assert.equal(result.breath, 10);
-    assert.equal(result.bubble.breath, 9);
-    assert.equal(result.bubble.bubble.breath, 8);
+    assert.equal(result.o, 10);
+    assert.equal(result.bubble.o, 9);
+    assert.equal(result.bubble.bubble.o, 8);
   });
 });
 
-describe("#push(breath)", () => {
-  it("pushes an breath onto the bubble.", () => {
+describe("#push(o)", () => {
+  it("pushes an o onto the bubble.", () => {
     var bubble = Bubble.air;
     assert(bubble.isAir);
 
     bubble = bubble.push(1);
-    assert.equal(bubble.breath, 1)
+    assert.equal(bubble.o, 1)
     assert(bubble.bubble.isAir);
 
     bubble = bubble.push(2);
-    assert.equal(bubble.breath, 2)
-    assert.equal(bubble.bubble.breath, 1)
+    assert.equal(bubble.o, 2)
+    assert.equal(bubble.bubble.o, 1)
     assert(bubble.bubble.bubble.isAir);
   });
 });
@@ -185,7 +185,7 @@ describe("#toString", () => {
 });
 
 describe("#get(index)", () => {
-  it("gets breath at index", () => {
+  it("gets o at index", () => {
     let bubble = Bubble.blow(6,7,8);
     assert.equal(bubble.get(0), 6);
     assert.equal(bubble.get(1), 7);
@@ -194,7 +194,7 @@ describe("#get(index)", () => {
 });
 
 describe(".get(bubble, index)", () => {
-  it("gets breath at index", () => {
+  it("gets o at index", () => {
     let {get} = Bubble;
     let bubble = Bubble.blow(6,7,8);
     assert.equal(get(bubble, 0), 6);
@@ -207,9 +207,9 @@ describe(".skip(bubble, count)", () => {
   it("skips count of bubbles", () => {
     let {skip} = Bubble;
     let bubble = Bubble.blow(6,7,8);
-    assert.equal(skip(bubble, 0).breath, 6);
-    assert.equal(skip(bubble, 1).breath, 7);
-    assert.equal(skip(bubble, 2).breath, 8);
+    assert.equal(skip(bubble, 0).o, 6);
+    assert.equal(skip(bubble, 1).o, 7);
+    assert.equal(skip(bubble, 2).o, 8);
   });
 });
 

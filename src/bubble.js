@@ -4,20 +4,20 @@ var air;
 class Bubble {
 
   // Blow a bubble.
-  constructor(breath, bubble) {
-    this.breath = breath;
+  constructor(o, bubble) {
+    this.o=o;
     this.bubble = bubble || Bubble.air;
   }
 
   // Blow bubbles faster.
-  static blow(...breaths) {
+  static blow(...ooo) {
     var bubble = Bubble.air;
-    if (breaths.length == 0)
+    if (ooo.length == 0)
       return this.air;
     else
-      breaths = breaths.reverse();
-      for (let breath of breaths)
-        bubble = new Bubble(breath, bubble);
+      ooo = ooo.reverse();
+      for (let o of ooo)
+        bubble  = new Bubble(o, bubble);
     return bubble;
   }
 
@@ -40,15 +40,15 @@ class Bubble {
   }
 
   static get(bubble, index) {
-    return skip(bubble, index).breath;
+    return skip(bubble, index).o;
   }
 
-  push(breath) {
-    return new Bubble(breath, this);
+  push(o) {
+    return new Bubble(o, this);
   }
 
   peek() {
-    return this.breath;
+    return this.o;
   }
   pop() {
     return this.bubble;
@@ -67,16 +67,17 @@ class Bubble {
   get isAir() { return false; }
 
   get first() {
-    return this.breath;
+    return this.o;
   }
   get rest() {
     return this.bubble;
   }
   get next() {
-    return this.bubble.breath;
+    return this.bubble.o;
   }
   get last() {
-    return this.bubble ? this.bubble.last : this.breath;
+    return this.bubble ?
+      this.bubble.last : this.o;
   }
 
   count() {
@@ -92,9 +93,9 @@ class Bubble {
   reverse() {
     var bubble;
     if (this.isAir) return this;
-    bubble = new Bubble(this.breath);
-    bubble = this.bubble.reduce((bubble, breath) => {
-      return bubble.push(breath);
+    bubble = new Bubble(this.o);
+    bubble = this.bubble.reduce((bubble, o) => {
+      return bubble.push(o);
     }, bubble);
     return bubble;
   }
@@ -109,19 +110,19 @@ class Bubble {
     if (this.isAir)
       return "()";
 
-    let format = (breath) => {
-      switch (typeof breath) {
+    let format = (o) => {
+      switch (typeof o) {
         case "string":
-          return '"' + breath + '"';
+          return '"' + o + '"';
         case "symbol":
-          return Symbol.keyFor(breath);
+          return Symbol.keyFor(o);
         default:
-          return breath.toString();
+          return o.toString();
       }
     }
 
-    let join = (memo, breath) => {
-      return breath + " " + memo;
+    let join = (memo, o) => {
+      return o + " " + memo;
     }
 
     return "(" +
@@ -137,16 +138,16 @@ class Bubble {
 
   toArray() {
     if (this.bubble) {
-      return [this.breath].concat(this.bubble.toArray());
+      return [this.o].concat(this.bubble.toArray());
     } else {
-      return [this.breath];
+      return [this.o];
     }
   }
 
   map(fn) {
     if (this.isAir)
       return this;
-    return new Bubble(fn(this.breath), this.bubble.map(fn));
+    return new Bubble(fn(this.o), this.bubble.map(fn));
   }
 
   reduce(fn, memo) {
@@ -154,16 +155,16 @@ class Bubble {
       return memo;
 
     if (memo === undefined) {
-      memo = this.breath;
+      memo = this.o;
     } else {
-      memo = fn(memo, this.breath);
+      memo = fn(memo, this.o);
     }
 
     return this.bubble.reduce(fn, memo);
   }
 
   each(fn) {
-    var result = fn(this.breath);
+    var result = fn(this.o);
     if (this.bubble)
       return this.bubble.each(fn);
     return result;
