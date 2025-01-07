@@ -7,8 +7,8 @@ class Lexer {
   tokenize(head, callback) {
     try {
       this.head = head;
-      // this.tokens =
-      // this.values = Bubble.blow();
+      this.tokens =
+      this.values = undefined;
 
       while (this.head[0]) {
         switch (this.head[0]) {
