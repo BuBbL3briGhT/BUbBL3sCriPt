@@ -87,7 +87,7 @@ describe(".blow()", () => {
 });
 
 describe(".blow(o...)", () => {
-  it.only("blows bubbles", () => {
+  it("blows bubbles", () => {
     let o = Bubble.blow(1, 2, 3);
     assert.equal(get(o), 3);
     assert.equal(get(o, 1), 2);
@@ -188,12 +188,12 @@ describe("toString(o)", () => {
   });
 });
 
-describe("#get(index)", () => {
-  it("gets o at index", () => {
-    let bubble = Bubble.blow(6,7,8);
-    assert.equal(bubble.get(0), 6);
-    assert.equal(bubble.get(1), 7);
-    assert.equal(bubble.get(2), 8);
+describe("get(o,index)", () => {
+  it.only("gets o at index", () => {
+    let o = Bubble.blow(6,7,8);
+    assert.equal(get(o, 0), 8);
+    assert.equal(get(o, 1), 7);
+    assert.equal(get(o, 2), 6);
   });
 });
 
