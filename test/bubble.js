@@ -113,7 +113,7 @@ describe(".blow(o...)", () => {
 // });
 
 describe("map(o, fn)", () => {
-  it.only("maps the bubble through fn", ()=>{
+  it("maps o through fn", ()=>{
     var o;
 
     let add7 = (o) => { return o + 7 };
@@ -138,19 +138,18 @@ describe("map(o, fn)", () => {
   });
 });
 
-describe("#push(o)", () => {
-  it("pushes an o onto the bubble.", () => {
-    var bubble = Bubble.air;
-    assert(bubble.isAir);
+describe("push(o)", () => {
+  it.only("pushes o onto the bubble stack.", () => {
+    var o;
 
-    bubble = bubble.push(1);
-    assert.equal(bubble.o, 1)
-    assert(bubble.bubble.isAir);
+    o = push(o, 1);
+    assert.equal(get(o), 1)
+    assert.equal(skip(o, 1), undefined);
 
-    bubble = bubble.push(2);
-    assert.equal(bubble.o, 2)
-    assert.equal(bubble.bubble.o, 1)
-    assert(bubble.bubble.bubble.isAir);
+    o = push(o, 2);
+    assert.equal(get(o), 2)
+    assert.equal(get(o, 1), 1)
+    assert.equal(skip(o, 2), undefined);
   });
 });
 
