@@ -2,7 +2,7 @@ const assert = require("assert");
 const Bubble  = require("../src/bubble");
 
 const { blow, get, invert, map, peek,
-  push, reduce, skip} = Bubble;
+  push, reduce, skip, toString} = Bubble;
 
 describe("Bubble", () => {
 
@@ -139,7 +139,7 @@ describe("map(o, fn)", () => {
 });
 
 describe("push(o)", () => {
-  it.only("pushes o onto the bubble stack.", () => {
+  it("pushes o onto the bubble stack.", () => {
     var o;
 
     o = push(o, 1);
@@ -153,33 +153,31 @@ describe("push(o)", () => {
   });
 });
 
-describe("#toString", () => {
-  it("formats the bubble as a string.", () => {
-    var bubble, result;
+describe("toString(o)", () => {
+  it.only("formats the bubble as a string.", () => {
+    var o, result;
 
-    bubble = Bubble.air;
-    result = bubble.toString();
+    result = toString(o);
     assert.equal(result, "()");
 
-    bubble = new Bubble(1);
-    result = bubble.toString();
+    o = blow(1);
+    result = toString(o);
     assert.equal(result, "(1)");
 
-    bubble = new Bubble(2, bubble);
-    result = bubble.toString();
+    o = push(o,2);
+    result = toString(o);
     assert.equal(result, "(1 2)");
 
-    bubble = new Bubble(3, bubble);
-    result = bubble.toString();
+    o = push(o, 3);
+    result = toString(o);
     assert.equal(result, "(1 2 3)");
 
-
-    bubble = new Bubble("string", bubble);
-    result = bubble.toString();
+    o = push(o, "string");
+    result = toString(o);
     assert.equal(result, "(1 2 3 \"string\")");
 
-    bubble = new Bubble(Symbol.for("symbol"), bubble);
-    result = bubble.toString();
+    o = push(o, Symbol.for("symbol"));
+    result = toString(o);
     assert.equal(result, "(1 2 3 \"string\" symbol)");
   });
 });

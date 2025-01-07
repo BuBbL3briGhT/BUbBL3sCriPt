@@ -106,8 +106,7 @@ class Bubble {
   }
 
   static toString(o) {
-    if (o.x)
-      return "()";
+    if (!o) return "()";
 
     let format = (o) => {
       switch (typeof o) {
@@ -116,7 +115,7 @@ class Bubble {
         case "symbol":
           return Symbol.keyFor(o);
         default:
-          return toString(o);
+          return o.toString();
       }
     }
 
