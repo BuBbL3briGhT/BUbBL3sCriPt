@@ -1,18 +1,18 @@
 const assert = require("assert");
 const Lexer = require("../src/lexer");
 const Token = require("../src/token");
-const Bubble = require("../src/bubble");
+const Bubble = { blow } = require("../src/bubble");
 
 const lexer = new Lexer();
 
 describe('Lexer', function() {
   describe("#tokenize", function() {
-    itTokenizes("symbol",
-      { tokens: Bubble.blow(Token.SYMBOL),
-        values: Bubble.blow("symbol")});
+    itOnlyTokenizes("symbol",
+      { tokens: blow(Token.SYMBOL),
+        values: blow("symbol")});
     itTokenizes(":keyword",
-      { tokens: Bubble.blow(Token.KEYWORD),
-        values: Bubble.blow("keyword")});
+      { tokens: blow(Token.KEYWORD),
+        values: blow("keyword")});
     itTokenizes("(a b c)",
       { tokens: Bubble.from("(YYY)".split('')),
         values: Bubble.from([void 0, "a", "b", "c", void 0])});

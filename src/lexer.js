@@ -1,5 +1,5 @@
 
-const Bubble = require("./bubble");
+const Bubble = { push, invert } = require("./bubble");
 const Token = require("./token");
 
 class Lexer {
@@ -7,8 +7,8 @@ class Lexer {
   tokenize(head, callback) {
     try {
       this.head = head;
-      this.tokens =
-      this.values = Bubble.blow();
+      // this.tokens =
+      // this.values = Bubble.blow();
 
       while (this.head[0]) {
         switch (this.head[0]) {
@@ -51,8 +51,8 @@ class Lexer {
             break;
         }
       }
-      this.tokens = this.tokens.reverse();
-      this.values = this.values.reverse();
+      this.tokens = invert(this.tokens);
+      this.values = invert(this.values);
 
       return callback(void 0, this.tokens, this.values);
     } catch (error) {
@@ -62,8 +62,8 @@ class Lexer {
 
   // Adds token type and value to the result.
   token(type, value) {
-    this.tokens = this.tokens.push(type);
-    this.values = this.values.push(value);
+    this.tokens = push(this.tokens, type);
+    this.values = push(this.values, value);
   }
 
   tokenizeString() {

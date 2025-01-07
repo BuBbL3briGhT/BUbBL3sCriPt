@@ -93,9 +93,9 @@ class Bubble {
 
   static invert(o) {
     if (o)
-      return reduce(o, (oo, o) => {
+      return reduce(pop(o), (oo, o) => {
         return push(oo, o)
-      }, new Bubble(o.o));
+      }, new Bubble(peek(o)));
   }
 
   static conj(o, oo) {
