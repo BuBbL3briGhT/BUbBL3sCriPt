@@ -1,7 +1,7 @@
 const assert = require("assert");
 const Bubble  = require("../src/bubble");
 
-const { blow, get, invert, map, peek,
+const { blow, get, invert, map, peek, pop,
   push, reduce, skip, toString} = Bubble;
 
 describe("Bubble", () => {
@@ -154,7 +154,7 @@ describe("push(o)", () => {
 });
 
 describe("toString(o)", () => {
-  it.only("formats the bubble as a string.", () => {
+  it.only("formats bubble as a string.", () => {
     var o, result;
 
     result = toString(o);
@@ -179,6 +179,11 @@ describe("toString(o)", () => {
     o = push(o, Symbol.for("symbol"));
     result = toString(o);
     assert.equal(result, "(1 2 3 \"string\" symbol)");
+
+    let ts = toString;
+    o = push(pop(pop(o)), blow(3,2,1));
+    assert.equal(ts(o), "(1 2 3 (3 2 1))");
+
   });
 });
 
