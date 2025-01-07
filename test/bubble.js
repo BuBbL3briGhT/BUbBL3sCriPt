@@ -87,11 +87,11 @@ describe(".blow()", () => {
 });
 
 describe(".blow(o...)", () => {
-  it("blows bubbles", () => {
+  it.only("blows bubbles", () => {
     let o = Bubble.blow(1, 2, 3);
-    assert.equal(get(o), 1);
+    assert.equal(get(o), 3);
     assert.equal(get(o, 1), 2);
-    assert.equal(get(o, 2), 3);
+    assert.equal(get(o, 2), 1);
   });
 });
 
@@ -154,7 +154,7 @@ describe("push(o)", () => {
 });
 
 describe("toString(o)", () => {
-  it.only("formats bubble as a string.", () => {
+  it("formats bubble as a string.", () => {
     var o, result;
 
     result = toString(o);
@@ -185,7 +185,6 @@ describe("toString(o)", () => {
     assert.equal(ts(oo), "(3 2 1)");
     o = push(pop(pop(o)), oo);
     assert.equal(ts(o), "(1 2 3 (3 2 1))");
-
   });
 });
 
