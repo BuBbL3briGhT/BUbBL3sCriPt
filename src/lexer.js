@@ -8,7 +8,7 @@ class Lexer {
     try {
       this.head = head;
       this.tokens =
-      this.values = undefined;
+      this.values = null;
 
       while (this.head[0]) {
         switch (this.head[0]) {
