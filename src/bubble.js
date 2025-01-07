@@ -31,10 +31,28 @@ class Bubble {
     if (ooo.length == 0)
       return air;
     else
-      ooo = ooo.reverse();
-      for (let o of ooo)
-        oo  = new Bubble(o, oo);
+    ooo = ooo.reverse();
+    for (let o of ooo)
+      oo  = new Bubble(o, oo);
     return oo;
+  }
+
+  // Blow bubbles faster.
+  static blow(...ooo) {
+    var oo;
+    ooo = ooo.reverse();
+    for (let o of ooo)
+      oo  = new Bubble(o, oo);
+    return oo;
+  }
+
+  // Blow bubbles faster.
+  static blow(...oo) {
+    var ooo;
+    oo = oo.reverse();
+    for (let o of oo)
+      ooo  = new Bubble(o, ooo);
+    return ooo;
   }
 
   // Blow a bunch of bubbles from an
@@ -124,8 +142,21 @@ class Bubble {
   }
 
   static reduce(o, fn, memo) {
-    return o? reduce(pop(o),
-      fn, fn(memo, peek(o))) : memo;
+    console.log(o, memo);
+    if (o) {
+      let oo = pop(o);
+      if (oo)
+        if (memo)
+          return reduce(oo, fn,
+            fn(memo, peek(o)))
+        else
+          return reduce(oo, fn, peek(o));
+      else if(memo) {
+        return fn(memo, peek(o));
+      } else
+        return peek(o);
+    } else
+      return memo;
   }
 
   static each(o, fn) {
