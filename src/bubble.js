@@ -135,10 +135,9 @@ class Bubble {
   }
 
   static map(o, fn) {
-    if (o.x)
-      return o;
-    return new Bubble(fn(o.o),
-      map(o.oo, fn));
+    if (o)
+      return new Bubble(fn(o.o),
+        map(o.oo, fn));
   }
 
   static reduce(o, fn, memo) {

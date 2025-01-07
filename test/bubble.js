@@ -1,8 +1,8 @@
 const assert = require("assert");
 const Bubble  = require("../src/bubble");
 
-const { blow, get, invert, peek, push,
-  reduce, skip} = Bubble;
+const { blow, get, invert, map, peek,
+  push, reduce, skip} = Bubble;
 
 describe("Bubble", () => {
 
@@ -81,7 +81,7 @@ describe("reduce", () => {
 });
 
 describe(".blow()", () => {
-  it.only("blows it", () => {
+  it("blows it", () => {
     assert.equal(Bubble.blow(), undefined);
   });
 });
@@ -95,47 +95,46 @@ describe(".blow(o...)", () => {
   });
 });
 
-describe(".air", () => {
-  it("should be empty bubble.", () => {
-    let bubble = Bubble.air;
-    assert.equal(bubble.isAir, true);
-    assert.equal(bubble.toString(), "()");
-    assert.equal(bubble.reverse(), bubble);
-    assert.equal(bubble.map(), bubble);
-  });
-  it("can not be assigned to", () => {
-    let air = Bubble.air;
-    assert.throws(() => {
-      Bubble.air = null;
-    });
-    assert.equal(Bubble.air, air);
-  });
-});
+// describe(".air", () => {
+//   it("should be empty bubble.", () => {
+//     let bubble = Bubble.air;
+//     assert.equal(bubble.isAir, true);
+//     assert.equal(bubble.toString(), "()");
+//     assert.equal(bubble.reverse(), bubble);
+//     assert.equal(bubble.map(), bubble);
+//   });
+//   it("can not be assigned to", () => {
+//     let air = Bubble.air;
+//     assert.throws(() => {
+//       Bubble.air = null;
+//     });
+//     assert.equal(Bubble.air, air);
+//   });
+// });
 
-describe("#map(fn)", () => {
-  it("maps the bubble through fn", ()=>{
-    var bubble;
+describe("map(o, fn)", () => {
+  it.only("maps the bubble through fn", ()=>{
+    var o, result;
 
-    let add7 = (o) => { return o+7 };
+    let add7 = (o) => { return o + 7 };
 
-    bubble = Bubble.air;
-    result = bubble.map(add7);
-    assert.equal(result, Bubble.air);
+    result = map(o, add7);
+    assert.equal(result, undefined);
 
-    bubble = new Bubble(1);
-    result = bubble.map(add7);
-    assert.equal(result.o, 8);
+    o = blow(1);
+    result = map(o, add7);
+    assert.equal(get(result), 8);
 
-    bubble = new Bubble(2, bubble);
-    result = bubble.map(add7);
-    assert.equal(result.o, 9);
-    assert.equal(result.bubble.o, 8);
+    o = push(o, 2);
+    result = map(o, add7);
+    assert.equal(get(result), 9);
+    assert.equal(get(result, 1), 8);
 
-    bubble = new Bubble(3, bubble);
-    result = bubble.map(add7);
-    assert.equal(result.o, 10);
-    assert.equal(result.bubble.o, 9);
-    assert.equal(result.bubble.bubble.o, 8);
+    o = push(o, 3);
+    result = map(o, add7);
+    assert.equal(get(result), 10);
+    assert.equal(get(result, 1), 9);
+    assert.equal(get(result, 2), 8);
   });
 });
 
