@@ -181,7 +181,9 @@ describe("toString(o)", () => {
     assert.equal(result, "(1 2 3 \"string\" symbol)");
 
     let ts = toString;
-    o = push(pop(pop(o)), blow(3,2,1));
+    let oo = blow(3,2,1);
+    assert.equal(ts(oo), "(3 2 1)");
+    o = push(pop(pop(o)), oo);
     assert.equal(ts(o), "(1 2 3 (3 2 1))");
 
   });

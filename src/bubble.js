@@ -49,7 +49,6 @@ class Bubble {
   // Blow bubbles faster.
   static blow(...oo) {
     var ooo;
-    oo = oo.reverse();
     for (let o of oo)
       ooo  = new Bubble(o, ooo);
     return ooo;
