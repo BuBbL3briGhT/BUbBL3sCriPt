@@ -24,21 +24,19 @@ describe("new Bubble(o, oo) ", () => {
 describe("invert", () => {
   it("inverts bubbles", () => {
     var o;
-
-    o = Bubble.air;
     o = invert(o);
-    assert.equal(o, Bubble.air);
+    assert.equal(o, undefined);
 
     o = blow(1);
     o = invert(o);
-    assert.equal(peek(o), 1);
+    assert.equal(peek(o),1);
 
-    o = push(o, 2);
-    o = push(o, 3);
+    o = push(o,2);
+    o = push(o,3);
 
-    assert.equal(peek(o), 3);
+    assert.equal(peek(o),3);
     o = invert(o);
-    assert.equal(peek(o), 1)
+    assert.equal(peek(o),1)
   });
 });
 
@@ -80,37 +78,15 @@ describe("reduce", () => {
   });
 });
 
-describe(".blow()", () => {
-  it("blows it", () => {
-    assert.equal(Bubble.blow(), undefined);
-  });
-});
-
-describe(".blow(o...)", () => {
+describe("blow(o...)", () => {
   it("blows bubbles", () => {
-    let o = Bubble.blow(1, 2, 3);
-    assert.equal(get(o), 3);
-    assert.equal(get(o, 1), 2);
-    assert.equal(get(o, 2), 1);
+    assert.equal(blow(), undefined);
+    let o = blow(1, 2, 3);
+    assert.equal(get(o,0), 3);
+    assert.equal(get(o,1), 2);
+    assert.equal(get(o,2), 1);
   });
 });
-
-// describe(".air", () => {
-//   it("should be empty bubble.", () => {
-//     let bubble = Bubble.air;
-//     assert.equal(bubble.isAir, true);
-//     assert.equal(bubble.toString(), "()");
-//     assert.equal(bubble.reverse(), bubble);
-//     assert.equal(bubble.map(), bubble);
-//   });
-//   it("can not be assigned to", () => {
-//     let air = Bubble.air;
-//     assert.throws(() => {
-//       Bubble.air = null;
-//     });
-//     assert.equal(Bubble.air, air);
-//   });
-// });
 
 describe("map(o, fn)", () => {
   it("maps o through fn", ()=>{
@@ -198,7 +174,7 @@ describe("get(o, index)", () => {
 });
 
 describe("skip(bubble, count)", () => {
-  it.only("skips count of bubbles", () => {
+  it("skips count of bubbles", () => {
     let o = Bubble.blow(6,7,8);
     assert.equal(peek(skip(o)), 8);
     assert.equal(peek(skip(o,0)), 8);

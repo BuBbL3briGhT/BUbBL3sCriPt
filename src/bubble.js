@@ -92,10 +92,10 @@ class Bubble {
   }
 
   static invert(o) {
-    if (o.x) return o;
-    return reduce(o, (oo, o) => {
-      return push(oo, o)
-    }, new Bubble(o.o))
+    if (o)
+      return reduce(o, (oo, o) => {
+        return push(oo, o)
+      }, new Bubble(o.o));
   }
 
   static conj(o, oo) {
