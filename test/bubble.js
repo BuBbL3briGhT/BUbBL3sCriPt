@@ -188,8 +188,8 @@ describe("toString(o)", () => {
   });
 });
 
-describe("get(o,index)", () => {
-  it.only("gets o at index", () => {
+describe("get(o, index)", () => {
+  it("gets value of o at index", () => {
     let o = Bubble.blow(6,7,8);
     assert.equal(get(o, 0), 8);
     assert.equal(get(o, 1), 7);
@@ -197,23 +197,13 @@ describe("get(o,index)", () => {
   });
 });
 
-describe(".get(bubble, index)", () => {
-  it("gets o at index", () => {
-    let {get} = Bubble;
-    let bubble = Bubble.blow(6,7,8);
-    assert.equal(get(bubble, 0), 6);
-    assert.equal(get(bubble, 1), 7);
-    assert.equal(get(bubble, 2), 8);
-  });
-});
-
-describe(".skip(bubble, count)", () => {
-  it("skips count of bubbles", () => {
-    let {skip} = Bubble;
-    let bubble = Bubble.blow(6,7,8);
-    assert.equal(skip(bubble, 0).o, 6);
-    assert.equal(skip(bubble, 1).o, 7);
-    assert.equal(skip(bubble, 2).o, 8);
+describe("skip(bubble, count)", () => {
+  it.only("skips count of bubbles", () => {
+    let o = Bubble.blow(6,7,8);
+    assert.equal(peek(skip(o)), 8);
+    assert.equal(peek(skip(o,0)), 8);
+    assert.equal(peek(skip(o,1)), 7);
+    assert.equal(peek(skip(o,2)), 6);
   });
 });
 
