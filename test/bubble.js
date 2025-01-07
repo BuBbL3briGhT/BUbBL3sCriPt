@@ -51,10 +51,9 @@ describe("invert", () => {
     assert.equal(peek(o),1);
     assert.equal(skip(o,1), undefined);
 
-    o = push(o,2);
-    o = push(o,3);
-
+    o = push(push(o,2),3);
     assert.equal(peek(o),3);
+
     o = invert(o);
     assert.equal(peek(o),1);
 
