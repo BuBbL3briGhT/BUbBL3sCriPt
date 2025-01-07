@@ -41,7 +41,7 @@ describe("get(o, index)", () => {
 });
 
 describe("invert", () => {
-  it.only("inverts bubbles", () => {
+  it("inverts bubbles", () => {
     var o;
     o = invert(o);
     assert.equal(o, undefined);
