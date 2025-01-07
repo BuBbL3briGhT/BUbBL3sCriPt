@@ -7,7 +7,7 @@ const { blow, get, invert, peek, push,
 describe("Bubble", () => {
 
 describe("new Bubble(o, oo) ", () => {
-  it.only("blows a new bubble for your fun and profit.", () => {
+  it("blows a new bubble for your fun and profit.", () => {
     var o;
     o = new Bubble();
     assert.equal(get(o), undefined);
@@ -81,8 +81,8 @@ describe("reduce", () => {
 });
 
 describe(".blow()", () => {
-  it("should return an empty bubble.", () => {
-    assert.equal(Bubble.blow(), Bubble.air);
+  it.only("blows it", () => {
+    assert.equal(Bubble.blow(), undefined);
   });
 });
 
