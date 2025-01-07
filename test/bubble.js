@@ -21,6 +21,25 @@ describe("new Bubble(o, oo) ", () => {
   });
 });
 
+describe("blow(o...)", () => {
+  it("blows bubbles", () => {
+    assert.equal(blow(), undefined);
+    let o = blow(1, 2, 3);
+    assert.equal(get(o,0), 3);
+    assert.equal(get(o,1), 2);
+    assert.equal(get(o,2), 1);
+  });
+});
+
+describe("get(o, index)", () => {
+  it("gets value of o at index", () => {
+    let o = Bubble.blow(6,7,8);
+    assert.equal(get(o, 0), 8);
+    assert.equal(get(o, 1), 7);
+    assert.equal(get(o, 2), 6);
+  });
+});
+
 describe("invert", () => {
   it("inverts bubbles", () => {
     var o;
@@ -37,54 +56,6 @@ describe("invert", () => {
     assert.equal(peek(o),3);
     o = invert(o);
     assert.equal(peek(o),1)
-  });
-});
-
-describe("reduce", () => {
-  it("reduces the bubble", () => {
-    var o, result;
-
-    let add = (a,b) => { return b + a };
-
-    result = reduce(o, add);
-    assert.equal(result, undefined);
-
-    result = reduce(o, add, 0);
-    assert.equal(result, 0);
-
-    o = push(o, 1);
-    result = reduce(o, add);
-    assert.equal(result, 1);
-
-    o = push(o, 2);
-    result = reduce(o, add);
-    assert.equal(result, 3);
-
-    o = push(o, 3),
-    result = reduce(o, add)
-    assert.equal(result, 6)
-
-    o = blow("a");
-    result = reduce(o, add);
-    assert.equal(result, "a");
-
-    o = push(o, "b");
-    result = reduce(o, add);
-    assert.equal(result, "ab");
-
-    o = push(o, "c");
-    result = reduce(o, add);
-    assert.equal(result, "abc");
-  });
-});
-
-describe("blow(o...)", () => {
-  it("blows bubbles", () => {
-    assert.equal(blow(), undefined);
-    let o = blow(1, 2, 3);
-    assert.equal(get(o,0), 3);
-    assert.equal(get(o,1), 2);
-    assert.equal(get(o,2), 1);
   });
 });
 
@@ -129,6 +100,54 @@ describe("push(o)", () => {
   });
 });
 
+describe("reduce", () => {
+  it("reduces the bubble", () => {
+    var o, result;
+
+    let add = (a,b) => { return b + a };
+
+    result = reduce(o, add);
+    assert.equal(result, undefined);
+
+    result = reduce(o, add, 0);
+    assert.equal(result, 0);
+
+    o = push(o, 1);
+    result = reduce(o, add);
+    assert.equal(result, 1);
+
+    o = push(o, 2);
+    result = reduce(o, add);
+    assert.equal(result, 3);
+
+    o = push(o, 3),
+    result = reduce(o, add)
+    assert.equal(result, 6)
+
+    o = blow("a");
+    result = reduce(o, add);
+    assert.equal(result, "a");
+
+    o = push(o, "b");
+    result = reduce(o, add);
+    assert.equal(result, "ab");
+
+    o = push(o, "c");
+    result = reduce(o, add);
+    assert.equal(result, "abc");
+  });
+});
+
+describe("skip(bubble, count)", () => {
+  it("skips count of bubbles", () => {
+    let o = Bubble.blow(6,7,8);
+    assert.equal(peek(skip(o)), 8);
+    assert.equal(peek(skip(o,0)), 8);
+    assert.equal(peek(skip(o,1)), 7);
+    assert.equal(peek(skip(o,2)), 6);
+  });
+});
+
 describe("toString(o)", () => {
   it("formats bubble as a string.", () => {
     var o, result;
@@ -161,25 +180,6 @@ describe("toString(o)", () => {
     assert.equal(ts(oo), "(3 2 1)");
     o = push(pop(pop(o)), oo);
     assert.equal(ts(o), "(1 2 3 (3 2 1))");
-  });
-});
-
-describe("get(o, index)", () => {
-  it("gets value of o at index", () => {
-    let o = Bubble.blow(6,7,8);
-    assert.equal(get(o, 0), 8);
-    assert.equal(get(o, 1), 7);
-    assert.equal(get(o, 2), 6);
-  });
-});
-
-describe("skip(bubble, count)", () => {
-  it("skips count of bubbles", () => {
-    let o = Bubble.blow(6,7,8);
-    assert.equal(peek(skip(o)), 8);
-    assert.equal(peek(skip(o,0)), 8);
-    assert.equal(peek(skip(o,1)), 7);
-    assert.equal(peek(skip(o,2)), 6);
   });
 });
 
