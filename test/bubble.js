@@ -114,7 +114,7 @@ describe(".blow(o...)", () => {
 
 describe("map(o, fn)", () => {
   it.only("maps the bubble through fn", ()=>{
-    var o, result;
+    var o;
 
     let add7 = (o) => { return o + 7 };
 
@@ -122,19 +122,19 @@ describe("map(o, fn)", () => {
     assert.equal(result, undefined);
 
     o = blow(1);
-    result = map(o, add7);
-    assert.equal(get(result), 8);
+    o = map(o, add7);
+    assert.equal(get(o), 8);
 
     o = push(o, 2);
-    result = map(o, add7);
-    assert.equal(get(result), 9);
-    assert.equal(get(result, 1), 8);
+    o = map(o, add7);
+    assert.equal(get(o), 9);
+    assert.equal(get(o, 1), 15);
 
     o = push(o, 3);
-    result = map(o, add7);
-    assert.equal(get(result), 10);
-    assert.equal(get(result, 1), 9);
-    assert.equal(get(result, 2), 8);
+    o = map(o, add7);
+    assert.equal(get(o), 10);
+    assert.equal(get(o, 1), 16);
+    assert.equal(get(o, 2), 22);
   });
 });
 
