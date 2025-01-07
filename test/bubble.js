@@ -46,9 +46,7 @@ describe("reduce", () => {
   it.only("reduces the bubble", () => {
     var o, result;
 
-    let add = (a,b) => {
-      console.log(a,b);
-      return b + a };
+    let add = (a,b) => { return b + a };
 
     result = reduce(o, add);
     assert.equal(result, undefined);
@@ -60,9 +58,7 @@ describe("reduce", () => {
     result = reduce(o, add);
     assert.equal(result, 1);
 
-    console.log("---");
     o = push(o, 2);
-    console.log(o);
     result = reduce(o, add);
     assert.equal(result, 3);
 
@@ -71,7 +67,6 @@ describe("reduce", () => {
     assert.equal(result, 6)
 
     o = blow("a");
-    // o = push("a");
     result = reduce(o, add);
     assert.equal(result, "a");
 

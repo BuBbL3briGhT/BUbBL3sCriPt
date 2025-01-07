@@ -142,7 +142,6 @@ class Bubble {
   }
 
   static reduce(o, fn, memo) {
-    console.log(o, memo);
     if (o) {
       let oo = pop(o);
       if (oo)
@@ -151,9 +150,9 @@ class Bubble {
             fn(memo, peek(o)))
         else
           return reduce(oo, fn, peek(o));
-      else if(memo) {
+      else if(memo)
         return fn(memo, peek(o));
-      } else
+      else
         return peek(o);
     } else
       return memo;
