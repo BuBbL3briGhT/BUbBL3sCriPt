@@ -43,8 +43,8 @@ function itTokenizes(s, expected) {
     lexer.tokenize(s, function(err, tokens, values) {
       if (err)
         throw err;
-      assert.deepEqual(tokens, expected.tokens);
-      assert.deepEqual(values, expected.values);
+      assert.deepEqual(tokens, invert(expected.tokens));
+      assert.deepEqual(values, invert(expected.values));
     });
   });
 }
@@ -54,8 +54,8 @@ function itOnlyTokenizes(s, expected) {
     lexer.tokenize(s, function(err, tokens, values) {
       if (err)
         throw err;
-      assert.deepEqual(tokens, expected.tokens);
-      assert.deepEqual(values, expected.values);
+      assert.deepEqual(tokens, invert(expected.tokens));
+      assert.deepEqual(values, invert(expected.values));
     });
   });
 }
@@ -66,8 +66,8 @@ function itTokenizes2(desc, str, toks, vals) {
     lexer.tokenize(str, function(err, tokens, values) {
       if (err)
         throw err;
-      assert.deepEqual(tokens, toks);
-      assert.deepEqual(values, vals);
+      assert.deepEqual(tokens, invert(toks));
+      assert.deepEqual(values, invert(vals));
     });
   });
 }

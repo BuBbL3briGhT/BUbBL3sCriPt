@@ -51,10 +51,12 @@ class Lexer {
             break;
         }
       }
-      return callback(void 0, this.tokens, this.values);
+      this.tokens = invert(this.tokens);
+      this.values = invert(this.values);
     } catch (error) {
       return callback(error);
     }
+    return callback(void 0, this.tokens, this.values);
   }
 
   // Adds token type and value to the result.

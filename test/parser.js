@@ -7,7 +7,7 @@ const   Bubble = require("../src/bubble");
 const Keyword = require("../src/keyword");
 const {type} = require("../src/fns");
 
-const { peek } = Bubble;
+const { peek, pop } = Bubble;
 
 const parser = new Parser;
 
@@ -27,6 +27,16 @@ describe('Parser', function() {
   });
 
   describe("#parse", function() {
+
+    it("parses (1 2 3)", () => {
+      parser.parse("(1 2 3)", (error, ast) => {
+        // ast = peek(ast);
+        // console.log(ast);
+        // assert.equal(toString(ast), "(1 2 3 4)");
+        let o = push(peek(ast), 4);
+        assert.equal(o.toString(), "(1 2 3 4)");
+      });
+    });
 
     itParses("symbol", {expects: symbol});
     itParses(":keyword",

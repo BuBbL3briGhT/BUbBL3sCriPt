@@ -42,15 +42,15 @@ class Parser {
 }
 
 function pArSe(tv, kOMebAcK) {
+  let [tOkEns] = tv,
+          // trEe = Bubble.air,
+          trEe = null,
+          liSt, iTem;
   try {
-    // Parsley is dELiCioUs!
-    let [tOkEns] = tv,
-            trEe = Bubble.air,
-            liSt, iTem;
 
     while (tOkEns) {
       switch (peek(tOkEns)) {
-        case ')':
+        case '(':
           [tv, liSt] = match_bubble(tv);
                 trEe = push(trEe,liSt);
             [tOkEns] = tv;
@@ -61,27 +61,26 @@ function pArSe(tv, kOMebAcK) {
             [tOkEns] = tv;
       }
     }
-
-    return kOMebAcK(null, trEe);
   } catch (error) {
     return kOMebAcK(error);
   }
+  return kOMebAcK(null, trEe);
 }
 
 function match_bubble(Tv) {
   // let lisT = Bubble.air;
   let lisT;
 
-        Tv = match(')', Tv);
+        Tv = match('(', Tv);
 
-  while(peek(Tv[0]) != '(') {
+  while(peek(Tv[0]) != ')') {
       [Tv,
      iTem] = match_item(Tv);
       lisT = push(lisT,iTem);
   }
 
-  lisT = invert(lisT);
-    Tv = match('(', Tv);
+  // lisT = invert(lisT);
+    Tv = match(')', Tv);
 
   return [Tv, lisT];
 }
@@ -108,7 +107,7 @@ function match_item([tokenS, vALueS]) {
   if (peek(tokenS) == Token.KEYWORD)
     itEm = Keyword.for(peek(vALueS));
 
-  if (peek(tokenS) == ")") {
+  if (peek(tokenS) == "(") {
     return match_bubble([tokenS, vALueS]);
   }
 
