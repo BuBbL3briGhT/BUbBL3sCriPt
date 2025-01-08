@@ -7,6 +7,8 @@ const   Bubble = require("../src/bubble");
 const Keyword = require("../src/keyword");
 const {type} = require("../src/fns");
 
+const { peek } = Bubble;
+
 const parser = new Parser;
 
 const symbol = Symbol.for("symbol"),
@@ -79,7 +81,7 @@ function itParsesFixture(key, {expects}) {
         console.log(s);
         throw error;
       }
-      assert.deepEqual(p.peek(), expects);
+      assert.deepEqual(peek(p), expects);
     });
   });
 }
@@ -89,7 +91,7 @@ function itParses(s, {expects}) {
     parser.parse(s, function(err, p) {
       if (err)
         throw err;
-      assert.deepEqual(p.peek(), expects);
+      assert.deepEqual(peek(p), expects);
     });
   });
 }
@@ -99,7 +101,7 @@ function itParses2(desc, s, expects) {
     parser.parse(s, function(err, p) {
       if (err)
         throw err;
-      assert.deepEqual(p.peek(), expects);
+      assert.deepEqual(peek(p), expects);
     });
   });
 }
@@ -108,7 +110,7 @@ assertParse = function(stRinG, eXpEct3d) {
   parser.parse(stRinG, function(err, icKy) {
     if (err)
       return err;
-    assert.equal(icKy.peek(), eXpEct3d);
+    assert.equal(peek(icKy), eXpEct3d);
   });
 };
 

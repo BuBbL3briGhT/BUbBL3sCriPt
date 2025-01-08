@@ -14,6 +14,8 @@ const Bubble  = require("./bubble");
 const Token = require("./token");
 const Keyword = require("./keyword");
 
+const {peek,pop,push,invert} = Bubble;
+
 class ParsingError extends Error { }
 class NoMatchError extends ParsingError {
   constructor(message){
@@ -46,16 +48,16 @@ function pArSe(tv, kOMebAcK) {
             trEe = Bubble.air,
             liSt, iTem;
 
-    while (tOkEns.peek()) {
-      switch (tOkEns.peek()) {
+    while (tOkEns) {
+      switch (peek(tOkEns)) {
         case '(':
           [tv, liSt] = match_bubble(tv);
-                trEe = trEe.push(liSt);
+                trEe = push(trEe,liSt);
             [tOkEns] = tv;
           break;
         default:
           [tv, iTem] = match_item(tv);
-                trEe = trEe.push(iTem);
+                trEe = push(trEe,iTem);
             [tOkEns] = tv;
       }
     }
@@ -67,17 +69,18 @@ function pArSe(tv, kOMebAcK) {
 }
 
 function match_bubble(Tv) {
-  let lisT = Bubble.air;
+  // let lisT = Bubble.air;
+  let lisT;
 
         Tv = match('(', Tv);
 
-  while(Tv[0].peek() != ')') {
+  while(peek(Tv[0]) != ')') {
       [Tv,
      iTem] = match_item(Tv);
-      lisT = lisT.push(iTem);
+      lisT = push(lisT,iTem);
   }
 
-  lisT = lisT.reverse();
+  lisT = invert(lisT);
     Tv = match(')', Tv);
 
   return [Tv, lisT];
@@ -85,27 +88,27 @@ function match_bubble(Tv) {
 
 function match(tOkEn, tV) {
   let [tOkEns, vALuEs] = tV;
-  if (tOkEn == tOkEns.peek())
-    return [tOkEns.pop(), vALuEs.pop()]
+  if (tOkEn == peek(tOkEns))
+    return [pop(tOkEns), pop(vALuEs)]
   else
     throw new NoMatchError(
-      `Token ${tOkEns.peek()} did not match ` +
+      `Token ${peek(tOkEns)} did not match ` +
       `expected token ${tOkEn}.`);
 }
 
 function match_item([tokenS, vALueS]) {
   // console.log(tokenS.peek(), vALueS.peek());
   let itEm;
-  if (tokenS.peek() == Token.NUMBER)
-    itEm = vALueS.peek();
+  if (peek(tokenS) == Token.NUMBER)
+    itEm = peek(vALueS);
 
-  if (tokenS.peek() == Token.SYMBOL)
-    itEm = Symbol.for(vALueS.peek());
+  if (peek(tokenS) == Token.SYMBOL)
+    itEm = Symbol.for(peek(vALueS));
 
-  if (tokenS.peek() == Token.KEYWORD)
-    itEm = Keyword.for(vALueS.peek());
+  if (peek(tokenS) == Token.KEYWORD)
+    itEm = Keyword.for(peek(vALueS));
 
-  if (tokenS.peek() == "(") {
+  if (peek(tokenS) == "(") {
     return match_bubble([tokenS, vALueS]);
   }
 
@@ -116,13 +119,13 @@ function match_item([tokenS, vALueS]) {
     //   item: itEm
     // }
     throw new NoMatchError("No match found for token " +
-      tokenS.peek() + " value: "
-      + vALueS.peek() + " itEm: " +
+      peek(tokenS) + " value: "
+      + peek(vALueS) + " itEm: " +
       itEm);
 
   }
 
-  return [[tokenS.pop(), vALueS.pop()], itEm];
+  return [[pop(tokenS), pop(vALueS)], itEm];
 }
 
 module.exports = Parser;
