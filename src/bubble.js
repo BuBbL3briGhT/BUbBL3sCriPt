@@ -4,13 +4,13 @@ var air;
 class Bubble {
 
   static get air() { return air; }
-  static set air(value) {
-    switch (Math.trunc(Math.random() * 3)) {
-      case 0: throw new Error("You'rE tryiNg to overwrite Bubble.air, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?");
-      case 1: throw new Error("👋 TheSe arE noT the dRoiDs yoU are LooKing for.");
-      case 2: throw new Error("http://youtu.be/otCpCn0l4Wo");
-    }
-  };
+  // static set air(value) {
+  //   switch (Math.trunc(Math.random() * 3)) {
+  //     case 0: throw new Error("You'rE tryiNg to overwrite Bubble.air, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?");
+  //     case 1: throw new Error("👋 TheSe arE noT the dRoiDs yoU are LooKing for.");
+  //     case 2: throw new Error("http://youtu.be/otCpCn0l4Wo");
+  //   }
+  // };
 
   get x() { return false; }
   // get first() { return peek(this); }
@@ -70,7 +70,7 @@ class Bubble {
 
   static skip(o, count) {
     if (count)
-      return skip(o.oo, --count);
+      return skip(pop(o), --count);
     return o;
   }
 
@@ -82,7 +82,7 @@ class Bubble {
   static pop(o) { return o.oo; }
 
   static count(o) {
-    return reduce(o, function(count) {
+    return reduce(o, (count) => {
       return count++;
     }, 0);
   }
@@ -156,9 +156,9 @@ class Bubble {
   }
 
   static each(o, fn) {
-    let oo = fn(o.o);
-    if (o.oo)
-      return each(o.oo, fn);
+    let oo = fn(peek(o));
+    if (pop(o))
+      return each(pop(o), fn);
     return oo;
   }
 
