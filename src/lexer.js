@@ -51,7 +51,6 @@ class Lexer {
             break;
         }
       }
-
       return callback(void 0, this.tokens, this.values);
     } catch (error) {
       return callback(error);

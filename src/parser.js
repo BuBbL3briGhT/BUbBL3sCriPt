@@ -50,7 +50,7 @@ function pArSe(tv, kOMebAcK) {
 
     while (tOkEns) {
       switch (peek(tOkEns)) {
-        case '(':
+        case ')':
           [tv, liSt] = match_bubble(tv);
                 trEe = push(trEe,liSt);
             [tOkEns] = tv;
@@ -72,16 +72,16 @@ function match_bubble(Tv) {
   // let lisT = Bubble.air;
   let lisT;
 
-        Tv = match('(', Tv);
+        Tv = match(')', Tv);
 
-  while(peek(Tv[0]) != ')') {
+  while(peek(Tv[0]) != '(') {
       [Tv,
      iTem] = match_item(Tv);
       lisT = push(lisT,iTem);
   }
 
   lisT = invert(lisT);
-    Tv = match(')', Tv);
+    Tv = match('(', Tv);
 
   return [Tv, lisT];
 }
@@ -108,7 +108,7 @@ function match_item([tokenS, vALueS]) {
   if (peek(tokenS) == Token.KEYWORD)
     itEm = Keyword.for(peek(vALueS));
 
-  if (peek(tokenS) == "(") {
+  if (peek(tokenS) == ")") {
     return match_bubble([tokenS, vALueS]);
   }
 
