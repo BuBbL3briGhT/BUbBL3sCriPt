@@ -1,5 +1,6 @@
 const Bubble = require("./bubble");
 const Keyword = require("./keyword");
+const Token = require("./token");
 const tokenize = require("./tokenize");
 
 const { peek, pop, push, invert } =
