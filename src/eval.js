@@ -1,34 +1,39 @@
 
 const Bubble = require("./bubble");
 const Keyword = require("./keyword");
-const parse = require("./parse.js");
+const parse = require("./parse");
+const Balloon = require("./balloon");
 
 const { map } = Bubble;
 
-const Ballon = undefined;
-
-function zing(q) {
+function makeFn(q) {
   return (p) => {
     return q.call(this,
       p.map(m => eVaL(this, m)))
   }
 }
 
-const bnd = {
-  "+": zing(function([a,[b]]) {
-    return a+b;
+const rootBinding = {
+  "+": makeFn(([a,[b]]) => {
+    return a+b
   })
 }
 
-function eval(string) {
-  return eVaL(parse(string));
+// Evaluate Bubblescript
+function eval(script) {
+  return parse(script)
+    .map(function(expression) {
+      return eVaL(rootBinding, expression);
+    }).pop();
 }
 
 function eVaL(bnd, xpr) {
+  console.log(xpr)
   switch (xpr && xpr.constructor) {
     case Symbol:
       return xpr.resolve(bnd)
     case Bubble: {
+      console.log("🧀");
       let s = peek(xpr);
       if (s instanceof Symbol) {
         // debug('->', xpr.toString());
@@ -70,7 +75,7 @@ function eVaL(bnd, xpr) {
         return undefined;
       }
     }
-    case Ballon:
+    case Balloon:
       return map(xpr, (a) => {
         return eVaL(bnd, a)
       });

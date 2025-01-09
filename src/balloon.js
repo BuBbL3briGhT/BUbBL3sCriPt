@@ -1,9 +1,9 @@
 
-class Glider {
+class Balloon {
 
   constructor(head, tail) {
     this.head = head;
-    this.tail = tail || Glider.emptyGlider;
+    this.tail = tail || Balloon.emptyBalloon;
   }
 
   static from(a) {
@@ -11,18 +11,18 @@ class Glider {
     var head = a.pop(),
        tail = a;
      if (tail.length > 0)
-         return new Glider(head, this.from(tail));
-     return new Glider(head);
+         return new Balloon(head, this.from(tail));
+     return new Balloon(head);
   }
 
   peek() {
     return this.head;
   }
   push(val) {
-    return new Glider(val, this);
+    return new Balloon(val, this);
   }
   pop() {
-    return this.tail || Glider.emptyGlider;
+    return this.tail || Balloon.emptyBalloon;
   }
 
   get isEmpty() { return false; }
@@ -44,7 +44,7 @@ class Glider {
   get rest() {
     if (this._rest == null)
       if (this.tail)
-        this._rest = new Glider(this.head, this.tail.rest);
+        this._rest = new Balloon(this.head, this.tail.rest);
 
     return this._rest;
   }
@@ -76,7 +76,7 @@ class Glider {
   map(fn, ...aux) {
     var tail = null;
 
-    var result = new Glider(fn(this.first,
+    var result = new Balloon(fn(this.first,
       ...aux.map(function(q) {
         return q ? q.first : q
       })));
@@ -85,7 +85,7 @@ class Glider {
       return result;
 
     function into(a, b) {
-      var c = new Glider(b.peek());
+      var c = new Balloon(b.peek());
       b = b.pop();
 
       while (!b.isEmpty) {
@@ -109,13 +109,13 @@ class Glider {
   mapp(fn, ...aux) {
     var tail = null;
 
-    var result = new Glider(fn(this.first,
+    var result = new Balloon(fn(this.first,
       ...aux.map(function(q) {
         return q ? q.first : q
       })));
 
     return this.rest.map(function(...args) {
-      return new Glider(fn(...args), result);
+      return new Balloon(fn(...args), result);
     }, ...aux.map(function(q) {
       return q.rest
     }));
@@ -148,7 +148,7 @@ class Glider {
 
   reverse() {
     if (!this.tail) return this;
-    var glider = new Glider(this.head);
+    var glider = new Balloon(this.head);
     return this.tail.reduce(function(memo, i) {
       return memo.push(i);
     }, glider);
@@ -165,11 +165,11 @@ class Glider {
   }
 }
 
-class EmptyGlider extends Glider {
+class EmptyBalloon extends Balloon {
   get isEmpty() { return true }
 
   push (val) {
-    return new Glider(val);
+    return new Balloon(val);
   }
 
   toString () {
@@ -177,6 +177,6 @@ class EmptyGlider extends Glider {
   }
 }
 
-Glider.emptyGlider = new EmptyGlider;
+Balloon.emptyBalloon = new EmptyBalloon;
 
-module.exports = Glider;
+module.exports = Balloon;
