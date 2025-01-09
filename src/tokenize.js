@@ -6,6 +6,46 @@ const Bubble = { push, invert } =
 function tokenize(string) {
   let tokens, values;
 
+  function token(type, value) {
+    tokens = push(tokens, type);
+    values = push(values, value);
+  }
+
+  function tokenizeString() {
+    let m = string.match(/^"(.*)[^\\]"/);
+    token(Token.STRING, m[1]);
+    advance(m[0].length);
+  }
+
+  function tokenizeNumber() {
+    let m = string.match(/^\d+(?:\.\d+)?/);
+    token(Token.NUMBER, Number(m[0]));
+    advance(m[0].length);
+  }
+
+  function tokenizeSymbol() {
+    let m = string.match(/^([^\s()[\]]*)/);
+    token(Token.SYMBOL, m[0]);
+    advance(m[0].length);
+  }
+
+  function tokenizeKeyword() {
+    let i = string.indexOf(' ');
+    if (i < 1) {
+       i = string.indexOf(')');
+      if (i < 1)
+        i = string.length;
+    }
+    let value = string.slice(1, i);
+    token(Token.KEYWORD, value)
+    advance(i);
+  }
+
+  // Advances head along string by n characters.
+  function advance(n=1) {
+    string = string.slice(n);
+  }
+
   while (string[0]) {
     switch (string[0]) {
       case ' ':
@@ -21,7 +61,7 @@ function tokenize(string) {
       case '}':
       case '.':
       case "'":
-        token(this.head[0]);
+        token(string[0]);
         advance()
         break;
       case '"':
@@ -49,48 +89,7 @@ function tokenize(string) {
   }
   tokens = invert(tokens);
   values = invert(values);
-  return [this.tokens, this.values];
-}
-
-// Adds token type and value to the result.
-token(type, value) {
-  this.tokens = push(this.tokens, type);
-  this.values = push(this.values, value);
-}
-
-tokenizeString() {
-  let m = this.head.match(/^"(.*)[^\\]"/);
-  this.token(Token.STRING, m[1]);
-  this.advance(m[0].length);
-}
-
-tokenizeNumber() {
-  let m = this.head.match(/^\d+(?:\.\d+)?/);
-  this.token(Token.NUMBER, Number(m[0]));
-  this.advance(m[0].length);
-}
-
-tokenizeSymbol() {
-  let m = this.head.match(/^([^\s()[\]]*)/);
-  this.token(Token.SYMBOL, m[0]);
-  this.advance(m[0].length);
-}
-
-tokenizeKeyword() {
-  let i = this.head.indexOf(' ');
-  if (i < 1) {
-     i = this.head.indexOf(')');
-    if (i < 1)
-      i = this.head.length;
-  }
-  let value = this.head.slice(1, i);
-  this.token(Token.KEYWORD, value)
-  this.advance(i);
-}
-
-// Advances head along string by n characters.
-advance(n=1) {
-  this.head = this.head.slice(n);
+  return [tokens, values];
 }
 
 module.exports = tokenize;
