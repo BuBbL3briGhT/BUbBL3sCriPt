@@ -43,8 +43,10 @@ function itTokenizes(s, expected) {
     lexer.tokenize(s, function(err, tokens, values) {
       if (err)
         throw err;
-      assert.deepEqual(tokens, expected.tokens);
-      assert.deepEqual(values, expected.values);
+      let toks = invert(expected.tokens);
+      let vals = invert(expected.values);
+      assert.deepEqual(tokens, toks);
+      assert.deepEqual(values, vals);
     });
   });
 }
@@ -54,8 +56,10 @@ function itOnlyTokenizes(s, expected) {
     lexer.tokenize(s, function(err, tokens, values) {
       if (err)
         throw err;
-      assert.deepEqual(tokens, expected.tokens);
-      assert.deepEqual(values, expected.values);
+      let toks = invert(expected.tokens);
+      let vals = invert(expected.values);
+      assert.deepEqual(tokens, toks);
+      assert.deepEqual(values, vals);
     });
   });
 }
@@ -66,6 +70,8 @@ function itTokenizes2(desc, str, toks, vals) {
     lexer.tokenize(str, function(err, tokens, values) {
       if (err)
         throw err;
+      toks = invert(toks);
+      vals = invert(vals);
       assert.deepEqual(tokens, toks);
       assert.deepEqual(values, vals);
     });

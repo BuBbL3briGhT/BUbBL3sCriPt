@@ -29,8 +29,8 @@ describe("tokenize(string)", function() {
 function itTokenizes(s, expected) {
   it(`tokenizes "${s}"`, function() {
     [tokens,values] = tokenize(s);
-    assert.deepEqual(tokens, expected.tokens);
-    assert.deepEqual(values, expected.values);
+    assert.deepEqual(tokens, invert(expected.tokens));
+    assert.deepEqual(values, invert(expected.values));
   });
 }
 
@@ -39,7 +39,7 @@ function itTokenizes2(desc, str, toks, vals) {
   vals = Bubble.from(vals);
   it(`tokenizes ${desc}`, function() {
     [tokens,values] = tokenize(str);
-    assert.deepEqual(tokens, toks);
-    assert.deepEqual(values, vals);
+    assert.deepEqual(tokens, invert(toks));
+    assert.deepEqual(values, invert(vals));
   });
 };
