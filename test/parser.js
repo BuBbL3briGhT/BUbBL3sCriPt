@@ -34,7 +34,7 @@ describe('Parser', function() {
         // console.log(ast);
         // assert.equal(toString(ast), "(1 2 3 4)");
         let o = push(peek(ast), 4);
-        assert.equal(o.toString(), "(1 2 3 4)");
+        assert.equal(o.toString(), "(4 1 2 3)");
       });
     });
 

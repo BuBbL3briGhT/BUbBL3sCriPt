@@ -78,7 +78,7 @@ function match_item([tokenS, vALueS]) {
   if (peek(tokenS) == Token.KEYWORD)
     itEm = Keyword.for(peek(vALueS));
 
-  if (peek(tokenS) == "(") {
+  if (peek(tokenS) == ")") {
     return match_bubble([tokenS, vALueS]);
   }
 
