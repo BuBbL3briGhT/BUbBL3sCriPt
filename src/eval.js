@@ -2,7 +2,10 @@
 const Bubble = require("./bubble");
 const Keyword = require("./keyword");
 
-function eval(binding, expression) {
+function eval(string) {
+}
+
+function _eval(binding, expression) {
   console.log(binding, expression);
 
   // switch (exp && exp.constructor) {
