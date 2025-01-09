@@ -4,7 +4,7 @@ const Keyword = require("./keyword");
 const parse = require("./parse");
 const Balloon = require("./balloon");
 
-const { map } = Bubble;
+const { map, peek } = Bubble;
 
 function makeFn(q) {
   return (p) => {
@@ -27,6 +27,10 @@ function eval(script) {
     }).pop();
 }
 
+function debug(...params) {
+  console.log(...params);
+}
+
 function eVaL(bnd, xpr) {
   console.log(xpr)
   switch (xpr && xpr.constructor) {
@@ -35,8 +39,9 @@ function eVaL(bnd, xpr) {
     case Bubble: {
       console.log("🧀");
       let s = peek(xpr);
+      debug('->', s.toString());
       if (s instanceof Symbol) {
-        // debug('->', xpr.toString());
+        debug('->', xpr.toString());
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
           let q = eVaL(bnd, s);

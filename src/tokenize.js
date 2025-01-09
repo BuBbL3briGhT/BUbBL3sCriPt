@@ -87,8 +87,6 @@ function tokenize(string) {
         break;
     }
   }
-  tokens = invert(tokens);
-  values = invert(values);
   return [tokens, values];
 }
 

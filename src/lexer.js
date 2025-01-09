@@ -51,8 +51,6 @@ class Lexer {
             break;
         }
       }
-      this.tokens = invert(this.tokens);
-      this.values = invert(this.values);
     } catch (error) {
       return callback(error);
     }
