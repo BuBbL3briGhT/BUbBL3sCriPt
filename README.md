@@ -1,5 +1,5 @@
 Functional programming just got a little
-cooler. [🐮🔔](https://youtu.be/cVsQLlk-T0s]
+cooler. [🐮🔔](https://youtu.be/cVsQLlk-T0s)
 
 ## Donations Welcome ##
 
