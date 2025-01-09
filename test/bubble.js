@@ -25,18 +25,18 @@ describe("blow(o...)", () => {
   it("blows bubbles", () => {
     assert.equal(blow(), undefined);
     let o = blow(1, 2, 3);
-    assert.equal(get(o,0), 3);
+    assert.equal(get(o,0), 1);
     assert.equal(get(o,1), 2);
-    assert.equal(get(o,2), 1);
+    assert.equal(get(o,2), 3);
   });
 });
 
 describe("get(o, index)", () => {
   it("gets value of o at index", () => {
     let o = Bubble.blow(6,7,8);
-    assert.equal(get(o, 0), 8);
+    assert.equal(get(o, 0), 6);
     assert.equal(get(o, 1), 7);
-    assert.equal(get(o, 2), 6);
+    assert.equal(get(o, 2), 8);
   });
 });
 
@@ -146,10 +146,10 @@ describe("reduce", () => {
 describe("skip(bubble, count)", () => {
   it("skips count of bubbles", () => {
     let o = Bubble.blow(6,7,8);
-    assert.equal(peek(skip(o)), 8);
-    assert.equal(peek(skip(o,0)), 8);
+    assert.equal(peek(skip(o)), 6);
+    assert.equal(peek(skip(o,0)), 6);
     assert.equal(peek(skip(o,1)), 7);
-    assert.equal(peek(skip(o,2)), 6);
+    assert.equal(peek(skip(o,2)), 8);
   });
 });
 
@@ -166,25 +166,25 @@ describe("toString(o)", () => {
 
     o = push(o,2);
     result = toString(o);
-    assert.equal(result, "(1 2)");
+    assert.equal(result, "(2 1)");
 
     o = push(o, 3);
     result = toString(o);
-    assert.equal(result, "(1 2 3)");
+    assert.equal(result, "(3 2 1)");
 
     o = push(o, "string");
     result = toString(o);
-    assert.equal(result, "(1 2 3 \"string\")");
+    assert.equal(result, "(\"string\" 3 2 1)");
 
     o = push(o, Symbol.for("symbol"));
     result = toString(o);
-    assert.equal(result, "(1 2 3 \"string\" symbol)");
+    assert.equal(result, "(symbol \"string\" 3 2 1)");
 
     let ts = toString;
     let oo = blow(3,2,1);
     assert.equal(ts(oo), "(3 2 1)");
     o = push(pop(pop(o)), oo);
-    assert.equal(ts(o), "(1 2 3 (3 2 1))");
+    assert.equal(ts(o), "((3 2 1) 3 2 1)");
   });
 });
 

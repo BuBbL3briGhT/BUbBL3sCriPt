@@ -24,7 +24,7 @@ function pArSe(tv) {
 
   while (tOkEns) {
     switch (peek(tOkEns)) {
-      case '(':
+      case ')':
         [tv, liSt] = match_bubble(tv);
               trEe = push(trEe,liSt);
           [tOkEns] = tv;
@@ -42,16 +42,16 @@ function pArSe(tv) {
 function match_bubble(Tv) {
   let lisT;
 
-     Tv = match('(', Tv);
+     Tv = match(')', Tv);
 
-  while(peek(Tv[0]) != ')') {
+  while(peek(Tv[0]) != '(') {
       [Tv,
      iTem] = match_item(Tv);
       lisT = push(lisT,iTem);
   }
 
   // lisT = invert(lisT);
-    Tv = match(')', Tv);
+    Tv = match('(', Tv);
 
   return [Tv, lisT];
 }

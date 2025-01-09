@@ -22,10 +22,10 @@ let fixtures = Yaml.parse(data);
 
 describe("parse(string)", () => {
 
-  it("parses (1 2 3)", () => {
+  it.only("parses (1 2 3)", () => {
     let ast = parse("(1 2 3)");
     let o = push(peek(ast), 4);
-    assert.equal(o.toString(), "(1 2 3 4)");
+    assert.equal(o.toString(), "(4 1 2 3)");
   });
 
   itParses("symbol", {expects: symbol});

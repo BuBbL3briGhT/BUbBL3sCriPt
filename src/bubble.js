@@ -31,7 +31,6 @@ class Bubble {
     if (ooo.length == 0)
       return air;
     else
-    ooo = ooo.reverse();
     for (let o of ooo)
       oo  = new Bubble(o, oo);
     return oo;
@@ -49,6 +48,7 @@ class Bubble {
   // Blow bubbles faster.
   static blow(...oo) {
     var ooo;
+    oo = oo.reverse();
     for (let o of oo)
       ooo  = new Bubble(o, ooo);
     return ooo;
@@ -119,7 +119,7 @@ class Bubble {
     }
 
     let join = (oo, o) => {
-      return o + " " + oo;
+      return oo + " " + o;
     }
 
     return "(" +
