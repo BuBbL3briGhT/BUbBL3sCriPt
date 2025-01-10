@@ -14,3 +14,5 @@ class Macro {
     return invoke(bnd, this, args);
   }
 }
+
+module.exports = Macro;

@@ -3,6 +3,8 @@ const Bubble = require("./bubble");
 const Keyword = require("./keyword");
 const parse = require("./parse");
 const Balloon = require("./balloon");
+const Fn = require("./fn");
+const Macro = require("./macro");
 
 const { map, peek } = Bubble;
 
@@ -32,16 +34,23 @@ function debug(...params) {
 }
 
 function eVaL(bnd, xpr) {
-  console.log(xpr)
+  // console.log(xpr)
   switch (xpr && xpr.constructor) {
     case Symbol:
       return xpr.resolve(bnd)
     case Bubble: {
-      console.log("🧀");
+      // console.log("🧀");
       let s = peek(xpr);
-      debug('->', s.toString());
+      debug('->', s instanceof Symbol);
       if (s instanceof Symbol) {
-        debug('->', xpr.toString());
+      // if (typeof s == "symbol") {
+        // debug('->', xpr.toString());
+        // debug('->', s.callPattern);
+        // let q = eVaL(bnd, s);
+        // if (q != s)
+        //   return eVaL(bnd,
+        //     push(pop(xpr), q));
+
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
           let q = eVaL(bnd, s);

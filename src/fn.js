@@ -19,3 +19,5 @@ class Fn {
       .toString()
   }
 }
+
+module.exports = Fn;
