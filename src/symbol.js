@@ -44,6 +44,10 @@ class Symbol {
     return r;
   }
 
+  static for(key) {
+    return new Symbol(key);
+  }
+
 }
 
 module.exports = Symbol;

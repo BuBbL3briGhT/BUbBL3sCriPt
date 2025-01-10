@@ -6,6 +6,7 @@ const parse = require("../src/parse");
 const   Bubble = require("../src/bubble");
 const Keyword = require("../src/keyword");
 const {type} = require("../src/fns");
+const Symbol = require("../src/symbol");
 
 const { peek, pop } = Bubble;
 
