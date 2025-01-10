@@ -5,8 +5,11 @@ const parse = require("./parse");
 const Balloon = require("./balloon");
 const Fn = require("./fn");
 const Macro = require("./macro");
+const Symbol = require("./symbol");
+// const Symbobl = require("./symbobl");
+const Quoted = require("./quoted");
 
-const { map, peek } = Bubble;
+const { map, peek, pop, push } = Bubble;
 
 function makeFn(q) {
   return (p) => {
@@ -17,6 +20,7 @@ function makeFn(q) {
 
 const rootBinding = {
   "+": makeFn(([a,[b]]) => {
+    console.log(a, b);
     return a+b
   })
 }
@@ -26,7 +30,7 @@ function eval(script) {
   return parse(script)
     .map(function(expression) {
       return eVaL(rootBinding, expression);
-    }).pop();
+    }).peek();
 }
 
 function debug(...params) {
@@ -37,6 +41,7 @@ function eVaL(bnd, xpr) {
   // console.log(xpr)
   switch (xpr && xpr.constructor) {
     case Symbol:
+      // debug('->', xpr.resolve(bnd));
       return xpr.resolve(bnd)
     case Bubble: {
       // console.log("🧀");
@@ -50,7 +55,6 @@ function eVaL(bnd, xpr) {
         // if (q != s)
         //   return eVaL(bnd,
         //     push(pop(xpr), q));
-
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
           let q = eVaL(bnd, s);

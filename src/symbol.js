@@ -40,6 +40,7 @@ class Symbol {
   resolve(bnd) {
     var r = this.resolveRoot(bnd)
     if (r) r = r[this.fn];
+    console.log('->', r);
     return r;
   }
 
