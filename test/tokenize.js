@@ -1,9 +1,14 @@
 const assert = require("assert");
 const tokenize = require("../src/tokenize");
 const Token = require("../src/token");
-const Bubble = { blow } = require("../src/bubble");
+const Bubble = { blow, peek } = require("../src/bubble");
 
 describe("tokenize(string)", function() {
+  specify("symbols may include dots", function () {
+    let [t,v] = tokenize("console.log");
+    assert.equal(peek(t), Token.SYMBOL);
+    assert.equal(peek(v), "console.log");
+  });
   itTokenizes("symbol",
     { tokens: blow(Token.SYMBOL),
       values: blow("symbol")});
