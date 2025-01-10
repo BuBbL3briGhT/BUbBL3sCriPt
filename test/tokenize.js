@@ -11,7 +11,7 @@ describe("tokenize(string)", function() {
     assert.equal(peek(v), "console.log");
   });
 
-  it.only("tokenizes string", function () {
+  it("tokenizes string", function () {
     let [t,v] = tokenize('"Hola Berenjena"');
     assert.equal(peek(t), Token.STRING);
     assert.equal(peek(v), "Hola Berenjena");

@@ -6,7 +6,7 @@ describe("eval(script)", function () {
   it("evaluates bubblescript", function () {
     assert.equal(eval("(+ 45 87)"), 132);
   });
-  it.only("can console.log", function () {
+  it("can console.log", function () {
     eval('(console.log "Bonjour Marbre")');
   });
 });
