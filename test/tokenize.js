@@ -4,11 +4,19 @@ const Token = require("../src/token");
 const Bubble = { blow, peek } = require("../src/bubble");
 
 describe("tokenize(string)", function() {
+
   specify("symbols may include dots", function () {
     let [t,v] = tokenize("console.log");
     assert.equal(peek(t), Token.SYMBOL);
     assert.equal(peek(v), "console.log");
   });
+
+  it.only("tokenizes string", function () {
+    let [t,v] = tokenize('"Hola Berenjena"');
+    assert.equal(peek(t), Token.STRING);
+    assert.equal(peek(v), "Hola Berenjena");
+  });
+
   itTokenizes("symbol",
     { tokens: blow(Token.SYMBOL),
       values: blow("symbol")});

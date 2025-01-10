@@ -12,7 +12,7 @@ function tokenize(string) {
   }
 
   function tokenizeString() {
-    let m = string.match(/^"(.*)[^\\]"/);
+    let m = string.match(/^"((?:[^\\"]|\\.)*)"/);
     token(Token.STRING, m[1]);
     advance(m[0].length);
   }

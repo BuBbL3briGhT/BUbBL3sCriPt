@@ -286,11 +286,11 @@ function eVaL(bnd, xpr) {
             //   function(a) {
             //     return eVaL(bnd, a)
             //   }).toArray())
-            console.log(xpr.rest);
-            console.log(toArray(map(xpr.rest,
-              function(a) {
-                return eVaL(bnd, a);
-              })));
+            // console.log(xpr.rest);
+            // console.log(toArray(map(xpr.rest,
+            //   function(a) {
+            //     return eVaL(bnd, a);
+            //   })));
             return q[s.fn](...toArray(map(xpr.rest,
               function(a) {
                 return eVaL(bnd, a);
