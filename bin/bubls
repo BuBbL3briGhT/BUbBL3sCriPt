@@ -11,6 +11,10 @@ const rl = readline.createInterface({
 function r3pL() {
   rl.question("%< ", (xoxo) => {
     try {
+      if (xoxo == ".exit") {
+        rl.close();
+        return;
+      }
       console.log(bubls.eval(xoxo));
     } catch (error) {
       console.log(error);
