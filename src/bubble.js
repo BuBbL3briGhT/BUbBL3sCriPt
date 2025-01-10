@@ -13,11 +13,11 @@ class Bubble {
   // };
 
   get x() { return false; }
-  // get first() { return peek(this); }
-  // get rest() { return pop(this); }
-  // get next() { return this.oo.o; }
-  // get last() { return this.oo ?
-  //     this.oo.last : this.o; }
+  get first() { return peek(this); }
+  get rest() { return pop(this); }
+  get next() { return peek(pop(this)); }
+  get last() { return pop(this) ?
+      pop(this).last : peek(this); }
 
   // Blow a bubble.
   constructor(o, oo) {
@@ -128,8 +128,8 @@ class Bubble {
   }
 
   static toArray(o) {
-    return reduce((oo, o) => {
-      oo.push(o); }, []);
+    return reduce(o, (oo, o) => {
+      oo.push(o); return oo; }, []);
   }
 
   static map(o, fn) {

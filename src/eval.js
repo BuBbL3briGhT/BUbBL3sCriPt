@@ -9,7 +9,7 @@ const Symbol = require("./symbol");
 // const Symbobl = require("./symbobl");
 const Quoted = require("./quoted");
 
-const { map, peek, pop, push } = Bubble;
+const { map, peek, pop, push, toArray } = Bubble;
 
 function mkfn(q) {
   return (p) => {
@@ -277,15 +277,24 @@ function eVaL(bnd, xpr) {
         } else /* send */ {
           // call pattern 2
           // x.x or x.x.x or x.x...
-          let q = resolveRoot(bnd, s)
+          let q = s.resolveRoot(bnd)
           if (!xpr.rest) {
             return q[s.fn]()
           }
           try {
-            return q[s.fn](...xpr.rest.map(
+            // return q[s.fn](...xpr.rest.map(
+            //   function(a) {
+            //     return eVaL(bnd, a)
+            //   }).toArray())
+            console.log(xpr.rest);
+            console.log(toArray(map(xpr.rest,
               function(a) {
-                return eVaL(bnd, a)
-              }).toArray())
+                return eVaL(bnd, a);
+              })));
+            return q[s.fn](...toArray(map(xpr.rest,
+              function(a) {
+                return eVaL(bnd, a);
+              })));
           } catch (e) {
             console.log(s.fn);
             throw e;
