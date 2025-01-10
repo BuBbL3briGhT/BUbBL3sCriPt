@@ -20,8 +20,7 @@ function makeFn(q) {
 
 const rootBinding = {
   "+": makeFn(([a,[b]]) => {
-    console.log(a, b);
-    return a+b
+    return a+b;
   })
 }
 
@@ -46,7 +45,7 @@ function eVaL(bnd, xpr) {
     case Bubble: {
       // console.log("🧀");
       let s = peek(xpr);
-      debug('->', s instanceof Symbol);
+      // debug('->', s instanceof Symbol);
       if (s instanceof Symbol) {
       // if (typeof s == "symbol") {
         // debug('->', xpr.toString());

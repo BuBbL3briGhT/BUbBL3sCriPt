@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 
 const readline = require('readline'),
-      Bubblescript = require('../lib/bubblescript');
-
-const bubls = new Bubblescript()
+      bubls = require('../src/bubblescript');
 
 const rl = readline.createInterface({
   input: process.stdin,
