@@ -11,7 +11,7 @@ const Quoted = require("./quoted");
 
 const { map, peek, pop, push } = Bubble;
 
-function makeFn(q) {
+function mkfn(q) {
   return (p) => {
     return q.call(this,
       p.map(m => eVaL(this, m)))
@@ -28,14 +28,14 @@ const rootBinding = {
 
   muf: function([key,[val]]) {
     return binding[key.toString()]
-      = evl(this, val);
+      = eVaL(this, val);
   },
 
   send: function([car, driver]) {
     var binding = this,
-      car = evl(binding, car),
+      car = eVaL(binding, car),
       driver = driver.map(function(a) {
-                     return evl(binding, a) });
+                     return eVaL(binding, a) });
 
     if (driver.tail) {
       return car[driver.head](...driver.tail.toArray());
@@ -43,7 +43,7 @@ const rootBinding = {
       return car[driver.head]();
   },
 
-  send: makeFn(function([car, driver]) {
+  send: mkfn(function([car, driver]) {
     if (driver.tail) {
       // console.log(driver.head)
       return car[driver.head](...driver.tail.toArray());
@@ -54,7 +54,7 @@ const rootBinding = {
   get: function(args) {
     var binding = this
     return args.map(function(a) {
-        return evl(binding, a);
+        return eVaL(binding, a);
       })
       .reduce(function(a, b) {
         if (a) {
@@ -64,7 +64,7 @@ const rootBinding = {
         }
       });
   },
-  get: makeFn(function(args) {
+  get: mkfn(function(args) {
      return args.reduce(
         (a,b) => a ? a[b] : b);
   }),
@@ -74,12 +74,12 @@ const rootBinding = {
     binding = this;
     [ca,[nd,[y]]] = crunch
       .map(function(q) {
-        return evl(binding, q);
+        return eVaL(binding, q);
       });
     return ca[nd] = y;
   },
 
-  export: makeFn(function([ca,[nd,[y]]]) {
+  export: mkfn(function([ca,[nd,[y]]]) {
     return ca[nd] = y;
   }),
 
@@ -96,7 +96,7 @@ const rootBinding = {
   jsfn: function(args) {
     var x, binding = this
     x = args.push(new Symbol('fn'));
-    var fn = evl(binding, x);
+    var fn = eVaL(binding, x);
     return function(...args) {
       return fn.call(binding, arry.toList(args));
     }
@@ -107,8 +107,8 @@ const rootBinding = {
     x = x.reverse();
     debug('let', x.toString());
     while (!x.isEmpty) { let k,w; [k,[w,x]] = x;
-      binding[k] = evl(binding, w); }
-    return xx.each(z => evl(binding, z));
+      binding[k] = eVaL(binding, w); }
+    return xx.each(z => eVaL(binding, z));
   },
 
   loop: function([x,xx]) {
@@ -121,12 +121,12 @@ const rootBinding = {
     console.log('loop', x.toString());
     while (!x.isEmpty) { let k,v; [k,[v,x]] = x;
       keys = keys.push(k);
-      binding[k] = evl(binding, v); }
+      binding[k] = eVaL(binding, v); }
 
     // keys = keys.reverse()
     console.log('loop keys', keys);
 
-    binding.recur = makeFn(function(a) {
+    binding.recur = mkfn(function(a) {
       var b = keys,
         c = Object.create(binding);
       a = a.reverse();
@@ -142,7 +142,7 @@ const rootBinding = {
 
     do {
       recurCalled = false;
-      m = xx.each(z => evl(cnd, z));
+      m = xx.each(z => eVaL(cnd, z));
       if (recurCalled) {
         cnd = m;
       }
@@ -154,7 +154,7 @@ const rootBinding = {
     var turbulance = rainbows.peek(),
       kango = rainbows.pop(),
       binding = this,
-      elves = evl;
+      elves = eVaL;
 
     if (elves(binding, turbulance)) {
       return elves(binding, kango.peek());
@@ -167,13 +167,13 @@ const rootBinding = {
     }
   },
   if: function([c,[t,[f]]]) {
-    return evl(this, evl(this, c) ? t : f);
+    return eVaL(this, eVaL(this, c) ? t : f);
   },
   unless: function([u,[v,[w]]]) {
-    return evl(this,!evl(this,u)?v:w);
+    return eVaL(this,!eVaL(this,u)?v:w);
   },
 
-  print: makeFn(function(vals) {
+  print: mkfn(function(vals) {
     return vals.each(function(value) {
       document.body.append(value);
     });
@@ -183,55 +183,55 @@ const rootBinding = {
   list: function(args) {
     var binding = this;
     return args.reverse().map(function(arg) {
-      return evl(binding, arg);
+      return eVaL(binding, arg);
     }).reverse();
   },
-  "+": makeFn(function([a,[b]]) {
+  "+": mkfn(function([a,[b]]) {
     return a+b;
   }),
-  "-": makeFn(function([a,[b]]) {
+  "-": mkfn(function([a,[b]]) {
     return a-b;
   }),
-  "*": makeFn(function([a,[b]]) {
+  "*": mkfn(function([a,[b]]) {
     return a*b;
   }),
-  "/": makeFn(function([a,[b]]) {
+  "/": mkfn(function([a,[b]]) {
     return a/b;
   }),
-  "=": makeFn(function([a,[b]]) {
+  "=": mkfn(function([a,[b]]) {
     return a == b;
   }),
-  not: makeFn(function([y]) {
+  not: mkfn(function([y]) {
     return !y;
   }),
-  and: makeFn(function([a,[b]]) {
+  and: mkfn(function([a,[b]]) {
     return a && b;
   }),
-  or: makeFn(function([a,[b]]) {
+  or: mkfn(function([a,[b]]) {
     return a || b;
   }),
-  '>': makeFn(function([xx,[x]]) {
+  '>': mkfn(function([xx,[x]]) {
     return xx > x;
   }),
-  '<': makeFn(function([a,[b]]) {
+  '<': mkfn(function([a,[b]]) {
     return a < b;
   }),
   blert: function(msgs) {
     alert(this.concat(msgs));
   },
-  parse: makeFn(function([fierce]) {
+  parse: mkfn(function([fierce]) {
     return bubbleParse(fierce);
   }),
-  evl: makeFn(function([v]) {
-    return evl(this, v[0]);
+  eVaL: mkfn(function([v]) {
+    return eVaL(this, v[0]);
   }),
-  concat: makeFn(function(eeks) {
+  concat: mkfn(function(eeks) {
     return eeks.join('');
   }),
   expandmacro: function([m,n]) {
-    return evl(this,m).expand(this, n);
+    return eVaL(this,m).expand(this, n);
   },
-  "new": makeFn(function([m,n]) {
+  "new": mkfn(function([m,n]) {
       return new m(...n.toArray());
   })
 }
