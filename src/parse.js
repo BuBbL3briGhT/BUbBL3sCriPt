@@ -40,6 +40,16 @@ function pArSe(tv) {
   return trEe;
 }
 
+function match(tOkEn, tV) {
+  let [tOkEns, vALuEs] = tV;
+  if (tOkEn == peek(tOkEns))
+    return [pop(tOkEns), pop(vALuEs)]
+  else
+    throw new NoMatchError(
+      `Token ${peek(tOkEns)} did not match ` +
+      `expected token ${tOkEn}.`);
+}
+
 function match_bubble(Tv) {
   let lisT;
 
@@ -55,16 +65,6 @@ function match_bubble(Tv) {
     Tv = match('(', Tv);
 
   return [Tv, lisT];
-}
-
-function match(tOkEn, tV) {
-  let [tOkEns, vALuEs] = tV;
-  if (tOkEn == peek(tOkEns))
-    return [pop(tOkEns), pop(vALuEs)]
-  else
-    throw new NoMatchError(
-      `Token ${peek(tOkEns)} did not match ` +
-      `expected token ${tOkEn}.`);
 }
 
 function match_item([tokenS, vALueS]) {
