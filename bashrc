@@ -1,4 +1,4 @@
-
+alias hi="echo hello"
 
 alias gs="git status"
 alias gd="git diff"
@@ -40,5 +40,5 @@ export EDITOR=vi
 #   $
 alias swapfiles='find . -type f -name ".*.s??"'
 
-
+alias bashrc='vi ~/.bashrc && source ~/.bashrc'
 

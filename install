@@ -2,4 +2,5 @@
 
 ROOT=$(cd $(dirname $0); pwd -P)
 
-ln -s $ROOT/vimrc ~/.vimrc 
+ln -s $ROOT/vimrc ~/.vimrc
+ln -s $ROOT/bashrc ~/.bashrc
