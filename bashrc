@@ -15,8 +15,6 @@ alias 🍉="git commit -m🍉"
 alias 🍫="git commit -m🍫"
 alias gc="git commit -m"
 
-alias td="vi ~/.todo"
-
 alias j=jobs
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
@@ -40,5 +38,16 @@ export EDITOR=vi
 #   $
 alias swapfiles='find . -type f -name ".*.s??"'
 
+# Edit ~/.bashrc and source it.
 alias bashrc='vi ~/.bashrc && source ~/.bashrc'
 
+# Edit todos
+#
+# Usage:
+#
+#   $ td    # Edit .todo in current directory
+#   $ td ~  # Edit ~/.todo
+#   $ td .. # Edit ../.todo
+function td() {
+  ${EDITOR:-nano} "${@:-.}/.todo"
+}
