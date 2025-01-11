@@ -44,11 +44,11 @@ const rootBinding = {
   },
 
   send: mkfn(function([car, driver]) {
-    if (driver.tail) {
+    if (pop(driver)) {
       // console.log(driver.head)
-      return car[driver.head](...driver.tail.toArray());
+      return car[peek(driver)](...toArray(pop(driver)));
     } else
-      return car[driver.head]();
+      return car[peek(driver)]();
   }),
 
   get: function(args) {

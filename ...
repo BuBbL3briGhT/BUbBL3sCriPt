@@ -1,9 +1,14 @@
 # Notes and Todos
 
+♡ <leader>f "function () {|}"
+♡ fix notebox
+♡ <leader>o open block
+
+
 ## Parser/Lexer error handeling
-- Add error handeling to Lexer#tokenize,
+♡ Add error handeling to Lexer#tokenize,
   pass error to callback as first object
-- Add error handeling to Parser#parse.
+♡ Add error handeling to Parser#parse.
   pass error to callback as first object
-- Add tests for each case.
+♡ Add tests for each case.
 
