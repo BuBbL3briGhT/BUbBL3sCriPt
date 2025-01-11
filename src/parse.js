@@ -61,21 +61,18 @@ function match_bubble(Tv) {
       lisT = push(lisT,iTem);
   }
 
-  // lisT = invert(lisT);
     Tv = match('(', Tv);
 
   return [Tv, lisT];
 }
 
 function match_item([tokenS, vALueS]) {
-  // console.log(tokenS.peek(), vALueS.peek());
   let itEm;
   if (peek(tokenS) == Token.NUMBER)
     itEm = peek(vALueS);
 
   if (peek(tokenS) == Token.SYMBOL)
-    // itEm = Symbol.for(peek(vALueS));
-    itEm = new Symbol(peek(vALueS));
+    itEm = Symbol.for(peek(vALueS));
 
   if (peek(tokenS) == Token.KEYWORD)
     itEm = Keyword.for(peek(vALueS));
