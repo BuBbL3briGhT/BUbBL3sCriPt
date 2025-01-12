@@ -78,8 +78,8 @@ class Bubble {
     return new Bubble(o,oo);
   }
 
-  static peek(o) { return o.o; }
-  static pop(o) { return o.oo; }
+  static peek(o) { return o && o.o; }
+  static pop(o) { return o && o.oo; }
 
   static count(o) {
     return reduce(o, (count) => {

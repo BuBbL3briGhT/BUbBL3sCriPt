@@ -11,6 +11,15 @@ describe("tokenize(string)", function() {
     assert.equal(peek(v), "console.log");
   });
 
+  it("eats comments", function () {
+    let [t,v] = tokenize("# Hamilton Burger");
+    assert.equal(peek(t), undefined);
+    assert.equal(peek(v), undefined);
+    [t,v] = tokenize("# 🍔4\ncop");
+    assert.equal(peek(t), "Y");
+    assert.equal(peek(v), "cop");
+  });
+
   it("tokenizes string", function () {
     let [t,v] = tokenize('"Hola Berenjena"');
     assert.equal(peek(t), Token.STRING);

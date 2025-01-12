@@ -29,6 +29,15 @@ function tokenize(string) {
     advance(m[0].length);
   }
 
+  function eatComment() {
+    let i = string.indexOf("\n");
+    if (i > -1) {
+      advance(i);
+    } else {
+      advance(string.length+1);
+    }
+  }
+
   function tokenizeKeyword() {
     let i = string.indexOf(' ');
     if (i < 1) {
@@ -81,6 +90,9 @@ function tokenize(string) {
         break;
       case ':':
         tokenizeKeyword();
+        break;
+      case '#':
+        eatComment();
         break;
       default:
         tokenizeSymbol();
