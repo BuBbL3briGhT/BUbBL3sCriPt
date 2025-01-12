@@ -1,3 +1,4 @@
+const fs = require('fs');
 
 const Bubblescript = {
     Bubble: require("./bubble"),
@@ -11,5 +12,9 @@ const Bubblescript = {
      parse: require("./parse"),
       eval: require("./eval")
 };
+
+Bubblescript.loadFile = function (path) {
+  return Bubblescript.eval(fs.readFileSync(path, 'utf-8'))
+}
 
 module.exports = Bubblescript;
