@@ -1,3 +1,5 @@
 ## 2025-01-11 ##
 - parse quote
 - run scripts with bin/bubls
+- pipe into bubls
+    cat sunshine | bin/bubls
