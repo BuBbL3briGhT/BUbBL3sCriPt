@@ -1,26 +1,52 @@
 #!/usr/bin/env node
+'use strict'
 
-const readline = require('readline'),
-      bubls = require('../src/bubblescript');
+const bubls = require('../src/bubblescript');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+let path = process.argv[2];
 
-function r3pL() {
-  rl.question("%< ", (xoxo) => {
+if (path) {
+
+  const fs = require('fs');
+
+  fs.readFile(path, 'utf-8', function (error, xoxo) {
+    if (error) {
+      console.log(error);
+      return;
+    }
     try {
-      if (xoxo == ".exit") {
-        rl.close();
-        return;
-      }
-      console.log(bubls.eval(xoxo));
+      bubls.eval(xoxo);
     } catch (error) {
       console.log(error);
     }
-    r3pL();
   });
+
+} else {
+
+  const readline = require('readline');
+
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  function r3pL() {
+    rl.question("%< ", (xoxo) => {
+      try {
+        if (xoxo == ".exit") {
+          rl.close();
+          return;
+        }
+        console.log(bubls.eval(xoxo));
+      } catch (error) {
+        console.log(error);
+      }
+      r3pL();
+    });
+  }
+
+  r3pL(); /* StaRt r3pL */
+
 }
 
-r3pL(); /* StaRt r3pL */
+
