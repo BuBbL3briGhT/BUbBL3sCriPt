@@ -5,7 +5,7 @@ alias gd="git diff"
 alias gdc="git diff --cached"
 alias gp="git push"
 alias ga="git add"
-alias gl="git log"
+alias gl="git log --oneline"
 alias aa="git add . && git status"
 alias s="git status"
 alias p="cd ~/projects"
@@ -51,3 +51,7 @@ alias bashrc='vi ~/.bashrc && source ~/.bashrc'
 function td() {
   ${EDITOR:-nano} "${@:-.}/.todo"
 }
+
+PS1="\[\e[0;95m\]\W\[\e[0m\] \[\e[1;35m\]\$\[\e[0m\] "
+# LS_COLORS='di=0;97:fi=1:97:' ; export LS_COLORS
+LS_COLORS=':di=0;95:' ; export LS_COLORS
