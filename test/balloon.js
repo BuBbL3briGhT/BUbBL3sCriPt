@@ -19,7 +19,20 @@ describe("Balloon", function() {
     });
   });
 
+  describe("#peek", function () {
+    it("peeks at the contents of the balloon", function () {
+      let balloon = Balloon.inflate(1);
+      assert.equal(balloon.peek(), 1);
+    });
+  });
+
   describe(".inflate", function () {
+
+    it("inflate balloons", function () {
+      let balloon = Balloon.inflate(1);
+      assert.equal(balloon.peek(), 1);
+    });
+
     when("called with no parameters", function () {
       it("returns an empty balloon", function () {
         let balloon = Balloon.inflate();
