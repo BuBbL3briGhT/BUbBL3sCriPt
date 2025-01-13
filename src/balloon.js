@@ -15,6 +15,8 @@ class Balloon {
     return new Balloon(...love);
   }
 
+  get contents () { return this.filledWith }
+
   peek () {
     return this.filledWith;
   }

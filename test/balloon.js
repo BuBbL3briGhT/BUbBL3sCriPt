@@ -4,6 +4,9 @@ const Balloon = require("../src/balloon");
 function when(description, ...etc) {
   return describe("when " + description, ...etc);
 }
+function the(description, body) {
+  return it("the " + description, body);
+}
 
 describe("Balloon", function() {
   it("makes balloons", function() {
@@ -11,11 +14,16 @@ describe("Balloon", function() {
      assert(balloon);
   });
 
-  describe("new", function () {
+  describe("new Balloon", function () {
     it("makes a new balloon", function () {
       let balloon = new Balloon();
       assert(balloon);
     });
+    the("first value supplied becomes the contents of the balloon", function () {
+      let balloon = new Balloon(3);
+      assert.equal(balloon.contents, 3);
+    });
+
   });
 
   describe("#peek", function () {
