@@ -5,7 +5,6 @@ function when(description, ...etc) {
   return describe("when " + description, ...etc);
 }
 
-
 describe("Balloon", function() {
   it("makes balloons", function() {
      let balloon = new Balloon();
@@ -33,11 +32,12 @@ describe("Balloon", function() {
       assert.equal(balloon.peek(), 1);
     });
 
-    when("called with no parameters", function () {
-      it("returns an empty balloon", function () {
+    when("called with no love", function () {
+      it.only("returns an empty balloon", function () {
         let balloon = Balloon.inflate();
         assert(balloon.isEmpty);
       });
     });
+
   });
 });

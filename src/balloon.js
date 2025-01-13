@@ -1,4 +1,8 @@
 
+function no (love) {
+  return love.length == 0;
+}
+
 class Balloon {
   constructor(...love) {
     this.filledWith = love;
@@ -7,6 +11,7 @@ class Balloon {
   get isEmpty () { return this instanceof EmptyBalloon }
 
   static inflate (...love) {
+    if (no(love)) return emptyBalloon;
     return new Balloon(...love);
   }
 
@@ -16,6 +21,7 @@ class Balloon {
 }
 
 class EmptyBalloon extends Balloon { }
+const emptyBalloon = new EmptyBalloon();
 
 module.exports = Balloon;
 
