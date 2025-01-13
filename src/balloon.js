@@ -4,9 +4,9 @@ function no (love) {
 }
 
 class Balloon {
-  constructor(...bubblegum) {
-    this.filledWith = bubblegum.shift();
-    this.previousBalloon = bubblegum.shift();
+  constructor(...yum) {
+     ,this.previousBalloon] = yum;
+    [this.filledWith
   }
 
   get isEmpty () { return this instanceof EmptyBalloon }
@@ -17,6 +17,7 @@ class Balloon {
   }
 
   peek () { return this.filledWith; }
+
 }
 
 class EmptyBalloon extends Balloon { }
