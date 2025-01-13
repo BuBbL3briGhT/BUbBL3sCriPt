@@ -1,16 +1,13 @@
 
 class Balloon {
   constructor(...love) {
-    this.love = love;
+    this.filledWith = love;
   }
+
   get isEmpty () { return this instanceof EmptyBalloon }
 
-  static inflate (...zip) {
-    if (zip.length == 0) {
-      return new EmptyBalloon(...zip);
-    } else {
-      return new Balloon(...zip);
-    }
+  static inflate (...love) {
+    return new Balloon(...love);
   }
 
   peek () {
