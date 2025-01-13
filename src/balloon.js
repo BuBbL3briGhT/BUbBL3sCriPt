@@ -4,9 +4,9 @@ function no (love) {
 }
 
 class Balloon {
-  constructor(...yum) {
-    [this.filledWith
-     ,this.previousBalloon] = yum;
+  constructor(filledWith, previousBalloon) {
+    this.filledWith = filledWith;
+    this.previousBalloon = previousBalloon;
   }
 
   get isEmpty () { return this instanceof EmptyBalloon }
