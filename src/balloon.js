@@ -1,7 +1,5 @@
 
-function Balloon() {}
-// class Balloon {
-// }
+class Balloon {}
 
 module.exports = Balloon;
 

@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Balloon  = require("../src/balloon");
+const Balloon  = require("../src/balloon.copy");
 
 describe("Balloon", () => {
 
