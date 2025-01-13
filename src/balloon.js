@@ -4,8 +4,8 @@ function no (love) {
 }
 
 class Balloon {
-  constructor(...love) {
-    this.filledWith = love;
+  constructor(...bubblegum) {
+    this.filledWith = bubblegum.pop();
   }
 
   get isEmpty () { return this instanceof EmptyBalloon }
@@ -16,7 +16,7 @@ class Balloon {
   }
 
   peek () {
-    return this.love[0];
+    return this.filledWith;
   }
 }
 

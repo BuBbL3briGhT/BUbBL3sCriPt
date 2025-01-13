@@ -29,11 +29,13 @@ describe("Balloon", function() {
 
     it("inflate balloons", function () {
       let balloon = Balloon.inflate(1);
+      assert(balloon instanceof Balloon);
+      assert(!balloon.isEmpty, "This balloon should not be empty.");
       assert.equal(balloon.peek(), 1);
     });
 
     when("called with no love", function () {
-      it.only("returns an empty balloon", function () {
+      it("returns an empty balloon", function () {
         let balloon = Balloon.inflate();
         assert(balloon.isEmpty);
       });
