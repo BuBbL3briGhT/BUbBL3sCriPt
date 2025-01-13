@@ -19,9 +19,9 @@ describe("Balloon", function() {
       let balloon = new Balloon();
       assert(balloon);
     });
-    the("first value supplied becomes the contents of the balloon", function () {
+    the("first value fills the balloon", function () {
       let balloon = new Balloon(3);
-      assert.equal(balloon.contents, 3);
+      assert.equal(balloon.peek(), 3);
     });
 
   });
