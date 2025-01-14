@@ -26,31 +26,11 @@ class Bubble {
   }
 
   // Blow bubbles faster.
-  static blow(...ooo) {
-    var oo = air;
-    if (ooo.length == 0)
-      return air;
-    else
-    for (let o of ooo)
-      oo  = new Bubble(o, oo);
-    return oo;
-  }
-
-  // Blow bubbles faster.
-  static blow(...ooo) {
-    var oo;
-    ooo = ooo.reverse();
-    for (let o of ooo)
-      oo  = new Bubble(o, oo);
-    return oo;
-  }
-
-  // Blow bubbles faster.
   static blow(...oo) {
     var ooo;
     oo = oo.reverse();
     for (let o of oo)
-      ooo  = new Bubble(o, ooo);
+      ooo = new Bubble(o, ooo);
     return ooo;
   }
 
