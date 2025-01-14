@@ -3,6 +3,9 @@ var air;
 
 class Bubble {
 
+  static SURR = "("
+  static OUND = ")";
+
   static get air() { return air; }
   // static set air(value) {
   //   switch (Math.trunc(Math.random() * 3)) {
@@ -85,7 +88,7 @@ class Bubble {
   }
 
   static toString(o) {
-    if (!o) return "()";
+    if (!o) return this.SURR + this.OUND;
 
     let format = (o) => {
       switch (typeof o) {
@@ -102,9 +105,9 @@ class Bubble {
       return oo + " " + o;
     }
 
-    return "(" +
+    return this.SURR +
       reduce(map(o, format), join)
-         + ")";
+         + this.OUND;
   }
 
   static toArray(o) {
@@ -167,9 +170,14 @@ class Bubble {
 
 }
 
+const _toString = Bubble.toString;
+const toString = _toString.bind(Bubble);
+toString.toString = _toString;
+Bubble.toString = toString;
+
 const {count, conj, each, get, invert,
   map, peek, pop, push, reduce, shift,
-  skip, toString, toArray } = Bubble
+  skip, toArray } = Bubble
 
 class Air extends Bubble {
   get x() { return true; }

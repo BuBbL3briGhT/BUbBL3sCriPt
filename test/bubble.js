@@ -58,9 +58,11 @@ describe("invert", () => {
     assert.equal(peek(o),1);
 
     let oo = blow(1,2,3);
-    assert.equal(toString(oo), "(1 2 3)");
+    // assert.equal(toString(oo), "(1 2 3)");
+    assert.equal(Bubble.toString(oo), "(1 2 3)");
     let xo = invert(oo);
-    assert.equal(toString(xo), "(3 2 1)");
+    // assert.equal(toString(xo), "(3 2 1)");
+    assert.equal(Bubble.toString(xo), "(3 2 1)");
   });
 });
 

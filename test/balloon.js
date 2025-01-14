@@ -40,6 +40,19 @@ describe("Balloon", function() {
     });
   });
 
+
+  describe(".toString", function () {
+    when("the balloon is empty", function () {
+      // it("renders an empty balloon", function () {
+      it("renders an undefined", function () {
+        // let balloon = Balloon.inflate();
+        // assert.equal(balloon.toString(), "[]");
+        assert.equal(Balloon.toString(undefined), "[]");
+      });
+    });
+  });
+
+
   describe(".inflate", function () {
 
     it("inflate balloons", function () {

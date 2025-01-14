@@ -2,6 +2,9 @@ const Bubble = require("./bubble");
 
 class Balloon extends Bubble {
 
+  static SURR = "["
+  static OUND = "]";
+
   static inflate(...oo) {
     var ooo;
     for (let o of oo)
@@ -10,6 +13,11 @@ class Balloon extends Bubble {
   }
 
 }
+
+let _toString = Bubble.toString.toString;
+let toString = _toString.bind(Balloon);
+Balloon.toString = toString;
+
 
 // function no (love) {
 //   return love.length == 0;
@@ -31,6 +39,7 @@ class Balloon extends Bubble {
 //   peek () { return this.filledWith; }
 
 // }
+
 
 // class EmptyBalloon extends Balloon { }
 // const emptyBalloon = new EmptyBalloon();
