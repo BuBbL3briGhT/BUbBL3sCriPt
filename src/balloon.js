@@ -1,6 +1,6 @@
-const Bubble = require("./bubble");
+const LynktLyst = require("./lynkt_lyst");
 
-class Balloon extends Bubble {
+class Balloon extends LynktLyst {
 
   static SURR = "["
   static OUND = "]";
@@ -14,7 +14,7 @@ class Balloon extends Bubble {
 
 }
 
-let _toString = Bubble.toString.toString;
+let _toString = Balloon.toString.toString;
 let toString = _toString.bind(Balloon);
 Balloon.toString = toString;
 
