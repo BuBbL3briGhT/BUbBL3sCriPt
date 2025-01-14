@@ -14,6 +14,7 @@ alias 🍭="git commit -m🍭"
 alias 🍉="git commit -m🍉"
 alias 🍫="git commit -m🍫"
 alias gc="git commit -m"
+alias +=gc
 
 alias j=jobs
 
