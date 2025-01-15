@@ -136,7 +136,7 @@ class LynktLyst {
     return oo;
   }
 
-  //// Members Only ////
+  //// Members Only ¥ ////
 
   count() { return count(this); }
   conj(oo) { return conj(this, oo); }
@@ -170,10 +170,10 @@ const {count, conj, each, get, invert,
   map, peek, pop, push, reduce, shift,
   skip, toArray } = LynktLyst
 
-class Air extends LynktLyst {
+class EmptiLyst extends LynktLyst {
   get x() { return true; }
 }
 
-air = new Air()
+air = new EmptiLyst()
 
 module.exports = LynktLyst;

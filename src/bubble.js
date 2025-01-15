@@ -1,14 +1,29 @@
 const LynktLyst = require("./lynkt_lyst");
 
+
+
 class Bubble extends LynktLyst {
 
   // Blow bubbles faster.
   static blow(...oo) {
-    var ooo;
-    oo = oo.reverse();
-    for (let o of oo)
-      ooo = new Bubble(o, ooo);
-    return ooo;
+    return oo.reduceRight((memo, o) => {
+      return new Bubble(o, memo);
+    // }, emptyBubble);
+    });
+  }
+
+  static blow(...oo) {
+    return _blow(oo);
+  }
+
+  static _blow(a) {
+    if (a.length < 1) return emptyBubble;
+    return new Bubble(a.shift(), _blow(a))
+  }
+
+  static _blow(a, bubble) {
+    if (a.length < 1) return bubble;
+    return _blow(a, new Bubble(a.pop(), bubble));
   }
 
   // Blow a bunch of lynktLysts from an
@@ -55,7 +70,7 @@ class Bubble extends LynktLyst {
 
 }
 
-const { map, push, reduce, toString } =
+const { _blow, map, push, reduce, toString } =
   Bubble;
 
 module.exports = Bubble;
