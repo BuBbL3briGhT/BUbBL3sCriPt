@@ -28,25 +28,16 @@ class LynktLyst {
     this.oo=oo;
   }
 
-  // Blow lynktLysts faster.
-  static blow(...oo) {
+  static make(...oo) {
     var ooo;
-    oo = oo.reverse();
     for (let o of oo)
       ooo = new LynktLyst(o, ooo);
     return ooo;
   }
 
-  // Blow a bunch of lynktLysts from an
-  // Javascript iterable or array-like
-  // object.
-  //
-  // Parameters are passed directly to
-  // Array.from and the result is then
-  // blown into lynktLysts.
   static from(arryLike, mapFn, thisArg) {
     let array = Array.from(arryLike, mapFn, thisArg);
-    return LynktLyst.blow(...array);
+    return LynktLyst.make(...array);
   }
 
   static get(o,i) { return peek(skip(o,i)); }
@@ -102,7 +93,7 @@ class LynktLyst {
     }
 
     let join = (oo, o) => {
-      return oo + " " + o;
+      return o + " " + oo;
     }
 
     return this.SURR +
