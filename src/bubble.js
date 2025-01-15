@@ -6,24 +6,7 @@ class Bubble extends LynktLyst {
 
   // Blow bubbles faster.
   static blow(...oo) {
-    return oo.reduceRight((memo, o) => {
-      return new Bubble(o, memo);
-    // }, emptyBubble);
-    });
-  }
-
-  static blow(...oo) {
     return _blow(oo);
-  }
-
-  static _blow(a) {
-    if (a.length < 1) return emptyBubble;
-    return new Bubble(a.shift(), _blow(a))
-  }
-
-  static _blow(a, bubble) {
-    if (a.length < 1) return bubble;
-    return _blow(a, new Bubble(a.pop(), bubble));
   }
 
   // Blow a bunch of lynktLysts from an
@@ -70,7 +53,13 @@ class Bubble extends LynktLyst {
 
 }
 
-const { _blow, map, push, reduce, toString } =
+const { map, push, reduce, toString } =
   Bubble;
+
+
+function _blow(a, bubble) {
+  if (a.length < 1) return bubble;
+  return _blow(a, new Bubble(a.pop(), bubble));
+}
 
 module.exports = Bubble;
