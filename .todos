@@ -1,11 +1,1 @@
-## 2025-01-13 ##
-- Balloons, full treatment.
-- parse quote
-- run scripts with bin/bubls
-- pipe into bubls
-    cat sunshine | bin/bubls
-
-## Complete ##
-- 🌞 Associate bubblescript .bubls files
-  with lisp in vim.
 
