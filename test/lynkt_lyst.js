@@ -1,8 +1,9 @@
 const assert = require("assert");
 const LynktLyst  = require("../src/lynkt_lyst");
 
-const { make, get, invert, map, peek, pop,
-  push, reduce, skip, toString } = LynktLyst;
+const { make, count, get, invert, map,
+  peek, pop, push, reduce, skip, toString
+} = LynktLyst;
 
 describe("LynktLyst", () => {
 
@@ -28,6 +29,13 @@ describe("make(o...)", () => {
     assert.equal(get(o,0), 3);
     assert.equal(get(o,1), 2);
     assert.equal(get(o,2), 1);
+  });
+});
+
+describe("count(o)", function () {
+  it("counts", function () {
+    let o = LynktLyst.make(1, 2, 3);
+    assert.equal(count(o), 3);
   });
 });
 

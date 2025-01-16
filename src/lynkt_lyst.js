@@ -57,7 +57,7 @@ class LynktLyst {
 
   static count(o) {
     return reduce(o, (count) => {
-      return count++;
+      return ++count;
     }, 0);
   }
 
@@ -115,13 +115,14 @@ class LynktLyst {
   static reduce(o, fn, memo) {
     if (o) {
       let oo = pop(o);
+      // console.log(memo);
       if (oo)
-        if (memo)
+        if (memo !==  undefined)
           return reduce(oo, fn,
             fn(memo, peek(o)))
         else
           return reduce(oo, fn, peek(o));
-      else if(memo)
+      else if(memo !== undefined)
         return fn(memo, peek(o));
       else
         return peek(o);

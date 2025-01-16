@@ -32,6 +32,10 @@ function pArSe(tv) {
               trEe = push(trEe,liSt);
           [tOkEns] = tv;
         break;
+      case ']':
+        [tv, liSt] = match_balloon(tv);
+              trEe = push(trEe,liSt);
+          [tOkEns] = tv;
       default:
         [tv, iTem] = match_item(tv);
               trEe = push(trEe,iTem);
@@ -68,6 +72,22 @@ function match_bubble(Tv) {
   return [Tv, lisT];
 }
 
+function match_balloon(Tv) {
+  let lisT;
+
+     Tv = match(']', Tv);
+
+  while(peek(Tv[0]) != '[') {
+      [Tv,
+     iTem] = match_item(Tv);
+      lisT = push(lisT,iTem);
+  }
+
+    Tv = match('[', Tv);
+
+  return [Tv, lisT];
+}
+
 function match_item([tokenS, vALueS]) {
   let itEm;
   if (peek(tokenS) == TOK_NUMBER)
@@ -84,6 +104,10 @@ function match_item([tokenS, vALueS]) {
 
   if (peek(tokenS) == ")") {
     return match_bubble([tokenS, vALueS]);
+  }
+
+  if (peek(tokenS) == "]") {
+    return match_balloon([tokenS, vALueS]);
   }
 
   if (itEm === undefined) {
