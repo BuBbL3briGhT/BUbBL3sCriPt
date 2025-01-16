@@ -1,4 +1,5 @@
 const Bubble = require("./bubble");
+const Balloon = require("./balloon");
 const Keyword = require("./keyword");
 const Symbol = require("./symbol");
 const tokenize = require("./tokenize");
@@ -26,6 +27,8 @@ function pArSe(tv) {
       trEe, liSt, iTem;
 
   while (tOkEns) {
+    // console.log(tOkEns);
+    // console.log(peek(tOkEns));
     switch (peek(tOkEns)) {
       case ')':
         [tv, liSt] = match_bubble(tv);
@@ -36,6 +39,7 @@ function pArSe(tv) {
         [tv, liSt] = match_balloon(tv);
               trEe = push(trEe,liSt);
           [tOkEns] = tv;
+        break;
       default:
         [tv, iTem] = match_item(tv);
               trEe = push(trEe,iTem);
@@ -80,7 +84,7 @@ function match_balloon(Tv) {
   while(peek(Tv[0]) != '[') {
       [Tv,
      iTem] = match_item(Tv);
-      lisT = push(lisT,iTem);
+      lisT = Balloon.push(lisT,iTem);
   }
 
     Tv = match('[', Tv);

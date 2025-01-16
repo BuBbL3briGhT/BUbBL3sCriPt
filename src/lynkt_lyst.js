@@ -115,7 +115,6 @@ class LynktLyst {
   static reduce(o, fn, memo) {
     if (o) {
       let oo = pop(o);
-      // console.log(memo);
       if (oo)
         if (memo !==  undefined)
           return reduce(oo, fn,

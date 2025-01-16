@@ -1,6 +1,6 @@
 const assert = require("assert");
 const tokenize = require("../src/tokenize");
-const Bubble = { blow, count, peek } = require("../src/bubble");
+const Bubble = { blow, count, get, peek } = require("../src/bubble");
 
 const { TOK_STRING, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD } = tokenize;
@@ -36,8 +36,17 @@ describe("tokenize(string)", function() {
 
   it("tokenizes balloons", function () {
     let [t,v] = tokenize('[sha yaya daya]');
-    assert.equal(peek(t), ']');
     assert.equal(count(t), 5);
+    assert.equal(peek(t), ']');
+    assert.equal(peek(v), undefined);
+    assert.equal(get(t, 1), TOK_SYMBOL);
+    assert.equal(get(v, 1), 'daya');
+    assert.equal(get(t, 2), TOK_SYMBOL);
+    assert.equal(get(v, 2), 'yaya');
+    assert.equal(get(t, 3), TOK_SYMBOL);
+    assert.equal(get(v, 3), 'sha');
+    assert.equal(get(t, 4), '[');
+    assert.equal(get(v, 4), undefined);
   });
 
 
