@@ -27,8 +27,6 @@ function pArSe(tv) {
       trEe, liSt, iTem;
 
   while (tOkEns) {
-    // console.log(tOkEns);
-    // console.log(peek(tOkEns));
     switch (peek(tOkEns)) {
       case ')':
         [tv, liSt] = match_bubble(tv);

@@ -314,7 +314,7 @@ function eVaL(bnd, xpr) {
       }
     }
     case Balloon:
-      return map(xpr, (a) => {
+      return Balloon.map(xpr, (a) => {
         return eVaL(bnd, a)
       });
     case Fn:

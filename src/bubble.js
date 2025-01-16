@@ -25,6 +25,13 @@ class Bubble extends LynktLyst {
     return new Bubble(o,oo);
   }
 
+
+  static map(o, fn) {
+    if (o)
+      return new Bubble(fn(o.o),
+        map(o.oo, fn));
+  }
+
   static toString(o) {
     if (!o) return "()";
 

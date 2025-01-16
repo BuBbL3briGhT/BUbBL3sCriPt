@@ -12,37 +12,56 @@ class Balloon extends LynktLyst {
     return ooo;
   }
 
+  static from(arryLike, mapFn, thisArg) {
+    let array = Array.from(arryLike, mapFn, thisArg);
+    return Balloon.blow(...array);
+  }
+
+  static push(oo,o) {
+    return new Balloon(o,oo);
+  }
+
+  static map(o, fn) {
+    if (o)
+      return new Balloon(fn(o.o),
+        map(o.oo, fn));
+  }
+
+  static toString(o) {
+    if (!o) return "[]";
+
+    let format = (o) => {
+      switch (typeof o) {
+        case "string":
+          return '"' + o + '"';
+        case "symbol":
+          return Symbol.keyFor(o);
+        default:
+          return o.toString();
+      }
+    }
+
+    let join = (oo, o) => {
+      return oo + " " + o;
+    }
+
+    return "[" +
+      reduce(map(o, format), join)
+         + "]";
+  }
+
+  toString() { return toString(this); }
+  push(o) { return push(this, o); }
+
+
 }
 
-let _toString = Balloon.toString.toString;
-let toString = _toString.bind(Balloon);
-Balloon.toString = toString;
+const { map, push, reduce, toString } =
+  Balloon;
 
-
-// function no (love) {
-//   return love.length == 0;
-// }
-
-// class Balloon {
-//   constructor(filledWith, previousBalloon) {
-//     this.filledWith = filledWith;
-//     this.previousBalloon = previousBalloon;
-//   }
-
-//   get isEmpty () { return this instanceof EmptyBalloon }
-
-//   static inflate (...love) {
-//     if (no(love)) return emptyBalloon;
-//     return new Balloon(...love);
-//   }
-
-//   peek () { return this.filledWith; }
-
-// }
-
-
-// class EmptyBalloon extends Balloon { }
-// const emptyBalloon = new EmptyBalloon();
+// let _toString = Balloon.toString.toString;
+// let toString = _toString.bind(Balloon);
+// Balloon.toString = toString;
 
 module.exports = Balloon;
 
