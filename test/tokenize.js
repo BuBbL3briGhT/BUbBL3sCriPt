@@ -1,13 +1,15 @@
 const assert = require("assert");
 const tokenize = require("../src/tokenize");
-const Token = require("../src/token");
 const Bubble = { blow, peek } = require("../src/bubble");
+
+const { TOK_STRING, TOK_NUMBER,
+  TOK_SYMBOL, TOK_KEYWORD } = tokenize;
 
 describe("tokenize(string)", function() {
 
   specify("symbols may include dots", function () {
     let [t,v] = tokenize("console.log");
-    assert.equal(peek(t), Token.SYMBOL);
+    assert.equal(peek(t), TOK_SYMBOL);
     assert.equal(peek(v), "console.log");
   });
 
@@ -22,15 +24,15 @@ describe("tokenize(string)", function() {
 
   it("tokenizes string", function () {
     let [t,v] = tokenize('"Hola Berenjena"');
-    assert.equal(peek(t), Token.STRING);
+    assert.equal(peek(t), TOK_STRING);
     assert.equal(peek(v), "Hola Berenjena");
   });
 
   itTokenizes("symbol",
-    { tokens: blow(Token.SYMBOL),
+    { tokens: blow(TOK_SYMBOL),
       values: blow("symbol")});
   itTokenizes(":keyword",
-    { tokens: blow(Token.KEYWORD),
+    { tokens: blow(TOK_KEYWORD),
       values: blow("keyword")});
   itTokenizes("(a b c)",
     { tokens: Bubble.from("(YYY)".split('')),

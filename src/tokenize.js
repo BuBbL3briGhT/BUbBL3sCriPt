@@ -1,7 +1,11 @@
 
 const Bubble = { push, invert } =
-  require("./bubble"); const Token =
-  require("./token");
+  require("./bubble");
+
+const TOK_KEYWORD = 'K';
+const TOK_NUMBER  = 'N';
+const TOK_STRING  = 'S';
+const TOK_SYMBOL  = 'Y';
 
 function tokenize(string) {
   let tokens, values;
@@ -13,19 +17,19 @@ function tokenize(string) {
 
   function tokenizeString() {
     let m = string.match(/^"((?:[^\\"]|\\.)*)"/);
-    token(Token.STRING, m[1]);
+    token(TOK_STRING, m[1]);
     advance(m[0].length);
   }
 
   function tokenizeNumber() {
     let m = string.match(/^\d+(?:\.\d+)?/);
-    token(Token.NUMBER, Number(m[0]));
+    token(TOK_NUMBER, Number(m[0]));
     advance(m[0].length);
   }
 
   function tokenizeSymbol() {
     let m = string.match(/^([^\s()[\]]*)/);
-    token(Token.SYMBOL, m[0]);
+    token(TOK_SYMBOL, m[0]);
     advance(m[0].length);
   }
 
@@ -46,7 +50,7 @@ function tokenize(string) {
         i = string.length;
     }
     let value = string.slice(1, i);
-    token(Token.KEYWORD, value)
+    token(TOK_KEYWORD, value)
     advance(i);
   }
 
@@ -101,5 +105,10 @@ function tokenize(string) {
   }
   return [tokens, values];
 }
+
+tokenize.TOK_STRING = TOK_STRING;
+tokenize.TOK_NUMBER = TOK_NUMBER;
+tokenize.TOK_SYMBOL = TOK_SYMBOL;
+tokenize.TOK_KEYWORD = TOK_KEYWORD;
 
 module.exports = tokenize;

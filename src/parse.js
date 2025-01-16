@@ -1,8 +1,10 @@
 const Bubble = require("./bubble");
 const Keyword = require("./keyword");
-const Token = require("./token");
 const Symbol = require("./symbol");
 const tokenize = require("./tokenize");
+
+const { TOK_STRING, TOK_NUMBER,
+  TOK_SYMBOL, TOK_KEYWORD } = tokenize;
 
 const { peek, pop, push, invert } =
   Bubble;
@@ -68,16 +70,16 @@ function match_bubble(Tv) {
 
 function match_item([tokenS, vALueS]) {
   let itEm;
-  if (peek(tokenS) == Token.NUMBER)
+  if (peek(tokenS) == TOK_NUMBER)
     itEm = peek(vALueS);
 
-  if (peek(tokenS) == Token.SYMBOL)
+  if (peek(tokenS) == TOK_SYMBOL)
     itEm = Symbol.for(peek(vALueS));
 
-  if (peek(tokenS) == Token.KEYWORD)
+  if (peek(tokenS) == TOK_KEYWORD)
     itEm = Keyword.for(peek(vALueS));
 
-  if (peek(tokenS) == Token.STRING)
+  if (peek(tokenS) == TOK_STRING)
     itEm = peek(vALueS);
 
   if (peek(tokenS) == ")") {
