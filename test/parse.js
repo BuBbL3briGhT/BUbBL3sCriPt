@@ -7,6 +7,7 @@ const   Bubble = require("../src/bubble");
 const Keyword = require("../src/keyword");
 const {type} = require("../src/fns");
 const Symbol = require("../src/symbol");
+const Quoted = require("../src/quoted");
 
 const { peek, pop } = Bubble;
 
@@ -27,6 +28,11 @@ describe("parse(string)", () => {
     let ast = parse("(1 2 3)");
     let o = push(peek(ast), 4);
     assert.equal(o.toString(), "(4 1 2 3)");
+  });
+
+  it("parses a quoted bubble", function () {
+    let m = parse("'(a b c)")
+    assert(peek(m) instanceof Quoted);
   });
 
   itParses("symbol", {expects: symbol});

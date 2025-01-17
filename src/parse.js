@@ -3,6 +3,7 @@ const Balloon = require("./balloon");
 const Keyword = require("./keyword");
 const Symbol = require("./symbol");
 const tokenize = require("./tokenize");
+const Quoted = require("./quoted");
 
 const { TOK_STRING, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD } = tokenize;
@@ -36,6 +37,12 @@ function pArSe(tv) {
       case ']':
         [tv, liSt] = match_balloon(tv);
               trEe = push(trEe,liSt);
+          [tOkEns] = tv;
+        break;
+      case "'":
+         tv = match("'", tv);
+        trEe = push(pop(trEe),
+          new Quoted(peek(trEe)));
           [tOkEns] = tv;
         break;
       default:
