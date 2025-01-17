@@ -27,3 +27,24 @@ function peval(string) {
 }
 
 peval("Bubble.map");
+
+class Namespace {
+  constructor(name) {
+    this.name = name;
+  }
+
+  copy(namespace) {
+    for (let prop of Object.getOwnPropertyNames(namespace))
+      this[prop] = namespace[prop];
+  }
+}
+
+const MyBubble = new Namespace("MyBubble");
+MyBubble.copy(Bubble);
+peval("MyBubble");
+peval("MyBubble.map");
+
+const AnotherBubble = new Namespace("AnotherBubble");
+AnotherBubble.copy(MyBubble);
+peval("AnotherBubble");
+peval("AnotherBubble.map");
