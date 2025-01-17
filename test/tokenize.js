@@ -7,10 +7,15 @@ const { TOK_STRING, TOK_NUMBER,
 
 describe("tokenize(string)", function() {
 
-  specify("symbols may include dots", function () {
+  it("allows dots in symbols", function () {
     let [t,v] = tokenize("console.log");
     assert.equal(peek(t), TOK_SYMBOL);
     assert.equal(peek(v), "console.log");
+  });
+
+  it("tokenizes single quote", function () {
+    let [t,v] = tokenize("'");
+    assert.equal(peek(t), "'");
   });
 
   it("eats comments", function () {
