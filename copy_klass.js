@@ -29,7 +29,9 @@ function peval(string) {
 peval("Bubble.map");
 
 class Namespace {
-  constructor(name) {
+  constructor(name, that) {
+    if (that)
+      this.copy(that);
     this.name = name;
   }
 
@@ -48,3 +50,10 @@ const AnotherBubble = new Namespace("AnotherBubble");
 AnotherBubble.copy(MyBubble);
 peval("AnotherBubble");
 peval("AnotherBubble.map");
+
+const MyNamespace = new Namespace("MyNamespace", {
+  hello () {
+    return "Eh, What's up doc?";
+  }
+});
+peval("MyNamespace.hello()");
