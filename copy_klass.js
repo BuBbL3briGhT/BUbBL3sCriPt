@@ -30,9 +30,9 @@ peval("Bubble.map");
 
 class Namespace {
   constructor(name, that) {
+    this.name = name;
     if (that)
       this.copy(that);
-    this.name = name;
   }
 
   copy(namespace) {
@@ -57,3 +57,7 @@ const MyNamespace = new Namespace("MyNamespace", {
   }
 });
 peval("MyNamespace.hello()");
+peval("MyNamespace");
+
+
+peval("Object.getOwnPropertyNames(LL.prototype)");
