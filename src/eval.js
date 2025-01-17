@@ -323,7 +323,7 @@ function eVaL(bnd, xpr) {
         return eVaL(bnd, xpr);
       });
     case Quoted:
-      return unquote(xpr);
+      return xpr.unquote();
     default:
       return xpr;
   }
