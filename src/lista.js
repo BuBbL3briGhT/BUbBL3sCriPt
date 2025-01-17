@@ -1,8 +1,13 @@
-const LynktLyst = require("./lynkt_lyst");
+const Lista = require("./lista");
 
+const Bubble;
+extenda(Bubble, Lista);
+for (
+open(Bubble, function () {
+  this.
+});
 
-
-class Bubble extends LynktLyst {
+class Bubble extends Lista {
 
   // Blow bubbles faster.
   static blow(...oo) {
