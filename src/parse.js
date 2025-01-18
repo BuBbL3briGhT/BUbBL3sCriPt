@@ -29,27 +29,38 @@ function _parse(tv) {
 
   while (tokens) {
     switch (peek(tokens)) {
-      case ')':
-        [tv, list] = match_bubble(tv);
-              tree = push(tree,list);
-          [tokens] = tv;
-        break;
-      case ']':
-        [tv, list] = match_balloon(tv);
-              tree = push(tree,list);
-          [tokens] = tv;
-        break;
-      case "'":
-         tv = match("'", tv);
-        tree = push(pop(tree),
-          new Quoted(peek(tree)));
-          [tokens] = tv;
-        break;
+      // case ')':
+      //   [tv, list] = match_bubble(tv);
+      //         tree = push(tree,list);
+      //     [tokens] = tv;
+      //   break;
+      // case ']':
+      //   [tv, list] = match_balloon(tv);
+      //         tree = push(tree,list);
+      //     [tokens] = tv;
+      //   break;
+      // case "'":
+      //    tv = match("'", tv);
+      //   tree = push(pop(tree),
+      //     new Quoted(peek(tree)));
+      //     [tokens] = tv;
+      //   break;
       default:
         [tv, item] = match_item(tv);
               tree = push(tree,item);
           [tokens] = tv;
     }
+  }
+
+  return tree;
+}
+
+function _parse(tv) {
+  let [tokens] = tv, tree;
+
+  while (tokens) {
+    [tv, tree] = match_item(tv, tree);
+      [tokens] = tv;
   }
 
   return tree;
@@ -65,14 +76,14 @@ function match(token, tv) {
       `expected token ${token}.`);
 }
 
-function match_bubble(tv) {
+function match_bubble(tv, tree) {
   let list;
 
      tv = match(')', tv);
 
   while(peek(tv[0]) != '(') {
       [tv,
-     item] = match_item(tv);
+     tree] = match_item(tv, Bubble.emptyBubble);
       list = push(list,item);
   }
 
@@ -81,48 +92,54 @@ function match_bubble(tv) {
   return [tv, list];
 }
 
-function match_balloon(tv) {
-  let list;
+function match_balloon(tv, tree) {
+  let balloon = Balloon.emptyBalloon;
 
      tv = match(']', tv);
 
   while(peek(tv[0]) != '[') {
       [tv,
-     item] = match_item(tv);
-      list = Balloon.push(list,item);
+     balloon] = match_item(tv, balloon);
+      // list = Balloon.push(list,item);
   }
 
     tv = match('[', tv);
 
-  return [tv, list];
+  tree = tree.push(balloon);
+
+  return [tv, tree];
 }
 
-function match_item([tokens, values]) {
+function match_item([tokens, values], tree) {
   let item;
 
   switch (peek(tokens)) {
 
     case TOK_NUMBER:
-      item = peek(values);
+    case TOK_STRING:
+      tree = push(tree, peek(values));
       break;
 
     case TOK_SYMBOL:
-      item = Symbol.for(peek(values));
+      tree = push(tree,
+        Symbol.for(peek(values));
       break;
 
     case TOK_KEYWORD:
-      item = Keyword.for(peek(values));
+      tree = push(tree,
+        Keyword.for(peek(values));
       break;
 
-    case TOK_STRING:
-      item = peek(values);
+    case "'":
+      tree = push(pop(tree),
+        new Quoted(peek(tree)));
       break;
 
     case ")":
-      return match_bubble([tokens, values]);
+      return match_bubble([tokens, values], tree);
 
     case "]":
-      return match_balloon([tokens, values]);
+      return match_balloon([tokens, values], tree);
 
   }
 
