@@ -99,24 +99,31 @@ function match_balloon(tv) {
 
 function match_item([tokens, values]) {
   let item;
-  if (peek(tokens) == TOK_NUMBER)
-    item = peek(values);
 
-  if (peek(tokens) == TOK_SYMBOL)
-    item = Symbol.for(peek(values));
+  switch (peek(tokens)) {
 
-  if (peek(tokens) == TOK_KEYWORD)
-    item = Keyword.for(peek(values));
+    case TOK_NUMBER:
+      item = peek(values);
+      break;
 
-  if (peek(tokens) == TOK_STRING)
-    item = peek(values);
+    case TOK_SYMBOL:
+      item = Symbol.for(peek(values));
+      break;
 
-  if (peek(tokens) == ")") {
-    return match_bubble([tokens, values]);
-  }
+    case TOK_KEYWORD:
+      item = Keyword.for(peek(values));
+      break;
 
-  if (peek(tokens) == "]") {
-    return match_balloon([tokens, values]);
+    case TOK_STRING:
+      item = peek(values);
+      break;
+
+    case ")":
+      return match_bubble([tokens, values]);
+
+    case "]":
+      return match_balloon([tokens, values]);
+
   }
 
   if (item === undefined) {
@@ -124,7 +131,6 @@ function match_item([tokens, values]) {
       peek(tokens) + " value: "
       + peek(values) + " item: " +
       item);
-
   }
 
   return [[pop(tokens), pop(values)], item];
