@@ -61,3 +61,51 @@ peval("MyNamespace");
 
 
 peval("Object.getOwnPropertyNames(LL.prototype)");
+
+
+class B extends Bubble {}
+peval("Object.getOwnPropertyNames(B)");
+peval("B.prototype.constructor");
+peval("B.prototype.constructor.name");
+peval("Object.getOwnPropertyNames(B.prototype)");
+peval("Object.getPrototypeOf(B.prototype)");
+peval("Object.getPrototypeOf(B)");
+peval("B.__proto__");
+
+function C () {}
+peval("C");
+peval("Object.getOwnPropertyNames(C)");
+peval("C.prototype.__proto__ === C.__proto__.prototype");
+peval("C.__proto__.prototype");
+peval("C.prototype.__proto__");
+peval("B.prototype.__proto__ === B.__proto__.prototype");
+
+
+function copyProp(a, b, c) {
+  b[c] = a[c];
+}
+// function copyObjectProps(a, b) {
+function copyProps(a, b) {
+  for (let prop of Object.getOwnPropertyNames(b))
+    b[prop] = a[prop];
+    // {a,=b}[prop];
+    // copyProp(a, b, prop);
+}
+
+// function copyKlass(klass) {
+//   let k = function () {};
+//   k.__proto__ = klass.__proto__
+//   copyProp(k, klass, "__proto__");
+
+//   for (let prop of Object.getOwnPropertyNames(klass)) {
+//     k[prop] = klass[prop]
+//     copyProp(k, klass, prop);
+//   }
+// }
+
+function copyKlass(klass) {
+  copyProps(klass, k);
+  copyProp(klass, k, "__proto__");
+  copyProps(klass.prototype, k.prototype);
+  copyProp(klass.prototype, k.prototype, "__proto__");
+}
