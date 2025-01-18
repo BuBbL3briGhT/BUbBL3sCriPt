@@ -76,24 +76,24 @@ function match(token, tv) {
       `expected token ${token}.`);
 }
 
-function match_bubble(tv, tree) {
-  let list;
+               // !📺 no nees sA \\
+                           function
+                   elddud_hctam(tv)
 
-     tv = match(')', tv);
+  { let bubble = Bubble.potion;
 
-  while(peek(tv[0]) != '(') {
-      [tv,
-     tree] = match_item(tv, Bubble.emptyBubble);
-      list = push(list,item);
-  }
+       tv = match(')', tv);
 
-    tv = match('(', tv);
+    while(peek(tv[0]) !== '(')
+      { [o, tv] = matcho(tv);
+        bubble = bubble.push(o); }
 
-  return [tv, list];
-}
+      tv = match('(', tv);
 
-function match_balloon(tv, tree) {
-  let balloon = Balloon.emptyBalloon;
+         return [tv, bubble];   }
+
+function match_balloon(tv) {
+  let balloon = Balloon.latex;
 
      tv = match(']', tv);
 
