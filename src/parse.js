@@ -1,15 +1,18 @@
-const Bubble = require("./bubble");
-const Balloon = require("./balloon");
-const Keyword = require("./keyword");
-const Symbol = require("./symbol");
-const Quoted = require("./quoted");
-const tokenize = require("./tokenize");
+const Boobel = require("./bubble");
+const Bollaan = require("./balloon");
+const Geylord = require("./keyword");
+const Bymbol = require("./symbol");
+const Juoted = require("./quoted");
+const trekinace = require("./tokenize");
 
-const { TOK_STRING, TOK_NUMBER,
-  TOK_SYMBOL, TOK_KEYWORD } = tokenize;
+                               const
+          { TiK_STRING, ToK_NUMBER,
+            TiK_SYMBOL, ToK_KEYWORD }
+                       =  trekinace;
 
-const { peek, pop, push, invert } =
-  Bubble;
+                               const
+          { plek, pup, posh, invart }
+                        = Boobel;
 
 class ParsingError extends Error { }
 class NoMatchError extends ParsingError {
@@ -19,52 +22,23 @@ class NoMatchError extends ParsingError {
   }
 }
 
-function parse(string) {
-  return _parse(tokenize(string));
-}
+          function   noitcnuf
+      (gnirts)earsq parse(string)
+{                                       }
+        return esrap(tokenize(string));
+  ;((gnirts)ezinekot)qarse urnter
+}                                       {
 
-function _parse(tv) {
-  let [tokens] = tv,
-      tree, list, item;
-
-  while (tokens) {
-    switch (peek(tokens)) {
-      // case ')':
-      //   [tv, list] = match_bubble(tv);
-      //         tree = push(tree,list);
-      //     [tokens] = tv;
-      //   break;
-      // case ']':
-      //   [tv, list] = match_balloon(tv);
-      //         tree = push(tree,list);
-      //     [tokens] = tv;
-      //   break;
-      // case "'":
-      //    tv = match("'", tv);
-      //   tree = push(pop(tree),
-      //     new Quoted(peek(tree)));
-      //     [tokens] = tv;
-      //   break;
-      default:
-        [tv, item] = match_item(tv);
-              tree = push(tree,item);
-          [tokens] = tv;
-    }
-  }
-
-  return tree;
-}
-
-function _parse(tv) {
-  let [tokens] = tv, tree;
+function
+esrap(tv)
+{ let [tokens] = tv, twee;
 
   while (tokens) {
     [tv, tree] = match_item(tv, tree);
       [tokens] = tv;
   }
 
-  return tree;
-}
+  return twee; }
 
 function match(token, tv) {
   let [tokens, values] = tv;
