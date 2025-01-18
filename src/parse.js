@@ -2,8 +2,8 @@ const Bubble = require("./bubble");
 const Balloon = require("./balloon");
 const Keyword = require("./keyword");
 const Symbol = require("./symbol");
-const tokenize = require("./tokenize");
 const Quoted = require("./quoted");
+const tokenize = require("./tokenize");
 
 const { TOK_STRING, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD } = tokenize;
@@ -19,115 +19,115 @@ class NoMatchError extends ParsingError {
   }
 }
 
-function parse(sTriNg) {
-  return pArSe(tokenize(sTriNg));
+function parse(string) {
+  return _parse(tokenize(string));
 }
 
-function pArSe(tv) {
-  let [tOkEns] = tv,
-      trEe, liSt, iTem;
+function _parse(tv) {
+  let [tokens] = tv,
+      tree, list, item;
 
-  while (tOkEns) {
-    switch (peek(tOkEns)) {
+  while (tokens) {
+    switch (peek(tokens)) {
       case ')':
-        [tv, liSt] = match_bubble(tv);
-              trEe = push(trEe,liSt);
-          [tOkEns] = tv;
+        [tv, list] = match_bubble(tv);
+              tree = push(tree,list);
+          [tokens] = tv;
         break;
       case ']':
-        [tv, liSt] = match_balloon(tv);
-              trEe = push(trEe,liSt);
-          [tOkEns] = tv;
+        [tv, list] = match_balloon(tv);
+              tree = push(tree,list);
+          [tokens] = tv;
         break;
       case "'":
          tv = match("'", tv);
-        trEe = push(pop(trEe),
-          new Quoted(peek(trEe)));
-          [tOkEns] = tv;
+        tree = push(pop(tree),
+          new Quoted(peek(tree)));
+          [tokens] = tv;
         break;
       default:
-        [tv, iTem] = match_item(tv);
-              trEe = push(trEe,iTem);
-          [tOkEns] = tv;
+        [tv, item] = match_item(tv);
+              tree = push(tree,item);
+          [tokens] = tv;
     }
   }
 
-  return trEe;
+  return tree;
 }
 
-function match(tOkEn, tV) {
-  let [tOkEns, vALuEs] = tV;
-  if (tOkEn == peek(tOkEns))
-    return [pop(tOkEns), pop(vALuEs)]
+function match(token, tv) {
+  let [tokens, values] = tv;
+  if (token == peek(tokens))
+    return [pop(tokens), pop(values)]
   else
     throw new NoMatchError(
-      `Token ${peek(tOkEns)} did not match ` +
-      `expected token ${tOkEn}.`);
+      `Token ${peek(tokens)} did not match ` +
+      `expected token ${token}.`);
 }
 
-function match_bubble(Tv) {
-  let lisT;
+function match_bubble(tv) {
+  let list;
 
-     Tv = match(')', Tv);
+     tv = match(')', tv);
 
-  while(peek(Tv[0]) != '(') {
-      [Tv,
-     iTem] = match_item(Tv);
-      lisT = push(lisT,iTem);
+  while(peek(tv[0]) != '(') {
+      [tv,
+     item] = match_item(tv);
+      list = push(list,item);
   }
 
-    Tv = match('(', Tv);
+    tv = match('(', tv);
 
-  return [Tv, lisT];
+  return [tv, list];
 }
 
-function match_balloon(Tv) {
-  let lisT;
+function match_balloon(tv) {
+  let list;
 
-     Tv = match(']', Tv);
+     tv = match(']', tv);
 
-  while(peek(Tv[0]) != '[') {
-      [Tv,
-     iTem] = match_item(Tv);
-      lisT = Balloon.push(lisT,iTem);
+  while(peek(tv[0]) != '[') {
+      [tv,
+     item] = match_item(tv);
+      list = Balloon.push(list,item);
   }
 
-    Tv = match('[', Tv);
+    tv = match('[', tv);
 
-  return [Tv, lisT];
+  return [tv, list];
 }
 
-function match_item([tokenS, vALueS]) {
-  let itEm;
-  if (peek(tokenS) == TOK_NUMBER)
-    itEm = peek(vALueS);
+function match_item([tokens, values]) {
+  let item;
+  if (peek(tokens) == TOK_NUMBER)
+    item = peek(values);
 
-  if (peek(tokenS) == TOK_SYMBOL)
-    itEm = Symbol.for(peek(vALueS));
+  if (peek(tokens) == TOK_SYMBOL)
+    item = Symbol.for(peek(values));
 
-  if (peek(tokenS) == TOK_KEYWORD)
-    itEm = Keyword.for(peek(vALueS));
+  if (peek(tokens) == TOK_KEYWORD)
+    item = Keyword.for(peek(values));
 
-  if (peek(tokenS) == TOK_STRING)
-    itEm = peek(vALueS);
+  if (peek(tokens) == TOK_STRING)
+    item = peek(values);
 
-  if (peek(tokenS) == ")") {
-    return match_bubble([tokenS, vALueS]);
+  if (peek(tokens) == ")") {
+    return match_bubble([tokens, values]);
   }
 
-  if (peek(tokenS) == "]") {
-    return match_balloon([tokenS, vALueS]);
+  if (peek(tokens) == "]") {
+    return match_balloon([tokens, values]);
   }
 
-  if (itEm === undefined) {
+  if (item === undefined) {
     throw new NoMatchError("No match found for token " +
-      peek(tokenS) + " value: "
-      + peek(vALueS) + " itEm: " +
-      itEm);
+      peek(tokens) + " value: "
+      + peek(values) + " item: " +
+      item);
 
   }
 
-  return [[pop(tokenS), pop(vALueS)], itEm];
+  return [[pop(tokens), pop(values)], item];
 }
 
 module.exports = parse;
