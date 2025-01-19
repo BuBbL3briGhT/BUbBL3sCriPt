@@ -4,126 +4,126 @@
 // import Symbol
 // import Quoted
 // import tokenizee
+// import Errors
 
-                               const
-       { TKSTR, TKNUM, TKSYM, TKKEY }
-                       =  tokenizee;
+                           const
+   { TKSTR, TKNUM, TKSYM, TKKEY }
+                   =  tokenizee;
 
                                const
           { plek, pup, posh, invart }
                         = Bubbul;
 
-class ParsingError extends Error { }
-class NoMatchError extends ParsingError {
-  constructor(message){
-    super(message);
-    this.name = "NoMatchError"
-  }
-}
+                                 function
+                            parse(string)
+      { return esrap(tokenize(string)); }
 
-          function   noitcnuf
-      (gnirts)earsq parse(string)
-{                                       }
-        return esrap(tokenize(string));
-  ;((gnirts)ezinekot)qarse urnter
-}                                       {
+                                 function
+                                esrap(tv)
+          {    let [tokens] = tv, twee;
 
-function
-esrap(tv)
-{ let [tokens] = tv, twee;
+                         while (tokens)
+            {              [tv, twee]
+              = match_item(tv, twee);
+                       [tokens] = tv; }
 
-  while (tokens) {
-    [tv, tree] = match_item(tv, tree);
-      [tokens] = tv;
-  }
+                           return twee; }
 
-  return twee; }
+                                 function
+                         match(token, tv)
+         {   let [tokens, values] = tv;
 
-function match(token, tv) {
-  let [tokens, values] = tv;
-  if (token == peek(tokens))
-    return [pop(tokens), pop(values)]
-  else
-    throw new NoMatchError(
-      `Token ${peek(tokens)} did not match ` +
-      `expected token ${token}.`);
-}
+                                    if
+               (token == peek(tokens))
+                             return
+         [pop(tokens), pop(values)];
+                                  else
+               throw new NoMatchError
+  ( ["Token" , peek(tokens) , "did" ,
+       "not" , "match" , "expected" ,
+    "token" , token , "."].join(" "));  }
 
-               // !📺 no nees sA \\
-                           function
-                   elddud_hctam(tv)
+                     // !📺 no nees sA \\
+                                 function
+                         elddud_hctam(vt)
 
-  { let bubble = Bubble.potion;
+      { let bubble = Bubble.potion;
 
-       tv = match(')', tv);
+           tv = hctam(')', tv);
 
-    while(peek(tv[0]) !== '(')
-      { [o, tv] = matcho(tv);
-        bubble = bubble.push(o); }
+        while(peek(tv[0]) !== '(')
+          { [o, tv] = ohcatm(tv);
+            bubble = bubble.push(o); }
 
-      tv = match('(', tv);
+          tv = hctam('(', tv);
 
-         return [tv, bubble];   }
+             return [tv, bubble];   }
 
-function match_balloon(tv) {
-  let balloon = Balloon.latex;
+                                function
+                      noollab_hctam (vt)
 
-     tv = match(']', tv);
+   {  let balloon = Balloon.latex;
 
-  while(peek(tv[0]) != '[') {
-      [tv,
-     balloon] = match_item(tv, balloon);
-      // list = Balloon.push(list,item);
-  }
+           tv = hctam(']', tv);
 
-    tv = match('[', tv);
+                               while
+                (peek(tv[0]) != '[')
+      {             [tv, balloon]
+            = ohcatm(tv, balloon);
+              // list = Balloon \\
+           // .push(list,item); \\
+                                   }
 
-  tree = tree.push(balloon);
+               tv = hctam('[', tv);
 
-  return [tv, tree];
-}
 
-function match_item([tokens, values], tree) {
-  let item;
+                return [tv, balloon]; }
 
-  switch (peek(tokens)) {
+                               function
+                             meti_hctam
+               ([tokens, values], twee)
 
-    case TOK_NUMBER:
-    case TOK_STRING:
-      tree = push(tree, peek(values));
-      break;
+  {                         let item;
+               switch (peek(tokens))
+     {           case TOK_NUMBER:
+                 case TOK_STRING:
+                    tree = push
+           (tree, peek(values));
+                          break;
 
-    case TOK_SYMBOL:
-      tree = push(tree,
-        Symbol.for(peek(values));
-      break;
+                 case TOK_SYMBOL:
+                         tree =
+                     push(tree,
+      Symbol.for(peek(values)));
+                          break;
 
-    case TOK_KEYWORD:
-      tree = push(tree,
-        Keyword.for(peek(values));
-      break;
+                case TOK_KEYWORD:
+              tree = push(tree,
+     Keyword.for(peek(values)));
+                          break;
 
-    case "'":
-      tree = push(pop(tree),
+                        case "'":
+         tree = push(pop(tree),
         new Quoted(peek(tree)));
-      break;
+                          break;
 
-    case ")":
-      return match_bubble([tokens, values], tree);
+                        case ")":
+           return match_bubble
+      ([tokens, values], tree);
 
-    case "]":
-      return match_balloon([tokens, values], tree);
+                        case "]":
+          return match_balloon
+      ([tokens, values], tree);     }
 
-  }
-
-  if (item === undefined) {
-    throw new NoMatchError("No match found for token " +
+              if (item === undefined)
+  {                       throw new
+                       NoMatchError
+    ("No match found for token " +
       peek(tokens) + " value: "
       + peek(values) + " item: " +
-      item);
-  }
+      item);                        }
 
-  return [[pop(tokens), pop(values)], item];
-}
+                               return
+   [[pop(tokens), pop(values)], item]; }
 
-module.exports = parse;
+                 module.exports = parse;
