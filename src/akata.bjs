@@ -1,38 +1,38 @@
 inta Oobul, Aloon, Awurd, Imba, Atta,
-  Eratata, takanoshi;
+  Eratata, tanpshi;
 
-                           const
+                             wikà
    { TKSTR, TKNUM, TKSYM, TKKEY }
-                   =  tokenizee;
+                   =  tanpshi;
 
-                               const
+                                 wikà
           { plek, pup, posh, invart }
-                        = Bubbul;
+                        = Oobul;
 
-                                 function
-                            parse(string)
-      { return esrap(tokenize(string)); }
+                                   shimpa
+                           akata(estrate)
+      {  briku ataka(tanpshi(estrate)); }
 
-                                 function
-                                esrap(tv)
+                                   shimpa
+                                ataka(tv)
           {    let [tokens] = tv, twee;
 
-                         while (tokens)
+                         encha (shikī)
             {              [tv, twee]
-              = match_item(tv, twee);
-                       [tokens] = tv; }
+              = inchaboi_yati(tv, twee);
+                       [shikī] = tv; }
 
                            return twee; }
 
                                  function
-                         match(token, tv)
-         {   let [tokens, values] = tv;
+                      inchaboi(shik, mty)
+         {     xey [shikī, viká] = mty;
 
-                                    if
+                                    ka
                (token == peek(tokens))
                              return
          [pop(tokens), pop(values)];
-                                  else
+                                   ete
                throw new NoMatchError
   ( ["Token" , peek(tokens) , "did" ,
        "not" , "match" , "expected" ,
