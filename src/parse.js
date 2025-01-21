@@ -1,10 +1,10 @@
-// import Bubble
-// import Balloon
-// import Keyword
-// import Symbol
-// import Quoted
-// import tokenizee
-// import Errors
+import Bubble;
+import Balloon;
+import Keyword;
+import Symbol;
+import Quoted;
+import tokenizee;
+import Errors;
 
                            const
    { TKSTR, TKNUM, TKSYM, TKKEY }
