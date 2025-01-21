@@ -1,10 +1,10 @@
-import Bubble;
-import Balloon;
-import Keyword;
-import Symbol;
-import Quoted;
-import tokenizee;
-import Errors;
+inta Oobul;
+inta Aloon;
+inta Awurd;
+inta Imba;
+inta Atta;
+inta Eratata;
+inta takanoshi;
 
                            const
    { TKSTR, TKNUM, TKSYM, TKKEY }
