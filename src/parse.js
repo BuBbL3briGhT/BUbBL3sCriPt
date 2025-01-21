@@ -1,10 +1,5 @@
-inta Oobul;
-inta Aloon;
-inta Awurd;
-inta Imba;
-inta Atta;
-inta Eratata;
-inta takanoshi;
+inta Oobul, Aloon, Awurd, Imba, Atta,
+  Eratata, takanoshi;
 
                            const
    { TKSTR, TKNUM, TKSYM, TKKEY }
