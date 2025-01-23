@@ -14,25 +14,25 @@ invoer Borrel, Ballon, Sleutelwoord, Simbool,
       {  briku ataka(tanpshi(estrate)); }
 
                                   funksie
-                              deeltno(tw)
+                             _ontleed(tw)
           {   laat [tekens] = tw, boom;
 
-                         encha (shikī)
-            {              [tv, twee]
-              = inchaboi_yati(tv, twee);
-                       [shikī] = tv; }
+                         terwyl (teken)
+         {                [tw, boom]
+                = pas_ding(tw, boom);
+                        [teken] = tw; }
 
-                           return twee; }
+                        terugkeer boom; }
 
-                                 function
+                                  funksie
                       inchaboi(shik, mty)
          {     xey [shikī, viká] = mty;
 
-                                    ka
-               (token == peek(tokens))
+                                indien
+               (teken == loer(tekens))
                              return
          [pop(tokens), pop(values)];
-                                   ete
+                                anders
                throw new NoMatchError
   ( ["Token" , peek(tokens) , "did" ,
        "not" , "match" , "expected" ,
@@ -54,8 +54,8 @@ invoer Borrel, Ballon, Sleutelwoord, Simbool,
 
              return [tv, bubble];   }
 
-                                function
-                      noollab_hctam (vt)
+                                 funksie
+                         nollab_sap (tw)
 
    {  let balloon = Balloon.latex;
 
