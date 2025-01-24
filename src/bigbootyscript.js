@@ -12,9 +12,36 @@ function loadFile (filename) {
 }
 
 function expandImports(source, sourcePath) {
-  console.log(source);
-  console.log(sourcePath);
-  return source;
+  // console.log(source);
+  // console.log(sourcePath);
+  let m = match(source, /inta (.*);/);
+  // console.log(m);
+  let q = m[1]
+  let p = toParam(q);
+  // console.log(p);
+  let path = resolvePath(p);
+  // console.log(path)
+  let r = "inta " + q;
+  let f = " = require(\"" + path + "\")"
+  let e = replace(source, r, r + f);
+  return e;
+}
+
+function match(string, regex) {
+  return string.match(regex);
+}
+
+function toParam(string) {
+  return string.toLowerCase();
+}
+
+function resolvePath(path) {
+  // search for file
+  return "./" + path + ".js";
+}
+
+function replace(string, m, s) {
+  return string.replace(m, s);
 }
 
 
