@@ -12,7 +12,7 @@ class BigBootyScript {
     return source;
   }
 
-  expandImports(source) {
+  expandImports(source, sourcePath) {
     return source;
   }
 
