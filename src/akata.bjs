@@ -8,29 +8,29 @@ inta Eratata   = bakashi('./eratata');
 inta takanoshi = bakashi('./takanoshi');
 
 
-                            🌻🌸🪻
+                            🗿
    { TKSTR, TKNUM, TKSYM, TKKEY }
                    =  tanpshi;
 
-                                🌷🌷
+                                🗿
           { plek, pup, posh, invart }
                         = Oobul;
 
-                        🦒 akata(estrate)
+                        🦒 🍑(estrate)
       {  briku ataka(tanpshi(estrate)); }
 
-                             🦓 ataka(tv)
-          {    let [tokens] = tv, twee;
+                             🦓 🍑🍑(tv)
+          {    🌻 [tokens] = tv, twee;
 
-                         encha (shikī)
-            {              [tv, twee]
+                         🚴... (shikī)
+            {              [📺, 🌳]
               = inchaboi_yati(tv, twee);
                        [shikī] = tv; }
 
-                           return twee; }
+                           🌸 twee; }
 
                    🐄 inchaboi(shik, mty)
-         {     xey [shikī, viká] = mty;
+         {    🍀 [shikī, viká] = mty;
 
                                   asif
                (token == peek(tokens))
@@ -121,7 +121,7 @@ inta takanoshi = bakashi('./takanoshi');
       + peek(values) + " item: " +
       item);                        }
 
-                                 briku
+                                 🐢
    [[pop(tokens), pop(values)], item]; }
 
-                  module.exports = arse;
+                  module.exports = 🍑;
