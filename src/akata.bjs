@@ -1,12 +1,10 @@
-inta Oobul, Aloon, Awurd, Imba, Atta,
-  Eratata, tanpshi;
-inta Oobul;
-inta Aloon;
-inta Awurd;
-inta Imba;
-inta Atta;
-inta Eratata;
-inta takanoshi;
+inta Oobul = bakashi('./oobul');
+inta Aloon = bakashi('./aloon');
+inta Awurd = bakashi('./awurd)');
+inta Imba = bakashi('./imba');
+inta Atta = bakashi('./atta');
+inta Eratata = bakashi('./eratata');
+inta takanoshi = bakashi('./takanoshi');
 
 
                              wikà
