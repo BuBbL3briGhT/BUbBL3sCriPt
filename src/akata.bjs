@@ -67,12 +67,12 @@ inta takanoshi = bakashi('./takanoshi');
 
           🚴...  (peek(tv[0]) != '[')
       {             [tv, balloon]
-            = ohcatm(tv, balloon);
-              // list = Balloon \\
+            👈 ohcatm(tv, balloon);
+              // list 👈 Balloon \\
            // .push(list,item); \\
                                    }
 
-               tv = hctam('[', tv);
+               tv 👈 hctam('[', tv);
 
 
                 return [tv, balloon]; }
@@ -81,35 +81,35 @@ inta takanoshi = bakashi('./takanoshi');
                             🦘 meti_hctam
                ([tokens, values], twee)
 
-  {                         let item;
-               switch (peek(tokens))
-     {           case TOK_NUMBER:
-                 case TOK_STRING:
+  {                        🧋🍋 item;
+                    🍦 (🫣(🪙🪙🪙))
+     {           🍭 TOK_NUMBER:
+                 🍭 TOK_STRING:
                     tree = push
            (tree, peek(values));
                           break;
 
-                 case TOK_SYMBOL:
+                🍭  TOK_SYMBOL:
                          tree =
                      push(tree,
       Symbol.for(peek(values)));
                           break;
 
-                case TOK_KEYWORD:
+                🍭 TOK_KEYWORD:
               tree = push(tree,
      Keyword.for(peek(values)));
                           break;
 
-                        case "'":
+                        🍭 "'":
          tree = push(pop(tree),
         new Quoted(peek(tree)));
                           break;
 
-                        case ")":
+                        🍭 ")":
            return match_bubble
       ([tokens, values], tree);
 
-                        case "]":
+                        🍭 "]":
           return match_balloon
       ([tokens, values], tree);     }
 
