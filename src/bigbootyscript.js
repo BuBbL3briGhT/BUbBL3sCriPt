@@ -3,24 +3,20 @@
 const Module = require('module');
 const fs = require("fs");
 
-class BigBootyScript {
 
-  loadFile (filename) {
-    let source =
-      fs.readFileSync(path, 'utf-8');
-    source = expandImports(source);
-    return source;
-  }
-
-  static expandImports(source, sourcePath) {
-    console.log(source);
-    console.log(sourcePath);
-    return source;
-  }
-
+function loadFile (filename) {
+  let source =
+    fs.readFileSync(path, 'utf-8');
+  source = expandImports(source);
+  return source;
 }
 
-const { expandImports } = BigBootyScript;
+function expandImports(source, sourcePath) {
+  console.log(source);
+  console.log(sourcePath);
+  return source;
+}
+
 
 Module._extensions['.bbs'] =
   function (module, filename) {
@@ -30,4 +26,4 @@ Module._extensions['.bbs'] =
   };
 
 
-module.exports = BigBootyScript;
+module.exports = { loadFile, expandImports }
