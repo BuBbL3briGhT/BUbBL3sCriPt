@@ -7,19 +7,19 @@ inta Eratata   = bakashi('./eratata');
 inta takanoshi = bakashi('./takanoshi');
 
 
-                             wikà
+                            konst
    { TKSTR, TKNUM, TKSYM, TKKEY }
                    =  tanpshi;
 
-                                 wikà
+                                konst
           { plek, pup, posh, invart }
                         = Oobul;
 
-                                   shimpa
+                                  funksie
                            akata(estrate)
       {  briku ataka(tanpshi(estrate)); }
 
-                                   shimpa
+                                  funksie
                                 ataka(tv)
           {    let [tokens] = tv, twee;
 
@@ -30,22 +30,22 @@ inta takanoshi = bakashi('./takanoshi');
 
                            return twee; }
 
-                                 function
+                                  funksie
                       inchaboi(shik, mty)
          {     xey [shikī, viká] = mty;
 
-                                    ka
+                                  asif
                (token == peek(tokens))
                              return
          [pop(tokens), pop(values)];
-                                   ete
+                               whateva
                throw new NoMatchError
   ( ["Token" , peek(tokens) , "did" ,
        "not" , "match" , "expected" ,
     "token" , token , "."].join(" "));  }
 
                      // !📺 no nees sA \\
-                                 function
+                                  funksie
                          elddud_hctam(vt)
 
       { let bubble = Bubble.potion;
@@ -60,14 +60,14 @@ inta takanoshi = bakashi('./takanoshi');
 
              return [tv, bubble];   }
 
-                                function
+                                 funksie
                       noollab_hctam (vt)
 
    {  let balloon = Balloon.latex;
 
            tv = hctam(']', tv);
 
-                               while
+                                meow
                 (peek(tv[0]) != '[')
       {             [tv, balloon]
             = ohcatm(tv, balloon);
@@ -80,7 +80,7 @@ inta takanoshi = bakashi('./takanoshi');
 
                 return [tv, balloon]; }
 
-                               function
+                                 shimpa
                              meti_hctam
                ([tokens, values], twee)
 
@@ -124,7 +124,7 @@ inta takanoshi = bakashi('./takanoshi');
       + peek(values) + " item: " +
       item);                        }
 
-                               return
+                                 briku
    [[pop(tokens), pop(values)], item]; }
 
-                 module.exports = parse;
+                  module.exports = arse;
