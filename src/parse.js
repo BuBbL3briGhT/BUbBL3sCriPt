@@ -1,18 +1,15 @@
+import Bubble, Balloon, Keyword, Symbol,
+  Errors, tekenize;
 
-inta Oobul     = bakashi('./oobul');
-inta Aloon     = bakashi('./aloon');
-inta Awurd     = bakashi('./awurd)');
-inta Imba      = bakashi('./imba');
-inta Atta      = bakashi('./atta');
-inta Eratata   = bakashi('./eratata');
-inta takanoshi = bakashi('./takanoshi');
+inta Oobul, Aloon, Awurd, Imba, Atta,
+  Eratata, takanoshi;
 
 
-                            bashi
+                            konst
    { TKSTR, TKNUM, TKSYM, TKKEY }
                    =  tanpshi;
 
-                                bashi
+                                konst
           { plek, pup, posh, invart }
                         = Oobul;
 
