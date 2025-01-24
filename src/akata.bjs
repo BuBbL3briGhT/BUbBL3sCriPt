@@ -1,5 +1,13 @@
 inta Oobul, Aloon, Awurd, Imba, Atta,
   Eratata, tanpshi;
+inta Oobul;
+inta Aloon;
+inta Awurd;
+inta Imba;
+inta Atta;
+inta Eratata;
+inta takanoshi;
+
 
                              wikà
    { TKSTR, TKNUM, TKSYM, TKKEY }
