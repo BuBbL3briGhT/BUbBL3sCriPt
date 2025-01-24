@@ -63,10 +63,9 @@ inta takanoshi = bakashi('./takanoshi');
 
     {   Balloon.latex 👉 balloon;
 
-           tv = hctam(']', tv);
+           tv 👈 hctam(']', tv);
 
-                               🚴...
-                (peek(tv[0]) != '[')
+          🚴...  (peek(tv[0]) != '[')
       {             [tv, balloon]
             = ohcatm(tv, balloon);
               // list = Balloon \\
