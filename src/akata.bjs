@@ -46,7 +46,7 @@ inta takanoshi = bakashi('./takanoshi');
 
                       🦧 elddud_hctam(vt)
 
-      { let bubble = Bubble.potion;
+      { 🫱 bubble = Bubble.potion;
 
            tv = hctam(')', tv);
 
@@ -58,10 +58,10 @@ inta takanoshi = bakashi('./takanoshi');
 
              return [tv, bubble];   }
 
-                                 funksie
-                      noollab_hctam (vt)
 
-   {  let balloon = Balloon.latex;
+                   🖖 noollab_hctam (vt)
+
+   {  🫱 balloon 👉👌 Balloon.latex;
 
            tv = hctam(']', tv);
 
