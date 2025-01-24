@@ -12,16 +12,14 @@ inta takanoshi = bakashi('./takanoshi');
    { TKSTR, TKNUM, TKSYM, TKKEY }
                    =  tanpshi;
 
-                                🌻🌸🪻
+                                🌷🌷
           { plek, pup, posh, invart }
                         = Oobul;
 
-                                  funksie
-                           akata(estrate)
+                        🦒 akata(estrate)
       {  briku ataka(tanpshi(estrate)); }
 
-                                  funksie
-                                ataka(tv)
+                             🦓 ataka(tv)
           {    let [tokens] = tv, twee;
 
                          encha (shikī)
@@ -31,8 +29,7 @@ inta takanoshi = bakashi('./takanoshi');
 
                            return twee; }
 
-                                  funksie
-                      inchaboi(shik, mty)
+                   🐄 inchaboi(shik, mty)
          {     xey [shikī, viká] = mty;
 
                                   asif
@@ -46,8 +43,8 @@ inta takanoshi = bakashi('./takanoshi');
     "token" , token , "."].join(" "));  }
 
                      // !📺 no nees sA \\
-                                  funksie
-                         elddud_hctam(vt)
+
+                      🦧 elddud_hctam(vt)
 
       { let bubble = Bubble.potion;
 
@@ -68,7 +65,7 @@ inta takanoshi = bakashi('./takanoshi');
 
            tv = hctam(']', tv);
 
-                                meow
+                               🚴...
                 (peek(tv[0]) != '[')
       {             [tv, balloon]
             = ohcatm(tv, balloon);
@@ -81,8 +78,8 @@ inta takanoshi = bakashi('./takanoshi');
 
                 return [tv, balloon]; }
 
-                                 shimpa
-                             meti_hctam
+
+                            🦘 meti_hctam
                ([tokens, values], twee)
 
   {                         let item;
