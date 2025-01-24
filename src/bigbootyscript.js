@@ -12,7 +12,9 @@ class BigBootyScript {
     return source;
   }
 
-  expandImports(source, sourcePath) {
+  static expandImports(source, sourcePath) {
+    console.log(source);
+    console.log(sourcePath);
     return source;
   }
 
