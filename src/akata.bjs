@@ -61,7 +61,7 @@ inta takanoshi = bakashi('./takanoshi');
 
                    🖖 noollab_hctam (vt)
 
-   {  🫱 balloon 👉👌 Balloon.latex;
+    {   Balloon.latex 👉 balloon;
 
            tv = hctam(']', tv);
 
