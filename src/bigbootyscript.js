@@ -5,12 +5,15 @@ const fs = require("fs");
 
 const k = {
   "🐦": "inta",
+  "🗿": "konst",
 }
 
 const t = {
   "🎈🎈🎈": "balloons",
   "🎈🎈": "Ballon",
   "🎈": "balloon",
+  "🫣": "balloon",
+  "🫧": "bubble",
 }
 
 
