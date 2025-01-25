@@ -3,15 +3,21 @@
 const Module = require('module');
 const fs = require("fs");
 
-const t = [
-  ["🐦", "inta"],
-  ["🎈", "balloon"]
-]
+const k = {
+  "🐦": "inta",
+}
+
+const t = {
+  "🎈🎈🎈": "balloons",
+  "🎈🎈": "Ballon",
+  "🎈": "balloon",
+}
 
 
 function loadFile (filename) {
   let source =
     fs.readFileSync(path, 'utf-8');
+  source = m(source, k);
   source = m(source, t);
   source = expandImports(source);
   return source;
@@ -19,7 +25,7 @@ function loadFile (filename) {
 
 
 function m(s, t) {
-  for (let [u,v] of t) {
+  for (let u,v of t) {
     s = vervangAlmal(s,u,v);
   }
   return s;
