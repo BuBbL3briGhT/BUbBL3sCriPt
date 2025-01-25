@@ -6,14 +6,17 @@ const fs = require("fs");
 const k = {
   "🐦": "inta",
   "🗿": "konst",
+  "🖖": "funksie",
+  "🌻": "laat"
 }
 
 const t = {
-  "🎈🎈🎈": "balloons",
-  "🎈🎈": "Ballon",
   "🎈": "balloon",
-  "🫣": "balloon",
-  "🫧": "bubble",
+  "🫣": "peek",
+  "🫧": "oobul",
+  "🍑": "dėkooshi",
+  "📺": "tŭpētátá",
+
 }
 
 
