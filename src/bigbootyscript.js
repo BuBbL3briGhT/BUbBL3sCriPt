@@ -16,8 +16,10 @@ const t = {
   "🫧": "oobul",
   "🍑": "dėkooshi",
   "📺": "tŭpētátá",
-
 }
+
+// List all symbols in source z.
+fn list(z)
 
 
 function loadFile (filename) {
