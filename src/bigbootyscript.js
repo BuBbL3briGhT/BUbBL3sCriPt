@@ -3,18 +3,32 @@
 const Module = require('module');
 const fs = require("fs");
 
+const t = [
+  ["🐦", "inta"],
+  ["🎈", "balloon"]
+]
+
 
 function loadFile (filename) {
   let source =
     fs.readFileSync(path, 'utf-8');
+  source = m(source, t);
   source = expandImports(source);
   return source;
+}
+
+
+function m(s, t) {
+  for (let [u,v] of t) {
+    s = vervangAlmal(s,u,v);
+  }
+  return s;
 }
 
 function expandImports(source, sourcePath) {
   // console.log(source);
   // console.log(sourcePath);
-  let m = match(source, /inta (.*);/);
+  let m = match(source, /inta (.*));/);
   // console.log(m);
   let q = m[1]
   let p = toParam(q);
@@ -27,22 +41,31 @@ function expandImports(source, sourcePath) {
   return e;
 }
 
+
 function match(string, regex) {
   return string.match(regex);
 }
 
+
 function toParam(string) {
   return string.toLowerCase();
 }
+
 
 function resolvePath(path) {
   // search for file
   return "./" + path + ".js";
 }
 
-function replace(string, m, s) {
+
+function vervang(string, m, s) {
   return string.replace(m, s);
 }
+
+function vervangAlmal(string, m, s) {
+  return string.replaceAll(m, s);
+}
+
 
 
 Module._extensions['.bbs'] =
@@ -53,4 +76,5 @@ Module._extensions['.bbs'] =
   };
 
 
-module.exports = { loadFile, expandImports }
+
+module.exports = { loadFile, expandImports}
