@@ -18,6 +18,10 @@ const t = {
   "📺": "tŭpētátá",
 }
 
+superKonsTant {
+  VanDaMorT TislEboTtOm wUz hERe.
+}
+
 // List all symbols in source z.
 // fn list(z) {
 function list(z) {
