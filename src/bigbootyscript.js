@@ -19,8 +19,18 @@ const t = {
 }
 
 // List all symbols in source z.
-fn list(z)
-
+// fn list(z) {
+function list(z) {
+  // match comments
+  let a = match(z, /\/\/.*$/g)
+  console.log(a);
+  // split on comments
+  // match multiline comments
+  // split on multiline comments
+  // match strings
+  // split on strings
+  // split
+}
 
 function loadFile (filename) {
   let source =
@@ -31,10 +41,9 @@ function loadFile (filename) {
   return source;
 }
 
-
 function m(s, t) {
-  for (let u,v of t) {
-    s = vervangAlmal(s,u,v);
+  for (let u of t) {
+    s = vervangAlmal(s,u,t[u]);
   }
   return s;
 }
@@ -55,22 +64,18 @@ function expandImports(source, sourcePath) {
   return e;
 }
 
-
 function match(string, regex) {
   return string.match(regex);
 }
-
 
 function toParam(string) {
   return string.toLowerCase();
 }
 
-
 function resolvePath(path) {
   // search for file
   return "./" + path + ".js";
 }
-
 
 function vervang(string, m, s) {
   return string.replace(m, s);
@@ -80,7 +85,8 @@ function vervangAlmal(string, m, s) {
   return string.replaceAll(m, s);
 }
 
-
+module.exports = { loadFile, expandImports,
+  list }
 
 Module._extensions['.bbs'] =
   function (module, filename) {
@@ -89,6 +95,3 @@ Module._extensions['.bbs'] =
     module._compile(code, filename);
   };
 
-
-
-module.exports = { loadFile, expandImports}
