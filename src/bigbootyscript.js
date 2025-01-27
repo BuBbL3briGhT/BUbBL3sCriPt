@@ -3,6 +3,12 @@
 const Module = require('module');
 const fs = require("fs");
 
+namespace BalloonParty {
+  pop () {}
+  pickle () {}
+  splash () {}
+}
+
 const k = {
   "🐦": "inta",
   "🗿": "konst",
