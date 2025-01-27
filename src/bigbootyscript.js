@@ -1,13 +1,31 @@
 // (((((((((((((((((((ENLARGE)))))))))))))))))))
 
+         🐓
 const Module = require('module');
 const fs = require("fs");
 
-namespace BalloonParty {
-  pop () {}
-  pickle () {}
-  splash () {}
-}
+
+                           🎈
+                            `~.
+                               `.  🎈
+                               🎈`. '
+                          🎈    '.`.`
+                           `~.    `.
+                              `.   ..........................................
+               🌷               ;  : 0                                      :
+namespace BalloonParty {         ` : 1  hard BalloonParty = (() => {        :
+  pop () {}                        : 2    function pop () {}                :
+  pickle () {}              ==>    : 3    function pickle () {}             :
+  splash () {}                     : 4    function splash () {}             :
+}                                  : 5    return { pop, pickle, splash };   :
+                                   : 6  })(🧀🐁);                           :
+                                   : 7                                      :
+             🌼    🪻              : 8                                      :
+    🐇   🌱🌱🌱🌱🌱🌱🌱 🌱🌱       : 9  🧧 https://youtu.be/cpF7zmFJlyc     :
+                                   :.........................................
+
+
+
 
 const k = {
   "🐦": "inta",
