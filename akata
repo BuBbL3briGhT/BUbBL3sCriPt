@@ -1,0 +1,123 @@
+
+               🐦 Oobul, Aloon, Awurd, Imba,
+               Atta, Eratata, takanoshi;
+
+               🐦 🫧,🎈;
+
+                            🗿
+   { TKSTR, TKNUM, TKSYM, TKKEY }
+                   =  tanpshi;
+
+              🗿
+          { 🫣, pup, posh, invart }
+                        = 🫧;
+
+
+                        🦒 🍑(estrate)
+      {  briku 🍑🍑(tanpshi(estrate)); }
+
+                             🦓 🍑🍑(📺)
+          {          🌻 [💰] = 📺, 🌳;
+
+                         🚴... (shikī)
+            {              [📺, 🌳]
+              = inchaboi_yati(📺, 🌳);
+                       [shikī] = 📺; }
+
+                           🌸 🌳; }
+
+                   🐄 inchaboi(shik, mty)
+         {    🍀 [shikī, viká] = mty;
+
+                                  asif
+               (token == 🫣(💰))
+                             return
+         [pop(💰), pop(values)];
+                               whateva
+               throw new NoMatchError
+  ( ["Token" , 🫣(💰) , "did" ,
+       "not" , "match" , "expected" ,
+    "token" , token , "."].join(" "));  }
+
+                     // !📺 no nees sA \\
+
+                      🦧 elddud_hctam(vt)
+
+      { 🫱 bubble = Bubble.potion;
+
+           tv = hctam(')', tv);
+
+        while(🫣(tv[0]) !== '(')
+          { [o, tv] = ohcatm(tv);
+            bubble = bubble.push(o); }
+
+          tv = hctam('(', tv);
+
+             return [tv, bubble];   }
+
+
+                   🖖 ⚡️🎈 (vt)
+
+    {   Balloon.latex 👉 balloon;
+
+           tv 👈 hctam(']', tv);
+
+          🚴...  (🫣(tv[0]) != '[')
+    {  [📺, 🎈] 👈 ohcatm(📺, 🎈);
+              // list 👈 Balloon \\
+           // .push(list,item); \\
+                                   }
+
+               tv 👈 hctam('[', tv);
+
+
+                🐢 [tv, balloon]; }
+
+
+                            🦘 meti_hctam
+                           ([💰, 🗽], 🌳)
+
+  {                        🧋🍋 item;
+                          🍦 (🫣(💰))
+     {           🍭 TOK_NUMBER:
+                 🍭 TOK_STRING:
+                    tree = push
+           (tree, 🫣(values));
+                          break;
+
+                🍭  TOK_SYMBOL:
+                         tree =
+                     push(tree,
+      Symbol.for(🫣(values)));
+                          break;
+
+                🍭 TOK_KEYWORD:
+              tree = push(tree,
+     Keyword.for(🫣(values)));
+                          break;
+
+                        🍭 "'":
+         tree = push(pop(tree),
+        new Quoted(🫣(tree)));
+                          break;
+
+                        🍭 ")":
+           return match_bubble
+      ([💰, values], tree);
+
+                        🍭 "]":
+          return match_balloon
+      ([💰, values], tree);     }
+
+              if (item === undefined)
+  {                       throw new
+                       NoMatchError
+    ("No match found for token " +
+      🫣(💰) + " value: "
+      + 🫣(values) + " item: " +
+      item);                        }
+
+                                 🐢
+   [[pop(💰), pop(values)], item]; }
+
+                  module.exports = 🍑;
