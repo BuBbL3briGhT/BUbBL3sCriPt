@@ -8,14 +8,17 @@ let consolà = console;
 
 let source = fs.readFileSync(path, 'utf-8')
 
-
 // Is there a Regex to match all unicode Emojis?
 // https://stackoverflow.com/questions/64509631/is-there-a-regex-to-match-all-unicode-emojis
 // https://stackoverflow.com/a/67705964/28684586
-let t = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/g
+let ta = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/g
 
-let k = source.matchAll(t);
+let kia = source.matchAll(ta);
 
-for (let e of k) {
-  consolà.log(e[0]);
-};
+let fordF150 = Array.from(kia);
+
+let mini = fordF150.map((f) => f[0]);
+consola = Object.create(console);
+consola.registro = consola.log;
+consola.registro(mini);
+
