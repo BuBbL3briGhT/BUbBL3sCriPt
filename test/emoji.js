@@ -7,3 +7,5 @@ let muyContenta = new Emoji("😃");
 console.log(muyContenta);
 let guiño = new Emoji("😉");
 console.log(guiño);
+let 🐒 = "Mona";
+console.log(🐒);
