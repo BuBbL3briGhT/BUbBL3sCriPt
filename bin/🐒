@@ -20,5 +20,19 @@ let fordF150 = Array.from(kia);
 let mini = fordF150.map((f) => f[0]);
 consola = Object.create(console);
 consola.registro = consola.log;
-consola.registro(mini);
+// consola.registro(mini);
+
+let gorgadash = new Set(mini);
+
+consola.registro(gorgadash);
+
+let marmalade = Array.from(gorgadash);
+
+consola.registro(marmalade);
+
+// marmalade.map((a) => a).forEach(consola.registro);
+
+// for (let t in gorgadash)  {
+//   consola.registro(t);
+// }
 
