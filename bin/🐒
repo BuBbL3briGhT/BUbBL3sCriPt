@@ -34,6 +34,21 @@ let p = "console.log(🐒);".match(/[^a-zA-Z =(.]/);
 consolà.log(p);
 consolà.log(p.input.substring(p.index, p.index+2));
 
+consolà.log("---");
+let s = source.matchAll(/[^a-zA-Z =(.]/g);
+
+for (let wow of s) {
+  // consolà.log(o);
+  consolà.log(source.substring(wow.index-1, wow.index+1));
+};
+consolà.log("---");
+// let k = source.slice(1).matchAll(/[^a-zA-Z =("]/g);
+let k = source.slice(1).matchAll(/[^a-zA-Z =(]"/g);
+for (let e of k) {
+  // consolà.log(o);
+  consolà.log(e.input.substring(e.index-1, e.index+1));
+};
+
   // , (cómo, estás) => {
   // if (cómo) {
   //   console.log (cómo)         ;
