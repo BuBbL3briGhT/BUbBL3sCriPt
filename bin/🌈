@@ -3,6 +3,5 @@
 akata = File.read "src/akata.bjs"
 akata = akata.split("_ _ _");
 akata = akata.shift
+File.write "akata.bjs.output", akata
 puts akata
-# puts "¡Hola Mundo!"
-
