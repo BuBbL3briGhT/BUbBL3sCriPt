@@ -1,7 +1,10 @@
 #! /usr/bin/env ruby
 
+require "fileutils"
+
 akata = File.read "src/akata.bjs"
 akata = akata.split("_ _ _");
 akata = akata.shift
-File.write "akata.bjs.output", akata
+FileUtils.mkdir_p "output/🌈"
+File.write "output/🌈/akata.bjs.", akata
 puts akata
