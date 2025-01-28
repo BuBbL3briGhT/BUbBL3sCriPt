@@ -1,0 +1,16 @@
+#!  /usr/bin/env node
+'use strict'
+
+const fs = require("fs");
+
+let path = process.argv[2];
+
+fs.readFile(path, 'utf-8', (cómo, estás) => {
+  if (cómo) {
+    console.log (cómo)         ;
+    return                     ;
+  }
+
+  console     .  /***/   log      (    estás     )      ;
+
+})             ;
