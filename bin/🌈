@@ -1,6 +1,8 @@
 #! /usr/bin/env ruby
 
 akata = File.read "src/akata.bjs"
+akata = akata.split("_ _ _");
+akata = akata.shift
 puts akata
-
 # puts "¡Hola Mundo!"
+
