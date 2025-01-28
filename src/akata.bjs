@@ -7,7 +7,7 @@
         /* consola.registro 🫧; */
 
 
-  consola.anotar("¡Hola Mundo!")
+  consola.anotar "¡Hola Mundo!"
 
 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
