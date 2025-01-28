@@ -1,5 +1,3 @@
-import Bubble, Balloon, Keyword, Symbol,
-  Errors, tekenize;
 
 inta Oobul, Aloon, Awurd, Imba, Atta,
   Eratata, takanoshi;
