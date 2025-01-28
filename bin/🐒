@@ -24,15 +24,10 @@ consola.registro = consola.log;
 
 let gorgadash = new Set(mini);
 
-consola.registro(gorgadash);
-
 let marmalade = Array.from(gorgadash);
 
-consola.registro(marmalade);
 
-// marmalade.map((a) => a).forEach(consola.registro);
-
-// for (let t in gorgadash)  {
-//   consola.registro(t);
-// }
+for (let t of marmalade)  {
+  consola.registro(t);
+}
 
