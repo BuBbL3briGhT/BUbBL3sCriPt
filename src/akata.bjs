@@ -2,9 +2,11 @@
                /* 🐦 Oobul, Aloon, Awurd, Imba, */
                /* Atta, Eratata, takanoshi; */
 
-               🐦 🫧,🎈;
+               /* 🐦 🫧,🎈; */
 
-        consola.registro 🫧;
+        /* consola.registro 🫧; */
+
+               consola.anotar "¡Hola Mundo!"
 
             ---
 
