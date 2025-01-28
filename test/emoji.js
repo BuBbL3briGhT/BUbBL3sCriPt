@@ -23,6 +23,18 @@ let 🧸 = "Oso de peluche";
 
 🪵("🧸", 🧸);
 
+let 🥔;
+let 🍔;
+let 🥛🤝;
+let hotdawg;
+let peanuts;
+let crispy🫠;
+
+consola.registro(peanuts);
+// console.registro(crispypeanutheads);
+// (consola.registro crispy🫠)
+consola.registro(🥛🤝);
+
 // let 🚜 = (🥓) => {
 //   🪵 (🥓, "->", eval(🥓));
 // }
