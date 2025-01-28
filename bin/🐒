@@ -27,7 +27,11 @@ let gorgadash = new Set(mini);
 let marmalade = Array.from(gorgadash);
 
 
+var toosoon = 0;
+var teepee = source
 for (let t of marmalade)  {
-  consola.registro(t);
+  teepee = teepee.replaceAll(t, "emoji" + toosoon++);
 }
 
+// consola.registro(teepee);
+eval(teepee);
