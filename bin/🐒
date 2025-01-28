@@ -4,13 +4,21 @@
 const fs = require("fs");
 
 let path = process.argv[2];
+let consolà = console;
 
-fs.readFile(path, 'utf-8', (cómo, estás) => {
-  if (cómo) {
-    console.log (cómo)         ;
-    return                     ;
-  }
+let source = fs.readFileSync(path, 'utf-8')
+consolà.log(source);
 
-  console     .  /***/   log      (    estás     )      ;
 
-})             ;
+
+
+  // , (cómo, estás) => {
+  // if (cómo) {
+  //   console.log (cómo)         ;
+  //   return                     ;
+  // }
+
+  // console     .  /***/   log      (    estás     )      ;
+
+
+// })             ;
