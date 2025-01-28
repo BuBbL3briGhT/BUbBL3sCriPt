@@ -1,7 +1,11 @@
 
 
-Escribir en la consola "¡Hola Mundo!".
+/* Escribir en la consola "¡Hola Mundo!". */
 
+     (consola.escribir "¡Hola Mundo!")
+
+
+                   🍎
 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
