@@ -7,55 +7,15 @@ let path = process.argv[2];
 let consolà = console;
 
 let source = fs.readFileSync(path, 'utf-8')
-// consolà.log(source);
 
-let m = source.match(/[^a-zA-Z =(]"/);
-consolà.log(m);
-consolà.log(m.index);
-consolà.log(m[0]);
-// consolà.log(m.input[m.index, 2]);
-consolà.log(m.input.substring(m.index, 2));
-consolà.log("---");
-consolà.log(source.substring(81, 83));
-consolà.log(source.substring(m.index-1, m.index+1));
 
-let n = source.matchAll(/[^a-zA-Z =(]"/g);
-consolà.log(n);
+// Is there a Regex to match all unicode Emojis?
+// https://stackoverflow.com/questions/64509631/is-there-a-regex-to-match-all-unicode-emojis
+// https://stackoverflow.com/a/67705964/28684586
+let t = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/g
 
-consolà.log("---");
-// n.each((o) => {
-for (let o of n) {
-  // consolà.log(o);
-  consolà.log(source.substring(o.index-1, o.index+1));
-};
+let k = source.matchAll(t);
 
-consolà.log("---");
-let p = "console.log(🐒);".match(/[^a-zA-Z =(.]/);
-consolà.log(p);
-consolà.log(p.input.substring(p.index, p.index+2));
-
-consolà.log("---");
-let s = source.matchAll(/[^a-zA-Z =(.]/g);
-
-for (let wow of s) {
-  // consolà.log(o);
-  consolà.log(source.substring(wow.index-1, wow.index+1));
-};
-consolà.log("---");
-// let k = source.slice(1).matchAll(/[^a-zA-Z =("]/g);
-let k = source.slice(1).matchAll(/[^a-zA-Z =(]"/g);
 for (let e of k) {
-  // consolà.log(o);
-  consolà.log(e.input.substring(e.index-1, e.index+1));
+  consolà.log(e[0]);
 };
-
-  // , (cómo, estás) => {
-  // if (cómo) {
-  //   console.log (cómo)         ;
-  //   return                     ;
-  // }
-
-  // console     .  /***/   log      (    estás     )      ;
-
-
-// })             ;
