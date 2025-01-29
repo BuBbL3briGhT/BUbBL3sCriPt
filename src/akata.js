@@ -74,8 +74,12 @@ television  [and do] {
     (extract  the  first entry into shikī.)
 
     equal [da value currently stored in da]
-    📺        ;}
-    television.}
+    📺        ;
+    television.
+  }
+  }
 
-  🌸                       🌳        ;}
-  Briku (e.g. return) [da] BUSHY tree.}
+  🌸                       🌳        ;
+  Briku (e.g. return) [da] BUSHY tree.
+}
+}
