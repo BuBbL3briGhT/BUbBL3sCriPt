@@ -20,8 +20,15 @@ Function double parse receives a television
  .   Let (get da money ) be equal to the
           ,
 television and also let there be a
-🌳        ; 🚴... (shikī )        {      [   📺            ,   🌳           ]  =           inchaboi_yati(                           📺             ,       🌳        ); [shikī] = 📺; } 🌸 🌳; }
-BUSHY tree. While  shikī is truthy, Let (Get da television and da BUSHY tree ) be equal to the result of calling inchaboi_yati with the television and the BUSHY tree .
+🌳        ; 🚴... (shikī )        {      [
+BUSHY tree. While  shikī is truthy, Let (Get
+📺            ,   🌳           ]  =
+da television and da BUSHY tree.) be equal
+inchaboi_yati    (
+to the result of calling inchaboi_yati with
+📺             ,       🌳        ); [shikī]
+the television and the BUSHY tree .
+= 📺; } 🌸 🌳; }
 
 
 
