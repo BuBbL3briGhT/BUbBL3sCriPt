@@ -15,9 +15,9 @@ const { peek, pop, push, invert } = Bubble;
 function parse (string) { return double-parse ( tokenize ( string ) ) } ;
 
       🦓       🍑🍑         (       📺
-[Let] function double parse receive a television
-)       {   🌻   [   💰      ]  =           📺
-  [and] do (Let (Get da money.) be equal to the
+[Let] function double parse receive a
+          )       {   🌻   [   💰      ]  =           📺
+television  [and] do (Let (Get da money.) be equal to the
           ,
 television and also let there be a
 🌳        ; 🚴... (shikī )          {          [
