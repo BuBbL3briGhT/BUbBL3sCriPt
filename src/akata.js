@@ -29,13 +29,13 @@ television and save the second entry to da
 🌳         ] =
 BUSHY tree.) be equal to [the result of
                       inchaboi_yati  (
-calling da function] "inchaboi_yati"
-                     📺         ,
-providing it with da television and the
-🌳        );      [
-BUSHY tree.  Let (extract the first entry
-     shikī]  =     📺           ;} 🌸    🌳
-into shikī.) equal da television.) Briku da BUSHY
+calling da function] "inchaboi_yati" provid-
+               📺         ,       🌳
+ing it with da television and the BUSHY
+     );     [
+tree.  Let (extract the first entry into
+shikī]  =                      📺           ;} 🌸    🌳
+shikī.) equal [da value of da] television.) Briku da BUSHY
     ; }
 tree.
 
