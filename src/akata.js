@@ -16,14 +16,12 @@ function parse (string) { return double-parse ( tokenize ( string ) ) } ;
 
 🦓       🍑🍑         (        📺
 Function double parse receives a television
-)  { 🌻   [   💰      ]  =
+)  { 🌻   [   💰      ]  =           📺
  .   Let (get da money ) be equal to the
-📺         ,
+          ,
 television and also let there be a
-🌳        ; 🚴...
-BUSHY tree. Guy on a bike speeding away from
-(¿)
-...
+🌳        ; 🚴... (shikī )        {      [   📺            ,   🌳           ]  =           inchaboi_yati(📺, 🌳); [shikī] = 📺; } 🌸 🌳; }
+BUSHY tree. While  shikī is truthy, Let (Get da television and da BUSHY tree ) be equal to
 
 
 
