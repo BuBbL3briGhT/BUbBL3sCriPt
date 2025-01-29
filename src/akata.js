@@ -11,7 +11,7 @@ const { TOKEN_STRiNG, TOKEN_NUMBER, TOKEN_SYMBOL, TOKEN_KEYWORD } = tokenize;
 
 const { peek, pop, push, invert } = Bubble;
 
-function parse (
+function parse (string) { return double-parse ( tokenize ( string ) ) } ;
 
 
 
