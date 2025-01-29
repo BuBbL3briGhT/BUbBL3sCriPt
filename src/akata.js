@@ -14,8 +14,16 @@ const { peek, pop, push, invert } = Bubble;
 // 🦒 🍑(estrate) {  briku 🍑🍑(tanpshi(estrate)); }
 function parse (string) { return double-parse ( tokenize ( string ) ) } ;
 
-🦓       🍑🍑         (        📺          ) { 🌻   [   💰      ]  =            📺         ,                       🌳        ;
-Function double parse receives a television .  let (get da money ) be equal to  television and also let there be a bushy-tree. Guy on a bike speeding away from...
+🦓       🍑🍑         (        📺
+Function double parse receives a television
+)  { 🌻   [   💰      ]  =
+ .   Let (get da money ) be equal to the
+📺         ,
+television and also let there be a
+🌳        ; 🚴...
+BUSHY tree. Guy on a bike speeding away from
+(¿)
+...
 
 
 
