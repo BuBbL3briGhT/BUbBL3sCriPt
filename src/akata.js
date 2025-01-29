@@ -26,12 +26,16 @@ be] a BUSHY tree. While shikī is truthy do (
 [Let] (Get da first entry and put it in da
 📺         ,
 television and save the second entry to da
-🌳         ] =           inchaboi_yati
-BUSHY tree.) be equal to the result of
-(                        📺         ,
-passing inchaboi_yati da television and the
-🌳        );      [                      shikī          ]     =     📺           ;} 🌸    🌳
-BUSHY tree.  Let (extract the first into shikī.) equal da television.) Briku da BUSHY
+🌳         ] =
+BUSHY tree.) be equal to [the result of
+                      inchaboi_yati  (
+calling da function] "inchaboi_yati"
+                     📺         ,
+providing it with da television and the
+🌳        );      [
+BUSHY tree.  Let (extract the first entry
+     shikī]  =     📺           ;} 🌸    🌳
+into shikī.) equal da television.) Briku da BUSHY
     ; }
 tree.
 
