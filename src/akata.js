@@ -33,15 +33,15 @@ BUSHY  tree.)  be  equal  to  [the  result of
 calling  da function] "inchaboi_yati" provid-
                    📺          ,        🌳
 ing  it  with  da  television  and  the BUSHY
-      );      [
-tree.   Let  (extract  the  first  entry into
+      );       [
+tree.   [Let] (extract  the  first entry into
 shikī]   =
 shikī.)  equal  [da value currently stored in
     📺        ;}
 da] television.)
 
-  🌸                     🌳        ;}
-  Briku (e.g. return) da BUSHY tree.)
+  🌸                       🌳        ;}
+  Briku (e.g. return) [da] BUSHY tree.)
 
 
 
