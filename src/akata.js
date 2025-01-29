@@ -85,7 +85,41 @@ television  [and do] {
 
 
 
+_  __  __  __  __  __  __  __  __  __  __  __
 
+
+        🦓        🍑🍑           (
+  [Let] function  double  parse  accept  [a]
+📺  )                 { 🌻   [   💰      ]
+teli and be defined as: let (Get da money.)
+=               📺,
+be equal to the teli,  and  also  [let there
+      🌳        ;  🚴... (shikī        ) {
+be] a BUSHY tree.  While shikī is truthy mark one. [Let]
+        [
+  (Get  da  first  entry and put it
+           📺           ,
+    in  da television   and  save  the second
+                   🌳        ]  =
+    entry  to  da  BUSHY tree.) be  equal  to
+
+    [the   result  of  calling  da  function]
+     inchaboi_yati   (
+    "inchaboi_yati"  providing   it  with  da
+    📺          ,         🌳         );
+    television  and  the  BUSHY  tree.  [Let]
+     [                                shikī]
+    (extract  the  first  entry  into shikī.)
+
+    equal  [da  value currently stored in da]
+    📺        ;
+    television.
+  }
+  }
+    🌸                       🌳        ;
+    Briku (e.g. return) [da] BUSHY tree.
+}
+}
 
 
 
