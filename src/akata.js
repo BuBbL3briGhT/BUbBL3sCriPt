@@ -14,16 +14,16 @@ const { peek, pop, push, invert } = Bubble;
 // 🦒 🍑(estrate) {  briku 🍑🍑(tanpshi(estrate)); }
 function parse (string) { return double-parse ( tokenize ( string ) ) } ;
 
-      🦓       🍑🍑         (       📺
-[Let] function double parse receive a
-          )      {   🌻   [   💰      ]  =
+      🦓       🍑🍑         (
+[Let] function double parse receive [a]
+📺        )      {   🌻   [   💰      ]  =
 television [and] do (Let (Get da money.) be
          📺            ,
 equal to the television, and also [let there
     🌳          ; 🚴... (shikī        ) {
-be] a BUSHY tree. While shikī is truthy do
-  [ 📺            ,   🌳           ]  =
-  ([Let] (Get da television and da BUSHY tree.) be equal
+be] a BUSHY tree. While shikī is truthy do (
+       [                                📺            ,                               🌳         ] =
+[Let] (Get da first entry and put it in da television and save the second entry to da BUSHY tree.) be equal
    inchaboi_yati (                     📺
 to the result of passing inchaboi_yati da
            ,   🌳            );      [
