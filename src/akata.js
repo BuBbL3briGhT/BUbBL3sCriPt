@@ -15,8 +15,8 @@ const { peek, pop, push, invert } = Bubble;
 function parse (string) { return double-parse ( tokenize ( string ) ) } ;
 
 
-       🦓         🍑🍑           (
-[Let]  function   double  parse  receive  [a]
+        🦓        🍑🍑           (
+  [Let] function  double  parse  receive  [a]
 📺        )        {   🌻   [   💰      ]  =
 television  [and]  do (Let (Get da money.) be
               📺        ,
@@ -40,8 +40,8 @@ shikī.)  equal  [da value currently stored in
     📺        ;}
 da] television.)
 
-🌸                     🌳        ;}
-Briku (e.g. return) da BUSHY tree.)
+  🌸                     🌳        ;}
+  Briku (e.g. return) da BUSHY tree.)
 
 
 
