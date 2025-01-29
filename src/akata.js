@@ -18,18 +18,20 @@ function parse (string) { return double-parse ( tokenize ( string ) ) } ;
 [Let] function double parse receive [a]
 📺        )      {   🌻   [   💰      ]  =
 television [and] do (Let (Get da money.) be
-         📺            ,
+             📺        ,
 equal to the television, and also [let there
-    🌳          ; 🚴... (shikī        ) {
+      🌳        ; 🚴... (shikī        ) {
 be] a BUSHY tree. While shikī is truthy do (
-       [                                📺            ,                               🌳         ] =
-[Let] (Get da first entry and put it in da television and save the second entry to da BUSHY tree.) be equal
-   inchaboi_yati (                     📺
-to the result of passing inchaboi_yati da
-           ,   🌳            );      [
-television and the BUSHY tree.  Let (Get
-shikī]  =     📺           ;} 🌸    🌳
-shikī.) equal da television.) Briku da BUSHY
+       [
+[Let] (Get da first entry and put it in da
+📺         ,
+television and save the second entry to da
+🌳         ] =           inchaboi_yati
+BUSHY tree.) be equal to the result of
+(                        📺         ,
+passing inchaboi_yati da television and the
+🌳        );      [                      shikī          ]     =     📺           ;} 🌸    🌳
+BUSHY tree.  Let (extract the first into shikī.) equal da television.) Briku da BUSHY
     ; }
 tree.
 
