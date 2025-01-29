@@ -14,7 +14,7 @@ const { peek, pop, push, invert } = Bubble;
 // 🦒 🍑(estrate) {  briku 🍑🍑(tanpshi(estrate)); }
 function parse (string) { return double-parse ( tokenize ( string ) ) } ;
 
-// 🦓 🍑🍑(📺) {          🌻 [💰] = 📺, 🌳;
+// 🦓    🍑🍑         (  📺          )    {  🌻  [💰] = 📺, 🌳;
 function double-parse (  television  )    {  let [bag-of-gold] = television, bushy-tree;    guy on a bike speeding away from...
 
 
