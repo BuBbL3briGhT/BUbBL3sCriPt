@@ -56,24 +56,26 @@ television  [and do] {
     Let (Get da money.) be equal to the tel-
          ,                           🌳
   evision, and also [let there be] a BUSHY
-      ;  🚴... (shikī        ) {
-  tree.  While shikī is truthy do (
-       [
-[Let] (Get  da  first  entry and put it in da
-📺          ,
-television  and  save  the second entry to da
-🌳          ]  =
-BUSHY  tree.)  be  equal  to  [the  result of
-                       inchaboi_yati  (
-calling  da function] "inchaboi_yati" provid-
-                   📺          ,        🌳
-ing  it  with  da  television  and  the BUSHY
-      );       [
-tree.   [Let] (extract  the  first entry into
-shikī]   =
-shikī.)  equal  [da value currently stored in
+      ;  🚴... (shikī        )      {
+  tree.  While shikī is truthy [do] {
+             [
+      [Let] (Get  da  first  entry and put it
+          📺          ,
+    in da television  and  save  the second
+                🌳        ]  =
+    entry to da BUSHY tree.) be  equal  to
+
+    [the  result of calling  da function]
+     inchaboi_yati  (
+    "inchaboi_yati" providing  it  with  da
+    📺          ,        🌳        );
+    television  and  the BUSHY tree. [Let]
+     [                              shikī]
+    (extract  the  first entry into shikī.)
+
+    equal [da value currently stored in da]
     📺        ;}
-da] television.)
+    television.}
 
   🌸                       🌳        ;}
-  Briku (e.g. return) [da] BUSHY tree.)
+  Briku (e.g. return) [da] BUSHY tree.}
