@@ -185,51 +185,92 @@ const tokenize = require("./tokenize");
 
      return [tv, balloon];
    }
-                                 shimpa
-                             meti_hctam
-               ([tokens, values], twee)
+                                 // shimpa
+                             // meti_hctam
+               // ([tokens, values], twee)
 
-  {                         let item;
-               switch (peek(tokens))
-     {           case TOK_NUMBER:
-                 case TOK_STRING:
-                    tree = push
-           (tree, peek(values));
-                          break;
+  // {                         let item;
+               // switch (peek(tokens))
+     // {           case TOK_NUMBER:
+                 // case TOK_STRING:
+                    // tree = push
+           // (tree, peek(values));
+                          // break;
 
-                 case TOK_SYMBOL:
-                         tree =
-                     push(tree,
-      Symbol.for(peek(values)));
-                          break;
+                 // case TOK_SYMBOL:
+                         // tree =
+                     // push(tree,
+      // Symbol.for(peek(values)));
+                          // break;
 
-                case TOK_KEYWORD:
-              tree = push(tree,
-     Keyword.for(peek(values)));
-                          break;
+                // case TOK_KEYWORD:
+              // tree = push(tree,
+     // Keyword.for(peek(values)));
+                          // break;
 
-                        case "'":
-         tree = push(pop(tree),
+                        // case "'":
+         // tree = push(pop(tree),
+        // new Quoted(peek(tree)));
+                          // break;
+
+                        // case ")":
+           // return match_bubble
+      // ([tokens, values], tree);
+
+                        // case "]":
+          // return match_balloon
+      // ([tokens, values], tree);     }
+
+              // if (item === undefined)
+  // {                       throw new
+                       // NoMatchError
+    // ("No match found for token " +
+      // peek(tokens) + " value: "
+      // + peek(values) + " item: " +
+      // item);                        }
+
+                                 // briku
+   // [[pop(tokens), pop(values)], item]; }
+
+  function
+  matchItem ([tokens, values], tree) {
+    let item;
+    switch (peek(tokens)) {
+      case TOK_NUMBER:
+      case TOK_STRING:
+        tree = push(tree, peek(values));
+        break;
+
+      case TOK_SYMBOL:
+        tree = push(tree, Symbol.for(peek(values)));
+        break;
+
+      case TOK_KEYWORD:
+        tree = push(tree,
+        Keyword.for(peek(values)));
+        break;
+
+      case "'":
+        tree = push(pop(tree),
         new Quoted(peek(tree)));
-                          break;
+        break;
 
-                        case ")":
-           return match_bubble
-      ([tokens, values], tree);
+      case ")":
+        return matchBubble([tokens, values], tree);
 
-                        case "]":
-          return match_balloon
-      ([tokens, values], tree);     }
+       case "]":
+          return matchBalloon([tokens, values], tree);
+    }
 
-              if (item === undefined)
-  {                       throw new
-                       NoMatchError
-    ("No match found for token " +
-      peek(tokens) + " value: "
-      + peek(values) + " item: " +
-      item);                        }
+    if (item === undefined) {
+      throw new NoMatchError
+        ("No match found for token " +
+          peek(tokens) + " value: "
+          + peek(values) + " item: " +
+          item);
+    }
 
-                                 briku
-   [[pop(tokens), pop(values)], item]; }
+    return [[pop(tokens), pop(values)], item];
+  }
 
-                  module.exports = arse;
+module.exports = parse;
