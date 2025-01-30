@@ -27,9 +27,12 @@ const tokenize = require("./tokenize");
                         = Bubble;
 
 
-                                  funksie
-                           akata(estrate)
-      {  briku ataka(tanpshi(estrate)); }
+                                  // funksie
+                           // akata(estrate)
+      // {  briku ataka(tanpshi(estrate)); }
+//
+
+   function parse (string) { return parseTokens(tokenize(string)) }
 
                                   funksie
                                 ataka(tv)
