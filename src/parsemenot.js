@@ -228,9 +228,51 @@ bong ding dong yabba dabba dee. 🧸
        p(s)=(-> t q) s
 
 
+       p(s)=((-> t q) s)
+       ps(s)=((-> t pt) s)
+       ps(s)=((-> t pt) s)
+       ps=parse string
+       pt=parse tokens
 
+       ps:parse string
+       pt:parse tokens
 
+       ps="parse string"
+       pt="parse tokens"
 
+       ps=parsestring
+       pt=parsetokens
+
+       ps=parseString
+       pt=parseTokens
+
+       ps=parse_string
+       pt=parse_tokens
+       ps:parse string
+       pt:parse tokens
+       ps=parse string
+       pt=parse tokens
+
+       ps(s)=((-> t pt) s)
+       ps(s)=(pt (t s))
+
+       ps(s)=(pt (t s))
+
+       ps(s)=(-> t pt s)
+       ps(s)=(-> s t pt)
+
+       ps(s)=((-> t pt) s)
+       ps(s)=(-> t pt) s
+       ps s =(-> t pt) s
+       ps=(-> t pt)
+       ps=(pt (t))
+       (ps s)=((pt (t s)))
+       ps=(pt(t))
+       (ps s)=(pt(t s))
+       (p s)=(ps s)
+
+       (ps s)=(pt(t s))
+       (p s)=(ps s)
 
 
 
