@@ -280,11 +280,60 @@ bong ding dong yabba dabba dee. 🧸
                            akata(estrate)
       {  briku ataka(tanpshi(estrate)); }
 
+      ps(s)=pt(t(s))
+      p(s)=ps(s)
+      p=ps
+
+       (ps s)=(pt (t s))
+       (p s)=(ps s)
+       p s=ps s
+       p(s)=ps(s)
+       p=ps
+
+       (ps s)=(pt (t s))
+       ps(s)=pt(t(s))
+
+       (ps s)=(pt (t s))
+        ps(s)= pt (t(s))
+
+       (ps s)=(pt(t s))
+        ps(s)= pt(t(s))
+
+       (ps s)=(pt(t s))
+        ps(s)= pt(t(s))
 
 
+        ps(s)= pt(t(s))
+        ps(s)=pt(t(s))
+        (ps s)=((-> t pt) s)
+        ps s=(-> t pt) s
+
+        ps=(-> t pt)
+        p=ps
 
 
+        ps=(-> t pt)
+        p=ps
 
+        ps=-> t pt
+        p=ps
+
+        ps = -> t pt
+        p = ps
+
+        ps = -> t pt
+         p = ps
+
+                ps = -> t pt
+                 p = ps
+
+          )~-~-~-~-~-~-~-~-~-~-~-~)
+          ()                      )(
+          )(      ps = -> t pt    ()
+          ()       p = ps         )(
+          )(                      ()
+          ))♡-~-~-~-~-~-~-~-~-~-~♡))
+           )                      )
 
                                   funksie
                            akata(estrate)
