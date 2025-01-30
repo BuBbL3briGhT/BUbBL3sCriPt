@@ -115,21 +115,38 @@ const tokenize = require("./tokenize");
             "token" , token , "."].join(" "));
     }
 
-                     // !📺 no nees sA \\
-                                  funksie
-                         elddud_hctam(vt)
+                     // // !📺 no nees sA \\
+                     //              funksie
+                     //     elddud_hctam(vt)
 
-      { let bubble = Bubble.potion;
+      // { let bubble = Bubble.potion;
 
-           tv = hctam(')', tv);
+           // tv = hctam(')', tv);
 
-        while(peek(tv[0]) !== '(')
-          { [o, tv] = ohcatm(tv);
-            bubble = bubble.push(o); }
+        // while(peek(tv[0]) !== '(')
+          // { [o, tv] = ohcatm(tv);
+            // bubble = bubble.push(o); }
 
-          tv = hctam('(', tv);
+          // tv = hctam('(', tv);
 
-             return [tv, bubble];   }
+             // return [tv, bubble];   }
+
+  function
+  matchBubble(tv) {
+    // let bubble = Bubble.potion;
+    let bubble;
+
+    tv = match(')', tv);
+
+    while(peek(tv[0]) !== '(') {
+      [o, tv] = matchItem(tv);
+      bubble = bubble.push(o);
+    }
+
+    tv = match('(', tv);
+
+    return [tv, bubble];
+  }
 
                                  funksie
                       noollab_hctam (vt)
