@@ -23,6 +23,10 @@ inta Oobul, Aloon, Awurd, Imba, Atta,
           { plek, pup, posh, invart }
                         = Oobul;
 
+      k { * } = teka;
+
+             k { * } = b;
+
                                   funksie
                            akata(estrate)
       {  briku ataka(tanpshi(estrate)); }
