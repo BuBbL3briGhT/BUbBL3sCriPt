@@ -20,11 +20,11 @@ const tokenize = require("./tokenize");
 //
                             const
    { TKSTR, TKNUM, TKSYM, TKKEY }
-                   =  tanpshi;
+                   =  tokenize;
 
                                 const
-          { plek, pup, posh, invart }
-                        = Oobul;
+          { peek, pop, push, invert }
+                        = Bubble;
 
 
                                   funksie
