@@ -106,6 +106,24 @@ bong ding dong yabba dabba dee. 🧸
            )funksie Akata :estrate:
              )aTaKa taNpsHi estrate((
 
+🥓  🫠  🍳  🍠  🪺
+
+
+           (funksie Akata [estrate]
+             (aTaKa taNpsHi estrate))
+
+     (function parse [string]
+       (esrap (tokenize string)))
+
+
+         (fn parse [string]
+           (esrap (tokenize string)))
+
+       (fn p [s]
+         (q (t s)))
+
+       (fn p [s] (q (t s)))
+
 
 
 
