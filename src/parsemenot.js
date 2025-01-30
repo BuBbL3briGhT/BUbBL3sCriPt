@@ -95,6 +95,22 @@ bong ding dong yabba dabba dee. 🧸
                            akata(estrate)
       {  briku ataka(tanpshi(estrate)); }
 
+
+      funksie akata estrate briku ataka tanpshi estrate
+      funksie akata estrate briku ataka tanpshi estrate
+
+  Funksie akata estrate briku ataka tanpshi
+  estrate.
+
+
+
+
+
+
+                                  funksie
+                           akata(estrate)
+      {  briku ataka(tanpshi(estrate)); }
+
                                   funksie
                                 ataka(tv)
           {    let [tokens] = tv, twee;
