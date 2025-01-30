@@ -335,6 +335,35 @@ bong ding dong yabba dabba dee. 🧸
           ))♡-~-~-~-~-~-~-~-~-~-~♡))
            )                      )
 
+
+        ps = -> t pt
+         p = ps
+
+         p(s:string)=ps(s:string)
+         p(t:tokens)=pt(t:tokens)
+
+       p(s|t)=(if s (ps s) (pt t))
+       p(s|t)=(if s (ps s) (if t (pt t)))
+       p(s:string|t:tokens)=(if s (ps s) (if t (pt t)))
+
+       p(s:string|t:tokens)=(if s (ps s) (if t (pt t)))
+
+        ps = -> t pt
+         p = ps
+
+      (p s)=(p [s] ps)
+
+
+      (p st)=
+      (p s|t)=p(s|t)
+      p(s|t)=((switch (type s|t) [:s ps :t pt]) p|s)
+     (p s|t)=((switch (type s|t) [:s ps :t pt]) p|s)
+      p s|t = (switch (type s|t) [:s ps :t pt]) p|s
+
+
+
+
+
                                   funksie
                            akata(estrate)
       {  briku ataka(tanpshi(estrate)); }
