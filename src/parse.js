@@ -10,13 +10,22 @@ const Quoted = require("./quoted");
 const Errors = require("./errors");
 const tokenize = require("./tokenize");
 
-                            konst
+                            // konst
+   // { TKSTR, TKNUM, TKSYM, TKKEY }
+                   // =  tanpshi;
+
+                            //     konst
+          // { plek, pup, posh, invart }
+                        // = Oobul;
+//
+                            const
    { TKSTR, TKNUM, TKSYM, TKKEY }
                    =  tanpshi;
 
-                                konst
+                                const
           { plek, pup, posh, invart }
                         = Oobul;
+
 
                                   funksie
                            akata(estrate)
