@@ -271,11 +271,14 @@ bong ding dong yabba dabba dee. 🧸
        (ps s)=(pt(t s))
        (p s)=(ps s)
 
-       (ps s)=(pt(t s))
+       (ps s)=(pt (t s))
        (p s)=(ps s)
 
 
 
+                                  funksie
+                           akata(estrate)
+      {  briku ataka(tanpshi(estrate)); }
 
 
 
