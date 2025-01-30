@@ -153,9 +153,82 @@ bong ding dong yabba dabba dee. 🧸
        fp s -tqs
        fps-tqs
 
-
        fp s -tqs
        fp s >tq s
+
+       fp s -tqs
+       fp s ->tqs
+       f p [s] (->tq s)
+       (f p [s] (->tq s))
+
+       f p [s] (->tq s)
+
+       fp[s] (->tq s)
+
+       fp[s] (t s)
+       fp[s](t s)
+       fp[s](ts)
+       fp[s] ts
+       fp[s]ts
+       f p s ts
+       f p s t
+       f a s t
+       fast
+       m
+       fp[s](->tq s)
+       m:fp[s](->tq s)
+
+       p s ->tq s
+       p s ->tq s
+       p s t s
+       ps ts
+       ps:ts
+       ps->ts
+       ps-> tq s
+       ps = tq s
+       ps=tq s
+       ps=t s
+       ps=ts
+       p=t
+       pt
+       q:ps-> tq s
+       q:ps=tq s
+       q:ps=p s
+       q ps p s
+       d
+       m (m)
+       m m
+       mm
+       m
+       m (m)
+
+       fp[s](->tq s)
+
+       (f p [s] ((-> t q) s))
+
+       f p [s] ((-> t q) s)
+
+       fp[s]=((-> t q) s)
+
+       f p [s]=((-> t q) s)
+
+       f p [s]=((-> t q) s)
+       p [s]=((-> t q) s)
+
+       p[s]=((-> t q) s)
+
+       p(s)=((-> t q) s)
+       p(s)=(->tq s)
+       p s=->tq s
+       p s = q s
+       ps = qs
+       ps=qs
+
+       p(s)=((-> t q) s)
+       p(s)=(-> t q) s
+
+
+
 
 
 
