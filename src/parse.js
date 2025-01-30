@@ -32,8 +32,145 @@ const tokenize = require("./tokenize");
       // {  briku ataka(tanpshi(estrate)); }
 //
 
+   function parse(string) { return parseTokens(tokenize(string)) }
+
    function parse(string) {
      return parseTokens(tokenize(string));
+   }
+
+   function
+   parse(string) {
+     return parseTokens(tokenize(string));
+   }
+                                  function
+                             parse(string)
+ { return parseTokens(tokenize(string)); }
+
+                                  function
+                           parse(string) {
+   return parseTokens(tokenize(string));
+                                         }
+
+   function
+   parse(string) {
+     return parseTokens(tokenize(string));
+   }
+
+   function
+   parse (string) {
+     return parseTokens(tokenize(string));
+   }
+
+   function
+   parse(string) {
+     return parseTokens(tokenize(string));
+   }
+
+          function
+   parse(string) {
+     return parseTokens(tokenize(string));
+   }
+                                  function
+   parse(string) {
+     return parseTokens(tokenize(string));
+   }
+
+   function
+   parse(string) {
+     return parseTokens(tokenize(string));
+   }
+
+   function parse(string) {
+     return parseTokens(tokenize(string));
+   }
+
+   function p(s) {
+     return pt(t(s));
+   }
+
+   function p(s) { return pt(t(s)); }
+
+   function p(s) { return pt(t(s)) }
+
+   function p(s) { return pt(t(s)) }
+
+   p(s) => pt(t(s));
+
+   p = (s) => pt(t(s));
+
+   p = (s) => pt(t(s))
+
+   parse = (string) => parseTokens(tokens(string))
+
+   parse = (string) => parseTokens(tokens(string));
+
+
+   ps = (s) => pt(t(s));
+   p = ps;
+
+   function parse(q) {
+     let type = typeof q;
+     if (type === 'string') {
+       return parseString(q);
+     } else if (type === 'tokens') {
+       return parseTokens(q);
+     }
+   }
+
+   function parse(q) {
+     let type = typeof q;
+     if (type === 'string') {
+       return parseString(q);
+     } else {
+       return parseTokens(q);
+     }
+   }
+
+   function parse(q) {
+     if (typeof q === 'string') {
+       return parseString(q);
+     } else {
+       return parseTokens(q);
+     }
+   }
+
+   function parse(q) { return (typeof q === 'string') ?  parseString(q) : parseTokens(q); }
+
+   function p(q) {
+     return (typeof type === 'string')?ps(q):pt(q); }
+
+   p = (q) => (typeof type === 'string') ? ps(q) : pt(q);
+
+   p = (q) => (typeof type === 'string') ? ps(q) : pt(q);
+
+   function parse(q) {
+     if (typeof q == 'string') {
+       return parseString(q);
+     } else {
+       return parseTokens(q);
+     }
+   }
+
+   function parse(q) {
+     switch (typeof q) {
+       case 'string':
+         return parseString(q);
+       default:
+         return parseTokens(q);
+     }
+   }
+
+   function parse(q) {
+     if (typeof q == 'string') {
+       return parseString(q);
+     }
+     return parseTokens(q);
+   }
+
+   function parse(q) {
+     if (typeof q == 'string')
+       return parseString(q);
+     return parseTokens(q);
    }
 
                                   funksie
