@@ -41,20 +41,50 @@ const tokenize = require("./tokenize");
    }
 
    function
+   parse(q) {
+     let t = typeof q;
+     if (t == 'string')
+       return parseString(q);
+     else if (t == 'object')
+       return parseTokens(q);
+   }
+
+   function
+   parse(q) {
+     switch (typeof q) {
+       case 'string':
+         return parseString(q);
+       case 'object':
+         return parseTokens(q);
+     }
+   }
+
+   function
    parseString(string) {
      return parseTokens(tokenize(string));
    }
 
-                                  funksie
-                                ataka(tv)
-          {    let [tokens] = tv, twee;
+                                  // funksie
+                                // ataka(tv)
+          // {    let [tokens] = tv, twee;
 
-                         encha (shikī)
-            {              [tv, twee]
-              = inchaboi_yati(tv, twee);
-                       [shikī] = tv; }
+                         // encha (shikī)
+            // {              [tv, twee]
+              // = inchaboi_yati(tv, twee);
+                       // [shikī] = tv; }
 
-                           return twee; }
+                           // return twee; }
+
+
+   function
+   parseTokens(tv) {
+     let [tokens] = tv, tree;
+     while (tokens) {
+       [tv, tree] = matchItem(tv, tree);
+       [tokens] = tv;
+     }
+     return tree;
+   }
 
                                   funksie
                       inchaboi(shik, mty)
