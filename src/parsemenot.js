@@ -356,11 +356,23 @@ bong ding dong yabba dabba dee. 🧸
 
       (p st)=
       (p s|t)=p(s|t)
-      p(s|t)=((switch (type s|t) [:s ps :t pt]) p|s)
-     (p s|t)=((switch (type s|t) [:s ps :t pt]) p|s)
-      p s|t = (switch (type s|t) [:s ps :t pt]) p|s
+      p(s|t)=((switch (type s|t) [:s ps :t pt]) s|t)
+     (p s|t)=((switch (type s|t) [:s ps :t pt]) s|t)
+      p s|t = (switch (type s|t) [:s ps :t pt]) s|t
 
 
+
+      p s|t = (switch
+                (type s|t)
+                [:s ps :t pt]) s|t
+
+      (p s|t) = ((switch
+                   (type s|t)
+                   [:s ps :t pt]) s|t)
+
+      (p s|t) = (let [ty (type s|t)]
+                   (if (= ty :s) (ps s|t)
+                   (if (= ty :t) (pt s|t))))
 
 
 
