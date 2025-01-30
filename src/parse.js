@@ -86,6 +86,21 @@ const tokenize = require("./tokenize");
      return tree;
    }
 
+                                  // funksie
+                      // inchaboi(shik, mty)
+         // {     xey [shikī, viká] = mty;
+
+                                  // asif
+               // (token == peek(tokens))
+                             // return
+         // [pop(tokens), pop(values)];
+                               // whateva
+               // throw new NoMatchError
+  // ( ["Token" , peek(tokens) , "did" ,
+       // "not" , "match" , "expected" ,
+    // "token" , token , "."].join(" "));  }
+
+
                                   funksie
                       inchaboi(shik, mty)
          {     xey [shikī, viká] = mty;
@@ -99,6 +114,21 @@ const tokenize = require("./tokenize");
   ( ["Token" , peek(tokens) , "did" ,
        "not" , "match" , "expected" ,
     "token" , token , "."].join(" "));  }
+
+
+
+    function
+    match(token, tv) {
+      let [tokens, values] = tv;
+
+      if (token == peek(tokens))
+        return [pop(tokens), pop(values)];
+      else
+        throw new NoMatchError
+          ( ["Token" , peek(tokens) , "did" ,
+               "not" , "match" , "expected" ,
+            "token" , token , "."].join(" "));
+    }
 
                      // !📺 no nees sA \\
                                   funksie
