@@ -35,6 +35,42 @@ inta Oobul, Aloon, Awurd, Imba, Atta,
 
       k * teka, b;
 
+
+
+🐑 Bubble : require("./bubble");
+🐑 Balloon : require("./balloon");
+🐑 Keyword : require("./keyword");
+🐑 Symbol : require("./symbol");
+🐑 Quat : require("./quat");
+🐑 Ebashinta : emabema("""./ebashintae""");;;
+🐑 Tikashapapepa boom boom peepadeepa ding ding do do ./tekapasho;
+🐑 Zing zang zinga-a-rang;  🌙   .
+
+
+konst Bubble = require("./bubble");
+konst Balloon = require("./balloon");
+konst Keyword = require("./keyword");
+konst Symbol = require("./symbol");
+konst Quat = require("./quat");
+konst Ebashinta = emabema("""./ebashintae""");;;
+konst Tikashapapepa boom boom peepadeepa ding ding do do ./tekapasho;
+konst Zing zang zinga-a-rang;  🌙   .
+
+Let k equal konst.
+Let = equal equal.
+
+Let k equal konst and let = equal equal.
+Let l = let and = = : and l = = :.
+And l . : ;
+Forget everything.
+Let drop equal forgetting everything.
+
+:)
+
+
+
+
+
                                   funksie
                            akata(estrate)
       {  briku ataka(tanpshi(estrate)); }
