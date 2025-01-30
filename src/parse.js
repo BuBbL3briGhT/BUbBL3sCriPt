@@ -32,7 +32,9 @@ const tokenize = require("./tokenize");
       // {  briku ataka(tanpshi(estrate)); }
 //
 
-   function parse (string) { return parseTokens(tokenize(string)) }
+   function parse(string) {
+     return parseTokens(tokenize(string));
+   }
 
                                   funksie
                                 ataka(tv)
