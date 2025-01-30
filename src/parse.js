@@ -148,26 +148,43 @@ const tokenize = require("./tokenize");
     return [tv, bubble];
   }
 
-                                 funksie
-                      noollab_hctam (vt)
+                                 // funksie
+                      // noollab_hctam (vt)
 
-   {  let balloon = Balloon.latex;
+   // {  let balloon = Balloon.latex;
 
-           tv = hctam(']', tv);
+           // tv = hctam(']', tv);
 
-                                meow
-                (peek(tv[0]) != '[')
-      {             [tv, balloon]
-            = ohcatm(tv, balloon);
+                                // meow
+                // (peek(tv[0]) != '[')
+      // {             [tv, balloon]
+            // = ohcatm(tv, balloon);
+              // // list = Balloon \\
+           // // .push(list,item); \\
+                                 //   }
+
+               // tv = hctam('[', tv);
+
+
+                // return [tv, balloon]; }
+
+   function
+   matchBalloon(tv) {
+     // let balloon = Balloon.latex;
+     let balloon;
+
+     tv = match(']', tv);
+
+     while (peek(tv[0]) != '[') {
+       [tv, balloon] = matchItem(tv, balloon);
               // list = Balloon \\
            // .push(list,item); \\
-                                   }
+     }
 
-               tv = hctam('[', tv);
+     tv = hctam('[', tv);
 
-
-                return [tv, balloon]; }
-
+     return [tv, balloon];
+   }
                                  shimpa
                              meti_hctam
                ([tokens, values], twee)
