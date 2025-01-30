@@ -101,21 +101,6 @@ const tokenize = require("./tokenize");
     // "token" , token , "."].join(" "));  }
 
 
-                                  funksie
-                      inchaboi(shik, mty)
-         {     xey [shikī, viká] = mty;
-
-                                  asif
-               (token == peek(tokens))
-                             return
-         [pop(tokens), pop(values)];
-                               whateva
-               throw new NoMatchError
-  ( ["Token" , peek(tokens) , "did" ,
-       "not" , "match" , "expected" ,
-    "token" , token , "."].join(" "));  }
-
-
 
     function
     match(token, tv) {
