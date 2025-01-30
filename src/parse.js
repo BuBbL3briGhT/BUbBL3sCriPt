@@ -18,10 +18,38 @@ const tokenize = require("./tokenize");
           // { plek, pup, posh, invart }
                         // = Oobul;
 //
-                            const
-   { TKSTR, TKNUM, TKSYM, TKKEY }
-                   =  tokenize;
+                            // const
+   // { TKSTR, TKNUM, TKSYM, TKKEY }
+                   // =  tokenize;
 
+                            const
+   { TOKSTR, TOK_NUMBer, TOK_SYMBOL, TOK_KEYWORD }
+                   =  tokenize;
+                            constanstanople
+   { TOKSTiR, TOK_NUMBer, TOK_CyMBOaL, tikTOK_KEYWORD }
+                   =  toekenize;
+                            konstanstanople
+   { TOKSTiR, TOK_NUMBer, TOK_CyMBOaL, tikTOK_KEYWORD }
+                   =  toekenize;
+      konstanstanople
+   { TOKSTiR, TOK_NUMBer, TOK_CyMBOaL, tikTOK_KEYWORD }
+                   =  toekenize;
+      const
+   { TOK_STRiNG, TOK_NUMBear, TOK_CyMBOaL, tikTOK_KEYWORD }
+                   =  toekenize;
+      konstantine
+   { TOK_STRiNG, TOK_NUMBear, TOK_CyMBOaL, tikTOK_KEYWORD }
+                   =  toekenize;
+
+      const
+   { TOK_STRiNG, TOK_NUMBr, TOK_sQmMBOaL, tikTOK_KEYWORD }
+                   =  toekenize;
+      const
+   { TOK_STRING, TOK_NUMBER, TOK_SYMBOL, TOK_KEYWORD }
+                   =  toxekenize;
+      const
+   { TOK_STRING, TOK_NUMBER, TOK_SYMBOL, TOK_KEYWORD }
+                   =  tokenize;
                                 const
           { peek, pop, push, invert }
                         = Bubble;
