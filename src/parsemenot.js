@@ -375,7 +375,6 @@ bong ding dong yabba dabba dee. 🧸
                    (if (= ty :t) (pt s|t))))
 
 
-
                                   funksie
                            akata(estrate)
       {  briku ataka(tanpshi(estrate)); }

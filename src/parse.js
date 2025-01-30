@@ -1,7 +1,14 @@
 
-inta Oobul, Aloon, Awurd, Imba, Atta,
-  Eratata, takanoshi;
+// inta Oobul, Aloon, Awurd, Imba, Atta,
+//   Eratata, takanoshi;
 
+const Bubble = require("./bubble");
+const Balloon = require("./balloon");
+const Keyword = require("./keyword");
+const Symbol = require("./symbol");
+const Quoted = require("./quoted");
+const Errors = require("./errors");
+const tokenize = require("./tokenize");
 
                             konst
    { TKSTR, TKNUM, TKSYM, TKKEY }
