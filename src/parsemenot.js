@@ -67,7 +67,27 @@ Let drop equal forgetting everything.
 
 :)
 
+drop
 
+inta o, b, a, s, q, e, t;
+
+      k * teka, o;
+
+inta o b a s q e t
+
+inta obasqet
+
+i obasqet
+
+iobasqet
+
+iteqsabo ~ deta beeta.
+
+Oshi dabba dooba. Bebab debaba boom boom ting ba bang bang utta utta bela bala bing bong ding dong yabba dabba dee.
+
+Oshi dabba dooba. Bebab debaba boom boom
+ting ba bang bang utta utta bela bala bing
+bong ding dong yabba dabba dee. 🧸
 
 
 
