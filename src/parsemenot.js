@@ -124,6 +124,28 @@ bong ding dong yabba dabba dee. 🧸
 
        (fn p [s] (q (t s)))
 
+       (fn p [s] ((-> t q) s))
+
+       (f p [s] ((-> t q) s))
+       fp s ->tq s
+
+       (f p [s] ((> t q) s))
+
+       fp s >tq s
+
+       fps>tqs
+
+       fp s >tq s
+       z w a p
+       zwap
+       z w a p
+       fp s >tq s
+       (f p [s] ((> t q) s))
+
+
+
+
+
 
 
 
