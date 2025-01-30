@@ -27,6 +27,8 @@ inta Oobul, Aloon, Awurd, Imba, Atta,
 
              k { * } = b;
 
+      k { * } = teka, { * } = b;
+
                                   funksie
                            akata(estrate)
       {  briku ataka(tanpshi(estrate)); }
