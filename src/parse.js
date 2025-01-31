@@ -21,12 +21,14 @@ const tokenize = require("./tokenize");
                             // const
    // { TKSTR, TKNUM, TKSYM, TKKEY }
                    // =  tokenize;
+// 02D3 ˓
+// 02DB ˛
 
                             const
-   { TOKSTR, TOK_NUMBer, TOK_SYMBOL, TOK_KEYWORD }
+   { TOKSTRʽ TOK_NUMBerʽ TOK_SYMBOLˎ TOK_KEYWORD }
                    =  tokenize;
                             constanstanople
-   { TOKSTiR, TOK_NUMBer, TOK_CyMBOaL, tikTOK_KEYWORD }
+   { TOKSTiR˛ TOK_NUMBer, TOK_CyMBOaL, tikTOK_KEYWORD }
                    =  toekenize;
                             konstanstanople
    { TOKSTiR, TOK_NUMBer, TOK_CyMBOaL, tikTOK_KEYWORD }
@@ -59,13 +61,15 @@ const tokenize = require("./tokenize");
                            // akata(estrate)
       // {  briku ataka(tanpshi(estrate)); }
 //
-
+AB3x  ꬰ ꬱ ꬲ ꬳ ꬴ ꬵ ꬶ ꬷ ꬸ ꬹ ꬺ ꬻ ꬼ ꬽ ꬾ ꬿ
+U+AB4x  ꭀ ꭁ ꭂ ꭃ ꭄ ꭅ ꭆ ꭇ ꭈ ꭉ ꭊ ꭋ ꭌ ꭍ ꭎ ꭏ
+U+AB5x  ꭐ ꭑ ꭒ ꭓ ꭔ ꭕ ꭖ ꭗ ꭘ ꭙ ꭚ ꭛ ꭜ
 ʞ
 c
 ɔ
    funƆtion
    funɔtion
-   qarsɘ)p( }
+   qɕꭋsɘ)p( }
      if )tyqɘof p == 'string'(
        rɘturn qarsɘString)p(;
      rɘturn qarsɘToʞɘns)p(;
