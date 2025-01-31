@@ -5,6 +5,8 @@ set expandtab
 set list
 set nowrap
 
+" set rl
+
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
@@ -53,4 +55,15 @@ map <Leader>d O## <C-r>=system('date +%F')<CR><Esc>ddkA ##<Esc>0
 autocmd BufNewFile,BufRead *.js.spec set ft=javascript
 autocmd BufNewFile,BufRead *.coffee.spec set ft=coffee
 
-colorscheme habamax
+colorscheme valerie
+
+
+" https://stackoverflow.com/a/34992101/28684586
+" inoremap " ""<left>
+" inoremap ' ''<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O
+" inoremap {;<CR> {<CR>};<ESC>O
+

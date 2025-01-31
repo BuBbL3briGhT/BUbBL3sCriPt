@@ -15,6 +15,23 @@ alias 🍉="git commit -m🍉"
 alias 🍫="git commit -m🍫"
 alias gc="git commit -m"
 alias +=gc
+# alias ++="+ ."
+# alias ++="aa;
+# unalias ++;
+alias ++="quickcommit"
+
+function quickcommit() {
+  git add .
+  git status
+  git diff --cached
+  read -p "Commit message: " message
+  git commit -m "$message"
+}
+
+function yo() {
+  echo "hi"
+}
+
 
 alias j=jobs
 
@@ -42,6 +59,8 @@ alias swapfiles='find . -type f -name ".*.s??"'
 # Edit ~/.bashrc and source it.
 alias bashrc='vi ~/.bashrc && source ~/.bashrc'
 
+alias vimrc='vi ~/.vimrc'
+
 # Edit todos
 #
 # Usage:
@@ -50,9 +69,12 @@ alias bashrc='vi ~/.bashrc && source ~/.bashrc'
 #   $ td ~  # Edit ~/.todo
 #   $ td .. # Edit ../.todo
 function td() {
-  ${EDITOR:-nano} "${@:-.}/.todo"
+  ${EDITOR:-nano} "${@:-.}/.todos"
 }
 
 PS1="\[\e[0;95m\]\W\[\e[0m\] \[\e[1;35m\]\$\[\e[0m\] "
 # LS_COLORS='di=0;97:fi=1:97:' ; export LS_COLORS
 LS_COLORS=':di=0;95:' ; export LS_COLORS
+
+cd ~/projects/bubblescript
+vi newjack.
