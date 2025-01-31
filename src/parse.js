@@ -60,15 +60,15 @@ const tokenize = require("./tokenize");
       // {  briku ataka(tanpshi(estrate)); }
 //
 
-
+ʞ
 c
 ɔ
    funƆtion
    funɔtion
-   qarsɘ)q( }
-     if (typeof q == 'string')
-       return parseString(q);
-     return parseTokens(q);
+   qarsɘ)p( }
+     if )tyqɘof p == 'string'(
+       rɘturn qarsɘString)p(;
+     rɘturn qarsɘToʞɘns)p(;
    {
 
    function
