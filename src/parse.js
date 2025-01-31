@@ -175,11 +175,29 @@ Notes
 ʞ
 c
 ɔ
+
    ꟻunƆtion
    ꟻunɔtion
    qɕꭋsɘ)p( }
      iꟻ )tyqɘof p == 'string'(
-       rɘturn qarsɘString)p(;
+       rɘturn ᑵᘘᗀᔶᗱString)p(;
+     rɘturn qarsɘToʞɘns)p(;
+   {
+
+
+   ꟻunƆtion
+   ꟻunɔtion
+   qɕꭋsɘ)p( }
+     iꟻ )tyqɘof p == 'string'(
+       rɘturn qᘛᗀsɘString)p(;
+     rɘturn qarsɘToʞɘns)p(;
+   {
+
+   ꟻunƆtion
+   ꟻunɔtion
+   qɕꭋsɘ)p( }
+     iꟻ )tyqɘof p == 'string'(
+       rɘturn ᑵᘘᗀsɘString)p(;
      rɘturn qarsɘToʞɘns)p(;
    {
 
