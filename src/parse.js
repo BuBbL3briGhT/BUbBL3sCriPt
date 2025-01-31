@@ -72,13 +72,31 @@ U+AB3x  ꬰ ꬱ ꬲ ꬳ ꬴ ꬵ ꬶ ꬷ ꬸ ꬹ ꬺ ꬻ ꬼ ꬽ ꬾ ꬿ
 U+AB4x  ꭀ ꭁ ꭂ ꭃ ꭄ ꭅ ꭆ ꭇ ꭈ ꭉ ꭊ ꭋ ꭌ ꭍ ꭎ ꭏ
 U+AB5x  ꭐ ꭑ ꭒ ꭓ ꭔ ꭕ ꭖ ꭗ ꭘ ꭙ ꭚ ꭛ ꭜ ꭝ ꭞ ꭟ
 U+AB6x  ꭠ ꭡ ꭢ ꭣ ꭤ ꭥ ꭦ ꭧ ꭨ ꭩ ꭪ ꭫
+
+Latin Extended-D[1][2]
+Official Unicode Consortium code chart (PDF)
+  0 1 2 3 4 5 6 7 8 9 A B C D E F
+U+A72x  ꜠ ꜡ Ꜣ ꜣ Ꜥ ꜥ Ꜧ ꜧ Ꜩ ꜩ Ꜫ ꜫ Ꜭ ꜭ Ꜯ ꜯ
+U+A73x  ꜰ ꜱ Ꜳ ꜳ Ꜵ ꜵ Ꜷ ꜷ Ꜹ ꜹ Ꜻ ꜻ Ꜽ ꜽ Ꜿ ꜿ
+U+A74x  Ꝁ ꝁ Ꝃ ꝃ Ꝅ ꝅ Ꝇ ꝇ Ꝉ ꝉ Ꝋ ꝋ Ꝍ ꝍ Ꝏ ꝏ
+U+A75x  Ꝑ ꝑ Ꝓ ꝓ Ꝕ ꝕ Ꝗ ꝗ Ꝙ ꝙ Ꝛ ꝛ Ꝝ ꝝ Ꝟ ꝟ
+U+A76x  Ꝡ ꝡ Ꝣ ꝣ Ꝥ ꝥ Ꝧ ꝧ Ꝩ ꝩ Ꝫ ꝫ Ꝭ ꝭ Ꝯ ꝯ
+U+A77x  ꝰ ꝱ ꝲ ꝳ ꝴ ꝵ ꝶ ꝷ ꝸ Ꝺ ꝺ Ꝼ ꝼ Ᵹ Ꝿ ꝿ
+U+A78x  Ꞁ ꞁ Ꞃ ꞃ Ꞅ ꞅ Ꞇ ꞇ ꞈ ꞉ ꞊ Ꞌ ꞌ Ɥ ꞎ ꞏ
+U+A79x  Ꞑ ꞑ Ꞓ ꞓ ꞔ ꞕ Ꞗ ꞗ Ꞙ ꞙ Ꞛ ꞛ Ꞝ ꞝ Ꞟ ꞟ
+U+A7Ax  Ꞡ ꞡ Ꞣ ꞣ Ꞥ ꞥ Ꞧ ꞧ Ꞩ ꞩ Ɦ Ɜ Ɡ Ɬ Ɪ ꞯ
+U+A7Bx  Ʞ Ʇ Ʝ Ꭓ Ꞵ ꞵ Ꞷ ꞷ Ꞹ ꞹ Ꞻ ꞻ Ꞽ ꞽ Ꞿ ꞿ
+U+A7Cx  Ꟁ ꟁ Ꟃ ꟃ Ꞔ Ʂ Ᶎ Ꟈ ꟈ Ꟊ ꟊ Ɤ Ꟍ ꟍ
+U+A7Dx  Ꟑ ꟑ   ꟓ   ꟕ Ꟗ ꟗ Ꟙ ꟙ Ꟛ ꟛ Ƛ
+U+A7Ex
+U+A7Fx      ꟲ ꟳ ꟴ Ꟶ ꟶ ꟷ ꟸ ꟹ ꟺ ꟻ ꟼ ꟽ ꟾ ꟿ
 ʞ
 c
 ɔ
-   funƆtion
-   funɔtion
+   ꟻunƆtion
+   ꟻunɔtion
    qɕꭋsɘ)p( }
-     if )tyqɘof p == 'string'(
+     iꟻ )tyqɘof p == 'string'(
        rɘturn qarsɘString)p(;
      rɘturn qarsɘToʞɘns)p(;
    {
