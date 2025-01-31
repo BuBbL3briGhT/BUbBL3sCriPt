@@ -61,12 +61,15 @@ const tokenize = require("./tokenize");
 //
 
 
-   function
-   parse(q) {
+c
+ɔ
+   funƆtion
+   funɔtion
+   parse)q( }
      if (typeof q == 'string')
        return parseString(q);
      return parseTokens(q);
-   }
+   {
 
    function
    parse(q) {
