@@ -1,2 +1,15 @@
-map(bubble:Bubble, funksie:Funksie);
-map(ballon:Ballon, funksie:Funksie);
+map(list:List, funksie:Funksie) {
+
+};
+
+map(stack:Stack, funksie:Funksie) {
+
+};
+
+map(bubble:Bubble, funksie:Funksie) {
+
+};
+
+map(ballon:Ballon, funksie:Funksie) {
+
+};
