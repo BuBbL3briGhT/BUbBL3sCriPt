@@ -1,15 +1,15 @@
-map(list:List, funksie:Funksie) {
+List map(list:List, funksie:Funksie) {
 
 };
 
-map(stack:Stack, funksie:Funksie) {
+Stack map(stack:Stack, funksie:Funksie) {
 
 };
 
-map(bubble:Bubble, funksie:Funksie) {
+Bubble map(bubble:Bubble, funksie:Funksie) {
 
 };
 
-map(ballon:Ballon, funksie:Funksie) {
+Balloon map(ballon:Ballon, funksie:Funksie) {
 
 };
