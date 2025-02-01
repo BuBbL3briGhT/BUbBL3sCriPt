@@ -1,15 +1,33 @@
-List map(list:List, funksie:Funksie) {
 
-};
+List map(List, Funksie);
+Stack map(Stack, Funksie);
+Bubble map(Bubble, Funksie);
+Balloon map(Ballon, Funksie);
 
-Stack map(stack:Stack, funksie:Funksie) {
+List
+map(List list, Funksie funksie)
+{ };
 
-};
+Stack
+map(Stack stack, Funksie funksie)
+{ };
 
-Bubble map(bubble:Bubble, funksie:Funksie) {
+Bubble
+map(Bubble bubble, Funksie funksie)
+{ };
 
-};
+Balloon
+map(Ballon ballon, Funksie funksie)
+{ };
 
-Balloon map(ballon:Ballon, funksie:Funksie) {
 
-};
+
+
+
+
+
+
+
+
+
+
