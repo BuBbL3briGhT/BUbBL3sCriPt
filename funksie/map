@@ -1,0 +1,2 @@
+map(bubble:Bubble, funksie:Funksie);
+map(ballon:Ballon, funksie:Funksie);
