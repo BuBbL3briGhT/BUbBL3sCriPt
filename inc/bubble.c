@@ -22,7 +22,7 @@ void printBubbles(struct Bubble* oo) {
     printf("\n");
 }
 
-struct Bubble* push(struct Bubble* oo, int o) {
+struct Bubble* pushBubble(struct Bubble* oo, int o) {
   struct Bubble* bubble = newBubble(o);
   bubble->oo = oo;
   return bubble;
@@ -30,8 +30,8 @@ struct Bubble* push(struct Bubble* oo, int o) {
 
 int main() {
     struct Bubble* o = newBubble(1);
-    o = push(o, 2);
-    o = push(o, 3);
+    o = pushBubble(o, 2);
+    o = pushBubble(o, 3);
 
     printf("Bubbles: ");
     printBubbles(o);
