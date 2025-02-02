@@ -1,4 +1,8 @@
-(pLay :yoUtuBE DL7-CKirWZE NQb8PWwM_3o v1c2OfAzDTI)
+(let playlist '("DL7-CKirWZE" "NQb8PWwM_3o" "v1c2OfAzDTI")
+    (let playlist (push playlist "6nFBTaCWhik")
+      (pLay :youUtuBE playlist)))
+
+
 
     COPY RiGHT BAMBi ©️ 20255, ALL RiGHTS  RESERVEDD
          ,,                           ,,--^--,,
