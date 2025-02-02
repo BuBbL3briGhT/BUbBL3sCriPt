@@ -14,18 +14,27 @@ alias 🍭="git commit -m🍭"
 alias 🍉="git commit -m🍉"
 alias 🍫="git commit -m🍫"
 alias gc="git commit -m"
-alias +=gc
+alias+="git add .; git status; git diff --cached"
 # alias ++="+ ."
 # alias ++="aa;
 # unalias ++;
 alias ++="quickcommit"
 
+
 function quickcommit() {
   git add .
   git status
   git diff --cached
-  read -p "Commit message: " message
-  git commit -m "$message"
+  if [ $# -gt 0 ]; then
+    for arg in $@
+    do
+      message="$message $arg"
+    done
+    git commit -m "$message"
+  else
+    read -p "Commit message: " message
+    git commit -m "$message"
+  fi
 }
 
 function yo() {
@@ -57,7 +66,8 @@ export EDITOR=vi
 alias swapfiles='find . -type f -name ".*.s??"'
 
 # Edit ~/.bashrc and source it.
-alias bashrc='vi ~/.bashrc && source ~/.bashrc'
+alias .rc='vi ~/.bashrc && source ~/.bashrc'
+
 
 alias vimrc='vi ~/.vimrc'
 
@@ -77,4 +87,4 @@ PS1="\[\e[0;95m\]\W\[\e[0m\] \[\e[1;35m\]\$\[\e[0m\] "
 LS_COLORS=':di=0;95:' ; export LS_COLORS
 
 cd ~/projects/bubblescript
-vi newjack.
+# vi newjack.
