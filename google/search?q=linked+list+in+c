@@ -1,0 +1,65 @@
+linked list in C is a dynamic data structure that consists of a series of nodes, where each node contains data and a pointer to the next node in the list. Here's a basic implementation of a singly linked list in C: [1]
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to create a new node
+struct Node* newNode(int data) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->data = data;
+    node->next = NULL;
+    return node;
+}
+
+// Function to print the linked list
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    // Create a simple linked list with three nodes
+    struct Node* head = newNode(1);
+    head->next = newNode(2);
+    head->next->next = newNode(3);
+
+    // Print the linked list
+    printf("Linked list: ");
+    printList(head);
+
+    return 0;
+}
+
+Explanation:
+
+• Structure: The Node structure defines a node in the linked list. It contains the data and a pointer to the next node.
+• newNode() function: This function creates a new node with the given data.
+• printList() function: This function traverses the linked list and prints the data in each node.
+• main() function: This function creates a simple linked list with three nodes and prints it. [1, 2, 3]
+
+Important concepts:
+
+• Head: The head pointer points to the first node in the list.
+• Next: The next pointer in each node points to the next node in the list.
+• NULL: The next pointer of the last node is set to NULL to indicate the end of the list. [1, 4, 5]
+
+Common operations on linked lists:
+
+• Insertion: Adding a new node to the list (at the beginning, end, or a specific position).
+• Deletion: Removing a node from the list.
+• Searching: Finding a specific node in the list.
+• Traversal: Iterating through the list to access each node's data.
+
+
+Generative AI is experimental.
+
+[1] https://m.youtube.com/watch?v=nrIeocfcdIc&pp=ygUSI3NpbmdseWxpbmtlZGxpc3Rz[2] https://www.hackerearth.com/practice/data-structures/linked-list/singly-linked-list/tutorial/[3] https://www.geeksforgeeks.org/c-program-to-implement-singly-linked-list/[4] https://www.geeksforgeeks.org/linked-list-in-c/[5] https://www.geeksforgeeks.org/what-is-linked-list/[-] https://www.w3resource.com/c-programming-exercises/stack/c-stack-exercise-2.php[-] https://www.quora.com/What-type-of-stack-implementation-in-C-is-more-useful-array-STL-or-linked-list[-] https://www.w3resource.com/c-programming-exercises/stack/c-stack-exercise-2.php[-] https://www.quora.com/What-type-of-stack-implementation-in-C-is-more-useful-array-STL-or-linked-list[-] https://www.w3resource.com/c-programming-exercises/stack/c-stack-exercise-2.php[-] https://www.quora.com/What-type-of-stack-implementation-in-C-is-more-useful-array-STL-or-linked-list[-] https://www.w3resource.com/c-programming-exercises/stack/c-stack-exercise-2.php[-] https://www.quora.com/What-type-of-stack-implementation-in-C-is-more-useful-array-STL-or-linked-list
