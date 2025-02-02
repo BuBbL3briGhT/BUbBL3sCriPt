@@ -2,11 +2,11 @@
 #include <stdlib.h>
 
 struct Bubble {
-    int o;
+    void o;
     struct Bubble* oo;
 };
 
-struct Bubble* newBubble(int o) {
+struct Bubble* newBubble(void o) {
     struct Bubble* bubble = (struct Bubble*)malloc(sizeof(struct Bubble));
     bubble->o = o;
     bubble->oo = NULL;

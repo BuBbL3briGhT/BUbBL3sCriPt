@@ -1,0 +1,85 @@
+In C, you can't directly pass a string or an integer as a single parameter without specifying its type. However, you can achieve similar functionality using different approaches:
+1. Passing an Integer
+#include <stdio.h>
+
+void print_int(int num) {
+    printf("The integer is: %d\n", num);
+}
+
+int main() {
+    int x = 10;
+    print_int(x);
+    return 0;
+}
+
+2. Passing a String
+#include <stdio.h>
+
+void print_string(char *str) {
+    printf("The string is: %s\n", str);
+}
+
+int main() {
+    char *name = "Hello, World!";
+    print_string(name);
+    return 0;
+}
+
+3. Using a Union to Handle Both Types
+#include <stdio.h>
+
+union Data {
+    int num;
+    char str[20];
+};
+
+void print_data(union Data data, int is_int) {
+    if (is_int) {
+        printf("The integer is: %d\n", data.num);
+    } else {
+        printf("The string is: %s\n", data.str);
+    }
+}
+
+int main() {
+    union Data data1;
+    data1.num = 10;
+    print_data(data1, 1); // 1 indicates integer
+
+    union Data data2;
+    snprintf(data2.str, sizeof(data2.str), "Hello, World!");
+    print_data(data2, 0); // 0 indicates string
+
+    return 0;
+}
+
+4. Using Void Pointers and Type Casting
+#include <stdio.h>
+
+void print_data(void *data, int is_int) {
+    if (is_int) {
+        printf("The integer is: %d\n", *(int *)data);
+    } else {
+        printf("The string is: %s\n", (char *)data);
+    }
+}
+
+int main() {
+    int x = 10;
+    print_data(&x, 1); // 1 indicates integer
+
+    char *name = "Hello, World!";
+    print_data(name, 0); // 0 indicates string
+
+    return 0;
+}
+
+Important Considerations:
+
+• Type Safety: C is a strongly-typed language, so be careful when using unions or void pointers to ensure you're handling the correct data type.
+• Memory Management: If you're dealing with dynamically allocated strings, remember to free the memory when you're done.
+
+
+Generative AI is experimental.
+
+
