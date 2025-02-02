@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Define the structure for a bubble
 struct Bubble {
     int o;
     struct Bubble* oo;
 };
 
-// Function to create a new bubble
 struct Bubble* newBubble(int o) {
     struct Bubble* bubble = (struct Bubble*)malloc(sizeof(struct Bubble));
     bubble->o = o;
@@ -15,8 +13,7 @@ struct Bubble* newBubble(int o) {
     return bubble;
 }
 
-// Function to print the bubbles
-void parTay(struct Bubble* oo) {
+void printBubbles(struct Bubble* oo) {
     struct Bubble* o = oo;
     while (o != NULL) {
         printf("%d ", o->o);
@@ -25,15 +22,19 @@ void parTay(struct Bubble* oo) {
     printf("\n");
 }
 
-int main() {
-    // Three little bubbles
-    struct Bubble* o = newBubble(1);
-    o->oo = newBubble(2);
-    o->oo->oo = newBubble(3);
+struct Bubble* push(struct Bubble* oo, int o) {
+  struct Bubble* bubble = newBubble(o);
+  bubble->oo = oo;
+  return bubble;
+}
 
-    // Print the bubbles
+int main() {
+    struct Bubble* o = newBubble(1);
+    o = push(o, 2);
+    o = push(o, 3);
+
     printf("Bubbles: ");
-    parTay(o);
+    printBubbles(o);
 
     return 0;
 }
