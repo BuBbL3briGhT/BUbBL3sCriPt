@@ -1,0 +1,54 @@
+Source: Google.com
+Query: c make file
+Tags: Makefile Simple C
+
+A simple Makefile for compiling C code could look like this:
+CC = gcc
+CFLAGS = -Wall -g
+
+TARGET = my_program
+
+SRCS = main.c functions.c
+OBJS = $(SRCS:.c=.o)
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
+
+clean:
+	rm -f $(OBJS) $(TARGET)
+
+Explanation:
+
+• CC: Sets the C compiler (usually gcc).
+• CFLAGS: Specifies the compiler flags (e.g., -Wall for warnings, -g for debugging).
+• TARGET: The name of the executable file you want to create.
+• SRCS: Lists the source files in your project.
+• OBJS: Derives the object file names from the source file names.
+• all: The default target, which builds the executable.
+• $(TARGET): $(OBJS): Rule to build the executable. It links the object files together.
+• clean: A target to remove the object files and the executable.
+
+How to use:
+
+• Save the code above as Makefile (no extension) in the same directory as your C source files.
+• Open a terminal in that directory and run:
+
+   make
+
+This will compile your C code and create the my_program executable.
+To clean up the object files and executable, run:
+make clean
+
+More advanced Makefiles can:
+
+• Handle multiple executables.
+• Include header file dependencies.
+• Define macros for libraries.
+• Create different build configurations (e.g., debug, release).
+
+
+Generative AI is experimental.
+
+
