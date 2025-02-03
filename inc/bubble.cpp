@@ -15,12 +15,13 @@ void printBubbles(struct Bubble*);
 
 int main() {
 
-  int z = 9;
-  void* a = &z;
-  // printf("%d ", *(int *)a);
+  int i = 179;
+  void* o = &i;
+  printf("%d ", *(int *)o);
+  printf("%d ", *(int *)o);
 
-    struct Bubble* o;
-    o = blowBubble(8);
+    // struct Bubble* o;
+    // o = blowBubble(8);
     // printf("%d ", *(int *)o->o);
     // printf("%d ", *(int *)o->o);
     // o = blowBubble(o, 2);
@@ -29,10 +30,10 @@ int main() {
     /* o = blowBubble(o, "orange"); */
     /* o = blowBubble(o, "🍌"); */
 
-    printf("Bubbles: ");
+    // printf("Bubbles: ");
     // printBubbles(o);
     // o = blowBubble(8);
-    printf("%d ", *(int *)o->o);
+    // printf("%d ", *(int *)o->o);
     printf("\n");
 
     return 0;
