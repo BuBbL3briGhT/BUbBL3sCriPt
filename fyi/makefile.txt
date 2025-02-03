@@ -1,6 +1,3 @@
-Source: Google.com
-Query: c make file
-Tags: Makefile Simple C
 
 A simple Makefile for compiling C code could look like this:
 CC = gcc
@@ -52,3 +49,6 @@ More advanced Makefiles can:
 Generative AI is experimental.
 
 
+credit: Google.com
+query: c make file
+Tags: Makefile Simple C
