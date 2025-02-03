@@ -1,5 +1,5 @@
-(let playlist '("DL7-CKirWZE" "NQb8PWwM_3o" "v1c2OfAzDTI")
-    (let playlist (push playlist "6nFBTaCWhik")
+(let playlist °(°DL7-CKirWZE  °NQb8PWwM_3o  °v1c2OfAzDTI)
+    (let playlist (push playlist °6nFBTaCWhik)
       (pLay :youUtuBE playlist)))
 
 
