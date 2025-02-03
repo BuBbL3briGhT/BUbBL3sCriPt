@@ -6,18 +6,19 @@ struct Bubble {
     struct Bubble* oo;
 };
 
-struct Bubble* newBubble(int);
-struct Bubble* pushBubble(struct Bubble*, int);
-          void printBubbles(struct Bubble*);
+struct Bubble* BlowBubble(int);
+struct Bubble* blowBubble(struct Bubble*, int);
+struct Bubble* popBubble(struct Bubble*);
+void           printBubbles(struct Bubble*);
 
 int main() {
     struct Bubble* o;
-    o = newBubble(1);
-    o = pushBubble(o, 2);
-    o = pushBubble(o, 3);
-    /* o = pushBubble(o, "apple"); */
-    /* o = pushBubble(o, "orange"); */
-    /* o = pushBubble(o, "🍌"); */
+    o = BlowBubble(1);
+    o = blowBubble(o, 2);
+    o = blowBubble(o, 3);
+    /* o = blowBubble(o, "apple"); */
+    /* o = blowBubble(o, "orange"); */
+    /* o = blowBubble(o, "🍌"); */
 
     printf("Bubbles: ");
     printBubbles(o);
@@ -25,18 +26,20 @@ int main() {
     return 0;
 }
 
-struct Bubble* newBubble(int o) {
+struct Bubble* BlowBubble(int o) {
     struct Bubble* bubble = (struct Bubble*)malloc(sizeof(struct Bubble));
     bubble->o = o;
     bubble->oo = NULL;
     return bubble;
 }
 
-struct Bubble* pushBubble(struct Bubble* oo, int o) {
-  struct Bubble* bubble = newBubble(o);
+struct Bubble* blowBubble(struct Bubble* oo, int o) {
+  struct Bubble* bubble = BlowBubble(o);
   bubble->oo = oo;
   return bubble;
 }
+
+/* struct Bubble* blowBubbles(); */
 
 void printBubbles(struct Bubble* oo) {
     struct Bubble* o = oo;
