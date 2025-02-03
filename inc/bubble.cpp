@@ -20,6 +20,13 @@ int main() {
   printf("%d ", *(int *)o);
   printf("%d ", *(int *)o);
 
+  char *s = "bet";
+  o = &s;
+  printf("%s ", *(char *)o);
+  // printf("%s ", *(char)o);
+
+
+
     // struct Bubble* o;
     // o = blowBubble(8);
     // printf("%d ", *(int *)o->o);

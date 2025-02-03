@@ -1,0 +1,49 @@
+
+Piping from vi into the command line and back again.
+
+via https://unix.stackexchange.com/a/47828
+via https://unix.stackexchange.com/questions/47793/bash-commands-inside-vi
+
+    Since you mentioned "get the stdout", note that you can do
+
+    :r! command
+    and the output of the command will be added to the file, or
+
+    :<range>!command
+    to have the content of the range filtered through the command [e.g. :1,$!wc]
+
+
+ ooo ooo ooo ooo i ooo ooo ooo ooo i ooo ooo ooo ooo
+
+Shuffling charade at the command line.
+Via Google.com
+Via https://www.google.com/search?q=shell+shuffle+characters
+
+    Shuffling characters in a string using the shell can be achieved using a combination of commands like fold, shuf, and tr. Here's how you can do it:
+    #!/bin/bash
+
+    string="Hello, World!"
+
+    # Fold the string into one character per line
+    folded_string=$(echo "$string" | fold -w1)
+
+    # Shuffle the lines (characters)
+    shuffled_string=$(echo "$folded_string" | shuf)
+
+    # Join the lines back into a single string, removing newlines
+    final_string=$(echo "$shuffled_string" | tr -d '\n')
+
+    echo "$final_string"
+
+    Explanation:
+
+    • fold -w1: This command takes the input string and breaks it into lines, where each line contains a single character.
+    • shuf: This command shuffles the lines randomly.
+    • tr -d '\n': This command removes the newline characters introduced by fold, resulting in a single string with the shuffled characters.
+
+    Example Output:
+    r!dl,o WleoH
+
+
+    Generative AI is experimental.
+
