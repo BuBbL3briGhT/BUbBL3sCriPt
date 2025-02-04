@@ -1,0 +1,151 @@
+Via https://www.google.com/search?q=memory+allocation+in+c
+
+In C, memory allocation can be done in two ways:
+1. Static Memory Allocation:
+
+• Occurs at compile time.
+• Memory is allocated on the stack.
+• Size of memory is fixed and cannot be changed during program execution.
+• Used for variables declared outside functions (global variables) and variables declared with the static keyword.
+
+int x; // Global variable (static allocation)
+
+void func() {
+    static int y; // Static local variable (static allocation)
+    int z; // Automatic local variable (stack allocation)
+}
+
+2. Dynamic Memory Allocation:
+
+• Occurs at runtime.
+• Memory is allocated on the heap.
+• Size of memory can be determined and changed during program execution.
+• Uses functions from stdlib.h library:
+	• malloc(): Allocates a block of memory of specified size.
+	• calloc(): Allocates a block of memory for an array of elements, initializing them to zero.
+	• realloc(): Resizes an existing block of memory.
+	• free(): Deallocates the memory allocated by malloc(), calloc(), or realloc().
+
+
+
+Example:
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *ptr;
+    int n, i;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    // Allocate memory for n integers
+    ptr = (int*)malloc(n * sizeof(int));
+
+    if (ptr == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
+
+    // Use the allocated memory
+    for (i = 0; i < n; i++) {
+        ptr[i] = i + 1;
+    }
+
+    // Print the elements
+    for (i = 0; i < n; i++) {
+        printf("%d ", ptr[i]);
+    }
+    printf("\n");
+
+    // Deallocate memory
+    free(ptr);
+
+    return 0;
+}
+
+
+Generative AI is experimental.
+
+
+~~~
+
+Via https://www.google.com/search?q=struct+vs+union+c
+
+In C, both structures and unions are user-defined data types used to group together variables of different data types. However, they work in fundamentally different ways:
+Structure:
+
+• Memory Allocation: Each member of a structure gets its own separate memory location.
+• Accessing Members: You can access each member individually.
+• Size: The total size of a structure is the sum of the sizes of all its members (plus padding).
+• Use Case: Used when you need to store different pieces of information that are related to each other, like a student's name, age, and grade.
+
+Union:
+
+• Memory Allocation: All members of a union share the same memory location.
+• Accessing Members: Only one member can hold a valid value at any given time.
+• Size: The total size of a union is equal to the size of its largest member.
+• Use Case: Used when you need to store different types of data in the same memory location, but only one type at a time. [1]
+
+Example:
+#include <stdio.h>
+
+struct student {
+    char name[50];
+    int age;
+    float grade;
+};
+
+union data {
+    int i;
+    float f;
+    char str[20];
+};
+
+int main() {
+    struct student s1;
+    union data d1;
+
+    printf("Size of struct: %lu\n", sizeof(s1));  // Output: 58 (may vary depending on compiler)
+    printf("Size of union: %lu\n", sizeof(d1));   // Output: 20
+
+    strcpy(s1.name, "John");
+    s1.age = 20;
+    s1.grade = 85.5;
+
+    printf("Student Name: %s\n", s1.name);
+    printf("Student Age: %d\n", s1.age);
+    printf("Student Grade: %.2f\n", s1.grade);
+
+    d1.i = 10;
+    printf("Union Value (int): %d\n", d1.i);
+
+    d1.f = 3.14;
+    printf("Union Value (float): %.2f\n", d1.f); // Overwrites the int value
+
+    return 0;
+}
+
+Key Differences:
+
+• Memory Usage: Structures use more memory because each member has its own location. Unions save memory by sharing the same location among members.
+• Simultaneous Access: Structures allow you to access all members simultaneously. Unions only allow you to access one member at a time.
+
+Choosing Between Structure and Union:
+
+Use a structure when you need to store multiple values simultaneously.
+
+
+
+Use a union when you need to save memory and only need to access one value at a time.
+
+
+
+
+
+Generative AI is experimental.
+
+[1] https://www.geeksforgeeks.org/structure-vs-union-in-c/
+
+
+
