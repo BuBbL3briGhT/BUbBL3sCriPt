@@ -2,6 +2,7 @@
 
 union Bubble {
    int i;
+   char c;
 };
 
 union Bubble blowBubble() {
@@ -15,6 +16,12 @@ union Bubble blowIntBubble(int i) {
   return o;
 }
 
+union Bubble blowCharBubble(char c) {
+  union Bubble o;
+  o.c = c;
+  return o;
+}
+
 int main() {
   union Bubble o;
 
@@ -23,6 +30,9 @@ int main() {
 
   o = blowIntBubble(7);
   printf("°%d ", o.i);
+
+  o = blowCharBubble('h');
+  printf("°%c ", o.c);
 
   printf("\n");
 
