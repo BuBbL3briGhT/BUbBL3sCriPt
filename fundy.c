@@ -1,6 +1,11 @@
 # include <stdio.h>
 
+void* blow() {
+  return 0;
+}
+
 int main() {
-   printf("by Uchiha cb\n");
-   return 0;
+  void* o = blow();
+  printf("by Uchiha cb\n");
+  return 0;
 }
