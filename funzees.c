@@ -41,20 +41,37 @@ struct Bubble blowStringBubble(char* str) {
   return o;
 }
 
+void printBubble(struct Bubble o) {
+  switch (o.type) {
+    case BUBL_EMPTY:
+      printf("° ");
+      break;
+    case BUBL_INT:
+      printf("°%d ", o.data.i);
+      break;
+    case BUBL_CHAR:
+      printf("°%c ", o.data.c);
+      break;
+    case BUBL_STR:
+      printf("°%s ", o.data.s);
+      break;
+  }
+}
+
 int main() {
   struct Bubble o;
 
   o = blowBubble();
-  printf("° ");
+  printBubble(o);
 
   o = blowIntBubble(7);
-  printf("°%d ", o.data.i);
+  printBubble(o);
 
   o = blowCharBubble('h');
-  printf("°%c ", o.data.c);
+  printBubble(o);
 
   o = blowStringBubble("fuck");
-  printf("°%s ", o.data.s);
+  printBubble(o);
 
   printf("\n");
 
