@@ -19,10 +19,12 @@ int main() {
   union Bubble o;
 
   o = blowBubble();
-  printf("%d \n", o.i);
+  printf("° ");
 
   o = blowIntBubble(7);
-  printf("%d \n", o.i);
+  printf("°%d ", o.i);
+
+  printf("\n");
 
   return 0;
 }
