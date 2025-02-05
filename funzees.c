@@ -59,20 +59,17 @@ void printBubble(struct Bubble o) {
 }
 
 int main() {
-  struct Bubble o;
+  struct Bubble a, b, c ,d;
 
-  o = blowBubble();
-  printBubble(o);
+  a = blowBubble();
+  b = blowIntBubble(9);
+  c = blowCharBubble('m');
+  d = blowStringBubble("orange");
 
-  o = blowIntBubble(7);
-  printBubble(o);
-
-  o = blowCharBubble('h');
-  printBubble(o);
-
-  o = blowStringBubble("fuck");
-  printBubble(o);
-
+  printBubble(a);
+  printBubble(b);
+  printBubble(c);
+  printBubble(d);
   printf("\n");
 
   return 0;
