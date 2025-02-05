@@ -1,6 +1,7 @@
 # include <stdio.h>
 
-enum BubbleType { BUBL_EMPTY, BUBL_INT, BUBL_CHAR, BUBL_STR };
+enum BubbleType { BUBL_EMPTY, BUBL_INT,
+  BUBL_CHAR, BUBL_STR };
 
 union BubbleData {
    int i;
@@ -56,7 +57,14 @@ void printBubble(struct Bubble o) {
     default:
       break;
   }
-  printf(" ");
+}
+
+void printBubbles(struct Bubble bubbles[], int length) {
+  for (int i = 0; i < length; i++) {
+    printBubble(bubbles[i]);
+    printf(" ");
+  }
+  printf("\n");
 }
 
 int main() {
@@ -67,11 +75,7 @@ int main() {
     blowStringBubble("green")
   };
 
-  for (int i = 0; i < 4; i++) {
-    printBubble(myBubbles[i]);
-  }
-
-  printf("\n");
+  printBubbles(myBubbles, 4);
 
   return 0;
 }
