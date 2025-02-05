@@ -1,0 +1,54 @@
+## Arrays in C ##
+
+In C, an array is a collection of elements of the same data type stored in contiguous memory locations. Here's a breakdown of the basics: [1]
+Declaring an Array:
+data_type array_name[array_size];
+
+• data_type: The type of data the array will hold (e.g., int, float, char).
+• array_name: A valid C identifier for the array.
+• array_size: The number of elements the array can hold.
+
+Example:
+int numbers[5]; // Declares an array named 'numbers' that can hold 5 integers
+
+Initializing an Array:
+int numbers[5] = {1, 2, 3, 4, 5}; // Initializes the array with values
+
+Accessing Array Elements:
+int x = numbers[2]; // Accesses the 3rd element (index 2) of the array
+
+Important Points:
+
+• Zero-Based Indexing: Arrays in C are zero-indexed, meaning the first element is at index 0, the second at index 1, and so on.
+• Fixed Size: Once declared, the size of an array cannot be changed.
+• Passing Arrays to Functions: Arrays are passed to functions as pointers, so any modifications made to the array inside the function will affect the original array.
+
+Example Program:
+#include <stdio.h>
+
+int main() {
+  int numbers[5] = {1, 2, 3, 4, 5};
+
+  printf("The third element is: %d\n", numbers[2]);
+
+  for (int i = 0; i < 5; i++) {
+    printf("%d\n", numbers[i]);
+  }
+
+  return 0;
+}
+
+Multi-dimensional Arrays:
+C also supports multi-dimensional arrays, which are essentially arrays of arrays.
+Example:
+int matrix[2][3] = {
+  {1, 2, 3},
+  {4, 5, 6}
+};
+
+
+Generative AI is experimental.
+
+[1] https://www.simplilearn.com/tutorials/c-tutorial/array-in-c
+
+Source: https://www.google.com/search?q=arrays+in+c

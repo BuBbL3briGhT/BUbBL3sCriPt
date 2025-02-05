@@ -60,17 +60,17 @@ void printBubble(struct Bubble o) {
 }
 
 int main() {
-  struct Bubble a, b, c ,d;
+  struct Bubble myBubbles[4] = {
+    blowBubble(),
+    blowIntBubble(9),
+    blowCharBubble('m'),
+    blowStringBubble("orange")
+  };
 
-  a = blowBubble();
-  b = blowIntBubble(9);
-  c = blowCharBubble('m');
-  d = blowStringBubble("orange");
+  for (int i = 0; i < 4; i++) {
+    printBubble(myBubbles[i]);
+  }
 
-  printBubble(a);
-  printBubble(b);
-  printBubble(c);
-  printBubble(d);
   printf("\n");
 
   return 0;
