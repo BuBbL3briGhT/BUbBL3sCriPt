@@ -59,7 +59,10 @@ void printBubble(struct Bubble o) {
   }
 }
 
-void printBubbles(struct Bubble bubbles[], int length) {
+void printBubbles(struct Bubble* bubbles, int length) {
+  printf("%d ", length);
+  printf("%lu ", sizeof(bubbles));
+  printf("%lu ", sizeof(bubbles[0]));
   for (int i = 0; i < length; i++) {
     printBubble(bubbles[i]);
     printf(" ");
@@ -75,7 +78,11 @@ int main() {
     blowStringBubble("green")
   };
 
-  printBubbles(myBubbles, 4);
+  int length = sizeof(myBubbles) / sizeof(myBubbles[0]);
+  printf("%d ", length);
+  printf("%lu ", sizeof(myBubbles));
+  printf("%lu ", sizeof(myBubbles[0]));
+  printBubbles(myBubbles, length);
 
   return 0;
 }
