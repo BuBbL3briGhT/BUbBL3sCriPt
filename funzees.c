@@ -42,20 +42,21 @@ struct Bubble blowStringBubble(char* str) {
 }
 
 void printBubble(struct Bubble o) {
+  printf("°");
   switch (o.type) {
-    case BUBL_EMPTY:
-      printf("° ");
-      break;
     case BUBL_INT:
-      printf("°%d ", o.data.i);
+      printf("%d", o.data.i);
       break;
     case BUBL_CHAR:
-      printf("°%c ", o.data.c);
+      printf("%c", o.data.c);
       break;
     case BUBL_STR:
-      printf("°%s ", o.data.s);
+      printf("%s", o.data.s);
+      break;
+    default:
       break;
   }
+  printf(" ");
 }
 
 int main() {
