@@ -19,6 +19,8 @@ alias+="git add .; git status; git diff --cached"
 # alias ++="aa;
 # unalias ++;
 alias ++="quickcommit"
+alias scramble="fold -w1 | shuf | tr -d '\n'";
+alias 🐦="quickcommit"
 
 
 function quickcommit() {
@@ -82,9 +84,13 @@ function td() {
   ${EDITOR:-nano} "${@:-.}/.todos"
 }
 
-PS1="\[\e[0;95m\]\W\[\e[0m\] \[\e[1;35m\]\$\[\e[0m\] "
+PS1="\[\e[0;95m\]\W\[\e[0m\] \[\e[1;35m\]🍀\[\e[0m\] "
 # LS_COLORS='di=0;97:fi=1:97:' ; export LS_COLORS
 LS_COLORS=':di=0;95:' ; export LS_COLORS
 
 cd ~/projects/bubblescript
 # vi newjack.
+alias 🌻=ls
+alias 💘=mv
+alias 👽=alias
+👽 🌺=.rc
