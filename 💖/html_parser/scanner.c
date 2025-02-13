@@ -99,3 +99,13 @@ static Token _tag(Scanner* scanner) {
   }
 }
 
+static Token closing_tag(Scanner* scanner) {
+  for (;;) {
+    char c = advance(scanner);
+
+    if (c == '>') {
+      scanner->ctx = CTX_INITIAL;
+      return make_token(scanner, TOKEN_TAG_END);
+    }
+  }
+}
