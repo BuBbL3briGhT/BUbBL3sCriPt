@@ -52,3 +52,15 @@ static Token init(Scanner* scanner) {
      }
   }
 }
+
+static Token tag(Scanner* scanner) {
+  // Check the character under the cursor without advancing.
+  char c = peek(scanner);
+
+  if (c == '/') {
+    return closing_tag(scanner);
+  } else {
+    return _tag(scanner);
+  }
+}
+
