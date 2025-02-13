@@ -36,3 +36,10 @@ typedef struct {
   char* start;
   int length;
 } Token;
+
+
+void init_scanner(Scanner* scanner, char* source);
+void free_scanner(Scanner* scanner);
+Token scan_token(Scanner* scanner);
+
+#endif
