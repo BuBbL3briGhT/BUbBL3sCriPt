@@ -11,3 +11,13 @@ typedef enum {
   CTX_IN_TAG,
   CTX_IN_ATTR
 } Ctx;
+
+typedef struct {
+  char* current;
+  char* start;
+  int line;
+  Ctx ctx;
+} Scanner;
+
+
+
