@@ -180,4 +180,18 @@ static Token attr_value(Scanner* scanner) {
   return t;
 }
 
+static Token text(Scanner* scanner) {
+  for (;;) {
+    char c = peek(scanner);
+
+    if (c == '<') {
+      break;
+    } else {
+      advance(scanner);
+    }
+  }
+
+  return make_token(scanner, TOKEN_TEXT);
+}
+
 
