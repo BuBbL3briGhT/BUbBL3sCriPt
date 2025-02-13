@@ -35,3 +35,20 @@ Token scan_token(Scanner* scanner) {
     }
   }
 }
+
+static Token init(Scanner* scanner) {
+  scanner->start = scanner->current;
+  char c = advance(scanner); // Move forward one character.
+
+   switch (c) {
+     case '<': {
+       return tag(scanner);
+     }
+     case '\0': {
+       return make_token(scanner, TOKEN_EOF);
+     }
+     default: {
+       return text(scanner);
+     }
+  }
+}
