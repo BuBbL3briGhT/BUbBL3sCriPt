@@ -1,4 +1,6 @@
-
+#include "scanner.h"
+#include "common.h"
+#include "debug.h"
 
 void init_scanner(Scanner* scanner, chat* source) {
   scanner->start = source;
