@@ -144,3 +144,40 @@ static Token attribute(Scanner* scanner) {
 
   return t;
 }
+
+
+static Token attr_value(Scanner* scanner) {
+  advance(scanner); // Skip the '='
+  advance(scanner); // Skip the '"'
+  scanner->start = scanner->current;
+
+  for (;;) {
+    char c = peek(scanner);
+
+    if (c == '"') {
+      break;
+    } else {
+      advance(scanner);
+    }
+  }
+
+  Token t = make_token(scanner, TOKEN_ATTR_VALUE);
+  advance(scanner); // Skip the ending '"'
+
+  char c = peek(scanner);
+
+  if (c == ' ') {
+    scanner->ctx = CTX_IN_TAG;
+  } else if (c == '>') {
+    advance(scanner);
+    scanner->ctx = CTX_INITIAL;
+  } else if (c == '/') {
+    advance(scanner);
+    advance(scanner);
+    scanner->ctx = CTX_INITIAL;
+  }
+
+  return t;
+}
+
+
