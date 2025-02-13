@@ -109,3 +109,38 @@ static Token closing_tag(Scanner* scanner) {
     }
   }
 }
+
+static Token attribute(Scanner* scanner) {
+  advance(scanner); // Skip the whitespace.
+  scanner->start = scanner->current;
+  Token t;
+
+  for(;;) {
+    char c = peek(scanner);
+
+    if (c == ' ') {
+      scanner->ctx = CTX_IN_TAG;
+      t = make_token(scanner, TOKEN_ATTR_NAME);
+      break;
+    } else if (c == '>') {
+      t = make_token(scanner, TOKEN_ATTR_NAME);
+      advance(scanner);
+      scanner->ctx = CTX_INITIAL;
+      break;
+    } else if (c == '/') {
+      t = make_token(scanner, TOKEN_ATTR_NAME);
+      advance(scanner);
+      advance(scanner);
+      scanner->ctx = CTX_INITIAL;
+      break;
+    } else if (c == '=') {
+      t = make_token(scanner, TOKEN_ATTR_NAME);
+      scanner->ctx = CTX_IN_ATTR;
+      break;
+    } else {
+      advance(scanner);
+    }
+  }
+
+  return t;
+}
