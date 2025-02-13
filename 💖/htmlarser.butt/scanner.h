@@ -1,6 +1,4 @@
 
-
-
 #ifndef __scanner_h__
 #define __scanner_h__
 
@@ -12,12 +10,14 @@ typedef enum {
   CTX_IN_ATTR
 } Ctx;
 
+
 typedef struct {
   char* current;
   char* start;
   int line;
   Ctx ctx;
 } Scanner;
+
 
 typedef enum {
    TOKEN_TAG_START,
@@ -30,3 +30,9 @@ typedef enum {
    TOKEN_EOF
 } TokenType;
 
+
+typedef struct {
+  TokenType type;
+  char* start;
+  int length;
+} Token;
