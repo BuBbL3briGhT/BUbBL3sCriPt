@@ -2,7 +2,7 @@
 #include "common.h"
 #include "debug.h"
 
-void init_scanner(Scanner* scanner, chat* source) {
+void init_scanner(Scanner* scanner, char* source) {
   scanner->start = source;
   scanner->current = source;
   scanner->line = 1;
