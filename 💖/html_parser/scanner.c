@@ -115,6 +115,20 @@ static Token tag(Scanner* scanner) {
   }
 }
 
+static Token text(Scanner* scanner) {
+  for (;;) {
+    char c = peek(scanner);
+
+    if (c == '<') {
+      break;
+    } else {
+      advance(scanner);
+    }
+  }
+
+  return make_token(scanner, TOKEN_TEXT);
+}
+
 static Token init(Scanner* scanner) {
   scanner->start = scanner->current;
   char c = advance(scanner); // Move forward one character.
@@ -225,19 +239,6 @@ static Token attr_value(Scanner* scanner) {
   return t;
 }
 
-static Token text(Scanner* scanner) {
-  for (;;) {
-    char c = peek(scanner);
-
-    if (c == '<') {
-      break;
-    } else {
-      advance(scanner);
-    }
-  }
-
-  return make_token(scanner, TOKEN_TEXT);
-}
 
 
 
