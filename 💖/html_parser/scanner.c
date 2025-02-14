@@ -39,7 +39,7 @@ static Token make_error_token(char* message) {
   t.start = message;
   t.length = strlen(message);
 
-  return 0;
+  return t;
 }
 
 static void skip_whitespace(Scanner* scanner) {
