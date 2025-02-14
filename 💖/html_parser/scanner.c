@@ -87,7 +87,7 @@ static Token _tag(Scanner* scanner) {
       advance(scanner);
       advance(scanner);
 
-      advance->ctx = CTX_INITIAL;
+      scanner->ctx = CTX_INITIAL;
       break;
     } else if (c == '>') {
       t = make_token(scanner, TOKEN_TAG_START);
