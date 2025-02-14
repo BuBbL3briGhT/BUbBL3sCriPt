@@ -58,6 +58,23 @@ static void skip_whitespace(Scanner* scanner) {
   }
 }
 
+static Token init(Scanner* scanner) {
+  scanner->start = scanner->current;
+  char c = advance(scanner); // Move forward one character.
+
+   switch (c) {
+     case '<': {
+       return tag(scanner);
+     }
+     case '\0': {
+       return make_token(scanner, TOKEN_EOF);
+     }
+     default: {
+       return text(scanner);
+     }
+  }
+}
+
 Token scan_token(Scanner* scanner) {
   switch (scanner->ctx) {
     case CTX_INITIAL: {
@@ -78,23 +95,6 @@ Token scan_token(Scanner* scanner) {
     default: {
       return make_error_token("Dang blast it: Tokenizer in an invalid state.");
     }
-  }
-}
-
-static Token init(Scanner* scanner) {
-  scanner->start = scanner->current;
-  char c = advance(scanner); // Move forward one character.
-
-   switch (c) {
-     case '<': {
-       return tag(scanner);
-     }
-     case '\0': {
-       return make_token(scanner, TOKEN_EOF);
-     }
-     default: {
-       return text(scanner);
-     }
   }
 }
 
