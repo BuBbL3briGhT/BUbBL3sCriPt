@@ -58,6 +58,17 @@ static void skip_whitespace(Scanner* scanner) {
   }
 }
 
+static Token closing_tag(Scanner* scanner) {
+  for (;;) {
+    char c = advance(scanner);
+
+    if (c == '>') {
+      scanner->ctx = CTX_INITIAL;
+      return make_token(scanner, TOKEN_TAG_END);
+    }
+  }
+}
+
 static Token tag(Scanner* scanner) {
   // Check the character under the cursor without advancing.
   char c = peek(scanner);
@@ -141,17 +152,6 @@ static Token _tag(Scanner* scanner) {
     }
 
     return t;
-  }
-}
-
-static Token closing_tag(Scanner* scanner) {
-  for (;;) {
-    char c = advance(scanner);
-
-    if (c == '>') {
-      scanner->ctx = CTX_INITIAL;
-      return make_token(scanner, TOKEN_TAG_END);
-    }
   }
 }
 
