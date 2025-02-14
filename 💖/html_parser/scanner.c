@@ -146,29 +146,6 @@ static Token init(Scanner* scanner) {
   }
 }
 
-Token scan_token(Scanner* scanner) {
-  switch (scanner->ctx) {
-    case CTX_INITIAL: {
-       skip_whitespace(scanner);
-       return init(scanner);
-    }
-
-    case CTX_IN_TAG: {
-      // In tag, so scam for attributes.
-      return attribute(scanner);
-    }
-
-    case CTX_IN_ATTR: {
-      // attribute name already read, read value next.
-      return attr_value(scanner):
-    }
-
-    default: {
-      return make_error_token("Dang blast it: Tokenizer in an invalid state.");
-    }
-  }
-}
-
 static Token attribute(Scanner* scanner) {
   advance(scanner); // Skip the whitespace.
   scanner->start = scanner->current;
@@ -202,6 +179,29 @@ static Token attribute(Scanner* scanner) {
   }
 
   return t;
+}
+
+Token scan_token(Scanner* scanner) {
+  switch (scanner->ctx) {
+    case CTX_INITIAL: {
+       skip_whitespace(scanner);
+       return init(scanner);
+    }
+
+    case CTX_IN_TAG: {
+      // In tag, so scam for attributes.
+      return attribute(scanner);
+    }
+
+    case CTX_IN_ATTR: {
+      // attribute name already read, read value next.
+      return attr_value(scanner):
+    }
+
+    default: {
+      return make_error_token("Dang blast it: Tokenizer in an invalid state.");
+    }
+  }
 }
 
 
