@@ -69,6 +69,41 @@ static Token closing_tag(Scanner* scanner) {
   }
 }
 
+static Token _tag(Scanner* scanner) {
+  Token t;
+
+  scanner->start = scanner->current;
+  for (;;) {
+    char c = peek(scanner);
+
+    if (c == ' ') {
+      t = make_token(scanner, TOKEN_TAG_START);
+      scanner->ctx = CTX_IN_TAG;
+      break;
+    } else if (c == '/') {
+      t make_token(scanner, TOKEN_SELF_CLOSING);
+
+      // Skip the '/' and '>'
+      advance(scanner);
+      advance(scanner);
+
+      advance->ctx = CTX_INITIAL;
+      break;
+    } else if (c == '>') {
+      t = make_token(scanner, TOKEN_TAG_START);
+
+      advance(scanner); // Skip the '>'
+      scanner->ctx = CTX_INITIAL;
+      break;
+    } else {
+      advance(scanner);
+    }
+
+    return t;
+  }
+}
+
+
 static Token tag(Scanner* scanner) {
   // Check the character under the cursor without advancing.
   char c = peek(scanner);
@@ -117,41 +152,6 @@ Token scan_token(Scanner* scanner) {
     default: {
       return make_error_token("Dang blast it: Tokenizer in an invalid state.");
     }
-  }
-}
-
-
-static Token _tag(Scanner* scanner) {
-  Token t;
-
-  scanner->start = scanner->current;
-  for (;;) {
-    char c = peek(scanner);
-
-    if (c == ' ') {
-      t = make_token(scanner, TOKEN_TAG_START);
-      scanner->ctx = CTX_IN_TAG;
-      break;
-    } else if (c == '/') {
-      t make_token(scanner, TOKEN_SELF_CLOSING);
-
-      // Skip the '/' and '>'
-      advance(scanner);
-      advance(scanner);
-
-      advance->ctx = CTX_INITIAL;
-      break;
-    } else if (c == '>') {
-      t = make_token(scanner, TOKEN_TAG_START);
-
-      advance(scanner); // Skip the '>'
-      scanner->ctx = CTX_INITIAL;
-      break;
-    } else {
-      advance(scanner);
-    }
-
-    return t;
   }
 }
 
