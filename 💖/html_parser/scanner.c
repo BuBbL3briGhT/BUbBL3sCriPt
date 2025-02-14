@@ -81,7 +81,7 @@ static Token _tag(Scanner* scanner) {
       scanner->ctx = CTX_IN_TAG;
       break;
     } else if (c == '/') {
-      t make_token(scanner, TOKEN_SELF_CLOSING);
+      t = make_token(scanner, TOKEN_SELF_CLOSING);
 
       // Skip the '/' and '>'
       advance(scanner);
