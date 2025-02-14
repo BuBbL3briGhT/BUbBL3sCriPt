@@ -98,9 +98,9 @@ static Token _tag(Scanner* scanner) {
     } else {
       advance(scanner);
     }
-
-    return t;
   }
+
+  return t;
 }
 
 
