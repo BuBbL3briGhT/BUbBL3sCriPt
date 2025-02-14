@@ -229,7 +229,7 @@ Token scan_token(Scanner* scanner) {
 
     case CTX_IN_ATTR: {
       // attribute name already read, read value next.
-      return attr_value(scanner):
+      return attr_value(scanner);
     }
 
     default: {
