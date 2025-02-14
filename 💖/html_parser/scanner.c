@@ -15,7 +15,7 @@ void free_scanner(Scanner* scanner) {
   scanner->line = 1;
 }
 
-static skip_whitespace(Scanner* scanner) {
+static void skip_whitespace(Scanner* scanner) {
   for (;;) {
     char c = peek(scanner);
 
