@@ -58,6 +58,17 @@ static void skip_whitespace(Scanner* scanner) {
   }
 }
 
+static Token tag(Scanner* scanner) {
+  // Check the character under the cursor without advancing.
+  char c = peek(scanner);
+
+  if (c == '/') {
+    return closing_tag(scanner);
+  } else {
+    return _tag(scanner);
+  }
+}
+
 static Token init(Scanner* scanner) {
   scanner->start = scanner->current;
   char c = advance(scanner); // Move forward one character.
@@ -95,17 +106,6 @@ Token scan_token(Scanner* scanner) {
     default: {
       return make_error_token("Dang blast it: Tokenizer in an invalid state.");
     }
-  }
-}
-
-static Token tag(Scanner* scanner) {
-  // Check the character under the cursor without advancing.
-  char c = peek(scanner);
-
-  if (c == '/') {
-    return closing_tag(scanner);
-  } else {
-    return _tag(scanner);
   }
 }
 
