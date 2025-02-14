@@ -6,7 +6,7 @@ void init_scanner(Scanner* scanner, char* source) {
   scanner->start = source;
   scanner->current = source;
   scanner->line = 1;
-  scanner->ctx = CTX_INTIAL;
+  scanner->ctx = CTX_INITIAL;
 }
 
 void free_scanner(Scanner* scanner) {
@@ -34,6 +34,22 @@ Token scan_token(Scanner* scanner) {
 
     default: {
       return make_error_token("Dang blast it: Tokenizer in an invalid state.");
+    }
+  }
+}
+
+static skip_whitespace(Scanner* scanner) {
+  for (;;) {
+    char c = peek(scanner);
+
+    switch (c) {
+      case '\n':
+      case '\r':
+      case '\t': {
+        advance(scanner);
+      }
+      default:
+        return;
     }
   }
 }
