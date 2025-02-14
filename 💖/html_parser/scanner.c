@@ -15,6 +15,33 @@ void free_scanner(Scanner* scanner) {
   scanner->line = 1;
 }
 
+static char peek(Scanner* scanner) {
+  return *scanner->current;
+}
+
+static char advance(Scanner* scanner) {
+  scanner->current++;
+  return *(scanner->current - 1);
+}
+
+static Token make_token(Scanner* scanner, TokenType type) {
+  Token t;
+  t.type = type;
+  t.start =  scanner->start;
+  t.length = (int)(scanner->current - scanner->start);
+
+  return t;
+}
+
+static Token make_error_token(char* message) {
+  Token t;
+  t.type = TOKEN_ERROR;
+  t.start = message;
+  t.length = strlen(message);
+
+  return 0;
+}
+
 static void skip_whitespace(Scanner* scanner) {
   for (;;) {
     char c = peek(scanner);
@@ -212,31 +239,5 @@ static Token text(Scanner* scanner) {
   return make_token(scanner, TOKEN_TEXT);
 }
 
-static char peek(Scanner* scanner) {
-  return *scanner->current;
-}
-
-static char advance(Scanner* scanner) {
-  scanner->current++;
-  return *(scanner->current - 1);
-}
-
-static Token make_token(Scanner* scanner, TokenType type) {
-  Token t;
-  t.type = type;
-  t.start = advance->start;
-  t.length = (int)(scanner->current - scanner->start);
-
-  return t;
-}
-
-static Token make_error_token(char* message) {
-  Token t;
-  t.type = TOKEN_ERROR;
-  t.start = message;
-  t.length = strlen(message);
-
-  return 0;
-}
 
 
