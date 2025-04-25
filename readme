@@ -1,0 +1,34 @@
+
+
+Source Tree Diagram:
+
+c
+js
+|-src
+  |-parse.js
+  |-tokenize.js
+
+## js/src/parse.js
+
+This file contines the parse function. The
+parse function is a core utility function
+that takes the raw bubblescript as a textual
+representation and produces a pare tree
+which can be subsequently analyized or
+evaluated. This function is overloaded in
+order to provide a clean seperation of
+concerns. Before a stream of characters or
+string can be parse with this function, it
+must be tokenized, other wise known a
+lexically analyzied. Lexacal analsys is
+performed by the tokenize function. When the
+parse function recieves a string, it first
+tokenizes the string by calling tokenize,
+then parses and retirns the result. The
+parse function may also be called directly
+with the result of calling tokenize.
+
+The parse function is also akata. This is a
+translation of the word parse, but in the
+standard english version of Bubblescript,
+the proper name of this function is parse.
