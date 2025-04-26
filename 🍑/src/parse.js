@@ -11,10 +11,10 @@ const { TKSTR, TKNUM, TKSYM, TKKEY } = tokenize;
 const { peek, pop, push, invert } = Bubble;
 
 
-                                  // funksie
-                           // akata(estrate)
-      // {  briku ataka(tanpshi(estrate)); }
-//
+function parse(string) {
+  return _parse(tokenize(string));
+}
+
 AB3x  ꬰ ꬱ ꬲ ꬳ ꬴ ꬵ ꬶ ꬷ ꬸ ꬹ ꬺ ꬻ ꬼ ꬽ ꬾ ꬿ
 U+AB4x  ꭀ ꭁ ꭂ ꭃ ꭄ ꭅ ꭆ ꭇ ꭈ ꭉ ꭊ ꭋ ꭌ ꭍ ꭎ ꭏ
 U+AB5x  ꭐ ꭑ ꭒ ꭓ ꭔ ꭕ ꭖ ꭗ ꭘ ꭙ ꭚ ꭛ ꭜ
