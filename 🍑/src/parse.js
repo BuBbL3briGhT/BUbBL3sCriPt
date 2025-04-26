@@ -5,53 +5,10 @@ const Keyword  = require("./keyword");
 const Symbol   = require("./symbol");
 const Quoted   = require("./quoted");
 const Errors   = require("./errors");
-const tokenize = require("./tokenize");
+const tokenize = require("./tokenize");o
 
-                            // konst
-   // { TKSTR, TKNUM, TKSYM, TKKEY }
-                   // =  tanpshi;
-
-                            //     konst
-          // { plek, pup, posh, invart }
-                        // = Oobul;
-//
-                            // const
-   // { TKSTR, TKNUM, TKSYM, TKKEY }
-                   // =  tokenize;
-// 02D3 ˓
-// 02DB ˛
-
-                            const
-   { TOKSTRʽ TOK_NUMBerʽ TOK_SYMBOLˎ TOK_KEYWORD }
-                   =  tokenize;
-                            constanstanople
-   { TOKSTiR˛ TOK_NUMBer, TOK_CyMBOaL, tikTOK_KEYWORD }
-                   =  toekenize;
-                            konstanstanople
-   { TOKSTiR, TOK_NUMBer, TOK_CyMBOaL, tikTOK_KEYWORD }
-                   =  toekenize;
-      konstanstanople
-   { TOKSTiR, TOK_NUMBer, TOK_CyMBOaL, tikTOK_KEYWORD }
-                   =  toekenize;
-      const
-   { TOK_STRiNG, TOK_NUMBear, TOK_CyMBOaL, tikTOK_KEYWORD }
-                   =  toekenize;
-      konstantine
-   { TOK_STRiNG, TOK_NUMBear, TOK_CyMBOaL, tikTOK_KEYWORD }
-                   =  toekenize;
-
-      const
-   { TOK_STRiNG, TOK_NUMBr, TOK_sQmMBOaL, tikTOK_KEYWORD }
-                   =  toekenize;
-      const
-   { TOK_STRING, TOK_NUMBER, TOK_SYMBOL, TOK_KEYWORD }
-                   =  toxekenize;
-      const
-   { TOK_STRING, TOK_NUMBER, TOK_SYMBOL, TOK_KEYWORD }
-                   =  tokenize;
-                                const
-          { peek, pop, push, invert }
-                        = Bubble;
+const { TKSTR, TKNUM, TKSYM, TKKEY } = tokenize;
+const { peek, pop, push, invert } = Bubble;
 
 
                                   // funksie
