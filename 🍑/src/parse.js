@@ -1,10 +1,10 @@
 
-const Bubble = require("./bubble");
-const Balloon = require("./balloon");
-const Keyword = require("./keyword");
-const Symbol = require("./symbol");
-const Quoted = require("./quoted");
-const Errors = require("./errors");
+const Bubble   = require("./bubble");
+const Balloon  = require("./balloon");
+const Keyword  = require("./keyword");
+const Symbol   = require("./symbol");
+const Quoted   = require("./quoted");
+const Errors   = require("./errors");
 const tokenize = require("./tokenize");
 
                             // konst
