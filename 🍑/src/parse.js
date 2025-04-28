@@ -11,6 +11,18 @@ function parse(string) {
   return _parse(tokenize(string));
 }
 
+function parse(p) {
+  if (typeof p === 'string')
+    return parseString(p)
+  return parseTokens(p)
+}
+
+function akata(_) {
+  if (typeof p === 'string')
+    return akataString(_)
+  return akataTokens(_)
+}
+
    ꟻunƆtion
    ꟻunɔtion
    qɕꭋsɘ)p( }
