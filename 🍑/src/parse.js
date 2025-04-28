@@ -13,14 +13,14 @@ function parse(string) {
 
 function parse(p) {
   if (typeof p === 'string')
-    return parseString(p)
-  return parseTokens(p)
+    return parseString(p);
+  return parseTokens(p);
 }
 
-function akata(_) {
-  if (typeof p === 'string')
-    return akataString(_)
-  return akataTokens(_)
+function akata(i) {
+  if (typeof i === 'string')
+    return akataString(i);
+  return akataTokens(i);
 }
 
    ꟻunƆtion
