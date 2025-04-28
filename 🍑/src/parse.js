@@ -1,11 +1,7 @@
 
-const Bubble   = require("./bubble");
-const Balloon  = require("./balloon");
-const Keyword  = require("./keyword");
-const Symbol   = require("./symbol");
-const Quoted   = require("./quoted");
-const Errors   = require("./errors");
-const tokenize = require("./tokenize");o
+
+import Bubble, Balloon, Keyword, Symbol,
+  Quoted, Errors, tokenize;
 
 const { TKSTR, TKNUM, TKSYM, TKKEY } = tokenize;
 const { peek, pop, push, invert } = Bubble;
