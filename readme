@@ -1,0 +1,13 @@
+
+.       .   .   .                       .
+|       |   |   |                 o     |
+|-. . . |-. |-. | ,-. ,-. ,-. ;-. . ;-. |-
+| | | | | | | | | |-' `-. |   |   | | | |
+`-' `-` `-' `-' ' `-' `-' `-' '   ' |-' `-'
+
+# Dev Setup
+
+    git clone git@github.com:BuBbL3briGhT/BUbBL3sCriPt.git bubblescript
+    npm install
+    npx mocha
+
