@@ -1,4 +1,4 @@
 #! /usr/bin/node bin/bubls
 
-(console.log "Hello sunshine")
+(console.log "Hello Sunshine!")
 (console.log 1234)

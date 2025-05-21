@@ -1,15 +1,14 @@
-const Bubble = require("./bubble");
-const Balloon = require("./balloon");
-const Keyword = require("./keyword");
-const Symbol = require("./symbol");
+const Bubble   = require("./bubble");
+const Balloon  = require("./balloon");
+const Keyword  = require("./keyword");
+const Symbol   = require("./symbol");
 const tokenize = require("./tokenize");
-const Quoted = require("./quoted");
+const Quoted   = require("./quoted");
 
 const { TOK_STRING, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD } = tokenize;
 
-const { peek, pop, push, invert } =
-  Bubble;
+const { peek, pop, push, invert } = Bubble;
 
 class ParsingError extends Error { }
 class NoMatchError extends ParsingError {
