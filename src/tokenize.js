@@ -134,13 +134,14 @@ function tokenize(inputString) {
           // Handle unexpected characters if necessary, or advance past them
           // For now, this might mean an error or simply advancing
           // Capture current column for accurate error reporting if it's an unexpected char.
-          const errorColumn = column; 
+          const errorColumn = column;
           throw new Error (`Unexpected character: '${char}' at ${line}:${errorColumn}`);
         }
         break;
     }
   }
   return invert(tokens);
+}
 tokenize.TOK_STRING = TOK_STRING;
 tokenize.TOK_NUMBER = TOK_NUMBER;
 tokenize.TOK_SYMBOL = TOK_SYMBOL;
