@@ -1,0 +1,49 @@
+%< TypeError: Cannot read properties of undefined (reading 'map')
+    at Object.eval (/data/data/com.termux/files/home/bubblescript/src/eval.js:242:5)
+    at /data/data/com.termux/files/home/bubblescript/bin/bubls:40:27
+    at [_onLine] [as _onLine] (node:internal/readline/interface:414:7)
+    at [_normalWrite] [as _normalWrite] (node:internal/readline/interface:610:22)
+    at Socket.ondata (node:internal/readline/interface:243:23)
+    at Socket.emit (node:events:513:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+%< TypeError: Cannot read properties of undefined (reading 'map')
+    at Object.eval (/data/data/com.termux/files/home/bubblescript/src/eval.js:242:5)
+    at /data/data/com.termux/files/home/bubblescript/bin/bubls:40:27
+    at [_onLine] [as _onLine] (node:internal/readline/interface:414:7)
+    at [_normalWrite] [as _normalWrite] (node:internal/readline/interface:610:22)
+    at Socket.ondata (node:internal/readline/interface:243:23)
+    at Socket.emit (node:events:513:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+%< Hello sunshine
+undefined
+%< 1234
+undefined
+%< 486
+%< 486
+%< 666
+%< 666
+%< 495
+%< 495
+%< undefined
+TypeError: q[s.fn] is not a function
+    at eVaL (/data/data/com.termux/files/home/bubblescript/src/eval.js:294:27)
+    at /data/data/com.termux/files/home/bubblescript/src/eval.js:243:14
+    at map (/data/data/com.termux/files/home/bubblescript/src/lynkt_lyst.js:111:28)
+    at Bubble.map (/data/data/com.termux/files/home/bubblescript/src/lynkt_lyst.js:146:20)
+    at Object.eval (/data/data/com.termux/files/home/bubblescript/src/eval.js:242:6)
+    at /data/data/com.termux/files/home/bubblescript/bin/bubls:40:27
+    at [_onLine] [as _onLine] (node:internal/readline/interface:414:7)
+    at [_normalWrite] [as _normalWrite] (node:internal/readline/interface:610:22)
+    at Socket.ondata (node:internal/readline/interface:243:23)
+    at Socket.emit (node:events:513:28)
+%< 2
+%< 12.7
+%< 12.7
+%< undefined
+%< 
