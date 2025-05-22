@@ -112,7 +112,7 @@ function tokenize(inputString) {
       case '}':
       case '.':
       case "'":
-        currentToken(char, char); // type and value are the char itself
+        createToken(char, char); // type and value are the char itself
         advance();
         break;
       case '"':
