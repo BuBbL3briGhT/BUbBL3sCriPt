@@ -1,70 +1,108 @@
 
-const Bubble = { push, invert } =
-  require("./bubble");
+const { push, invert } = require("./lynkt_lyst");
 
 const TOK_KEYWORD = 'K';
 const TOK_NUMBER  = 'N';
 const TOK_STRING  = 'S';
 const TOK_SYMBOL  = 'Y';
 
-function tokenize(string) {
-  let tokens, values;
+function tokenize(inputString) {
+  let tokens;
+  let line = 1;
+  let column = 1;
+  let currentString = inputString; // This string will be sliced
 
-  function token(type, value) {
-    tokens = push(tokens, type);
-    values = push(values, value);
+  // Helper to create token objects
+  function createToken(type, value) {
+    tokens = push(tokens, { type, value, line, column });
+  }
+
+  // Advances head along string by n characters, updating line and column.
+  function advance(n = 1) {
+    for (let i = 0; i < n; i++) {
+      if (currentString[i] === '\n') {
+        line++;
+        column = 1;
+      } else {
+        column++;
+      }
+    }
+    currentString = currentString.slice(n);
   }
 
   function tokenizeString() {
-    let m = string.match(/^"((?:[^\\"]|\\.)*)"/);
-    token(TOK_STRING, m[1]);
-    advance(m[0].length);
+    // Ensure regex matches from the start of currentString
+    let matchResult = currentString.match(/^"((?:[^\\"]|\\.)*)"/);
+    if (matchResult) {
+      createToken(TOK_STRING, matchResult[1]);
+      advance(matchResult[0].length);
+    } else {
+      // This should not be reached if called appropriately
+      throw new Error(`Unterminated string at ${line}:${column}`);
+    }
   }
 
   function tokenizeNumber() {
-    let m = string.match(/^\d+(?:\.\d+)?/);
-    token(TOK_NUMBER, Number(m[0]));
-    advance(m[0].length);
+    let matchResult = currentString.match(/^\d+(?:\.\d+)?/);
+    if (matchResult) {
+      createToken(TOK_NUMBER, Number(matchResult[0]));
+      advance(matchResult[0].length);
+    } else {
+      // This should not be reached
+      throw new Error(`Invalid number at ${line}:${column}`);
+    }
   }
 
   function tokenizeSymbol() {
-    let m = string.match(/^([^\s()[\]]*)/);
-    token(TOK_SYMBOL, m[0]);
-    advance(m[0].length);
+    // Original regex: /^([^\s()[\]]*)/, new: /^([^\s()[\]{}:"#'.]+)/
+    // The original was more permissive, let's stick to a more specific one for now
+    // but ensure it doesn't break existing symbol logic unintentionally.
+    // The key is that it must match something if it's called.
+    let matchResult = currentString.match(/^([^\s()[\]{}:"#'.]+)/);
+    if (matchResult && matchResult[0].length > 0) { // Ensure it matches a non-empty symbol
+      createToken(TOK_SYMBOL, matchResult[0]);
+      advance(matchResult[0].length);
+    } else {
+      // If it's not a recognized symbol starter or empty, it's an error.
+      // This differs from original, which would make empty symbols or take single chars.
+      throw new Error(`Invalid symbol starting with '${currentString[0]}' at ${line}:${column}`);
+    }
   }
 
   function eatComment() {
-    let i = string.indexOf("\n");
-    if (i > -1) {
-      advance(i);
+    let newlineIndex = currentString.indexOf("\n");
+    if (newlineIndex > -1) {
+      // Advance past the comment line including the newline
+      advance(newlineIndex + 1);
     } else {
-      advance(string.length+1);
+      // Comment goes to the end of the string
+      advance(currentString.length);
     }
   }
 
   function tokenizeKeyword() {
-    let i = string.indexOf(' ');
-    if (i < 1) {
-       i = string.indexOf(')');
-      if (i < 1)
-        i = string.length;
+    // Keywords start with ':' e.g. :foo
+    // The regex should match ':' followed by symbol-like characters.
+    let matchResult = currentString.match(/^:([^\s()[\]{}:"#'.]+)/);
+    if (matchResult) {
+      createToken(TOK_KEYWORD, matchResult[1]); // Value is the keyword without ':'
+      advance(matchResult[0].length); // Advance by the length of the full token (e.g., ":foo")
+    } else {
+      // This implies a ':' was not followed by a valid keyword identifier
+      throw new Error(`Invalid keyword at ${line}:${column}`);
     }
-    let value = string.slice(1, i);
-    token(TOK_KEYWORD, value)
-    advance(i);
   }
 
-  // Advances head along string by n characters.
-  function advance(n=1) {
-    string = string.slice(n);
-  }
+  while (currentString.length > 0) {
+    const char = currentString[0];
 
-  while (string[0]) {
-    switch (string[0]) {
+    switch (char) {
       case ' ':
-      case "\t":
-      case "\n":
-        advance();
+      case '\t':
+        advance(); // Consumes whitespace, updates column
+        break;
+      case '\n':
+        advance(); // Consumes newline, updates line and column
         break;
       case '(':
       case ')':
@@ -74,23 +112,11 @@ function tokenize(string) {
       case '}':
       case '.':
       case "'":
-        token(string[0]);
-        advance()
+        currentToken(char, char); // type and value are the char itself
+        advance();
         break;
       case '"':
         tokenizeString();
-        break;
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-        tokenizeNumber();
         break;
       case ':':
         tokenizeKeyword();
@@ -99,13 +125,22 @@ function tokenize(string) {
         eatComment();
         break;
       default:
-        tokenizeSymbol();
+        // Check for numbers before falling back to symbols
+        if (/\d/.test(char)) {
+          tokenizeNumber();
+        } else if (/[^\s()[\]{}:"#'.]/.test(char)) { // Ensure it's a valid start for a symbol
+          tokenizeSymbol();
+        } else {
+          // Handle unexpected characters if necessary, or advance past them
+          // For now, this might mean an error or simply advancing
+          // Capture current column for accurate error reporting if it's an unexpected char.
+          const errorColumn = column; 
+          throw new Error (`Unexpected character: '${char}' at ${line}:${errorColumn}`);
+        }
         break;
     }
   }
-  return [tokens, values];
-}
-
+  return invert(tokens);
 tokenize.TOK_STRING = TOK_STRING;
 tokenize.TOK_NUMBER = TOK_NUMBER;
 tokenize.TOK_SYMBOL = TOK_SYMBOL;

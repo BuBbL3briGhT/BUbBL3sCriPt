@@ -198,4 +198,96 @@ describe("toString(o)", () => {
   });
 });
 
+describe("Symbol.iterator", () => {
+  it("should not yield any values for an empty list (LynktLyst.air)", () => {
+    const emptyList = LynktLyst.air;
+    const results = [...emptyList];
+    assert.deepEqual(results, []);
+
+    let count = 0;
+    for (const item of emptyList) {
+      count++;
+    }
+    assert.equal(count, 0, "for...of loop should not execute for LynktLyst.air");
+  });
+
+  it("should handle a list created by new LynktLyst() (yields initial undefined value)", () => {
+    // A new LynktLyst() results in { o: undefined, oo: undefined }, which has x=false.
+    // The iterator will yield the 'o' value.
+    const listFromDefaultConstructor = new LynktLyst();
+    const results = [...listFromDefaultConstructor];
+    assert.deepEqual(results, [undefined], "Default constructor list should yield its undefined 'o' value");
+  });
+
+  it("should yield the single element for a single-element list", () => {
+    const list = LynktLyst.make(1); // Creates list: 1 -> air
+    const expected = [1];
+    
+    const resultsForOf = [];
+    for (const item of list) {
+      resultsForOf.push(item);
+    }
+    assert.deepEqual(resultsForOf, expected, "for...of loop results mismatch");
+    
+    const resultsSpread = [...list];
+    assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch");
+  });
+
+  it("should yield all elements in a multi-element list in order", () => {
+    const list = LynktLyst.make(1, 2, 3); // Creates list: 1 -> 2 -> 3 -> air
+                                         // Note: LynktLyst.make actually creates it as 3 -> 2 -> 1 -> air
+                                         // The tests for make() show: make(1,2,3) -> get(o,0)=3, get(o,1)=2, get(o,2)=1
+                                         // So the yielded order should be 3, 2, 1 for make(1,2,3)
+    const expected = [3, 2, 1]; 
+    
+    const resultsForOf = [];
+    for (const item of list) {
+      resultsForOf.push(item);
+    }
+    assert.deepEqual(resultsForOf, expected, "for...of loop results mismatch for multi-element list");
+    
+    const resultsSpread = [...list];
+    assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch for multi-element list");
+  });
+
+  it("should correctly yield null and undefined values if they are part of the list", () => {
+    const list = LynktLyst.make(1, undefined, 3, null, 5); // Expected order: 5, null, 3, undefined, 1
+    const expected = [5, null, 3, undefined, 1];
+    
+    const results = [...list];
+    assert.deepEqual(results, expected, "Spread syntax results mismatch for list with null/undefined");
+  });
+
+  it("should not modify the original list during iteration", () => {
+    const list = LynktLyst.make("a", "b", "c"); // c -> b -> a
+    const expectedItems = ["c", "b", "a"];
+    const expectedToString = "(c b a)"; // Based on typical toString for such a list structure
+
+    // First iteration
+    assert.deepEqual([...list], expectedItems, "First iteration results mismatch");
+
+    // Check list integrity after iteration
+    assert.equal(LynktLyst.toString(list), expectedToString, "List string form changed after iteration");
+    assert.equal(LynktLyst.count(list), 3, "List count changed after iteration");
+    assert.equal(LynktLyst.peek(list), "c", "List head changed after iteration");
+
+    // Second iteration
+    assert.deepEqual([...list], expectedItems, "Second iteration results mismatch");
+  });
+
+  it("should allow multiple iterations independently", () => {
+    const list = LynktLyst.make("x", "y"); // y -> x
+    const expected = ["y", "x"];
+
+    const iterator1 = list[Symbol.iterator]();
+    const iterator2 = list[Symbol.iterator]();
+
+    assert.deepEqual(iterator1.next().value, "y");
+    assert.deepEqual(iterator2.next().value, "y");
+    assert.deepEqual(iterator1.next().value, "x");
+    assert.deepEqual(iterator2.next().value, "x");
+    assert.deepEqual(iterator1.next().done, true);
+    assert.deepEqual(iterator2.next().done, true);
+  });
+});
 });

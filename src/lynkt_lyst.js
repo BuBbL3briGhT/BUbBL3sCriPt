@@ -3,8 +3,8 @@ var air;
 
 class LynktLyst {
 
-  static SURR = "("
-  static OUND = ")";
+  static listOpenChar = "("; // SURR -> listOpenChar
+  static listCloseChar = ")"; // OUND -> listCloseChar
 
   static get air() { return air; }
   // static set air(value) {
@@ -28,15 +28,15 @@ class LynktLyst {
     this.oo=oo;
   }
 
-  static make(...oo) {
-    var ooo;
-    for (let o of oo)
-      ooo = new LynktLyst(o, ooo);
-    return ooo;
+  static make(...elements) { // oo -> elements
+    var listHead; // ooo -> listHead
+    for (let o of elements) // oo -> elements
+      listHead = new LynktLyst(o, listHead); // ooo -> listHead
+    return listHead; // ooo -> listHead
   }
 
-  static from(arryLike, mapFn, thisArg) {
-    let array = Array.from(arryLike, mapFn, thisArg);
+  static from(arrayLike, mapFn, thisArg) { // arryLike -> arrayLike
+    let array = Array.from(arrayLike, mapFn, thisArg); // arryLike -> arrayLike
     return LynktLyst.make(...array);
   }
 
@@ -48,8 +48,8 @@ class LynktLyst {
     return o;
   }
 
-  static push(oo,o) {
-    return new LynktLyst(o,oo);
+  static push(list, element) { // oo -> list, o -> element
+    return new LynktLyst(element, list); // o -> element, oo -> list
   }
 
   static peek(o) { return o && o.o; }
@@ -67,19 +67,21 @@ class LynktLyst {
 
   static invert(o) {
     if (o)
-      return reduce(pop(o), (oo, o) => {
-        return push(oo, o)
+      // oo (accumulator), o (currentElement)
+      return reduce(pop(o), (accumulator, currentElement) => {
+        return push(accumulator, currentElement);
       }, new LynktLyst(peek(o)));
   }
 
-  static conj(o, oo) {
-    return oo.reduce(function(oo, o) {
-      return oo.push(o);
-    }, o);
+  static conj(targetList, sourceList) { // o -> targetList, oo -> sourceList
+    // oo (accumulator), o (currentElement)
+    return sourceList.reduce(function(accumulator, currentElement) {
+      return accumulator.push(currentElement);
+    }, targetList); // o -> targetList
   }
 
   static toString(o) {
-    if (!o) return this.SURR + this.OUND;
+    if (!o) return this.listOpenChar + this.listCloseChar; // SURR -> listOpenChar, OUND -> listCloseChar
 
     let format = (o) => {
       switch (typeof o) {
@@ -92,18 +94,20 @@ class LynktLyst {
       }
     }
 
-    let join = (oo, o) => {
-      return o + " " + oo;
+    // oo (accumulatedString), o (formattedElement)
+    let join = (accumulatedString, formattedElement) => {
+      return formattedElement + " " + accumulatedString;
     }
 
-    return this.SURR +
+    return this.listOpenChar + // SURR -> listOpenChar
       reduce(map(o, format), join)
-         + this.OUND;
+         + this.listCloseChar; // OUND -> listCloseChar
   }
 
   static toArray(o) {
-    return reduce(o, (oo, o) => {
-      oo.push(o); return oo; }, []);
+    // oo (array), o (currentElement)
+    return reduce(o, (array, currentElement) => {
+      array.push(currentElement); return array; }, []);
   }
 
   static map(o, fn) {
@@ -139,14 +143,14 @@ class LynktLyst {
   //// Members Only ¥ ////
 
   count() { return count(this); }
-  conj(oo) { return conj(this, oo); }
+  conj(sourceList) { return conj(this, sourceList); } // oo -> sourceList
   each(fn) { return each(this, fn); }
   get(i) { return get(this, i); }
   invert() { return invert(this); }
   map(fn) { return map(this, fn); }
   peek() { return peek(this); }
   pop() { return pop(this); }
-  push(o) { return push(this, o); }
+  push(element) { return push(this, element); } // o -> element
   reduce(fn, memo) {
     return reduce(this, fn, memo); }
   shift() { shift(this); }
@@ -154,11 +158,16 @@ class LynktLyst {
   toString() { return toString(this); }
   toArray() { return toArray(this); }
 
-  *[global.Symbol.iterator]() {
-    yield peek(this);
-    yield pop(this);
+  *[Symbol.iterator]() {
+    let currentNode = this;
+    // EmptiLyst (which is LynktLyst.air) has an accessor `get x() { return true; }`
+    // Regular LynktLyst nodes have `get x() { return false; }`
+    // So, iterate as long as the current node is not an EmptiLyst.
+    while (currentNode && !currentNode.x) {
+      yield currentNode.o;
+      currentNode = currentNode.oo;
+    }
   }
-
 }
 
 const _toString = LynktLyst.toString;
