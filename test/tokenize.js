@@ -112,6 +112,7 @@ describe("tokenize(string)", function() {
   // Original: itTokenizes2("two bubbles", "(+ 7 4)(8 2 -)", "(YNN)(NNY)", [,"+":7,4,,,8,2,"-",,]);
   // This implies types: '(', SYM, NUM, NUM, ')', '(', NUM, NUM, SYM, ')'
   // And values: '(', '+', 7, 4, ')', '(', 8, 2, '-', ')'
+  // + Dropping the descriptor here because it is getting sent to tokenize and causing the test to fail.
   // itTokenizes("two bubbles: (+ 7 4)(8 2 -)", // Changed description to be unique for `it`
   itTokenizes("(+ 7 4)(8 2 -)", // Changed description to be unique for `it`
     makeList(
@@ -131,6 +132,7 @@ describe("tokenize(string)", function() {
   // Original: itTokenizes2("nested bubble", "(1 (2))", "(N(N))", [,1,,2,,]);
   // Types: '(', NUM, '(', NUM, ')', ')'
   // Values: '(', 1, '(', 2, ')', ')'
+  // + Dropping the descriptor here because it is getting sent to tokenize and causing the test to fail.
   // itTokenizes("nested bubble: (1 (2))", // Changed description
   itTokenizes("(1 (2))", // Changed description
     makeList(
