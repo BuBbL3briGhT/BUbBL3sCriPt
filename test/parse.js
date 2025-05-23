@@ -3,15 +3,15 @@ const   fs   = require("fs");
 const  Yaml  = require("yaml");
 
 const parse = require("../src/parse");
-const LynktLyst = require("../src/lynkt_lyst"); // Changed from Bubble
+const List = require("../src/list"); // Changed from Bubble
 const Keyword = require("../src/keyword");
 const {type} = require("../src/fns"); // Assuming fns is a valid module
 const Symbol = require("../src/symbol");
 const Quoted = require("../src/quoted");
 
-// Use LynktLyst's static methods.
+// Use List's static methods.
 // peek and pop are available. make is like blow. from is for array-like.
-const { peek, pop, make: makeList, from: listFrom } = LynktLyst;
+const { peek, pop, make: makeList, from: listFrom } = List;
 
 
 const symbol = Symbol.for("symbol"),
@@ -26,17 +26,17 @@ let fixtures = Yaml.parse(data);
 
 describe("parse(string)", () => {
 
-  it.only("parses (1 2 3) into the correct AST structure", () => {
-    // parse("(1 2 3)") should produce a LynktLyst representing the list (1 2 3)
+  it("parses (1 2 3) into the correct AST structure", () => {
+    // parse("(1 2 3)") should produce a List representing the list (1 2 3)
     // The parser, due to its reverse processing, builds this as 3 -> 2 -> 1
     // and then it's inverted. So, peek(ast) should be the list 1 -> 2 -> 3.
     // However, the itParses test for "(1 2 3)" expects makeList(1,2,3)
     // makeList(1,2,3) creates 3 -> 2 -> 1.
-    // parse("(1 2 3)") returns an AST which is a LynktLyst.
+    // parse("(1 2 3)") returns an AST which is a List.
     // peek(ast) refers to the *first element* of this outer list if the parser wraps its result.
     // The parser's pArSe function returns invert(trEe). If trEe contains one list, peek(ast) is that list.
     const ast = parse("(1 2 3)");
-    // Expected: a LynktLyst where elements are 1, 2, 3.
+    // Expected: a List where elements are 1, 2, 3.
     // makeList(1,2,3) actually creates 3 -> 2 -> 1.
     // If parse("(1 2 3)") results in the list (1 2 3), its internal structure would be 1 -> 2 -> 3 -> air.
     // Let's use the existing itParses structure as a guide for expected values.
@@ -264,7 +264,7 @@ describe("Parser Error Handling", () => {
 
 describe("Parser Structure and Edge Case Tests", () => {
   it("parses empty string to undefined (or specific empty representation)", () => {
-    // tokenize("") returns no tokens (LynktLyst.air / undefined for tokens list)
+    // tokenize("") returns no tokens (List.air / undefined for tokens list)
     // parseTokens(undefined) returns undefined.
     assert.strictEqual(parse(""), undefined, "Parsing an empty string should result in undefined");
   });
