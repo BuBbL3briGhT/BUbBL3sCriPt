@@ -1,16 +1,16 @@
 const fs = require('fs');
 
 const Bubblescript = {
-    Bubble: require("./bubble"),
-   Balloon: require("./balloon"),
-    Symbol: require("./symbol"),
-   Keyword: require("./keyword"),
-    Quoted: require("./quoted"),
-        Fn: require("./fn"),
-     Macro: require("./macro"),
-  tokenize: require("./tokenize"),
-     parse: require("./parse"),
-      eval: require("./eval")
+      List: require("./o/list"),
+     Stack: require("./o/stack"),
+    Symbol: require("./o/symbol"),
+   Keyword: require("./o/keyword"),
+    Quoted: require("./o/quoted"),
+        Fn: require("./o/fn"),
+     Macro: require("./o/macro"),
+  tokenize: require("./f/tokenize"),
+     parse: require("./f/parse"),
+      eval: require("./f/eval")
 };
 
 Bubblescript.loadFile = function (path) {
