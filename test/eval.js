@@ -1,7 +1,7 @@
 const assert = require("assert");
 const sinon = require("sinon");
-const Bubble = require("../src/bubble");
-const Balloon = require("../src/balloon");
+const Stack = require("../src/stack");
+const List = require("../src/list");
 const eval = require("../src/eval");
 
 describe("eval(script)", function () {
@@ -16,10 +16,10 @@ describe("eval(script)", function () {
     eval('(console.log "Bonjour Marbre")');
     assert(console.log.calledWith("Bonjour Marbre"));
   });
-  it("evaluates a balloon with ease", function () {
+  it("evaluates a vector with ease", function () {
     let result = eval("[1 2 3]");
     // console.log(result);
-    assert(result instanceof Balloon);
+    assert(result instanceof List);
   });
 });
 
