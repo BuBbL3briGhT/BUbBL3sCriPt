@@ -1,28 +1,28 @@
 const assert = require("assert");
-const Stack  = require("../../src/o/stack");
+const Bubbles  = require("../../src/o/bubbles");
 
-const { make, get, invert, map, peek, pop,
-  push, reduce, skip, toString} = Stack;
+const { blow, make, get, invert, map, peek, pop,
+  push, reduce, skip, toString} = Bubbles;
 
-describe("Stack", () => {
+describe("Bubbles", () => {
 
-describe("new Stack(o, oo) ", () => {
-  it("makes a new stack for your fun and profit.", () => {
+describe("new Bubbles(o, oo) ", () => {
+  it("makes bubbles for your fun and profit.", () => {
     var o;
-    o = new Stack();
+    o = new Bubbles();
     assert.equal(get(o), undefined);
     assert.equal(skip(o, 1), undefined);
 
-    o = new Stack(1);
+    o = new Bubbles(1);
     assert.equal(get(o), 1);
-    o = new Stack(2, o);
+    o = new Bubbles(2, o);
     assert.equal(get(o), 2);
     assert.equal(get(o,1), 1);
   });
 });
 
 describe("make(o...)", () => {
-  it("makes stacks", () => {
+  it("makes bubbles", () => {
     assert.equal(make(), undefined);
     let o = make(1, 2, 3);
     assert.equal(get(o,0), 1);
@@ -33,7 +33,7 @@ describe("make(o...)", () => {
 
 describe("get(o, index)", () => {
   it("gets value of o at index", () => {
-    let o = Stack.make(6,7,8);
+    let o = Bubbles.make(6,7,8);
     assert.equal(get(o, 0), 6);
     assert.equal(get(o, 1), 7);
     assert.equal(get(o, 2), 8);
@@ -41,7 +41,7 @@ describe("get(o, index)", () => {
 });
 
 describe("invert", () => {
-  it("inverts stacks", () => {
+  it("inverts bubbles", () => {
     var o;
     o = invert(o);
     assert.equal(o, undefined);
@@ -60,10 +60,10 @@ describe("invert", () => {
     let oo = make(1,2,3);
     // assert.equal(toString(oo), "(1 2 3)");
     assert.equal(peek(oo), 1);
-    assert.equal(Stack.toString(oo), "(1 2 3)");
+    assert.equal(Bubbles.toString(oo), "(1 2 3)");
     let xo = invert(oo);
     // assert.equal(toString(xo), "(3 2 1)");
-    assert.equal(Stack.toString(xo), "(3 2 1)");
+    assert.equal(Bubbles.toString(xo), "(3 2 1)");
   });
 });
 
@@ -94,7 +94,7 @@ describe("map(o, fn)", () => {
 });
 
 describe("push(o)", () => {
-  it("pushes o onto the stack.", () => {
+  it("pushes o onto the bubbles.", () => {
     var o;
 
     o = push(o, 1);
@@ -110,7 +110,7 @@ describe("push(o)", () => {
 });
 
 describe("reduce", () => {
-  it("reduces the stack", () => {
+  it("reduces the bubbles", () => {
     var o, result;
 
     let add = (a,b) => { return b + a };
@@ -147,9 +147,9 @@ describe("reduce", () => {
   });
 });
 
-describe("skip(stack, count)", () => {
-  it("skips count of stacks", () => {
-    let o = Stack.make(6,7,8);
+describe("skip(bubbles, count)", () => {
+  it("skips count of bubbles", () => {
+    let o = Bubbles.make(6,7,8);
     assert.equal(peek(skip(o)), 6);
     assert.equal(peek(skip(o,0)), 6);
     assert.equal(peek(skip(o,1)), 7);
@@ -158,7 +158,7 @@ describe("skip(stack, count)", () => {
 });
 
 describe("toString(o)", () => {
-  it("formats stack as a string.", () => {
+  it("formats bubbles as a string.", () => {
     var o, result;
 
     result = toString(o);

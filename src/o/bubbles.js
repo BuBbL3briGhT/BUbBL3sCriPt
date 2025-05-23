@@ -1,31 +1,28 @@
 const List = require("./list");
 
-// const ;
-// extenda(, Lista);
-// for (
-// open(, function () {
-//   this.
-// });
-
-class Stack extends List {
+class Bubbles extends List {
 
   static make(...elements) {
     return _make(elements);
   }
 
+  static blow(...bubbles) {
+    return _blow(bubbles);
+  }
+
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
-    return Stack.make(...array);
+    return Bubbles.make(...array);
   }
 
   static push(list, element) { // oo -> list, o -> element
-    return new Stack(element, list); // o -> element, oo -> list
+    return new Bubbles(element, list); // o -> element, oo -> list
   }
 
 
   static map(o, fn) {
     if (o)
-      return new Stack(fn(o.o),
+      return new Bubbles(fn(o.o),
         map(o.oo, fn));
   }
 
@@ -48,7 +45,7 @@ class Stack extends List {
       return accumulatedString + " " + formattedElement; // Original was `oo + " " + o`, if list is reversed, this should be `formattedElement + " " + accumulatedString`
                                                         // However, looking at LynktLyst.toString, it was `o + " " + oo`.
                                                         // Let's keep the original logic of prepending: `formattedElement + " " + accumulatedString`
-                                                        // if the reduce iterates head to tail and wants to build a reversed string to match (e.g. LIFO stack -> string)
+                                                        // if the reduce iterates head to tail and wants to build a reversed string to match (e.g. LIFO bubbles -> string)
                                                         // Or, if reduce iterates head to tail and we want natural order string, it should be `accumulatedString + " " + formattedElement`
                                                         // Given `LynktLyst.toString` also had `o + " " + oo` and it works to produce `(1 2 3)`, this implies reduce iterates from tail (or list is inverted before stringification).
                                                         // For now, I keep the parameter names and the original logic: `formattedElement + " " + accumulatedString` assuming it's correct for the list's iteration order in reduce.
@@ -65,18 +62,23 @@ class Stack extends List {
          + ")";
   }
 
-  toString() { return Stack.toString(this); } // Ensure static toString is called for consistency
-  push(element) { return Stack.push(this, element); } // o -> element, ensure static push
+  toString() { return Bubbles.toString(this); } // Ensure static toString is called for consistency
+  push(element) { return Bubbles.push(this, element); } // o -> element, ensure static push
 
 }
 
-const { map, push, reduce, toString } = // These are static methods, ensure they are used as .map, Stack.push etc. if needed inside instance methods, or this is fine if they are standalone pure functions from LynktLyst.
-  Stack;
+const { map, push, reduce, toString } = // These are static methods, ensure they are used as .map, Bubbles.push etc. if needed inside instance methods, or this is fine if they are standalone pure functions from LynktLyst.
+  Bubbles;
 
 
 function _make(elementsArray, currentList) {
   if (elementsArray.length < 1) return currentList;
-  return _make(elementsArray, new Stack(elementsArray.pop(), currentList));
+  return _make(elementsArray, new Bubbles(elementsArray.pop(), currentList));
 }
 
-module.exports = Stack;
+function _blow(elementsArray, currentList) {
+  if (elementsArray.length < 1) return currentList;
+  return _blow(elementsArray, new Bubbles(elementsArray.pop(), currentList));
+}
+
+module.exports = Bubbles;
