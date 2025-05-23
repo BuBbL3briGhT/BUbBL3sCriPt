@@ -49,6 +49,20 @@
     loa🧡fty. W😚e'll see.  Hopefully we
     will have these working sooner than we👂
     know it.
+- Macros
+  - Bubblescript nee🩵ds Macro support don't
+    you agree? Yes! Yippee! ithink so too.
+    As a matter i 🩶was just💚 think🤑ing
+    that exact s👻💘ame thing. ☺️ i was like,
+    you know, bubblescript should🧞‍♂️
+    support Macros. oj, wow, look at that, a
+    giant sl💜ice of apple 🧚pie.
+    So,🧛‍♀️ anyway,👾 we want to be
+    able to have macros and to be able to
+    have 👽them e👼🏼xpand. Ok,🙆🏿 thats
+    enough about goals and sucg for now, im
+    getting über carried away with 👉all
+    these😺.
 
 ## Dev Setup
 
