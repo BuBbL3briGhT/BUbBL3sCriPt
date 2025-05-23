@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Stack  = require("../src/stack");
+const Stack  = require("../../src/o/stack");
 
 const { make, get, invert, map, peek, pop,
   push, reduce, skip, toString} = Stack;

@@ -1,12 +1,12 @@
-
-const Stack = require("./stack");
-const Keyword = require("./keyword");
 const parse = require("./parse");
-const List = require("./list");
-const Fn = require("./fn");
-const Macro = require("./macro");
-const Symbol = require("./symbol");
-const Quoted = require("./quoted");
+
+const List    = require("../o/list");
+const Stack   = require("../o/stack");
+const Keyword = require("../o/keyword");
+const Fn      = require("../o/fn");
+const Macro   = require("../o/macro");
+const Symbol  = require("../o/symbol");
+const Quoted  = require("../o/quoted");
 
 const { map, peek, pop, push, toArray } = Stack;
 

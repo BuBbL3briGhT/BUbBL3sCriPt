@@ -1,5 +1,5 @@
 const assert = require("assert");
-const List  = require("../src/list");
+const List  = require("../../src/o/list");
 
 const { make, count, get, invert, map,
   peek, pop, push, reduce, skip, toString

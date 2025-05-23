@@ -1,9 +1,9 @@
 const assert = require("assert");
-const tokenize = require("../src/tokenize");
+const tokenize = require("../../src/f/tokenize");
 // Use List for list operations. Note: `blow` was specific to Bubble.
 // We'll use List.make for varargs and List.from for array-like.
 // `count`, `get`, `peek` are static methods on List.
-const List = require("../src/list");
+const List = require("../../src/o/list");
 const { count, get, peek, invert, from: arrayFromList, make: makeList } = List; // Assuming 'from' and 'make' exist
 
 const { TOK_STRING, TOK_NUMBER,

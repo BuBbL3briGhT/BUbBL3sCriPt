@@ -1,9 +1,10 @@
-const Stack   = require("./stack");
-const List  = require("./list");
-const Keyword  = require("./keyword");
-const Symbol   = require("./symbol");
 const tokenize = require("./tokenize");
-const Quoted   = require("./quoted");
+
+const Stack    = require("../o/stack");
+const List     = require("../o/list");
+const Keyword  = require("../o/keyword");
+const Symbol   = require("../o/symbol");
+const Quoted   = require("../o/quoted");
 
 const { TOK_STRING, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD } = tokenize;

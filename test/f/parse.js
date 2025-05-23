@@ -2,13 +2,13 @@ const assert = require("assert");
 const   fs   = require("fs");
 const  Yaml  = require("yaml");
 
-const parse = require("../src/parse");
-const Stack = require("../src/stack");
-const List = require("../src/list");
-const Keyword = require("../src/keyword");
-const {type} = require("../src/fns"); // Assuming fns is a valid module
-const Symbol = require("../src/symbol");
-const Quoted = require("../src/quoted");
+const parse   = require("../../src/f/parse");
+const Stack   = require("../../src/o/stack");
+const List    = require("../../src/o/list");
+const Keyword = require("../../src/o/keyword");
+const Symbol  = require("../../src/o/symbol");
+const Quoted  = require("../../src/o/quoted");
+const {type}  = require("../../src/z/fns"); // Assuming fns is a valid module
 
 // Use Stack's static methods.
 const { peek, pop, make: makeStack, from:

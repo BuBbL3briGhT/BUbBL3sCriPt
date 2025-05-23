@@ -1,4 +1,4 @@
-const { push, invert } = require("./list");
+const { push, invert } = require("../o/list");
 
 const TOK_KEYWORD = 'K';
 const TOK_NUMBER  = 'N';

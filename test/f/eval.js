@@ -1,8 +1,8 @@
 const assert = require("assert");
 const sinon = require("sinon");
-const Stack = require("../src/stack");
-const List = require("../src/list");
-const eval = require("../src/eval");
+const Stack = require("../../src/o/stack");
+const List = require("../../src/o/list");
+const eval = require("../../src/f/eval");
 
 describe("eval(script)", function () {
   after(function () {
