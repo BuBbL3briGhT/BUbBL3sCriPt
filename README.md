@@ -5,6 +5,12 @@
 | | | | | | | | | |-' `-. |   |   | | | |
 `-' `-` `-' `-' ' `-' `-' `-' '   ' |-' `-'
 
+
+## TODO
+
+- Fix failing tests that have been marked as
+  pendin (it.skip) in test/f/parse.js
+
 ## Project Goals
 
 - Immutability
