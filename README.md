@@ -30,6 +30,25 @@
     has devised such devices in orde😊r to
     fluentl💜y f😲low and grove and hum
     🫏along their merry way.
+- Loop & Recurrrrrr
+  - We want to get dem loop and recurrrrr
+    function🙊s happening. We don't have
+    them yet AFAiK, but th🙃💜ey need to be
+    on our hit li👀st. These
+    function🧓🏿💤🫀🩵💋 dep🥲end on the
+    immu👄tablity factors discussed above,
+    so we are still 🖖🏿ham💚mering out the
+    d🤗eets with al😋l of th💕a🖤t right
+    😁now. We are trying to widdle down
+    t💖he cor💙🦴e of the code💞 base🫠 t💨o
+    👀the 🤑💥essesnce of what is needed to
+    make it happen sorta licking a thin
+    layer of 🫦del💌icious ov✌🏿er a
+    delicious Javas🫁crpit cake. Lofty
+    go🩷als, but hopegully n😉o🧠t too😝
+    loa🧡fty. W😚e'll see.  Hopefully we
+    will have these working sooner than we👂
+    know it.
 
 ## Dev Setup
 
