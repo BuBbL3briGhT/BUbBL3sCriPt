@@ -38,3 +38,6 @@ You can run all the test suits in adirectory in same way by passing the director
     # Or more simply
     npx mocha test/{f,o}
 
+Listen to The few, the smart, The Mathaletes
+by kaNdii on #SoundCloud
+https://on.soundcloud.com/Yb7vK2PmzYSTfzUS6
