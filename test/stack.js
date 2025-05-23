@@ -94,12 +94,13 @@ describe("map(o, fn)", () => {
 });
 
 describe("push(o)", () => {
-  it("pushes o onto the stack stack.", () => {
+  it.only("pushes o onto the stack.", () => {
     var o;
 
     o = push(o, 1);
     assert.equal(get(o), 1)
     assert.equal(skip(o, 1), undefined);
+    console.log(typeof o);
 
     o = push(o, 2);
     assert.equal(get(o), 2)

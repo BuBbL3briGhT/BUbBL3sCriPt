@@ -26,7 +26,7 @@ let fixtures = Yaml.parse(data);
 
 describe("parse(string)", () => {
 
-  it("parses (1 2 3) into the correct AST structure", () => {
+  it.only("parses (1 2 3) into the correct AST structure", () => {
     // parse("(1 2 3)") should produce a List representing the list (1 2 3)
     // The parser, due to its reverse processing, builds this as 3 -> 2 -> 1
     // and then it's inverted. So, peek(ast) should be the list 1 -> 2 -> 3.
@@ -36,6 +36,7 @@ describe("parse(string)", () => {
     // peek(ast) refers to the *first element* of this outer list if the parser wraps its result.
     // The parser's pArSe function returns invert(trEe). If trEe contains one list, peek(ast) is that list.
     const ast = parse("(1 2 3)");
+    console.log(ast);
     // Expected: a List where elements are 1, 2, 3.
     // makeList(1,2,3) actually creates 3 -> 2 -> 1.
     // If parse("(1 2 3)") results in the list (1 2 3), its internal structure would be 1 -> 2 -> 3 -> air.
