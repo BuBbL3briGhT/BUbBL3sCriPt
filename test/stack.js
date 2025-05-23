@@ -1,13 +1,13 @@
 const assert = require("assert");
 const Stack  = require("../src/stack");
 
-const { blow, get, invert, map, peek, pop,
+const { make, get, invert, map, peek, pop,
   push, reduce, skip, toString} = Stack;
 
 describe("Stack", () => {
 
 describe("new Stack(o, oo) ", () => {
-  it("blows a new stack for your fun and profit.", () => {
+  it("makes a new stack for your fun and profit.", () => {
     var o;
     o = new Stack();
     assert.equal(get(o), undefined);
@@ -21,10 +21,10 @@ describe("new Stack(o, oo) ", () => {
   });
 });
 
-describe("blow(o...)", () => {
-  it("blows stacks", () => {
-    assert.equal(blow(), undefined);
-    let o = blow(1, 2, 3);
+describe("make(o...)", () => {
+  it("makes stacks", () => {
+    assert.equal(make(), undefined);
+    let o = make(1, 2, 3);
     assert.equal(get(o,0), 1);
     assert.equal(get(o,1), 2);
     assert.equal(get(o,2), 3);
@@ -33,7 +33,7 @@ describe("blow(o...)", () => {
 
 describe("get(o, index)", () => {
   it("gets value of o at index", () => {
-    let o = Stack.blow(6,7,8);
+    let o = Stack.make(6,7,8);
     assert.equal(get(o, 0), 6);
     assert.equal(get(o, 1), 7);
     assert.equal(get(o, 2), 8);
@@ -46,7 +46,7 @@ describe("invert", () => {
     o = invert(o);
     assert.equal(o, undefined);
 
-    o = blow(1);
+    o = make(1);
     o = invert(o);
     assert.equal(peek(o),1);
     assert.equal(skip(o,1), undefined);
@@ -57,7 +57,7 @@ describe("invert", () => {
     o = invert(o);
     assert.equal(peek(o),1);
 
-    let oo = blow(1,2,3);
+    let oo = make(1,2,3);
     // assert.equal(toString(oo), "(1 2 3)");
     assert.equal(peek(oo), 1);
     assert.equal(Stack.toString(oo), "(1 2 3)");
@@ -76,7 +76,7 @@ describe("map(o, fn)", () => {
     result = map(o, add7);
     assert.equal(result, undefined);
 
-    o = blow(1);
+    o = make(1);
     o = map(o, add7);
     assert.equal(get(o), 8);
 
@@ -94,7 +94,7 @@ describe("map(o, fn)", () => {
 });
 
 describe("push(o)", () => {
-  it.only("pushes o onto the stack.", () => {
+  it("pushes o onto the stack.", () => {
     var o;
 
     o = push(o, 1);
@@ -133,7 +133,7 @@ describe("reduce", () => {
     result = reduce(o, add)
     assert.equal(result, 6)
 
-    o = blow("a");
+    o = make("a");
     result = reduce(o, add);
     assert.equal(result, "a");
 
@@ -149,7 +149,7 @@ describe("reduce", () => {
 
 describe("skip(stack, count)", () => {
   it("skips count of stacks", () => {
-    let o = Stack.blow(6,7,8);
+    let o = Stack.make(6,7,8);
     assert.equal(peek(skip(o)), 6);
     assert.equal(peek(skip(o,0)), 6);
     assert.equal(peek(skip(o,1)), 7);
@@ -164,7 +164,7 @@ describe("toString(o)", () => {
     result = toString(o);
     assert.equal(result, "()");
 
-    o = blow(1);
+    o = make(1);
     result = toString(o);
     assert.equal(result, "(1)");
 
@@ -185,7 +185,7 @@ describe("toString(o)", () => {
     assert.equal(result, "(symbol \"string\" 3 2 1)");
 
     let ts = toString;
-    let oo = blow(3,2,1);
+    let oo = make(3,2,1);
     assert.equal(ts(oo), "(3 2 1)");
     o = push(pop(pop(o)), oo);
     assert.equal(ts(o), "((3 2 1) 3 2 1)");

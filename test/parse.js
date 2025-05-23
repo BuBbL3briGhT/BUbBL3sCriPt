@@ -29,7 +29,7 @@ describe("parse(string)", () => {
 
   it.only("parses (1 2 3) into the correct AST structure", () => {
     const ast = parse("(1 2 3)");
-    const expectedAst = Stack.blow(1, 2, 3);
+    const expectedAst = Stack.make(1, 2, 3);
     assert.deepEqual(peek(ast), expectedAst, "AST for (1 2 3) should be a stack of 1, 2, 3");
   });
 

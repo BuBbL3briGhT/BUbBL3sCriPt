@@ -1,29 +1,21 @@
 const List = require("./list");
 
-// const Bubble;
-// extenda(Bubble, Lista);
+// const ;
+// extenda(, Lista);
 // for (
-// open(Bubble, function () {
+// open(, function () {
 //   this.
 // });
 
 class Stack extends List {
 
-  // Blow bubbles faster.
-  static blow(...elements) { // oo -> elements
-    return _blow(elements); // oo -> elements
+  static make(...elements) {
+    return _make(elements);
   }
 
-  // Blow a bunch of lynktLysts from an
-  // Javascript iterable or array-like
-  // object.
-  //
-  // Parameters are passed directly to
-  // Array.from and the result is then
-  // blown into lynktLysts.
-  static from(arrayLike, mapFn, thisArg) { // arryLike -> arrayLike
-    let array = Array.from(arrayLike, mapFn, thisArg); // arryLike -> arrayLike
-    return Bubble.blow(...array);
+  static from(arrayLike, mapFn, thisArg) {
+    let array = Array.from(arrayLike, mapFn, thisArg);
+    return Stack.make(...array);
   }
 
   static push(list, element) { // oo -> list, o -> element
@@ -78,14 +70,13 @@ class Stack extends List {
 
 }
 
-const { map, push, reduce, toString } = // These are static methods, ensure they are used as Bubble.map, Bubble.push etc. if needed inside instance methods, or this is fine if they are standalone pure functions from LynktLyst.
+const { map, push, reduce, toString } = // These are static methods, ensure they are used as .map, Stack.push etc. if needed inside instance methods, or this is fine if they are standalone pure functions from LynktLyst.
   Stack;
 
 
-function _blow(elementsArray, currentList) { // a -> elementsArray, bubble -> currentList
-  if (elementsArray.length < 1) return currentList; // a -> elementsArray, bubble -> currentList
-  // a -> elementsArray, bubble -> currentList, a -> elementsArray, bubble -> currentList
-  return _blow(elementsArray, new Stack(elementsArray.pop(), currentList));
+function _make(elementsArray, currentList) {
+  if (elementsArray.length < 1) return currentList;
+  return _make(elementsArray, new Stack(elementsArray.pop(), currentList));
 }
 
 module.exports = Stack;
