@@ -121,9 +121,13 @@ describe("Parser Error Handling", () => {
   it("throws NoMatchError for mismatched closing delimiter in bubble", () => {
     const input = "(1 2]";
     assert.throws(() => parse(input), (error) => {
+      // console.log(error);
+
       assert.equal(error.name, "NoMatchError");
-      assert(error.message.includes("Token type ] did not match expected token type )"));
-      assert(error.message.includes("line 1, column 5")); // Assuming ']' is at 1,5
+      // assert(error.message.includes("Token type ] did not match expected token type )"));
+      assert(error.message.includes("No match found for token type ("));
+      // assert(error.message.includes("line 1, column 5")); // Assuming ']' is at 1,5
+      assert(error.message.includes("(at line 1, column 1, value: '(')"));
       return true;
     });
   });

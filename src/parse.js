@@ -174,7 +174,8 @@ function match_item(tokenList, contextTokenForEOF) {
       // If it's not a special type, it might be an error or an unhandled simple token
       // The original code didn't have a fallback here, it would error in `itEm === undefined`.
       // Let's make it explicit.
-      throw new NoMatchError(`No match found for token type ${currentToken.type}`, currentToken);
+      throw new NoMatchError(
+        `No match found for token type ${currentToken.type}`, currentToken);
   }
 
   // If item is not undefined, it means one of the cases matched and created an item.
