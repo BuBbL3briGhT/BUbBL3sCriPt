@@ -10,10 +10,9 @@ const {type} = require("../src/fns"); // Assuming fns is a valid module
 const Symbol = require("../src/symbol");
 const Quoted = require("../src/quoted");
 
-// Use List's static methods.
-// peek and pop are available. make is like blow. from is for array-like.
-const { peek, pop, make: makeList, from: listFrom } = List;
-
+// Use Stack's static methods.
+const { peek, pop, make: makeStack, from:
+  stackFrom } = Stack;
 
 const symbol = Symbol.for("symbol"),
       a = Symbol.for("a"),
@@ -29,7 +28,7 @@ describe("parse(string)", () => {
 
   it("parses (1 2 3) into the correct AST structure", () => {
     const ast = parse("(1 2 3)");
-    const expectedAst = Stack.make(1, 2, 3);
+    const expectedAst = makeStack(1, 2, 3);
     assert.deepEqual(peek(ast), expectedAst, "AST for (1 2 3) should be a stack of 1, 2, 3");
   });
 
@@ -42,15 +41,14 @@ describe("parse(string)", () => {
   itParses(":keyword",
     {expects: keyword});
   itParses("(1 2 3)",
-    {expects: Stack.make(1, 2, 3)});
+    {expects: makeStack(1, 2, 3)});
   itParses("(a b c)",
-    {expects: Stack.make(a, b, c)});
+    {expects: makeStack(a, b, c)});
   itParses("(a 3 b 2 c 1)",
-    {expects: Stack.make(a, 3, b, 2, c, 1)});
+    {expects: makeStack(a, 3, b, 2, c, 1)});
 
   itParses2("a nested bubble", "(1 (2))",
-     // listFrom([1, listFrom([2])])); // Changed Bubble.from to listFrom
-     Stack.from([1, Stack.from([2])]));
+     stackFrom([1, stackFrom([2])]));
 
 
   // (define (abs x)
@@ -59,15 +57,15 @@ describe("parse(string)", () => {
   //       x))
   itParsesFixture("abs",
     { expects:
-        listFrom([Symbol.for("define"),
-          listFrom([Symbol.for("abs"),
+        stackFrom([Symbol.for("define"),
+          stackFrom([Symbol.for("abs"),
                      Symbol.for("x")]),
-          listFrom([Symbol.for("if"),
-            listFrom([Symbol.for("<"),
+          stackFrom([Symbol.for("if"),
+            stackFrom([Symbol.for("<"),
               Symbol.for("x"), 0]),
-            listFrom([Symbol.for("-"),
+            stackFrom([Symbol.for("-"),
               Symbol.for("x")]),
-            Symbol.for("x")])])}); // Changed Bubble.from to listFrom
+            Symbol.for("x")])])}); // Changed Bubble.from to stackFrom
 
   // it('should match a single keyword as a bubble', function() {
   //   assertParse(":keyword",
@@ -264,7 +262,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     // makeList(c, b, a) creates a -> b -> c -> air
     const ast = parse("1 2 (a b)");
     const expected = makeList( // This is the outer list of expressions
-        listFrom([Symbol.for("a"), Symbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
+        stackFrom([Symbol.for("a"), Symbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
         2,
         1
     );
@@ -311,7 +309,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     const expected = makeList( // Outer list from parse()
       new Quoted(
         makeList( // list (a ...)
-          listFrom([ // list [1 "s" 'x] -- assuming balloons are parsed as lists
+          stackFrom([ // list [1 "s" 'x] -- assuming balloons are parsed as lists
             new Quoted(Symbol.for("x")),
             "s",
             1
@@ -333,7 +331,7 @@ describe("Parser Structure and Edge Case Tests", () => {
       makeList( // list (define ...)
         new Quoted(
           makeList( // list (1 ...)
-            listFrom([ // list [2 :key]
+            stackFrom([ // list [2 :key]
               Keyword.for("key"),
               2,
             ]),
