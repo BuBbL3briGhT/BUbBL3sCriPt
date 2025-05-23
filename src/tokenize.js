@@ -1,6 +1,4 @@
-
-// const { push, invert } = require("./lynkt_lyst");
-const { push, invert } = require("./bubble");
+const { push, invert } = require("./list");
 
 const TOK_KEYWORD = 'K';
 const TOK_NUMBER  = 'N';
