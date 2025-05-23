@@ -6,7 +6,7 @@ const Keyword = require("../o/keyword");
 const Fn      = require("../o/fn");
 const Macro   = require("../o/macro");
 const Symbol  = require("../o/symbol");
-const Quoted  = require("../o/quoted");
+const Bubble  = require("../o/bubble");
 
 const { map, peek, pop, push, toArray } = Stack;
 
@@ -322,8 +322,8 @@ function eVaL(bnd, xpr) {
       return each(xpr.body, (xpr) => {
         return eVaL(bnd, xpr);
       });
-    case Quoted:
-      return xpr.unquote();
+    case Bubble:
+      return xpr.pop();
     default:
       return xpr;
   }

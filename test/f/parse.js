@@ -7,7 +7,7 @@ const Stack   = require("../../src/o/stack");
 const List    = require("../../src/o/list");
 const Keyword = require("../../src/o/keyword");
 const Symbol  = require("../../src/o/symbol");
-const Quoted  = require("../../src/o/quoted");
+const Bubble  = require("../../src/o/bubble");
 const {type}  = require("../../src/z/fns"); // Assuming fns is a valid module
 
 // Use Stack's static methods.
@@ -34,9 +34,9 @@ describe("parse(string)", () => {
     assert.deepEqual(peek(ast), expectedAst, "AST for (1 2 3) should be a stack of 1, 2, 3");
   });
 
-  it("parses a quoted bubble", function () {
-    let m = parse("'(a b c)")
-    assert(peek(m) instanceof Quoted);
+  it("parses a bubble", function () {
+    let m = parse("°(a b c)")
+    assert(peek(m) instanceof Bubble);
   });
 
   itParses("symbol", {expects: symbol});

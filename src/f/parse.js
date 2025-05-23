@@ -4,7 +4,7 @@ const Stack    = require("../o/stack");
 const List     = require("../o/list");
 const Keyword  = require("../o/keyword");
 const Symbol   = require("../o/symbol");
-const Quoted   = require("../o/quoted");
+const Bubble   = require("../o/bubble");
 
 const { TOK_STRING, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD } = tokenize;
@@ -54,14 +54,14 @@ function parseTokens(tokenList) { // pArSe -> parseTokens
         [tokenList, list] = match_list(tokenList); // liSt -> list
         tree = push(tree, list); // trEe -> tree, liSt -> list
         break;
-      case "'": // Quote
-        [tokenList, matchedToken] = match("'", tokenList); // match consumes the quote
-        // The item to be quoted is the last item pushed to trEe
+      case "°": // Bubble
+        [tokenList, matchedToken] = match("°", tokenList); // match consumes the bubble
+        // The item to be put in a bubble is the last item pushed to trEe
         // This logic might need adjustment if trEe can be empty or not what's expected
         if (!tree || !peek(tree)) throw new ParsingError("Nothing to quote", matchedToken); // trEe -> tree
-        let itemToQuote = peek(tree); // trEe -> tree
+        let itemToBubble = peek(tree); // trEe -> tree
         tree = pop(tree); // Remove the item // trEe -> tree
-        tree = push(tree, new Quoted(itemToQuote)); // Push the quoted item // trEe -> tree
+        tree = push(tree, new Bubble(itemToBubble)); // Push the bubble item // trEe -> tree
         break;
       default:
         [tokenList, item] = match_item(tokenList); // iTem -> item
