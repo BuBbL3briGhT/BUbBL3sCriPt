@@ -27,7 +27,7 @@ let fixtures = Yaml.parse(data);
 
 describe("parse(string)", () => {
 
-  it.only("parses (1 2 3) into the correct AST structure", () => {
+  it("parses (1 2 3) into the correct AST structure", () => {
     const ast = parse("(1 2 3)");
     const expectedAst = Stack.make(1, 2, 3);
     assert.deepEqual(peek(ast), expectedAst, "AST for (1 2 3) should be a stack of 1, 2, 3");
@@ -42,14 +42,16 @@ describe("parse(string)", () => {
   itParses(":keyword",
     {expects: keyword});
   itParses("(1 2 3)",
-    {expects: makeList(1, 2, 3)}); // Changed Bubble.blow to makeList
+    {expects: Stack.make(1, 2, 3)});
   itParses("(a b c)",
-    {expects: makeList(a, b, c)}); // Changed Bubble.blow to makeList
+    {expects: Stack.make(a, b, c)});
   itParses("(a 3 b 2 c 1)",
-    {expects: makeList(a, 3, b, 2, c, 1)}); // Changed Bubble.blow to makeList
+    {expects: Stack.make(a, 3, b, 2, c, 1)});
 
   itParses2("a nested bubble", "(1 (2))",
-     listFrom([1, listFrom([2])])); // Changed Bubble.from to listFrom
+     // listFrom([1, listFrom([2])])); // Changed Bubble.from to listFrom
+     Stack.from([1, Stack.from([2])]));
+
 
   // (define (abs x)
   //   (if (< x 0)
