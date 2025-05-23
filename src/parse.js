@@ -40,10 +40,11 @@ function parse(inputString) { // sTriNg -> inputString
 function parseTokens(tokenList) { // pArSe -> parseTokens
   let tree, list, item, matchedToken; // trEe -> tree, liSt -> list, iTem -> item
 
+  console.log(tokenList);
   while (tokenList && peek(tokenList)) { // Loop while there are tokens
     let currentTokenObject = peek(tokenList);
     switch (currentTokenObject.type) {
-      case ')': // End of a Bubble list
+      case '(': // End of a Bubble list
         [tokenList, list] = match_bubble(tokenList); // liSt -> list
         tree = push(tree, list); // trEe -> tree, liSt -> list
         break;
@@ -124,7 +125,7 @@ function match_balloon(tokenList) {
   }
 
   [tokenList, openingBracketToken] = match('[', tokenList, closingBracketToken);
-  
+
   // Assuming Balloon.push prepends items like Bubble.push, so inversion is necessary.
   return [tokenList, invert(list)]; // lisT -> list
 }

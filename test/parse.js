@@ -26,7 +26,7 @@ let fixtures = Yaml.parse(data);
 
 describe("parse(string)", () => {
 
-  it("parses (1 2 3) into the correct AST structure", () => {
+  it.only("parses (1 2 3) into the correct AST structure", () => {
     // parse("(1 2 3)") should produce a LynktLyst representing the list (1 2 3)
     // The parser, due to its reverse processing, builds this as 3 -> 2 -> 1
     // and then it's inverted. So, peek(ast) should be the list 1 -> 2 -> 3.
@@ -193,7 +193,7 @@ describe("Parser Error Handling", () => {
       return true;
     });
   });
-  
+
   it("throws NoMatchError for unexpected token where item is expected in bubble", () => {
     const input = "(1 . 2)"; // Tokenizer produces '(', 1, '.', 2, ')'
                            // Parser (reversed) sees ')', 2, '.', 1, '('
@@ -218,7 +218,7 @@ describe("Parser Error Handling", () => {
       return true;
     });
   });
-  
+
   it("throws ParsingError for quote with no preceding item in a list", () => {
     const input = "(')"; // Tokens: ')', ''', '('
     assert.throws(() => parse(input), (error) => {
@@ -341,7 +341,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     );
     assert.deepEqual(ast, expected, "AST for complex nested structure");
   });
-  
+
   it("parses another complex structure: (define x '(1 [2 keyword]))", () => {
     const input = "(define x '(1 [2 :key]))";
     // AST: List(Symbol(define), Symbol(x), Quoted(List(1, List(2, Keyword(key)))))

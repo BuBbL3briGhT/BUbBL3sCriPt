@@ -164,7 +164,7 @@ function itTokenizes(s, expectedTokenObjectsList) {
     // 🪖 Needing to do an invert here to get the tests
     // passing. This should factor out at some point
     // along with this comment. 🥂
-    expectedTokenObjectsList = invert(expectedTokenObjectsList);
+    // expectedTokenObjectsList = invert(expectedTokenObjectsList);
 
     assert.deepEqual(actualTokenList, expectedTokenObjectsList);
   });

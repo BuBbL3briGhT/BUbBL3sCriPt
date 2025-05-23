@@ -1,5 +1,6 @@
 
-const { push, invert } = require("./lynkt_lyst");
+// const { push, invert } = require("./lynkt_lyst");
+const { push, invert } = require("./bubble");
 
 const TOK_KEYWORD = 'K';
 const TOK_NUMBER  = 'N';
@@ -145,7 +146,8 @@ function tokenize(inputString) {
         break;
     }
   }
-  return invert(tokens);
+  // return invert(tokens);
+  return tokens;
 }
 tokenize.TOK_STRING = TOK_STRING;
 tokenize.TOK_NUMBER = TOK_NUMBER;

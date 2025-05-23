@@ -1,4 +1,4 @@
-const LynktLysta = require("./lynkt_lyst");
+const List = require("./list");
 
 // const Bubble;
 // extenda(Bubble, Lista);
@@ -7,7 +7,7 @@ const LynktLysta = require("./lynkt_lyst");
 //   this.
 // });
 
-class Bubble extends LynktLysta {
+class Stack extends List {
 
   // Blow bubbles faster.
   static blow(...elements) { // oo -> elements
@@ -27,13 +27,13 @@ class Bubble extends LynktLysta {
   }
 
   static push(list, element) { // oo -> list, o -> element
-    return new Bubble(element, list); // o -> element, oo -> list
+    return new Stack(element, list); // o -> element, oo -> list
   }
 
 
   static map(o, fn) {
     if (o)
-      return new Bubble(fn(o.o),
+      return new Stack(fn(o.o),
         map(o.oo, fn));
   }
 
@@ -73,19 +73,19 @@ class Bubble extends LynktLysta {
          + ")";
   }
 
-  toString() { return Bubble.toString(this); } // Ensure static toString is called for consistency
-  push(element) { return Bubble.push(this, element); } // o -> element, ensure static push
+  toString() { return Stack.toString(this); } // Ensure static toString is called for consistency
+  push(element) { return Stack.push(this, element); } // o -> element, ensure static push
 
 }
 
 const { map, push, reduce, toString } = // These are static methods, ensure they are used as Bubble.map, Bubble.push etc. if needed inside instance methods, or this is fine if they are standalone pure functions from LynktLyst.
-  Bubble;
+  Stack;
 
 
 function _blow(elementsArray, currentList) { // a -> elementsArray, bubble -> currentList
   if (elementsArray.length < 1) return currentList; // a -> elementsArray, bubble -> currentList
   // a -> elementsArray, bubble -> currentList, a -> elementsArray, bubble -> currentList
-  return _blow(elementsArray, new Bubble(elementsArray.pop(), currentList));
+  return _blow(elementsArray, new Stack(elementsArray.pop(), currentList));
 }
 
-module.exports = Bubble;
+module.exports = Stack;
