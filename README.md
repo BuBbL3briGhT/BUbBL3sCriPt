@@ -15,6 +15,7 @@
         interpretor, but the test suite is still
         passing. we need to figure out how to test
         this with Mocha.
+        - See test/bin/bubls.js
 
 ## Project Goals
 
