@@ -5,6 +5,32 @@
 | | | | | | | | | |-' `-. |   |   | | | |
 `-' `-` `-' `-' ' `-' `-' `-' '   ' |-' `-'
 
+## Project Goals
+
+- Immutability
+  - Immutability is a good things. In
+    Bubbles🗯🫠cript we wish 😮to be able
+    programming in a c🦁lear and concise
+    manner using functional program🤠ming
+    techniques tha🗽t depe🐺🌙nd on💜 an
+    exp🤪ect🎶ation. We d😏on't want to put
+    the programmer i🤓🇺🇸n bondag🥰e, and
+    act as a big brother 🎄or cop th🐩a🥹t
+    ensure they abso💖lutlt 🎈can't mutat😋e
+    thi🎈ng🍬👻s, we wish the empower the
+    pr🔔ogra🥸mmer with a path, and
+    support,🌸 and go🇺🇸od a😳nd tested
+    solutions that enable the ptogrammer to
+    exp🥳re🤔ss their pro💖grams🐇 using
+    🐯these constructs of immutablity 💃🏻so
+    the can unlock all t💜he
+    🐇🫧🧋b🫏enifits😇 and the bliss that
+    c😍omes 🤭with havi🤐ng th🍸is
+    expectation that c🍕lever prog🦜ra🧠mmer
+    has devised such devices in orde😊r to
+    fluentl💜y f😲low and grove and hum
+    🫏along their merry way.
+
 ## Dev Setup
 
     git clone git@github.com:BuBbL3briGhT/BUbBL3sCriPt.git bubblescript
