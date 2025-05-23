@@ -3,7 +3,8 @@ const   fs   = require("fs");
 const  Yaml  = require("yaml");
 
 const parse = require("../src/parse");
-const List = require("../src/list"); // Changed from Bubble
+const Stack = require("../src/stack");
+const List = require("../src/list");
 const Keyword = require("../src/keyword");
 const {type} = require("../src/fns"); // Assuming fns is a valid module
 const Symbol = require("../src/symbol");
@@ -27,30 +28,9 @@ let fixtures = Yaml.parse(data);
 describe("parse(string)", () => {
 
   it.only("parses (1 2 3) into the correct AST structure", () => {
-    // parse("(1 2 3)") should produce a List representing the list (1 2 3)
-    // The parser, due to its reverse processing, builds this as 3 -> 2 -> 1
-    // and then it's inverted. So, peek(ast) should be the list 1 -> 2 -> 3.
-    // However, the itParses test for "(1 2 3)" expects makeList(1,2,3)
-    // makeList(1,2,3) creates 3 -> 2 -> 1.
-    // parse("(1 2 3)") returns an AST which is a List.
-    // peek(ast) refers to the *first element* of this outer list if the parser wraps its result.
-    // The parser's pArSe function returns invert(trEe). If trEe contains one list, peek(ast) is that list.
     const ast = parse("(1 2 3)");
-    // console.log(ast);
-    // Expected: a List where elements are 1, 2, 3.
-    // makeList(1,2,3) actually creates 3 -> 2 -> 1.
-    // If parse("(1 2 3)") results in the list (1 2 3), its internal structure would be 1 -> 2 -> 3 -> air.
-    // Let's use the existing itParses structure as a guide for expected values.
-    // The test `itParses("(1 2 3)", {expects: makeList(1, 2, 3)})` implies that
-    // `peek(parse("(1 2 3)"))` should be structurally equivalent to `makeList(1, 2, 3)`.
-    // `makeList(1,2,3)` results in a list that stringifies to `(3 2 1)`.
-    // `parse("(1 2 3)")` stringifies to `((1 2 3))`.
-    // The `peek(ast)` is crucial. `parse` returns a list of top-level expressions.
-    // For `"(1 2 3)"`, it returns a list containing one element: the list `(1 2 3)`.
-    // So `peek(ast)` is the list `(1 2 3)`.
-    // This list `(1 2 3)` should be constructed as 1 -> 2 -> 3.
-    const expectedAst = makeList(3, 2, 1); // This creates 1 -> 2 -> 3
-    assert.deepEqual(peek(ast), expectedAst, "AST for (1 2 3) should be a list of 1, 2, 3");
+    const expectedAst = Stack.blow(1, 2, 3);
+    assert.deepEqual(peek(ast), expectedAst, "AST for (1 2 3) should be a stack of 1, 2, 3");
   });
 
   it("parses a quoted bubble", function () {
