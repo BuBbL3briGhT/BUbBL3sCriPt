@@ -1,55 +1,47 @@
 const assert = require("assert");
-const LynktLyst  = require("../src/lynkt_lyst");
+const Stack  = require("../../src/o/stack");
 
-const { make, count, get, invert, map,
-  peek, pop, push, reduce, skip, toString
-} = LynktLyst;
+const { make, get, invert, map, peek, pop,
+  push, reduce, skip, toString} = Stack;
 
-describe("LynktLyst", () => {
+describe("Stack", () => {
 
-describe("new LynktLyst(o, oo) ", () => {
-  it("create a new lynktLyst lynk for your fun and profit.", () => {
+describe("new Stack(o, oo) ", () => {
+  it("makes a new stack for your fun and profit.", () => {
     var o;
-    o = new LynktLyst();
+    o = new Stack();
     assert.equal(get(o), undefined);
     assert.equal(skip(o, 1), undefined);
 
-    o = new LynktLyst(1);
+    o = new Stack(1);
     assert.equal(get(o), 1);
-    o = new LynktLyst(2, o);
+    o = new Stack(2, o);
     assert.equal(get(o), 2);
     assert.equal(get(o,1), 1);
   });
 });
 
 describe("make(o...)", () => {
-  it("blows lynktLysts", () => {
+  it("makes stacks", () => {
     assert.equal(make(), undefined);
     let o = make(1, 2, 3);
-    assert.equal(get(o,0), 3);
+    assert.equal(get(o,0), 1);
     assert.equal(get(o,1), 2);
-    assert.equal(get(o,2), 1);
-  });
-});
-
-describe("count(o)", function () {
-  it("counts", function () {
-    let o = LynktLyst.make(1, 2, 3);
-    assert.equal(count(o), 3);
+    assert.equal(get(o,2), 3);
   });
 });
 
 describe("get(o, index)", () => {
   it("gets value of o at index", () => {
-    let o = LynktLyst.make(6,7,8);
-    assert.equal(get(o, 0), 8);
+    let o = Stack.make(6,7,8);
+    assert.equal(get(o, 0), 6);
     assert.equal(get(o, 1), 7);
-    assert.equal(get(o, 2), 6);
+    assert.equal(get(o, 2), 8);
   });
 });
 
 describe("invert", () => {
-  it("inverts lynktLysts", () => {
+  it("inverts stacks", () => {
     var o;
     o = invert(o);
     assert.equal(o, undefined);
@@ -66,10 +58,12 @@ describe("invert", () => {
     assert.equal(peek(o),1);
 
     let oo = make(1,2,3);
-    assert.equal(LynktLyst.toString(oo), "(1 2 3)");
-
+    // assert.equal(toString(oo), "(1 2 3)");
+    assert.equal(peek(oo), 1);
+    assert.equal(Stack.toString(oo), "(1 2 3)");
     let xo = invert(oo);
-    assert.equal(LynktLyst.toString(xo), "(3 2 1)");
+    // assert.equal(toString(xo), "(3 2 1)");
+    assert.equal(Stack.toString(xo), "(3 2 1)");
   });
 });
 
@@ -100,12 +94,13 @@ describe("map(o, fn)", () => {
 });
 
 describe("push(o)", () => {
-  it("pushes o onto the lynktLyst stack.", () => {
+  it("pushes o onto the stack.", () => {
     var o;
 
     o = push(o, 1);
     assert.equal(get(o), 1)
     assert.equal(skip(o, 1), undefined);
+    console.log(typeof o);
 
     o = push(o, 2);
     assert.equal(get(o), 2)
@@ -115,7 +110,7 @@ describe("push(o)", () => {
 });
 
 describe("reduce", () => {
-  it("reduces the lynktLyst", () => {
+  it("reduces the stack", () => {
     var o, result;
 
     let add = (a,b) => { return b + a };
@@ -152,18 +147,18 @@ describe("reduce", () => {
   });
 });
 
-describe("skip(lynktLyst, count)", () => {
-  it("skips", () => {
-    let o = LynktLyst.make(6,7,8);
-    assert.equal(peek(skip(o)), 8);
-    assert.equal(peek(skip(o,0)), 8);
+describe("skip(stack, count)", () => {
+  it("skips count of stacks", () => {
+    let o = Stack.make(6,7,8);
+    assert.equal(peek(skip(o)), 6);
+    assert.equal(peek(skip(o,0)), 6);
     assert.equal(peek(skip(o,1)), 7);
-    assert.equal(peek(skip(o,2)), 6);
+    assert.equal(peek(skip(o,2)), 8);
   });
 });
 
 describe("toString(o)", () => {
-  it("formats lynktLyst as a string.", () => {
+  it("formats stack as a string.", () => {
     var o, result;
 
     result = toString(o);
@@ -175,26 +170,25 @@ describe("toString(o)", () => {
 
     o = push(o,2);
     result = toString(o);
-    assert.equal(result, "(1 2)");
+    assert.equal(result, "(2 1)");
 
     o = push(o, 3);
     result = toString(o);
-    assert.equal(result, "(1 2 3)");
+    assert.equal(result, "(3 2 1)");
 
     o = push(o, "string");
     result = toString(o);
-    assert.equal(result, "(1 2 3 \"string\")");
+    assert.equal(result, "(\"string\" 3 2 1)");
 
     o = push(o, Symbol.for("symbol"));
     result = toString(o);
-    assert.equal(result, "(1 2 3 \"string\" symbol)");
+    assert.equal(result, "(symbol \"string\" 3 2 1)");
 
     let ts = toString;
     let oo = make(3,2,1);
     assert.equal(ts(oo), "(3 2 1)");
-
     o = push(pop(pop(o)), oo);
-    assert.equal(ts(o), "(1 2 3 (3 2 1))");
+    assert.equal(ts(o), "((3 2 1) 3 2 1)");
   });
 });
 

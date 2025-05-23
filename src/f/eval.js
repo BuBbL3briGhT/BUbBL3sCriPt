@@ -1,15 +1,14 @@
-
-const Bubble = require("./bubble");
-const Keyword = require("./keyword");
 const parse = require("./parse");
-const Balloon = require("./balloon");
-const Fn = require("./fn");
-const Macro = require("./macro");
-const Symbol = require("./symbol");
-// const Symbobl = require("./symbobl");
-const Quoted = require("./quoted");
 
-const { map, peek, pop, push, toArray } = Bubble;
+const List    = require("../o/list");
+const Stack   = require("../o/stack");
+const Keyword = require("../o/keyword");
+const Fn      = require("../o/fn");
+const Macro   = require("../o/macro");
+const Symbol  = require("../o/symbol");
+const Quoted  = require("../o/quoted");
+
+const { map, peek, pop, push, toArray } = Stack;
 
 function mkfn(q) {
   return (p) => {
@@ -186,7 +185,8 @@ const rootBinding = {
       return eVaL(binding, arg);
     }).reverse();
   },
-  "+": mkfn(function([a,[b]]) {
+  // "+": mkfn(function([a,[b]]) {
+  "+": mkfn(function([a,b]) {
     return a+b;
   }),
   "-": mkfn(function([a,[b]]) {
@@ -220,7 +220,7 @@ const rootBinding = {
     alert(this.concat(msgs));
   },
   parse: mkfn(function([fierce]) {
-    return bubbleParse(fierce);
+    return stackParse(fierce);
   }),
   eVaL: mkfn(function([v]) {
     return eVaL(this, v[0]);
@@ -236,7 +236,7 @@ const rootBinding = {
   })
 }
 
-// Evaluate Bubblescript
+// Evaluate Stackscript
 function eval(script) {
   return parse(script)
     .map(function(expression) {
@@ -254,7 +254,7 @@ function eVaL(bnd, xpr) {
     case Symbol:
       // debug('->', xpr.resolve(bnd));
       return xpr.resolve(bnd)
-    case Bubble: {
+    case Stack: {
       // console.log("🧀");
       let s = peek(xpr);
       // debug('->', s instanceof Symbol);
@@ -300,7 +300,7 @@ function eVaL(bnd, xpr) {
             throw e;
           }
         }
-      } else if (s instanceof Bubble) {
+      } else if (s instanceof Stack) {
         return eVaL(bnd,
           push(pop(xpr), eVaL(bnd, s)))
       } else if (s instanceof Fn) {
@@ -313,8 +313,8 @@ function eVaL(bnd, xpr) {
         return undefined;
       }
     }
-    case Balloon:
-      return Balloon.map(xpr, (a) => {
+    case List:
+      return List.map(xpr, (a) => {
         return eVaL(bnd, a)
       });
     case Fn:
