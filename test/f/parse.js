@@ -14,6 +14,8 @@ const {type}  = require("../../src/z/fns"); // Assuming fns is a valid module
 const { peek, pop, make: makeStack, from:
   stackFrom } = Stack;
 
+const { make: makeList } = List;
+
 const symbol = Symbol.for("symbol"),
       a = Symbol.for("a"),
       b = Symbol.for("b"),
@@ -275,7 +277,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     assert.deepEqual(ast, expected, "AST for multiple top-level expressions");
   });
 
-  it.skip("parses a single atom symbol correctly", () => {
+  it("parses a single atom symbol correctly", () => {
     const ast = parse("atom");
     // parse("atom") returns a list containing one symbol: (atom)
     const expected = makeList(Symbol.for("atom"));
