@@ -11,10 +11,10 @@
 - Fix failing tests that have been marked as
   pendin (it.skip) in test/f/parse.js
 - Get the entire system under test
-  x i'm pretty sure we broke the
-    interpretor, but the test suite is still
-    passing. we need to figure out how to
-    test this with Mocha.
+  [x] i'm pretty sure we broke the
+      interpretor, but the test suite is still
+      passing. we need to figure out how to test
+      this with Mocha.
 
 ## Project Goals
 
