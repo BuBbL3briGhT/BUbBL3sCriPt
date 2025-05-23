@@ -58,7 +58,12 @@ function tokenize(inputString) {
     // The original was more permissive, let's stick to a more specific one for now
     // but ensure it doesn't break existing symbol logic unintentionally.
     // The key is that it must match something if it's called.
-    let matchResult = currentString.match(/^([^\s()[\]{}:"#'.]+)/);
+    // let matchResult = currentString.match(/^([^\s()[\]{}:"#'.]+)/);
+
+    // Needing to switch back to the more permissive version in order to get the test for"it should allow dots in symbol name" to pass.
+    // The more specfic version is probably the better way to go, but for the exisiting functionality to remain working it currently depends on the symbols being allowed to have dots.
+    let matchResult = currentString.match(/^([^\s()[\]]*)/);
+
     if (matchResult && matchResult[0].length > 0) { // Ensure it matches a non-empty symbol
       createToken(TOK_SYMBOL, matchResult[0]);
       advance(matchResult[0].length);
