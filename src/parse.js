@@ -40,7 +40,7 @@ function parse(inputString) { // sTriNg -> inputString
 function parseTokens(tokenList) { // pArSe -> parseTokens
   let tree, list, item, matchedToken; // trEe -> tree, liSt -> list, iTem -> item
 
-  console.log("tokenList", tokenList);
+  // console.log("tokenList", tokenList);
 
   while (tokenList && peek(tokenList)) { // Loop while there are tokens
     let currentTokenObject = peek(tokenList);
@@ -95,12 +95,12 @@ function match(expectedType, tokenList, contextTokenForEOF) {
 
 // tokenList is the current list of token objects
 function match_stack(tokenList) {
-  console.log("match_stack")
+  // console.log("match_stack")
   let list, item, closingParenToken, openingParenToken; // lisT -> list, iTem -> item
 
   // Expect ')' to start, which is the closing paren of a stack list in reverse (e.g. (c b a) -> ) a b c ( )
   [tokenList, closingParenToken] = match(')', tokenList);
-  console.log("tokenList", tokenList);
+  // console.log("tokenList", tokenList);
 
   while (peek(tokenList) && peek(tokenList).type != '(') {
     // Pass closingParenToken as context for EOF errors when expecting an item for this stack.
@@ -108,7 +108,7 @@ function match_stack(tokenList) {
     list = push(list, item); // Items are pushed in reverse order, inverted later // lisT -> list, iTem -> item
   }
 
-  console.log(list);
+  // console.log(list);
 
   // Consumes the opening '('. Pass closingParenToken for context if '(' is missing.
   [tokenList, openingParenToken] = match('(', tokenList, closingParenToken);
