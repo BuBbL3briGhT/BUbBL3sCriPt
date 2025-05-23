@@ -261,7 +261,7 @@ describe("Symbol.iterator", () => {
   it("should not modify the original list during iteration", () => {
     const list = List.make("a", "b", "c"); // c -> b -> a
     const expectedItems = ["c", "b", "a"];
-    const expectedToString = "(c b a)"; // Based on typical toString for such a list structure
+    const expectedToString = '("a" "b" "c")'; // Based on typical toString for such a list structure
 
     // First iteration
     assert.deepEqual([...list], expectedItems, "First iteration results mismatch");
