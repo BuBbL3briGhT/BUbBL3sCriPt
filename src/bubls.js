@@ -5,7 +5,7 @@ const Bubblescript = {
      Stack: require("./o/stack"),
     Symbol: require("./o/symbol"),
    Keyword: require("./o/keyword"),
-    Quoted: require("./o/quoted"),
+    Bubble: require("./o/bubble"),
         Fn: require("./o/fn"),
      Macro: require("./o/macro"),
   tokenize: require("./f/tokenize"),
