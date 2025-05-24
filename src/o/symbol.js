@@ -7,7 +7,9 @@ class Symbol {
 
     var fn, segments,
       callPattern = 1;
-    [value, fn] = value.split('/')
+
+    if (value !== "/")
+      [value, fn] = value.split('/')
     segments = value.split('.')
 
     if (segments.length == 1 && !fn)

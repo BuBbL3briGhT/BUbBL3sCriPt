@@ -207,6 +207,12 @@ const rootBinding = {
   "/": mkfn(function([a,[b]]) {
     return a/b;
   }),
+  "/": mkfn(function([a,b]) {
+    return a/b;
+  }),
+  "/": mkfn(function(a) {
+    return a.reduce((a,b) => a/b);
+  }),
   "=": mkfn(function([a,[b]]) {
     return a == b;
   }),
@@ -300,6 +306,10 @@ function eVaL(bnd, xpr) {
             //   function(a) {
             //     return eVaL(bnd, a);
             //   })));
+            // console.log("q", q);
+            // console.log("s", s);
+            // console.log("s.fn", s.fn);
+            // console.log("q[s.fn]", q[s.fn]);
             return q[s.fn](...toArray(map(xpr.rest,
               function(a) {
                 return eVaL(bnd, a);

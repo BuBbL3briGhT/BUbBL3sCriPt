@@ -51,6 +51,19 @@ describe("*", function () {
   });
 });
 
+describe("/", function () {
+  it("divides", function () {
+    assertEval("(/ 1 1)", 1);
+    assertEval("(/ 1 2)", .5);
+    assertEval("(/ 1 2 3)", 0.16666666666666666);
+  });
+});
+
+function assertEval(expression, expected) {
+  assert.equal(eval(expression), expected,
+    expression + " => " + expected);
+}
+
 function assertEvalTo(expression, expected) {
   assert.equal(eval(expression), expected,
     expression + " => " + expected);
