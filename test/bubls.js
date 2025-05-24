@@ -1,5 +1,6 @@
 const assert = require("assert");
 const bubls = require("../src/bubls");
+
 const { eval } = bubls;
 
 describe("bubls", function () {
@@ -8,3 +9,14 @@ describe("bubls", function () {
   });
 });
 
+describe("+", function () {
+  it("sums two numbers", function () {
+    assert.equal(2, eval("(+ 1 1)"));
+  });
+});
+
+describe("+", function () {
+  it("sums", function () {
+    assert.equal(2, eval("(+ 1 1)"));
+  });
+});
