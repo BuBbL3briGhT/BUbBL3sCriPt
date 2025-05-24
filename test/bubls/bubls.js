@@ -1,7 +1,7 @@
 const assert = require("assert");
 const bubls = require("../../src/bubls");
 
-const { eval, eval: o } = bubls;
+const { eval } = bubls;
 
 describe("bubls", function () {
   it("runs tests", function () {
@@ -41,14 +41,6 @@ describe("-", function () {
 
 describe("*", function () {
   it("multiplies", function () {
-    assert.equal(1, o("(* 1 1)"));
-    assert.equal(1, o("(* 1 1 1)"));
-    assert.equal(2, o("(* 1 1 2)"));
-    assert.equal(4, o("(* 1 2 2)"));
-    assert.equal(8, o("(* 2 2 2)"));
-    assert.equal(4, o("(* 2 2)"));
-    assert.equal(2, o("(* 2)"));
-
     assertEvalTo("(* 1 1)", 1);
     assertEvalTo("(* 1 1 1)", 1);
     assertEvalTo("(* 1 1 2)", 2);
