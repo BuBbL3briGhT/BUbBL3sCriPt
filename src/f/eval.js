@@ -192,7 +192,7 @@ const rootBinding = {
   "-": mkfn(function([a,b]) {
     return a-b;
   }),
-  "*": mkfn(function([a,[b]]) {
+  "*": mkfn(function([a,b]) {
     return a*b;
   }),
   "/": mkfn(function([a,[b]]) {
