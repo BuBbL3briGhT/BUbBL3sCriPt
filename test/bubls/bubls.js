@@ -5,7 +5,7 @@ const { eval, eval: o } = bubls;
 
 describe("bubls", function () {
   it("runs tests", function () {
-    assert.equal(1, eval("(- 3 2)"));
+    assertEvalTo("(- 3 2)", 1)
   });
 });
 
@@ -48,6 +48,14 @@ describe("*", function () {
     assert.equal(8, o("(* 2 2 2)"));
     assert.equal(4, o("(* 2 2)"));
     assert.equal(2, o("(* 2)"));
+
+    assertEvalTo("(* 1 1)", 1);
+    assertEvalTo("(* 1 1 1)", 1);
+    assertEvalTo("(* 1 1 2)", 2);
+    assertEvalTo("(* 1 2 2)", 4);
+    assertEvalTo("(* 2 2 2)", 8);
+    assertEvalTo("(* 2 2)", 4);
+    assertEvalTo("(* 1 2)", 2);
   });
 });
 
