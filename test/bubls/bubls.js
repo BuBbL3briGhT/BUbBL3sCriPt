@@ -1,5 +1,5 @@
 const assert = require("assert");
-const bubls = require("../src/bubls");
+const bubls = require("../../src/bubls");
 
 const { eval, eval: o } = bubls;
 
