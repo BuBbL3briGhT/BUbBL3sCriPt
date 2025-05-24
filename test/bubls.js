@@ -28,3 +28,11 @@ describe("+", function () {
     assert.equal(3, eval("(+ 1 1 1)"));
   });
 });
+
+describe("-", function () {
+  it("subtracts", function () {
+    assert.equal(0, eval("(- 1 1)"));
+    assert.equal(1, eval("(- 2 1)"));
+    assert.equal(2, eval("(- 3 1)"));
+  });
+});
