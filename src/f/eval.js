@@ -189,6 +189,9 @@ const rootBinding = {
   "+": mkfn(function([a,b]) {
     return a+b;
   }),
+  "+": mkfn(function(a) {
+    return a.reduce((a,b) => a+b);
+  }),
   "-": mkfn(function([a,b]) {
     return a-b;
   }),
