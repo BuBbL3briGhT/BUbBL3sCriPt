@@ -11,31 +11,31 @@ describe("bubls", function () {
 
 describe("+", function () {
   it("sums two numbers", function () {
-    assert.equal(2, eval("(+ 1 1)"));
+    assertEvalTo("(+ 1 1)", 2);
   });
   it("sums one number", function () {
-    assert.equal(1, eval("(+ 1)"));
+    assertEvalTo("(+ 1)", 1);
   });
   it("sums three numbers", function () {
-    assert.equal(3, eval("(+ 1 1 1)"));
+    assertEvalTo("(+ 1 1 1)", 3);
   });
 });
 
 describe("+", function () {
   it("sums", function () {
-    assert.equal(1, eval("(+ 1)"));
-    assert.equal(2, eval("(+ 1 1)"));
-    assert.equal(3, eval("(+ 1 1 1)"));
+    assertEvalTo("(+ 1)", 1);
+    assertEvalTo("(+ 1 1)", 2);
+    assertEvalTo("(+ 1 1 1)", 3);
   });
 });
 
 describe("-", function () {
   it("subtracts", function () {
-    assert.equal( 0, eval("(- 1 1)"));
-    assert.equal( 1, eval("(- 2 1)"));
-    assert.equal( 2, eval("(- 3 1)"));
-    assert.equal( 1, eval("(- 1)"));
-    assert.equal(-1, eval("(- 1 1 1)"));
+    assertEvalTo("(- 1 1)"   , 0);
+    assertEvalTo("(- 2 1)"   , 1);
+    assertEvalTo("(- 3 1)"   , 2);
+    assertEvalTo("(- 1)"     , 1);
+    assertEvalTo("(- 1 1 1)", -1);
   });
 });
 
@@ -50,3 +50,9 @@ describe("*", function () {
     assert.equal(2, o("(* 2)"));
   });
 });
+
+function assertEvalTo(expression, expected) {
+  assert.equal(eval(expression), expected,
+    expression + " => " + expected);
+}
+
