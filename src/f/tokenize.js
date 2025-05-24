@@ -116,6 +116,7 @@ function tokenize(inputString) {
       case '}':
       case '.':
       case "'":
+      case "°":
         createToken(char, char); // type and value are the char itself
         advance();
         break;

@@ -34,7 +34,7 @@ describe("parse(string)", () => {
     assert.deepEqual(peek(ast), expectedAst, "AST for (1 2 3) should be a stack of 1, 2, 3");
   });
 
-  it("parses a bubble", function () {
+  it("parses a bubble of bubbles", function () {
     let m = parse("°(a b c)")
     assert(peek(m) instanceof Bubble);
   });
