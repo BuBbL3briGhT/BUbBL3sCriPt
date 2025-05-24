@@ -1,6 +1,6 @@
 const tokenize = require("./tokenize");
 
-const Stack    = require("../o/stack");
+const Bubbles    = require("../o/bubbles");
 const List     = require("../o/list");
 const Keyword  = require("../o/keyword");
 const Symbol   = require("../o/symbol");
@@ -9,7 +9,7 @@ const Bubble   = require("../o/bubble");
 const { TOK_STRING, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD } = tokenize;
 
-const { peek, pop, push, invert } = Stack; // Assuming Stack uses LynktLyst's peek/pop or compatible
+const { peek, pop, push, invert } = Bubbles; // Assuming Bubbles uses LynktLyst's peek/pop or compatible
 
 class ParsingError extends Error {
   constructor(message, token) {
@@ -46,8 +46,8 @@ function parseTokens(tokenList) { // pArSe -> parseTokens
   while (tokenList && peek(tokenList)) { // Loop while there are tokens
     let currentTokenObject = peek(tokenList);
     switch (currentTokenObject.type) {
-      case ')': // End of a Stack list
-        [tokenList, list] = match_stack(tokenList); // liSt -> list
+      case ')': // End of a Bubbles list
+        [tokenList, list] = match_bubbles(tokenList); // liSt -> list
         tree = push(tree, list); // trEe -> tree, liSt -> list
         break;
       case ']': // End of a List list
@@ -95,16 +95,16 @@ function match(expectedType, tokenList, contextTokenForEOF) {
 }
 
 // tokenList is the current list of token objects
-function match_stack(tokenList) {
-  // console.log("match_stack")
+function match_bubbles(tokenList) {
+  // console.log("match_bubbles")
   let list, item, closingParenToken, openingParenToken; // lisT -> list, iTem -> item
 
-  // Expect ')' to start, which is the closing paren of a stack list in reverse (e.g. (c b a) -> ) a b c ( )
+  // Expect ')' to start, which is the closing paren of a bubbles list in reverse (e.g. (c b a) -> ) a b c ( )
   [tokenList, closingParenToken] = match(')', tokenList);
   // console.log("tokenList", tokenList);
 
   while (peek(tokenList) && peek(tokenList).type != '(') {
-    // Pass closingParenToken as context for EOF errors when expecting an item for this stack.
+    // Pass closingParenToken as context for EOF errors when expecting an item for this bubbles.
     [tokenList, item] = match_item(tokenList, closingParenToken); // iTem -> item
     list = push(list, item); // Items are pushed in reverse order, inverted later // lisT -> list, iTem -> item
   }
@@ -133,7 +133,7 @@ function match_list(tokenList) {
 
   [tokenList, openingBracketToken] = match('[', tokenList, closingBracketToken);
 
-  // Assuming List.push prepends items like Stack.push, so inversion is necessary.
+  // Assuming List.push prepends items like Bubbles.push, so inversion is necessary.
   return [tokenList, invert(list)]; // lisT -> list
 }
 
@@ -164,10 +164,10 @@ function match_item(tokenList, contextTokenForEOF) {
     case TOK_STRING:
       item = currentToken.value; // Value is already a string // itEm -> item
       break;
-      case ')': // Start of a nested stack list.
-                // The contextTokenForEOF is not directly passed to match_stack here,
-                // as match_stack will establish its own context starting with the ')'.
-      return match_stack(tokenList);
+      case ')': // Start of a nested bubbles list.
+                // The contextTokenForEOF is not directly passed to match_bubbles here,
+                // as match_bubbles will establish its own context starting with the ')'.
+      return match_bubbles(tokenList);
     case ']': // Start of a nested list list.
       return match_list(tokenList);
     // Quoting is handled in parseTokens, not here, as it modifies the tree structure directly.

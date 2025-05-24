@@ -1,14 +1,14 @@
 const parse = require("./parse");
 
 const List    = require("../o/list");
-const Stack   = require("../o/stack");
+const Bubbles   = require("../o/bubbles");
 const Keyword = require("../o/keyword");
 const Fn      = require("../o/fn");
 const Macro   = require("../o/macro");
 const Symbol  = require("../o/symbol");
 const Bubble  = require("../o/bubble");
 
-const { map, peek, pop, push, toArray } = Stack;
+const { map, peek, pop, push, toArray } = Bubbles;
 
 function mkfn(q) {
   return (p) => {
@@ -220,7 +220,7 @@ const rootBinding = {
     alert(this.concat(msgs));
   },
   parse: mkfn(function([fierce]) {
-    return stackParse(fierce);
+    return bubblesParse(fierce);
   }),
   eVaL: mkfn(function([v]) {
     return eVaL(this, v[0]);
@@ -236,7 +236,7 @@ const rootBinding = {
   })
 }
 
-// Evaluate Stackscript
+// Evaluate Bubblesscript
 function eval(script) {
   return parse(script)
     .map(function(expression) {
@@ -254,7 +254,7 @@ function eVaL(bnd, xpr) {
     case Symbol:
       // debug('->', xpr.resolve(bnd));
       return xpr.resolve(bnd)
-    case Stack: {
+    case Bubbles: {
       // console.log("🧀");
       let s = peek(xpr);
       // debug('->', s instanceof Symbol);
@@ -300,7 +300,7 @@ function eVaL(bnd, xpr) {
             throw e;
           }
         }
-      } else if (s instanceof Stack) {
+      } else if (s instanceof Bubbles) {
         return eVaL(bnd,
           push(pop(xpr), eVaL(bnd, s)))
       } else if (s instanceof Fn) {

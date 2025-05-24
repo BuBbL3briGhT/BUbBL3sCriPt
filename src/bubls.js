@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const Bubblescript = {
       List: require("./o/list"),
-     Stack: require("./o/stack"),
+   Bubbles: require("./o/bubbles"),
     Symbol: require("./o/symbol"),
    Keyword: require("./o/keyword"),
     Bubble: require("./o/bubble"),

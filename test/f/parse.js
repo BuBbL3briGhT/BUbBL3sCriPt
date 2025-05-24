@@ -3,16 +3,16 @@ const   fs   = require("fs");
 const  Yaml  = require("yaml");
 
 const parse   = require("../../src/f/parse");
-const Stack   = require("../../src/o/stack");
+const Bubbles   = require("../../src/o/bubbles");
 const List    = require("../../src/o/list");
 const Keyword = require("../../src/o/keyword");
 const Symbol  = require("../../src/o/symbol");
 const Bubble  = require("../../src/o/bubble");
 const {type}  = require("../../src/z/fns"); // Assuming fns is a valid module
 
-// Use Stack's static methods.
-const { peek, pop, make: makeStack, from:
-  stackFrom } = Stack;
+// Use Bubbles's static methods.
+const { peek, pop, make: makeBubbles, from:
+  bubblesFrom } = Bubbles;
 
 const { make: makeList } = List;
 
@@ -30,8 +30,8 @@ describe("parse(string)", () => {
 
   it("parses (1 2 3) into the correct AST structure", () => {
     const ast = parse("(1 2 3)");
-    const expectedAst = makeStack(1, 2, 3);
-    assert.deepEqual(peek(ast), expectedAst, "AST for (1 2 3) should be a stack of 1, 2, 3");
+    const expectedAst = makeBubbles(1, 2, 3);
+    assert.deepEqual(peek(ast), expectedAst, "AST for (1 2 3) should be a bubbles of 1, 2, 3");
   });
 
   it("parses a bubble of bubbles", function () {
@@ -43,14 +43,14 @@ describe("parse(string)", () => {
   itParses(":keyword",
     {expects: keyword});
   itParses("(1 2 3)",
-    {expects: makeStack(1, 2, 3)});
+    {expects: makeBubbles(1, 2, 3)});
   itParses("(a b c)",
-    {expects: makeStack(a, b, c)});
+    {expects: makeBubbles(a, b, c)});
   itParses("(a 3 b 2 c 1)",
-    {expects: makeStack(a, 3, b, 2, c, 1)});
+    {expects: makeBubbles(a, 3, b, 2, c, 1)});
 
   itParses2("a nested bubble", "(1 (2))",
-     stackFrom([1, stackFrom([2])]));
+     bubblesFrom([1, bubblesFrom([2])]));
 
 
   // (define (abs x)
@@ -59,15 +59,15 @@ describe("parse(string)", () => {
   //       x))
   itParsesFixture("abs",
     { expects:
-        stackFrom([Symbol.for("define"),
-          stackFrom([Symbol.for("abs"),
+        bubblesFrom([Symbol.for("define"),
+          bubblesFrom([Symbol.for("abs"),
                      Symbol.for("x")]),
-          stackFrom([Symbol.for("if"),
-            stackFrom([Symbol.for("<"),
+          bubblesFrom([Symbol.for("if"),
+            bubblesFrom([Symbol.for("<"),
               Symbol.for("x"), 0]),
-            stackFrom([Symbol.for("-"),
+            bubblesFrom([Symbol.for("-"),
               Symbol.for("x")]),
-            Symbol.for("x")])])}); // Changed Bubble.from to stackFrom
+            Symbol.for("x")])])}); // Changed Bubble.from to bubblesFrom
 
   // it('should match a single keyword as a bubble', function() {
   //   assertParse(":keyword",
@@ -268,7 +268,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     // makeList(c, b, a) creates a -> b -> c -> air
     const ast = parse("1 2 (a b)");
     const expected = makeList( // This is the outer list of expressions
-        stackFrom([Symbol.for("a"), Symbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
+        bubblesFrom([Symbol.for("a"), Symbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
         2,
         1
     );
@@ -315,7 +315,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     const expected = makeList( // Outer list from parse()
       new Quoted(
         makeList( // list (a ...)
-          stackFrom([ // list [1 "s" 'x] -- assuming balloons are parsed as lists
+          bubblesFrom([ // list [1 "s" 'x] -- assuming balloons are parsed as lists
             new Quoted(Symbol.for("x")),
             "s",
             1
@@ -337,7 +337,7 @@ describe("Parser Structure and Edge Case Tests", () => {
       makeList( // list (define ...)
         new Quoted(
           makeList( // list (1 ...)
-            stackFrom([ // list [2 :key]
+            bubblesFrom([ // list [2 :key]
               Keyword.for("key"),
               2,
             ]),
