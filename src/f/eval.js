@@ -203,8 +203,8 @@ const rootBinding = {
   not: mkfn(function([y]) {
     return !y;
   }),
-  and: mkfn(function([a,b]) {
-    return a && b;
+  and: mkfn(function(a) {
+    return a.reduce((a,b) => a && b);
   }),
   or: mkfn(function([a,[b]]) {
     return a || b;

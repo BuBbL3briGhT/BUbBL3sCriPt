@@ -28,7 +28,9 @@ describe("unless", function () {
 
 describe("and", function () {
   it("😝", function () {
+    assertEvalTo("(and 1)", 1);
     assertEvalTo("(and 1 2)", 2);
+    assertEvalTo("(and 1 2 3)", 3);
     assertEvalTo("(and false 2)", false);
   });
 });
