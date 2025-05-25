@@ -218,8 +218,8 @@ const rootBinding = {
   blert: function(msgs) {
     alert(this.concat(msgs));
   },
-  parse: mkfn(function([fierce]) {
-    return bubblesParse(fierce);
+  parse: mkfn(function([s]) {
+    return parse(s);
   }),
   eVaL: mkfn(function([v]) {
     return eVaL(this, v[0]);
