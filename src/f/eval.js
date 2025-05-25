@@ -82,12 +82,12 @@ const rootBinding = {
   export: mkfn(function([ca,[nd,[y]]]) {
     return ca[nd] = y;
   }),
-
-  fn: function([caret,stic]) {
-    var binding = this;
+  fn: function(_) {
+    let binding = this;
+    let caret = _.peek();
+    let stic  = _.pop();
     return new Fn(binding, caret, stic);
   },
-
   macro: function(args) {
     var binding = this;
     return new Macro(binding, args.first, args.rest)
@@ -327,10 +327,9 @@ function eVaL(bnd, xpr) {
       //   return eVaL(bnd, xpr);
       // });
       console.log(xpr.body);
-      // return xpr.body.each((xpr) => {
-      //   return eVaL(bnd, xpr);
-      // });
-      return eVaL(bnd, xpr.body);
+      return xpr.body.each((xpr) => {
+        return eVaL(bnd, xpr);
+      });
     case Bubble:
       return xpr.pop();
     default:
