@@ -26,6 +26,13 @@ describe("unless", function () {
    });
 });
 
+describe("and", function () {
+  it("😝", function () {
+    assertEvalTo("(and 1 2)", 2);
+    assertEvalTo("(and false 2)", false);
+  });
+});
+
 describe("true", function () {
    it("true", function() {
      assertEvalTo("true", true);
