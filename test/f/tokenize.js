@@ -21,6 +21,17 @@ describe("tokenize(string)", function() {
   });
 
   it("tokenizes true", function () {
+    // let tokenList = tokenize('(true not)');
+    let tokenList = tokenize('(not true)');
+    console.log(tokenList);
+    // console.log(tokenList.pop());
+    console.log(tokenList.map((t) => t.type).toString());
+    tokenList = invert(tokenList); // Frivolus invert not sure why this is needed to get the test to pass.
+    assert.equal(get(tokenList, 0).type, '('); // First token
+    assert.equal(get(tokenList, 2).type, TOK_TRUE);
+  });
+
+  it.only("tokenizes true", function () {
     let tokenList = tokenize('(not true)');
     tokenList = invert(tokenList); // Frivolus invert not sure why this is needed to get the test to pass.
     assert.equal(get(tokenList, 0).type, '('); // First token

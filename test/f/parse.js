@@ -34,10 +34,12 @@ describe("parse(string)", () => {
     assert.deepEqual(peek(ast), expectedAst, "AST for (1 2 3) should be a bubbles of 1, 2, 3");
   });
 
-  it("parses (not true) into the correct AST structure", () => {
+  it.only("parses (not true) into the correct AST structure", () => {
     let not = Symbol.for("not");
-    const ast = parse("(not true)");
-    console.log(ast)
+    console.log(1, not);
+    // const ast = parse("(not true)");
+    const ast = parse("(notk true)");
+    console.log(2, ast)
     const expectedAst = makeBubbles(not, true);
     assert.deepEqual(peek(ast), expectedAst, "AST for (not true) should be a bubbles of not, true");
   });
