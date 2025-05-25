@@ -244,7 +244,7 @@ function eval(script) {
 }
 
 function debug(...params) {
-  console.log(...params);
+  console.debug(...params);
 }
 
 function eVaL(bnd, xpr) {
