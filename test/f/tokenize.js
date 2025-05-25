@@ -7,9 +7,26 @@ const List = require("../../src/o/list");
 const { count, get, peek, invert, from: arrayFromList, make: makeList } = List; // Assuming 'from' and 'make' exist
 
 const { TOK_STRING, TOK_NUMBER,
-  TOK_SYMBOL, TOK_KEYWORD } = tokenize;
+  TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,
+  TOK_FALSE} = tokenize;
 
 describe("tokenize(string)", function() {
+
+  it("tokenizes true", function () {
+    let tokenList = tokenize("true");
+    assert.equal(peek(tokenList).type, TOK_TRUE);
+    assert.equal(peek(tokenList).value, undefined);
+    assert.equal(peek(tokenList).line, 1);
+    assert.equal(peek(tokenList).column, 1);
+  });
+
+  it("tokenizes false", function () {
+    let tokenList = tokenize("false");
+    assert.equal(peek(tokenList).type, TOK_FALSE);
+    assert.equal(peek(tokenList).value, undefined);
+    assert.equal(peek(tokenList).line, 1);
+    assert.equal(peek(tokenList).column, 1);
+  });
 
   it("allows dots in symbols", function () {
     let tokenList = tokenize("console.log");

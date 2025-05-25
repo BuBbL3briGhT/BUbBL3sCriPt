@@ -4,6 +4,8 @@ const TOK_KEYWORD = 'K';
 const TOK_NUMBER  = 'N';
 const TOK_STRING  = 'S';
 const TOK_SYMBOL  = 'Y';
+const TOK_TRUE    = 'T';
+const TOK_FALSE   = 'F';
 
 function tokenize(inputString) {
   let tokens;
@@ -59,17 +61,29 @@ function tokenize(inputString) {
     // The key is that it must match something if it's called.
     // let matchResult = currentString.match(/^([^\s()[\]{}:"#'.]+)/);
 
-    // Needing to switch back to the more permissive version in order to get the test for"it should allow dots in symbol name" to pass.
-    // The more specfic version is probably the better way to go, but for the exisiting functionality to remain working it currently depends on the symbols being allowed to have dots.
-    let matchResult = currentString.match(/^([^\s()[\]]*)/);
-
-    if (matchResult && matchResult[0].length > 0) { // Ensure it matches a non-empty symbol
-      createToken(TOK_SYMBOL, matchResult[0]);
+    let matchResult = currentString.match(/true/);
+    if (matchResult && matchResult[0].length > 0) {
+      createToken(TOK_TRUE);
       advance(matchResult[0].length);
     } else {
-      // If it's not a recognized symbol starter or empty, it's an error.
-      // This differs from original, which would make empty symbols or take single chars.
-      throw new Error(`Invalid symbol starting with '${currentString[0]}' at ${line}:${column}`);
+      let matchResult = currentString.match(/false/);
+      if (matchResult && matchResult[0].length > 0) {
+        createToken(TOK_FALSE);
+        advance(matchResult[0].length);
+      } else {
+        // Needing to switch back to the more permissive version in order to get the test for"it should allow dots in symbol name" to pass.
+        // The more specfic version is probably the better way to go, but for the exisiting functionality to remain working it currently depends on the symbols being allowed to have dots.
+        let matchResult = currentString.match(/^([^\s()[\]]*)/);
+
+        if (matchResult && matchResult[0].length > 0) { // Ensure it matches a non-empty symbol
+          createToken(TOK_SYMBOL, matchResult[0]);
+          advance(matchResult[0].length);
+        } else {
+          // If it's not a recognized symbol starter or empty, it's an error.
+          // This differs from original, which would make empty symbols or take single chars.
+          throw new Error(`Invalid symbol starting with '${currentString[0]}' at ${line}:${column}`);
+        }
+      }
     }
   }
 
@@ -152,5 +166,7 @@ tokenize.TOK_STRING = TOK_STRING;
 tokenize.TOK_NUMBER = TOK_NUMBER;
 tokenize.TOK_SYMBOL = TOK_SYMBOL;
 tokenize.TOK_KEYWORD = TOK_KEYWORD;
+tokenize.TOK_TRUE = TOK_TRUE;
+tokenize.TOK_FALSE = TOK_FALSE;
 
 module.exports = tokenize;
