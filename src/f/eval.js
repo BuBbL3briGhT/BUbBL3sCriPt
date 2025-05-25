@@ -192,11 +192,12 @@ const rootBinding = {
     return a.reduce((a,b) => a-b);
   }),
   "*": mkfn(function(a) {
+    return a.reduce((a,b) => a*b);
   }),
   "/": mkfn(function(a) {
     return a.reduce((a,b) => a/b);
   }),
-  "=": mkfn(function([a,[b]]) {
+  "=": mkfn(function([a, b]) {
     return a == b;
   }),
   not: mkfn(function([y]) {

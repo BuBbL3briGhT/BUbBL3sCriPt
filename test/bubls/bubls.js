@@ -10,18 +10,6 @@ describe("bubls", function () {
 });
 
 describe("+", function () {
-  it("sums two numbers", function () {
-    assertEval("(+ 1 1)", 2);
-  });
-  it("sums one number", function () {
-    assertEval("(+ 1)", 1);
-  });
-  it("sums three numbers", function () {
-    assertEval("(+ 1 1 1)", 3);
-  });
-});
-
-describe("+", function () {
   it("sums", function () {
     assertEval("(+ 1)", 1);
     assertEval("(+ 1 1)", 2);
@@ -31,10 +19,10 @@ describe("+", function () {
 
 describe("-", function () {
   it("subtracts", function () {
-    assertEval("(- 1 1)"   , 0);
-    assertEval("(- 2 1)"   , 1);
-    assertEval("(- 3 1)"   , 2);
-    assertEval("(- 1)"     , 1);
+    assertEval("(- 1 1)", 0);
+    assertEval("(- 2 1)", 1);
+    assertEval("(- 3 1)", 2);
+    assertEval("(- 1)", 1);
     assertEval("(- 1 1 1)", -1);
   });
 });
@@ -59,7 +47,14 @@ describe("/", function () {
   });
 });
 
-function assertEval(expression, expected) {
+describe("=", function () {
+  it("tests equality", function () {
+    assertEval("(= 0 0)");
+    assertEval("(= 0 1)", false);
+  });
+});
+
+function assertEval(expression, expected=true) {
   assert.equal(eval(expression), expected,
     expression + " => " + expected);
 }
