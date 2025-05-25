@@ -31,23 +31,12 @@ function debug(...params) {
 }
 
 function eVaL(bnd, xpr) {
-  // console.log(xpr)
   switch (xpr && xpr.constructor) {
     case Symbol:
-      // debug('->', xpr.resolve(bnd));
       return xpr.resolve(bnd)
     case Bubbles: {
-      // console.log("🧀");
       let s = peek(xpr);
-      // debug('->', s instanceof Symbol);
       if (s instanceof Symbol) {
-      // if (typeof s == "symbol") {
-        // debug('->', xpr.toString());
-        // debug('->', s.callPattern);
-        // let q = eVaL(bnd, s);
-        // if (q != s)
-        //   return eVaL(bnd,
-        //     push(pop(xpr), q));
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
           let q = eVaL(bnd, s);
@@ -64,19 +53,6 @@ function eVaL(bnd, xpr) {
             return q[s.fn]()
           }
           try {
-            // return q[s.fn](...xpr.rest.map(
-            //   function(a) {
-            //     return eVaL(bnd, a)
-            //   }).toArray())
-            // console.log(xpr.rest);
-            // console.log(toArray(map(xpr.rest,
-            //   function(a) {
-            //     return eVaL(bnd, a);
-            //   })));
-            // console.log("q", q);
-            // console.log("s", s);
-            // console.log("s.fn", s.fn);
-            // console.log("q[s.fn]", q[s.fn]);
             return q[s.fn](...toArray(map(xpr.rest,
               function(a) {
                 return eVaL(bnd, a);
