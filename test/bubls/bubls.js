@@ -103,6 +103,7 @@ describe("muf", function () {
 describe("send", function () {
   it.only("send message to object", function () {
     assertEvalTo("(send console \"log\" \"Holà\")");
+    assertEvalTo("(send console :log \"Holà\")");
   });
 });
 
