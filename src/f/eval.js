@@ -8,7 +8,8 @@ const Macro   = require("../o/macro");
 const Symbol  = require("../o/symbol");
 const Bubble  = require("../o/bubble");
 
-const { map, peek, pop, push, toArray } = Bubbles;
+const { map, peek, pop, push, toArray } =
+  Bubbles;
 
 function mkfn(q) {
   return (p) => {
@@ -25,8 +26,8 @@ const rootBinding = {
   Array: Array,
   null: null,
 
-  muf: function([key,[val]]) {
-    return binding[key.toString()]
+  muf: function([key,val]) {
+    return this[key.toString()]
       = eVaL(this, val);
   },
 

@@ -3,6 +3,20 @@ const bubls = require("../../src/bubls");
 
 const { eval } = bubls;
 
+describe("fn", function () {
+  it.only("makes a function", function () {
+    assert(eval("(fn [a] a)"));
+  });
+});
+
+describe("muf", function () {
+   it.only("defines", function () {
+     assertEvalTo("a", undefined);
+     eval("(muf a 1)");
+     assertEvalTo("a", 1);
+   });
+});
+
 describe("bubls", function () {
   it("runs tests", function () {
     assertEval("(- 3 2)", 1)
@@ -55,6 +69,11 @@ describe("=", function () {
 });
 
 function assertEval(expression, expected=true) {
+  assert.equal(eval(expression), expected,
+    expression + " => " + expected);
+}
+
+function assertEvalTo(expression, expected) {
   assert.equal(eval(expression), expected,
     expression + " => " + expected);
 }
