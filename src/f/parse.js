@@ -7,7 +7,8 @@ const Symbol   = require("../o/symbol");
 const Bubble   = require("../o/bubble");
 
 const { TOK_STRING, TOK_NUMBER,
-  TOK_SYMBOL, TOK_KEYWORD } = tokenize;
+  TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,
+  TOK_FALSE } = tokenize;
 
 const { peek, pop, push, invert } = Bubbles; // Assuming Bubbles uses LynktLyst's peek/pop or compatible
 
@@ -154,6 +155,12 @@ function match_item(tokenList, contextTokenForEOF) {
   switch (currentToken.type) {
     case TOK_NUMBER:
       item = currentToken.value; // Value is already a number // itEm -> item
+      break;
+    case TOK_TRUE:
+      item = true
+      break;
+    case TOK_FALSE:
+      item = false
       break;
     case TOK_SYMBOL:
       item = Symbol.for(currentToken.value); // itEm -> item
