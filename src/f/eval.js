@@ -212,6 +212,9 @@ const rootBinding = {
   '>': mkfn(function([xx,[x]]) {
     return xx > x;
   }),
+  '>': mkfn((_) => {
+    return _.reduce((a,b) => a>b);
+  }),
   '<': mkfn(function([a,[b]]) {
     return a < b;
   }),
