@@ -15,7 +15,7 @@ function tokenize(inputString) {
 
   // Helper to create token objects
   function createToken(type, value) {
-    console.log("createToken", type, value);
+    console.debug("createToken", type, value);
     tokens = push(tokens, { type, value, line, column });
   }
 
