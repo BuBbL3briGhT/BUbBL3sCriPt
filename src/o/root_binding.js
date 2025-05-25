@@ -9,7 +9,7 @@ const Macro   = require("../o/macro");
 const Symbol  = require("../o/symbol");
 const Bubble  = require("../o/bubble");
 
-const eVaL = eval.eVaL;
+const _eval = eval.eVaL;
 
 const { map, peek, pop, push, toArray } =
   Bubbles;
@@ -17,7 +17,7 @@ const { map, peek, pop, push, toArray } =
 function mkfn(q) {
   return (p) => {
     return q.call(this,
-      p.map(m => eVaL(this, m)))
+      p.map(m => _eval(this, m)))
   }
 }
 
@@ -28,7 +28,7 @@ const rootBinding = {
 
   muf: function([key,val]) {
     return this[key.toString()]
-      = eVaL(this, val);
+      = _eval(this, val);
   },
   send: mkfn(function([car, driver]) {
     if (pop(driver)) {
@@ -59,7 +59,7 @@ const rootBinding = {
   jsfn: function(args) {
     var x, binding = this
     x = args.push(new Symbol('fn'));
-    var fn = eVaL(binding, x);
+    var fn = _eval(binding, x);
     return function(...args) {
       return fn.call(binding, arry.toList(args));
     }
@@ -70,16 +70,16 @@ const rootBinding = {
     x = x.reverse();
     debug('let', x.toString());
     while (!x.isEmpty) { let k,w; [k,[w,x]] = x;
-      binding[k] = eVaL(binding, w); }
-    return xx.each(z => eVaL(binding, z));
+      binding[k] = _eval(binding, w); }
+    return xx.each(z => _eval(binding, z));
   },
 
   if: function([c,t,f]) {
-    return eVaL(this, eVaL(this, c) ? t : f);
+    return _eval(this, _eval(this, c) ? t : f);
   },
 
   unless: function([u,v,w]) {
-    return eVaL(this,!eVaL(this,u)?v:w);
+    return _eval(this,!_eval(this,u)?v:w);
   },
 
   print: mkfn(function(vals) {
@@ -91,7 +91,7 @@ const rootBinding = {
   list: function(args) {
     var binding = this;
     return args.reverse().map(function(arg) {
-      return eVaL(binding, arg);
+      return _eval(binding, arg);
     }).reverse();
   },
   "+": mkfn(function(a) {
@@ -130,14 +130,14 @@ const rootBinding = {
   parse: mkfn(function([s]) {
     return parse(s);
   }),
-  eVaL: mkfn(function([v]) {
-    return eVaL(this, v[0]);
+  _eval: mkfn(function([v]) {
+    return _eval(this, v[0]);
   }),
   concat: mkfn(function(eeks) {
     return eeks.join('');
   }),
   expandmacro: function([m,n]) {
-    return eVaL(this,m).expand(this, n);
+    return _eval(this,m).expand(this, n);
   },
   "new": mkfn(function([m,n]) {
       return new m(...n.toArray());
@@ -152,7 +152,7 @@ const rootBinding = {
     console.log('loop', x.toString());
     while (!x.isEmpty) { let k,v; [k,[v,x]] = x;
       keys = keys.push(k);
-      binding[k] = eVaL(binding, v); }
+      binding[k] = _eval(binding, v); }
 
     // keys = keys.reverse()
     console.log('loop keys', keys);
@@ -173,7 +173,7 @@ const rootBinding = {
 
     do {
       recurCalled = false;
-      m = xx.each(z => eVaL(cnd, z));
+      m = xx.each(z => _eval(cnd, z));
       if (recurCalled) {
         cnd = m;
       }
