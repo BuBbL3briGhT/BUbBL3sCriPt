@@ -100,6 +100,12 @@ describe("muf", function () {
    });
 });
 
+describe("send", function () {
+  it.only("send message to object", function () {
+    assertEvalTo("(send console \"log\" \"Holà\")");
+  });
+});
+
 describe("bubls", function () {
   it("runs tests", function () {
     assertEval("(- 3 2)", 1)

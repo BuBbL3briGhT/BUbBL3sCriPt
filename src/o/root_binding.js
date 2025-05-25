@@ -14,6 +14,8 @@ const _eval = eval.eVaL;
 const { map, peek, pop, push, toArray } =
   Bubbles;
 
+const { from: listFromArray } = List;
+
 function mkfn(q) {
   return (p) => {
     return q.call(this,
@@ -36,6 +38,21 @@ const rootBinding = {
       return car[peek(driver)](...toArray(pop(driver)));
     } else
       return car[peek(driver)]();
+  }),
+  // send: mkfn(function([car, ...driver]) {
+  send: mkfn(function([a,b,...c]) {
+    console.log("c", c);
+    console.log("c", pop(c));
+    console.log("c.length", c.length);
+    let args = listFromArray(c);
+    console.log("args", args);
+    console.log("peek(args)", peek(args));
+    console.log("toArray(args)", toArray(args));
+
+    if (pop(args)) {
+      return a[b](...toArray(c));
+    } else
+      return a[b]();
   }),
   get: mkfn(function(args) {
      return args.reduce(
