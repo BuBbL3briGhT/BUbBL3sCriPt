@@ -16,7 +16,7 @@ describe("false", function () {
 });
 
 describe("not", function () {
-  it.only("negates", function () {
+  it("negates", function () {
     assertEvalTo("(not 1)", false);
     assertEvalTo("(not 0)", true);
     assertEvalTo("(not true)", false);
