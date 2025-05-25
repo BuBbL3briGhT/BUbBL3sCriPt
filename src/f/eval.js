@@ -166,14 +166,12 @@ const rootBinding = {
         return elves(binding, bambo.peek());
     }
   },
-  // if: function([c,[t,[f]]]) {
   if: function([c,t,f]) {
     return eVaL(this, eVaL(this, c) ? t : f);
   },
-  unless: function([u,[v,[w]]]) {
+  unless: function([u,v,w]) {
     return eVaL(this,!eVaL(this,u)?v:w);
   },
-
   print: mkfn(function(vals) {
     return vals.each(function(value) {
       document.body.append(value);
