@@ -323,9 +323,14 @@ function eVaL(bnd, xpr) {
       });
     case Fn:
     // case Macro:
-      return each(xpr.body, (xpr) => {
-        return eVaL(bnd, xpr);
-      });
+      // return each(xpr.body, (xpr) => {
+      //   return eVaL(bnd, xpr);
+      // });
+      console.log(xpr.body);
+      // return xpr.body.each((xpr) => {
+      //   return eVaL(bnd, xpr);
+      // });
+      return eVaL(bnd, xpr.body);
     case Bubble:
       return xpr.pop();
     default:
@@ -333,7 +338,7 @@ function eVaL(bnd, xpr) {
   }
 };
 
-
+eval.eVaL = eVaL;
 module.exports = eval;
 
 

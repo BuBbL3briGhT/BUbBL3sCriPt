@@ -4,13 +4,13 @@ const bubls = require("../../src/bubls");
 const { eval } = bubls;
 
 describe("fn", function () {
-  it.only("makes a function", function () {
-    assert(eval("(fn [a] a)"));
+  it("makes a function", function () {
+    assertEvalTo("((fn [a] 1) 1 2)", 1);
   });
 });
 
 describe("muf", function () {
-   it.only("defines", function () {
+   it("defines", function () {
      assertEvalTo("a", undefined);
      eval("(muf a 1)");
      assertEvalTo("a", 1);
