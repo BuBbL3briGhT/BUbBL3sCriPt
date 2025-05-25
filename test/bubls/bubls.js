@@ -17,12 +17,10 @@ describe("false", function () {
 
 describe("not", function () {
   it.only("negates", function () {
-    console.log(eval("(not true)"));
+    assertEvalTo("(not 1)", false);
+    assertEvalTo("(not 0)", true);
     assertEvalTo("(not true)", false);
-    // assertEvalTo("(not 1)", false);
-    // assertEvalTo("(not 0)", true);
-    // assertEvalTo("(not true)", false);
-    // assertEvalTo("(not false)", true);
+    assertEvalTo("(not false)", true);
   });
 });
 
