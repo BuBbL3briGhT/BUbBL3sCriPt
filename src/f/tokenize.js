@@ -15,7 +15,7 @@ function tokenize(inputString) {
 
   // Helper to create token objects
   function createToken(type, value) {
-    console.debug("createToken", type, value);
+    // console.debug("createToken", type, value);
     tokens = push(tokens, { type, value, line, column });
   }
 
@@ -62,7 +62,7 @@ function tokenize(inputString) {
     // The key is that it must match something if it's called.
     // let matchResult = currentString.match(/^([^\s()[\]{}:"#'.]+)/);
 
-    console.log("currentString", currentString);
+    // console.debug("currentString", currentString);
     let matchResult = currentString.match(/^true/);
     if (matchResult && matchResult[0].length > 0) {
       createToken(TOK_TRUE);
@@ -115,7 +115,7 @@ function tokenize(inputString) {
 
   while (currentString.length > 0) {
     const char = currentString[0];
-    console.log("char", char);
+    // console.debug("char", char);
 
     switch (char) {
       case ' ':
