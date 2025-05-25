@@ -18,6 +18,103 @@ function mkfn(q) {
   }
 }
 
+// Evaluate Bubblesscript
+function eval(script) {
+  return parse(script)
+    .map(function(expression) {
+      return eVaL(rootBinding, expression);
+    }).peek();
+}
+
+function debug(...params) {
+  console.debug(...params);
+}
+
+function eVaL(bnd, xpr) {
+  // console.log(xpr)
+  switch (xpr && xpr.constructor) {
+    case Symbol:
+      // debug('->', xpr.resolve(bnd));
+      return xpr.resolve(bnd)
+    case Bubbles: {
+      // console.log("🧀");
+      let s = peek(xpr);
+      // debug('->', s instanceof Symbol);
+      if (s instanceof Symbol) {
+      // if (typeof s == "symbol") {
+        // debug('->', xpr.toString());
+        // debug('->', s.callPattern);
+        // let q = eVaL(bnd, s);
+        // if (q != s)
+        //   return eVaL(bnd,
+        //     push(pop(xpr), q));
+        if (s.callPattern == 1) {
+          //  x or x/x or x.x/x
+          let q = eVaL(bnd, s);
+          if (q != s)
+            return eVaL(bnd,
+              push(pop(xpr), q));
+          else
+            return xpr;
+        } else /* send */ {
+          // call pattern 2
+          // x.x or x.x.x or x.x...
+          let q = s.resolveRoot(bnd)
+          if (!xpr.rest) {
+            return q[s.fn]()
+          }
+          try {
+            // return q[s.fn](...xpr.rest.map(
+            //   function(a) {
+            //     return eVaL(bnd, a)
+            //   }).toArray())
+            // console.log(xpr.rest);
+            // console.log(toArray(map(xpr.rest,
+            //   function(a) {
+            //     return eVaL(bnd, a);
+            //   })));
+            // console.log("q", q);
+            // console.log("s", s);
+            // console.log("s.fn", s.fn);
+            // console.log("q[s.fn]", q[s.fn]);
+            return q[s.fn](...toArray(map(xpr.rest,
+              function(a) {
+                return eVaL(bnd, a);
+              })));
+          } catch (e) {
+            console.log(s.fn);
+            throw e;
+          }
+        }
+      } else if (s instanceof Bubbles) {
+        return eVaL(bnd,
+          push(pop(xpr), eVaL(bnd, s)))
+      } else if (s instanceof Fn) {
+        return s.call(bnd, pop(xpr));
+      } else if (s instanceof Function) {
+        return s.call(bnd, pop(xpr));
+      } else if (s instanceof Macro) {
+        return s.call(bnd, pop(xpr));
+      } else {
+        return undefined;
+      }
+    }
+    case List:
+      return List.map(xpr, (a) => {
+        return eVaL(bnd, a)
+      });
+    case Fn:
+    // case Macro:
+      return xpr.body.each((xpr) => {
+        return eVaL(bnd, xpr);
+      });
+    case Bubble:
+      return xpr.pop();
+    default:
+      return xpr;
+  }
+};
+
 const rootBinding = {
   //window: window,
   //document: document,
@@ -234,103 +331,6 @@ const rootBinding = {
       return new m(...n.toArray());
   })
 }
-
-// Evaluate Bubblesscript
-function eval(script) {
-  return parse(script)
-    .map(function(expression) {
-      return eVaL(rootBinding, expression);
-    }).peek();
-}
-
-function debug(...params) {
-  console.debug(...params);
-}
-
-function eVaL(bnd, xpr) {
-  // console.log(xpr)
-  switch (xpr && xpr.constructor) {
-    case Symbol:
-      // debug('->', xpr.resolve(bnd));
-      return xpr.resolve(bnd)
-    case Bubbles: {
-      // console.log("🧀");
-      let s = peek(xpr);
-      // debug('->', s instanceof Symbol);
-      if (s instanceof Symbol) {
-      // if (typeof s == "symbol") {
-        // debug('->', xpr.toString());
-        // debug('->', s.callPattern);
-        // let q = eVaL(bnd, s);
-        // if (q != s)
-        //   return eVaL(bnd,
-        //     push(pop(xpr), q));
-        if (s.callPattern == 1) {
-          //  x or x/x or x.x/x
-          let q = eVaL(bnd, s);
-          if (q != s)
-            return eVaL(bnd,
-              push(pop(xpr), q));
-          else
-            return xpr;
-        } else /* send */ {
-          // call pattern 2
-          // x.x or x.x.x or x.x...
-          let q = s.resolveRoot(bnd)
-          if (!xpr.rest) {
-            return q[s.fn]()
-          }
-          try {
-            // return q[s.fn](...xpr.rest.map(
-            //   function(a) {
-            //     return eVaL(bnd, a)
-            //   }).toArray())
-            // console.log(xpr.rest);
-            // console.log(toArray(map(xpr.rest,
-            //   function(a) {
-            //     return eVaL(bnd, a);
-            //   })));
-            // console.log("q", q);
-            // console.log("s", s);
-            // console.log("s.fn", s.fn);
-            // console.log("q[s.fn]", q[s.fn]);
-            return q[s.fn](...toArray(map(xpr.rest,
-              function(a) {
-                return eVaL(bnd, a);
-              })));
-          } catch (e) {
-            console.log(s.fn);
-            throw e;
-          }
-        }
-      } else if (s instanceof Bubbles) {
-        return eVaL(bnd,
-          push(pop(xpr), eVaL(bnd, s)))
-      } else if (s instanceof Fn) {
-        return s.call(bnd, pop(xpr));
-      } else if (s instanceof Function) {
-        return s.call(bnd, pop(xpr));
-      } else if (s instanceof Macro) {
-        return s.call(bnd, pop(xpr));
-      } else {
-        return undefined;
-      }
-    }
-    case List:
-      return List.map(xpr, (a) => {
-        return eVaL(bnd, a)
-      });
-    case Fn:
-    // case Macro:
-      return xpr.body.each((xpr) => {
-        return eVaL(bnd, xpr);
-      });
-    case Bubble:
-      return xpr.pop();
-    default:
-      return xpr;
-  }
-};
 
 eval.eVaL = eVaL;
 module.exports = eval;
