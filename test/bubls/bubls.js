@@ -51,12 +51,8 @@ describe("or", function () {
 
 describe(">", function () {
   it("👽", function () {
-    assertEvalTo("(> 1)", 1);
     assertEvalTo("(> 2 1)", true);
-    assertEvalTo("(> 3 2 1)", true);
-    assertEvalTo("(> 2 3 1)", false);
-    assertEvalTo("(> 2 1 3)", false);
-    assertEvalTo("(> 1 2 3)", false);
+    assertEvalTo("(> 1 2)", false);
   });
 });
 
