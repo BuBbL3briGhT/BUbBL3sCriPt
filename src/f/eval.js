@@ -171,45 +171,6 @@ const rootBinding = {
     return xx.each(z => eVaL(binding, z));
   },
 
-  loop: function([x,xx]) {
-    var binding = Object.create(this),
-      cnd = binding,
-      keys = emptyGlider,
-      m, recurCalled;
-
-    x = x.reverse();
-    console.log('loop', x.toString());
-    while (!x.isEmpty) { let k,v; [k,[v,x]] = x;
-      keys = keys.push(k);
-      binding[k] = eVaL(binding, v); }
-
-    // keys = keys.reverse()
-    console.log('loop keys', keys);
-
-    binding.recur = mkfn(function(a) {
-      var b = keys,
-        c = Object.create(binding);
-      a = a.reverse();
-      while(!a.isEmpty && !b.isEmpty) {
-        let key, val;
-        [key,b] = b;
-        [val,a] = a;
-        c[key] = val;
-      }
-      recurCalled = true;
-      return c;
-    })
-
-    do {
-      recurCalled = false;
-      m = xx.each(z => eVaL(cnd, z));
-      if (recurCalled) {
-        cnd = m;
-      }
-    } while(recurCalled);
-    return m;
-  },
-
   if: function([c,t,f]) {
     return eVaL(this, eVaL(this, c) ? t : f);
   },
@@ -277,7 +238,45 @@ const rootBinding = {
   },
   "new": mkfn(function([m,n]) {
       return new m(...n.toArray());
-  })
+  }),
+  loop: function([x,xx]) {
+    var binding = Object.create(this),
+      cnd = binding,
+      keys = emptyGlider,
+      m, recurCalled;
+
+    x = x.reverse();
+    console.log('loop', x.toString());
+    while (!x.isEmpty) { let k,v; [k,[v,x]] = x;
+      keys = keys.push(k);
+      binding[k] = eVaL(binding, v); }
+
+    // keys = keys.reverse()
+    console.log('loop keys', keys);
+
+    binding.recur = mkfn(function(a) {
+      var b = keys,
+        c = Object.create(binding);
+      a = a.reverse();
+      while(!a.isEmpty && !b.isEmpty) {
+        let key, val;
+        [key,b] = b;
+        [val,a] = a;
+        c[key] = val;
+      }
+      recurCalled = true;
+      return c;
+    })
+
+    do {
+      recurCalled = false;
+      m = xx.each(z => eVaL(cnd, z));
+      if (recurCalled) {
+        cnd = m;
+      }
+    } while(recurCalled);
+    return m;
+  },
 }
 
 eval.eVaL = eVaL;
