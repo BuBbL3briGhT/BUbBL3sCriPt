@@ -32,6 +32,20 @@ describe("and", function () {
     assertEvalTo("(and 1 2)", 2);
     assertEvalTo("(and 1 2 3)", 3);
     assertEvalTo("(and false 2)", false);
+    assertEvalTo("(and 2 false)", false);
+  });
+});
+
+describe("or", function () {
+  it("😁", function () {
+    assertEvalTo("(or 1)", 1);
+    assertEvalTo("(or 1 2)", 1);
+    assertEvalTo("(or 1 2 3)", 1);
+    assertEvalTo("(or false 2)", 2);
+    assertEvalTo("(or 2 false)", 2);
+    assertEvalTo("(or 0 0)", false);
+    assertEvalTo("(or 0 0 0)", false);
+    assertEvalTo("(or 0 0 1)", 1);
   });
 });
 

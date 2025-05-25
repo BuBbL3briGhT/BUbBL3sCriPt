@@ -206,8 +206,8 @@ const rootBinding = {
   and: mkfn(function(a) {
     return a.reduce((a,b) => a && b);
   }),
-  or: mkfn(function([a,[b]]) {
-    return a || b;
+  or: mkfn(function(_) {
+    return _.reduce((a,b) => a || b);
   }),
   '>': mkfn(function([xx,[x]]) {
     return xx > x;
