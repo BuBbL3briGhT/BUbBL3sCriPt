@@ -209,13 +209,10 @@ const rootBinding = {
   or: mkfn(function(_) {
     return _.reduce((a,b) => a || b);
   }),
-  '>': mkfn(function([xx,[x]]) {
-    return xx > x;
-  }),
   '>': mkfn(([a,b]) => {
     return a > b;
   }),
-  '<': mkfn(function([a,[b]]) {
+  '<': mkfn(([a,b]) => {
     return a < b;
   }),
   blert: function(msgs) {

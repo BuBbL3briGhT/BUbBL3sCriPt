@@ -56,6 +56,13 @@ describe(">", function () {
   });
 });
 
+describe("<", function () {
+  it("👽", function () {
+    assertEvalTo("(< 1 2)", true);
+    assertEvalTo("(< 2 1)", false);
+  });
+});
+
 
 describe("true", function () {
    it("true", function() {
