@@ -202,6 +202,7 @@ const rootBinding = {
     return a == b;
   }),
   not: mkfn(function([y]) {
+    console.log(y);
     return !y;
   }),
   and: mkfn(function([a,[b]]) {

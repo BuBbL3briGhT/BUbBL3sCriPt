@@ -20,6 +20,13 @@ describe("tokenize(string)", function() {
     assert.equal(peek(tokenList).column, 1);
   });
 
+  it("tokenizes true", function () {
+    let tokenList = tokenize('(not true)');
+    tokenList = invert(tokenList); // Frivolus invert not sure why this is needed to get the test to pass.
+    assert.equal(get(tokenList, 0).type, '('); // First token
+    assert.equal(get(tokenList, 2).type, TOK_TRUE);
+  });
+
   it("tokenizes false", function () {
     let tokenList = tokenize("false");
     assert.equal(peek(tokenList).type, TOK_FALSE);
