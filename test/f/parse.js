@@ -38,7 +38,7 @@ describe("parse(string)", () => {
     let not = Symbol.for("not");
     console.log(1, not);
     // const ast = parse("(not true)");
-    const ast = parse("(notk true)");
+    const ast = parse("(not true)");
     console.log(2, ast)
     const expectedAst = makeBubbles(not, true);
     assert.deepEqual(peek(ast), expectedAst, "AST for (not true) should be a bubbles of not, true");
