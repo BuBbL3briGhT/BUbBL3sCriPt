@@ -166,7 +166,8 @@ const rootBinding = {
         return elves(binding, bambo.peek());
     }
   },
-  if: function([c,[t,[f]]]) {
+  // if: function([c,[t,[f]]]) {
+  if: function([c,t,f]) {
     return eVaL(this, eVaL(this, c) ? t : f);
   },
   unless: function([u,[v,[w]]]) {

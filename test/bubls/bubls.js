@@ -3,6 +3,18 @@ const bubls = require("../../src/bubls");
 
 const { eval } = bubls;
 
+
+describe("if", function () {
+   it("🫠", function() {
+     assertEvalTo("(if true 1 2)", 1);
+     assertEvalTo("(if false 1 2)", 2);
+     assertEvalTo("(if true)", undefined);
+     assertEvalTo("(if false)", undefined);
+     assertEvalTo("(if true 3)", 3);
+     assertEvalTo("(if false 3)", undefined);
+   });
+});
+
 describe("true", function () {
    it("true", function() {
      assertEvalTo("true", true);
