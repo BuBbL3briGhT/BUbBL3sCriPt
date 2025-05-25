@@ -326,7 +326,7 @@ function eVaL(bnd, xpr) {
       // return each(xpr.body, (xpr) => {
       //   return eVaL(bnd, xpr);
       // });
-      console.log(xpr.body);
+      // console.log(xpr.body);
       return xpr.body.each((xpr) => {
         return eVaL(bnd, xpr);
       });

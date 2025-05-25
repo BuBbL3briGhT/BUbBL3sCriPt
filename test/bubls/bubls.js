@@ -5,7 +5,8 @@ const { eval } = bubls;
 
 describe("fn", function () {
   it("makes a function", function () {
-    assertEvalTo("((fn [a] 1) 1)", 1);
+    // assertEval("(fn [a] a)");
+    assertEvalTo("((fn [a] a) 1)", 1);
   });
 });
 
