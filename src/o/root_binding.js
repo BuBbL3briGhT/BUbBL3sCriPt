@@ -1,5 +1,4 @@
 const parse = require("../f/parse");
-const eval = require("../f/eval");
 
 const List    = require("../o/list");
 const Bubbles   = require("../o/bubbles");
@@ -9,7 +8,6 @@ const Macro   = require("../o/macro");
 const Symbol  = require("../o/symbol");
 const Bubble  = require("../o/bubble");
 
-const _eval = eval.eVaL;
 
 const { map, peek, pop, push, toArray } =
   Bubbles;
@@ -205,4 +203,6 @@ const rootBinding = {
 
 module.exports = rootBinding;
 
+const eval = require("../f/eval");
+const _eval = eval.eVaL;
 

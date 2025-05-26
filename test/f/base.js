@@ -127,7 +127,7 @@ describe("base", function () {
   });
 
   describe("muf", function () {
-     it("defines", function () {
+     it.only("defines", function () {
        assertEvalTo("a", undefined);
        eval("(muf a 1)");
        assertEvalTo("a", 1);

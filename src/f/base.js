@@ -14,15 +14,9 @@ const Fn = require("../o/fn");
 
 class Base {
 
-  static if(c,t,f) {
-    return _eval(this, _eval(this, c) ? t : f);
-  }
-
-  static unless(u,v,w) {
-    return _eval(this,!_eval(this,u)?v:w);
-  }
-
-  static muf(key,val) {
+  muf(key, val) {
+    console.debug("key", key);
+    console.debug("val", val);
     return this[key.toString()]
       = _eval(this, val);
   }
@@ -34,6 +28,14 @@ class Base {
       return a[b](...c);
     } else
       return a[b]();
+  }
+
+  static if(c,t,f) {
+    return _eval(this, _eval(this, c) ? t : f);
+  }
+
+  static unless(u,v,w) {
+    return _eval(this,!_eval(this,u)?v:w);
   }
 
   static not(y) {
@@ -84,7 +86,6 @@ Base['<'] = (a,b) => {
   return a < b;
 }
 
-console.debug("Base 57", Base);
 module.exports = Base;
 
 const eval = require("../f/eval");

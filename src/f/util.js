@@ -21,7 +21,8 @@ class Util {
   }
 
   static makeRootBinding(Base, _eval) {
-    const rootBinding = Object.create({});
+    // const rootBinding = Object.create({});
+    const rootBinding = new Base();
     const functions = Util.getStaticMethods(Base);
     for (const fn of functions) {
       rootBinding[fn] = Util.makeFunction(
