@@ -5,7 +5,7 @@ const sinon = require("sinon");
 
 describe("base", function () {
   describe("not", function () {
-    it.only("negates", function () {
+    it("negates", function () {
       console.log(Base);
       console.log(eval.rootBinding);
       console.log("eval not", eval("not"));
