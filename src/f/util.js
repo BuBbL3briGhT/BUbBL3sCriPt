@@ -7,8 +7,16 @@ class Util {
   // names, as strings, from the passed in
   // 'klass' object.
   static getStaticMethods(klass) {
-    return  Object.getOwnPropertyNames(klass).filter(
-      (prop) => typeof klass[prop] === 'function' && !Object.prototype.hasOwnProperty.call(klass.prototype, prop)
+    return  Object.
+      getOwnPropertyNames(klass).
+      filter(
+        (prop) =>
+        typeof klass[prop] ===
+        'function' &&
+        !Object.
+          prototype.
+          hasOwnProperty.
+          call(klass.prototype, prop)
     );
   }
 
@@ -28,7 +36,7 @@ class Util {
   // sutible for use with bubblescript.
   // #coreUtilityFunction
   // TODO: Create tests for mkfn.
-  function mkfn(q) {
+  static mkfn(q, _eval) {
     return (p) => {
       return q.call(this,
         p.map(m => _eval(this, m)))
