@@ -12,12 +12,12 @@
 
 class Base {
 
-  static muf([key,val]) {
+  static muf(key,val) {
     return this[key.toString()]
       = _eval(this, val);
   }
 
-  static send([a,b,...c]) {
+  static send(a,b,...c) {
     if (b.key)
       b = b.key;
     if (c.length > 0) {
@@ -26,32 +26,30 @@ class Base {
       return a[b]();
   }
 
-  static not([y]) {
-    console.debug(y);
+  static not(y) {
     return !y;
   }
 
-
 }
 
-Base["+"] = function(a) {
+Base["+"] = function(...a) {
   // console.log(a);
   return a.reduce((a,b) => a+b);
 }
 
-Base["="] = function([a, b]) {
+Base["="] = function(a, b) {
   return a == b;
 }
 
-Base["/"] = function(a) {
+Base["/"] = function(...a) {
   return a.reduce((a,b) => a/b);
 }
 
-Base["*"] = function(a) {
+Base["*"] = function(...a) {
   return a.reduce((a,b) => a*b);
 }
 
-Base["-"] = function(a) {
+Base["-"] = function(...a) {
   return a.reduce((a,b) => a-b);
 }
 

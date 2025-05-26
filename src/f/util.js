@@ -75,7 +75,7 @@ class Util {
     return (params) => {
       console.debug("makeFunction params", params);
       return fn.call(this,
-        params.map(p => _eval(this, p)))
+        ...params.map(p => _eval(this, p)))
     }
   }
 
