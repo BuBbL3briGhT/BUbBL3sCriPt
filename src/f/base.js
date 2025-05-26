@@ -29,10 +29,21 @@ const { map, peek, pop, push, toArray } =
 const { from: listFromArray } = List;
 
 class base {
+
   static muf([key,val]) {
     return this[key.toString()]
       = _eval(this, val);
   }
+
+  static send([a,b,...c]) {
+    if (b.key)
+      b = b.key;
+    if (c.length > 0) {
+      return a[b](...c);
+    } else
+      return a[b]();
+  }
+
 }
 
 module.exports = base;
