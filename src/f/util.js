@@ -35,6 +35,42 @@ class Util {
   //
   // Make and return Bubblescript/Javascript
   // interop function.
+  //
+  // Crea y devuelve una función de
+  // interoperabilidad para la invocación de
+  // Bubblescript a Javascript.
+  //
+  // Skep en gee 'n interop-funksie terug
+  // vir die oproep van Bubblescript na
+  // Javascript.
+  //
+  // Crea e restituisce una funzione di
+  // interoperabilità per richiamare
+  // Bubblescript in Javascript.
+  //
+  // Ngaryanin lan ngawaliang fungsi interop
+  // anggén ngaukin Bubblescript ka
+  // Javascript.
+  //
+  // Crée et renvoie une fonction
+  // d'interopérabilité pour appeler
+  // Bubblescript en Javascript.
+  //
+  // Ստեղծում և վերադարձնում է
+  // փոխգործակցության ֆունկցիա
+  // Bubblescript-ը Javascript-ին կանչելու
+  // համար:
+  //
+  // Vytvoří a vrátí funkci interop pro
+  // vyvolání Bubblescriptu do Javascriptu.
+  //
+  // Ku tumbuluxa no vuyisa ntirho wa
+  // interop wo vitana Bubblescript eka
+  // Javascript.
+  //
+  // Bubblescript ကို Javascript သို့
+  // ခေါ်ဝေါ်ခြင်းအတွက် interop function တစ်ခုကို
+  // ဖန်တီးပြီး ပြန်ပေးသည်။
   static makeFunction(fn, _eval) {
     return (params) => {
       return fn.call(this,
