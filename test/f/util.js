@@ -20,6 +20,9 @@ describe("Util", function () {
 
   describe("makeRootBinding", function() {
     it.only("Makes a root binding", function () {
+      function assertFunction(fn) {
+        assert.equal(typeof fn, 'function');
+      }
       const Base = require("../../src/f/base.js");
       const eval = require("../../src/f/eval.js");
       const rootBinding =
@@ -28,9 +31,7 @@ describe("Util", function () {
       const functions = Util.getStaticMethods(Base);
       for (const fn of functions) {
         assert(rootBinding[fn]);
-        assert.equal(
-          typeof rootBinding[fn],
-          'function');
+        assertFunction(rootBinding[fn]);
       }
     });
   });
