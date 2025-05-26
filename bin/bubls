@@ -1,7 +1,7 @@
 #!  /usr/bin/env node
 'use strict'
 
-const bubls = require('../src/bubblescript');
+const bubls = require('../src/bubls');
 
 let path = process.argv[2];
 
