@@ -27,6 +27,7 @@ class Base {
   }
 
   static not([y]) {
+    console.debug(y);
     return !y;
   }
 
