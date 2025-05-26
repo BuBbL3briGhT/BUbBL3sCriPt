@@ -46,6 +46,15 @@ const rootBinding = {
     return this[key.toString()]
       = _eval(this, val);
   },
+  // fn: function([caret, stic]) {
+  //   return new Fn(this, caret, stic);
+  // },
+  fn: function(_) {
+    let binding = this;
+    let caret = _.peek();
+    let stic  = _.pop();
+    return new Fn(binding, caret, stic);
+  },
   send: mkfn(function([a,b,...c]) {
     if (b.key)
       b = b.key;
@@ -87,7 +96,7 @@ const rootBinding = {
   let: function([x,xx]) {
     var binding = Object.create(this);
     x = x.reverse();
-    debug('let', x.toString());
+    // debug('let', x.toString());
     while (!x.isEmpty) { let k,w; [k,[w,x]] = x;
       binding[k] = _eval(binding, w); }
     return xx.each(z => _eval(binding, z));
@@ -168,13 +177,13 @@ const rootBinding = {
       m, recurCalled;
 
     x = x.reverse();
-    console.log('loop', x.toString());
+    // console.log('loop', x.toString());
     while (!x.isEmpty) { let k,v; [k,[v,x]] = x;
       keys = keys.push(k);
       binding[k] = _eval(binding, v); }
 
     // keys = keys.reverse()
-    console.log('loop keys', keys);
+    // console.log('loop keys', keys);
 
     binding.recur = mkfn(function(a) {
       var b = keys,

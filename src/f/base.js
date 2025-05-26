@@ -15,8 +15,8 @@ const Fn = require("../o/fn");
 class Base {
 
   muf(key, val) {
-    console.debug("key", key);
-    console.debug("val", val);
+    // console.debug("key", key);
+    // console.debug("val", val);
     return this[key.toString()]
       = _eval(this, val);
   }

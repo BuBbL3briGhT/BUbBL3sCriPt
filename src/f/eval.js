@@ -83,7 +83,6 @@ function eVaL(bnd, xpr) {
 eval.eVaL = eVaL;
 module.exports = eval;
 
-
 const rootBinding = require("../o/root_binding");
 
 // const Base = require("./base");
