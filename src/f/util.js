@@ -72,7 +72,7 @@ class Util {
   // ခေါ်ဝေါ်ခြင်းအတွက် interop function တစ်ခုကို
   // ဖန်တီးပြီး ပြန်ပေးသည်။
   static makeFunction(fn, _eval) {
-    return (params) => {
+    return (...params) => {
       return fn.call(this,
         params.map(p => _eval(this, p)))
     }

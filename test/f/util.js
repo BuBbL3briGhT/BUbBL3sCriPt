@@ -1,5 +1,6 @@
 const assert = require("assert");
 const Util = require("../../src/f/util.js");
+const sinon = require("sinon");
 
 describe("Util", function () {
   describe("getStaticMethods", function () {
@@ -37,11 +38,15 @@ describe("Util", function () {
   });
 
   describe("makeFunction", function() {
-    it.skip("Makes a Bubblescript/Javascript interop function.", function () {
-      const Base = require("../../src/f/base.js");
+    it.only("Makes a Bubblescript/Javascript interop function.", function () {
       const eval = require("../../src/f/eval.js");
-      const rootBinding = Util.makeRootBinding(Base, eval._eval, {});
-      console.log(rootBinding);
+      const _fn = function (_) {
+        return _;
+      }
+      console.log(eval);
+      const fn = Util.makeFunction(_fn, eval._eval);
+      assert.equal(fn(1, 2, 3), [1, 2, 3]);
+      // console.log(fn(1, 2, 3));
     });
   });
 
