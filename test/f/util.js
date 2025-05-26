@@ -36,6 +36,7 @@ describe("Util", function () {
 
       assert(rootBinding["not"]);
       assertFunction(rootBinding["not"]);
+      console.debug(rootBinding);
     });
   });
 

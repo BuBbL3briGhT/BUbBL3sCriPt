@@ -10,24 +10,6 @@
 // All static functions in this class will
 // are included in the root bound object.
 
-const parse = require("../f/parse");
-const eval = require("../f/eval");
-
-const List    = require("../o/list");
-const Bubbles   = require("../o/bubbles");
-const Keyword = require("../o/keyword");
-const Fn      = require("../o/fn");
-const Macro   = require("../o/macro");
-const Symbol  = require("../o/symbol");
-const Bubble  = require("../o/bubble");
-
-const _eval = eval.eVaL;
-
-const { map, peek, pop, push, toArray } =
-  Bubbles;
-
-const { from: listFromArray } = List;
-
 class Base {
 
   static muf([key,val]) {
@@ -54,5 +36,5 @@ Base["+"] = function(a) {
   // console.log(a);
   return a.reduce((a,b) => a+b);
 }
-
+console.debug("Base 57", Base);
 module.exports = Base;
