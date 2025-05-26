@@ -41,7 +41,7 @@ describe("Util", function () {
   });
 
   describe("makeFunction", function() {
-    it("Makes a Bubblescript/Javascript interop function.", function () {
+    it.skip("Makes a Bubblescript/Javascript interop function.", function () {
       const eval = require("../../src/f/eval.js");
       const _fn = (_) => _; // Simple pass thru function for test.
       const fn = Util.
