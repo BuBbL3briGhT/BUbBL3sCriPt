@@ -26,8 +26,7 @@ class Base {
       return a[b]();
   }
 
-  // static not([y]) {
-  static not(y) {
+  static not([y]) {
     console.debug(y);
     return !y;
   }
