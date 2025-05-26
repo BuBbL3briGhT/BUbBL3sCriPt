@@ -1,7 +1,14 @@
-// Bubblescript base namespace. This
-// namespace contains function which are
-// core to the bubblescript namespace and
-// are included in the root binding.
+// Name: Base
+// File: src/f/Base.js
+// Author: Kandi Khristmas (kandikrismas@gmail.com)
+// Last Updated: May 25, 2025
+//
+// Description:
+//
+// Bubblescript base namespace.
+//
+// All static functions in this class will
+// are included in the root bound object.
 
 const parse = require("../f/parse");
 const eval = require("../f/eval");
