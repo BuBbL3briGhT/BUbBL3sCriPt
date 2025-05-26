@@ -28,7 +28,7 @@ const { map, peek, pop, push, toArray } =
 
 const { from: listFromArray } = List;
 
-class base {
+class Base {
 
   static muf([key,val]) {
     return this[key.toString()]
@@ -46,4 +46,4 @@ class base {
 
 }
 
-module.exports = base;
+module.exports = Base;
