@@ -31,11 +31,17 @@ class Base {
     return !y;
   }
 
+
 }
 
 Base["+"] = function(a) {
   // console.log(a);
   return a.reduce((a,b) => a+b);
 }
+
+Base["="] = function([a, b]) {
+  return a == b;
+}
+
 console.debug("Base 57", Base);
 module.exports = Base;
