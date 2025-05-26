@@ -1,8 +1,28 @@
 const assert = require("assert");
+const sinon = require("sinon");
 const bubls = require("../../src/bubls");
 
 const { eval } = bubls;
 
+describe("send", function () {
+  before(function () {
+    sinon.replace(console, "log",
+      sinon.fake());
+  });
+  after(function () {
+    sinon.restore();
+  });
+  it("send message to object", function () {
+    assertEvalTo(
+      "(send console :log \"Holà Marcai!o\")");
+    assert(console.log.
+      calledWith("Holà Marcai!o"));
+    assertEvalTo(
+      "(send console \"log\" \"Holà Beeba!\")");
+    assert(console.log.
+      calledWith("Holà Beeba!"));
+  });
+});
 
 describe("if", function () {
    it("🫠", function() {
@@ -98,13 +118,6 @@ describe("muf", function () {
      eval("(muf a 1)");
      assertEvalTo("a", 1);
    });
-});
-
-describe("send", function () {
-  it("send message to object", function () {
-    // TODO: Stub console
-    assertEvalTo("(send console :log \"Holà\")");
-  });
 });
 
 describe("bubls", function () {
