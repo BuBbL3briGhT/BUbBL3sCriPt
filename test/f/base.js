@@ -7,6 +7,7 @@ describe("base", function () {
   describe("not", function () {
     it.only("negates", function () {
       console.log(Base);
+      console.log(eval.rootBinding);
       assertEvalTo("(not 1)", false);
       assertEvalTo("(not 0)", true);
       assertEvalTo("(not true)", false);

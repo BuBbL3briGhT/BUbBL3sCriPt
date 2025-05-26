@@ -89,5 +89,6 @@ console.debug('eval Base 88', Base);
 const Util = require("./util");
 const rootBinding = Util.makeRootBinding(Base, eval.eVaL);
 console.debug('rootBinding', rootBinding);
+eval.rootBinding = rootBinding;
 
 
