@@ -4,6 +4,25 @@ const eval = require("../../src/f/eval");
 const sinon = require("sinon");
 
 describe("base", function () {
+  describe("not", function () {
+    it.only("negates", function () {
+      console.log(Base);
+      assertEvalTo("(not 1)", false);
+      assertEvalTo("(not 0)", true);
+      assertEvalTo("(not true)", false);
+      assertEvalTo("(not false)", true);
+    });
+  });
+
+  describe("+", function () {
+    it("sums", function () {
+      console.log(Base);
+      console.log(eval("(+ 1 1)"));
+      assertEvalTo("(+ 1)", 1);
+      assertEvalTo("(+ 1 1)", 2);
+      assertEvalTo("(+ 1 1 1)", 3);
+    });
+  });
   describe("send", function () {
     before(function () {
       sinon.replace(console, "log",
@@ -96,15 +115,6 @@ describe("base", function () {
      });
   });
 
-  describe("not", function () {
-    it("negates", function () {
-      assertEvalTo("(not 1)", false);
-      assertEvalTo("(not 0)", true);
-      assertEvalTo("(not true)", false);
-      assertEvalTo("(not false)", true);
-    });
-  });
-
   describe("fn", function () {
     it("makes a function", function () {
       // assertEval("(fn [a] a)");
@@ -120,13 +130,6 @@ describe("base", function () {
      });
   });
 
-  describe("+", function () {
-    it("sums", function () {
-      assertEval("(+ 1)", 1);
-      assertEval("(+ 1 1)", 2);
-      assertEval("(+ 1 1 1)", 3);
-    });
-  });
 
   describe("-", function () {
     it("subtracts", function () {

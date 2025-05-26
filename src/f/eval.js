@@ -87,5 +87,6 @@ module.exports = eval;
 const Base = require("./base");
 const Util = require("./util");
 const rootBinding = Util.makeRootBinding(Base, eval.eVaL);
+console.debug('rootBinding', rootBinding);
 
 

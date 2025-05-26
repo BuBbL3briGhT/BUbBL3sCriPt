@@ -44,6 +44,15 @@ class Base {
       return a[b]();
   }
 
+  static not([y]) {
+    return !y;
+  }
+
+}
+
+Base["+"] = function(a) {
+  // console.log(a);
+  return a.reduce((a,b) => a+b);
 }
 
 module.exports = Base;
