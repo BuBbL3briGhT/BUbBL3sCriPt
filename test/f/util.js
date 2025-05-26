@@ -19,7 +19,7 @@ describe("Util", function () {
   });
 
   describe("makeRootBinding", function() {
-    it("Makes a root binding", function () {
+    it.only("Makes a root binding", function () {
       const Base = require("../../src/f/base.js");
       const eval = require("../../src/f/eval.js");
       const rootBinding = Util.makeRootBinding(Base, eval._eval);
@@ -27,6 +27,14 @@ describe("Util", function () {
     });
   });
 
-  // TODO: Describe mkfn
+  describe("makeFunction", function() {
+    it("Makes a Bubblescript/Javascript interop function.", function () {
+      const Base = require("../../src/f/base.js");
+      const eval = require("../../src/f/eval.js");
+      const rootBinding = Util.makeRootBinding(Base, eval._eval, {});
+      console.log(rootBinding);
+    });
+  });
+
 
 });

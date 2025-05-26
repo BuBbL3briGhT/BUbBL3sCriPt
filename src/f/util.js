@@ -36,10 +36,10 @@ class Util {
   // sutible for use with bubblescript.
   // #coreUtilityFunction
   // TODO: Create tests for mkfn.
-  static mkfn(q, _eval) {
-    return (p) => {
-      return q.call(this,
-        p.map(m => _eval(this, m)))
+  static makeFunction(fn, _eval, binding) {
+    return (params) => {
+      return fn.call(binding,
+        params.map(p => _eval(binding, p)))
     }
   }
 
