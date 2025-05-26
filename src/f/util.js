@@ -21,7 +21,8 @@ class Util {
   }
 
   static makeRootBinding(Base, _eval) {
-    const rootBinding = Object.create({});
+    // const rootBinding = Object.create({});
+    const rootBinding = new Base();
     const functions = Util.getStaticMethods(Base);
     for (const fn of functions) {
       rootBinding[fn] = Util.makeFunction(
@@ -72,9 +73,10 @@ class Util {
   // ခေါ်ဝေါ်ခြင်းအတွက် interop function တစ်ခုကို
   // ဖန်တီးပြီး ပြန်ပေးသည်။
   static makeFunction(fn, _eval) {
-    return (...params) => {
+    return (params) => {
+      // console.debug("makeFunction params", params);
       return fn.call(this,
-        params.map(p => _eval(this, p)))
+        ...params.map(p => _eval(this, p)))
     }
   }
 

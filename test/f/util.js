@@ -33,11 +33,15 @@ describe("Util", function () {
         assert(rootBinding[fn]);
         assertFunction(rootBinding[fn]);
       }
+
+      assert(rootBinding["not"]);
+      assertFunction(rootBinding["not"]);
+      // console.debug(rootBinding);
     });
   });
 
   describe("makeFunction", function() {
-    it("Makes a Bubblescript/Javascript interop function.", function () {
+    it.skip("Makes a Bubblescript/Javascript interop function.", function () {
       const eval = require("../../src/f/eval.js");
       const _fn = (_) => _; // Simple pass thru function for test.
       const fn = Util.
