@@ -19,7 +19,7 @@ describe("Util", function () {
   });
 
   describe("makeRootBinding", function() {
-    it("Makes a root binding", function () {
+    it.only("Makes a root binding", function () {
       function assertFunction(fn) {
         assert.equal(typeof fn, 'function');
       }
@@ -33,6 +33,9 @@ describe("Util", function () {
         assert(rootBinding[fn]);
         assertFunction(rootBinding[fn]);
       }
+
+      assert(rootBinding["not"]);
+      assertFunction(rootBinding["not"]);
     });
   });
 
