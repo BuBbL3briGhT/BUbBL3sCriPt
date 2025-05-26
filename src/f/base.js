@@ -1,3 +1,8 @@
+// Bubblescript base namespace. This
+// namespace contains function which are
+// core to the bubblescript namespace and
+// are included in the root binding.
+
 const parse = require("../f/parse");
 const eval = require("../f/eval");
 
@@ -33,11 +38,18 @@ function mkfn(q) {
 }
 
 class base {
-
   static muf([key,val]) {
     return this[key.toString()]
       = _eval(this, val);
   }
+}
+
+function makeRootBinding() {
+  const rootBinding = Object.create();
+
+  getStaticMethods(base);
+
+console.log(staticMethods); // Output: ['myStaticMethod1', 'myStaticMethod2']
 
 }
 

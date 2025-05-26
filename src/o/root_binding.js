@@ -56,6 +56,14 @@ const rootBinding = {
     } else
       return a[b]();
   }),
+  send: mkfn(function([a,b,...c]) {
+    if (b.key)
+      b = b.key;
+    if (c.length > 0) {
+      return a[b](...c);
+    } else
+      return a[b]();
+  }),
   get: mkfn(function(args) {
      return args.reduce(
         (a,b) => a ? a[b] : b);
