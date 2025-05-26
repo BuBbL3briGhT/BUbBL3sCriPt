@@ -19,11 +19,18 @@ describe("Util", function () {
   });
 
   describe("makeRootBinding", function() {
-    it.skip("Makes a root binding", function () {
+    it.only("Makes a root binding", function () {
       const Base = require("../../src/f/base.js");
       const eval = require("../../src/f/eval.js");
-      const rootBinding = Util.makeRootBinding(Base, eval._eval);
-      console.log(rootBinding);
+      const rootBinding =
+        Util.makeRootBinding(Base, eval._eval);
+
+      const functions = Util.getStaticMethods(Base);
+      for (const fn of functions) {
+        assert(rootBinding[fn]);
+        // assert each is a function.
+        // assertFunction(rootBinding[fn]);
+      }
     });
   });
 
