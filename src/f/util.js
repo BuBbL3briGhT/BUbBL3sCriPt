@@ -30,15 +30,11 @@ class Util {
     return rootBinding;
   }
 
-  // Makes a Bubblescript function from a
-  // Javascript function.
-  // Params:
-  //   q: A Javascript function that will be
-  //   called for this function.
-  // Returns an annonomous function that is
-  // sutible for use with bubblescript.
-  // #coreUtilityFunction
-  // TODO: Create tests for mkfn.
+  // Makes and returns interop function for
+  // Bubblescript to Javascript invokation.
+  //
+  // Make and return Bubblescript/Javascript
+  // interop function.
   static makeFunction(fn, _eval) {
     return (params) => {
       return fn.call(this,
