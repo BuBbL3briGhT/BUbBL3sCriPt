@@ -71,12 +71,6 @@ const rootBinding = {
   export: mkfn(function([ca,[nd,[y]]]) {
     return ca[nd] = y;
   }),
-  fn: function(_) {
-    let binding = this;
-    let caret = _.peek();
-    let stic  = _.pop();
-    return new Fn(binding, caret, stic);
-  },
 
   macro: function(args) {
     var binding = this;

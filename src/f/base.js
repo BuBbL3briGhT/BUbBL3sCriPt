@@ -37,6 +37,14 @@ class Base {
     return new Fn(binding, caret, stic);
   }
 
+  static and(...a) {
+    return a.reduce((a,b) => a && b);
+  }
+
+  static or(..._) {
+    return _.reduce((a,b) => a || b);
+  }
+
 }
 
 Base["+"] = function(...a) {
@@ -58,6 +66,14 @@ Base["*"] = function(...a) {
 
 Base["-"] = function(...a) {
   return a.reduce((a,b) => a-b);
+}
+
+Base['>'] = (a,b) => {
+  return a > b;
+}
+
+Base['<'] = (a,b) => {
+  return a < b;
 }
 
 console.debug("Base 57", Base);
