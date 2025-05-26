@@ -17,4 +17,16 @@ describe("Util", function () {
          'myStaticMethod2']);
     });
   });
+
+  describe("makeRootBinding", function() {
+    it.only("Makes a root binding", function () {
+      const Base = require("../../src/f/base.js");
+      const eval = require("../../src/f/eval.js");
+      const rootBinding = Util.makeRootBinding(Base, eval._eval);
+      console.log(rootBinding);
+    });
+  });
+
+  // TODO: Describe mkfn
+
 });

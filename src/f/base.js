@@ -21,36 +21,11 @@ const { map, peek, pop, push, toArray } =
 
 const { from: listFromArray } = List;
 
-// Makes a Bubblescript function from a
-// Javascript function.
-// Params:
-//   q: A Javascript function that will be
-//   called for this function.
-// Returns an annonomous function that is
-// sutible for use with bubblescript.
-// #coreUtilityFunction
-// TODO: Create tests for mkfn.
-function mkfn(q) {
-  return (p) => {
-    return q.call(this,
-      p.map(m => _eval(this, m)))
-  }
-}
-
 class base {
   static muf([key,val]) {
     return this[key.toString()]
       = _eval(this, val);
   }
-}
-
-function makeRootBinding() {
-  const rootBinding = Object.create();
-
-  getStaticMethods(base);
-
-console.log(staticMethods); // Output: ['myStaticMethod1', 'myStaticMethod2']
-
 }
 
 module.exports = base;

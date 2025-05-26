@@ -11,6 +11,30 @@ class Util {
       (prop) => typeof klass[prop] === 'function' && !Object.prototype.hasOwnProperty.call(klass.prototype, prop)
     );
   }
+
+  static makeRootBinding(Base, _eval) {
+    const rootBinding = Object.create();
+    Util.getStaticMethods(base);
+
+    console.log(rootBinding);
+  }
+
+  // Makes a Bubblescript function from a
+  // Javascript function.
+  // Params:
+  //   q: A Javascript function that will be
+  //   called for this function.
+  // Returns an annonomous function that is
+  // sutible for use with bubblescript.
+  // #coreUtilityFunction
+  // TODO: Create tests for mkfn.
+  function mkfn(q) {
+    return (p) => {
+      return q.call(this,
+        p.map(m => _eval(this, m)))
+    }
+  }
+
 }
 
 module.exports = Util;
