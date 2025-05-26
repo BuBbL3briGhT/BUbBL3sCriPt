@@ -1,36 +1,47 @@
-%< TypeError: Cannot read properties of undefined (reading 'map')
+%< #! /usr/bin/node bin/bubls
+TypeError: Cannot read properties of undefined (reading 'map')
     at Object.eval (/data/data/com.termux/files/home/bubblescript/src/eval.js:242:5)
     at /data/data/com.termux/files/home/bubblescript/bin/bubls:40:27
     at [_onLine] [as _onLine] (node:internal/readline/interface:414:7)
-    at [_normalWrite] [as _normalWrite] (node:internal/readline/interface:610:22)
-    at Socket.ondata (node:internal/readline/interface:243:23)
+    at [_line] [as _line] (node:internal/readline/interface:887:18)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1274:24)
+    at Socket.onkeypress (node:internal/readline/interface:264:20)
     at Socket.emit (node:events:513:28)
-    at addChunk (node:internal/streams/readable:559:12)
-    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
-    at Readable.push (node:internal/streams/readable:390:5)
-    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
-%< TypeError: Cannot read properties of undefined (reading 'map')
+    at emitKeys (node:internal/readline/utils:370:14)
+    at emitKeys.next (<anonymous>)
+    at Socket.onData (node:internal/readline/emitKeypressEvents:64:36)
+%<
+TypeError: Cannot read properties of undefined (reading 'map')
     at Object.eval (/data/data/com.termux/files/home/bubblescript/src/eval.js:242:5)
     at /data/data/com.termux/files/home/bubblescript/bin/bubls:40:27
     at [_onLine] [as _onLine] (node:internal/readline/interface:414:7)
-    at [_normalWrite] [as _normalWrite] (node:internal/readline/interface:610:22)
-    at Socket.ondata (node:internal/readline/interface:243:23)
+    at [_line] [as _line] (node:internal/readline/interface:887:18)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1274:24)
+    at Socket.onkeypress (node:internal/readline/interface:264:20)
     at Socket.emit (node:events:513:28)
-    at addChunk (node:internal/streams/readable:559:12)
-    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
-    at Readable.push (node:internal/streams/readable:390:5)
-    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
-%< Hello sunshine
+    at emitKeys (node:internal/readline/utils:370:14)
+    at emitKeys.next (<anonymous>)
+    at Socket.onData (node:internal/readline/emitKeypressEvents:64:36)
+%< (console.log "Hello sunshine")
+Hello sunshine
 undefined
-%< 1234
+%< (console.log 1234)
+1234
 undefined
+%< (+ 137 349)
+486
 %< 486
-%< 486
+486
+%< (- 1000 334)
+666
 %< 666
-%< 666
+666
+%< (* 5 99)
+495
 %< 495
-%< 495
-%< undefined
+495
+%< (/ 10 5)
+undefined
 TypeError: q[s.fn] is not a function
     at eVaL (/data/data/com.termux/files/home/bubblescript/src/eval.js:294:27)
     at /data/data/com.termux/files/home/bubblescript/src/eval.js:243:14
@@ -39,11 +50,14 @@ TypeError: q[s.fn] is not a function
     at Object.eval (/data/data/com.termux/files/home/bubblescript/src/eval.js:242:6)
     at /data/data/com.termux/files/home/bubblescript/bin/bubls:40:27
     at [_onLine] [as _onLine] (node:internal/readline/interface:414:7)
-    at [_normalWrite] [as _normalWrite] (node:internal/readline/interface:610:22)
-    at Socket.ondata (node:internal/readline/interface:243:23)
-    at Socket.emit (node:events:513:28)
+    at [_line] [as _line] (node:internal/readline/interface:887:18)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1274:24)
+    at Socket.onkeypress (node:internal/readline/interface:264:20)
 %< 2
+2
+%< (+ 2.7 10)
+12.7
 %< 12.7
-%< 12.7
-%< undefined
-%< 
+12.7
+%< Expressions suc
+undefined
