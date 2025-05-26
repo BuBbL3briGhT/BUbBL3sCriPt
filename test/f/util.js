@@ -28,8 +28,9 @@ describe("Util", function () {
       const functions = Util.getStaticMethods(Base);
       for (const fn of functions) {
         assert(rootBinding[fn]);
-        // assert each is a function.
-        // assertFunction(rootBinding[fn]);
+        assert.equal(
+          typeof rootBinding[fn],
+          'function');
       }
     });
   });
