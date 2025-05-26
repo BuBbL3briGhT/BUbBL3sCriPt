@@ -10,6 +10,8 @@
 // All static functions in this class will
 // are included in the root bound object.
 
+const Fn = require("../o/fn");
+
 class Base {
 
   static muf(key,val) {
@@ -28,6 +30,11 @@ class Base {
 
   static not(y) {
     return !y;
+  }
+
+  static fn(caret, stic) {
+    let binding = this;
+    return new Fn(binding, caret, stic);
   }
 
 }
