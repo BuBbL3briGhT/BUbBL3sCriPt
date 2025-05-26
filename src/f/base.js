@@ -43,5 +43,9 @@ Base["="] = function([a, b]) {
   return a == b;
 }
 
+Base["/"] = function(a) {
+  return a.reduce((a,b) => a/b);
+}
+
 console.debug("Base 57", Base);
 module.exports = Base;
