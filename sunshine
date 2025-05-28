@@ -1,8 +1,8 @@
 #! /usr/bin/node bin/bubls
-(puts "hiya")
 (muf puts
   (fn [msg]
     (console.log msg)))
-(console.log "Hello Sunshine!")
-(console.log 1234)
-(console.log (+ 12 34))
+(puts "Hello Sunshine!")
+(puts 1234)
+(puts (+ 12 34))
+(puts "hiya")
