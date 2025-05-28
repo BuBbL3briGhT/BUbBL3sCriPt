@@ -1,9 +1,13 @@
+.............................................
 
-.       .   .   .                       .
-|       |   |   |                 o     |
-|-. . . |-. |-. | ,-. ,-. ,-. ;-. . ;-. |-
-| | | | | | | | | |-' `-. |   |   | | | |
-`-' `-` `-' `-' ' `-' `-' `-' '   ' |-' `-'
+ .       .   .   .                       .
+ |       |   |   |                 o     |
+ |-. . . |-. |-. | ,-. ,-. ,-. ;-. . ;-. |-
+ | | | | | | | | | |-' `-. |   |   | | | |
+ `-' `-` `-' `-' ' `-' `-' `-' '   ' |-' `-'
+
+.............................................
+
 
 
 ## TODO
@@ -16,6 +20,16 @@
         passing. we need to figure out how to test
         this with Mocha.
     - See test/bin/bubls.js
+
+- The is a glitch in the way that the scripts are
+  being processed that is causing the code to be run backwards
+  from the bottom to the top. While this is an interesting
+  quirk, it should probably fixed for praticality.
+  - [ ] Fix the bottom up processing glitch
+- Where is the best place to put the bubblescript code and libaries and how best to organize and load it?
+  We had some libraries strated in older versions of bubblescript be for the refactoring to use node and rewrite.
+  - [ ] Discover determine where how to organize store bubblescript code and libaries
+  - [ ] Track down and copy over old bubblescript libraries
 
 ## Project Goals
 
