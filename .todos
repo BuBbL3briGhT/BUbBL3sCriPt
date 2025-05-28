@@ -1,2 +1,3 @@
+- toString for macro
 - Automatic invokation
 - Parinfer for repl
