@@ -24,6 +24,20 @@ describe("send", function () {
   });
 });
 
+describe("puts", function () {
+  before(function () {
+    sinon.replace(console, "log",
+      sinon.fake());
+  });
+  after(function () {
+    sinon.restore();
+  });
+  it("logs to console", function () {
+    eval('(puts "hi")');
+    assert(console.log.calledWith("hi"));
+  });
+});
+
 describe("if", function () {
    it("🫠", function() {
      assertEvalTo("(if true 1 2)", 1);
