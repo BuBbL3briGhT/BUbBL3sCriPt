@@ -215,3 +215,48 @@ module.exports = rootBinding;
 const eval = require("../f/eval");
 const _eval = eval.eVaL;
 
+
+(function() {
+  let bnd = rootBinding;
+  let evl = _eval;
+
+  function list(...args) {
+    return Bubbles.from(args);
+  }
+  function glider(...args) {
+    return List.from(args);
+  }
+
+  function quote(m) {
+    return new Bubble(m);
+  }
+
+   let _push = new Symbol('push'),
+       fn = new Symbol('fn'),
+       a = new Symbol('a'),
+       b = new Symbol('b'),
+       send = new Symbol('send'),
+       mufn = new Symbol('mufn'),
+       macro = new Symbol('macro'),
+       name = new Symbol('name'),
+       amp = new Symbol('&'),
+       z = new Symbol('z'),
+      _list = new Symbol('list'),
+      _muf = new Symbol('muf');
+
+    function muf(...args) {
+      // return _eval(bnd, arry.toList(args).push(_muf));
+      return _eval(bnd, Bubbles.from(args).push(_muf));
+    }
+
+    // muf push (fn [a b] (send a 'push b))
+    muf(_push, list(fn, glider(a, b),
+         list(send, a, quote(_push), b)));
+
+    // (muf mufn (macro [name & z]
+    //     (list 'muf name (push z 'fn))))
+    muf(mufn, list(macro, glider(name,amp,z),
+        list(_list,quote(_muf), name,
+           list(_push, z, quote(fn)))));
+
+})();
