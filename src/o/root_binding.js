@@ -80,8 +80,7 @@ const rootBinding = {
   }),
 
   macro: function(args) {
-    var binding = this;
-    return new Macro(binding, args.first, args.rest)
+    return new Macro(this, args.first, args.rest)
   },
 
   jsfn: function(args) {

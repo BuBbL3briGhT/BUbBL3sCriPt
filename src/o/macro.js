@@ -1,4 +1,3 @@
-
 class Macro {
   constructor(bnd, args, body) {
     this.bnd = bnd;
@@ -16,3 +15,7 @@ class Macro {
 }
 
 module.exports = Macro;
+
+const eval = require('../f/eval');
+const evl  = eval.eVaL;
+
