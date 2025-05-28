@@ -1,13 +1,29 @@
-.............................................
+                                          o
+     .       .   .   .     o                 .
+     |  o    |   |   |          °      o     |
+     |-. . . |-. |-. | ,-. ,-. ,-. ;-. . ;-. |-
+     | | | | | | | | | |-' `-. |   |   | | | |
+     `-' `-` `-' `-' ' `-' `-' `-' ' ° ' |-' `-'
+                     °      o
+               o
 
- .       .   .   .                       .
- |       |   |   |                 o     |
- |-. . . |-. |-. | ,-. ,-. ,-. ;-. . ;-. |-
- | | | | | | | | | |-' `-. |   |   | | | |
- `-' `-` `-' `-' ' `-' `-' `-' '   ' |-' `-'
+## What is Bubblescript?
 
-.............................................
+Bubblescript is a
+[Clojure](https://clojure.org/)-like
+language inspired for Javascript.
+## Language Features
+  - Functional programming model
+  - Minimal syntax
+  - Interopretablity with Javascript
 
+## Planned Features
+  - Macros (Under Development)
+  - Loop/Recur functions
+  - Lazy evaluation
+  - tail call recursion optimization
+  - namespaces
+  - code libraries
 
 ## TODO
 
