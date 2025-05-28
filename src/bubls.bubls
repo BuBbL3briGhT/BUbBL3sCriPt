@@ -1,0 +1,97 @@
+ ;ns repl
+
+(muf get-id (fn [a])
+   (send document 'getElementById a)
+
+ muf cursor (get-id "cursor")
+ muf prompt  (get cursor 'parentNode)
+
+ ;repl/cursor
+
+ ;muf br (fn [💅🤷🏽‍♀️👑]
+ ;  (document.createElement "br"))
+
+ muf br (fn [💅🤷🏽‍♀️👑],)
+   (send  document 'createElement "br")
+
+ ;mufn br [m e o w],
+ ;  (send document 'createElement "br")
+
+ muf print (fn [msg])
+   (send (get document 'body)
+     'insertBefore
+     msg
+        prompt
+
+    muf println (fn [msg])
+      (print msg (br))
+
+    muf println (fn [msg])
+      (print (send document 'createTextNode msg))
+      (print (br))
+
+    muf typeChar (fn [ch])
+      (send prompt 'insertBefore
+        (send document 'createTextNode ch
+         cursor))
+
+    muf clear (fn [])
+      (export  prompt 'innerHTML "> ")
+      (send prompt 'append cursor)
+
+    muf backspace (fn [q])
+      (send prompt 'removeChild
+         (get cursor 'previousSibling))
+
+      muf muff muf
+
+      muf push (fn [a b])
+        (send a 'push b)
+
+       muf mufn,
+         (macro [name args & body]
+           (list 'muf name
+              (push (push body args) 'fn)))
+
+     mufn read [],
+       (send (get prompt 'innerText) 'slice 2
+           (- (get prompt 'innerText 'length) 1))
+
+       muff 😋 (fn [])
+         (let [v (read)]
+            (println v)
+            (print (send document 'createTextNode ";=> "))
+            (println (evl (parse v)))
+            ;(println (parse v))
+            (clear))
+
+        muf do list
+
+        muf arrow-left (fn [])
+          (prompt.insertBefore cursor
+             cursor.previousSibling)
+
+          ;   muf arrow-left (fn []
+          ;     (send prompt 'insertBefore cursor
+          ;        (get cursor 'previousSibling)))
+
+         muf arrow-right (fn [])
+           (prompt.insertBefore
+              (get cursor 'nextSibling)
+              cursor)
+
+          window.addEventListener 'keydown,
+            (jsfn [e]
+              (if (= e.key "Backspace")
+                (do (send e 'preventDefault
+                     (backspace))))
+              (if (= e.key "ArrowRight")
+                (arrow-right))
+              (if (= e.key "ArrowLeft")
+                (arrow-left)))
+
+        window.addEventListener 'keypress,
+          (jsfn [e]
+            (if (= (get e 'key) "Enter")
+              (😋)
+              (typeChar (get e 'key))))))
