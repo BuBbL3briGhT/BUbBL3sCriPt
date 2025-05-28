@@ -24,7 +24,7 @@
   being processed that is causing the code to be run backwards
   from the bottom to the top. While this is an interesting
   quirk, it should probably fixed for praticality.
-  - [ ] Fix the bottom up processing glitch
+  - [x] Fix the bottom up processing glitch
 - Where is the best place to put the bubblescript code and libaries and how best to organize and load it?
   We had some libraries strated in older versions of bubblescript be for the refactoring to use node and rewrite.
   - [ ] Discover determine where how to organize store bubblescript code and libaries
