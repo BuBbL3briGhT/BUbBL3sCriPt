@@ -12,18 +12,19 @@
 Bubblescript is a
 [Clojure](https://clojure.org/)-like
 language inspired for Javascript.
+
 ## Language Features
-  - Functional programming model
-  - Minimal syntax
-  - Interopretablity with Javascript
+  - Lisp/Javascript Hybrid
+  - Functional Programming Model
+  - Minimal Syntax
 
 ## Planned Features
-  - Macros (Under Development)
-  - Loop/Recur functions
-  - Lazy evaluation
-  - tail call recursion optimization
-  - namespaces
-  - code libraries
+  - Macro Support (Under Development)
+  - Loop & Recur functions for iteration
+  - Lazy Evaluation
+  - Tail Call Recursion Optimization
+  - Namespaces
+  - Code Libraries
 
 ## TODO
 
