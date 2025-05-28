@@ -1,7 +1,7 @@
 const Macro = require("../../src/o/macro");
 
 describe("Macro", function () {
-  it("✨️ constructs", function () {
+  it("✨️", function () {
     new Macro();
   });
 });
