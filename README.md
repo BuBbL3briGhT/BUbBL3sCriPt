@@ -9,9 +9,9 @@
 
 ## What is Bubblescript?
 
-Bubblescript is a
+Bubble🫧script is a
 [Clojure](https://clojure.org/)-like
-language inspired for Javascript.
+language inspired✨️ for Java☕️script.
 
 ## Language Features
   - Lisp/Javascript Hybrid
