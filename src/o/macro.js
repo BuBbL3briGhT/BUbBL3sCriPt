@@ -12,6 +12,13 @@ class Macro {
   expand(bnd, args) {
     return invoke(bnd, this, args);
   }
+
+  toString() {
+    return "(macro " + this.args.toString() +
+      this.body.toString() + ")";
+
+
+  }
 }
 
 const invoke = require("../f/invoke");
