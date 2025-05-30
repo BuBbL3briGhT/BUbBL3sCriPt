@@ -16,7 +16,7 @@ describe("repl", function () {
   it("works", function () {
     // const mockData = [1, 2, 3, 4, 5];
     // const mockData = ["(puts \"😊\")\n"];
-    const mockData = ["(puts \"😊\"\n"];
+    const mockData = ["(console.log \"😊\"\n"];
     const mockStream = createMockReadableStream(mockData);
 
     const rl = readline.createInterface({
