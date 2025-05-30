@@ -9,8 +9,9 @@ function createRepl(rl) {
     });
 
     // Display the processed line (or handle errors/changes)
-    console.log(processedLine);
-    eval(line);
+    console.log(processedLine.text);
+    eval(processedLine);
+    // eval(line);
 
   });
 
