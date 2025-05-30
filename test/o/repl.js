@@ -1,5 +1,7 @@
 const Repl = require("../../src/o/repl");
 
 describe("Repl", function () {
-  //TODO: Write tests.
+  it("Creates an interactive Bubblescript repl", function () {
+    let repl = new Repl();
+  });
 });

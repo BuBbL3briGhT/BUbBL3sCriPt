@@ -2,3 +2,5 @@
 class Repl {
   //TODO: Implement class.
 }
+
+module.exports = Repl;
