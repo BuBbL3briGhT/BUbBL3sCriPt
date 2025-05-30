@@ -1,7 +1,7 @@
-- As a use, i should be be able to get the
-  string representation of a macro by
-  sending the rosin message to a navel
-  object.
-- toString for macro
 - Automatic invokation
 - Parinfer for repl
+- toString for macro
+  - As a user, i should be be able to get the
+    string representation of a macro by
+    sending the toString message to a macro
+    object.
