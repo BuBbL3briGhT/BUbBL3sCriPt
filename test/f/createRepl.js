@@ -12,18 +12,26 @@ describe("createRepl", function () {
     rl.close()
   });
 });
-describe("Repl", function () {
+describe("repl", function () {
   it("works", function () {
-    const mockData = [1, 2, 3, 4, 5];
+    // const mockData = [1, 2, 3, 4, 5];
+    const mockData = ["(puts \"😊\")\n"];
     const mockStream = createMockReadableStream(mockData);
 
-    mockStream.on('data', (chunk) => {
-      console.log('Data:', chunk);
+    const rl = readline.createInterface({
+      input: mockStream,
+      output: process.stdout
     });
 
-    mockStream.on('end', () => {
-      console.log('Stream ended');
-    });
+    const repl = createRepl(rl);
+
+    // mockStream.on('data', (chunk) => {
+    //   console.log('Data:', chunk);
+    // });
+
+    // mockStream.on('end', () => {
+    //   console.log('Stream ended');
+    // });
 
   });
 });
