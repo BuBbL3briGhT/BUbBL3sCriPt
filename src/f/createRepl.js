@@ -1,4 +1,5 @@
-const Parinfer = require('parinfer'); // Assuming you have the parinfer module installed
+const Parinfer = require('parinfer');
+const eval = require("../../src/f/eval");
 
 function createRepl(rl) {
   rl.on('line', (line) => {
@@ -9,6 +10,8 @@ function createRepl(rl) {
 
     // Display the processed line (or handle errors/changes)
     console.log(processedLine);
+    eval(line);
+
   });
 
   rl.on('close', () => {
