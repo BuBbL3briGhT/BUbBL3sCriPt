@@ -23,8 +23,7 @@ process.stdin.on('keypress', (str, key) => {
   } else if (key.name === 'space') {
     type(" ");
   } else if (key.name === 'backspace') {
-    lines[cursor_y] = lines[cursor_y].slice(0, -1);
-    cursor_x = Math.max(0, cursor_x - 1);
+    backspace();
   } else if (key.name === 'left') {
     cursor_x = Math.max(0, cursor_x - 1);
   }else {
@@ -42,6 +41,13 @@ function type(sequence) {
     sequence +
     lines[cursor_y].slice(cursor_x);
   cursor_x++;
+}
+
+function backspace() {
+  lines[cursor_y] =
+    lines[cursor_y].slice(0, lines[cursor_y].length-cursor_x) +
+    lines[cursor_y].slice(lines[cursor_y].length-cursor_x+1);
+  cursor_x = Math.max(0, cursor_x - 1);
 }
 
 function updateView() {
