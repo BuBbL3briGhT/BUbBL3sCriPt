@@ -33,6 +33,9 @@ process.stdin.on('keypress', (str, key) => {
   } else if (key.name === 'up') {
     cursor_y = Math.max(0, cursor_y - 1);
     cursor_x = Math.min(cursor_x, lines[cursor_y].length);
+  } else if (key.name === 'down') {
+    cursor_y = Math.min(lines.length-1, cursor_y + 1);
+    cursor_x = Math.min(cursor_x, lines[cursor_y].length);
   }else {
     // currentLine += key.name;
     // currentLine.push(key.name);
