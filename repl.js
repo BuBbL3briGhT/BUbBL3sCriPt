@@ -26,16 +26,21 @@ process.stdin.on('keypress', (str, key) => {
   updateView();
 });
 
+var linesDrawn = 0;
+
 function updateView() {
   clear();
-  for (let line of lines) {
-    // console.log(lines);
-    process.stdout.write(line);
-  }
+
+  process.stdout.write(lines.join("\n"));
+  linesDrawn = lines.length;
+  // for (let line of lines) {
+  //   // console.log(lines);
+  //   process.stdout.write(line);
+  // }
 }
 
 function clear() {
-  clearLines(lines.length);
+  clearLines(linesDrawn);
 }
 
 function clearLines(n) {
