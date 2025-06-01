@@ -3,8 +3,9 @@ const readline = require('readline');
 readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
 
-var currentLine = "";
-var lines = [currentLine];
+// var currentLine = "";
+// var lines = [currentLine];
+var lines = [""];
 var cursor_x = 0;
 var cursor_y = 0;
 
@@ -13,14 +14,17 @@ process.stdin.on('keypress', (str, key) => {
   if (key.ctrl && key.name === 'c') {
     process.exit();
   }
-  currentLine += key.name;
+  // currentLine += key.name;
+  // currentLine.push(key.name);
+  lines[cursor_x] = lines[cursor_x] + key.name
   updateView();
 });
 
 function updateView() {
-  // clear();
+  clear();
   for (let line of lines) {
-    console.log(line);
+    // console.log(lines);
+    process.stdout.write(line);
   }
 }
 
