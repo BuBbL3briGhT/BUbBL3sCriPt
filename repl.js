@@ -17,15 +17,21 @@ process.stdin.on('keypress', (str, key) => {
 
   if (key.name === 'return') {
     cursor_y++;
+    cursor_x = 0;
     lines[cursor_y] ||= "";
   } else if (key.name === 'space') {
     lines[cursor_y] = lines[cursor_y] + " "
+    cursor_x++;
   } else if (key.name === 'backspace') {
     lines[cursor_y] = lines[cursor_y].slice(0, -1);
+    cursor_x = Math.max(0, cursor_x - 1);
+  } else if (key.name === 'left') {
+    cursor_x = Math.max(0, cursor_x - 1);
   }else {
     // currentLine += key.name;
     // currentLine.push(key.name);
     lines[cursor_y] = lines[cursor_y] + key.name
+    cursor_x++;
   }
   updateView();
 });
@@ -37,6 +43,8 @@ function updateView() {
 
   process.stdout.write(lines.join("\n"));
   linesDrawn = lines.length;
+  // process.stdout.moveCursor(0, y);
+  process.stdout.cursorTo(cursor_x);
   // for (let line of lines) {
   //   // console.log(lines);
   //   process.stdout.write(line);
