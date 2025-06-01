@@ -8,6 +8,7 @@ process.stdin.setRawMode(true);
 var lines = [""];
 var cursor_x = 0;
 var cursor_y = 0;
+var linesDrawn = 0;
 
 process.stdin.on('keypress', (str, key) => {
   // console.log('Key pressed:', key);
@@ -20,8 +21,7 @@ process.stdin.on('keypress', (str, key) => {
     cursor_x = 0;
     lines[cursor_y] ||= "";
   } else if (key.name === 'space') {
-    lines[cursor_y] = lines[cursor_y] + " "
-    cursor_x++;
+    type(" ");
   } else if (key.name === 'backspace') {
     lines[cursor_y] = lines[cursor_y].slice(0, -1);
     cursor_x = Math.max(0, cursor_x - 1);
@@ -31,14 +31,18 @@ process.stdin.on('keypress', (str, key) => {
     // currentLine += key.name;
     // currentLine.push(key.name);
     let sequence = key.sequence;
-    lines[cursor_y] =
-      lines[cursor_y] + key.sequence;
-    cursor_x++;
+    type(sequence);
   }
   updateView();
 });
 
-var linesDrawn = 0;
+function type(sequence) {
+  lines[cursor_y] =
+    lines[cursor_y].slice(0, cursor_x) +
+    sequence +
+    lines[cursor_y].slice(cursor_x);
+  cursor_x++;
+}
 
 function updateView() {
   clear();
