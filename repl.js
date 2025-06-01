@@ -45,8 +45,8 @@ function type(sequence) {
 
 function backspace() {
   lines[cursor_y] =
-    lines[cursor_y].slice(0, lines[cursor_y].length-cursor_x) +
-    lines[cursor_y].slice(lines[cursor_y].length-cursor_x+1);
+    lines[cursor_y].slice(0, cursor_x-1) +
+    lines[cursor_y].slice(cursor_x);
   cursor_x = Math.max(0, cursor_x - 1);
 }
 
