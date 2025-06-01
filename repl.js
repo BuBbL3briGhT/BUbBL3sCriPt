@@ -30,7 +30,8 @@ process.stdin.on('keypress', (str, key) => {
   }else {
     // currentLine += key.name;
     // currentLine.push(key.name);
-    lines[cursor_y] = lines[cursor_y] + key.name
+    let sequence = key.sequence;
+    lines[cursor_y] = lines[cursor_y] + key.sequence;
     cursor_x++;
   }
   updateView();
