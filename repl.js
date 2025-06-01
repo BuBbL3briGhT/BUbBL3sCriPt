@@ -31,7 +31,8 @@ process.stdin.on('keypress', (str, key) => {
     // currentLine += key.name;
     // currentLine.push(key.name);
     let sequence = key.sequence;
-    lines[cursor_y] = lines[cursor_y] + key.sequence;
+    lines[cursor_y] =
+      lines[cursor_y] + key.sequence;
     cursor_x++;
   }
   updateView();
@@ -41,7 +42,6 @@ var linesDrawn = 0;
 
 function updateView() {
   clear();
-
   process.stdout.write(lines.join("\n"));
   linesDrawn = lines.length;
   // process.stdout.moveCursor(0, y);
@@ -63,6 +63,7 @@ function clearLines(n) {
     process.stdout.clearLine(1);
     process.stdout.cursorTo(0);
   }
+  process.stdout.clearLine(1);
 }
 
 process.stdin.resume();
