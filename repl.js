@@ -18,7 +18,9 @@ process.stdin.on('keypress', (str, key) => {
   if (key.name === 'return') {
     cursor_y++;
     lines[cursor_y] ||= "";
-  } else {
+  } else if (key.name === 'space') {
+    lines[cursor_y] = lines[cursor_y] + " "
+  }else {
     // currentLine += key.name;
     // currentLine.push(key.name);
     lines[cursor_y] = lines[cursor_y] + key.name
