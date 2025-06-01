@@ -26,6 +26,10 @@ process.stdin.on('keypress', (str, key) => {
     backspace();
   } else if (key.name === 'left') {
     cursor_x = Math.max(0, cursor_x - 1);
+  } else if (key.name === 'right') {
+    cursor_x = Math.min(
+      lines[cursor_y].length
+      , cursor_x + 1);
   }else {
     // currentLine += key.name;
     // currentLine.push(key.name);
