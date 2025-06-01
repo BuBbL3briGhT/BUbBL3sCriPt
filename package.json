@@ -5,6 +5,7 @@
     "test": "mocha ./test/**/*.js"
   },
   "dependencies": {
+    "debounce": "^2.2.0",
     "parinfer": "^3.13.1",
     "yaml": "^2.7.0"
   },
