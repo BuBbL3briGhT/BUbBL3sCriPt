@@ -30,6 +30,8 @@ process.stdin.on('keypress', (str, key) => {
     cursor_x = Math.min(
       lines[cursor_y].length
       , cursor_x + 1);
+  } else if (key.name === 'up') {
+    cursor_y = Math.max(0, cursor_y - 1);
   }else {
     // currentLine += key.name;
     // currentLine.push(key.name);
@@ -59,6 +61,9 @@ function updateView() {
   process.stdout.write(lines.join("\n"));
   linesDrawn = lines.length;
   // process.stdout.moveCursor(0, y);
+  // process.stdout.moveCursor(0, lines.length-cursor_y);
+  process.stdout.moveCursor(0, 0);
+  process.stdout.moveCursor(0, cursor_y+1-lines.length);
   process.stdout.cursorTo(cursor_x);
   // for (let line of lines) {
   //   // console.log(lines);
