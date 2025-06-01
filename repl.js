@@ -18,7 +18,7 @@ process.stdin.on('keypress', (str, key) => {
 });
 
 function updateView() {
-  clear();
+  // clear();
   for (let line of lines) {
     console.log(line);
   }
