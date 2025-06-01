@@ -14,9 +14,15 @@ process.stdin.on('keypress', (str, key) => {
   if (key.ctrl && key.name === 'c') {
     process.exit();
   }
-  // currentLine += key.name;
-  // currentLine.push(key.name);
-  lines[cursor_x] = lines[cursor_x] + key.name
+
+  if (key.name === 'return') {
+    cursor_y++;
+    lines[cursor_y] ||= "";
+  } else {
+    // currentLine += key.name;
+    // currentLine.push(key.name);
+    lines[cursor_y] = lines[cursor_y] + key.name
+  }
   updateView();
 });
 
