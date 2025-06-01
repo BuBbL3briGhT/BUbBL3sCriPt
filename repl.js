@@ -20,6 +20,8 @@ process.stdin.on('keypress', (str, key) => {
     lines[cursor_y] ||= "";
   } else if (key.name === 'space') {
     lines[cursor_y] = lines[cursor_y] + " "
+  } else if (key.name === 'backspace') {
+    lines[cursor_y] = lines[cursor_y].slice(0, -1);
   }else {
     // currentLine += key.name;
     // currentLine.push(key.name);
