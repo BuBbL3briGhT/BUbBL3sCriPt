@@ -67,7 +67,7 @@ function updateView() {
   // process.stdout.moveCursor(0, y);
   // process.stdout.moveCursor(0, lines.length-cursor_y);
   process.stdout.moveCursor(0, 0);
-  process.stdout.moveCursor(0, cursor_y+1-lines.length);
+  process.stdout.moveCursor(0, cursor_y-lines.length+1);
   process.stdout.cursorTo(cursor_x);
   // for (let line of lines) {
   //   // console.log(lines);
