@@ -1,5 +1,6 @@
 const readline = require('readline');
 const Parinfer = require("parinfer");
+const bubls = require('./src/bubls');
 
 readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
@@ -30,8 +31,6 @@ process.stdin.on('keypress', (str, key) => {
       lines[cursor_y-1] = lines[cursor_y-1].slice(0, cursor_x);
       cursor_x = 0;
     }
-  } else if (key.name === 'return') {
-      // evaluate...
   } else if (key.name === 'space') {
     type(" ");
   } else if (key.name === 'backspace') {
@@ -55,6 +54,17 @@ process.stdin.on('keypress', (str, key) => {
     type(sequence);
   }
   lines = parinfer(lines);
+  if (key.name === 'return') {
+      // evaluate...
+    console.log(lines.join("\n"));
+    let result =
+      bubls.eval(lines.join("\n"));
+    console.log(result);
+    lines = [""];
+    cursor_x = 0;
+    cursor_y = 0;
+    linesDrawn = 0;
+  }
   updateView();
 });
 
