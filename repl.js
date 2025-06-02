@@ -54,17 +54,19 @@ process.stdin.on('keypress', (str, key) => {
     type(sequence);
   }
   lines = parinfer(lines);
-  // if (key.name === 'return') {
-  //     // evaluate...
-  //   console.log(lines.join("\n"));
-  //   let result =
-  //     bubls.eval(lines.join("\n"));
-  //   console.log(result);
-  //   lines = [""];
-  //   cursor_x = 0;
-  //   cursor_y = 0;
-  //   linesDrawn = 0;
-  // }
+  if (key.meta === false && key.name === 'return') {
+      // evaluate...
+    // console.log(lines.join("\n"));
+    let result =
+      bubls.eval(lines.join("\n").slice(0, -1));
+      // bubls.eval("1");
+    process.stdout.write("\n");
+    console.log(result);
+    lines = [""];
+    cursor_x = 0;
+    cursor_y = 0;
+    linesDrawn = 0;
+  }
   updateView();
 });
 
