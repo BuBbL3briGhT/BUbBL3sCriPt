@@ -89,7 +89,7 @@ function type(sequence) {
 
 function backspace() {
   let m = cursor_x - 1;
-  if (m < 1) {
+  if (m < 0) {
     if (cursor_y > 0) {
       // splice together lines.
       cursor_y--;
