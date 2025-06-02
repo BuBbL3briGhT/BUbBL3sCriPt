@@ -24,7 +24,7 @@ process.stdin.on('keypress', (str, key) => {
       i > cursor_y; i--) {
       lines[i] = lines[i-1];
     }
-    lines[cursor_y] ||= "";
+    lines[cursor_y] = "";
   } else if (key.name === 'space') {
     type(" ");
   } else if (key.name === 'backspace') {
