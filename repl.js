@@ -65,7 +65,15 @@ function backspace() {
   if (m < 1) {
     if (cursor_y > 0) {
       // splice together lines.
-
+      cursor_y--;
+      cursor_x = lines[cursor_y].length;
+      lines[cursor_y] =
+        lines[cursor_y] + lines[cursor_y+1];
+      for (let i = cursor_y+1;
+        i < lines.length; i++) {
+          lines[i] = lines[i+1];
+      }
+      delete lines[lines.length];
     } else {
       cursor_x = 0;
     }
