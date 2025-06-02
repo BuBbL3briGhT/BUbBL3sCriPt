@@ -1,4 +1,5 @@
 const readline = require('readline');
+const Parinfer = require("parinfer");
 
 readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
@@ -16,7 +17,7 @@ process.stdin.on('keypress', (str, key) => {
     process.exit();
   }
 
-  if (key.meta === true) {
+  if (key.meta === true) { // alt
     if (key.name === 'return') {
       cursor_y++;
       // make space for new line. move each line lower down by one starting from the last line.
@@ -53,8 +54,17 @@ process.stdin.on('keypress', (str, key) => {
     let sequence = key.sequence;
     type(sequence);
   }
+  lines = parinfer(lines);
   updateView();
 });
+
+function parinfer(lines) {
+  let raw = lines.join("\n");
+  var out = Parinfer.indentMode(raw, { // Use indentMode or parenMode as needed
+    // Parinfer options
+  });
+  return out.text.split("\n");
+}
 
 function type(sequence) {
   lines[cursor_y] =
