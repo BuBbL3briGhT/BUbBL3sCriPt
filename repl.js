@@ -43,7 +43,7 @@ process.stdin.on('keypress', (str, key) => {
   } else if (key.name === 'down') {
     cursor_y = Math.min(lines.length-1, cursor_y + 1);
     cursor_x = Math.min(cursor_x, lines[cursor_y].length);
-  }else {
+  } else {
     // currentLine += key.name;
     // currentLine.push(key.name);
     let sequence = key.sequence;
@@ -73,7 +73,7 @@ function backspace() {
         i < lines.length; i++) {
           lines[i] = lines[i+1];
       }
-      delete lines[lines.length];
+      lines.pop();
     } else {
       cursor_x = 0;
     }
