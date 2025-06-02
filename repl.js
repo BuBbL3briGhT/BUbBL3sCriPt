@@ -18,13 +18,15 @@ process.stdin.on('keypress', (str, key) => {
 
   if (key.name === 'return') {
     cursor_y++;
-    cursor_x = 0;
     // make space for new line. move each line lower down by one starting from the last line.
     for (let i = lines.length;
       i > cursor_y; i--) {
       lines[i] = lines[i-1];
     }
-    lines[cursor_y] = "";
+    // lines[cursor_y] = "";
+    lines[cursor_y] = lines[cursor_y-1].slice(cursor_x);
+    lines[cursor_y-1] = lines[cursor_y-1].slice(0, cursor_x);
+    cursor_x = 0;
   } else if (key.name === 'space') {
     type(" ");
   } else if (key.name === 'backspace') {
