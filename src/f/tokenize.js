@@ -123,6 +123,7 @@ function tokenize(inputString) {
         advance(); // Consumes whitespace, updates column
         break;
       case '\n':
+      case '\r':
         advance(); // Consumes newline, updates line and column
         break;
       case '(':

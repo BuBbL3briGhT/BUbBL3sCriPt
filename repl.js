@@ -58,7 +58,8 @@ process.stdin.on('keypress', (str, key) => {
       // evaluate...
     // console.log(lines.join("\n"));
     let result =
-      bubls.eval(lines.join("\n").slice(0, -1));
+      bubls.eval(lines.join("\n"));
+      // encodeURI(lines.join("\n"))
       // bubls.eval("1");
     process.stdout.write("\n");
     console.log(result);
