@@ -73,7 +73,8 @@ function backspace() {
         i < lines.length; i++) {
           lines[i] = lines[i+1];
       }
-      lines.pop();
+      // lines.pop() ;
+      lines[lines.length-1] = "";
     } else {
       cursor_x = 0;
     }
@@ -117,4 +118,4 @@ function log(msg) {
 
 process.stdin.resume();
 
-log('Press any key...');
+// log('Press any key...');
