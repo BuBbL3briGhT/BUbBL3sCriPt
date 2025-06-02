@@ -69,6 +69,8 @@ function updateView() {
 }
 
 function clear() {
+  const y = linesDrawn - cursor_y
+  process.stdout.moveCursor(0, y);
   clearLines(linesDrawn);
 }
 
