@@ -19,6 +19,11 @@ process.stdin.on('keypress', (str, key) => {
   if (key.name === 'return') {
     cursor_y++;
     cursor_x = 0;
+    // make space for new line. move each line lower down by one starting from the last line.
+    for (let i = lines.length;
+      i > cursor_y; i--) {
+      lines[i] = lines[i-1];
+    }
     lines[cursor_y] ||= "";
   } else if (key.name === 'space') {
     type(" ");
