@@ -54,23 +54,26 @@ process.stdin.on('keypress', (str, key) => {
     type(sequence);
   }
   lines = parinfer(lines);
-  if (key.name === 'return') {
-      // evaluate...
-    console.log(lines.join("\n"));
-    let result =
-      bubls.eval(lines.join("\n"));
-    console.log(result);
-    lines = [""];
-    cursor_x = 0;
-    cursor_y = 0;
-    linesDrawn = 0;
-  }
+  // if (key.name === 'return') {
+  //     // evaluate...
+  //   console.log(lines.join("\n"));
+  //   let result =
+  //     bubls.eval(lines.join("\n"));
+  //   console.log(result);
+  //   lines = [""];
+  //   cursor_x = 0;
+  //   cursor_y = 0;
+  //   linesDrawn = 0;
+  // }
   updateView();
 });
 
 function parinfer(lines) {
   let raw = lines.join("\n");
-  var out = Parinfer.indentMode(raw, { // Use indentMode or parenMode as needed
+  // var out = Parinfer.indentMode(raw, { // Use indentMode or parenMode as needed
+  var out = Parinfer.smartMode(raw, { // Use indentMode or parenMode as needed
+    cursorLine: cursor_y,
+    cursorX: cursor_x
     // Parinfer options
   });
   return out.text.split("\n");
