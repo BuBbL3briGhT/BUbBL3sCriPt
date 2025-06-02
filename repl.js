@@ -64,15 +64,8 @@ function updateView() {
   clear();
   process.stdout.write(lines.join("\n"));
   linesDrawn = lines.length;
-  // process.stdout.moveCursor(0, y);
-  // process.stdout.moveCursor(0, lines.length-cursor_y);
-  process.stdout.moveCursor(0, 0);
   process.stdout.moveCursor(0, cursor_y-lines.length+1);
   process.stdout.cursorTo(cursor_x);
-  // for (let line of lines) {
-  //   // console.log(lines);
-  //   process.stdout.write(line);
-  // }
 }
 
 function clear() {
@@ -89,6 +82,12 @@ function clearLines(n) {
   process.stdout.clearLine(1);
 }
 
+function log(msg) {
+  process.stdout.moveCursor(0, -10);
+  console.log(msg);
+  process.stdout.moveCursor(0, 9);
+}
+
 process.stdin.resume();
 
-// console.log('Press any key...');
+log('Press any key...');
