@@ -61,10 +61,20 @@ function type(sequence) {
 }
 
 function backspace() {
-  lines[cursor_y] =
-    lines[cursor_y].slice(0, cursor_x-1) +
-    lines[cursor_y].slice(cursor_x);
-  cursor_x = Math.max(0, cursor_x - 1);
+  let m = cursor_x - 1;
+  if (m < 1) {
+    if (cursor_y > 0) {
+      // splice together lines.
+
+    } else {
+      cursor_x = 0;
+    }
+  } else {
+    lines[cursor_y] =
+      lines[cursor_y].slice(0, cursor_x-1) +
+      lines[cursor_y].slice(cursor_x);
+    cursor_x = m;
+  }
 }
 
 function updateView() {
