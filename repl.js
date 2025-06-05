@@ -55,13 +55,13 @@ process.stdin.on('keypress', (str, key) => {
   }
   lines = parinfer(lines);
   if (key.meta === false && key.name === 'return') {
+    process.stdout.write("\n");
       // evaluate...
     // console.log(lines.join("\n"));
     let result =
       bubls.eval(lines.join("\n"));
       // encodeURI(lines.join("\n"))
       // bubls.eval("1");
-    process.stdout.write("\n");
     console.log(result);
     lines = [""];
     cursor_x = 0;
