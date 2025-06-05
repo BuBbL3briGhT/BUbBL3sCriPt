@@ -5,6 +5,13 @@ const bubls = require('../src/bubls');
 
 let path = process.argv[2];
 
+if (path === "-v") {
+  const packageInfo = require('../package.json');
+  const version = packageInfo.version;
+  console.log('Bubblescript version:', version)
+  process.exit();
+}
+
 if (path) {
 
   const fs = require('fs');

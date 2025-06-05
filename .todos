@@ -1,3 +1,9 @@
+June
+- -v --version for command bubls
+- Make Repl Function
+  - Options for repl
+
+May
 - Automatic invokation
 - Parinfer for repl
 - toString for macro
