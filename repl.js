@@ -11,7 +11,36 @@ var lines = [""];
 var cursor_x = 0;
 var cursor_y = 0;
 var linesDrawn = 0;
-const history = [];
+const history = makeHistory();
+
+function makeHistory() {
+  let history = [];
+  var i = 0;
+
+  this.push = function(expression) {
+    history.push(expression);
+    i = history.length - 1;
+    // console.log(history);
+    // console.log(history.length);
+  }
+
+  this.previous = function() {
+    if (i > 0)
+      return history[i--];
+    else
+      return history[0];
+  }
+
+  this.next = function() {
+    if (i < history.length - 1) {
+      return history[i++];
+    } else {
+      return history[i];
+    }
+  }
+
+  return this;
+}
 
 process.stdin.on('keypress', (str, key) => {
   // console.log('Key pressed:', key);
@@ -44,19 +73,23 @@ process.stdin.on('keypress', (str, key) => {
       , cursor_x + 1);
   } else if (key.name === 'up') {
     if (cursor_y == 0) {
-      let historyi = history.length;
-      let expression = history[historyi-1];
-       // console.log(history);
-       // console.log(historyi);
-       // console.log(expression);
+
+      // let historyi = history.length;
+      // let expression = history[historyi-1];
+      let expression = history.previous();
       lines = expression.split("\n");
     } else {
       cursor_y = cursor_y - 1;
       cursor_x = Math.min(cursor_x, lines[cursor_y].length);
     }
   } else if (key.name === 'down') {
-    cursor_y = Math.min(lines.length-1, cursor_y + 1);
-    cursor_x = Math.min(cursor_x, lines[cursor_y].length);
+    if (cursor_y == lines.length) {
+      let expression = history.next();
+      lines = expression.split("\n");
+    } else {
+      cursor_y = Math.min(lines.length-1, cursor_y + 1);
+      cursor_x = Math.min(cursor_x, lines[cursor_y].length);
+    }
   } else {
     // currentLine += key.name;
     // currentLine.push(key.name);
