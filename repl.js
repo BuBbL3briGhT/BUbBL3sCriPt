@@ -11,6 +11,7 @@ var lines = [""];
 var cursor_x = 0;
 var cursor_y = 0;
 var linesDrawn = 0;
+const history = [];
 
 process.stdin.on('keypress', (str, key) => {
   // console.log('Key pressed:', key);
@@ -42,8 +43,17 @@ process.stdin.on('keypress', (str, key) => {
       lines[cursor_y].length
       , cursor_x + 1);
   } else if (key.name === 'up') {
-    cursor_y = Math.max(0, cursor_y - 1);
-    cursor_x = Math.min(cursor_x, lines[cursor_y].length);
+    if (cursor_y == 0) {
+      let historyi = history.length;
+      let expression = history[historyi-1];
+       // console.log(history);
+       // console.log(historyi);
+       // console.log(expression);
+      lines = expression.split("\n");
+    } else {
+      cursor_y = cursor_y - 1;
+      cursor_x = Math.min(cursor_x, lines[cursor_y].length);
+    }
   } else if (key.name === 'down') {
     cursor_y = Math.min(lines.length-1, cursor_y + 1);
     cursor_x = Math.min(cursor_x, lines[cursor_y].length);
@@ -58,10 +68,13 @@ process.stdin.on('keypress', (str, key) => {
     process.stdout.write("\n");
       // evaluate...
     // console.log(lines.join("\n"));
+    let expression = lines.join("\n");
     let result =
-      bubls.eval(lines.join("\n"));
+      bubls.eval(expression);
       // encodeURI(lines.join("\n"))
       // bubls.eval("1");
+    history.push(expression);
+    // console.log(history);
     console.log(result);
     lines = [""];
     cursor_x = 0;
@@ -145,6 +158,7 @@ function log(msg) {
   console.log(msg);
   process.stdout.moveCursor(0, 9);
 }
+
 
 process.stdin.resume();
 
