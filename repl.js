@@ -125,7 +125,8 @@ function parinfer(lines) {
     cursorX: cursor_x
     // Parinfer options
   });
-  return out.text.split("\n");
+  let text = out.text.replaceAll("\r", "");
+  return text.split("\n");
 }
 
 function type(sequence) {
