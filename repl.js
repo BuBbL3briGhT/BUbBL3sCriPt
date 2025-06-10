@@ -32,10 +32,10 @@ function makeHistory() {
   }
 
   this.next = function() {
-    if (i < history.length - 1) {
+    if (i < history.length) {
       return history[i++];
     } else {
-      return history[i];
+      return "";
     }
   }
 
@@ -83,7 +83,7 @@ process.stdin.on('keypress', (str, key) => {
       cursor_x = Math.min(cursor_x, lines[cursor_y].length);
     }
   } else if (key.name === 'down') {
-    if (cursor_y == lines.length) {
+    if (cursor_y == lines.length-1) {
       let expression = history.next();
       lines = expression.split("\n");
     } else {
