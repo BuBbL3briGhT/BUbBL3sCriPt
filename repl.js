@@ -179,12 +179,10 @@ function clear() {
 
 function clearLines(n) {
   for (let i = 0; i < n; i++) {
-    const y = i === 0 ? null : -1;
-    process.stdout.moveCursor(0, y);
     process.stdout.clearLine(0);
     process.stdout.cursorTo(0);
+    process.stdout.moveCursor(0, -1);
   }
-  process.stdout.clearLine(0);
 }
 
 function log(msg) {
