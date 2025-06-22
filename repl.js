@@ -60,6 +60,7 @@ process.stdin.on('keypress', (str, key) => {
       lines[cursor_y] = lines[cursor_y-1].slice(cursor_x);
       lines[cursor_y-1] = lines[cursor_y-1].slice(0, cursor_x);
       cursor_x = 0;
+      process.stdout.write("\n");
     }
   } else if (key.name === 'space') {
     type(" ");
