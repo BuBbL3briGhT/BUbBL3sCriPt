@@ -184,6 +184,7 @@ function clearLines(n) {
     process.stdout.cursorTo(0);
     process.stdout.moveCursor(0, -1);
   }
+  process.stdout.clearLine(0);
 }
 
 function log(msg) {
