@@ -23,8 +23,16 @@ const { from: listFromArray } = List;
 // sutible for use with bubblescript.
 // #coreUtilityFunction
 // TODO: Create tests for mkfn.
+// function mkfn(q) {
+//   return (p) => {
+//     console.log("dd", this);
+//     return q.call(this,
+//       p.map(m => _eval(this, m)))
+//   }
+// }
 function mkfn(q) {
-  return (p) => {
+  return function (p) {
+    console.log("dd", this);
     return q.call(this,
       p.map(m => _eval(this, m)))
   }
@@ -105,28 +113,44 @@ const rootBinding = {
   //   return xx.each(z => _eval(binding, z));
   // },
   //
+  // let: function([x,...xx]) {
+  //   var binding = Object.create(this);
+  //   x = x.invert();
+  //   // console.log(x);
+  //   // x.peek();
+  //   // debug('let', x.toString());
+  //   // while (!x.isEmpty) {
+  //   while (x) {
+  //     let k,w;
+  //     // [k,[w,x]] = x;
+  //     k = x.peek();
+  //     x = x.pop();
+  //     w = x.peek();
+  //     x = x.pop();
+  //     // console.log(x);
+  //     binding[k] = _eval(binding, w);
+  //     // console.log(binding[k]);
+  //   }
+  //   // console.log(xx);
+  //   return xx.forEach(z => _eval(binding, z));
+  //   // return xx.each(z => console.log(z));
+  // },
+  //
   let: function([x,...xx]) {
-    var binding = Object.create(this);
+    let binding = Object.create(this);
     x = x.invert();
-    // console.log(x);
-    // x.peek();
-    // debug('let', x.toString());
-    // while (!x.isEmpty) {
     while (x) {
       let k,w;
-      // [k,[w,x]] = x;
       k = x.peek();
       x = x.pop();
       w = x.peek();
       x = x.pop();
-      // console.log(x);
       binding[k] = _eval(binding, w);
-      // console.log(binding[k]);
     }
-    // console.log(xx);
-    return xx.forEach(z => _eval(binding, z));
-    // return xx.each(z => console.log(z));
+    return xx.forEach(z =>
+      _eval(binding, z));
   },
+
 
   if: function([c,t,f]) {
     return _eval(this, _eval(this, c) ? t : f);
