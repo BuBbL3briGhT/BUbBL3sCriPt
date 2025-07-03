@@ -6,3 +6,6 @@
 (puts 1234)
 (puts (+ 12 34))
 (puts "hiya")
+
+(let [a 5]
+  (console.log a))

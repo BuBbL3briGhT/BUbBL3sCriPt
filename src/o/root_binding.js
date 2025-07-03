@@ -92,13 +92,40 @@ const rootBinding = {
     }
   },
 
-  let: function([x,xx]) {
+
+  // let: function([x,xx]) {
+  //   var binding = Object.create(this);
+  //   x = x.invert();
+  //   console.log(x);
+  //   // debug('let', x.toString());
+  //   while (!x.isEmpty) {
+  //     let k,w; [k,[w,x]] = x;
+  //     binding[k] = _eval(binding, w);
+  //   }
+  //   return xx.each(z => _eval(binding, z));
+  // },
+  //
+  let: function([x,...xx]) {
     var binding = Object.create(this);
-    x = x.reverse();
+    x = x.invert();
+    // console.log(x);
+    // x.peek();
     // debug('let', x.toString());
-    while (!x.isEmpty) { let k,w; [k,[w,x]] = x;
-      binding[k] = _eval(binding, w); }
-    return xx.each(z => _eval(binding, z));
+    // while (!x.isEmpty) {
+    while (x) {
+      let k,w;
+      // [k,[w,x]] = x;
+      k = x.peek();
+      x = x.pop();
+      w = x.peek();
+      x = x.pop();
+      // console.log(x);
+      binding[k] = _eval(binding, w);
+      // console.log(binding[k]);
+    }
+    // console.log(xx);
+    return xx.forEach(z => _eval(binding, z));
+    // return xx.each(z => console.log(z));
   },
 
   if: function([c,t,f]) {
