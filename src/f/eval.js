@@ -57,7 +57,6 @@ function eVaL(bnd, xpr) {
       } else if (s instanceof Fn) {
         return s.call(bnd, pop(xpr));
       } else if (s instanceof Function) {
-        console.log(bnd, xpr);
         return s.call(bnd, pop(xpr));
       } else if (s instanceof Macro) {
         return s.call(bnd, pop(xpr));

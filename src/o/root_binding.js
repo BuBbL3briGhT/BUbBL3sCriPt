@@ -23,16 +23,8 @@ const { from: listFromArray } = List;
 // sutible for use with bubblescript.
 // #coreUtilityFunction
 // TODO: Create tests for mkfn.
-// function mkfn(q) {
-//   return (p) => {
-//     console.log("dd", this);
-//     return q.call(this,
-//       p.map(m => _eval(this, m)))
-//   }
-// }
 function mkfn(q) {
   return function (p) {
-    console.log("dd", this);
     return q.call(this,
       p.map(m => _eval(this, m)))
   }
