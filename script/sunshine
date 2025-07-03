@@ -7,6 +7,7 @@
 (puts (+ 12 34))
 (puts "hiya")
 
-(let [a 5]
+(let [a 5
+      b 7]
   (console.log (+ a a))
-  (console.log (+ a a a)))
+  (console.log (+ a b a)))
