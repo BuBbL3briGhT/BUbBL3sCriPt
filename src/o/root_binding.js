@@ -37,6 +37,11 @@ function mkfn(q) {
 //   }
 // }
 
+
+// A man walks into a bar. Bartender says
+// what'll you have?  The man says,
+// something strong,  my head is killing
+// me. 🍸
 const rootBinding = {
   console: console,
   Array: Array,
