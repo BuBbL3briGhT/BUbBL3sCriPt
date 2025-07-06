@@ -112,7 +112,6 @@ const rootBinding = {
       _eval(binding, z));
   },
 
-
   if: function([c,t,f]) {
     return _eval(this, _eval(this, c) ? t : f);
   },
@@ -129,10 +128,21 @@ const rootBinding = {
 
   list: function(args) {
     var binding = this;
-    return args.reverse().map(function(arg) {
+    return args.invert().map(function(arg) {
       return _eval(binding, arg);
-    }).reverse();
+    }).invert();
   },
+
+  // list: function(args) {
+  //   return invert(map(invert(args), arg => _eval(this, arg)));
+  // },
+  // list: function(args) {
+  //   (invert
+  //     (map (invert args)
+  //       (curry _eval this)))
+  //       (fn [arg] (_eval this arg))));
+  // },
+
   "+": mkfn(function(a) {
     return a.reduce((a,b) => a+b);
   }),
