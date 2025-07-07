@@ -30,51 +30,51 @@ if (path) {
 
 } else {
 
-  // const readline = require('readline');
-
-  // const rl = readline.createInterface({
-  //   input: process.stdin,
-  //   output: process.stdout
-  // });
-
-  // function r3pL() {
-  //   rl.question("%< ", (xoxo) => {
-  //     try {
-  //       if (xoxo == ".exit") {
-  //         rl.close();
-  //         return;
-  //       }
-  //       console.log(bubls.eval(xoxo));
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //     r3pL();
-  //   });
-  // }
-
-  // r3pL(); /* StaRt r3pL */
-
   const readline = require('readline');
-  const Parinfer = require('parinfer'); // Assuming you have the parinfer module installed
 
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   });
 
-  rl.on('line', (line) => {
-    // Use Parinfer to process the line
-    const processedLine = Parinfer.indentMode(line, { // Use indentMode or parenMode as needed
-      // Parinfer options
+  function r3pL() {
+    rl.question("%< ", (xoxo) => {
+      try {
+        if (xoxo == ".exit") {
+          rl.close();
+          return;
+        }
+        console.log(bubls.eval(xoxo));
+      } catch (error) {
+        console.log(error);
+      }
+      r3pL();
     });
+  }
 
-    // Display the processed line (or handle errors/changes)
-    console.log(processedLine);
-  });
+  r3pL(); /* StaRt r3pL */
 
-  rl.on('close', () => {
-    console.log('Readline interface closed.');
-  });
+  // const readline = require('readline');
+  // const Parinfer = require('parinfer'); // Assuming you have the parinfer module installed
+
+  // const rl = readline.createInterface({
+  //   input: process.stdin,
+  //   output: process.stdout
+  // });
+
+  // rl.on('line', (line) => {
+  //   // Use Parinfer to process the line
+  //   const processedLine = Parinfer.indentMode(line, { // Use indentMode or parenMode as needed
+  //     // Parinfer options
+  //   });
+
+  //   // Display the processed line (or handle errors/changes)
+  //   console.log(processedLine);
+  // });
+
+  // rl.on('close', () => {
+  //   console.log('Readline interface closed.');
+  // });
 
 
 }
