@@ -108,8 +108,8 @@ const rootBinding = {
       x = x.pop();
       binding[k] = _eval(binding, w);
     }
-    return xx.forEach(z =>
-      _eval(binding, z));
+    return xx.map(z =>
+      _eval(binding, z)).pop();
   },
 
   if: function([c,t,f]) {

@@ -38,6 +38,13 @@ describe("puts", function () {
   });
 });
 
+describe("let", function () {
+   it("🌊", function() {
+     assertEvalTo("(let [a 5] a)", 5);
+     assertEvalTo("(let [a 5] 3 a)", 5);
+   });
+});
+
 describe("if", function () {
    it("🫠", function() {
      assertEvalTo("(if true 1 2)", 1);
