@@ -17,4 +17,6 @@ Bubblescript.loadFile = function (path) {
   return Bubblescript.eval(fs.readFileSync(path, 'utf-8'))
 }
 
+Bubblescript.loadFile("src/bubls.bubls");
+
 module.exports = Bubblescript;

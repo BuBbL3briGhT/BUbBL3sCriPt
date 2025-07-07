@@ -1,4 +1,3 @@
-
 class Macro {
   constructor(bnd, args, body) {
     this.bnd = bnd;
@@ -13,6 +12,19 @@ class Macro {
   expand(bnd, args) {
     return invoke(bnd, this, args);
   }
+
+  toString() {
+    return "(macro " + this.args.toString() +
+      this.body.toString() + ")";
+
+
+  }
 }
 
+const invoke = require("../f/invoke");
+
 module.exports = Macro;
+
+const eval = require('../f/eval');
+const evl  = eval.eVaL;
+

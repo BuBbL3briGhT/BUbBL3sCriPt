@@ -1,10 +1,30 @@
+                                          o
+     .       .   .   .     o                 .
+     |  o    |   |   |          °      o     |
+     |-. . . |-. |-. | ,-. ,-. ,-. ;-. . ;-. |-
+     | | | | | | | | | |-' `-. |   |   | | | |
+     `-' `-` `-' `-' ' `-' `-' `-' ' ° ' |-' `-'
+                     °      o
+               o
 
-.       .   .   .                       .
-|       |   |   |                 o     |
-|-. . . |-. |-. | ,-. ,-. ,-. ;-. . ;-. |-
-| | | | | | | | | |-' `-. |   |   | | | |
-`-' `-` `-' `-' ' `-' `-' `-' '   ' |-' `-'
+## What is Bubblescript?
 
+Bubble🫧script is a
+[Clojure](https://clojure.org/)-like
+language inspired✨️ for Java☕️script.
+
+## Language Features
+  - Lisp/Javascript Hybrid
+  - Functional Programming Model
+  - Minimal Syntax
+
+## Planned Features
+  - Macro Support (Under Development)
+  - Loop & Recur functions for iteration
+  - Lazy Evaluation
+  - Tail Call Recursion Optimization
+  - Namespaces
+  - Code Libraries
 
 ## TODO
 
@@ -16,6 +36,16 @@
         passing. we need to figure out how to test
         this with Mocha.
     - See test/bin/bubls.js
+
+- The is a glitch in the way that the scripts are
+  being processed that is causing the code to be run backwards
+  from the bottom to the top. While this is an interesting
+  quirk, it should probably fixed for praticality.
+  - [x] Fix the bottom up processing glitch
+- Where is the best place to put the bubblescript code and libaries and how best to organize and load it?
+  We had some libraries strated in older versions of bubblescript be for the refactoring to use node and rewrite.
+  - [ ] Discover determine where how to organize store bubblescript code and libaries
+  - [ ] Track down and copy over old bubblescript libraries
 
 ## Project Goals
 

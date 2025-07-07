@@ -70,7 +70,7 @@ function parseTokens(tokenList) { // pArSe -> parseTokens
     }
   }
 
-  return invert(tree); // Assuming tree is built in reverse like typical with push to head // trEe -> tree
+  return tree;
 }
 
 // expectedType is the type string (e.g., '(', TOK_NUMBER)

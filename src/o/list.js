@@ -3,8 +3,8 @@ var air;
 
 class List {
 
-  static listOpenChar = "("; // SURR -> listOpenChar
-  static listCloseChar = ")"; // OUND -> listCloseChar
+  static listOpenChar = "[";
+  static listCloseChar = "]";
 
   static get air() { return air; }
   // static set air(value) {

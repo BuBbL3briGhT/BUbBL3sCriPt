@@ -7,6 +7,13 @@ const { make, count, get, invert, map,
 
 describe("List", () => {
 
+describe("toString", function () {
+  it("returns the expected string representation", function () {
+    let list = List.make(1, 2, 3);
+    assert.equal(list.toString(), "[1 2 3]");
+  });
+});
+
 describe("new List(o, oo) ", () => {
   it("create a new list for your fun and profit.", () => {
     var o;
@@ -66,10 +73,10 @@ describe("invert", () => {
     assert.equal(peek(o),1);
 
     let oo = make(1,2,3);
-    assert.equal(List.toString(oo), "(1 2 3)");
+    assert.equal(List.toString(oo), "[1 2 3]");
 
     let xo = invert(oo);
-    assert.equal(List.toString(xo), "(3 2 1)");
+    assert.equal(List.toString(xo), "[3 2 1]");
   });
 });
 
@@ -167,34 +174,34 @@ describe("toString(o)", () => {
     var o, result;
 
     result = toString(o);
-    assert.equal(result, "()");
+    assert.equal(result, "[]");
 
     o = make(1);
     result = toString(o);
-    assert.equal(result, "(1)");
+    assert.equal(result, "[1]");
 
     o = push(o,2);
     result = toString(o);
-    assert.equal(result, "(1 2)");
+    assert.equal(result, "[1 2]");
 
     o = push(o, 3);
     result = toString(o);
-    assert.equal(result, "(1 2 3)");
+    assert.equal(result, "[1 2 3]");
 
     o = push(o, "string");
     result = toString(o);
-    assert.equal(result, "(1 2 3 \"string\")");
+    assert.equal(result, "[1 2 3 \"string\"]");
 
     o = push(o, Symbol.for("symbol"));
     result = toString(o);
-    assert.equal(result, "(1 2 3 \"string\" symbol)");
+    assert.equal(result, "[1 2 3 \"string\" symbol]");
 
     let ts = toString;
     let oo = make(3,2,1);
-    assert.equal(ts(oo), "(3 2 1)");
+    assert.equal(ts(oo), "[3 2 1]");
 
     o = push(pop(pop(o)), oo);
-    assert.equal(ts(o), "(1 2 3 (3 2 1))");
+    assert.equal(ts(o), "[1 2 3 [3 2 1]]");
   });
 });
 
@@ -261,7 +268,7 @@ describe("Symbol.iterator", () => {
   it("should not modify the original list during iteration", () => {
     const list = List.make("a", "b", "c"); // c -> b -> a
     const expectedItems = ["c", "b", "a"];
-    const expectedToString = '("a" "b" "c")'; // Based on typical toString for such a list structure
+    const expectedToString = '["a" "b" "c"]'; // Based on typical toString for such a list structure
 
     // First iteration
     assert.deepEqual([...list], expectedItems, "First iteration results mismatch");

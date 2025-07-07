@@ -2,6 +2,9 @@ const List = require("./list");
 
 class Bubbles extends List {
 
+  static listOpenChar = "(";
+  static listCloseChar = ")";
+
   static make(...elements) {
     return _make(elements);
   }

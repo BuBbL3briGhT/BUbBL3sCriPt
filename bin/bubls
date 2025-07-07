@@ -5,6 +5,13 @@ const bubls = require('../src/bubls');
 
 let path = process.argv[2];
 
+if (path === "-v" || path ==="--version") {
+  const packageInfo = require('../package.json');
+  const version = packageInfo.version;
+  console.log('Bubblescript version:', version)
+  process.exit();
+}
+
 if (path) {
 
   const fs = require('fs');
@@ -23,29 +30,52 @@ if (path) {
 
 } else {
 
+  // const readline = require('readline');
+
+  // const rl = readline.createInterface({
+  //   input: process.stdin,
+  //   output: process.stdout
+  // });
+
+  // function r3pL() {
+  //   rl.question("%< ", (xoxo) => {
+  //     try {
+  //       if (xoxo == ".exit") {
+  //         rl.close();
+  //         return;
+  //       }
+  //       console.log(bubls.eval(xoxo));
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //     r3pL();
+  //   });
+  // }
+
+  // r3pL(); /* StaRt r3pL */
+
   const readline = require('readline');
+  const Parinfer = require('parinfer'); // Assuming you have the parinfer module installed
 
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   });
 
-  function r3pL() {
-    rl.question("%< ", (xoxo) => {
-      try {
-        if (xoxo == ".exit") {
-          rl.close();
-          return;
-        }
-        console.log(bubls.eval(xoxo));
-      } catch (error) {
-        console.log(error);
-      }
-      r3pL();
+  rl.on('line', (line) => {
+    // Use Parinfer to process the line
+    const processedLine = Parinfer.indentMode(line, { // Use indentMode or parenMode as needed
+      // Parinfer options
     });
-  }
 
-  r3pL(); /* StaRt r3pL */
+    // Display the processed line (or handle errors/changes)
+    console.log(processedLine);
+  });
+
+  rl.on('close', () => {
+    console.log('Readline interface closed.');
+  });
+
 
 }
 

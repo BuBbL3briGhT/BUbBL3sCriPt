@@ -24,7 +24,7 @@ const { from: listFromArray } = List;
 // #coreUtilityFunction
 // TODO: Create tests for mkfn.
 function mkfn(q) {
-  return (p) => {
+  return function (p) {
     return q.call(this,
       p.map(m => _eval(this, m)))
   }
@@ -37,6 +37,11 @@ function mkfn(q) {
 //   }
 // }
 
+
+// A man walks into a bar. Bartender says
+// what'll you have?  The man says,
+// something strong,  my head is killing
+// me. 🍸
 const rootBinding = {
   console: console,
   Array: Array,
@@ -80,8 +85,7 @@ const rootBinding = {
   }),
 
   macro: function(args) {
-    var binding = this;
-    return new Macro(binding, args.first, args.rest)
+    return new Macro(this, args.first, args.rest)
   },
 
   jsfn: function(args) {
@@ -93,13 +97,19 @@ const rootBinding = {
     }
   },
 
-  let: function([x,xx]) {
-    var binding = Object.create(this);
-    x = x.reverse();
-    // debug('let', x.toString());
-    while (!x.isEmpty) { let k,w; [k,[w,x]] = x;
-      binding[k] = _eval(binding, w); }
-    return xx.each(z => _eval(binding, z));
+  let: function([x,...xx]) {
+    let binding = Object.create(this);
+    x = x.invert();
+    while (x) {
+      let k,w;
+      k = x.peek();
+      x = x.pop();
+      w = x.peek();
+      x = x.pop();
+      binding[k] = _eval(binding, w);
+    }
+    return xx.forEach(z =>
+      _eval(binding, z));
   },
 
   if: function([c,t,f]) {
@@ -118,10 +128,21 @@ const rootBinding = {
 
   list: function(args) {
     var binding = this;
-    return args.reverse().map(function(arg) {
+    return args.invert().map(function(arg) {
       return _eval(binding, arg);
-    }).reverse();
+    }).invert();
   },
+
+  // list: function(args) {
+  //   return invert(map(invert(args), arg => _eval(this, arg)));
+  // },
+  // list: function(args) {
+  //   (invert
+  //     (map (invert args)
+  //       (curry _eval this)))
+  //       (fn [arg] (_eval this arg))));
+  // },
+
   "+": mkfn(function(a) {
     return a.reduce((a,b) => a+b);
   }),
@@ -215,3 +236,48 @@ module.exports = rootBinding;
 const eval = require("../f/eval");
 const _eval = eval.eVaL;
 
+
+(function() {
+  let bnd = rootBinding;
+  let evl = _eval;
+
+  function list(...args) {
+    return Bubbles.from(args);
+  }
+  function glider(...args) {
+    return List.from(args);
+  }
+
+  function quote(m) {
+    return new Bubble(m);
+  }
+
+   let _push = new Symbol('push'),
+       fn = new Symbol('fn'),
+       a = new Symbol('a'),
+       b = new Symbol('b'),
+       send = new Symbol('send'),
+       mufn = new Symbol('mufn'),
+       macro = new Symbol('macro'),
+       name = new Symbol('name'),
+       amp = new Symbol('&'),
+       z = new Symbol('z'),
+      _list = new Symbol('list'),
+      _muf = new Symbol('muf');
+
+    function muf(...args) {
+      // return _eval(bnd, arry.toList(args).push(_muf));
+      return _eval(bnd, Bubbles.from(args).push(_muf));
+    }
+
+    // muf push (fn [a b] (send a 'push b))
+    muf(_push, list(fn, glider(a, b),
+         list(send, a, quote(_push), b)));
+
+    // (muf mufn (macro [name & z]
+    //     (list 'muf name (push z 'fn))))
+    muf(mufn, list(macro, glider(name,amp,z),
+        list(_list,quote(_muf), name,
+           list(_push, z, quote(fn)))));
+
+})();

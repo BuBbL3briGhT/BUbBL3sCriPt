@@ -1,2 +1,13 @@
+June
+- -v --version for command bubls
+- Make Repl Function
+  - Options for repl
+
+May
 - Automatic invokation
 - Parinfer for repl
+- toString for macro
+  - As a user, i should be be able to get the
+    string representation of a macro by
+    sending the toString message to a macro
+    object.
