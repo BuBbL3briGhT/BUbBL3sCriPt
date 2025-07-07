@@ -42,6 +42,8 @@ describe("let", function () {
    it("🌊", function() {
      assertEvalTo("(let [a 5] a)", 5);
      assertEvalTo("(let [a 5] 3 a)", 5);
+     assertEvalTo("(let [a 5 b 4] (+ a b))", 9);
+     assertEvalTo("(let [a 5 b (* a 3)] (+ a b))", 20);
    });
 });
 
