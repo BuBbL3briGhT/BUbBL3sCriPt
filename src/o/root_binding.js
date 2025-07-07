@@ -24,7 +24,7 @@ const { from: listFromArray } = List;
 // #coreUtilityFunction
 // TODO: Create tests for mkfn.
 function mkfn(q) {
-  return (p) => {
+  return function (p) {
     return q.call(this,
       p.map(m => _eval(this, m)))
   }
@@ -37,6 +37,11 @@ function mkfn(q) {
 //   }
 // }
 
+
+// A man walks into a bar. Bartender says
+// what'll you have?  The man says,
+// something strong,  my head is killing
+// me. 🍸
 const rootBinding = {
   console: console,
   Array: Array,
@@ -92,13 +97,19 @@ const rootBinding = {
     }
   },
 
-  let: function([x,xx]) {
-    var binding = Object.create(this);
-    x = x.reverse();
-    // debug('let', x.toString());
-    while (!x.isEmpty) { let k,w; [k,[w,x]] = x;
-      binding[k] = _eval(binding, w); }
-    return xx.each(z => _eval(binding, z));
+  let: function([x,...xx]) {
+    let binding = Object.create(this);
+    x = x.invert();
+    while (x) {
+      let k,w;
+      k = x.peek();
+      x = x.pop();
+      w = x.peek();
+      x = x.pop();
+      binding[k] = _eval(binding, w);
+    }
+    return xx.forEach(z =>
+      _eval(binding, z));
   },
 
   if: function([c,t,f]) {
@@ -117,10 +128,21 @@ const rootBinding = {
 
   list: function(args) {
     var binding = this;
-    return args.reverse().map(function(arg) {
+    return args.invert().map(function(arg) {
       return _eval(binding, arg);
-    }).reverse();
+    }).invert();
   },
+
+  // list: function(args) {
+  //   return invert(map(invert(args), arg => _eval(this, arg)));
+  // },
+  // list: function(args) {
+  //   (invert
+  //     (map (invert args)
+  //       (curry _eval this)))
+  //       (fn [arg] (_eval this arg))));
+  // },
+
   "+": mkfn(function(a) {
     return a.reduce((a,b) => a+b);
   }),
