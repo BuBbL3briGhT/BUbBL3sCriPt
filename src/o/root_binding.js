@@ -12,7 +12,7 @@ const Bubble  = require("../o/bubble");
 const { map, peek, pop, push, toArray } =
   Bubbles;
 
-const { from: listFromArray } = List;
+const { from: listFromArray, push: listPush } = List;
 
 // Makes a Bubblescript function from a
 // Javascript function.
@@ -231,7 +231,99 @@ const rootBinding = {
     } while(recurCalled);
     return m;
   },
+
+  loop: function([x,xx]) {
+    var binding = Object.create(this),
+      cnd = binding,
+      keys, m, recurCalled;
+
+    x = x.reverse();
+    // console.log('loop', x.toString());
+    while (x) {
+      let k,v;
+      k = x.peek();
+      x = x.pop();
+      v = x.peek();
+      x = x.pop();
+      keys = listPush(keys, k);
+      binding[k] = _eval(binding, v);
+    }
+
+    // keys = keys.reverse()
+    // console.log('loop keys', keys);
+
+    binding.recur = mkfn(function(a) {
+      var b = keys,
+          c = Object.create(binding);
+
+      a = invert(a);
+
+      while(a && b) {
+        let key, val;
+        [key, b] = b;
+        [val, a] = a;
+        c[key] = val;
+      }
+      recurCalled = true;
+      return c;
+    })
+
+    do {
+      recurCalled = false;
+      m = xx.each(z => _eval(cnd, z));
+      if (recurCalled) {
+        cnd = m;
+      }
+    } while(recurCalled);
+    return m;
+  },
+
+  loop: function([x, xx]) {
+    var binding = Object.create(this),
+      cnd = binding,
+      keys, m, recurCalled;
+
+    x = invert(x);
+    while (x) {
+      let k,v;
+      k = x.peek();
+      x = x.pop();
+      v = x.peek();
+      x = x.pop();
+      keys = listPush(keys, k);
+      binding[k] = _eval(binding, v);
+    }
+
+    binding.recur = mkfn(function(a) {
+      var b = keys,
+
+      a = invert(a);
+
+      while(a && b) {
+        let key, val;
+        [key, b] = b;
+        [val, a] = a;
+        c[key] = val;
+      }
+      recurCalled = true;
+      return c;
+    })
+
+    do {
+      recurCalled = false;
+      m = xx.each(z => _eval(cnd, z));
+      if (recurCalled) {
+        cnd = m;
+      }
+    } while(recurCalled);
+    return m;
+  },
 }
+
+// (loop [a 0]
+//   (puts a)
+//   (unless (> a 5)
+//     (recur [a (+ a 1)])))
 
 module.exports = rootBinding;
 
