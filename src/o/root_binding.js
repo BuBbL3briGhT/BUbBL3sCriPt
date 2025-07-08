@@ -117,19 +117,10 @@ const rootBinding = {
       _eval(this, c) ? t : f);
   },
 
-  // unless: function([u,v,w]) {
-  //   return _eval(this,
-  //     ! _eval(this, u) ? v : w);
-  // },
-
   unless: function([c,f,t]) {
     return _eval(this,
       _eval(this, c) ? t : f);
   },
-
-  // unless: function(...args) {
-  //   return !this.if(...args);
-  // },
 
   print: mkfn(function(vals) {
     return vals.each(function(value) {
