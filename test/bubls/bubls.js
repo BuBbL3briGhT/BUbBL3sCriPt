@@ -49,7 +49,10 @@ describe("loop", function () {
     sinon.restore();
   });
   it("loops", function () {
-    eval('(loop [a 0] (puts a) (unless (> a 5) (recur [a (+ a 1)])))');
+    eval('(loop [a 0] ' +
+            '(puts a) ' +
+            '(unless (> a 5) ' +
+              '(recur [a (+ a 1)])))');
     assert(console.log.calledWith(0));
     assert(console.log.calledWith(1));
     assert(console.log.calledWith(2));
