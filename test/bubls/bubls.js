@@ -38,6 +38,28 @@ describe("puts", function () {
   });
 });
 
+
+
+describe("loop", function () {
+  before(function () {
+    sinon.replace(console, "log",
+      sinon.fake());
+  });
+  after(function () {
+    sinon.restore();
+  });
+  it("loops", function () {
+    eval('(loop [a 0] (puts a) (unless (> a 5) (recur [a (+ a 1)])))');
+    assert(console.log.calledWith(0));
+    assert(console.log.calledWith(1));
+    assert(console.log.calledWith(2));
+    assert(console.log.calledWith(3));
+    assert(console.log.calledWith(4));
+    assert(console.log.calledWith(5));
+    assert(console.log.calledWith(6));
+  });
+});
+
 describe("let", function () {
    it("🌊", function() {
      assertEvalTo("(let [a 5] a)", 5);
