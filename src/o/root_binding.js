@@ -12,7 +12,7 @@ const Bubble  = require("../o/bubble");
 const { map, peek, pop, push, toArray } =
   Bubbles;
 
-const { from: listFromArray, push: listPush } = List;
+const { from: listFromArray, push: listPush} = List;
 
 // Makes a Bubblescript function from a
 // Javascript function.
@@ -278,52 +278,41 @@ const rootBinding = {
     return m;
   },
 
-  loop: function([x, xx]) {
+  loop: function([x,...xx]) {
     var binding = Object.create(this),
-      cnd = binding,
-      keys, m, recurCalled;
+      m, recurCalled;
 
-    x = invert(x);
+    x = x.invert();
     while (x) {
       let k,v;
       k = x.peek();
       x = x.pop();
       v = x.peek();
       x = x.pop();
-      keys = listPush(keys, k);
       binding[k] = _eval(binding, v);
     }
 
-    binding.recur = mkfn(function(a) {
-      var b = keys,
-
-      a = invert(a);
-
-      while(a && b) {
-        let key, val;
-        [key, b] = b;
-        [val, a] = a;
-        c[key] = val;
+    binding.recur = function([a]) {
+      a = a.invert();
+      while (a) {
+        let k,w;
+        k = a.peek();
+        a = a.pop();
+        w = a.peek();
+        a = a.pop();
+        binding[k] = _eval(binding, w);
       }
       recurCalled = true;
-      return c;
-    })
+    };
 
     do {
       recurCalled = false;
-      m = xx.each(z => _eval(cnd, z));
-      if (recurCalled) {
-        cnd = m;
-      }
+      m = xx.map(z =>
+        _eval(binding, z)).pop();
     } while(recurCalled);
     return m;
-  },
+  }
 }
-
-// (loop [a 0]
-//   (puts a)
-//   (unless (> a 5)
-//     (recur [a (+ a 1)])))
 
 module.exports = rootBinding;
 

@@ -11,3 +11,8 @@
       b 7]
   (console.log (+ a a))
   (console.log (+ a b a)))
+
+(loop [a 0]
+  (puts a)
+  (unless (> a 5)
+    (recur [a (+ a 1)])))
