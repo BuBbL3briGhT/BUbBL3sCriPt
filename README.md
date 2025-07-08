@@ -67,25 +67,6 @@ language inspired✨️ for Java☕️script.
     has devised such devices in orde😊r to
     fluentl💜y f😲low and grove and hum
     🫏along their merry way.
-- Loop & Recurrrrrr
-  - We want to get dem loop and recurrrrr
-    function🙊s happening. We don't have
-    them yet AFAiK, but th🙃💜ey need to be
-    on our hit li👀st. These
-    function🧓🏿💤🫀🩵💋 dep🥲end on the
-    immu👄tablity factors discussed above,
-    so we are still 🖖🏿ham💚mering out the
-    d🤗eets with al😋l of th💕a🖤t right
-    😁now. We are trying to widdle down
-    t💖he cor💙🦴e of the code💞 base🫠 t💨o
-    👀the 🤑💥essesnce of what is needed to
-    make it happen sorta licking a thin
-    layer of 🫦del💌icious ov✌🏿er a
-    delicious Javas🫁crpit cake. Lofty
-    go🩷als, but hopegully n😉o🧠t too😝
-    loa🧡fty. W😚e'll see.  Hopefully we
-    will have these working sooner than we👂
-    know it.
 - Macros
   - Bubblescript nee🩵ds Macro support don't
     you agree? Yes! Yippee! ithink so too.
@@ -100,6 +81,12 @@ language inspired✨️ for Java☕️script.
     enough about goals and sucg for now, im
     getting über carried away with 👉all
     these😺.
+
+## News
+  - You can now use let and loop and
+    recur. These functions are probably
+    quite niave, but are working well for
+    the basic use cases so far.
 
 ## Dev Setup
 
@@ -116,6 +103,35 @@ language inspired✨️ for Java☕️script.
     undefined
     %< .exit
     $
+
+## Examples
+
+**Some math**
+
+    (+ 1 2)
+    (+ 1 2 3)
+    (- 5 2)
+    (/ 8 2)
+    (* 7 8 9)
+
+**Create a function**
+
+    (mufn coolbeans [beans]
+      (puts beans))
+
+    (coolbeans "yes!")
+
+**Setting locals**
+
+    (let [luckynumber 777]
+      (puts luckynumber))
+
+**Looping**
+
+    (loop [i 0]
+      (puts "🥰")
+      (if (< i 3)
+        (recur [i (+ i 1)])))
 
 ## Tips
 
