@@ -105,9 +105,15 @@ function match_bubbles(tokenList) {
   // console.log("tokenList", tokenList);
 
   while (peek(tokenList) && peek(tokenList).type != '(') {
-    // Pass closingParenToken as context for EOF errors when expecting an item for this bubbles.
-    [tokenList, item] = match_item(tokenList, closingParenToken); // iTem -> item
-    list = push(list, item); // Items are pushed in reverse order, inverted later // lisT -> list, iTem -> item
+    if(peek(tokenList).type === "°") {
+      tokenList = Bubbles.pop(tokenList);
+      list = Bubbles.push(Bubbles.pop(list),
+        new Bubble(Bubbles.peek(list)))
+    } else {
+      // Pass closingParenToken as context for EOF errors when expecting an item for this bubbles.
+      [tokenList, item] = match_item(tokenList, closingParenToken); // iTem -> item
+      list = push(list, item); // Items are pushed in reverse order, inverted later // lisT -> list, iTem -> item
+    }
   }
 
   // console.log(list);
