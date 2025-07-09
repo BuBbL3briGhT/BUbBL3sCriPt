@@ -46,6 +46,12 @@ const rootBinding = {
   console: console,
   Array: Array,
   null: null,
+  Bubbles: Bubbles,
+  List: List,
+
+  peek: peek,
+  push: push,
+  pop: pop,
 
   muf: function([key,val]) {
     return this[key.toString()]

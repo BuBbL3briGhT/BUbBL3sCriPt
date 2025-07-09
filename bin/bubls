@@ -46,7 +46,14 @@ if (path) {
         }
         let result = bubls.eval(xoxo);
         if (result && result.toString) {
-          console.log(result.toString());
+          // console.log(result);
+          try {
+            console.log(result.toString());
+          } catch (error) {
+            console.log(error);
+            console.log("Error rendering with toString on result, falling back.");
+            console.log(result);
+          }
         } else {
           console.log(result);
         }

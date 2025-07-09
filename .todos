@@ -5,6 +5,12 @@ July
 - better pretty printing objects in repl
 - document/integrate multiline repl
 - lazy evaluation, research proof of concept
+- Need to use empty lists and empty
+  bubbles to make them object oriented
+  again and get the best of both worlds by
+  using a funtion which sends the message
+  to the object, i.e. push, set
+  root_binding
 
 June
 - -v --version for command bubls
