@@ -193,7 +193,8 @@ describe("skip(list, count)", () => {
 
 describe("toString(o)", () => {
   it("formats list as a string.", () => {
-    var o, result;
+    var o = List.make(),
+      result;
 
     result = toString(o);
     assert.equal(result, "[]");
