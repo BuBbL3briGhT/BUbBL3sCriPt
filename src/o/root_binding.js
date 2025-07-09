@@ -61,7 +61,7 @@ const rootBinding = {
   //   return new Fn(this, caret, stic);
   // },
   fn: function(_) {
-    console.log(_);
+    // console.log(_);
     let binding = this;
     let caret = _.peek();
     let stic  = _.pop();
