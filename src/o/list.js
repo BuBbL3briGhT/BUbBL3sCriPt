@@ -176,6 +176,7 @@ const {count, conj, each, get, invert,
 class EmptyList {
   get isEmpty() { return true; }
   *[Symbol.iterator]() { }
+  toString() { return "[]"; }
 }
 
 emptyList = new EmptyList()
