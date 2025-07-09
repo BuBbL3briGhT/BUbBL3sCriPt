@@ -157,7 +157,7 @@ class List {
     // EmptiLyst (which is List.air) has an accessor `get x() { return true; }`
     // Regular List nodes have `get x() { return false; }`
     // So, iterate as long as the current node is not an EmptiLyst.
-    while (currentNode && !currentNode.x) {
+    while (currentNode && !currentNode.isEmpty) {
       yield currentNode.o;
       currentNode = currentNode.oo;
     }
