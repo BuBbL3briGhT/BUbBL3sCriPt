@@ -107,33 +107,31 @@ class List {
   }
 
   static map(o, fn) {
-    if (!o.isEmpty)
-      return new List(fn(o.o),
-        map(o.oo, fn));
+    if (o.isEmpty) return o;
+    return new List(fn(o.o),
+      map(o.oo, fn));
   }
 
   static reduce(o, fn, memo) {
-    if (!o.isEmpty) {
-      let oo = pop(o);
-      if (oo)
-        if (memo !== undefined)
-          return reduce(oo, fn,
-            fn(memo, peek(o)))
-        else
-          return reduce(oo, fn, peek(o));
-      else if(memo !== undefined)
-        return fn(memo, peek(o));
+    if (o.isEmpty) return memo;
+
+    let oo = pop(o);
+    if (oo)
+      if (memo !== undefined)
+        return reduce(oo, fn,
+          fn(memo, peek(o)))
       else
-        return peek(o);
-    } else
-      return memo;
+        return reduce(oo, fn, peek(o));
+    else if(memo !== undefined)
+      return fn(memo, peek(o));
+    else
+      return peek(o);
   }
 
   static each(o, fn) {
     let oo = fn(peek(o));
-    if (!pop(o).isEmpty)
-      return each(pop(o), fn);
-    return oo;
+    if (pop(o).isEmpty) return oo;
+    return each(pop(o), fn);
   }
 
   //// Members Only ¥ ////

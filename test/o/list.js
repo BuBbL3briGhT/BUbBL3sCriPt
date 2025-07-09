@@ -103,12 +103,12 @@ describe("invert", () => {
 
 describe("map(o, fn)", () => {
   it("maps o through fn", ()=>{
-    var o;
+    var o = List.make();
 
     let add7 = (o) => { return o + 7 };
 
     result = map(o, add7);
-    assert.equal(result, undefined);
+    assert.equal(result, List.emptyList);
 
     o = make(1);
     o = map(o, add7);
