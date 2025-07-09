@@ -144,7 +144,8 @@ describe("push(o)", () => {
 
 describe("reduce", () => {
   it("reduces the list", () => {
-    var o, result;
+    var o = List.make(),
+        result;
 
     let add = (a,b) => { return b + a };
 
