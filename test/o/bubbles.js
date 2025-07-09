@@ -23,7 +23,7 @@ describe("new Bubbles(o, oo) ", () => {
 
 describe("make(o...)", () => {
   it("makes bubbles", () => {
-    assert.equal(make(), undefined);
+    assert.equal(make(), Bubbles.emptyBubbles);
     let o = make(1, 2, 3);
     assert.equal(get(o,0), 1);
     assert.equal(get(o,1), 2);
