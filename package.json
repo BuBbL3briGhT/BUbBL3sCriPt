@@ -4,6 +4,9 @@
   "scripts": {
     "test": "mocha ./test/**/*.js"
   },
+  "bin": {
+    "bubls": "bin/bubls"
+  },
   "dependencies": {
     "debounce": "^2.2.0",
     "parinfer": "^3.13.1",
