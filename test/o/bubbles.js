@@ -111,7 +111,8 @@ describe("push(o)", () => {
 
 describe("reduce", () => {
   it("reduces the bubbles", () => {
-    var o, result;
+    var o = Bubbles.make(),
+      result;
 
     let add = (a,b) => { return b + a };
 
