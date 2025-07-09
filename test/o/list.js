@@ -128,17 +128,17 @@ describe("map(o, fn)", () => {
 });
 
 describe("push(o)", () => {
-  it("pushes o onto the list stack.", () => {
-    var o;
+  it("pushes o onto the list.", () => {
+    var o = List.make();
 
     o = push(o, 1);
     assert.equal(get(o), 1)
-    assert.equal(skip(o, 1), undefined);
+    assert.equal(skip(o, 1), List.emptyList);
 
     o = push(o, 2);
     assert.equal(get(o), 2)
     assert.equal(get(o, 1), 1)
-    assert.equal(skip(o, 2), undefined);
+    assert.equal(skip(o, 2), List.emptyList);
   });
 });
 
