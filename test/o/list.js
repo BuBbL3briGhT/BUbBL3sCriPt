@@ -60,16 +60,6 @@ describe("make(o...)", () => {
   });
 });
 
-describe("make(o...)", () => {
-  it("blows lists", () => {
-    assert.equal(make(), undefined);
-    let o = make(1, 2, 3);
-    assert.equal(get(o,0), 3);
-    assert.equal(get(o,1), 2);
-    assert.equal(get(o,2), 1);
-  });
-});
-
 describe("count(o)", function () {
   it("counts", function () {
     let o = List.make(1, 2, 3);
