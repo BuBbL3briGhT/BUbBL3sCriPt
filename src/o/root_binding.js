@@ -106,7 +106,7 @@ const rootBinding = {
   let: function([x,...xx]) {
     let binding = Object.create(this);
     x = x.invert();
-    while (x) {
+    while (!x.isEmpty) {
       let k,w;
       k = x.peek();
       x = x.pop();
@@ -205,7 +205,7 @@ const rootBinding = {
       m, recurCalled;
 
     x = x.invert();
-    while (x) {
+    while (!x.isEmpty) {
       let k,v;
       k = x.peek();
       x = x.pop();
@@ -216,7 +216,7 @@ const rootBinding = {
 
     binding.recur = function([a]) {
       a = a.invert();
-      while (a) {
+      while (!a.isEmpty) {
         let k,w;
         k = a.peek();
         a = a.pop();
