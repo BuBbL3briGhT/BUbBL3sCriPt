@@ -89,9 +89,14 @@ class Bubbles extends List {
 
 }
 
+
+// These are static methods, ensure they
+// are used as .map, Bubbles.push etc.
+// if needed inside instance methods, or
+// this is fine if they are standalone
+// pure functions from LynktLyst.
 const { map, push, reduce, toString,
-  pop, peek, make } = // These are static methods, ensure they are used as .map, Bubbles.push etc. if needed inside instance methods, or this is fine if they are standalone pure functions from LynktLyst.
-  Bubbles;
+        pop, peek, make } = Bubbles;
 
 
 function _make(elementsArray, currentList=emptyBubbles) {

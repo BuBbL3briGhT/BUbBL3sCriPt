@@ -41,15 +41,13 @@ describe("get(o, index)", () => {
 });
 
 describe("invert", () => {
-  it.only("inverts bubbles", () => {
+  it("inverts bubbles", () => {
     var o = Bubbles.make();
     o = invert(o);
     assert.equal(o, Bubbles.emptyBubbles);
 
     o = make(1);
-    console.log(o);
     o = invert(o);
-    console.log(o);
     assert.equal(peek(o),1);
     assert.equal(skip(o,1), Bubbles.emptyBubbles);
 
