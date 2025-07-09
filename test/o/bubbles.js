@@ -95,17 +95,17 @@ describe("map(o, fn)", () => {
 
 describe("push(o)", () => {
   it("pushes o onto the bubbles.", () => {
-    var o;
+    var o = Bubbles.make();
 
     o = push(o, 1);
     assert.equal(get(o), 1)
-    assert.equal(skip(o, 1), undefined);
+    assert.equal(skip(o, 1), Bubbles.emptyBubbles);
     console.log(typeof o);
 
     o = push(o, 2);
     assert.equal(get(o), 2)
     assert.equal(get(o, 1), 1)
-    assert.equal(skip(o, 2), undefined);
+    assert.equal(skip(o, 2), Bubbles.emptyBubbles);
   });
 });
 
