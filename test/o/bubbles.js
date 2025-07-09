@@ -69,7 +69,7 @@ describe("invert", () => {
 
 describe("map(o, fn)", () => {
   it("maps o through fn", ()=>{
-    var o;
+    var o = Bubbles.make();
 
     let add7 = (o) => { return o + 7 };
 
