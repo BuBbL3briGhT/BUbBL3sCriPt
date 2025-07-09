@@ -7,6 +7,17 @@ const { make, count, get, invert, map,
 
 describe("List", () => {
 
+describe("isEmpty", function () {
+  it("should return true for an empty list", function () {
+    let list = List.make();
+    assert.equal(list.isEmpty, true);
+  });
+  it("should return false for a none empty list", function () {
+    let list = List.make(1);
+    assert.equal(list.isEmpty, false);
+  });
+});
+
 describe("toString", function () {
   it("returns the expected string representation", function () {
     let list = List.make(1, 2, 3);
@@ -26,6 +37,16 @@ describe("new List(o, oo) ", () => {
     o = new List(2, o);
     assert.equal(get(o), 2);
     assert.equal(get(o,1), 1);
+  });
+});
+
+describe("make(o...)", () => {
+  it("blows lists", () => {
+    assert.equal(make(), undefined);
+    let o = make(1, 2, 3);
+    assert.equal(get(o,0), 3);
+    assert.equal(get(o,1), 2);
+    assert.equal(get(o,2), 1);
   });
 });
 
@@ -207,7 +228,7 @@ describe("toString(o)", () => {
 
 describe("Symbol.iterator", () => {
   it("should not yield any values for an empty list (List.air)", () => {
-    const emptyList = List.air;
+    const emptyList = List.emptyList;
     const results = [...emptyList];
     assert.deepEqual(results, []);
 

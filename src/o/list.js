@@ -1,21 +1,14 @@
 
-var air;
+let emptyList;
 
 class List {
 
   static listOpenChar = "[";
   static listCloseChar = "]";
 
-  static get air() { return air; }
-  // static set air(value) {
-  //   switch (Math.trunc(Math.random() * 3)) {
-  //     case 0: throw new Error("You'rE tryiNg to overwrite List.air, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?");
-  //     case 1: throw new Error("👋 TheSe arE noT the dRoiDs yoU are LooKing for.");
-  //     case 2: throw new Error("http://youtu.be/otCpCn0l4Wo");
-  //   }
-  // };
+  static get emptyList() { return emptyList; }
 
-  get x() { return false; }
+  get isEmpty() { return false; }
   get first() { return peek(this); }
   get rest() { return pop(this); }
   get next() { return peek(pop(this)); }
@@ -29,7 +22,7 @@ class List {
   }
 
   static make(...elements) { // oo -> elements
-    var listHead; // ooo -> listHead
+    var listHead = emptyList; // ooo -> listHead
     for (let o of elements) // oo -> elements
       listHead = new List(o, listHead); // ooo -> listHead
     return listHead; // ooo -> listHead
@@ -120,7 +113,7 @@ class List {
     if (o) {
       let oo = pop(o);
       if (oo)
-        if (memo !==  undefined)
+        if (memo !== undefined)
           return reduce(oo, fn,
             fn(memo, peek(o)))
         else
@@ -180,9 +173,9 @@ const {count, conj, each, get, invert,
   skip, toArray } = List
 
 class EmptyList extends List {
-  get x() { return true; }
+  get isEmpty() { return true; }
 }
 
-air = new EmptyList()
+emptyList = new EmptyList()
 
 module.exports = List;

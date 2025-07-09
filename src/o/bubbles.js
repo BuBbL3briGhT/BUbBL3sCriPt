@@ -75,13 +75,19 @@ const { map, push, reduce, toString } = // These are static methods, ensure they
 
 
 function _make(elementsArray, currentList) {
-  if (elementsArray.length < 1) return currentList;
-  return _make(elementsArray, new Bubbles(elementsArray.pop(), currentList));
+  if (elementsArray.length < 1)
+    return currentList;
+  return _make(elementsArray,
+    new Bubbles(elementsArray.pop(),
+      currentList));
 }
 
 function _blow(elementsArray, currentList) {
-  if (elementsArray.length < 1) return currentList;
-  return _blow(elementsArray, new Bubbles(elementsArray.pop(), currentList));
+  if (elementsArray.length < 1)
+    return currentList;
+  return _blow(elementsArray,
+    new Bubbles(elementsArray.pop(),
+      currentList));
 }
 
 module.exports = Bubbles;
