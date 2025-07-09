@@ -290,10 +290,10 @@ describe("Parser Structure and Edge Case Tests", () => {
     assert.deepEqual(ast, expected, "AST for single atom symbol");
   });
 
-  it.skip("parses a single atom number correctly", () => {
+  it("parses a single atom number correctly", () => {
     const ast = parse("123");
     // parse("123") returns a list containing one number: (123)
-    const expected = makeList(123);
+    const expected = makeBubbles(123);
     assert.deepEqual(ast, expected, "AST for single atom number");
   });
 
