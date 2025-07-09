@@ -45,8 +45,8 @@ class List {
     return new List(element, list); // o -> element, oo -> list
   }
 
-  static peek(o) { return !o.isEmpty && o.o; }
-  static pop(o) { return !o.isEmpty && o.oo; }
+  static peek(o) { return o.o; }
+  static pop(o) { return o.oo; }
 
   static count(o) {
     return reduce(o, (count) => {
