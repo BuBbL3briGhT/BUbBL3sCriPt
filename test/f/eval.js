@@ -30,9 +30,9 @@ describe("eval(script)", function () {
     assert(console.log.calledWith("Bonjour Marbre"));
   });
 
-  it.only("evaluates a vector with ease", function () {
+  it("evaluates a vector with ease", function () {
     let result = eval("[1 2 3]");
-    console.log(result);
+    // console.log(result);
     assert(result instanceof List);
   });
 
