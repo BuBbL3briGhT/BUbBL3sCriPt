@@ -130,7 +130,7 @@ const rootBinding = {
 
   list: function(args) {
     var binding = this;
-    return args.invert().map(function(arg) {
+    return args.map(function(arg) {
       return _eval(binding, arg);
     }).invert();
   },

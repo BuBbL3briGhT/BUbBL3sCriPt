@@ -44,7 +44,12 @@ if (path) {
           rl.close();
           return;
         }
-        console.log(bubls.eval(xoxo));
+        let result = bubls.eval(xoxo);
+        if (result && result.toString) {
+          console.log(result.toString());
+        } else {
+          console.log(result);
+        }
       } catch (error) {
         console.log(error);
       }

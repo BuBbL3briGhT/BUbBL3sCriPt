@@ -1,3 +1,4 @@
+const Symbol = require("./symbol");
 
 class Fn {
 

@@ -1,3 +1,11 @@
+July
+- Update to use new es6 import
+- namespaces
+- pop, push in bubblescript
+- better pretty printing objects in repl
+- document/integrate multiline repl
+- lazy evaluation, research proof of concept
+
 June
 - -v --version for command bubls
 - Make Repl Function
