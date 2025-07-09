@@ -31,6 +31,16 @@ class Bubbles extends List {
     return new Bubbles(element, list); // o -> element, oo -> list
   }
 
+  static invert(o) {
+    if (o.isEmpty)
+      return o;
+
+    // oo (accumulator), o (currentElement)
+    return reduce(pop(o),
+      (accumulator, currentElement) => {
+        return push(accumulator, currentElement);
+      }, make(peek(o)));
+  }
 
   static map(o, fn) {
     if (!o.isEmpty)
@@ -79,11 +89,12 @@ class Bubbles extends List {
 
 }
 
-const { map, push, reduce, toString } = // These are static methods, ensure they are used as .map, Bubbles.push etc. if needed inside instance methods, or this is fine if they are standalone pure functions from LynktLyst.
+const { map, push, reduce, toString,
+  pop, peek, make } = // These are static methods, ensure they are used as .map, Bubbles.push etc. if needed inside instance methods, or this is fine if they are standalone pure functions from LynktLyst.
   Bubbles;
 
 
-function _make(elementsArray, currentList) {
+function _make(elementsArray, currentList=emptyBubbles) {
   if (elementsArray.length < 1)
     return currentList;
   return _make(elementsArray,
@@ -91,7 +102,7 @@ function _make(elementsArray, currentList) {
       currentList));
 }
 
-function _blow(elementsArray, currentList) {
+function _blow(elementsArray, currentList=emptyBubbles) {
   if (elementsArray.length < 1)
     return currentList;
   return _blow(elementsArray,
