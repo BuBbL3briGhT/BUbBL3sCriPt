@@ -12,7 +12,7 @@ class List {
   get first() { return peek(this); }
   get rest() { return pop(this); }
   get next() { return peek(pop(this)); }
-  get last() { return pop(this) ?
+  get last() { return !pop(this).isEmpty ?
       pop(this).last : peek(this); }
 
   // Create a list.
@@ -45,8 +45,8 @@ class List {
     return new List(element, list); // o -> element, oo -> list
   }
 
-  static peek(o) { return o && o.o; }
-  static pop(o) { return o && o.oo; }
+  static peek(o) { return !o.isEmpty && o.o; }
+  static pop(o) { return !o.isEmpty && o.oo; }
 
   static count(o) {
     return reduce(o, (count) => {
@@ -59,7 +59,7 @@ class List {
   }
 
   static invert(o) {
-    if (o)
+    if (!o.isEmpty)
       // oo (accumulator), o (currentElement)
       return reduce(pop(o), (accumulator, currentElement) => {
         return push(accumulator, currentElement);
@@ -74,7 +74,7 @@ class List {
   }
 
   static toString(o) {
-    if (!o) return this.listOpenChar + this.listCloseChar; // SURR -> listOpenChar, OUND -> listCloseChar
+    if (o.isEmpty) return this.listOpenChar + this.listCloseChar; // SURR -> listOpenChar, OUND -> listCloseChar
 
     let format = (o) => {
       switch (typeof o) {
@@ -104,13 +104,13 @@ class List {
   }
 
   static map(o, fn) {
-    if (o)
+    if (!o.isEmpty)
       return new List(fn(o.o),
         map(o.oo, fn));
   }
 
   static reduce(o, fn, memo) {
-    if (o) {
+    if (!o.isEmpty) {
       let oo = pop(o);
       if (oo)
         if (memo !== undefined)
@@ -128,7 +128,7 @@ class List {
 
   static each(o, fn) {
     let oo = fn(peek(o));
-    if (pop(o))
+    if (!pop(o).isEmpty)
       return each(pop(o), fn);
     return oo;
   }

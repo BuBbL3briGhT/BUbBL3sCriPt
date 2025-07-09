@@ -5,7 +5,17 @@ const { make, count, get, invert, map,
   peek, pop, push, reduce, skip, toString
 } = List;
 
+
 describe("List", () => {
+
+describe("emptyList", function () {
+  describe("toString", function () {
+    it("should return a formatted string representation of an empty list", function () {
+      let emptyList = List.emptyList
+      assert.equal(emptyList.toString(), "[]");
+    });
+  });
+});
 
 describe("isEmpty", function () {
   it("should return true for an empty list", function () {
