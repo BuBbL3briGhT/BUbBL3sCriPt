@@ -121,7 +121,8 @@ function match_bubbles(tokenList) {
 
 // tokenList is the current list of token objects
 function match_list(tokenList) {
-  let list, item, closingBracketToken, openingBracketToken; // lisT -> list, iTem -> item
+  let list = List.emptyList,
+    item, closingBracketToken, openingBracketToken; // lisT -> list, iTem -> item
 
   [tokenList, closingBracketToken] = match(']', tokenList);
 
@@ -135,7 +136,7 @@ function match_list(tokenList) {
   [tokenList, openingBracketToken] = match('[', tokenList, closingBracketToken);
 
   // Assuming List.push prepends items like Bubbles.push, so inversion is necessary.
-  return [tokenList, invert(list)]; // lisT -> list
+  return [tokenList, List.invert(list)]; // lisT -> list
 }
 
 // tokenList is the current list of token objects
@@ -179,7 +180,7 @@ function match_item(tokenList, contextTokenForEOF) {
       return match_list(tokenList);
     // Quoting/Bubble is handled in parseTokens, not here, as it modifies the tree structure directly.
     case '°':
-      item = new Bubble(currentToken.value);
+      // item = new Bubble(currentToken.value);
       break;
     default:
       // If it's not a special type, it might be an error or an unhandled simple token

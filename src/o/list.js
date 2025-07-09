@@ -1,4 +1,3 @@
-
 let emptyList;
 
 class List {
@@ -174,7 +173,7 @@ const {count, conj, each, get, invert,
   map, make, peek, pop, push, reduce,
   shift, skip, toArray } = List
 
-class EmptyList extends List {
+class EmptyList {
   get isEmpty() { return true; }
 }
 
