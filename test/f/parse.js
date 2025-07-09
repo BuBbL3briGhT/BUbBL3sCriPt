@@ -1,5 +1,4 @@
-const assert = require("assert");
-const   fs   = require("fs");
+const assert = require("assert"); const   fs   = require("fs");
 const  Yaml  = require("yaml");
 
 const parse   = require("../../src/f/parse");
@@ -287,7 +286,7 @@ describe("Parser Structure and Edge Case Tests", () => {
   it("parses a single atom symbol correctly", () => {
     const ast = parse("atom");
     // parse("atom") returns a list containing one symbol: (atom)
-    const expected = makeList(Symbol.for("atom"));
+    const expected = makeBubbles(Symbol.for("atom"));
     assert.deepEqual(ast, expected, "AST for single atom symbol");
   });
 
