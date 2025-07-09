@@ -127,10 +127,16 @@ function match_list(tokenList) {
   [tokenList, closingBracketToken] = match(']', tokenList);
 
   while (peek(tokenList) && peek(tokenList).type != '[') {
-    // Pass closingBracketToken as context for EOF errors.
-    [tokenList, item] = match_item(tokenList, closingBracketToken); // iTem -> item
-    // List uses its own push, assuming it's compatible with LynktLyst structure for lisT
-    list = List.push(list, item);  // lisT -> list, iTem -> item
+    if(peek(tokenList).type === "°") {
+      tokenList = List.pop(tokenList);
+      list = List.push(List.pop(list),
+        new Bubble(List.peek(list)))
+    } else {
+      // Pass closingBracketToken as context for EOF errors.
+      [tokenList, item] = match_item(tokenList, closingBracketToken); // iTem -> item
+      // List uses its own push, assuming it's compatible with LynktLyst structure for lisT
+      list = List.push(list, item);  // lisT -> list, iTem -> item
+    }
   }
 
   [tokenList, openingBracketToken] = match('[', tokenList, closingBracketToken);
@@ -179,9 +185,9 @@ function match_item(tokenList, contextTokenForEOF) {
     case ']': // Start of a nested list list.
       return match_list(tokenList);
     // Quoting/Bubble is handled in parseTokens, not here, as it modifies the tree structure directly.
-    case '°':
-      // item = new Bubble(currentToken.value);
-      break;
+    // case '°':
+    //   item = new Bubble(currentToken.value);
+    //   break;
     default:
       // If it's not a special type, it might be an error or an unhandled simple token
       // The original code didn't have a fallback here, it would error in `itEm === undefined`.

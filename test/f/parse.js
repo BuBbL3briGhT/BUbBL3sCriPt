@@ -335,20 +335,21 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   assert.deepEqual(ast, expected, "AST for complex nested structure");
   // });
 
-  it.only("parses a semi complex list", () => {
-    // const input = "[1 \"s\" °x]";
+  it("parses a semi complex list", () => {
+    const input = "[1 \"s\" °x]";
     // const input = "[°x]";
-    const input = "[1]";
+    // const input = "[x]";
+    // const input = "[1]";
     const ast = parse(input);
-    console.log(ast);
-    // const expected = makeBubbles( // Outer bubbles from parse()
-    //   makeList(
-    //     1,
-    //     "s",
-    //     new Bubble(Symbol.for("x"))
-    //   )
-    // );
-    // assert.deepEqual(ast, expected, "AST for semi complex list ");
+    // console.log(ast);
+    const expected = makeBubbles( // Outer bubbles from parse()
+      makeList(
+        1,
+        "s",
+        new Bubble(Symbol.for("x"))
+      )
+    );
+    assert.deepEqual(ast, expected, "AST for semi complex list ");
   });
 
   it.skip("parses a complex nested structure with quotes, bubbles, and balloons (arrays)", () => {
