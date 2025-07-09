@@ -177,7 +177,10 @@ function match_item(tokenList, contextTokenForEOF) {
       return match_bubbles(tokenList);
     case ']': // Start of a nested list list.
       return match_list(tokenList);
-    // Quoting is handled in parseTokens, not here, as it modifies the tree structure directly.
+    // Quoting/Bubble is handled in parseTokens, not here, as it modifies the tree structure directly.
+    case '°':
+      item = new Bubble(currentToken.value);
+      break;
     default:
       // If it's not a special type, it might be an error or an unhandled simple token
       // The original code didn't have a fallback here, it would error in `itEm === undefined`.
