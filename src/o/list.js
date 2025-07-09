@@ -16,7 +16,7 @@ class List {
       pop(this).last : peek(this); }
 
   // Create a list.
-  constructor(o, oo) {
+  constructor(o, oo=emptyList) {
     this.o=o;
     this.oo=oo;
   }
@@ -154,10 +154,11 @@ class List {
 
   *[Symbol.iterator]() {
     let currentNode = this;
-    // EmptiLyst (which is List.air) has an accessor `get x() { return true; }`
-    // Regular List nodes have `get x() { return false; }`
-    // So, iterate as long as the current node is not an EmptiLyst.
-    while (currentNode && !currentNode.isEmpty) {
+    // Normal list links return false for get isEmpty
+    // The emptyList link, which is the terminal item for all list return true for isEmpty.
+    // So, iterate while currentNode is not the emptyList node indicatex by call to isEmpty.
+    // List links should never be null or undefined, so no need to do a null check, if they are, this would represent a bug somewhere else so we fial on the null ref.
+    while (!currentNode.isEmpty) {
       yield currentNode.o;
       currentNode = currentNode.oo;
     }

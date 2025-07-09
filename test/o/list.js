@@ -40,7 +40,7 @@ describe("new List(o, oo) ", () => {
     var o;
     o = new List();
     assert.equal(get(o), undefined);
-    assert.equal(skip(o, 1), undefined);
+    assert.equal(skip(o, 1), List.emptyList);
 
     o = new List(1);
     assert.equal(get(o), 1);
