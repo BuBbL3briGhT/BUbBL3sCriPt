@@ -24,6 +24,12 @@ describe("send", function () {
   });
 });
 
+describe("push", function () {
+  it.only("pushes", function () {
+    eval("(push [1 2]) 3");
+  });
+});
+
 describe("puts", function () {
   before(function () {
     sinon.replace(console, "log",
