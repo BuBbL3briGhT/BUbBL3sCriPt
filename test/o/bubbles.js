@@ -11,7 +11,7 @@ describe("new Bubbles(o, oo) ", () => {
     var o;
     o = new Bubbles();
     assert.equal(get(o), undefined);
-    assert.equal(skip(o, 1), undefined);
+    assert.equal(skip(o, 1), Bubbles.emptyBubbles);
 
     o = new Bubbles(1);
     assert.equal(get(o), 1);

@@ -1,9 +1,18 @@
 const List = require("./list");
 
+let emptyBubbles;
+
 class Bubbles extends List {
 
   static listOpenChar = "(";
   static listCloseChar = ")";
+
+  static get emptyBubbles() { return emptyBubbles; }
+
+  // Create a bubbles.
+  constructor(o, oo=emptyBubbles) {
+    super(o, oo);
+  }
 
   static make(...elements) {
     return _make(elements);
@@ -24,7 +33,7 @@ class Bubbles extends List {
 
 
   static map(o, fn) {
-    if (o)
+    if (!o.isEmpty)
       return new Bubbles(fn(o.o),
         map(o.oo, fn));
   }
@@ -89,5 +98,11 @@ function _blow(elementsArray, currentList) {
     new Bubbles(elementsArray.pop(),
       currentList));
 }
+
+class EmptyBubbles {
+  get isEmpty() { return true; }
+}
+
+emptyBubbles = new EmptyBubbles()
 
 module.exports = Bubbles;
