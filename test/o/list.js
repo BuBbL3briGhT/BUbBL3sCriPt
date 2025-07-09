@@ -52,7 +52,7 @@ describe("new List(o, oo) ", () => {
 
 describe("make(o...)", () => {
   it("blows lists", () => {
-    assert.equal(make(), undefined);
+    assert.equal(make(), List.emptyList);
     let o = make(1, 2, 3);
     assert.equal(get(o,0), 3);
     assert.equal(get(o,1), 2);
