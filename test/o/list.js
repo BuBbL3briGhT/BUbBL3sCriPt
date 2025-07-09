@@ -78,14 +78,14 @@ describe("get(o, index)", () => {
 
 describe("invert", () => {
   it("inverts lists", () => {
-    var o;
+    var o = List.make();
     o = invert(o);
-    assert.equal(o, undefined);
+    assert.equal(o, List.emptyList);
 
     o = make(1);
     o = invert(o);
     assert.equal(peek(o),1);
-    assert.equal(skip(o,1), undefined);
+    assert.equal(skip(o,1), List.emptyList);
 
     o = push(push(o,2),3);
     assert.equal(peek(o),3);

@@ -59,11 +59,14 @@ class List {
   }
 
   static invert(o) {
-    if (!o.isEmpty)
-      // oo (accumulator), o (currentElement)
-      return reduce(pop(o), (accumulator, currentElement) => {
+    if (o.isEmpty)
+      return o;
+
+    // oo (accumulator), o (currentElement)
+    return reduce(pop(o),
+      (accumulator, currentElement) => {
         return push(accumulator, currentElement);
-      }, new List(peek(o)));
+      }, make(peek(o)));
   }
 
   static conj(targetList, sourceList) { // o -> targetList, oo -> sourceList
@@ -169,8 +172,8 @@ toString.toString = _toString;
 List.toString = toString;
 
 const {count, conj, each, get, invert,
-  map, peek, pop, push, reduce, shift,
-  skip, toArray } = List
+  map, make, peek, pop, push, reduce,
+  shift, skip, toArray } = List
 
 class EmptyList extends List {
   get isEmpty() { return true; }
