@@ -8,10 +8,18 @@ class Fn {
     this.body = body;
   }
 
+  // call(bnd, args) {
+  //   const evl = require("../f/eval").eVaL;
+  //   return invoke(this.bnd, this,
+  //     args && args.map(function(a) {
+  //       return evl(bnd, a);
+  //     }))
+  // }
+
   call(bnd, args) {
     const evl = require("../f/eval").eVaL;
     return invoke(this.bnd, this,
-      args && args.map(function(a) {
+      args && args.invert().map(function(a) {
         return evl(bnd, a);
       }))
   }

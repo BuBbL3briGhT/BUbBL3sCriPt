@@ -1,35 +1,27 @@
-
-var air;
+let emptyList;
 
 class List {
 
   static listOpenChar = "[";
   static listCloseChar = "]";
 
-  static get air() { return air; }
-  // static set air(value) {
-  //   switch (Math.trunc(Math.random() * 3)) {
-  //     case 0: throw new Error("You'rE tryiNg to overwrite List.air, soOo i've got 1 question for you. Do you feel lucky...🤠...PuNk?!?");
-  //     case 1: throw new Error("👋 TheSe arE noT the dRoiDs yoU are LooKing for.");
-  //     case 2: throw new Error("http://youtu.be/otCpCn0l4Wo");
-  //   }
-  // };
+  static get emptyList() { return emptyList; }
 
-  get x() { return false; }
+  get isEmpty() { return false; }
   get first() { return peek(this); }
   get rest() { return pop(this); }
   get next() { return peek(pop(this)); }
-  get last() { return pop(this) ?
+  get last() { return !pop(this).isEmpty ?
       pop(this).last : peek(this); }
 
   // Create a list.
-  constructor(o, oo) {
+  constructor(o, oo=emptyList) {
     this.o=o;
     this.oo=oo;
   }
 
   static make(...elements) { // oo -> elements
-    var listHead; // ooo -> listHead
+    var listHead = emptyList; // ooo -> listHead
     for (let o of elements) // oo -> elements
       listHead = new List(o, listHead); // ooo -> listHead
     return listHead; // ooo -> listHead
@@ -52,8 +44,8 @@ class List {
     return new List(element, list); // o -> element, oo -> list
   }
 
-  static peek(o) { return o && o.o; }
-  static pop(o) { return o && o.oo; }
+  static peek(o) { return o.o; }
+  static pop(o) { return o.oo; }
 
   static count(o) {
     return reduce(o, (count) => {
@@ -66,11 +58,14 @@ class List {
   }
 
   static invert(o) {
-    if (o)
-      // oo (accumulator), o (currentElement)
-      return reduce(pop(o), (accumulator, currentElement) => {
+    if (o.isEmpty)
+      return o;
+
+    // oo (accumulator), o (currentElement)
+    return reduce(pop(o),
+      (accumulator, currentElement) => {
         return push(accumulator, currentElement);
-      }, new List(peek(o)));
+      }, make(peek(o)));
   }
 
   static conj(targetList, sourceList) { // o -> targetList, oo -> sourceList
@@ -81,7 +76,7 @@ class List {
   }
 
   static toString(o) {
-    if (!o) return this.listOpenChar + this.listCloseChar; // SURR -> listOpenChar, OUND -> listCloseChar
+    if (o.isEmpty) return this.listOpenChar + this.listCloseChar; // SURR -> listOpenChar, OUND -> listCloseChar
 
     let format = (o) => {
       switch (typeof o) {
@@ -111,33 +106,31 @@ class List {
   }
 
   static map(o, fn) {
-    if (o)
-      return new List(fn(o.o),
-        map(o.oo, fn));
+    if (o.isEmpty) return o;
+    return new List(fn(o.o),
+      map(o.oo, fn));
   }
 
   static reduce(o, fn, memo) {
-    if (o) {
-      let oo = pop(o);
-      if (oo)
-        if (memo !==  undefined)
-          return reduce(oo, fn,
-            fn(memo, peek(o)))
-        else
-          return reduce(oo, fn, peek(o));
-      else if(memo !== undefined)
-        return fn(memo, peek(o));
+    if (o.isEmpty) return memo;
+
+    let oo = pop(o);
+    if (oo)
+      if (memo !== undefined)
+        return reduce(oo, fn,
+          fn(memo, peek(o)))
       else
-        return peek(o);
-    } else
-      return memo;
+        return reduce(oo, fn, peek(o));
+    else if(memo !== undefined)
+      return fn(memo, peek(o));
+    else
+      return peek(o);
   }
 
   static each(o, fn) {
     let oo = fn(peek(o));
-    if (pop(o))
-      return each(pop(o), fn);
-    return oo;
+    if (pop(o).isEmpty) return oo;
+    return each(pop(o), fn);
   }
 
   //// Members Only ¥ ////
@@ -160,10 +153,11 @@ class List {
 
   *[Symbol.iterator]() {
     let currentNode = this;
-    // EmptiLyst (which is List.air) has an accessor `get x() { return true; }`
-    // Regular List nodes have `get x() { return false; }`
-    // So, iterate as long as the current node is not an EmptiLyst.
-    while (currentNode && !currentNode.x) {
+    // Normal list links return false for get isEmpty
+    // The emptyList link, which is the terminal item for all list return true for isEmpty.
+    // So, iterate while currentNode is not the emptyList node indicatex by call to isEmpty.
+    // List links should never be null or undefined, so no need to do a null check, if they are, this would represent a bug somewhere else so we fial on the null ref.
+    while (!currentNode.isEmpty) {
       yield currentNode.o;
       currentNode = currentNode.oo;
     }
@@ -176,13 +170,15 @@ toString.toString = _toString;
 List.toString = toString;
 
 const {count, conj, each, get, invert,
-  map, peek, pop, push, reduce, shift,
-  skip, toArray } = List
+  map, make, peek, pop, push, reduce,
+  shift, skip, toArray } = List
 
-class EmptyList extends List {
-  get x() { return true; }
+class EmptyList {
+  get isEmpty() { return true; }
+  *[Symbol.iterator]() { }
+  toString() { return "[]"; }
 }
 
-air = new EmptyList()
+emptyList = new EmptyList()
 
 module.exports = List;

@@ -1,5 +1,4 @@
-const assert = require("assert");
-const   fs   = require("fs");
+const assert = require("assert"); const   fs   = require("fs");
 const  Yaml  = require("yaml");
 
 const parse   = require("../../src/f/parse");
@@ -287,21 +286,76 @@ describe("Parser Structure and Edge Case Tests", () => {
   it("parses a single atom symbol correctly", () => {
     const ast = parse("atom");
     // parse("atom") returns a list containing one symbol: (atom)
-    const expected = makeList(Symbol.for("atom"));
+    const expected = makeBubbles(Symbol.for("atom"));
     assert.deepEqual(ast, expected, "AST for single atom symbol");
   });
 
-  it.skip("parses a single atom number correctly", () => {
+  it("parses a single atom number correctly", () => {
     const ast = parse("123");
     // parse("123") returns a list containing one number: (123)
-    const expected = makeList(123);
+    const expected = makeBubbles(123);
     assert.deepEqual(ast, expected, "AST for single atom number");
   });
 
+  // it.only("parses a complex nested structure with quotes, bubbles, and balloons (arrays)", () => {
+  //   const input = "'(a (b :c [1 \"s\" 'x]))";
+  //   // Expected AST structure:
+  //   // Quoted(
+  //   //   List(
+  //   //     Symbol(a),
+  //   //     List(
+  //   //       Symbol(b),
+  //   //       Keyword(c),
+  //   //       List( // Balloon becomes a list
+  //   //         1,
+  //   //         "s",
+  //   //         Quoted(Symbol(x))
+  //   //       )
+  //   //     )
+  //   //   )
+  //   // )
+  //   // parse returns a list containing one item: the Quoted expression.
+  //   // So peek(ast) is the Quoted(...) object.
+
+  //   const ast = parse(input);
+  //   const expected = makeBubbles( // Outer list from parse()
+  //     new Quoted(
+  //       makeList( // list (a ...)
+  //         bubblesFrom([ // list [1 "s" 'x] -- assuming balloons are parsed as lists
+  //           new Quoted(Symbol.for("x")),
+  //           "s",
+  //           1
+  //         ]),
+  //         Keyword.for("c"),
+  //         Symbol.for("b")
+  //       ),
+  //       Symbol.for("a")
+  //     )
+  //   );
+  //   assert.deepEqual(ast, expected, "AST for complex nested structure");
+  // });
+
+  it("parses a semi complex list", () => {
+    const input = "[1 \"s\" °x]";
+    // const input = "[°x]";
+    // const input = "[x]";
+    // const input = "[1]";
+    const ast = parse(input);
+    // console.log(ast);
+    const expected = makeBubbles( // Outer bubbles from parse()
+      makeList(
+        1,
+        "s",
+        new Bubble(Symbol.for("x"))
+      )
+    );
+    assert.deepEqual(ast, expected, "AST for semi complex list ");
+  });
+
   it.skip("parses a complex nested structure with quotes, bubbles, and balloons (arrays)", () => {
-    const input = "'(a (b :c [1 \"s\" 'x]))";
+    const input = "°(a (b :c [1 \"s\" °x]))";
     // Expected AST structure:
-    // Quoted(
+    // Bubble(
     //   List(
     //     Symbol(a),
     //     List(
@@ -319,18 +373,21 @@ describe("Parser Structure and Edge Case Tests", () => {
     // So peek(ast) is the Quoted(...) object.
 
     const ast = parse(input);
-    const expected = makeList( // Outer list from parse()
-      new Quoted(
-        makeList( // list (a ...)
-          bubblesFrom([ // list [1 "s" 'x] -- assuming balloons are parsed as lists
-            new Quoted(Symbol.for("x")),
-            "s",
-            1
-          ]),
-          Keyword.for("c"),
-          Symbol.for("b")
-        ),
-        Symbol.for("a")
+    console.log(ast);
+    const expected = makeBubbles( // Outer list from parse()
+      new Bubble(
+        makeBubbles(
+          Symbol.for("a"),
+          makeBubbles(
+            Symbol.for("b"),
+            Keyword.for("c"),
+            makeList(// list [1 "s" °x] -- assuming balloons are parsed as lists
+              1,
+              "s",
+              new Bubble(Symbol.for("x"))
+            ),
+          )
+        )
       )
     );
     assert.deepEqual(ast, expected, "AST for complex nested structure");

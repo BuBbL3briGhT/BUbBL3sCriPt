@@ -5,7 +5,28 @@ const { make, count, get, invert, map,
   peek, pop, push, reduce, skip, toString
 } = List;
 
+
 describe("List", () => {
+
+describe("emptyList", function () {
+  describe("toString", function () {
+    it("should return a formatted string representation of an empty list", function () {
+      let emptyList = List.emptyList
+      assert.equal(emptyList.toString(), "[]");
+    });
+  });
+});
+
+describe("isEmpty", function () {
+  it("should return true for an empty list", function () {
+    let list = List.make();
+    assert.equal(list.isEmpty, true);
+  });
+  it("should return false for a none empty list", function () {
+    let list = List.make(1);
+    assert.equal(list.isEmpty, false);
+  });
+});
 
 describe("toString", function () {
   it("returns the expected string representation", function () {
@@ -19,7 +40,7 @@ describe("new List(o, oo) ", () => {
     var o;
     o = new List();
     assert.equal(get(o), undefined);
-    assert.equal(skip(o, 1), undefined);
+    assert.equal(skip(o, 1), List.emptyList);
 
     o = new List(1);
     assert.equal(get(o), 1);
@@ -31,7 +52,7 @@ describe("new List(o, oo) ", () => {
 
 describe("make(o...)", () => {
   it("blows lists", () => {
-    assert.equal(make(), undefined);
+    assert.equal(make(), List.emptyList);
     let o = make(1, 2, 3);
     assert.equal(get(o,0), 3);
     assert.equal(get(o,1), 2);
@@ -57,14 +78,14 @@ describe("get(o, index)", () => {
 
 describe("invert", () => {
   it("inverts lists", () => {
-    var o;
+    var o = List.make();
     o = invert(o);
-    assert.equal(o, undefined);
+    assert.equal(o, List.emptyList);
 
     o = make(1);
     o = invert(o);
     assert.equal(peek(o),1);
-    assert.equal(skip(o,1), undefined);
+    assert.equal(skip(o,1), List.emptyList);
 
     o = push(push(o,2),3);
     assert.equal(peek(o),3);
@@ -82,12 +103,12 @@ describe("invert", () => {
 
 describe("map(o, fn)", () => {
   it("maps o through fn", ()=>{
-    var o;
+    var o = List.make();
 
     let add7 = (o) => { return o + 7 };
 
     result = map(o, add7);
-    assert.equal(result, undefined);
+    assert.equal(result, List.emptyList);
 
     o = make(1);
     o = map(o, add7);
@@ -107,23 +128,24 @@ describe("map(o, fn)", () => {
 });
 
 describe("push(o)", () => {
-  it("pushes o onto the list stack.", () => {
-    var o;
+  it("pushes o onto the list.", () => {
+    var o = List.make();
 
     o = push(o, 1);
     assert.equal(get(o), 1)
-    assert.equal(skip(o, 1), undefined);
+    assert.equal(skip(o, 1), List.emptyList);
 
     o = push(o, 2);
     assert.equal(get(o), 2)
     assert.equal(get(o, 1), 1)
-    assert.equal(skip(o, 2), undefined);
+    assert.equal(skip(o, 2), List.emptyList);
   });
 });
 
 describe("reduce", () => {
   it("reduces the list", () => {
-    var o, result;
+    var o = List.make(),
+        result;
 
     let add = (a,b) => { return b + a };
 
@@ -171,7 +193,8 @@ describe("skip(list, count)", () => {
 
 describe("toString(o)", () => {
   it("formats list as a string.", () => {
-    var o, result;
+    var o = List.make(),
+      result;
 
     result = toString(o);
     assert.equal(result, "[]");
@@ -207,7 +230,7 @@ describe("toString(o)", () => {
 
 describe("Symbol.iterator", () => {
   it("should not yield any values for an empty list (List.air)", () => {
-    const emptyList = List.air;
+    const emptyList = List.emptyList;
     const results = [...emptyList];
     assert.deepEqual(results, []);
 

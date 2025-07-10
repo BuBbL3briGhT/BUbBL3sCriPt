@@ -1,9 +1,18 @@
 const List = require("./list");
 
+let emptyBubbles;
+
 class Bubbles extends List {
 
   static listOpenChar = "(";
   static listCloseChar = ")";
+
+  static get emptyBubbles() { return emptyBubbles; }
+
+  // Create a bubbles.
+  constructor(o, oo=emptyBubbles) {
+    super(o, oo);
+  }
 
   static make(...elements) {
     return _make(elements);
@@ -22,9 +31,19 @@ class Bubbles extends List {
     return new Bubbles(element, list); // o -> element, oo -> list
   }
 
+  static invert(o) {
+    if (o.isEmpty)
+      return o;
+
+    // oo (accumulator), o (currentElement)
+    return reduce(pop(o),
+      (accumulator, currentElement) => {
+        return push(accumulator, currentElement);
+      }, make(peek(o)));
+  }
 
   static map(o, fn) {
-    if (o)
+    if (!o.isEmpty)
       return new Bubbles(fn(o.o),
         map(o.oo, fn));
   }
@@ -70,18 +89,36 @@ class Bubbles extends List {
 
 }
 
-const { map, push, reduce, toString } = // These are static methods, ensure they are used as .map, Bubbles.push etc. if needed inside instance methods, or this is fine if they are standalone pure functions from LynktLyst.
-  Bubbles;
+
+// These are static methods, ensure they
+// are used as .map, Bubbles.push etc.
+// if needed inside instance methods, or
+// this is fine if they are standalone
+// pure functions from LynktLyst.
+const { map, push, reduce, toString,
+        pop, peek, make } = Bubbles;
 
 
-function _make(elementsArray, currentList) {
-  if (elementsArray.length < 1) return currentList;
-  return _make(elementsArray, new Bubbles(elementsArray.pop(), currentList));
+function _make(elementsArray, currentList=emptyBubbles) {
+  if (elementsArray.length < 1)
+    return currentList;
+  return _make(elementsArray,
+    new Bubbles(elementsArray.pop(),
+      currentList));
 }
 
-function _blow(elementsArray, currentList) {
-  if (elementsArray.length < 1) return currentList;
-  return _blow(elementsArray, new Bubbles(elementsArray.pop(), currentList));
+function _blow(elementsArray, currentList=emptyBubbles) {
+  if (elementsArray.length < 1)
+    return currentList;
+  return _blow(elementsArray,
+    new Bubbles(elementsArray.pop(),
+      currentList));
 }
+
+class EmptyBubbles {
+  get isEmpty() { return true; }
+}
+
+emptyBubbles = new EmptyBubbles()
 
 module.exports = Bubbles;

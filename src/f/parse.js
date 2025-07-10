@@ -105,9 +105,15 @@ function match_bubbles(tokenList) {
   // console.log("tokenList", tokenList);
 
   while (peek(tokenList) && peek(tokenList).type != '(') {
-    // Pass closingParenToken as context for EOF errors when expecting an item for this bubbles.
-    [tokenList, item] = match_item(tokenList, closingParenToken); // iTem -> item
-    list = push(list, item); // Items are pushed in reverse order, inverted later // lisT -> list, iTem -> item
+    if(peek(tokenList).type === "°") {
+      tokenList = Bubbles.pop(tokenList);
+      list = Bubbles.push(Bubbles.pop(list),
+        new Bubble(Bubbles.peek(list)))
+    } else {
+      // Pass closingParenToken as context for EOF errors when expecting an item for this bubbles.
+      [tokenList, item] = match_item(tokenList, closingParenToken); // iTem -> item
+      list = push(list, item); // Items are pushed in reverse order, inverted later // lisT -> list, iTem -> item
+    }
   }
 
   // console.log(list);
@@ -121,21 +127,28 @@ function match_bubbles(tokenList) {
 
 // tokenList is the current list of token objects
 function match_list(tokenList) {
-  let list, item, closingBracketToken, openingBracketToken; // lisT -> list, iTem -> item
+  let list = List.emptyList,
+    item, closingBracketToken, openingBracketToken; // lisT -> list, iTem -> item
 
   [tokenList, closingBracketToken] = match(']', tokenList);
 
   while (peek(tokenList) && peek(tokenList).type != '[') {
-    // Pass closingBracketToken as context for EOF errors.
-    [tokenList, item] = match_item(tokenList, closingBracketToken); // iTem -> item
-    // List uses its own push, assuming it's compatible with LynktLyst structure for lisT
-    list = List.push(list, item);  // lisT -> list, iTem -> item
+    if(peek(tokenList).type === "°") {
+      tokenList = List.pop(tokenList);
+      list = List.push(List.pop(list),
+        new Bubble(List.peek(list)))
+    } else {
+      // Pass closingBracketToken as context for EOF errors.
+      [tokenList, item] = match_item(tokenList, closingBracketToken); // iTem -> item
+      // List uses its own push, assuming it's compatible with LynktLyst structure for lisT
+      list = List.push(list, item);  // lisT -> list, iTem -> item
+    }
   }
 
   [tokenList, openingBracketToken] = match('[', tokenList, closingBracketToken);
 
   // Assuming List.push prepends items like Bubbles.push, so inversion is necessary.
-  return [tokenList, invert(list)]; // lisT -> list
+  return [tokenList, List.invert(list)]; // lisT -> list
 }
 
 // tokenList is the current list of token objects
@@ -177,7 +190,10 @@ function match_item(tokenList, contextTokenForEOF) {
       return match_bubbles(tokenList);
     case ']': // Start of a nested list list.
       return match_list(tokenList);
-    // Quoting is handled in parseTokens, not here, as it modifies the tree structure directly.
+    // Quoting/Bubble is handled in parseTokens, not here, as it modifies the tree structure directly.
+    // case '°':
+    //   item = new Bubble(currentToken.value);
+    //   break;
     default:
       // If it's not a special type, it might be an error or an unhandled simple token
       // The original code didn't have a fallback here, it would error in `itEm === undefined`.

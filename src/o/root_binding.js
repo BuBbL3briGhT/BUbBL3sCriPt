@@ -46,6 +46,12 @@ const rootBinding = {
   console: console,
   Array: Array,
   null: null,
+  Bubbles: Bubbles,
+  List: List,
+
+  peek: peek,
+  push: push,
+  pop: pop,
 
   muf: function([key,val]) {
     return this[key.toString()]
@@ -55,19 +61,12 @@ const rootBinding = {
   //   return new Fn(this, caret, stic);
   // },
   fn: function(_) {
+    // console.log(_);
     let binding = this;
     let caret = _.peek();
     let stic  = _.pop();
     return new Fn(binding, caret, stic);
   },
-  send: mkfn(function([a,b,...c]) {
-    if (b.key)
-      b = b.key;
-    if (c.length > 0) {
-      return a[b](...c);
-    } else
-      return a[b]();
-  }),
   send: mkfn(function([a,b,...c]) {
     if (b.key)
       b = b.key;
@@ -100,7 +99,7 @@ const rootBinding = {
   let: function([x,...xx]) {
     let binding = Object.create(this);
     x = x.invert();
-    while (x) {
+    while (!x.isEmpty) {
       let k,w;
       k = x.peek();
       x = x.pop();
@@ -199,7 +198,7 @@ const rootBinding = {
       m, recurCalled;
 
     x = x.invert();
-    while (x) {
+    while (!x.isEmpty) {
       let k,v;
       k = x.peek();
       x = x.pop();
@@ -210,7 +209,7 @@ const rootBinding = {
 
     binding.recur = function([a]) {
       a = a.invert();
-      while (a) {
+      while (!a.isEmpty) {
         let k,w;
         k = a.peek();
         a = a.pop();
@@ -269,9 +268,13 @@ const _eval = eval.eVaL;
       return _eval(bnd, Bubbles.from(args).push(_muf));
     }
 
-    // muf push (fn [a b] (send a 'push b))
+    // // muf push (fn [a b] (send a °push b))
+    // muf(_push, list(fn, glider(a, b),
+    //      list(send, a, quote(_push), b)));
+
+    // muf push (fn [a b] (send a :push b))
     muf(_push, list(fn, glider(a, b),
-         list(send, a, quote(_push), b)));
+         list(send, a, new Keyword("push"), b)));
 
     // (muf mufn (macro [name & z]
     //     (list 'muf name (push z 'fn))))

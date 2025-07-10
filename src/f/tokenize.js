@@ -1,4 +1,5 @@
-const { push, invert } = require("../o/list");
+const List = require("../o/list");
+const { push, invert } = List;
 
 const TOK_KEYWORD = 'K';
 const TOK_NUMBER  = 'N';
@@ -8,7 +9,7 @@ const TOK_TRUE    = 'T';
 const TOK_FALSE   = 'F';
 
 function tokenize(inputString) {
-  let tokens;
+  let tokens = List.emptyList;
   let line = 1;
   let column = 1;
   let currentString = inputString; // This string will be sliced

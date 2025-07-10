@@ -1,8 +1,11 @@
 {
   "name": "bubblescript",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "scripts": {
     "test": "mocha ./test/**/*.js"
+  },
+  "bin": {
+    "bubls": "bin/bubls"
   },
   "dependencies": {
     "debounce": "^2.2.0",
