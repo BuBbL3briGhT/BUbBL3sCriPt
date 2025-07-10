@@ -1,4 +1,7 @@
 July
+- ensure Tokenize and parse &
+- ensure implementation for & in function params.
+- invert seems to be converting list to vector, is bug?
 - Clean up the Readme
 - add MiT license
 - Make macros work
