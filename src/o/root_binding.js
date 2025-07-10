@@ -49,10 +49,6 @@ const rootBinding = {
   Bubbles: Bubbles,
   List: List,
 
-  peek: peek,
-  push: push,
-  pop: pop,
-
   muf: function([key,val]) {
     return this[key.toString()]
       = _eval(this, val);
