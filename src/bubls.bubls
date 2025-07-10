@@ -3,6 +3,6 @@
 
 (muf 🍎 (fn [a b] (console.log a b)))
 
-
 (muf peek (fn [a] (send a :peek)))
 (muf pop (fn [a] (send a :pop)))
+(muf invert (fn [list] (send list :invert)))

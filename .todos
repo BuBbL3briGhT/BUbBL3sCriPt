@@ -1,4 +1,12 @@
 July
+- Clean up the Readme
+- add MiT license
+- Make macros work
+- Rename list to vector and bubbles to buble,. Make both inherit from LinkList class
+- Use Typescript?
+- Research lazy evaluation.
+- Better docs, (Literate code style, liyerate
+  code documentation generator.
 - Update to use new es6 import
 - namespaces
 - pop, push in bubblescript
