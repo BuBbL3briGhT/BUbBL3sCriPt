@@ -1,4 +1,5 @@
 July
+- Impliment macros and make sure the expand when building the parse tree or just in time.
 - ensure Tokenize and parse &
 - ensure implementation for & in function params.
 - invert seems to be converting list to vector, is bug?
