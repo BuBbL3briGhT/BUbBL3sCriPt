@@ -16,8 +16,6 @@ class Macro {
   toString() {
     return "(macro " + this.args.toString() +
       this.body.toString() + ")";
-
-
   }
 }
 

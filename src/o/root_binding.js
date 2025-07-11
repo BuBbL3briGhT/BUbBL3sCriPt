@@ -63,21 +63,6 @@ const rootBinding = {
     let stic  = _.pop();
     return new Fn(binding, caret, stic);
   },
-  send: mkfn(function([a,b,...c]) {
-    if (b.key)
-      b = b.key;
-    if (c.length > 0) {
-      return a[b](...c);
-    } else
-      return a[b]();
-  }),
-  get: mkfn(function(args) {
-     return args.reduce(
-        (a,b) => a ? a[b] : b);
-  }),
-  export: mkfn(function([ca,[nd,[y]]]) {
-    return ca[nd] = y;
-  }),
 
   macro: function(args) {
     return new Macro(this, args.first, args.rest)
@@ -116,13 +101,6 @@ const rootBinding = {
     return _eval(this,
       _eval(this, c) ? t : f);
   },
-
-  print: mkfn(function(vals) {
-    return vals.each(function(value) {
-      document.body.append(value);
-    });
-  }),
-
   list: function(args) {
     var binding = this;
     return args.map(function(arg) {
@@ -140,54 +118,14 @@ const rootBinding = {
   //       (fn [arg] (_eval this arg))));
   // },
 
-  "+": mkfn(function(a) {
-    return a.reduce((a,b) => a+b);
-  }),
-  "-": mkfn(function(a) {
-    return a.reduce((a,b) => a-b);
-  }),
-  "*": mkfn(function(a) {
-    return a.reduce((a,b) => a*b);
-  }),
-  "/": mkfn(function(a) {
-    return a.reduce((a,b) => a/b);
-  }),
-  "=": mkfn(function([a, b]) {
-    return a == b;
-  }),
-  not: mkfn(function([y]) {
-    return !y;
-  }),
-  and: mkfn(function(a) {
-    return a.reduce((a,b) => a && b);
-  }),
-  or: mkfn(function(_) {
-    return _.reduce((a,b) => a || b);
-  }),
-  '>': mkfn(([a,b]) => {
-    return a > b;
-  }),
-  '<': mkfn(([a,b]) => {
-    return a < b;
-  }),
   blert: function(msgs) {
     alert(this.concat(msgs));
   },
-  parse: mkfn(function([s]) {
-    return parse(s);
-  }),
-  _eval: mkfn(function([v]) {
-    return _eval(this, v[0]);
-  }),
-  concat: mkfn(function(eeks) {
-    return eeks.join('');
-  }),
+
   expandmacro: function([m,n]) {
+    console.log(m);
     return _eval(this,m).expand(this, n);
   },
-  "new": mkfn(function([m,n]) {
-      return new m(...n.toArray());
-  }),
 
   loop: function([x,...xx]) {
     var binding = Object.create(this),
@@ -222,7 +160,70 @@ const rootBinding = {
         _eval(binding, z)).pop();
     } while(recurCalled);
     return m;
-  }
+  },
+
+  send: mkfn(function([a,b,...c]) {
+    if (b.key)
+      b = b.key;
+    if (c.length > 0) {
+      return a[b](...c);
+    } else
+      return a[b]();
+  }),
+  get: mkfn(function(args) {
+     return args.reduce(
+        (a,b) => a ? a[b] : b);
+  }),
+  export: mkfn(function([ca,[nd,[y]]]) {
+    return ca[nd] = y;
+  }),
+  print: mkfn(function(vals) {
+    return vals.each(function(value) {
+      document.body.append(value);
+    });
+  }),
+  "+": mkfn(function(a) {
+    return a.reduce((a,b) => a+b);
+  }),
+  "-": mkfn(function(a) {
+    return a.reduce((a,b) => a-b);
+  }),
+  "*": mkfn(function(a) {
+    return a.reduce((a,b) => a*b);
+  }),
+  "/": mkfn(function(a) {
+    return a.reduce((a,b) => a/b);
+  }),
+  "=": mkfn(function([a, b]) {
+    return a == b;
+  }),
+  not: mkfn(function([y]) {
+    return !y;
+  }),
+  and: mkfn(function(a) {
+    return a.reduce((a,b) => a && b);
+  }),
+  or: mkfn(function(_) {
+    return _.reduce((a,b) => a || b);
+  }),
+  '>': mkfn(([a,b]) => {
+    return a > b;
+  }),
+  '<': mkfn(([a,b]) => {
+    return a < b;
+  }),
+  parse: mkfn(function([s]) {
+    return parse(s);
+  }),
+  _eval: mkfn(function([v]) {
+    return _eval(this, v[0]);
+  }),
+  concat: mkfn(function(eeks) {
+    return eeks.join('');
+  }),
+  "new": mkfn(function([m,n]) {
+      return new m(...n.toArray());
+  }),
 }
 
 module.exports = rootBinding;
