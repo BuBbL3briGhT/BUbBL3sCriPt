@@ -1,4 +1,7 @@
 July
+- Package bubblescript to run in browser
+- binding to events
+- bubblescript for web dev
 - Impliment macros and make sure the expand when building the parse tree or just in time.
 - ensure Tokenize and parse &
 - ensure implementation for & in function params.
