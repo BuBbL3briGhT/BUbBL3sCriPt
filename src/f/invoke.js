@@ -1,7 +1,5 @@
 
 function invoke(bnd, fn, args) {
-  const evl = require("../f/eval").eVaL;
-
   var bnd = Object.create(bnd);
   // var q = map(glider, fn.args, args)
 
@@ -20,7 +18,10 @@ function invoke(bnd, fn, args) {
     y = y && y.rest;
   }
 
-  return evl(bnd, fn);
+  return _eval(bnd, fn);
 }
 
 module.exports = invoke;
+
+const eval = require('../f/eval');
+const _eval  = eval.eVaL;

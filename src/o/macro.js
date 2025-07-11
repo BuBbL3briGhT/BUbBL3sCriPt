@@ -1,3 +1,4 @@
+
 class Macro {
   constructor(bnd, args, body) {
     this.bnd = bnd;
@@ -6,7 +7,7 @@ class Macro {
   }
 
   call(bnd, args) {
-    return evl(this.bnd, invoke(bnd, this, args));
+    return _eval(this.bnd, invoke(bnd, this, args));
   }
 
   expand(bnd, args) {
@@ -19,10 +20,10 @@ class Macro {
   }
 }
 
-const invoke = require("../f/invoke");
-
 module.exports = Macro;
 
+const invoke = require("../f/invoke");
 const eval = require('../f/eval');
-const evl  = eval.eVaL;
-
+const _eval  = eval.eVaL;
+console.log(eval);
+console.log(_eval);

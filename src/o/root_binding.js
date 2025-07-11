@@ -123,7 +123,6 @@ const rootBinding = {
   },
 
   expandmacro: function([m,n]) {
-    console.log(m);
     return _eval(this,m).expand(this, n);
   },
 
@@ -161,6 +160,7 @@ const rootBinding = {
     } while(recurCalled);
     return m;
   },
+
 
   send: mkfn(function([a,b,...c]) {
     if (b.key)

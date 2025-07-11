@@ -17,7 +17,6 @@ class Fn {
   // }
 
   call(bnd, args) {
-    const evl = require("../f/eval").eVaL;
     return invoke(this.bnd, this,
       args && args.invert().map(function(a) {
         return evl(bnd, a);
@@ -32,6 +31,9 @@ class Fn {
 
 }
 
-const invoke = require("../f/invoke");
-
 module.exports = Fn;
+
+const invoke = require("../f/invoke");
+const eval = require('../f/eval');
+const _eval  = eval.eVaL;
+console.log(_eval);

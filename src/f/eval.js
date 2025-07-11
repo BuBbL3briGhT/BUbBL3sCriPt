@@ -3,8 +3,8 @@ const parse = require("./parse");
 const List    = require("../o/list");
 const Bubbles   = require("../o/bubbles");
 const Keyword = require("../o/keyword");
-const Fn      = require("../o/fn");
 const Macro   = require("../o/macro");
+const Fn      = require("../o/fn");
 const Symbol  = require("../o/symbol");
 const Bubble  = require("../o/bubble");
 
@@ -91,5 +91,4 @@ const rootBinding = require("../o/root_binding");
 // const rootBinding = Util.makeRootBinding(Base, eval.eVaL);
 // console.debug('rootBinding', rootBinding);
 // eval.rootBinding = rootBinding;
-
 
