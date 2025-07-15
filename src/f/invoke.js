@@ -24,6 +24,7 @@ function invoke(bnd, fn, args) {
 
 console.log("export invoke");
 module.exports = invoke;
+console.log("assemble invoke");
 
 const eval = require('../f/eval');
 const _eval  = eval.eVaL;

@@ -34,8 +34,10 @@ class Fn {
 
 console.log("export fn");
 module.exports = Fn;
+console.log("assemble fn");
 
 const invoke = require("../f/invoke");
 const eval = require('../f/eval');
+console.log("fn required eval");
 const _eval  = eval.eVaL;
 console.log(_eval);

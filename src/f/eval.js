@@ -82,6 +82,7 @@ function eVaL(bnd, xpr) {
 eval.eVaL = eVaL;
 console.log("export eval");
 module.exports = eval;
+console.log("assemble eval");
 
 const Macro   = require("../o/macro");
 const Fn      = require("../o/fn");

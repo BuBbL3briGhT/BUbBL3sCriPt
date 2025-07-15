@@ -23,6 +23,7 @@ class Macro {
 
 console.log("export macro");
 module.exports = Macro;
+console.log("assemble macro");
 
 const invoke = require("../f/invoke");
 const eval = require('../f/eval');
