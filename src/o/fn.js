@@ -1,4 +1,4 @@
-console.log("load fn");
+// console.log("load fn");
 const Symbol = require("./symbol");
 
 class Fn {
@@ -20,7 +20,7 @@ class Fn {
   call(bnd, args) {
     return invoke(this.bnd, this,
       args && args.invert().map(function(a) {
-        return evl(bnd, a);
+        return _eval(bnd, a);
       }))
   }
 
@@ -32,12 +32,12 @@ class Fn {
 
 }
 
-console.log("export fn");
+// console.log("export fn");
 module.exports = Fn;
-console.log("assemble fn");
+// console.log("assemble fn");
 
 const invoke = require("../f/invoke");
 const eval = require('../f/eval');
-console.log("fn required eval");
+// console.log("fn required eval");
 const _eval  = eval.eVaL;
-console.log(_eval);
+// console.log(_eval);

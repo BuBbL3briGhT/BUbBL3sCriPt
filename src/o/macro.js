@@ -1,4 +1,4 @@
-console.log("load macro");
+// console.log("load macro");
 
 class Macro {
   constructor(bnd, args, body) {
@@ -21,9 +21,9 @@ class Macro {
   }
 }
 
-console.log("export macro");
+// console.log("export macro");
 module.exports = Macro;
-console.log("assemble macro");
+// console.log("assemble macro");
 
 const invoke = require("../f/invoke");
 const eval = require('../f/eval');

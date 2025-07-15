@@ -1,4 +1,4 @@
-console.log("load eval");
+// console.log("load eval");
 const parse = require("./parse");
 
 const List    = require("../o/list");
@@ -80,9 +80,9 @@ function eVaL(bnd, xpr) {
 };
 
 eval.eVaL = eVaL;
-console.log("export eval");
+// console.log("export eval");
 module.exports = eval;
-console.log("assemble eval");
+// console.log("assemble eval");
 
 const Macro   = require("../o/macro");
 const Fn      = require("../o/fn");
