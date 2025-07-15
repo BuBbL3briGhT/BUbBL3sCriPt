@@ -1,3 +1,4 @@
+console.log("load macro");
 
 class Macro {
   constructor(bnd, args, body) {
@@ -20,10 +21,9 @@ class Macro {
   }
 }
 
+console.log("export macro");
 module.exports = Macro;
 
 const invoke = require("../f/invoke");
 const eval = require('../f/eval');
 const _eval  = eval.eVaL;
-console.log(eval);
-console.log(_eval);

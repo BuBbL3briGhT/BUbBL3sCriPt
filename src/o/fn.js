@@ -1,3 +1,4 @@
+console.log("load fn");
 const Symbol = require("./symbol");
 
 class Fn {
@@ -31,6 +32,7 @@ class Fn {
 
 }
 
+console.log("export fn");
 module.exports = Fn;
 
 const invoke = require("../f/invoke");

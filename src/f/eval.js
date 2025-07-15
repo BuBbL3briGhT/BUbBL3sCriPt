@@ -1,10 +1,9 @@
+console.log("load eval");
 const parse = require("./parse");
 
 const List    = require("../o/list");
 const Bubbles   = require("../o/bubbles");
 const Keyword = require("../o/keyword");
-const Macro   = require("../o/macro");
-const Fn      = require("../o/fn");
 const Symbol  = require("../o/symbol");
 const Bubble  = require("../o/bubble");
 
@@ -81,7 +80,11 @@ function eVaL(bnd, xpr) {
 };
 
 eval.eVaL = eVaL;
+console.log("export eval");
 module.exports = eval;
+
+const Macro   = require("../o/macro");
+const Fn      = require("../o/fn");
 
 const rootBinding = require("../o/root_binding");
 
