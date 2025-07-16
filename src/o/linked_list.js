@@ -100,15 +100,25 @@ class LinkedList {
     return this.invert().pop().invert();
   }
 
-  static invert(o) {
-    if (o.isEmpty)
-      return o;
+  // static invert(o) {
+  //   if (o.isEmpty)
+  //     return o;
 
-    // oo (accumulator), o (currentElement)
-    return reduce(pop(o),
+  //   // oo (accumulator), o (currentElement)
+  //   return reduce(pop(o),
+  //     (accumulator, currentElement) => {
+  //       return push(accumulator, currentElement);
+  //     }, make(peek(o)));
+  // }
+
+  invert() {
+    if (this.isEmpty)
+      return this;
+
+    return this.pop().reduce(
       (accumulator, currentElement) => {
-        return push(accumulator, currentElement);
-      }, make(peek(o)));
+        return accumulator.push(currentElement);
+      }, this.constructor.make(this.peek()));
   }
 
   static conj(targetLinkedList, sourceLinkedList) { // o -> targetLinkedList, oo -> sourceLinkedList
