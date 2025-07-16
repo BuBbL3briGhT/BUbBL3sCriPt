@@ -8,6 +8,7 @@ class Macro {
   }
 
   call(bnd, args) {
+    console.log("Macro called", args);
     return _eval(this.bnd, invoke(bnd, this, args));
   }
 

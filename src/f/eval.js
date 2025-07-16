@@ -1,4 +1,3 @@
-// console.log("load eval");
 const parse = require("./parse");
 
 const List    = require("../o/list");
@@ -80,19 +79,9 @@ function eVaL(bnd, xpr) {
 };
 
 eval.eVaL = eVaL;
-// console.log("export eval");
 module.exports = eval;
-// console.log("assemble eval");
 
 const Macro   = require("../o/macro");
 const Fn      = require("../o/fn");
 
 const rootBinding = require("../o/root_binding");
-
-// const Base = require("./base");
-// console.debug('eval Base 88', Base);
-// const Util = require("./util");
-// const rootBinding = Util.makeRootBinding(Base, eval.eVaL);
-// console.debug('rootBinding', rootBinding);
-// eval.rootBinding = rootBinding;
-
