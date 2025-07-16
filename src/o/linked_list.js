@@ -33,11 +33,21 @@ class LinkedList {
   //   return head;
   // }
 
-  make(...elements) {
+  static make(...elements) {
     var head = this.empty;
     for (let o of elements)
-      head = new this.constructor(o, head);
+      head = new this(o, head);
     return head;
+  }
+
+  // static from(arrayLike, mapFn, thisArg) {
+  //   let array = Array.from(arrayLike, mapFn, thisArg);
+  //   return this.make(...array);
+  // }
+
+  static from(arrayLike, mapFn, thisArg) {
+    let array = Array.from(arrayLike, mapFn, thisArg);
+    return this.make(...array);
   }
 
   // static push(vector, element) {
@@ -58,11 +68,6 @@ class LinkedList {
     if (this.isEmpty) return this;
     return new this.constructor(fn(this.o),
       this.oo.map(fn));
-  }
-
-  static from(arrayLike, mapFn, thisArg) {
-    let array = Array.from(arrayLike, mapFn, thisArg);
-    return this.make(...array);
   }
 
   static get(o,i) { return peek(skip(o,i)); }
