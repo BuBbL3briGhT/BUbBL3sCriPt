@@ -2,10 +2,10 @@ let emptyLinkedList;
 
 class LinkedList {
 
-  static linkedListOpenChar = "[";
-  static linkedListCloseChar = "]";
+  static listOpenChar = "";
+  static listCloseChar = "";
 
-  static get emptyLinkedList() { return emptyLinkedList; }
+  static get empty() { return emptyLinkedList; }
 
   get isEmpty() { return false; }
   get first() { return peek(this); }
@@ -15,21 +15,38 @@ class LinkedList {
       pop(this).last : peek(this); }
 
   // Create a linkedList.
-  constructor(o, oo=emptyLinkedList) {
+  constructor(o, oo=this.empty) {
     this.o=o;
     this.oo=oo;
   }
 
-  static make(...elements) { // oo -> elements
-    var linkedListHead = emptyLinkedList; // ooo -> linkedListHead
-    for (let o of elements) // oo -> elements
-      linkedListHead = new LinkedList(o, linkedListHead); // ooo -> linkedListHead
-    return linkedListHead; // ooo -> linkedListHead
+  // static make(...elements) {
+  //   var head = emptyVector;
+  //   for (let o of elements)
+  //     head = new Vector(o, head);
+  //   return head;
+  // }
+
+  static make(...elements) {
+    var head = this.empty;
+    for (let o of elements)
+      head = new this(o, head);
+    return head;
   }
 
-  static from(arrayLike, mapFn, thisArg) { // arryLike -> arrayLike
-    let array = Array.from(arrayLike, mapFn, thisArg); // arryLike -> arrayLike
-    return LinkedList.make(...array);
+  static from(arrayLike, mapFn, thisArg) {
+    let array = Array.from(arrayLike, mapFn, thisArg);
+    return this.make(...array);
+  }
+
+  static push(vector, element) {
+    return new this(element, vector);
+  }
+
+  static map(o, fn) {
+    if (o.isEmpty) return o;
+    return new this(fn(o.o),
+      map(o.oo, fn));
   }
 
   static get(o,i) { return peek(skip(o,i)); }
@@ -38,10 +55,6 @@ class LinkedList {
     if (count)
       return skip(pop(o), --count);
     return o;
-  }
-
-  static push(linkedList, element) { // oo -> linkedList, o -> element
-    return new LinkedList(element, linkedList); // o -> element, oo -> linkedList
   }
 
   static peek(o) { return o.o; }
@@ -75,8 +88,8 @@ class LinkedList {
     }, targetLinkedList); // o -> targetLinkedList
   }
 
-  static toString(o) {
-    if (o.isEmpty) return this.linkedListOpenChar + this.linkedListCloseChar; // SURR -> linkedListOpenChar, OUND -> linkedListCloseChar
+  static toString(o, listOpenChar, listCloseChar, join) {
+    if (o.isEmpty) return listOpenChar + listCloseChar;
 
     let format = (o) => {
       switch (typeof o) {
@@ -89,26 +102,14 @@ class LinkedList {
       }
     }
 
-    // oo (accumulatedString), o (formattedElement)
-    let join = (accumulatedString, formattedElement) => {
-      return formattedElement + " " + accumulatedString;
-    }
-
-    return this.linkedListOpenChar + // SURR -> linkedListOpenChar
+    return listOpenChar +
       reduce(map(o, format), join)
-         + this.linkedListCloseChar; // OUND -> linkedListCloseChar
+         + listCloseChar;
   }
 
   static toArray(o) {
-    // oo (array), o (currentElement)
     return reduce(o, (array, currentElement) => {
       array.push(currentElement); return array; }, []);
-  }
-
-  static map(o, fn) {
-    if (o.isEmpty) return o;
-    return new LinkedList(fn(o.o),
-      map(o.oo, fn));
   }
 
   static reduce(o, fn, memo) {
@@ -135,21 +136,24 @@ class LinkedList {
 
   //// Members Only ¥ ////
 
-  count() { return count(this); }
-  conj(sourceLinkedList) { return conj(this, sourceLinkedList); } // oo -> sourceLinkedList
-  each(fn) { return each(this, fn); }
-  get(i) { return get(this, i); }
-  invert() { return invert(this); }
-  map(fn) { return map(this, fn); }
-  peek() { return peek(this); }
-  pop() { return pop(this); }
-  push(element) { return push(this, element); } // o -> element
+  count() { return this.constructor.count(this); }
+  conj(sourceLinkedList) { return this.constructor.conj(this, sourceLinkedList); } // oo -> sourceLinkedList
+  each(fn) { return this.constructor.each(this, fn); }
+  get(i) { return this.constructor.get(this, i); }
+  invert() { return this.constructor.invert(this); }
+  map(fn) { return this.constructor.map(this, fn); }
+  peek() { return this.constructor.peek(this); }
+  pop() { return this.constructor.pop(this); }
+  push(element) { return this.constructor.push(this, element); } // o -> element
   reduce(fn, memo) {
-    return reduce(this, fn, memo); }
-  shift() { shift(this); }
-  skip(n) { skip(this, n) };
-  toString() { return toString(this); }
-  toArray() { return toArray(this); }
+    return this.constructor.reduce(this, fn, memo); }
+  shift() { this.constructor.shift(this); }
+  skip(n) { this.constructor.skip(this, n) };
+  toString() { return toString(this, this.listOpenChar, this.listCloseChar,
+    (accumulatedString, formattedElement) => {
+      return formattedElement + " " + accumulatedString;
+    }); }
+  toArray() { return this.constructor.toArray(this); }
 
   *[Symbol.iterator]() {
     let currentNode = this;
@@ -164,10 +168,10 @@ class LinkedList {
   }
 }
 
-const _toString = LinkedList.toString;
-const toString = _toString.bind(LinkedList);
-toString.toString = _toString;
-LinkedList.toString = toString;
+// const _toString = LinkedList.toString;
+// const toString = _toString.bind(LinkedList);
+// toString.toString = _toString;
+// LinkedList.toString = toString;
 
 const {count, conj, each, get, invert,
   map, make, peek, pop, push, reduce,
@@ -176,7 +180,7 @@ const {count, conj, each, get, invert,
 class EmptyLinkedList {
   get isEmpty() { return true; }
   *[Symbol.iterator]() { }
-  toString() { return "[]"; }
+  toString() { return ""; }
 }
 
 emptyLinkedList = new EmptyLinkedList()
