@@ -3,11 +3,11 @@ const LinkedList  = require("../../src/o/linked_list");
 
 describe("LinkedList", () => {
 
-describe("emptyLinkedList", function () {
+describe("empty", function () {
   describe("toString", function () {
-    it.only("should return a formatted string representation of an empty linkedList", function () {
-      let emptyLinkedList = LinkedList.emptyLinkedList
-      assert.equal(emptyLinkedList.toString(), "[]");
+    it("should return a formatted string representation of an empty linkedList", function () {
+      let emptyLinkedList = LinkedList.empty
+      assert.equal(emptyLinkedList.toString(), "");
     });
   });
 });
@@ -26,7 +26,7 @@ describe("isEmpty", function () {
 describe("toString", function () {
   it("returns the expected string representation", function () {
     let linkedList = LinkedList.make(1, 2, 3);
-    assert.equal(linkedList.toString(), "[1 2 3]");
+    assert.equal(linkedList.toString(), "1 2 3");
   });
 });
 
@@ -34,65 +34,65 @@ describe("new LinkedList(o, oo) ", () => {
   it("create a new linkedList for your fun and profit.", () => {
     var o;
     o = new LinkedList();
-    assert.equal(get(o), undefined);
-    assert.equal(skip(o, 1), LinkedList.emptyLinkedList);
+    assert.equal(o.get(), undefined);
+    assert.equal(o.skip(1), LinkedList.emptyLinkedList);
 
     o = new LinkedList(1);
-    assert.equal(get(o), 1);
+    assert.equal(o.get(), 1);
     o = new LinkedList(2, o);
-    assert.equal(get(o), 2);
-    assert.equal(get(o,1), 1);
+    assert.equal(o.get(), 2);
+    assert.equal(o.get(1), 1);
   });
 });
 
 describe("make(o...)", () => {
   it("blows linkedLists", () => {
-    assert.equal(make(), LinkedList.emptyLinkedList);
-    let o = make(1, 2, 3);
-    assert.equal(get(o,0), 3);
-    assert.equal(get(o,1), 2);
-    assert.equal(get(o,2), 1);
+    assert.equal(LinkedList.make(), LinkedList.empty);
+    let o = LinkedList.make(1, 2, 3);
+    assert.equal(o.get(0), 3);
+    assert.equal(o.get(1), 2);
+    assert.equal(o.get(2), 1);
   });
 });
 
 describe("count(o)", function () {
   it("counts", function () {
     let o = LinkedList.make(1, 2, 3);
-    assert.equal(count(o), 3);
+    assert.equal(o.count(), 3);
   });
 });
 
 describe("get(o, index)", () => {
   it("gets value of o at index", () => {
     let o = LinkedList.make(6,7,8);
-    assert.equal(get(o, 0), 8);
-    assert.equal(get(o, 1), 7);
-    assert.equal(get(o, 2), 6);
+    assert.equal(o.get(0), 8);
+    assert.equal(o.get(1), 7);
+    assert.equal(o.get(2), 6);
   });
 });
 
 describe("invert", () => {
   it("inverts linkedLists", () => {
     var o = LinkedList.make();
-    o = invert(o);
-    assert.equal(o, LinkedList.emptyLinkedList);
+    o = o.invert();
+    assert.equal(o, LinkedList.empty);
 
-    o = make(1);
-    o = invert(o);
-    assert.equal(peek(o),1);
-    assert.equal(skip(o,1), LinkedList.emptyLinkedList);
+    o = LinkedList.make(1);
+    o = o.invert();
+    assert.equal(o.peek(),1);
+    assert.equal(o.skip(1), LinkedList.empty);
 
-    o = push(push(o,2),3);
-    assert.equal(peek(o),3);
+    o = push(o.push(2),3);
+    assert.equal(o.peek(),3);
 
-    o = invert(o);
-    assert.equal(peek(o),1);
+    o = o.invert();
+    assert.equal(o.peek(),1);
 
-    let oo = make(1,2,3);
-    assert.equal(LinkedList.toString(oo), "[1 2 3]");
+    let oo = LinkedList.make(1,2,3);
+    assert.equal(oo.toString(), "1 2 3");
 
-    let xo = invert(oo);
-    assert.equal(LinkedList.toString(xo), "[3 2 1]");
+    let xo = oo.invert();
+    assert.equal(xo.toString(), "3 2 1");
   });
 });
 
@@ -102,23 +102,23 @@ describe("map(o, fn)", () => {
 
     let add7 = (o) => { return o + 7 };
 
-    result = map(o, add7);
-    assert.equal(result, LinkedList.emptyLinkedList);
+    result = o.map(add7);
+    assert.equal(result, LinkedList.empty);
 
-    o = make(1);
-    o = map(o, add7);
-    assert.equal(get(o), 8);
+    o = LinkedList.make(1);
+    o = o.map(add7);
+    assert.equal(o.get(), 8);
 
-    o = push(o, 2);
-    o = map(o, add7);
-    assert.equal(get(o), 9);
-    assert.equal(get(o, 1), 15);
+    o = o.push(2);
+    o = o.map(add7);
+    assert.equal(o.get(), 9);
+    assert.equal(o.get(1), 15);
 
-    o = push(o, 3);
-    o = map(o, add7);
-    assert.equal(get(o), 10);
-    assert.equal(get(o, 1), 16);
-    assert.equal(get(o, 2), 22);
+    o = o.push(3);
+    o = o.map(add7);
+    assert.equal(o.get(), 10);
+    assert.equal(o.get(1), 16);
+    assert.equal(o.get(2), 22);
   });
 });
 
@@ -126,14 +126,14 @@ describe("push(o)", () => {
   it("pushes o onto the linkedList.", () => {
     var o = LinkedList.make();
 
-    o = push(o, 1);
-    assert.equal(get(o), 1)
-    assert.equal(skip(o, 1), LinkedList.emptyLinkedList);
+    o = o.push(1);
+    assert.equal(o.get(), 1)
+    assert.equal(o.skip(1), LinkedList.empty);
 
-    o = push(o, 2);
-    assert.equal(get(o), 2)
-    assert.equal(get(o, 1), 1)
-    assert.equal(skip(o, 2), LinkedList.emptyLinkedList);
+    o = o.push(2);
+    assert.equal(o.get(), 2)
+    assert.equal(o.get(1), 1)
+    assert.equal(o.skip(2), LinkedList.empty);
   });
 });
 

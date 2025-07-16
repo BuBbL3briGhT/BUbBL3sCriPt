@@ -44,8 +44,8 @@ class LinkedList {
 
   map(fn) {
     if (this.isEmpty) return this;
-    return new this.constructor(fn(this.o),
-      this.oo.map(fn));
+    return new this.constructor(fn(this.peek()),
+      this.pop().map(fn));
   }
 
   get(i) { return this.skip(i).peek(); }
@@ -83,9 +83,9 @@ class LinkedList {
   toString() {
     if (this.isEmpty) return this.listOpenChar + this.listCloseChar;
 
-    return listOpenChar +
+    return this.listOpenChar +
       this.map(this.toStringFormat).reduce(this.toStringJoin)
-         + listCloseChar;
+         + this.listCloseChar;
   }
 
   toStringFormat(o) {
