@@ -70,19 +70,34 @@ class LinkedList {
       this.oo.map(fn));
   }
 
-  static get(o,i) { return peek(skip(o,i)); }
+  // static get(o,i) { return peek(skip(o,i)); }
 
-  static skip(o, count) {
+  get(i) { return this.skip(i).peek(); }
+
+  // static skip(o, count) {
+  //   if (count)
+  //     return skip(pop(o), --count);
+  //   return o;
+  // }
+
+  skip(count) {
     if (count)
-      return skip(pop(o), --count);
-    return o;
+      return this.pop().skip(--count);
+    return this;
   }
 
-  static peek(o) { return o.o; }
-  static pop(o) { return o.oo; }
+  // static peek(o) { return o.o; }
+  // static pop(o) { return o.oo; }
 
-  static shift(o) {
-    return invert(pop(invert(o)));
+  peek() { return this.o; }
+  pop() { return this.oo; }
+
+  // static shift(o) {
+  //   return invert(pop(invert(o)));
+  // }
+
+  shift() {
+    return this.invert().pop().invert();
   }
 
   static invert(o) {
