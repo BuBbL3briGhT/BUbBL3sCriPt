@@ -101,7 +101,7 @@ class LinkedList {
 
   toStringJoin(accumulatedString, formattedElement) {
     return formattedElement + " " + accumulatedString;
-  });
+  };
 
   toArray() {
     return this.reduce((array, currentElement) => {
