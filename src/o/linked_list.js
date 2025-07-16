@@ -20,23 +20,17 @@ class LinkedList {
     this.oo=oo;
   }
 
-  // static make(...elements) {
-  //   var head = emptyVector;
-  //   for (let o of elements)
-  //     head = new Vector(o, head);
-  //   return head;
-  // }
+  static count(o) {
+    return reduce(o, (count) => {
+      return ++count;
+    }, 0);
+  }
 
   static make(...elements) {
     var head = this.empty;
     for (let o of elements)
       head = new this(o, head);
     return head;
-  }
-
-  static from(arrayLike, mapFn, thisArg) {
-    let array = Array.from(arrayLike, mapFn, thisArg);
-    return this.make(...array);
   }
 
   static push(vector, element) {
@@ -49,6 +43,11 @@ class LinkedList {
       map(o.oo, fn));
   }
 
+  static from(arrayLike, mapFn, thisArg) {
+    let array = Array.from(arrayLike, mapFn, thisArg);
+    return this.make(...array);
+  }
+
   static get(o,i) { return peek(skip(o,i)); }
 
   static skip(o, count) {
@@ -59,12 +58,6 @@ class LinkedList {
 
   static peek(o) { return o.o; }
   static pop(o) { return o.oo; }
-
-  static count(o) {
-    return reduce(o, (count) => {
-      return ++count;
-    }, 0);
-  }
 
   static shift(o) {
     return invert(pop(invert(o)));
@@ -136,7 +129,7 @@ class LinkedList {
 
   //// Members Only ¥ ////
 
-  count() { return this.constructor.count(this); }
+  count() { return count(this); }
   conj(sourceLinkedList) { return this.constructor.conj(this, sourceLinkedList); } // oo -> sourceLinkedList
   each(fn) { return this.constructor.each(this, fn); }
   get(i) { return this.constructor.get(this, i); }
