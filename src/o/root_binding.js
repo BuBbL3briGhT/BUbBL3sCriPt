@@ -166,6 +166,9 @@ const rootBinding = {
     if (b.key)
       b = b.key;
     if (c.length > 0) {
+      console.log("a", a);
+      console.log("b", b);
+      console.log("c", c);
       return a[b](...c);
     } else
       return a[b]();

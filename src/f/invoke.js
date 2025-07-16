@@ -1,4 +1,3 @@
-// console.log("load invoke");
 
 function invoke(bnd, fn, args) {
   var bnd = Object.create(bnd);
@@ -22,9 +21,7 @@ function invoke(bnd, fn, args) {
   return _eval(bnd, fn);
 }
 
-// console.log("export invoke");
 module.exports = invoke;
-// console.log("assemble invoke");
 
 const eval = require('../f/eval');
 const _eval  = eval.eVaL;
