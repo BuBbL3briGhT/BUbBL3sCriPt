@@ -121,31 +121,61 @@ class LinkedList {
       }, this.constructor.make(this.peek()));
   }
 
-  static conj(targetLinkedList, sourceLinkedList) { // o -> targetLinkedList, oo -> sourceLinkedList
+  // static conj(targetLinkedList, sourceLinkedList) { // o -> targetLinkedList, oo -> sourceLinkedList
+  //   // oo (accumulator), o (currentElement)
+  //   return sourceLinkedList.reduce(function(accumulator, currentElement) {
+  //     return accumulator.push(currentElement);
+  //   }, targetLinkedList); // o -> targetLinkedList
+  // }
+
+  conj(sourceLinkedList) { // o -> targetLinkedList, oo -> sourceLinkedList
     // oo (accumulator), o (currentElement)
     return sourceLinkedList.reduce(function(accumulator, currentElement) {
       return accumulator.push(currentElement);
-    }, targetLinkedList); // o -> targetLinkedList
+    }, this); // o -> targetLinkedList
   }
 
-  static toString(o, listOpenChar, listCloseChar, join) {
-    if (o.isEmpty) return listOpenChar + listCloseChar;
+  // static toString(o, listOpenChar, listCloseChar, join) {
+  //   if (o.isEmpty) return listOpenChar + listCloseChar;
 
-    let format = (o) => {
-      switch (typeof o) {
-        case "string":
-          return '"' + o + '"';
-        case "symbol":
-          return Symbol.keyFor(o);
-        default:
-          return o.toString();
-      }
-    }
+  //   let format = (o) => {
+  //     switch (typeof o) {
+  //       case "string":
+  //         return '"' + o + '"';
+  //       case "symbol":
+  //         return Symbol.keyFor(o);
+  //       default:
+  //         return o.toString();
+  //     }
+  //   }
+
+  //   return listOpenChar +
+  //     reduce(map(o, format), join)
+  //        + listCloseChar;
+  // }
+
+  toString() {
+    if (this.isEmpty) return this.listOpenChar + this.listCloseChar;
 
     return listOpenChar +
-      reduce(map(o, format), join)
+      this.map(this.toStringFormat).reduce(this.toStringJoin)
          + listCloseChar;
   }
+
+  toStringFormat(o) {
+    switch (typeof o) {
+      case "string":
+        return '"' + o + '"';
+      case "symbol":
+        return Symbol.keyFor(o);
+      default:
+        return o.toString();
+    }
+  }
+
+  toStringJoin(accumulatedString, formattedElement) {
+    return formattedElement + " " + accumulatedString;
+  });
 
   static toArray(o) {
     return reduce(o, (array, currentElement) => {
