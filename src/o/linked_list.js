@@ -177,31 +177,58 @@ class LinkedList {
     return formattedElement + " " + accumulatedString;
   });
 
-  static toArray(o) {
-    return reduce(o, (array, currentElement) => {
+  // static toArray(o) {
+  //   return reduce(o, (array, currentElement) => {
+  //     array.push(currentElement); return array; }, []);
+  // }
+
+  toArray() {
+    return this.reduce((array, currentElement) => {
       array.push(currentElement); return array; }, []);
   }
 
-  static reduce(o, fn, memo) {
-    if (o.isEmpty) return memo;
+  // static reduce(o, fn, memo) {
+  //   if (o.isEmpty) return memo;
 
-    let oo = pop(o);
+  //   let oo = pop(o);
+  //   if (oo)
+  //     if (memo !== undefined)
+  //       return reduce(oo, fn,
+  //         fn(memo, peek(o)))
+  //     else
+  //       return reduce(oo, fn, peek(o));
+  //   else if(memo !== undefined)
+  //     return fn(memo, peek(o));
+  //   else
+  //     return peek(o);
+  // }
+
+  reduce(fn, memo) {
+    if (this.isEmpty) return memo;
+
+    let oo = this.pop();
     if (oo)
       if (memo !== undefined)
-        return reduce(oo, fn,
-          fn(memo, peek(o)))
+        return oo.reduce(fn,
+          fn(memo, this.peek()))
       else
-        return reduce(oo, fn, peek(o));
+        return oo.reduce(fn, this.peek());
     else if(memo !== undefined)
-      return fn(memo, peek(o));
+      return fn(memo, this.peek());
     else
-      return peek(o);
+      return this.peek();
   }
 
-  static each(o, fn) {
-    let oo = fn(peek(o));
-    if (pop(o).isEmpty) return oo;
-    return each(pop(o), fn);
+  // static each(o, fn) {
+  //   let oo = fn(peek(o));
+  //   if (pop(o).isEmpty) return oo;
+  //   return each(pop(o), fn);
+  // }
+
+  static this.each(fn) {
+    let oo = fn(this.peek());
+    if (this.pop().isEmpty) return oo;
+    return this.pop().each(fn);
   }
 
   //// Members Only ¥ ////
