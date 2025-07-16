@@ -1,11 +1,11 @@
-let emptyList;
+let emptyLinkedList;
 
-class List {
+class LinkedList {
 
-  static listOpenChar = "[";
-  static listCloseChar = "]";
+  static linkedListOpenChar = "[";
+  static linkedListCloseChar = "]";
 
-  static get emptyList() { return emptyList; }
+  static get emptyLinkedList() { return emptyLinkedList; }
 
   get isEmpty() { return false; }
   get first() { return peek(this); }
@@ -14,22 +14,22 @@ class List {
   get last() { return !pop(this).isEmpty ?
       pop(this).last : peek(this); }
 
-  // Create a list.
-  constructor(o, oo=emptyList) {
+  // Create a linkedList.
+  constructor(o, oo=emptyLinkedList) {
     this.o=o;
     this.oo=oo;
   }
 
   static make(...elements) { // oo -> elements
-    var listHead = emptyList; // ooo -> listHead
+    var linkedListHead = emptyLinkedList; // ooo -> linkedListHead
     for (let o of elements) // oo -> elements
-      listHead = new List(o, listHead); // ooo -> listHead
-    return listHead; // ooo -> listHead
+      linkedListHead = new LinkedList(o, linkedListHead); // ooo -> linkedListHead
+    return linkedListHead; // ooo -> linkedListHead
   }
 
   static from(arrayLike, mapFn, thisArg) { // arryLike -> arrayLike
     let array = Array.from(arrayLike, mapFn, thisArg); // arryLike -> arrayLike
-    return List.make(...array);
+    return LinkedList.make(...array);
   }
 
   static get(o,i) { return peek(skip(o,i)); }
@@ -40,8 +40,8 @@ class List {
     return o;
   }
 
-  static push(list, element) { // oo -> list, o -> element
-    return new List(element, list); // o -> element, oo -> list
+  static push(linkedList, element) { // oo -> linkedList, o -> element
+    return new LinkedList(element, linkedList); // o -> element, oo -> linkedList
   }
 
   static peek(o) { return o.o; }
@@ -68,15 +68,15 @@ class List {
       }, make(peek(o)));
   }
 
-  static conj(targetList, sourceList) { // o -> targetList, oo -> sourceList
+  static conj(targetLinkedList, sourceLinkedList) { // o -> targetLinkedList, oo -> sourceLinkedList
     // oo (accumulator), o (currentElement)
-    return sourceList.reduce(function(accumulator, currentElement) {
+    return sourceLinkedList.reduce(function(accumulator, currentElement) {
       return accumulator.push(currentElement);
-    }, targetList); // o -> targetList
+    }, targetLinkedList); // o -> targetLinkedList
   }
 
   static toString(o) {
-    if (o.isEmpty) return this.listOpenChar + this.listCloseChar; // SURR -> listOpenChar, OUND -> listCloseChar
+    if (o.isEmpty) return this.linkedListOpenChar + this.linkedListCloseChar; // SURR -> linkedListOpenChar, OUND -> linkedListCloseChar
 
     let format = (o) => {
       switch (typeof o) {
@@ -94,9 +94,9 @@ class List {
       return formattedElement + " " + accumulatedString;
     }
 
-    return this.listOpenChar + // SURR -> listOpenChar
+    return this.linkedListOpenChar + // SURR -> linkedListOpenChar
       reduce(map(o, format), join)
-         + this.listCloseChar; // OUND -> listCloseChar
+         + this.linkedListCloseChar; // OUND -> linkedListCloseChar
   }
 
   static toArray(o) {
@@ -107,7 +107,7 @@ class List {
 
   static map(o, fn) {
     if (o.isEmpty) return o;
-    return new List(fn(o.o),
+    return new LinkedList(fn(o.o),
       map(o.oo, fn));
   }
 
@@ -136,7 +136,7 @@ class List {
   //// Members Only ¥ ////
 
   count() { return count(this); }
-  conj(sourceList) { return conj(this, sourceList); } // oo -> sourceList
+  conj(sourceLinkedList) { return conj(this, sourceLinkedList); } // oo -> sourceLinkedList
   each(fn) { return each(this, fn); }
   get(i) { return get(this, i); }
   invert() { return invert(this); }
@@ -153,10 +153,10 @@ class List {
 
   *[Symbol.iterator]() {
     let currentNode = this;
-    // Normal list links return false for get isEmpty
-    // The emptyList link, which is the terminal item for all list return true for isEmpty.
-    // So, iterate while currentNode is not the emptyList node indicatex by call to isEmpty.
-    // List links should never be null or undefined, so no need to do a null check, if they are, this would represent a bug somewhere else so we fial on the null ref.
+    // Normal linkedList links return false for get isEmpty
+    // The emptyLinkedList link, which is the terminal item for all linkedList return true for isEmpty.
+    // So, iterate while currentNode is not the emptyLinkedList node indicatex by call to isEmpty.
+    // LinkedList links should never be null or undefined, so no need to do a null check, if they are, this would represent a bug somewhere else so we fial on the null ref.
     while (!currentNode.isEmpty) {
       yield currentNode.o;
       currentNode = currentNode.oo;
@@ -164,21 +164,21 @@ class List {
   }
 }
 
-const _toString = List.toString;
-const toString = _toString.bind(List);
+const _toString = LinkedList.toString;
+const toString = _toString.bind(LinkedList);
 toString.toString = _toString;
-List.toString = toString;
+LinkedList.toString = toString;
 
 const {count, conj, each, get, invert,
   map, make, peek, pop, push, reduce,
-  shift, skip, toArray } = List
+  shift, skip, toArray } = LinkedList
 
-class EmptyList {
+class EmptyLinkedList {
   get isEmpty() { return true; }
   *[Symbol.iterator]() { }
   toString() { return "[]"; }
 }
 
-emptyList = new EmptyList()
+emptyLinkedList = new EmptyLinkedList()
 
-module.exports = List;
+module.exports = LinkedList;
