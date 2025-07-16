@@ -26,21 +26,38 @@ class LinkedList {
     }, 0);
   }
 
-  static make(...elements) {
+  // static make(...elements) {
+  //   var head = this.empty;
+  //   for (let o of elements)
+  //     head = new this(o, head);
+  //   return head;
+  // }
+
+  make(...elements) {
     var head = this.empty;
     for (let o of elements)
-      head = new this(o, head);
+      head = new this.constructor(o, head);
     return head;
   }
 
-  static push(vector, element) {
-    return new this(element, vector);
+  // static push(vector, element) {
+  //   return new this(element, vector);
+  // }
+
+  push(element) {
+    return new this.constructor(element, this);
   }
 
-  static map(o, fn) {
-    if (o.isEmpty) return o;
-    return new this(fn(o.o),
-      map(o.oo, fn));
+  // static map(o, fn) {
+  //   if (o.isEmpty) return o;
+  //   return new this(fn(o.o),
+  //     map(o.oo, fn));
+  // }
+
+  map(fn) {
+    if (this.isEmpty) return this;
+    return new this.constructor(fn(this.o),
+      this.oo.map(fn));
   }
 
   static from(arrayLike, mapFn, thisArg) {
