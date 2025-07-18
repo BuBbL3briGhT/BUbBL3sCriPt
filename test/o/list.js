@@ -96,31 +96,31 @@ describe("List", () => {
     });
   });
 
-  // describe("map(o, fn)", () => {
-  //   it("maps o through fn", ()=>{
-  //     var o = LinkedList.make();
+  describe("#map(fn)", () => {
+    it("maps through fn", ()=>{
+      var list = List.make();
 
-  //     let add7 = (o) => { return o + 7 };
+      let add7 = (o) => { return o + 7 };
 
-  //     result = o.map(add7);
-  //     assert.equal(result, LinkedList.empty);
+      result = list.map(add7);
+      assert.equal(result, List.emptyList);
 
-  //     o = LinkedList.make(1);
-  //     o = o.map(add7);
-  //     assert.equal(o.get(), 8);
+      list = List.make(1);
+      list = list.map(add7);
+      assert.equal(list.get(), 8);
 
-  //     o = o.push(2);
-  //     o = o.map(add7);
-  //     assert.equal(o.get(), 9);
-  //     assert.equal(o.get(1), 15);
+      list = list.push(2);
+      list = list.map(add7);
+      assert.equal(list.get(), 9);
+      assert.equal(list.get(1), 15);
 
-  //     o = o.push(3);
-  //     o = o.map(add7);
-  //     assert.equal(o.get(), 10);
-  //     assert.equal(o.get(1), 16);
-  //     assert.equal(o.get(2), 22);
-  //   });
-  // });
+      list = list.push(3);
+      list = list.map(add7);
+      assert.equal(list.get(), 10);
+      assert.equal(list.get(1), 16);
+      assert.equal(list.get(2), 22);
+    });
+  });
 
   // describe("push(o)", () => {
   //   it("pushes o onto the linkedList.", () => {
