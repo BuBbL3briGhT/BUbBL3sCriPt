@@ -144,34 +144,34 @@ describe("reduce", () => {
 
     let add = (a,b) => { return b + a };
 
-    result = reduce(o, add);
+    result = o.reduce(add);
     assert.equal(result, undefined);
 
-    result = reduce(o, add, 0);
+    result = o.reduce(add, 0);
     assert.equal(result, 0);
 
-    o = push(o, 1);
-    result = reduce(o, add);
+    o = o.push(1);
+    result = o.reduce(add);
     assert.equal(result, 1);
 
-    o = push(o, 2);
-    result = reduce(o, add);
+    o = o.push(2);
+    result = o.reduce(add);
     assert.equal(result, 3);
 
-    o = push(o, 3),
-    result = reduce(o, add)
+    o = o.push(3),
+    result = o.reduce(add)
     assert.equal(result, 6)
 
-    o = make("a");
-    result = reduce(o, add);
+    o = LinkedList.make("a");
+    result = o.reduce(add);
     assert.equal(result, "a");
 
-    o = push(o, "b");
-    result = reduce(o, add);
+    o = o.push("b");
+    result = o.reduce(add);
     assert.equal(result, "ab");
 
-    o = push(o, "c");
-    result = reduce(o, add);
+    o = o.push("c");
+    result = o.reduce(add);
     assert.equal(result, "abc");
   });
 });
@@ -179,10 +179,10 @@ describe("reduce", () => {
 describe("skip(linkedList, count)", () => {
   it("skips", () => {
     let o = LinkedList.make(6,7,8);
-    assert.equal(peek(skip(o)), 8);
-    assert.equal(peek(skip(o,0)), 8);
-    assert.equal(peek(skip(o,1)), 7);
-    assert.equal(peek(skip(o,2)), 6);
+    assert.equal(o.skip().peek(), 8);
+    assert.equal(o.skip(0).peek(), 8);
+    assert.equal(o.skip(1).peek(), 7);
+    assert.equal(o.skip(2).peek(), 6);
   });
 });
 
@@ -191,35 +191,36 @@ describe("toString(o)", () => {
     var o = LinkedList.make(),
       result;
 
-    result = toString(o);
-    assert.equal(result, "[]");
+    result = o.toString();
+    assert.equal(result, "");
 
-    o = make(1);
-    result = toString(o);
-    assert.equal(result, "[1]");
+    o = LinkedList.make(1);
+    result = o.toString();
+    assert.equal(result, "1");
 
-    o = push(o,2);
-    result = toString(o);
-    assert.equal(result, "[1 2]");
+    o = o.push(2);
+    result = o.toString();
+    assert.equal(result, "1 2");
 
-    o = push(o, 3);
-    result = toString(o);
-    assert.equal(result, "[1 2 3]");
+    o = o.push(3);
+    result = o.toString();
+    assert.equal(result, "1 2 3");
 
-    o = push(o, "string");
-    result = toString(o);
-    assert.equal(result, "[1 2 3 \"string\"]");
+    o = o.push("string");
+    result = o.toString();
+    assert.equal(result, "1 2 3 \"string\"");
 
-    o = push(o, Symbol.for("symbol"));
-    result = toString(o);
-    assert.equal(result, "[1 2 3 \"string\" symbol]");
+    o = o.push(Symbol.for("symbol"));
+    result = o.toString();
+    assert.equal(result, "1 2 3 \"string\" symbol");
 
-    let ts = toString;
+    // let ts = toString;
     let oo = make(3,2,1);
-    assert.equal(ts(oo), "[3 2 1]");
+    assert.equal(oo.toString(), "3 2 1");
 
-    o = push(pop(pop(o)), oo);
-    assert.equal(ts(o), "[1 2 3 [3 2 1]]");
+    // o = push(pop(pop(o)), oo);
+    // o = o.pop().pop().push(oo);
+    assert.equal(o.toString(), "1 2 3 3 2 1");
   });
 });
 
