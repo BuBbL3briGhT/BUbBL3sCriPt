@@ -186,43 +186,43 @@ describe("List", () => {
     });
   });
 
-  // describe("toString(o)", () => {
-  //   it("formats linkedList as a string.", () => {
-  //     var o = LinkedList.make(),
-  //       result;
+  describe("toString(o)", () => {
+    it("formats list as a string.", () => {
+      var list = List.make(),
+        result;
 
-  //     result = o.toString();
-  //     assert.equal(result, "");
+      result = list.toString();
+      assert.equal(result, "()");
 
-  //     o = LinkedList.make(1);
-  //     result = o.toString();
-  //     assert.equal(result, "1");
+      list = List.make(1);
+      result = list.toString();
+      assert.equal(result, "(1)");
 
-  //     o = o.push(2);
-  //     result = o.toString();
-  //     assert.equal(result, "1 2");
+      list = list.push(2);
+      result = list.toString();
+      assert.equal(result, "(2 1)");
 
-  //     o = o.push(3);
-  //     result = o.toString();
-  //     assert.equal(result, "1 2 3");
+      list = list.push(3);
+      result = list.toString();
+      assert.equal(result, "(3 2 1)");
 
-  //     o = o.push("string");
-  //     result = o.toString();
-  //     assert.equal(result, "1 2 3 \"string\"");
+      list = list.push("string");
+      result = list.toString();
+      assert.equal(result, "(\"string\" 3 2 1)");
 
-  //     o = o.push(Symbol.for("symbol"));
-  //     result = o.toString();
-  //     assert.equal(result, "1 2 3 \"string\" symbol");
+      list = list.push(Symbol.for("symbol"));
+      result = list.toString();
+      assert.equal(result, "(symbol \"string\" 3 2 1)");
 
-  //     // let ts = toString;
-  //     let oo = make(3,2,1);
-  //     assert.equal(oo.toString(), "3 2 1");
+      // let ts = toString;
+      let oo = List.make(3,2,1);
+      assert.equal(oo.toString(), "(3 2 1)");
 
-  //     // o = push(pop(pop(o)), oo);
-  //     // o = o.pop().pop().push(oo);
-  //     assert.equal(o.toString(), "1 2 3 3 2 1");
-  //   });
-  // });
+      // list = push(pop(pop(o)), oo);
+      // o = o.pop().pop().push(oo);
+      // assert.equal(list.toString(), "(1 2 3 (3 2 1))");
+    });
+  });
 
   // describe("Symbol.iterator", () => {
   //   it("should not yield any values for an empty linkedList (LinkedList.air)", () => {
