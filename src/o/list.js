@@ -20,8 +20,8 @@ class List {
     this.oo=oo;
   }
 
-  static count(o) {
-    return reduce(o, (count) => {
+  count() {
+    return this.reduce((count) => {
       return ++count;
     }, 0);
   }

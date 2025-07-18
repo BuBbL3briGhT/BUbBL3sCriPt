@@ -55,12 +55,12 @@ describe("List", () => {
     });
   });
 
-  // describe("count(o)", function () {
-  //   it("counts", function () {
-  //     let o = LinkedList.make(1, 2, 3);
-  //     assert.equal(o.count(), 3);
-  //   });
-  // });
+  describe("count(o)", function () {
+    it("counts", function () {
+      let list = List.make(1, 2, 3);
+      assert.equal(list.count(), 3);
+    });
+  });
 
   // describe("get(o, index)", () => {
   //   it("gets value of o at index", () => {
