@@ -15,7 +15,7 @@ class List {
       this.pop().last : this.peek(); }
 
   // Create a linkedList.
-  constructor(o, oo=this.constructor.emptyList) {
+  constructor(o, oo=List.emptyList) {
     this.o=o;
     this.oo=oo;
   }
@@ -40,7 +40,7 @@ class List {
   }
 
   push(element) {
-    return new this.constructor(element, this);
+    return new List(element, this);
   }
 
   map(fn) {
@@ -110,19 +110,21 @@ class List {
   }
 
   reduce(fn, memo) {
-    if (this.isEmpty) return memo;
+    if (this.isEmpty)
+      return memo;
 
     let oo = this.pop();
-    if (oo)
-      if (memo !== undefined)
+    if (oo.isEmpty)
+      if(memo == undefined)
+        return this.peek();
+      else
+        return fn(memo, this.peek());
+    else
+      if (memo != undefined)
         return oo.reduce(fn,
           fn(memo, this.peek()))
       else
         return oo.reduce(fn, this.peek());
-    else if(memo !== undefined)
-      return fn(memo, this.peek());
-    else
-      return this.peek();
   }
 
   each(fn) {

@@ -137,54 +137,54 @@ describe("List", () => {
     });
   });
 
-  // describe("reduce", () => {
-  //   it("reduces the linkedList", () => {
-  //     var o = LinkedList.make(),
-  //         result;
+  describe("#reduce(fn)", () => {
+    it("reduces the list", () => {
+      var list = List.make(),
+          result;
 
-  //     let add = (a,b) => { return b + a };
+      let add = (a,b) => { return b + a };
 
-  //     result = o.reduce(add);
-  //     assert.equal(result, undefined);
+      result = list.reduce(add);
+      assert.equal(result, undefined);
 
-  //     result = o.reduce(add, 0);
-  //     assert.equal(result, 0);
+      result = list.reduce(add, 0);
+      assert.equal(result, 0);
 
-  //     o = o.push(1);
-  //     result = o.reduce(add);
-  //     assert.equal(result, 1);
+      list = list.push(1);
+      result = list.reduce(add);
+      assert.equal(result, 1);
 
-  //     o = o.push(2);
-  //     result = o.reduce(add);
-  //     assert.equal(result, 3);
+      list= list.push(2);
+      result = list.reduce(add);
+      assert.equal(result, 3);
 
-  //     o = o.push(3),
-  //     result = o.reduce(add)
-  //     assert.equal(result, 6)
+      list= list.push(3),
+      result = list.reduce(add)
+      assert.equal(result, 6)
 
-  //     o = LinkedList.make("a");
-  //     result = o.reduce(add);
-  //     assert.equal(result, "a");
+      list= List.make("a");
+      result = list.reduce(add);
+      assert.equal(result, "a");
 
-  //     o = o.push("b");
-  //     result = o.reduce(add);
-  //     assert.equal(result, "ab");
+      list= list.push("b");
+      result = list.reduce(add);
+      assert.equal(result, "ab");
 
-  //     o = o.push("c");
-  //     result = o.reduce(add);
-  //     assert.equal(result, "abc");
-  //   });
-  // });
+      list= list.push("c");
+      result = list.reduce(add);
+      assert.equal(result, "abc");
+    });
+  });
 
-  // describe("skip(linkedList, count)", () => {
-  //   it("skips", () => {
-  //     let o = LinkedList.make(6,7,8);
-  //     assert.equal(o.skip().peek(), 8);
-  //     assert.equal(o.skip(0).peek(), 8);
-  //     assert.equal(o.skip(1).peek(), 7);
-  //     assert.equal(o.skip(2).peek(), 6);
-  //   });
-  // });
+  describe("#skip(count)", () => {
+    it("skips", () => {
+      let list = List.make(6,7,8);
+      assert.equal(list.skip().peek(), 6);
+      assert.equal(list.skip(0).peek(), 6);
+      assert.equal(list.skip(1).peek(), 7);
+      assert.equal(list.skip(2).peek(), 8);
+    });
+  });
 
   // describe("toString(o)", () => {
   //   it("formats linkedList as a string.", () => {
