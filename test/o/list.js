@@ -122,20 +122,20 @@ describe("List", () => {
     });
   });
 
-  // describe("push(o)", () => {
-  //   it("pushes o onto the linkedList.", () => {
-  //     var o = LinkedList.make();
+  describe("#push(o)", () => {
+    it("pushes o onto the List.", () => {
+      var list = List.make();
 
-  //     o = o.push(1);
-  //     assert.equal(o.get(), 1)
-  //     assert.equal(o.skip(1), LinkedList.empty);
+      list = list.push(1);
+      assert.equal(list.get(), 1)
+      assert.equal(list.skip(1), List.emptyList);
 
-  //     o = o.push(2);
-  //     assert.equal(o.get(), 2)
-  //     assert.equal(o.get(1), 1)
-  //     assert.equal(o.skip(2), LinkedList.empty);
-  //   });
-  // });
+      list = list.push(2);
+      assert.equal(list.get(), 2)
+      assert.equal(list.get(1), 1)
+      assert.equal(list.skip(2), List.emptyList);
+    });
+  });
 
   // describe("reduce", () => {
   //   it("reduces the linkedList", () => {
