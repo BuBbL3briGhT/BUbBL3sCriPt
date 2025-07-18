@@ -30,20 +30,20 @@ describe("List", () => {
     });
   });
 
-  // describe("new LinkedList(o, oo) ", () => {
-  //   it("create a new linkedList for your fun and profit.", () => {
-  //     var o;
-  //     o = new LinkedList();
-  //     assert.equal(o.get(), undefined);
-  //     assert.equal(o.skip(1), LinkedList.emptyLinkedList);
+  describe("new List(o, oo) ", () => {
+    it("create a new list for your fun and profit.", () => {
+      var list;
+      list = new List();
+      assert.equal(list.get(), undefined);
+      assert.equal(list.pop(), List.emptyList);
 
-  //     o = new LinkedList(1);
-  //     assert.equal(o.get(), 1);
-  //     o = new LinkedList(2, o);
-  //     assert.equal(o.get(), 2);
-  //     assert.equal(o.get(1), 1);
-  //   });
-  // });
+      list = new List(1);
+      assert.equal(list.get(), 1);
+      list = new List(2, list);
+      assert.equal(list.get(), 2);
+      assert.equal(list.get(1), 1);
+    });
+  });
 
   // describe("make(o...)", () => {
   //   it("blows linkedLists", () => {

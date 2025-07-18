@@ -15,7 +15,7 @@ class List {
       this.pop().last : this.peek(); }
 
   // Create a linkedList.
-  constructor(o, oo=this.emptyList) {
+  constructor(o, oo=this.constructor.emptyList) {
     this.o=o;
     this.oo=oo;
   }
