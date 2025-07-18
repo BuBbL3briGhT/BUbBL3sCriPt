@@ -7,7 +7,7 @@ describe("List", () => {
     describe("toString", function () {
       it("should return a formatted string representation of an empty linkedList", function () {
         let emptyList = List.emptyList
-        assert.equal(emptyList.toString(), "");
+        assert.equal(emptyList.toString(), "()");
       });
     });
   });
@@ -23,12 +23,12 @@ describe("List", () => {
     });
   });
 
-  // describe("toString", function () {
-  //   it("returns the expected string representation", function () {
-  //     let linkedList = LinkedList.make(1, 2, 3);
-  //     assert.equal(linkedList.toString(), "1 2 3");
-  //   });
-  // });
+  describe("toString", function () {
+    it("returns the expected string representation", function () {
+      let list = List.make(1, 2, 3);
+      assert.equal(list.toString(), "(1 2 3)");
+    });
+  });
 
   // describe("new LinkedList(o, oo) ", () => {
   //   it("create a new linkedList for your fun and profit.", () => {

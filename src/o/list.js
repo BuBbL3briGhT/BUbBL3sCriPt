@@ -143,10 +143,8 @@ class List {
   }
 }
 
-class EmptyList {
+class EmptyList extends List {
   get isEmpty() { return true; }
-  *[Symbol.iterator]() { }
-  toString() { return ""; }
 }
 
 emptyList = new EmptyList()
