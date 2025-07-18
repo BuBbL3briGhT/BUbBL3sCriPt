@@ -12,16 +12,16 @@ describe("List", () => {
     });
   });
 
-  // describe("isEmpty", function () {
-  //   it("should return true for an empty linkedList", function () {
-  //     let linkedList = LinkedList.make();
-  //     assert.equal(linkedList.isEmpty, true);
-  //   });
-  //   it("should return false for a none empty linkedList", function () {
-  //     let linkedList = LinkedList.make(1);
-  //     assert.equal(linkedList.isEmpty, false);
-  //   });
-  // });
+  describe("isEmpty", function () {
+    it("should return true for an empty list", function () {
+      let list = List.make();
+      assert.equal(list.isEmpty, true);
+    });
+    it("should return false for a none empty linkedList", function () {
+      let list = List.make(1);
+      assert.equal(list.isEmpty, false);
+    });
+  });
 
   // describe("toString", function () {
   //   it("returns the expected string representation", function () {

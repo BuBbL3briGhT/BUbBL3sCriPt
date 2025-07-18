@@ -151,4 +151,4 @@ class EmptyList {
 
 emptyList = new EmptyList()
 
-module.exports = LinkedList;
+module.exports = List;
