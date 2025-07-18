@@ -1,124 +1,154 @@
-const LinkedList = require("./linked_list");
-
 let emptyList;
 
-class List extends LinkedList {
+class LinkedList {
 
-  static listOpenChar = "(";
-  static listCloseChar = ")";
+  listOpenChar = "";
+  listCloseChar = "";
 
-  static get empty() { return emptyList; }
+  static get emptyList() { return emptyList; }
 
-  // Create a list.
-  // constructor(o, oo=emptyList) {
-  //   super(o, oo);
-  // }
+  get isEmpty() { return false; }
+  get first() { return this.peek(); }
+  get rest() { return this.pop(); }
+  get next() { return this.pop().peek(); }
+  get last() { return !this.pop().isEmpty ?
+      this.pop().last : this.peek(); }
+
+  // Create a linkedList.
+  constructor(o, oo=this.emptyList) {
+    this.o=o;
+    this.oo=oo;
+  }
+
+  static count(o) {
+    return reduce(o, (count) => {
+      return ++count;
+    }, 0);
+  }
 
   static make(...elements) {
-    return _make(elements);
+    var head = this.emptyList;
+    for (let o of elements)
+      head = new this(o, head);
+    return head;
   }
 
-  static blow(...list) {
-    return _blow(list);
+  static from(arrayLike, mapFn, thisArg) {
+    let array = Array.from(arrayLike, mapFn, thisArg);
+    return this.make(...array);
   }
 
-  // static from(arrayLike, mapFn, thisArg) {
-  //   let array = Array.from(arrayLike, mapFn, thisArg);
-  //   return List.make(...array);
-  // }
+  push(element) {
+    return new this.constructor(element, this);
+  }
 
-  // static push(linkedList, element) { // oo -> linkedList, o -> element
-  //   return new List(element, linkedList); // o -> element, oo -> linkedList
-  // }
+  map(fn) {
+    if (this.isEmpty) return this;
+    return new this.constructor(fn(this.peek()),
+      this.pop().map(fn));
+  }
 
-  // static invert(o) {
-  //   if (o.isEmpty)
-  //     return o;
+  get(i) { return this.skip(i).peek(); }
 
-  //   // oo (accumulator), o (currentElement)
-  //   return reduce(pop(o),
-  //     (accumulator, currentElement) => {
-  //       return push(accumulator, currentElement);
-  //     }, make(peek(o)));
-  // }
+  skip(count) {
+    if (count)
+      return this.pop().skip(--count);
+    return this;
+  }
 
-  // static map(o, fn) {
-  //   if (!o.isEmpty)
-  //     return new List(fn(o.o),
-  //       map(o.oo, fn));
-  // }
+  peek() { return this.o; }
+  pop() { return this.oo; }
 
-  // static toString(o) {
-  //   if (!o) return "()";
+  shift() {
+    return this.invert().pop().invert();
+  }
 
-  //   let format = (o) => {
-  //     switch (typeof o) {
-  //       case "string":
-  //         return '"' + o + '"';
-  //       case "symbol":
-  //         return Symbol.keyFor(o);
-  //       default:
-  //         return o.toString();
-  //     }
-  //   }
+  invert() {
+    if (this.isEmpty)
+      return this;
 
-  //   // oo (accumulatedString), o (formattedElement)
-  //   let join = (accumulatedString, formattedElement) => {
-  //     return accumulatedString + " " + formattedElement; // Original was `oo + " " + o`, if linkedList is reversed, this should be `formattedElement + " " + accumulatedString`
-  //                                                       // However, looking at LynktLyst.toString, it was `o + " " + oo`.
-  //                                                       // Let's keep the original logic of prepending: `formattedElement + " " + accumulatedString`
-  //                                                       // if the reduce iterates head to tail and wants to build a reversed string to match (e.g. LIFO list -> string)
-  //                                                       // Or, if reduce iterates head to tail and we want natural order string, it should be `accumulatedString + " " + formattedElement`
-  //                                                       // Given `LynktLyst.toString` also had `o + " " + oo` and it works to produce `(1 2 3)`, this implies reduce iterates from tail (or linkedList is inverted before stringification).
-  //                                                       // For now, I keep the parameter names and the original logic: `formattedElement + " " + accumulatedString` assuming it's correct for the linkedList's iteration order in reduce.
-  //                                                       // The original code `oo + " " + o` means `accumulatedString + " " + formattedElement`.
-  //                                                       // If `reduce` processes from head (e.g. 1, then 2, then 3 for linkedList (1 2 3) ):
-  //                                                       // Iter 1: memo="", current=1 -> memo=" 1"
-  //                                                       // Iter 2: memo=" 1", current=2 -> memo=" 1 2"
-  //                                                       // This seems more standard. Let's use `accumulatedString + " " + formattedElement`.
-  //     return accumulatedString + " " + formattedElement;
-  //   }
+    return this.pop().reduce(
+      (accumulator, currentElement) => {
+        return accumulator.push(currentElement);
+      }, this.constructor.make(this.peek()));
+  }
 
-  //   return "(" +
-  //     reduce(map(o, format), join, "").trimStart() // Added trimStart and initial value for reduce
-  //        + ")";
-  // }
+  conj(sourceLinkedList) { // o -> targetLinkedList, oo -> sourceLinkedList
+    // oo (accumulator), o (currentElement)
+    return sourceLinkedList.reduce(function(accumulator, currentElement) {
+      return accumulator.push(currentElement);
+    }, this); // o -> targetLinkedList
+  }
 
-  // toString() { return List.toString(this); } // Ensure static toString is called for consistency
-  // push(element) { return List.push(this, element); } // o -> element, ensure static push
+  toString() {
+    if (this.isEmpty) return this.listOpenChar + this.listCloseChar;
 
-}
+    return this.listOpenChar +
+      this.map(this.toStringFormat).reduce(this.toStringJoin)
+         + this.listCloseChar;
+  }
 
+  toStringFormat(o) {
+    switch (typeof o) {
+      case "string":
+        return '"' + o + '"';
+      case "symbol":
+        return Symbol.keyFor(o);
+      default:
+        return o.toString();
+    }
+  }
 
-// These are static methods, ensure they
-// are used as .map, List.push etc.
-// if needed inside instance methods, or
-// this is fine if they are standalone
-// pure functions from LynktLyst.
-const { map, push, reduce, toString,
-        pop, peek, make } = List;
+  toStringJoin(accumulatedString, formattedElement) {
+    return formattedElement + " " + accumulatedString;
+  };
 
+  toArray() {
+    return this.reduce((array, currentElement) => {
+      array.push(currentElement); return array; }, []);
+  }
 
-function _make(elementsArray, currentLinkedList=emptyList) {
-  if (elementsArray.length < 1)
-    return currentLinkedList;
-  return _make(elementsArray,
-    new List(elementsArray.pop(),
-      currentLinkedList));
-}
+  reduce(fn, memo) {
+    if (this.isEmpty) return memo;
 
-function _blow(elementsArray, currentLinkedList=emptyList) {
-  if (elementsArray.length < 1)
-    return currentLinkedList;
-  return _blow(elementsArray,
-    new List(elementsArray.pop(),
-      currentLinkedList));
+    let oo = this.pop();
+    if (oo)
+      if (memo !== undefined)
+        return oo.reduce(fn,
+          fn(memo, this.peek()))
+      else
+        return oo.reduce(fn, this.peek());
+    else if(memo !== undefined)
+      return fn(memo, this.peek());
+    else
+      return this.peek();
+  }
+
+  each(fn) {
+    let oo = fn(this.peek());
+    if (this.pop().isEmpty) return oo;
+    return this.pop().each(fn);
+  }
+
+  *[Symbol.iterator]() {
+    let currentNode = this;
+    // Normal linkedList links return false for get isEmpty
+    // The emptyList link, which is the terminal item for all linkedList return true for isEmpty.
+    // So, iterate while currentNode is not the emptyLinkedList node indicatex by call to isEmpty.
+    // LinkedList links should never be null or undefined, so no need to do a null check, if they are, this would represent a bug somewhere else so we fial on the null ref.
+    while (!currentNode.isEmpty) {
+      yield currentNode.o;
+      currentNode = currentNode.oo;
+    }
+  }
 }
 
 class EmptyList {
   get isEmpty() { return true; }
+  *[Symbol.iterator]() { }
+  toString() { return ""; }
 }
 
 emptyList = new EmptyList()
 
-module.exports = List;
+module.exports = LinkedList;
