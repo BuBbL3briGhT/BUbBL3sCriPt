@@ -71,30 +71,30 @@ describe("List", () => {
     });
   });
 
-  // describe("invert", () => {
-  //   it("inverts linkedLists", () => {
-  //     var o = LinkedList.make();
-  //     o = o.invert();
-  //     assert.equal(o, LinkedList.empty);
+  describe("invert", () => {
+    it("inverts list", () => {
+      var list = List.make();
+      list = list.invert();
+      assert.equal(list, List.emptyList);
 
-  //     o = LinkedList.make(1);
-  //     o = o.invert();
-  //     assert.equal(o.peek(),1);
-  //     assert.equal(o.skip(1), LinkedList.empty);
+      list = List.make(1);
+      list = list.invert();
+      assert.equal(list.peek(),1);
+      assert.equal(list.skip(1), List.emptyList);
 
-  //     o = push(o.push(2),3);
-  //     assert.equal(o.peek(),3);
+      list = list.push(2).push(3);
+      assert.equal(list.peek(), 3);
 
-  //     o = o.invert();
-  //     assert.equal(o.peek(),1);
+      list = list.invert();
+      assert.equal(list.peek(), 1);
 
-  //     let oo = LinkedList.make(1,2,3);
-  //     assert.equal(oo.toString(), "1 2 3");
+      let oo = List.make(1,2,3);
+      assert.equal(oo.toString(), "(1 2 3)");
 
-  //     let xo = oo.invert();
-  //     assert.equal(xo.toString(), "3 2 1");
-  //   });
-  // });
+      let xo = oo.invert();
+      assert.equal(xo.toString(), "(3 2 1)");
+    });
+  });
 
   // describe("map(o, fn)", () => {
   //   it("maps o through fn", ()=>{
