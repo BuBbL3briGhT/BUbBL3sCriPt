@@ -45,15 +45,15 @@ describe("List", () => {
     });
   });
 
-  // describe("make(o...)", () => {
-  //   it("blows linkedLists", () => {
-  //     assert.equal(LinkedList.make(), LinkedList.empty);
-  //     let o = LinkedList.make(1, 2, 3);
-  //     assert.equal(o.get(0), 3);
-  //     assert.equal(o.get(1), 2);
-  //     assert.equal(o.get(2), 1);
-  //   });
-  // });
+  describe("make(o...)", () => {
+    it("makes a list", () => {
+      assert.equal(List.make(), List.emptyList);
+      let list = List.make(1, 2, 3);
+      assert.equal(list.get(0), 1);
+      assert.equal(list.get(1), 2);
+      assert.equal(list.get(2), 3);
+    });
+  });
 
   // describe("count(o)", function () {
   //   it("counts", function () {

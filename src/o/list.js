@@ -28,6 +28,7 @@ class List {
 
   static make(...elements) {
     var head = this.emptyList;
+    elements = elements.reverse();
     for (let o of elements)
       head = new this(o, head);
     return head;
@@ -100,7 +101,7 @@ class List {
   }
 
   toStringJoin(accumulatedString, formattedElement) {
-    return formattedElement + " " + accumulatedString;
+    return accumulatedString + " " + formattedElement;
   };
 
   toArray() {
