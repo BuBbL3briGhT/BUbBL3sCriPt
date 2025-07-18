@@ -1,9 +1,9 @@
 let emptyList;
 
-class LinkedList {
+class List {
 
-  listOpenChar = "";
-  listCloseChar = "";
+  listOpenChar = "(";
+  listCloseChar = ")";
 
   static get emptyList() { return emptyList; }
 
