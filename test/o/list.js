@@ -62,14 +62,14 @@ describe("List", () => {
     });
   });
 
-  // describe("get(o, index)", () => {
-  //   it("gets value of o at index", () => {
-  //     let o = LinkedList.make(6,7,8);
-  //     assert.equal(o.get(0), 8);
-  //     assert.equal(o.get(1), 7);
-  //     assert.equal(o.get(2), 6);
-  //   });
-  // });
+  describe("get(index)", () => {
+    it("gets value at index", () => {
+      let list = List.make(6,7,8);
+      assert.equal(list.get(0), 6);
+      assert.equal(list.get(1), 7);
+      assert.equal(list.get(2), 8);
+    });
+  });
 
   // describe("invert", () => {
   //   it("inverts linkedLists", () => {
