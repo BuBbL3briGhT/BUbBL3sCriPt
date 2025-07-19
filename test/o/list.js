@@ -282,22 +282,22 @@ describe("List", () => {
       assert.deepEqual(results, expected, "Spread syntax results mismatch for list with null/undefined");
     });
 
-  //   it("should not modify the original linkedList during iteration", () => {
-  //     const linkedList = LinkedList.make("a", "b", "c"); // c -> b -> a
-  //     const expectedItems = ["c", "b", "a"];
-  //     const expectedToString = '["a" "b" "c"]'; // Based on typical toString for such a linkedList structure
+    it("should not modify the original list during iteration", () => {
+      const list = List.make("a", "b", "c"); // c -> b -> a
+      const expectedItems = ["a", "b", "c"];
+      const expectedToString = '("a" "b" "c")'; // Based on typical toString for such a linkedList structure
 
-  //     // First iteration
-  //     assert.deepEqual([...linkedList], expectedItems, "First iteration results mismatch");
+      // First iteration
+      assert.deepEqual([...list], expectedItems, "First iteration results mismatch");
 
-  //     // Check linkedList integrity after iteration
-  //     assert.equal(LinkedList.toString(linkedList), expectedToString, "LinkedList string form changed after iteration");
-  //     assert.equal(LinkedList.count(linkedList), 3, "LinkedList count changed after iteration");
-  //     assert.equal(LinkedList.peek(linkedList), "c", "LinkedList head changed after iteration");
+      // Check linkedList integrity after iteration
+      assert.equal(list.toString(), expectedToString, "List string form changed after iteration");
+      assert.equal(list.count(), 3, "List count changed after iteration");
+      assert.equal(list.peek(), "a", "List head changed after iteration");
 
-  //     // Second iteration
-  //     assert.deepEqual([...linkedList], expectedItems, "Second iteration results mismatch");
-  //   });
+      // Second iteration
+      assert.deepEqual([...list], expectedItems, "Second iteration results mismatch");
+    });
 
   //   it("should allow multiple iterations independently", () => {
   //     const linkedList = LinkedList.make("x", "y"); // y -> x
