@@ -299,19 +299,19 @@ describe("List", () => {
       assert.deepEqual([...list], expectedItems, "Second iteration results mismatch");
     });
 
-  //   it("should allow multiple iterations independently", () => {
-  //     const linkedList = LinkedList.make("x", "y"); // y -> x
-  //     const expected = ["y", "x"];
+    it("should allow multiple iterations independently", () => {
+      const list = List.make("x", "y"); // y -> x
+      const expected = ["x", "y"];
 
-  //     const iterator1 = linkedList[Symbol.iterator]();
-  //     const iterator2 = linkedList[Symbol.iterator]();
+      const iterator1 = list[Symbol.iterator]();
+      const iterator2 = list[Symbol.iterator]();
 
-  //     assert.deepEqual(iterator1.next().value, "y");
-  //     assert.deepEqual(iterator2.next().value, "y");
-  //     assert.deepEqual(iterator1.next().value, "x");
-  //     assert.deepEqual(iterator2.next().value, "x");
-  //     assert.deepEqual(iterator1.next().done, true);
-  //     assert.deepEqual(iterator2.next().done, true);
-  //   });
+      assert.deepEqual(iterator1.next().value, "x");
+      assert.deepEqual(iterator2.next().value, "x");
+      assert.deepEqual(iterator1.next().value, "y");
+      assert.deepEqual(iterator2.next().value, "y");
+      assert.deepEqual(iterator1.next().done, true);
+      assert.deepEqual(iterator2.next().done, true);
+    });
   });
 });
