@@ -186,7 +186,7 @@ describe("List", () => {
     });
   });
 
-  describe("toString(o)", () => {
+  describe("#toString()", () => {
     it("formats list as a string.", () => {
       var list = List.make(),
         result;
@@ -224,18 +224,18 @@ describe("List", () => {
     });
   });
 
-  // describe("Symbol.iterator", () => {
-  //   it("should not yield any values for an empty linkedList (LinkedList.air)", () => {
-  //     const emptyLinkedList = LinkedList.emptyLinkedList;
-  //     const results = [...emptyLinkedList];
-  //     assert.deepEqual(results, []);
+  describe("Symbol.iterator", () => {
+    it("should not yield any values for an empty linkedList (LinkedList.air)", () => {
+      const emptyList = List.emptyList;
+      const results = [...emptyList];
+      assert.deepEqual(results, []);
 
-  //     let count = 0;
-  //     for (const item of emptyLinkedList) {
-  //       count++;
-  //     }
-  //     assert.equal(count, 0, "for...of loop should not execute for LinkedList.air");
-  //   });
+      let count = 0;
+      for (const item of emptyList) {
+        count++;
+      }
+      assert.equal(count, 0, "for...of loop should not execute for List.emptyList");
+    });
 
   //   it("should handle a linkedList created by new LinkedList() (yields initial undefined value)", () => {
   //     // A new LinkedList() results in { o: undefined, oo: undefined }, which has x=false.
@@ -315,5 +315,5 @@ describe("List", () => {
   //     assert.deepEqual(iterator1.next().done, true);
   //     assert.deepEqual(iterator2.next().done, true);
   //   });
-  // });
+  });
 });
