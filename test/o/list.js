@@ -274,13 +274,13 @@ describe("List", () => {
       assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch for multi-element list");
     });
 
-  //   it("should correctly yield null and undefined values if they are part of the linkedList", () => {
-  //     const linkedList = LinkedList.make(1, undefined, 3, null, 5); // Expected order: 5, null, 3, undefined, 1
-  //     const expected = [5, null, 3, undefined, 1];
+    it("should correctly yield null and undefined values if they are part of the list", () => {
+      const list = List.make(1, undefined, 3, null, 5); // Expected order: 5, null, 3, undefined, 1
+      const expected = [1, undefined, 3, null, 5];
 
-  //     const results = [...linkedList];
-  //     assert.deepEqual(results, expected, "Spread syntax results mismatch for linkedList with null/undefined");
-  //   });
+      const results = [...list];
+      assert.deepEqual(results, expected, "Spread syntax results mismatch for list with null/undefined");
+    });
 
   //   it("should not modify the original linkedList during iteration", () => {
   //     const linkedList = LinkedList.make("a", "b", "c"); // c -> b -> a
