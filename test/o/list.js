@@ -259,22 +259,20 @@ describe("List", () => {
       assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch");
     });
 
-  //   it("should yield all elements in a multi-element linkedList in order", () => {
-  //     const linkedList = LinkedList.make(1, 2, 3); // Creates linkedList: 1 -> 2 -> 3 -> air
-  //                                          // Note: LinkedList.make actually creates it as 3 -> 2 -> 1 -> air
-  //                                          // The tests for make() show: make(1,2,3) -> get(o,0)=3, get(o,1)=2, get(o,2)=1
-  //                                          // So the yielded order should be 3, 2, 1 for make(1,2,3)
-  //     const expected = [3, 2, 1];
+    it("should yield all elements in a multi-element list in order", () => {
+      const list = List.make(1, 2, 3);
 
-  //     const resultsForOf = [];
-  //     for (const item of linkedList) {
-  //       resultsForOf.push(item);
-  //     }
-  //     assert.deepEqual(resultsForOf, expected, "for...of loop results mismatch for multi-element linkedList");
+      const expected = [1, 2, 3];
 
-  //     const resultsSpread = [...linkedList];
-  //     assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch for multi-element linkedList");
-  //   });
+      const resultsForOf = [];
+      for (const item of list) {
+        resultsForOf.push(item);
+      }
+      assert.deepEqual(resultsForOf, expected, "for...of loop results mismatch for multi-element list");
+
+      const resultsSpread = [...list];
+      assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch for multi-element list");
+    });
 
   //   it("should correctly yield null and undefined values if they are part of the linkedList", () => {
   //     const linkedList = LinkedList.make(1, undefined, 3, null, 5); // Expected order: 5, null, 3, undefined, 1
