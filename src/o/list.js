@@ -2,8 +2,8 @@ let emptyList;
 
 class List {
 
-  listOpenChar = "(";
-  listCloseChar = ")";
+  // static listOpenChar = "(";
+  // static listCloseChar = ")";
 
   static get emptyList() { return emptyList; }
 
@@ -81,12 +81,14 @@ class List {
     }, this); // o -> targetLinkedList
   }
 
-  toString() {
-    if (this.isEmpty) return this.listOpenChar + this.listCloseChar;
+  _toString() {
+    if (this.isEmpty) return "";
 
-    return this.listOpenChar +
-      this.map(this.toStringFormat).reduce(this.toStringJoin)
-         + this.listCloseChar;
+    return this.map(this.toStringFormat).reduce(this.toStringJoin);
+  }
+
+  toString() {
+    return "(" + this._toString() + ")";
   }
 
   toStringFormat(o) {

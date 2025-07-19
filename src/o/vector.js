@@ -1,31 +1,35 @@
-const LinkedList = require("./linked_list");
+const List = require("./list");
 
 let emptyVector;
 
-class Vector extends LinkedList {
+class Vector extends List {
 
-  static listOpenChar = "[";
-  static listCloseChar = "]";
+  // static listOpenChar = "[";
+  // static listCloseChar = "]";
 
   static get empty() { return emptyVector; }
 
   // Create a vector.
-  // constructor(o, oo=emptyVector) {
-  //   super(o, oo);
-  // }
+  constructor(o, oo=emptyVector) {
+    super(o, oo);
+  }
 
-  // toString() { return toString(this); }
+  static make(...elements) {
+    var head = this.emptyList;
+    for (let o of elements)
+      head = new this(o, head);
+    return head;
+  }
+
+  toString() {
+    return "[" + this._toString() + "]";
+  }
+
 }
 
-// const _toString = LinkedList.toString.toString;
-// const toString = _toString.bind(Vector);
-// toString.toString = _toString;
-// Vector.toString = toString;
 
-class EmptyVector {
+class EmptyVector extends Vector {
   get isEmpty() { return true; }
-  *[Symbol.iterator]() { }
-  toString() { return "[]"; }
 }
 
 emptyVector = new EmptyVector()
