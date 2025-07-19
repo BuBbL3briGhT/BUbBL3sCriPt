@@ -237,13 +237,13 @@ describe("List", () => {
       assert.equal(count, 0, "for...of loop should not execute for List.emptyList");
     });
 
-  //   it("should handle a linkedList created by new LinkedList() (yields initial undefined value)", () => {
-  //     // A new LinkedList() results in { o: undefined, oo: undefined }, which has x=false.
-  //     // The iterator will yield the 'o' value.
-  //     const linkedListFromDefaultConstructor = new LinkedList();
-  //     const results = [...linkedListFromDefaultConstructor];
-  //     assert.deepEqual(results, [undefined], "Default constructor linkedList should yield its undefined 'o' value");
-  //   });
+    it("should handle a list created by new List() (yields initial undefined value)", () => {
+      // A new List() results in { o: undefined, oo: List.emptyList }, which has isEmpty=false.
+      // The iterator will yield the 'o' value.
+      const listFromDefaultConstructor = new List();
+      const results = [...listFromDefaultConstructor];
+      assert.deepEqual(results, [undefined], "Default constructor List should yield its undefined 'o' value");
+    });
 
   //   it("should yield the single element for a single-element linkedList", () => {
   //     const linkedList = LinkedList.make(1); // Creates linkedList: 1 -> air
