@@ -245,19 +245,19 @@ describe("List", () => {
       assert.deepEqual(results, [undefined], "Default constructor List should yield its undefined 'o' value");
     });
 
-  //   it("should yield the single element for a single-element linkedList", () => {
-  //     const linkedList = LinkedList.make(1); // Creates linkedList: 1 -> air
-  //     const expected = [1];
+    it("should yield the single element for a single-element list", () => {
+      const list = List.make(1); // Creates list: 1 -> emptyList
+      const expected = [1];
 
-  //     const resultsForOf = [];
-  //     for (const item of linkedList) {
-  //       resultsForOf.push(item);
-  //     }
-  //     assert.deepEqual(resultsForOf, expected, "for...of loop results mismatch");
+      const resultsForOf = [];
+      for (const item of list) {
+        resultsForOf.push(item);
+      }
+      assert.deepEqual(resultsForOf, expected, "for...of loop results mismatch");
 
-  //     const resultsSpread = [...linkedList];
-  //     assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch");
-  //   });
+      const resultsSpread = [...list];
+      assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch");
+    });
 
   //   it("should yield all elements in a multi-element linkedList in order", () => {
   //     const linkedList = LinkedList.make(1, 2, 3); // Creates linkedList: 1 -> 2 -> 3 -> air
