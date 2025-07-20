@@ -2,18 +2,18 @@ const assert = require("assert"); const   fs   = require("fs");
 const  Yaml  = require("yaml");
 
 const parse   = require("../../src/f/parse");
-const Bubbles   = require("../../src/o/bubbles");
-const List    = require("../../src/o/list");
+const List   = require("../../src/o/list");
+const Vector    = require("../../src/o/vector");
 const Keyword = require("../../src/o/keyword");
 const Symbol  = require("../../src/o/symbol");
 const Bubble  = require("../../src/o/bubble");
 const {type}  = require("../../src/z/fns"); // Assuming fns is a valid module
 
-// Use Bubbles's static methods.
-const { peek, pop, make: makeBubbles, from:
-  bubblesFrom } = Bubbles;
+// Use List's static methods.
+// const { peek, pop, make: List.make, from:
+//   List.from } = List;
 
-const { make: makeList } = List;
+// const { make: Vector.make } = Vector;
 
 const symbol = Symbol.for("symbol"),
       a = Symbol.for("a"),
@@ -29,34 +29,34 @@ describe("parse(string)", () => {
 
   it("parses (1 2 3) into the correct AST structure", () => {
     const ast = parse("(1 2 3)");
-    const expectedAst = makeBubbles(1, 2, 3);
-    assert.deepEqual(peek(ast), expectedAst, "AST for (1 2 3) should be a bubbles of 1, 2, 3");
+    const expectedAst = List.make(1, 2, 3);
+    assert.deepEqual(ast.peek(), expectedAst, "AST for (1 2 3) should be a list of 1, 2, 3");
   });
 
   it("parses (not true) into the correct AST structure", () => {
     let not = Symbol.for("not");
     const ast = parse("(not true)");
-    const expectedAst = makeBubbles(not, true);
-    assert.deepEqual(peek(ast), expectedAst, "AST for (not true) should be a bubbles of not, true");
+    const expectedAst = List.make(not, true);
+    assert.deepEqual(ast.peek(), expectedAst, "AST for (not true) should be a list of not, true");
   });
 
-  it("parses a bubble of bubbles", function () {
+  it("parses a bubble of list", function () {
     let m = parse("°(a b c)")
-    assert(peek(m) instanceof Bubble);
+    assert(m.peek() instanceof Bubble);
   });
 
   itParses("symbol", {expects: symbol});
   itParses(":keyword",
     {expects: keyword});
   itParses("(1 2 3)",
-    {expects: makeBubbles(1, 2, 3)});
+    {expects: List.make(1, 2, 3)});
   itParses("(a b c)",
-    {expects: makeBubbles(a, b, c)});
+    {expects: List.make(a, b, c)});
   itParses("(a 3 b 2 c 1)",
-    {expects: makeBubbles(a, 3, b, 2, c, 1)});
+    {expects: List.make(a, 3, b, 2, c, 1)});
 
   itParses2("a nested bubble", "(1 (2))",
-     bubblesFrom([1, bubblesFrom([2])]));
+     List.from([1, List.from([2])]));
 
 
   // (define (abs x)
@@ -65,15 +65,15 @@ describe("parse(string)", () => {
   //       x))
   itParsesFixture("abs",
     { expects:
-        bubblesFrom([Symbol.for("define"),
-          bubblesFrom([Symbol.for("abs"),
+        List.from([Symbol.for("define"),
+          List.from([Symbol.for("abs"),
                      Symbol.for("x")]),
-          bubblesFrom([Symbol.for("if"),
-            bubblesFrom([Symbol.for("<"),
+          List.from([Symbol.for("if"),
+            List.from([Symbol.for("<"),
               Symbol.for("x"), 0]),
-            bubblesFrom([Symbol.for("-"),
+            List.from([Symbol.for("-"),
               Symbol.for("x")]),
-            Symbol.for("x")])])}); // Changed Bubble.from to bubblesFrom
+            Symbol.for("x")])])}); // Changed Bubble.from to List.from
 
   // it('should match a single keyword as a bubble', function() {
   //   assertParse(":keyword",
@@ -94,34 +94,34 @@ function itParsesFixture(key, {expects}) {
   it(`parses fixture "${key}"`, function() {
     let s = fixtures[key];
     let p = parse(s);
-    assert.deepEqual(peek(p), expects);
+    assert.deepEqual(p.peek(), expects);
   });
 }
 
 function itParses(s, {expects}) {
   it(`parses "${s}"`, function() {
     let p = parse(s);
-    assert.deepEqual(peek(p), expects);
+    assert.deepEqual(p.peek(), expects);
   });
 }
 
 function itParses2(desc, s, expects) {
   it(`correctly parses ${desc}`, function() {
     let p = parse(s);
-    assert.deepEqual(peek(p), expects);
+    assert.deepEqual(p.peek(), expects);
   });
 }
 
 assertParse = function(inputString, expectedAst) { // stRinG -> inputString, eXpEct3d -> expectedAst
   let resultAst = parse(inputString); // icKy -> resultAst
-  assert.deepEqual(peek(resultAst), expectedAst); // assert.equal -> assert.deepEqual
+  assert.deepEqual(resultAst.peek(), expectedAst); // assert.equal -> assert.deepEqual
 };
 
 assertBubble = function(bubble) {
   assert(type(bubble) === 'Bubble');
 };
 
-assertBubblesEqual = function(actual, expected) {
+assertListEqual = function(actual, expected) {
   assert.deepEqual(actual, expected);
 };
 
@@ -150,7 +150,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws NoMatchError for incomplete bubble list (EOF)", () => {
+  it.skip("throws NoMatchError for incomplete bubble vector (EOF)", () => {
     const input = "(1 2"; // Parsed as ) 2 1 ( by pArSe logic
                        // Error occurs when matching final '(', context is ')'
     assert.throws(() => parse(input), (error) => {
@@ -163,7 +163,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws NoMatchError for incomplete balloon list (EOF)", () => {
+  it.skip("throws NoMatchError for incomplete balloon vector (EOF)", () => {
     const input = "[1 2"; // Parsed as ] 2 1 [
     assert.throws(() => parse(input), (error) => {
       assert.equal(error.name, "NoMatchError");
@@ -212,7 +212,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws ParsingError for quote with no preceding item in a list", () => {
+  it.skip("throws ParsingError for quote with no preceding item in a vector", () => {
     const input = "(')"; // Tokens: ')', ''', '('
     assert.throws(() => parse(input), (error) => {
       assert.equal(error.name, "ParsingError");
@@ -231,7 +231,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws NoMatchError for unclosed list with items then EOF", () => {
+  it.skip("throws NoMatchError for unclosed vector with items then EOF", () => {
     const input = "(a b"; // Tokens: ')', 'b', 'a', '(' -- error expecting '(' got EOF
     assert.throws(() => parse(input), (error) => {
       assert.equal(error.name, "NoMatchError");
@@ -243,7 +243,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws NoMatchError for list with only a mismatched closer", () => {
+  it.skip("throws NoMatchError for vector with only a mismatched closer", () => {
     const input = "(]"; // Tokens: ']', '(' -- error expecting ')' got ']'
     assert.throws(() => parse(input), (error) => {
       assert.equal(error.name, "NoMatchError");
@@ -257,7 +257,7 @@ describe("Parser Error Handling", () => {
 
 describe("Parser Structure and Edge Case Tests", () => {
   it.skip("parses empty string to undefined (or specific empty representation)", () => {
-    // tokenize("") returns no tokens (List.air / undefined for tokens list)
+    // tokenize("") returns no tokens (Vector.air / undefined for tokens vector)
     // parseTokens(undefined) returns undefined.
     assert.strictEqual(parse(""), undefined, "Parsing an empty string should result in undefined");
   });
@@ -266,47 +266,47 @@ describe("Parser Structure and Edge Case Tests", () => {
     assert.strictEqual(parse("  \n#comment\t\n   "), undefined, "Parsing whitespace/comment only string should be undefined");
   });
 
-  it.skip("parses multiple top-level expressions into a single list", () => {
-    // parse("1 2 (a b)") should result in a list: (1 2 (a b))
-    // The outer list is the result of parse(). peek() gives the first element.
-    // So, parse("1 2 (a b)") returns a list containing 1, then 2, then list (a b)
+  it.skip("parses multiple top-level expressions into a single vector", () => {
+    // parse("1 2 (a b)") should result in a vector: (1 2 (a b))
+    // The outer vector is the result of parse(). peek() gives the first element.
+    // So, parse("1 2 (a b)") returns a vector containing 1, then 2, then vector (a b)
     // Expected structure: 1 -> 2 -> (a -> b -> air) -> air
-    // makeList(c, b, a) creates a -> b -> c -> air
+    // Vector.make(c, b, a) creates a -> b -> c -> air
     const ast = parse("1 2 (a b)");
-    const expected = makeList( // This is the outer list of expressions
-        bubblesFrom([Symbol.for("a"), Symbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
+    const expected = Vector.make( // This is the outer vector of expressions
+        List.from([Symbol.for("a"), Symbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
         2,
         1
     );
-    // parse("1 2 (a b)") results in list (1 2 (a b))
-    // makeList( (b a), 2, 1) -> 1 -> 2 -> (a b)
+    // parse("1 2 (a b)") results in vector (1 2 (a b))
+    // Vector.make( (b a), 2, 1) -> 1 -> 2 -> (a b)
     assert.deepEqual(ast, expected, "AST for multiple top-level expressions");
   });
 
   it("parses a single atom symbol correctly", () => {
     const ast = parse("atom");
-    // parse("atom") returns a list containing one symbol: (atom)
-    const expected = makeBubbles(Symbol.for("atom"));
+    // parse("atom") returns a vector containing one symbol: (atom)
+    const expected = List.make(Symbol.for("atom"));
     assert.deepEqual(ast, expected, "AST for single atom symbol");
   });
 
   it("parses a single atom number correctly", () => {
     const ast = parse("123");
-    // parse("123") returns a list containing one number: (123)
-    const expected = makeBubbles(123);
+    // parse("123") returns a vector containing one number: (123)
+    const expected = List.make(123);
     assert.deepEqual(ast, expected, "AST for single atom number");
   });
 
-  // it.only("parses a complex nested structure with quotes, bubbles, and balloons (arrays)", () => {
+  // it.only("parses a complex nested structure with quotes, list, and balloons (arrays)", () => {
   //   const input = "'(a (b :c [1 \"s\" 'x]))";
   //   // Expected AST structure:
   //   // Quoted(
-  //   //   List(
+  //   //   Vector(
   //   //     Symbol(a),
-  //   //     List(
+  //   //     Vector(
   //   //       Symbol(b),
   //   //       Keyword(c),
-  //   //       List( // Balloon becomes a list
+  //   //       Vector( // Balloon becomes a vector
   //   //         1,
   //   //         "s",
   //   //         Quoted(Symbol(x))
@@ -314,14 +314,14 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   //     )
   //   //   )
   //   // )
-  //   // parse returns a list containing one item: the Quoted expression.
-  //   // So peek(ast) is the Quoted(...) object.
+  //   // parse returns a vector containing one item: the Quoted expression.
+  //   // So ast.peek() is the Quoted(...) object.
 
   //   const ast = parse(input);
-  //   const expected = makeBubbles( // Outer list from parse()
+  //   const expected = List.make( // Outer vector from parse()
   //     new Quoted(
-  //       makeList( // list (a ...)
-  //         bubblesFrom([ // list [1 "s" 'x] -- assuming balloons are parsed as lists
+  //       Vector.make( // vector (a ...)
+  //         List.from([ // vector [1 "s" 'x] -- assuming balloons are parsed as vectors
   //           new Quoted(Symbol.for("x")),
   //           "s",
   //           1
@@ -335,33 +335,33 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   assert.deepEqual(ast, expected, "AST for complex nested structure");
   // });
 
-  it("parses a semi complex list", () => {
+  it("parses a semi complex vector", () => {
     const input = "[1 \"s\" °x]";
     // const input = "[°x]";
     // const input = "[x]";
     // const input = "[1]";
     const ast = parse(input);
     // console.log(ast);
-    const expected = makeBubbles( // Outer bubbles from parse()
-      makeList(
+    const expected = List.make( // Outer list from parse()
+      Vector.make(
         1,
         "s",
         new Bubble(Symbol.for("x"))
       )
     );
-    assert.deepEqual(ast, expected, "AST for semi complex list ");
+    assert.deepEqual(ast, expected, "AST for semi complex vector ");
   });
 
-  it.skip("parses a complex nested structure with quotes, bubbles, and balloons (arrays)", () => {
+  it.skip("parses a complex nested structure with quotes, list, and balloons (arrays)", () => {
     const input = "°(a (b :c [1 \"s\" °x]))";
     // Expected AST structure:
     // Bubble(
-    //   List(
+    //   Vector(
     //     Symbol(a),
-    //     List(
+    //     Vector(
     //       Symbol(b),
     //       Keyword(c),
-    //       List( // Balloon becomes a list
+    //       Vector( // Balloon becomes a vector
     //         1,
     //         "s",
     //         Quoted(Symbol(x))
@@ -369,19 +369,19 @@ describe("Parser Structure and Edge Case Tests", () => {
     //     )
     //   )
     // )
-    // parse returns a list containing one item: the Quoted expression.
-    // So peek(ast) is the Quoted(...) object.
+    // parse returns a vector containing one item: the Quoted expression.
+    // So ast.peek() is the Quoted(...) object.
 
     const ast = parse(input);
     console.log(ast);
-    const expected = makeBubbles( // Outer list from parse()
+    const expected = List.make( // Outer vector from parse()
       new Bubble(
-        makeBubbles(
+        List.make(
           Symbol.for("a"),
-          makeBubbles(
+          List.make(
             Symbol.for("b"),
             Keyword.for("c"),
-            makeList(// list [1 "s" °x] -- assuming balloons are parsed as lists
+            Vector.make(// vector [1 "s" °x] -- assuming balloons are parsed as vectors
               1,
               "s",
               new Bubble(Symbol.for("x"))
@@ -395,13 +395,13 @@ describe("Parser Structure and Edge Case Tests", () => {
 
   it.skip("parses another complex structure: (define x '(1 [2 keyword]))", () => {
     const input = "(define x '(1 [2 :key]))";
-    // AST: List(Symbol(define), Symbol(x), Quoted(List(1, List(2, Keyword(key)))))
+    // AST: Vector(Symbol(define), Symbol(x), Quoted(Vector(1, Vector(2, Keyword(key)))))
     const ast = parse(input);
-    const expected = makeList( // outer list from parse
-      makeList( // list (define ...)
+    const expected = Vector.make( // outer vector from parse
+      Vector.make( // vector (define ...)
         new Quoted(
-          makeList( // list (1 ...)
-            bubblesFrom([ // list [2 :key]
+          Vector.make( // vector (1 ...)
+            List.from([ // vector [2 :key]
               Keyword.for("key"),
               2,
             ]),
