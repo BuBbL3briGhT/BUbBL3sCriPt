@@ -137,44 +137,44 @@ describe("Vector", () => {
     });
   });
 
-  // describe("reduce", () => {
-  //   it("reduces the vector", () => {
-  //     var o = Vector.make(),
-  //         result;
+  describe("reduce", () => {
+    it("reduces the vector", () => {
+      var vector = Vector.make(),
+          result;
 
-  //     let add = (a,b) => { return b + a };
+      let add = (a,b) => { return b + a };
 
-  //     result = reduce(o, add);
-  //     assert.equal(result, undefined);
+      result = vector.reduce(add);
+      assert.equal(result, undefined);
 
-  //     result = reduce(o, add, 0);
-  //     assert.equal(result, 0);
+      result = vector.reduce(add, 0);
+      assert.equal(result, 0);
 
-  //     o = push(o, 1);
-  //     result = reduce(o, add);
-  //     assert.equal(result, 1);
+      vector = vector.push(1);
+      result = vector.reduce(add);
+      assert.equal(result, 1);
 
-  //     o = push(o, 2);
-  //     result = reduce(o, add);
-  //     assert.equal(result, 3);
+      vector = vector.push(2);
+      result = vector.reduce(add);
+      assert.equal(result, 3);
 
-  //     o = push(o, 3),
-  //     result = reduce(o, add)
-  //     assert.equal(result, 6)
+      vector = vector.push(3),
+      result = vector.reduce(add)
+      assert.equal(result, 6)
 
-  //     o = make("a");
-  //     result = reduce(o, add);
-  //     assert.equal(result, "a");
+      vector = Vector.make("a");
+      result = vector.reduce(add);
+      assert.equal(result, "a");
 
-  //     o = push(o, "b");
-  //     result = reduce(o, add);
-  //     assert.equal(result, "ab");
+      vector = vector.push("b");
+      result = vector.reduce(add);
+      assert.equal(result, "ab");
 
-  //     o = push(o, "c");
-  //     result = reduce(o, add);
-  //     assert.equal(result, "abc");
-  //   });
-  // });
+      vector = vector.push("c");
+      result = vector.reduce(add);
+      assert.equal(result, "abc");
+    });
+  });
 
   // describe("skip(vector, count)", () => {
   //   it("skips", () => {
