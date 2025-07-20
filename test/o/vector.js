@@ -222,18 +222,18 @@ describe("Vector", () => {
     });
   });
 
-  // describe("Symbol.iterator", () => {
-  //   it("should not yield any values for an empty vector (Vector.air)", () => {
-  //     const emptyVector = Vector.emptyVector;
-  //     const results = [...emptyVector];
-  //     assert.deepEqual(results, []);
+  describe("Symbol.iterator", () => {
+    it("should not yield any values for an empty vector (Vector.air)", () => {
+      const emptyVector = Vector.emptyVector;
+      const results = [...emptyVector];
+      assert.deepEqual(results, []);
 
-  //     let count = 0;
-  //     for (const item of emptyVector) {
-  //       count++;
-  //     }
-  //     assert.equal(count, 0, "for...of loop should not execute for Vector.air");
-  //   });
+      let count = 0;
+      for (const item of emptyVector) {
+        count++;
+      }
+      assert.equal(count, 0, "for...of loop should not execute for Vector.air");
+    });
 
   //   it("should handle a vector created by new Vector() (yields initial undefined value)", () => {
   //     // A new Vector() results in { o: undefined, oo: undefined }, which has x=false.
@@ -313,5 +313,5 @@ describe("Vector", () => {
   //     assert.deepEqual(iterator1.next().done, true);
   //     assert.deepEqual(iterator2.next().done, true);
   //   });
-  // });
+  });
 });
