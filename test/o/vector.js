@@ -71,30 +71,30 @@ describe("Vector", () => {
     });
   });
 
-  // describe("invert", () => {
-  //   it("inverts vectors", () => {
-  //     var o = Vector.make();
-  //     o = invert(o);
-  //     assert.equal(o, Vector.emptyVector);
+  describe("invert", () => {
+    it("inverts vectors", () => {
+      var vector = Vector.make();
+      vector = invert(vecto );
+      assert.equal(vector , Vector.emptyVector);
 
-  //     o = make(1);
-  //     o = invert(o);
-  //     assert.equal(peek(o),1);
-  //     assert.equal(skip(o,1), Vector.emptyVector);
+      vector = make(1);
+      vector = invert(vecto );
+      assert.equal(peek(vecto ),1);
+      assert.equal(skip(vector ,1), Vector.emptyVector);
 
-  //     o = push(push(o,2),3);
-  //     assert.equal(peek(o),3);
+      vector = push(push(vector ,2),3);
+      assert.equal(peek(vector),3);
 
-  //     o = invert(o);
-  //     assert.equal(peek(o),1);
+      vector = invert(vector);
+      assert.equal(peek(vector),1);
 
-  //     let oo = make(1,2,3);
-  //     assert.equal(Vector.toString(oo), "[1 2 3]");
+      let oo = make(1,2,3);
+      assert.equal(Vector.toString(oo), "[1 2 3]");
 
-  //     let xo = invert(oo);
-  //     assert.equal(Vector.toString(xo), "[3 2 1]");
-  //   });
-  // });
+      let xo = invert(oo);
+      assert.equal(Vector.toString(xo), "[3 2 1]");
+    });
+  });
 
   // describe("map(o, fn)", () => {
   //   it("maps o through fn", ()=>{
