@@ -186,42 +186,41 @@ describe("Vector", () => {
     });
   });
 
-  // describe("toString(vector)", () => {
-  //   it("formats vector as a string.", () => {
-  //     var vector = Vector.make(),
-  //       result;
+  describe("toString(vector)", () => {
+    it("formats vector as a string.", () => {
+      var vector = Vector.make(),
+        result;
 
-  //     result = toString(vector);
-  //     assert.equal(result, "[]");
+      result = vector.toString();
+      assert.equal(result, "[]");
 
-  //     vector = make(1);
-  //     result = toString(vector);
-  //     assert.equal(result, "[1]");
+      vector = Vector.make(1);
+      result = vector.toString();
+      assert.equal(result, "[1]");
 
-  //     vector = vector.push(2);
-  //     result = toString(vector);
-  //     assert.equal(result, "[1 2]");
+      vector = vector.push(2);
+      result = vector.toString();
+      assert.equal(result, "[1 2]");
 
-  //     vector = vector.push(3);
-  //     result = toString(vector);
-  //     assert.equal(result, "[1 2 3]");
+      vector = vector.push(3);
+      result = vector.toString();
+      assert.equal(result, "[1 2 3]");
 
-  //     vector = vector.push("string");
-  //     result = toString(vector);
-  //     assert.equal(result, "[1 2 3 \"string\"]");
+      vector = vector.push("string");
+      result = vector.toString();
+      assert.equal(result, "[1 2 3 \"string\"]");
 
-  //     vector = vector.push(Symbol.for("symbol"));
-  //     result = toString(vector);
-  //     assert.equal(result, "[1 2 3 \"string\" symbol]");
+      vector = vector.push(Symbol.for("symbol"));
+      result = vector.toString();
+      assert.equal(result, "[1 2 3 \"string\" symbol]");
 
-  //     let ts = toString;
-  //     let ovector = make(3,2,1);
-  //     assert.equal(ts(vectoro), "[3 2 1]");
+      let oo = Vector.make(3,2,1);
+      assert.equal(oo.toString(), "[3 2 1]");
 
-  //     vector = push(pop(pop(vector)), oo);
-  //     assert.equal(ts(vector), "[1 2 3 [3 2 1]]");
-  //   });
-  // });
+      vector = vector.pop().pop().push(oo);
+      assert.equal(vector.toString(), "[1 2 3 [3 2 1]]");
+    });
+  });
 
   // describe("Symbol.iterator", () => {
   //   it("should not yield any values for an empty vector (Vector.air)", () => {
