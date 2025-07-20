@@ -105,20 +105,20 @@ describe("Vector", () => {
       result = vector.map(add7);
       assert.equal(result, Vector.emptyVector);
 
-      vector = make(1);
-      vector = map(vector, add7);
-      assert.equal(get(vector), 8);
+      vector = Vector.make(1);
+      vector = vector.map(add7);
+      assert.equal(vector.get(), 8);
 
-      vector = push(vector, 2);
-      vector = map(vector, add7);
-      assert.equal(get(vector), 9);
-      assert.equal(get(vector, 1), 15);
+      vector = vector.push(2);
+      vector = vector.map(add7);
+      assert.equal(vector.get(), 9);
+      assert.equal(vector.get(1), 15);
 
-      vector = push(vector, 3);
-      vector = map(vector, add7);
-      assert.equal(get(vector), 10);
-      assert.equal(get(vector, 1), 16);
-      assert.equal(get(vector, 2), 22);
+      vector = vector.push(3);
+      vector = vector.map(add7);
+      assert.equal(vector.get(), 10);
+      assert.equal(vector.get(1), 16);
+      assert.equal(vector.get(2), 22);
     });
   });
 
