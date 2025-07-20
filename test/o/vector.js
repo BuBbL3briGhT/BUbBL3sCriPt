@@ -223,7 +223,7 @@ describe("Vector", () => {
   });
 
   describe("Symbol.iterator", () => {
-    it("should not yield any values for an empty vector (Vector.air)", () => {
+    it("should not yield any values for an empty vector (Vector.emptyVector)", () => {
       const emptyVector = Vector.emptyVector;
       const results = [...emptyVector];
       assert.deepEqual(results, []);
@@ -235,13 +235,13 @@ describe("Vector", () => {
       assert.equal(count, 0, "for...of loop should not execute for Vector.air");
     });
 
-  //   it("should handle a vector created by new Vector() (yields initial undefined value)", () => {
-  //     // A new Vector() results in { o: undefined, oo: undefined }, which has x=false.
-  //     // The iterator will yield the 'o' value.
-  //     const vectorFromDefaultConstructor = new Vector();
-  //     const results = [...vectorFromDefaultConstructor];
-  //     assert.deepEqual(results, [undefined], "Default constructor vector should yield its undefined 'o' value");
-  //   });
+    it("should handle a vector created by new Vector() (yields initial undefined value)", () => {
+      // A new Vector() results in { o: undefined, oo: emptyVector }, which has isEmpty=false.
+      // The iterator will yield the 'o' value.
+      const vectorFromDefaultConstructor = new Vector();
+      const results = [...vectorFromDefaultConstructor];
+      assert.deepEqual(results, [undefined], "Default constructor vector should yield its undefined 'o' value");
+    });
 
   //   it("should yield the single element for a single-element vector", () => {
   //     const vector = Vector.make(1); // Creates vector: 1 -> air
