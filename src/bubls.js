@@ -3,7 +3,7 @@ const path = require('path');
 
 const Bubblescript = {
       List: require("./o/list"),
-   Bubbles: require("./o/bubbles"),
+    Vector: require("./o/vector"),
     Symbol: require("./o/symbol"),
    Keyword: require("./o/keyword"),
     Bubble: require("./o/bubble"),

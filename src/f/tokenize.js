@@ -1,5 +1,4 @@
-const List = require("../o/list");
-const { push, invert } = List;
+const Vector = require("../o/vector");
 
 const TOK_KEYWORD = 'K';
 const TOK_NUMBER  = 'N';
@@ -9,7 +8,7 @@ const TOK_TRUE    = 'T';
 const TOK_FALSE   = 'F';
 
 function tokenize(inputString) {
-  let tokens = List.emptyList;
+  let tokens = Vector.emptyVector;
   let line = 1;
   let column = 1;
   let currentString = inputString; // This string will be sliced
@@ -17,7 +16,7 @@ function tokenize(inputString) {
   // Helper to create token objects
   function createToken(type, value) {
     // console.debug("createToken", type, value);
-    tokens = push(tokens, { type, value, line, column });
+    tokens = tokens.push({ type, value, line, column });
   }
 
   // Advances head along string by n characters, updating line and column.
@@ -164,7 +163,7 @@ function tokenize(inputString) {
         break;
     }
   }
-  // return invert(tokens);
+  // return tokens.invert();
   return tokens;
 }
 tokenize.TOK_STRING = TOK_STRING;
