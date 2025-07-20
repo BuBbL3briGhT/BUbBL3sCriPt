@@ -77,22 +77,22 @@ describe("Vector", () => {
       vector = vector.invert();
       assert.equal(vector, Vector.emptyVector);
 
-      vector = make(1);
-      vector = invert(vector);
-      assert.equal(peek(vector),1);
-      assert.equal(skip(vector,1), Vector.emptyVector);
+      vector = Vector.make(1);
+      vector = vector.invert();
+      assert.equal(vector.peek(), 1);
+      assert.equal(vector.skip(1), Vector.emptyVector);
 
-      vector = push(push(vector ,2),3);
-      assert.equal(peek(vector),3);
+      vector = vector.push(2).push(3);
+      assert.equal(vector.peek(), 3);
 
-      vector = invert(vector);
-      assert.equal(peek(vector),1);
+      vector = vector.invert();
+      assert.equal(vector.peek(), 1);
 
-      let oo = make(1,2,3);
-      assert.equal(Vector.toString(oo), "[1 2 3]");
+      let oo = Vector.make(1,2,3);
+      assert.equal(oo.toString(), "[1 2 3]");
 
-      let xo = invert(oo);
-      assert.equal(Vector.toString(xo), "[3 2 1]");
+      let xo = oo.invert();
+      assert.equal(xo.toString(), "[3 2 1]");
     });
   });
 
