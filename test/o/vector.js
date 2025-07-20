@@ -45,15 +45,15 @@ describe("Vector", () => {
     });
   });
 
-  // describe("make(o...)", () => {
-  //   it("blows vectors", () => {
-  //     assert.equal(make(), Vector.emptyVector);
-  //     let o = make(1, 2, 3);
-  //     assert.equal(get(o,0), 3);
-  //     assert.equal(get(o,1), 2);
-  //     assert.equal(get(o,2), 1);
-  //   });
-  // });
+  describe("make(o...)", () => {
+    it("blows vectors", () => {
+      assert.equal(Vector.make(), Vector.emptyVector);
+      let vector = Vector.make(1, 2, 3);
+      assert.equal(vector.get(0), 3);
+      assert.equal(vector.get(1), 2);
+      assert.equal(vector.get(2), 1);
+    });
+  });
 
   // describe("count(o)", function () {
   //   it("counts", function () {
