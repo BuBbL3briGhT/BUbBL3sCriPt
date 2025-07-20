@@ -6,12 +6,16 @@ class List extends AbstractList {
 
   static get emptyList() { return emptyList; }
 
+  // static make(...elements) {
+  //   var head = emptyList;
+  //   elements = elements.reverse();
+  //   for (let o of elements)
+  //     head = new this(o, head);
+  //   return head;
+  // }
+
   static make(...elements) {
-    var head = emptyList;
-    elements = elements.reverse();
-    for (let o of elements)
-      head = new this(o, head);
-    return head;
+    return _make(elements);
   }
 
   // Create a list.
@@ -27,6 +31,14 @@ class List extends AbstractList {
     return "(" + this._toString() + ")";
   }
 
+}
+
+function _make(elementsArray, currentLinkedList=emptyList) {
+  if (elementsArray.length < 1)
+    return currentLinkedList;
+  return _make(elementsArray,
+    new List(elementsArray.pop(),
+      currentLinkedList));
 }
 
 class EmptyList extends List {

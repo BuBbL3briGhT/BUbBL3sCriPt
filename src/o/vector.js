@@ -1,4 +1,4 @@
-const List = require("./abstract_list");
+const AbstractList = require("./abstract_list");
 
 let emptyVector;
 

@@ -1,4 +1,4 @@
-class AbstracList {
+class AbstractList {
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
@@ -119,4 +119,4 @@ class AbstracList {
   }
 }
 
-module.exports = List;
+module.exports = AbstractList;
