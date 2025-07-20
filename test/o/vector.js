@@ -57,19 +57,19 @@ describe("Vector", () => {
 
   describe("count(o)", function () {
     it("counts", function () {
-      let o = Vector.make(1, 2, 3);
-      assert.equal(o.count(), 3);
+      let vector = Vector.make(1, 2, 3);
+      assert.equal(vector.count(), 3);
     });
   });
 
-  // describe("get(o, index)", () => {
-  //   it("gets value of o at index", () => {
-  //     let o = Vector.make(6,7,8);
-  //     assert.equal(get(o, 0), 8);
-  //     assert.equal(get(o, 1), 7);
-  //     assert.equal(get(o, 2), 6);
-  //   });
-  // });
+  describe("get(o, index)", () => {
+    it("gets value of o at index", () => {
+      let vector = Vector.make(6,7,8);
+      assert.equal(vector.get(0), 8);
+      assert.equal(vector.get(1), 7);
+      assert.equal(vector.get(2), 6);
+    });
+  });
 
   // describe("invert", () => {
   //   it("inverts vectors", () => {
