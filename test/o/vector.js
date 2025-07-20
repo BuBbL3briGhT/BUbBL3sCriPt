@@ -274,13 +274,13 @@ describe("Vector", () => {
       assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch for multi-element vector");
     });
 
-  //   it("should correctly yield null and undefined values if they are part of the vector", () => {
-  //     const vector = Vector.make(1, undefined, 3, null, 5); // Expected order: 5, null, 3, undefined, 1
-  //     const expected = [5, null, 3, undefined, 1];
+    it("should correctly yield null and undefined values if they are part of the vector", () => {
+      const vector = Vector.make(1, undefined, 3, null, 5); // Expected order: 5, null, 3, undefined, 1
+      const expected = [5, null, 3, undefined, 1];
 
-  //     const results = [...vector];
-  //     assert.deepEqual(results, expected, "Spread syntax results mismatch for vector with null/undefined");
-  //   });
+      const results = [...vector];
+      assert.deepEqual(results, expected, "Spread syntax results mismatch for vector with null/undefined");
+    });
 
   //   it("should not modify the original vector during iteration", () => {
   //     const vector = Vector.make("a", "b", "c"); // c -> b -> a
