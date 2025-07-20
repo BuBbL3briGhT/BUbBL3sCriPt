@@ -299,19 +299,19 @@ describe("Vector", () => {
       assert.deepEqual([...vector], expectedItems, "Second iteration results mismatch");
     });
 
-  //   it("should allow multiple iterations independently", () => {
-  //     const vector = Vector.make("x", "y"); // y -> x
-  //     const expected = ["y", "x"];
+    it("should allow multiple iterations independently", () => {
+      const vector = Vector.make("x", "y"); // y -> x
+      const expected = ["y", "x"];
 
-  //     const iterator1 = vector[Symbol.iterator]();
-  //     const iterator2 = vector[Symbol.iterator]();
+      const iterator1 = vector[Symbol.iterator]();
+      const iterator2 = vector[Symbol.iterator]();
 
-  //     assert.deepEqual(iterator1.next().value, "y");
-  //     assert.deepEqual(iterator2.next().value, "y");
-  //     assert.deepEqual(iterator1.next().value, "x");
-  //     assert.deepEqual(iterator2.next().value, "x");
-  //     assert.deepEqual(iterator1.next().done, true);
-  //     assert.deepEqual(iterator2.next().done, true);
-  //   });
+      assert.deepEqual(iterator1.next().value, "y");
+      assert.deepEqual(iterator2.next().value, "y");
+      assert.deepEqual(iterator1.next().value, "x");
+      assert.deepEqual(iterator2.next().value, "x");
+      assert.deepEqual(iterator1.next().done, true);
+      assert.deepEqual(iterator2.next().done, true);
+    });
   });
 });
