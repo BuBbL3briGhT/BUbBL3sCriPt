@@ -243,19 +243,19 @@ describe("Vector", () => {
       assert.deepEqual(results, [undefined], "Default constructor vector should yield its undefined 'o' value");
     });
 
-  //   it("should yield the single element for a single-element vector", () => {
-  //     const vector = Vector.make(1); // Creates vector: 1 -> air
-  //     const expected = [1];
+    it("should yield the single element for a single-element vector", () => {
+      const vector = Vector.make(1); // Creates vector: 1 -> emptyVector
+      const expected = [1];
 
-  //     const resultsForOf = [];
-  //     for (const item of vector) {
-  //       resultsForOf.push(item);
-  //     }
-  //     assert.deepEqual(resultsForOf, expected, "for...of loop results mismatch");
+      const resultsForOf = [];
+      for (const item of vector) {
+        resultsForOf.push(item);
+      }
+      assert.deepEqual(resultsForOf, expected, "for...of loop results mismatch");
 
-  //     const resultsSpread = [...vector];
-  //     assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch");
-  //   });
+      const resultsSpread = [...vector];
+      assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch");
+    });
 
   //   it("should yield all elements in a multi-element vector in order", () => {
   //     const vector = Vector.make(1, 2, 3); // Creates vector: 1 -> 2 -> 3 -> air
