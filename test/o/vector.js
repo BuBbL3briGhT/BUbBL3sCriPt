@@ -46,7 +46,7 @@ describe("Vector", () => {
   });
 
   describe("make(o...)", () => {
-    it("blows vectors", () => {
+    it("makes a vector", () => {
       assert.equal(Vector.make(), Vector.emptyVector);
       let vector = Vector.make(1, 2, 3);
       assert.equal(vector.get(0), 3);
@@ -55,12 +55,12 @@ describe("Vector", () => {
     });
   });
 
-  // describe("count(o)", function () {
-  //   it("counts", function () {
-  //     let o = Vector.make(1, 2, 3);
-  //     assert.equal(count(o), 3);
-  //   });
-  // });
+  describe("count(o)", function () {
+    it("counts", function () {
+      let o = Vector.make(1, 2, 3);
+      assert.equal(o.count(), 3);
+    });
+  });
 
   // describe("get(o, index)", () => {
   //   it("gets value of o at index", () => {
