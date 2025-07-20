@@ -122,20 +122,20 @@ describe("Vector", () => {
     });
   });
 
-  // describe("push(o)", () => {
-  //   it("pushes o onto the vector.", () => {
-  //     var o = Vector.make();
+  describe("push(vector)", () => {
+    it("pushes vector ontvector the vector.", () => {
+      var vector = Vector.make();
 
-  //     o = push(o, 1);
-  //     assert.equal(get(o), 1)
-  //     assert.equal(skip(o, 1), Vector.emptyVector);
+      vector = vector.push(1);
+      assert.equal(vector.get(), 1)
+      assert.equal(vector.skip(1), Vector.emptyVector);
 
-  //     o = push(o, 2);
-  //     assert.equal(get(o), 2)
-  //     assert.equal(get(o, 1), 1)
-  //     assert.equal(skip(o, 2), Vector.emptyVector);
-  //   });
-  // });
+      vector = vector.push(2);
+      assert.equal(vector.get(), 2)
+      assert.equal(vector.get(1), 1)
+      assert.equal(vector.skip(2), Vector.emptyVector);
+    });
+  });
 
   // describe("reduce", () => {
   //   it("reduces the vector", () => {
