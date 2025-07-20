@@ -176,50 +176,50 @@ describe("Vector", () => {
     });
   });
 
-  // describe("skip(vector, count)", () => {
-  //   it("skips", () => {
-  //     let o = Vector.make(6,7,8);
-  //     assert.equal(peek(skip(o)), 8);
-  //     assert.equal(peek(skip(o,0)), 8);
-  //     assert.equal(peek(skip(o,1)), 7);
-  //     assert.equal(peek(skip(o,2)), 6);
-  //   });
-  // });
+  describe("vector.skip(count)", () => {
+    it("skips", () => {
+      let vector = Vector.make(6,7,8);
+      assert.equal(vector.skip().peek(), 8);
+      assert.equal(vector.skip(0).peek(), 8);
+      assert.equal(vector.skip(1).peek(), 7);
+      assert.equal(vector.skip(2).peek(), 6);
+    });
+  });
 
-  // describe("toString(o)", () => {
+  // describe("toString(vector)", () => {
   //   it("formats vector as a string.", () => {
-  //     var o = Vector.make(),
+  //     var vector = Vector.make(),
   //       result;
 
-  //     result = toString(o);
+  //     result = toString(vector);
   //     assert.equal(result, "[]");
 
-  //     o = make(1);
-  //     result = toString(o);
+  //     vector = make(1);
+  //     result = toString(vector);
   //     assert.equal(result, "[1]");
 
-  //     o = push(o,2);
-  //     result = toString(o);
+  //     vector = vector.push(2);
+  //     result = toString(vector);
   //     assert.equal(result, "[1 2]");
 
-  //     o = push(o, 3);
-  //     result = toString(o);
+  //     vector = vector.push(3);
+  //     result = toString(vector);
   //     assert.equal(result, "[1 2 3]");
 
-  //     o = push(o, "string");
-  //     result = toString(o);
+  //     vector = vector.push("string");
+  //     result = toString(vector);
   //     assert.equal(result, "[1 2 3 \"string\"]");
 
-  //     o = push(o, Symbol.for("symbol"));
-  //     result = toString(o);
+  //     vector = vector.push(Symbol.for("symbol"));
+  //     result = toString(vector);
   //     assert.equal(result, "[1 2 3 \"string\" symbol]");
 
   //     let ts = toString;
-  //     let oo = make(3,2,1);
-  //     assert.equal(ts(oo), "[3 2 1]");
+  //     let ovector = make(3,2,1);
+  //     assert.equal(ts(vectoro), "[3 2 1]");
 
-  //     o = push(pop(pop(o)), oo);
-  //     assert.equal(ts(o), "[1 2 3 [3 2 1]]");
+  //     vector = push(pop(pop(vector)), oo);
+  //     assert.equal(ts(vector), "[1 2 3 [3 2 1]]");
   //   });
   // });
 
@@ -261,8 +261,8 @@ describe("Vector", () => {
   //   it("should yield all elements in a multi-element vector in order", () => {
   //     const vector = Vector.make(1, 2, 3); // Creates vector: 1 -> 2 -> 3 -> air
   //                                          // Note: Vector.make actually creates it as 3 -> 2 -> 1 -> air
-  //                                          // The tests for make() show: make(1,2,3) -> get(o,0)=3, get(o,1)=2, get(o,2)=1
-  //                                          // So the yielded order should be 3, 2, 1 for make(1,2,3)
+  //                                          // The tests for make() show: make(1,2,3) -> vector.get(0)=3, vector.get(1)=2, vector.get(2)=1
+  //                                          // Svector the yielded order should be 3, 2, 1 for make(1,2,3)
   //     const expected = [3, 2, 1];
 
   //     const resultsForOf = [];
