@@ -30,20 +30,20 @@ describe("Vector", () => {
     });
   });
 
-  // describe("new Vector(o, oo) ", () => {
-  //   it("create a new vector for your fun and profit.", () => {
-  //     var o;
-  //     o = new Vector();
-  //     assert.equal(get(o), undefined);
-  //     assert.equal(skip(o, 1), Vector.emptyVector);
+  describe("new Vector(o, oo) ", () => {
+    it("create a new vector for your fun and profit.", () => {
+      var vector;
+      vector = new Vector();
+      assert.equal(vector.get(), undefined);
+      assert.equal(vector.skip(1), Vector.emptyVector);
 
-  //     o = new Vector(1);
-  //     assert.equal(get(o), 1);
-  //     o = new Vector(2, o);
-  //     assert.equal(get(o), 2);
-  //     assert.equal(get(o,1), 1);
-  //   });
-  // });
+      vector = new Vector(1);
+      assert.equal(vector.get(), 1);
+      vector = new Vector(2, vector);
+      assert.equal(vector.get(), 2);
+      assert.equal(vector.get(1), 1);
+    });
+  });
 
   // describe("make(o...)", () => {
   //   it("blows vectors", () => {
