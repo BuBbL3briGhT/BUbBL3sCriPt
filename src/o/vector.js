@@ -13,7 +13,6 @@ class Vector extends AbstractList {
     return head;
   }
 
-  // Create a vector.
   constructor(o, oo=emptyVector) {
     super(o, oo);
   }
@@ -31,7 +30,6 @@ class Vector extends AbstractList {
   };
 
 }
-
 
 class EmptyVector extends Vector {
   get isEmpty() { return true; }

@@ -96,31 +96,31 @@ describe("Vector", () => {
     });
   });
 
-  // describe("map(o, fn)", () => {
-  //   it("maps o through fn", ()=>{
-  //     var o = Vector.make();
+  describe("map(vector, fn)", () => {
+    it("maps vector through fn", ()=>{
+      var vector = Vector.make();
 
-  //     let add7 = (o) => { return o + 7 };
+      let add7 = (vector) => { return vector + 7 };
 
-  //     result = map(o, add7);
-  //     assert.equal(result, Vector.emptyVector);
+      result = vector.map(add7);
+      assert.equal(result, Vector.emptyVector);
 
-  //     o = make(1);
-  //     o = map(o, add7);
-  //     assert.equal(get(o), 8);
+      vector = make(1);
+      vector = map(vector, add7);
+      assert.equal(get(vector), 8);
 
-  //     o = push(o, 2);
-  //     o = map(o, add7);
-  //     assert.equal(get(o), 9);
-  //     assert.equal(get(o, 1), 15);
+      vector = push(vector, 2);
+      vector = map(vector, add7);
+      assert.equal(get(vector), 9);
+      assert.equal(get(vector, 1), 15);
 
-  //     o = push(o, 3);
-  //     o = map(o, add7);
-  //     assert.equal(get(o), 10);
-  //     assert.equal(get(o, 1), 16);
-  //     assert.equal(get(o, 2), 22);
-  //   });
-  // });
+      vector = push(vector, 3);
+      vector = map(vector, add7);
+      assert.equal(get(vector), 10);
+      assert.equal(get(vector, 1), 16);
+      assert.equal(get(vector, 2), 22);
+    });
+  });
 
   // describe("push(o)", () => {
   //   it("pushes o onto the vector.", () => {
