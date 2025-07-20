@@ -1,21 +1,25 @@
-const List = require("./list");
+const List = require("./abstract_list");
 
 let emptyVector;
 
-class Vector extends List {
+class Vector extends AbstractList {
 
   static get emptyVector() { return emptyVector; }
-
-  // Create a vector.
-  constructor(o, oo=emptyVector) {
-    super(o, oo);
-  }
 
   static make(...elements) {
     var head = emptyVector;
     for (let o of elements)
       head = new this(o, head);
     return head;
+  }
+
+  // Create a vector.
+  constructor(o, oo=emptyVector) {
+    super(o, oo);
+  }
+
+  push(element) {
+    return new Vector(element, this);
   }
 
   toString() {

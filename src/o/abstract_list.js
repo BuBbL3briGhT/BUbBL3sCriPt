@@ -5,10 +5,13 @@ class AbstracList {
     return this.make(...array);
   }
 
-  // constructor(o, oo) {
-  //   this.o=o;
-  //   this.oo=oo;
-  // }
+  constructor(o, oo) {
+    this.o=o;
+    this.oo=oo;
+  }
+
+  peek() { return this.o; }
+  pop()  { return this.oo; }
 
   get isEmpty() { return false; }
   get first() { return this.peek(); }
@@ -23,9 +26,6 @@ class AbstracList {
     }, 0);
   }
 
-  // push(element) {
-  //   return new List(element, this);
-  // }
 
   map(fn) {
     if (this.isEmpty) return this;
@@ -41,14 +41,8 @@ class AbstracList {
     return this;
   }
 
-  // peek() { return this.o; }
-  // pop() { return this.oo; }
-
   shift() {
     return this.invert().pop().invert();
-
-    (-> list invert pop invert)
-    (invert (pop (invert list)))
   }
 
   invert() {
@@ -61,21 +55,15 @@ class AbstracList {
       }, this.constructor.make(this.peek()));
   }
 
-  conj(sourceLinkedList) { // o -> targetLinkedList, oo -> sourceLinkedList
-    // oo (accumulator), o (currentElement)
-    return sourceLinkedList.reduce(function(accumulator, currentElement) {
+  conj(sourceList) {
+    return sourceList.reduce(function(accumulator, currentElement) {
       return accumulator.push(currentElement);
-    }, this); // o -> targetLinkedList
+    }, this);
   }
 
   _toString() {
     if (this.isEmpty) return "";
-
     return this.map(this.toStringFormat).reduce(this.toStringJoin);
-  }
-
-  toString() {
-    return "(" + this._toString() + ")";
   }
 
   toStringFormat(o) {
@@ -124,21 +112,11 @@ class AbstracList {
 
   *[Symbol.iterator]() {
     let currentNode = this;
-    // Normal linkedList links return false for get isEmpty
-    // The emptyList link, which is the terminal item for all linkedList return true for isEmpty.
-    // So, iterate while currentNode is not the emptyLinkedList node indicatex by call to isEmpty.
-    // LinkedList links should never be null or undefined, so no need to do a null check, if they are, this would represent a bug somewhere else so we fial on the null ref.
     while (!currentNode.isEmpty) {
       yield currentNode.o;
       currentNode = currentNode.oo;
     }
   }
 }
-
-class EmptyList extends List {
-  get isEmpty() { return true; }
-}
-
-emptyList = new EmptyList()
 
 module.exports = List;
