@@ -282,22 +282,22 @@ describe("Vector", () => {
       assert.deepEqual(results, expected, "Spread syntax results mismatch for vector with null/undefined");
     });
 
-  //   it("should not modify the original vector during iteration", () => {
-  //     const vector = Vector.make("a", "b", "c"); // c -> b -> a
-  //     const expectedItems = ["c", "b", "a"];
-  //     const expectedToString = '["a" "b" "c"]'; // Based on typical toString for such a vector structure
+    it("should not modify the original vector during iteration", () => {
+      const vector = Vector.make("a", "b", "c"); // c -> b -> a
+      const expectedItems = ["c", "b", "a"];
+      const expectedToString = '["a" "b" "c"]'; // Based on typical toString for such a vector structure
 
-  //     // First iteration
-  //     assert.deepEqual([...vector], expectedItems, "First iteration results mismatch");
+      // First iteration
+      assert.deepEqual([...vector], expectedItems, "First iteration results mismatch");
 
-  //     // Check vector integrity after iteration
-  //     assert.equal(Vector.toString(vector), expectedToString, "Vector string form changed after iteration");
-  //     assert.equal(Vector.count(vector), 3, "Vector count changed after iteration");
-  //     assert.equal(Vector.peek(vector), "c", "Vector head changed after iteration");
+      // Check vector integrity after iteration
+      assert.equal(vector.toString(), expectedToString, "Vector string form changed after iteration");
+      assert.equal(vector.count(), 3, "Vector count changed after iteration");
+      assert.equal(vector.peek(), "c", "Vector head changed after iteration");
 
-  //     // Second iteration
-  //     assert.deepEqual([...vector], expectedItems, "Second iteration results mismatch");
-  //   });
+      // Second iteration
+      assert.deepEqual([...vector], expectedItems, "Second iteration results mismatch");
+    });
 
   //   it("should allow multiple iterations independently", () => {
   //     const vector = Vector.make("x", "y"); // y -> x
