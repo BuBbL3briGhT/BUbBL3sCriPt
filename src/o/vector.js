@@ -4,10 +4,7 @@ let emptyVector;
 
 class Vector extends List {
 
-  // static listOpenChar = "[";
-  // static listCloseChar = "]";
-
-  static get empty() { return emptyVector; }
+  static get emptyVector() { return emptyVector; }
 
   // Create a vector.
   constructor(o, oo=emptyVector) {
@@ -15,7 +12,7 @@ class Vector extends List {
   }
 
   static make(...elements) {
-    var head = this.emptyList;
+    var head = emptyVector;
     for (let o of elements)
       head = new this(o, head);
     return head;

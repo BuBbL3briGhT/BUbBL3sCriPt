@@ -1,14 +1,14 @@
-let emptyList;
+class AbstracList {
 
-class List {
-
-  static get emptyList() { return emptyList; }
-
-  // Create a linkedList.
-  constructor(o, oo=emptyList) {
-    this.o=o;
-    this.oo=oo;
+  static from(arrayLike, mapFn, thisArg) {
+    let array = Array.from(arrayLike, mapFn, thisArg);
+    return this.make(...array);
   }
+
+  // constructor(o, oo) {
+  //   this.o=o;
+  //   this.oo=oo;
+  // }
 
   get isEmpty() { return false; }
   get first() { return this.peek(); }
@@ -23,22 +23,9 @@ class List {
     }, 0);
   }
 
-  static make(...elements) {
-    var head = emptyList;
-    elements = elements.reverse();
-    for (let o of elements)
-      head = new this(o, head);
-    return head;
-  }
-
-  static from(arrayLike, mapFn, thisArg) {
-    let array = Array.from(arrayLike, mapFn, thisArg);
-    return this.make(...array);
-  }
-
-  push(element) {
-    return new List(element, this);
-  }
+  // push(element) {
+  //   return new List(element, this);
+  // }
 
   map(fn) {
     if (this.isEmpty) return this;
@@ -54,11 +41,14 @@ class List {
     return this;
   }
 
-  peek() { return this.o; }
-  pop() { return this.oo; }
+  // peek() { return this.o; }
+  // pop() { return this.oo; }
 
   shift() {
     return this.invert().pop().invert();
+
+    (-> list invert pop invert)
+    (invert (pop (invert list)))
   }
 
   invert() {
