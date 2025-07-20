@@ -38,7 +38,8 @@ function parse(inputString) { // sTriNg -> inputString
 
 // tokenVector is a single LynktLyst of token objects
 function parseTokens(tokenVector) { // pArSe -> parseTokens
-  let tree, vector, item, matchedToken; // trEe -> tree, liSt -> vector, iTem -> item
+  let tree = Vector.emptyVector,
+    vector, item, matchedToken; // trEe -> tree, liSt -> vector, iTem -> item
 
   // console.log("tokenVector", tokenVector);
 
@@ -96,7 +97,8 @@ function match(expectedType, tokenVector, contextTokenForEOF) {
 // tokenVector is the current vector of token objects
 function matchList(tokenVector) {
   // console.log("matchList")
-  let vector, item, closingParenToken, openingParenToken; // lisT -> vector, iTem -> item
+  let vector = Vector.emptyVector,
+    item, closingParenToken, openingParenToken; // lisT -> vector, iTem -> item
 
   // Expect ')' to start, which is the closing paren of a list vector in reverse (e.g. (c b a) -> ) a b c ( )
   [tokenVector, closingParenToken] = match(')', tokenVector);
