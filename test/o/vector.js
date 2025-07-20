@@ -257,22 +257,22 @@ describe("Vector", () => {
       assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch");
     });
 
-  //   it("should yield all elements in a multi-element vector in order", () => {
-  //     const vector = Vector.make(1, 2, 3); // Creates vector: 1 -> 2 -> 3 -> air
-  //                                          // Note: Vector.make actually creates it as 3 -> 2 -> 1 -> air
-  //                                          // The tests for make() show: make(1,2,3) -> vector.get(0)=3, vector.get(1)=2, vector.get(2)=1
-  //                                          // Svector the yielded order should be 3, 2, 1 for make(1,2,3)
-  //     const expected = [3, 2, 1];
+    it("should yield all elements in a multi-element vector in order", () => {
+      const vector = Vector.make(1, 2, 3); // Creates vector: 1 -> 2 -> 3 -> emptyVector
+                                           // Note: Vector.make actually creates it as 3 -> 2 -> 1 -> emptyVector
+                                           // The tests for make() show: make(1,2,3) -> vector.get(0)=3, vector.get(1)=2, vector.get(2)=1
+                                           // Svector the yielded order should be 3, 2, 1 for make(1,2,3)
+      const expected = [3, 2, 1];
 
-  //     const resultsForOf = [];
-  //     for (const item of vector) {
-  //       resultsForOf.push(item);
-  //     }
-  //     assert.deepEqual(resultsForOf, expected, "for...of loop results mismatch for multi-element vector");
+      const resultsForOf = [];
+      for (const item of vector) {
+        resultsForOf.push(item);
+      }
+      assert.deepEqual(resultsForOf, expected, "for...of loop results mismatch for multi-element vector");
 
-  //     const resultsSpread = [...vector];
-  //     assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch for multi-element vector");
-  //   });
+      const resultsSpread = [...vector];
+      assert.deepEqual(resultsSpread, expected, "Spread syntax results mismatch for multi-element vector");
+    });
 
   //   it("should correctly yield null and undefined values if they are part of the vector", () => {
   //     const vector = Vector.make(1, undefined, 3, null, 5); // Expected order: 5, null, 3, undefined, 1
