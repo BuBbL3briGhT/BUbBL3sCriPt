@@ -74,13 +74,13 @@ describe("Vector", () => {
   describe("invert", () => {
     it("inverts vectors", () => {
       var vector = Vector.make();
-      vector = invert(vecto );
-      assert.equal(vector , Vector.emptyVector);
+      vector = vector.invert();
+      assert.equal(vector, Vector.emptyVector);
 
       vector = make(1);
-      vector = invert(vecto );
-      assert.equal(peek(vecto ),1);
-      assert.equal(skip(vector ,1), Vector.emptyVector);
+      vector = invert(vector);
+      assert.equal(peek(vector),1);
+      assert.equal(skip(vector,1), Vector.emptyVector);
 
       vector = push(push(vector ,2),3);
       assert.equal(peek(vector),3);
