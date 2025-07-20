@@ -26,7 +26,6 @@ class AbstractList {
     }, 0);
   }
 
-
   map(fn) {
     if (this.isEmpty) return this;
     return new this.constructor(fn(this.peek()),
@@ -76,10 +75,6 @@ class AbstractList {
         return o.toString();
     }
   }
-
-  toStringJoin(accumulatedString, formattedElement) {
-    return accumulatedString + " " + formattedElement;
-  };
 
   toArray() {
     return this.reduce((array, currentElement) => {

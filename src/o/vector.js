@@ -26,6 +26,10 @@ class Vector extends AbstractList {
     return "[" + this._toString() + "]";
   }
 
+  toStringJoin(accumulatedString, formattedElement) {
+    return formattedElement + " " + accumulatedString;
+  };
+
 }
 
 

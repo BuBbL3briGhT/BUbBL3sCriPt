@@ -12,23 +12,23 @@ describe("Vector", () => {
     });
   });
 
-  // describe("isEmpty", function () {
-  //   it("should return true for an empty vector", function () {
-  //     let vector = Vector.make();
-  //     assert.equal(vector.isEmpty, true);
-  //   });
-  //   it("should return false for a none empty vector", function () {
-  //     let vector = Vector.make(1);
-  //     assert.equal(vector.isEmpty, false);
-  //   });
-  // });
+  describe("isEmpty", function () {
+    it("should return true for an empty vector", function () {
+      let vector = Vector.make();
+      assert.equal(vector.isEmpty, true);
+    });
+    it("should return false for a none empty vector", function () {
+      let vector = Vector.make(1);
+      assert.equal(vector.isEmpty, false);
+    });
+  });
 
-  // describe("toString", function () {
-  //   it("returns the expected string representation", function () {
-  //     let vector = Vector.make(1, 2, 3);
-  //     assert.equal(vector.toString(), "[1 2 3]");
-  //   });
-  // });
+  describe("toString", function () {
+    it("returns the expected string representation", function () {
+      let vector = Vector.make(1, 2, 3);
+      assert.equal(vector.toString(), "[1 2 3]");
+    });
+  });
 
   // describe("new Vector(o, oo) ", () => {
   //   it("create a new vector for your fun and profit.", () => {

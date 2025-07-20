@@ -31,6 +31,10 @@ class List extends AbstractList {
     return "(" + this._toString() + ")";
   }
 
+  toStringJoin(accumulatedString, formattedElement) {
+    return accumulatedString + " " + formattedElement;
+  };
+
 }
 
 function _make(elementsArray, currentLinkedList=emptyList) {
