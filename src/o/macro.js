@@ -4,7 +4,8 @@ class Macro {
   constructor(bnd, args, body) {
     this.bnd = bnd;
     this.args = args.invert();
-    this.body = body.peek();
+    // this.body = body.peek();
+    this.body = body;
   }
 
   // call(bnd, args) {
