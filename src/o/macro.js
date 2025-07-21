@@ -16,6 +16,7 @@ class Macro {
   call(bnd, args) {
     // console.log("Macro called", args.toString());
     // console.log("expanded", this.expand(args).toString());
+    // console.log("args", args.toString());
     // console.log("expanded", this.expand(args));
     return _eval(bnd, this.expand(args));
   }
@@ -31,7 +32,8 @@ class Macro {
       if (x.first == '&') {
         x = x.rest;
         bnd[x.first] = y
-        x = null;                                    y = null;
+        x = null;
+        y = null;
         break;
       }
       bnd[x.first] = y && y.first;
@@ -41,7 +43,10 @@ class Macro {
     // console.log("bnd", bnd);
     // console.log("body", this.body);
     // console.log("body", this.body.toString());
-    return _eval(bnd, this.body);
+    // return _eval(bnd, this.body);
+
+    // console.log(this.body.map((xpr) => _eval(bnd, xpr)).toString(), 123);
+    return this.body.map((xpr) => _eval(bnd, xpr));
   }
 
   // expand(bnd, args) {
