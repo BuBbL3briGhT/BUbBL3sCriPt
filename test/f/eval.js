@@ -1,7 +1,7 @@
 const assert = require("assert");
 const sinon = require("sinon");
-const Bubbles = require("../../src/o/bubbles");
 const List = require("../../src/o/list");
+const Vector = require("../../src/o/vector");
 const eval = require("../../src/f/eval");
 
 describe("eval(script)", function () {
@@ -20,7 +20,7 @@ describe("eval(script)", function () {
     assert(console.log.calledWith(3));
   });
 
-  it("evaluates bubblescript", function () {
+  it("evaluates listcript", function () {
     assert.equal(eval("(+ 45 87)"), 132);
   });
 
@@ -33,7 +33,7 @@ describe("eval(script)", function () {
   it("evaluates a vector with ease", function () {
     let result = eval("[1 2 3]");
     // console.log(result);
-    assert(result instanceof List);
+    assert(result instanceof Vector);
   });
 
 });

@@ -1,7 +1,7 @@
 const parse = require("../f/parse");
 
-const List    = require("../o/list");
-const Bubbles   = require("../o/bubbles");
+const Vector    = require("../o/vector");
+const List   = require("../o/list");
 const Keyword = require("../o/keyword");
 const Fn      = require("../o/fn");
 const Macro   = require("../o/macro");
@@ -9,18 +9,18 @@ const Symbol  = require("../o/symbol");
 const Bubble  = require("../o/bubble");
 
 
-const { map, peek, pop, push, toArray } =
-  Bubbles;
+// const { map, peek, pop, push, toArray } =
+//   List;
 
-const { from: listFromArray, push: listPush} = List;
+// const { from: vectorFromArray, push: vectorPush} = Vector;
 
-// Makes a Bubblescript function from a
+// Makes a Listcript function from a
 // Javascript function.
 // Params:
 //   q: A Javascript function that will be
 //   called for this function.
 // Returns an annonomous function that is
-// sutible for use with bubblescript.
+// sutible for use with listcript.
 // #coreUtilityFunction
 // TODO: Create tests for mkfn.
 function mkfn(q) {
@@ -46,8 +46,8 @@ const rootBinding = {
   console: console,
   Array: Array,
   null: null,
-  Bubbles: Bubbles,
   List: List,
+  Vector: Vector,
 
   muf: function([key,val]) {
     return this[key.toString()]
@@ -73,7 +73,7 @@ const rootBinding = {
     x = args.push(new Symbol('fn'));
     var fn = _eval(binding, x);
     return function(...args) {
-      return fn.call(binding, arry.toList(args));
+      return fn.call(binding, arry.toVector(args));
     }
   },
 
@@ -101,17 +101,17 @@ const rootBinding = {
     return _eval(this,
       _eval(this, c) ? t : f);
   },
-  list: function(args) {
+  vector: function(args) {
     var binding = this;
     return args.map(function(arg) {
       return _eval(binding, arg);
     }).invert();
   },
 
-  // list: function(args) {
+  // vector: function(args) {
   //   return invert(map(invert(args), arg => _eval(this, arg)));
   // },
-  // list: function(args) {
+  // vector: function(args) {
   //   (invert
   //     (map (invert args)
   //       (curry _eval this)))
@@ -239,11 +239,11 @@ const _eval = eval.eVaL;
   let bnd = rootBinding;
   let evl = _eval;
 
-  function list(...args) {
-    return Bubbles.from(args);
+  function vector(...args) {
+    return List.from(args);
   }
   function glider(...args) {
-    return List.from(args);
+    return Vector.from(args);
   }
 
   function quote(m) {
@@ -260,26 +260,26 @@ const _eval = eval.eVaL;
        name = new Symbol('name'),
        amp = new Symbol('&'),
        z = new Symbol('z'),
-      _list = new Symbol('list'),
+      _vector = new Symbol('vector'),
       _muf = new Symbol('muf');
 
     function muf(...args) {
-      // return _eval(bnd, arry.toList(args).push(_muf));
-      return _eval(bnd, Bubbles.from(args).push(_muf));
+      // return _eval(bnd, arry.toVector(args).push(_muf));
+      return _eval(bnd, List.from(args).push(_muf));
     }
 
     // // muf push (fn [a b] (send a °push b))
-    // muf(_push, list(fn, glider(a, b),
-    //      list(send, a, quote(_push), b)));
+    // muf(_push, vector(fn, glider(a, b),
+    //      vector(send, a, quote(_push), b)));
 
     // muf push (fn [a b] (send a :push b))
-    muf(_push, list(fn, glider(a, b),
-         list(send, a, new Keyword("push"), b)));
+    muf(_push, vector(fn, glider(a, b),
+         vector(send, a, new Keyword("push"), b)));
 
     // (muf mufn (macro [name & z]
-    //     (list 'muf name (push z 'fn))))
-    muf(mufn, list(macro, glider(name,amp,z),
-        list(_list,quote(_muf), name,
-           list(_push, z, quote(fn)))));
+    //     (vector 'muf name (push z 'fn))))
+    muf(mufn, vector(macro, glider(name,amp,z),
+        vector(_vector,quote(_muf), name,
+           vector(_push, z, quote(fn)))));
 
 })();

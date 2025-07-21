@@ -1,15 +1,12 @@
 const parse = require("./parse");
 
-const List    = require("../o/list");
-const Bubbles   = require("../o/bubbles");
+const Vector    = require("../o/vector");
+const List   = require("../o/list");
 const Keyword = require("../o/keyword");
 const Symbol  = require("../o/symbol");
 const Bubble  = require("../o/bubble");
 
-const { map, peek, pop, push, toArray } =
-  Bubbles;
-
-// Evaluate Bubblesscript
+// Evaluate Listscript
 function eval(script) {
   return parse(script)
     .map(function(expression) {
@@ -21,15 +18,15 @@ function eVaL(bnd, xpr) {
   switch (xpr && xpr.constructor) {
     case Symbol:
       return xpr.resolve(bnd)
-    case Bubbles: {
-      let s = peek(xpr);
+    case List: {
+      let s = xpr.peek();
       if (s instanceof Symbol) {
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
           let q = eVaL(bnd, s);
           if (q != s)
             return eVaL(bnd,
-              push(pop(xpr), q));
+              xpr.pop().push(q));
           else
             return xpr;
         } else /* send */ {
@@ -40,30 +37,30 @@ function eVaL(bnd, xpr) {
             return q[s.fn]()
           }
           try {
-            return q[s.fn](...toArray(map(xpr.rest,
+            return q[s.fn](...xpr.rest.map(
               function(a) {
                 return eVaL(bnd, a);
-              })));
+              })).toArray();
           } catch (e) {
             console.log(s.fn);
             throw e;
           }
         }
-      } else if (s instanceof Bubbles) {
+      } else if (s instanceof List) {
         return eVaL(bnd,
-          push(pop(xpr), eVaL(bnd, s)))
+          xpr.pop().push(eVaL(bnd, s)))
       } else if (s instanceof Fn) {
-        return s.call(bnd, pop(xpr));
+        return s.call(bnd, xpr.pop());
       } else if (s instanceof Function) {
-        return s.call(bnd, pop(xpr));
+        return s.call(bnd, xpr.pop());
       } else if (s instanceof Macro) {
-        return s.call(bnd, pop(xpr));
+        return s.call(bnd, xpr.pop());
       } else {
         return undefined;
       }
     }
-    case List:
-      return List.map(xpr, (a) => {
+    case Vector:
+      return xpr.map((a) => {
         return eVaL(bnd, a)
       });
     case Fn:
