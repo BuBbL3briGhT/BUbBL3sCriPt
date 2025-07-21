@@ -15,6 +15,7 @@ function eval(script) {
 }
 
 function eVaL(bnd, xpr) {
+  // console.log("eVaL (xpr):", xpr.toString());
   switch (xpr && xpr.constructor) {
     case Symbol:
       return xpr.resolve(bnd)

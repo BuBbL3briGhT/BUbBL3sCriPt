@@ -7,7 +7,7 @@ describe("Macro", function () {
   describe("new Macro()", function () {
     it("✨️ creates a new macro", function () {
       let bnd = {};
-      let args = Vector.emptyVector;
+      let args = Vector.make(1,2);
       let body = List.emptyList;
       let macro = new Macro(bnd, args, body);
       assert.equal(macro.bnd, bnd);

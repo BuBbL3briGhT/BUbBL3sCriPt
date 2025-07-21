@@ -3,9 +3,7 @@
 class Macro {
   constructor(bnd, args, body) {
     this.bnd = bnd;
-    // this.args = args.invert();
     this.args = args;
-    // this.body = body.peek();
     this.body = body;
   }
 
@@ -23,12 +21,13 @@ class Macro {
   }
 
   expand(args) {
+    console.log("expand (args):", args.toString());
     let bnd = Object.create(this.bnd);
 
     var x, y;
-    x = this.args;
+    x = this.args.invert();
     y = args;
-    while (x) {
+    while (!x.isEmpty) {
       if (x.first == '&') {
         x = x.rest;
         bnd[x.first] = y
