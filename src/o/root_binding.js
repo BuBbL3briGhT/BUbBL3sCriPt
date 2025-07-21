@@ -101,12 +101,7 @@ const rootBinding = {
     return _eval(this,
       _eval(this, c) ? t : f);
   },
-  // vector: function(args) {
-  //   var binding = this;
-  //   return args.map(function(arg) {
-  //     return _eval(binding, arg);
-  //   }).invert();
-  // },
+
   list: mkfn(function(args) {
     return args;
   }),
@@ -115,15 +110,13 @@ const rootBinding = {
     return args.toVector();
   }),
 
-  // vector: function(args) {
-  //   return invert(map(invert(args), arg => _eval(this, arg)));
-  // },
-  // vector: function(args) {
-  //   (invert
-  //     (map (invert args)
-  //       (curry _eval this)))
-  //       (fn [arg] (_eval this arg))));
-  // },
+  // eval: mkfn(function(args) {
+  //   return _eval(this, args);
+  // }),
+
+  eval: mkfn(function(args) {
+    return args.map((exp) => _eval(this, exp)).last
+  }),
 
   blert: function(msgs) {
     alert(this.concat(msgs));
@@ -246,10 +239,10 @@ const _eval = eval.eVaL;
   let bnd = rootBinding;
   let evl = _eval;
 
-  function vector(...args) {
+  function list(...args) {
     return List.from(args);
   }
-  function glider(...args) {
+  function vector(...args) {
     return Vector.from(args);
   }
 
@@ -267,7 +260,7 @@ const _eval = eval.eVaL;
        name = new Symbol('name'),
        amp = new Symbol('&'),
        z = new Symbol('z'),
-      _vector = new Symbol('vector'),
+      _list = new Symbol('list'),
       _muf = new Symbol('muf');
 
     function muf(...args) {
@@ -276,17 +269,17 @@ const _eval = eval.eVaL;
     }
 
     // // muf push (fn [a b] (send a °push b))
-    // muf(_push, vector(fn, glider(a, b),
-    //      vector(send, a, quote(_push), b)));
+    // muf(_push, list(fn, vector(a, b),
+    //      list(send, a, quote(_push), b)));
 
     // muf push (fn [a b] (send a :push b))
-    muf(_push, vector(fn, glider(a, b),
-         vector(send, a, new Keyword("push"), b)));
+    muf(_push, list(fn, vector(a, b),
+         list(send, a, new Keyword("push"), b)));
 
     // (muf mufn (macro [name & z]
-    //     (vector 'muf name (push z 'fn))))
-    muf(mufn, vector(macro, glider(name,amp,z),
-        vector(_vector,quote(_muf), name,
-           vector(_push, z, quote(fn)))));
+    //     (list 'muf name (push z 'fn))))
+    muf(mufn, list(macro, vector(name,amp,z),
+        list(_list, quote(_muf), name,
+           list(_push, z, quote(fn)))));
 
 })();
