@@ -56,12 +56,16 @@ const rootBinding = {
   // fn: function([caret, stic]) {
   //   return new Fn(this, caret, stic);
   // },
-  fn: function(_) {
-    // console.log(_);
-    let binding = this;
-    let caret = _.peek();
-    let stic  = _.pop();
-    return new Fn(binding, caret, stic);
+  // fn: function(_) {
+  //   // console.log(_);
+  //   let binding = this;
+  //   let caret = _.peek();
+  //   let stic  = _.pop();
+  //   return new Fn(binding, caret, stic);
+  // },
+
+  fn: function(args) {
+    return new Fn(this, args.first, args.rest)
   },
 
   macro: function(args) {
@@ -101,22 +105,6 @@ const rootBinding = {
     return _eval(this,
       _eval(this, c) ? t : f);
   },
-
-  list: mkfn(function(args) {
-    return args;
-  }),
-
-  vector: mkfn(function(args) {
-    return args.toVector();
-  }),
-
-  // eval: mkfn(function(args) {
-  //   return _eval(this, args);
-  // }),
-
-  eval: mkfn(function(args) {
-    return args.map((exp) => _eval(this, exp)).last
-  }),
 
   blert: function(msgs) {
     alert(this.concat(msgs));
@@ -161,6 +149,17 @@ const rootBinding = {
     return m;
   },
 
+  list: mkfn(function(args) {
+    return args;
+  }),
+
+  vector: mkfn(function(args) {
+    return args.toVector();
+  }),
+
+  eval: mkfn(function(args) {
+    return args.map((exp) => _eval(this, exp)).last
+  }),
 
   send: mkfn(function([a,b,...c]) {
     if (b.key)
@@ -276,6 +275,7 @@ const _eval = eval.eVaL;
     muf(_push, list(fn, vector(a, b),
          list(send, a, new Keyword("push"), b)));
 
+    // console.log(vector(name,amp,z));
     // (muf mufn (macro [name & z]
     //     (list 'muf name (push z 'fn))))
     muf(mufn, list(macro, vector(name,amp,z),

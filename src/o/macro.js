@@ -3,7 +3,8 @@
 class Macro {
   constructor(bnd, args, body) {
     this.bnd = bnd;
-    this.args = args.invert();
+    // this.args = args.invert();
+    this.args = args;
     // this.body = body.peek();
     this.body = body;
   }
