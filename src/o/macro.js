@@ -14,14 +14,14 @@ class Macro {
   // }
 
   call(bnd, args) {
-    console.log("Macro called", args.toString());
+    // console.log("Macro called", args.toString());
     // console.log("expanded", this.expand(args).toString());
-    console.log("expanded", this.expand(args));
+    // console.log("expanded", this.expand(args));
     return _eval(bnd, this.expand(args));
   }
 
   expand(args) {
-    console.log("expand (args):", args.toString());
+    // console.log("expand (args):", args.toString());
     let bnd = Object.create(this.bnd);
 
     var x, y;
@@ -38,9 +38,9 @@ class Macro {
       x = x.rest;
       y = y && y.rest;
     }
-    console.log("bnd", bnd);
-    console.log("body", this.body);
-    console.log("body", this.body.toString());
+    // console.log("bnd", bnd);
+    // console.log("body", this.body);
+    // console.log("body", this.body.toString());
     return _eval(bnd, this.body);
   }
 

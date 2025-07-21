@@ -43,7 +43,7 @@ function eVaL(bnd, xpr) {
                 return eVaL(bnd, a);
               }).toArray());
           } catch (e) {
-            console.log(s.fn);
+            // console.log(s.fn);
             throw e;
           }
         }
