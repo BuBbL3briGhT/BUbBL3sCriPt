@@ -16,7 +16,8 @@ class Macro {
 
   call(bnd, args) {
     console.log("Macro called", args.toString());
-    console.log("expanded", this.expand(args).toString());
+    // console.log("expanded", this.expand(args).toString());
+    console.log("expanded", this.expand(args));
     return _eval(bnd, this.expand(args));
   }
 

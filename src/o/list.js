@@ -35,6 +35,12 @@ class List extends AbstractList {
     return accumulatedString + " " + formattedElement;
   };
 
+  toVector() {
+    return this.reduce((vector, o) => {
+      return vector.push(o); },
+      Vector.emptyVector);
+  }
+
 }
 
 function _make(elementsArray, currentLinkedList=emptyList) {
@@ -52,3 +58,5 @@ class EmptyList extends List {
 emptyList = new EmptyList()
 
 module.exports = List;
+
+const Vector = require("./vector");

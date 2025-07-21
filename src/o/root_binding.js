@@ -101,12 +101,19 @@ const rootBinding = {
     return _eval(this,
       _eval(this, c) ? t : f);
   },
-  vector: function(args) {
-    var binding = this;
-    return args.map(function(arg) {
-      return _eval(binding, arg);
-    }).invert();
-  },
+  // vector: function(args) {
+  //   var binding = this;
+  //   return args.map(function(arg) {
+  //     return _eval(binding, arg);
+  //   }).invert();
+  // },
+  list: mkfn(function(args) {
+    return args;
+  }),
+
+  vector: mkfn(function(args) {
+    return args.toVector();
+  }),
 
   // vector: function(args) {
   //   return invert(map(invert(args), arg => _eval(this, arg)));
@@ -166,9 +173,9 @@ const rootBinding = {
     if (b.key)
       b = b.key;
     if (c.length > 0) {
-      console.log("a", a);
-      console.log("b", b);
-      console.log("c", c);
+      // console.log("a", a);
+      // console.log("b", b);
+      // console.log("c", c);
       return a[b](...c);
     } else
       return a[b]();

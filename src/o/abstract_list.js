@@ -66,6 +66,7 @@ class AbstractList {
   }
 
   toStringFormat(o) {
+    if (!o) return o;
     switch (typeof o) {
       case "string":
         return '"' + o + '"';

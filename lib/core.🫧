@@ -1,7 +1,7 @@
-(muf puts (fn [msg] (console.log msg)))
+# (muf puts (fn [msg] (console.log msg)))
 # (mufn puts [& msg] (console.log & msg))
 
-# (mufn puts [msg] (console.log msg))
+(mufn puts [msg] (console.log msg))
 
 (muf 🍎 (fn [a b] (console.log a b)))
 

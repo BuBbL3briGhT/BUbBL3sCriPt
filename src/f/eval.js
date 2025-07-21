@@ -1,12 +1,12 @@
-const parse = require("./parse");
-
-const Vector    = require("../o/vector");
-const List   = require("../o/list");
-const Keyword = require("../o/keyword");
+const List    = require("../o/list");
+const Vector  = require("../o/vector");
 const Symbol  = require("../o/symbol");
+const Keyword = require("../o/keyword");
 const Bubble  = require("../o/bubble");
 
-// Evaluate Listscript
+const parse = require("./parse");
+
+// Evaluate Bubblescript
 function eval(script) {
   return parse(script)
     .map(function(expression) {
