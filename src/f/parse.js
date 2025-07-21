@@ -97,7 +97,7 @@ function match(expectedType, tokenVector, contextTokenForEOF) {
 // tokenVector is the current vector of token objects
 function matchList(tokenVector) {
   // console.log("matchList")
-  let vector = Vector.emptyVector,
+  let list = List.emptyList,
     item, closingParenToken, openingParenToken; // lisT -> vector, iTem -> item
 
   // Expect ')' to start, which is the closing paren of a list vector in reverse (e.g. (c b a) -> ) a b c ( )
@@ -107,11 +107,11 @@ function matchList(tokenVector) {
   while (tokenVector.peek() && tokenVector.peek().type != '(') {
     if(tokenVector.peek().type === "°") {
       tokenVector = tokenVector.pop();
-      vector = vector.pop().push(new Bubble(vector.peek()))
+      list = list.pop().push(new Bubble(list.peek()))
     } else {
       // Pass closingParenToken as context for EOF errors when expecting an item for this list.
       [tokenVector, item] = matchItem(tokenVector, closingParenToken); // iTem -> item
-      vector = vector.push(item); // Items are pushed in reverse order, inverted later // lisT -> vector, iTem -> item
+      list = list.push(item); // Items are pushed in reverse order, inverted later // lisT -> vector, iTem -> item
     }
   }
 
@@ -121,7 +121,7 @@ function matchList(tokenVector) {
   [tokenVector, openingParenToken] = match('(', tokenVector, closingParenToken);
 
   // return [tokenVector, vector.invert()]; // Invert the collected vector to restore original order // lisT -> vector
-  return [tokenVector, vector];
+  return [tokenVector, list];
 }
 
 // tokenVector is the current vector of token objects

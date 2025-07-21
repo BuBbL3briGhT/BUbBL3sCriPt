@@ -40,7 +40,7 @@ function eVaL(bnd, xpr) {
             return q[s.fn](...xpr.rest.map(
               function(a) {
                 return eVaL(bnd, a);
-              })).toArray();
+              }).toArray());
           } catch (e) {
             console.log(s.fn);
             throw e;
