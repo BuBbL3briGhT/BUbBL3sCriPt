@@ -62,6 +62,5 @@ class Macro {
 
 module.exports = Macro;
 
-const invoke = require("../f/invoke");
 const eval = require('../f/eval');
 const _eval  = eval.eVaL;

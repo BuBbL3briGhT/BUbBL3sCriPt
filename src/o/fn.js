@@ -18,10 +18,32 @@ class Fn {
   // }
 
   call(bnd, args) {
-    return invoke(this.bnd, this,
+    return this.invoke(this.bnd, this,
       args && args.invert().map(function(a) {
         return _eval(bnd, a);
       }))
+  }
+
+  invoke(bnd, fn, args) {
+    var bnd = Object.create(bnd);
+    // var q = map(glider, fn.args, args)
+
+    var x, y;
+    x = fn.args;
+    y = args;
+    while (x) {
+      if (x.first == '&') {
+        x = x.rest;
+        bnd[x.first] = y
+        x = null;                                    y = null;
+        break;
+      }
+      bnd[x.first] = y && y.first;
+      x = x.rest;
+      y = y && y.rest;
+    }
+
+    return _eval(bnd, fn);
   }
 
   toString() {
@@ -36,7 +58,6 @@ class Fn {
 module.exports = Fn;
 // console.log("assemble fn");
 
-const invoke = require("../f/invoke");
 const eval = require('../f/eval');
 // console.log("fn required eval");
 const _eval  = eval.eVaL;
