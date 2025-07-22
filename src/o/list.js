@@ -41,6 +41,12 @@ class List extends AbstractList {
       Vector.emptyVector);
   }
 
+  evalEach(binding) {
+    return this.each(xpr =>
+      _eval(binding, xpr));
+  }
+
+
 }
 
 function _make(elementsArray, currentLinkedList=emptyList) {
@@ -60,3 +66,6 @@ emptyList = new EmptyList()
 module.exports = List;
 
 const Vector = require("./vector");
+
+const eval = require('../f/eval');
+const _eval  = eval.eVaL;
