@@ -51,7 +51,7 @@ describe("eval(script)", function () {
     assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
   });
 
-  it.only("expands a macro a more complex macro", function () {
+  it("expands a macro a more complex macro", function () {
     let bnd = Object.create(rootBinding);
     bnd.puts = null;
     let ast = parse("(muf 🐒 (macro [🐸 🐷 🦎] (list °puts (list °+ 🐸 🐷 🦎)) (list °puts (+ 🐸 🐷 🐷) 🦎)))");
