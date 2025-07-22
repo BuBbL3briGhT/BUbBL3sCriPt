@@ -1,4 +1,3 @@
-// console.log("load fn");
 const Symbol = require("./symbol");
 
 class Fn {
@@ -39,11 +38,7 @@ class Fn {
 
 }
 
-// console.log("export fn");
 module.exports = Fn;
-// console.log("assemble fn");
 
 const eval = require('../f/eval');
-// console.log("fn required eval");
 const _eval  = eval.eVaL;
-// console.log(_eval);
