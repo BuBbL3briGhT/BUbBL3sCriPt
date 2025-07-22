@@ -5,7 +5,7 @@ class Fn {
 
   constructor(bnd, args, body) {
     this.bnd = bnd;
-    this.args = args;
+    this.args = args.toList();
     this.body = body;
   }
 
@@ -18,32 +18,61 @@ class Fn {
   // }
 
   call(bnd, args) {
-    return this.invoke(this.bnd, this,
-      args && args.invert().map(function(a) {
+    return this.invoke(
+      args && args.map(function(a) {
         return _eval(bnd, a);
-      }))
+      }));
   }
 
-  invoke(bnd, fn, args) {
-    var bnd = Object.create(bnd);
-    // var q = map(glider, fn.args, args)
+  // orginalinvoke(bnd, fn, args) {
+  //   var bnd = Object.create(bnd);
+  //   // var q = map(glider, fn.args, args)
+
+  //   var x, y;
+  //   x = fn.args;
+  //   y = args;
+  //   while (x) {
+  //     if (x.first == '&') {
+  //       x = x.rest;
+  //       bnd[x.first] = y
+  //       x = null;                                    y = null;
+  //       break;
+  //     }
+  //     bnd[x.first] = y && y.first;
+  //     x = x.rest;
+  //     y = y && y.rest;
+  //   }
+
+  //   return _eval(bnd, fn);
+  // }
+
+  invoke(args) { //new
+    // console.log("expand (args):", args.toString());
+    let bnd = Object.create(this.bnd);
 
     var x, y;
-    x = fn.args;
+    x = this.args;
     y = args;
-    while (x) {
+    while (!x.isEmpty) {
       if (x.first == '&') {
         x = x.rest;
         bnd[x.first] = y
-        x = null;                                    y = null;
+        x = null;
+        y = null;
         break;
       }
       bnd[x.first] = y && y.first;
       x = x.rest;
       y = y && y.rest;
     }
+    // console.log("bnd", bnd);
+    // console.log("body", this.body);
+    // console.log("body", this.body.toString());
+    // return _eval(bnd, this.body);
 
-    return _eval(bnd, fn);
+    // console.log(this.body.map((xpr) => _eval(bnd, xpr)).toString(), 123);
+    // return this.body.map((xpr) => _eval(bnd, xpr));
+    return _eval(bnd, this);
   }
 
   toString() {
