@@ -9,16 +9,8 @@ class Fn {
     this.body = body;
   }
 
-  // call(bnd, args) {
-  //   const evl = require("../f/eval").eVaL;
-  //   return invoke(this.bnd, this,
-  //     args && args.map(function(a) {
-  //       return evl(bnd, a);
-  //     }))
-  // }
-
-  call(bnd, args) {
-    bnd = Object.create(bnd);
+  invoke(args) {
+    let bnd = Object.create(this.bnd);
 
     var x, y;
     x = this.args;
@@ -37,10 +29,6 @@ class Fn {
     }
 
     return _eval(bnd, this);
-  }
-
-  invoke(args) {
-    return this.call(this.bnd, args);
   }
 
   toString() {
