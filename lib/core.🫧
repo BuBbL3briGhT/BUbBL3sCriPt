@@ -6,9 +6,6 @@
 (mufn puts [& msg]
   (eval (push msg °console.log)))
 
-(mufn putss [& msg]
-  (eval (push msg °console.log)))
-
 # (muf puts (fn [msg] (console.log msg)))
 # (mufn puts [& msg] (console.log & msg))
 

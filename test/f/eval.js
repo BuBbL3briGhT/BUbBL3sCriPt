@@ -3,6 +3,9 @@ const sinon = require("sinon");
 const List = require("../../src/o/list");
 const Vector = require("../../src/o/vector");
 const eval = require("../../src/f/eval");
+const parse = require("../../src/f/parse");
+const rootBinding = require("../../src/o/root_binding");
+// require("../../src/bubls");
 
 describe("eval(script)", function () {
 
@@ -36,6 +39,26 @@ describe("eval(script)", function () {
     assert(result instanceof Vector);
   });
 
-});
+  it.only("expands macros", function () {
+    let _eval = eval.eVaL;
+    let bnd = Object.create(rootBinding);
+    let ast = parse("(muf 🐒 (macro [] °(puts \"Monkey\")))");
+    assert.equal(ast.toString(), "((muf 🐒 (macro [] °(puts \"Monkey\"))))");
+    // console.log(ast.toString());
+    ast.evalEach(bnd)
+    let fn = parse("(fn [] (🐒))").evalEach(bnd);
+    // console.log(fn.body.toString());
+    assert.equal(fn.body.toString(), "((🐒))");
+    fn.body.evalEach(bnd);
+    // console.log(fn.body.toString());
+    assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
+    fn.body.evalEach(bnd);
+    // console.log(fn.body.toString());
+    assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
+    // console.log(parse("🐵").evalEach(bnd));
+    // console.log(bnd);
+    // console.log(parse("🐒").evalEach(bnd).toString());
+  });
 
+});
 

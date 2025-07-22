@@ -62,7 +62,6 @@ class List extends AbstractList {
     if (this.pop().isEmpty) return result;
     return this.pop().each(fn);
   }
-
 }
 
 function _make(elementsArray, currentLinkedList=emptyList) {
