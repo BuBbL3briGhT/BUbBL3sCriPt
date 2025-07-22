@@ -54,13 +54,13 @@ describe("eval(script)", function () {
   it.only("expands a macro a more complex macro", function () {
     let bnd = Object.create(rootBinding);
     bnd.puts = null;
-    let ast = parse("(muf 🐒 (macro [🐸 🐷] (list °puts (list °+ 🐸 🐷)) (list °puts (+ 🐸 🐷 🐷))))");
-    assert.equal(ast.toString(), "((muf 🐒 (macro [🐸 🐷] (list °puts (list °+ 🐸 🐷)) (list °puts (+ 🐸 🐷 🐷)))))");
+    let ast = parse("(muf 🐒 (macro [🐸 🐷 🦎] (list °puts (list °+ 🐸 🐷 🦎)) (list °puts (+ 🐸 🐷 🐷) 🦎)))");
+    assert.equal(ast.toString(), "((muf 🐒 (macro [🐸 🐷 🦎] (list °puts (list °+ 🐸 🐷 🦎)) (list °puts (+ 🐸 🐷 🐷) 🦎))))");
     ast.evalEach(bnd)
-    let fn = parse("(fn [] (* 6 9) (🐒 1 2) (+ 3 4))").evalEach(bnd);
-    assert.equal(fn.body.toString(), "((* 6 9) (🐒 1 2) (+ 3 4))");
+    let fn = parse("(fn [🪻] (* 6 9) (🐒 1 2 🪻) (+ 3 4))").evalEach(bnd);
+    assert.equal(fn.body.toString(), "((* 6 9) (🐒 1 2 🪻) (+ 3 4))");
     fn.body.evalEach(bnd);
-    assert.equal(fn.body.toString(), "((* 6 9) (puts (+ 1 2)) (puts 5) (+ 3 4))");
+    assert.equal(fn.body.toString(), "((* 6 9) (puts (+ 1 2 🪻)) (puts 5 🪻) (+ 3 4))");
   });
 });
 
