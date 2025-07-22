@@ -13,7 +13,6 @@ describe("eval(script)", function () {
     sinon.restore();
   });
 
-
   it("runs script top to bottom", function () {
     sinon.replace(console, "log", sinon.fake())
     eval("(muf puts (fn [a] (console.log a)))\n(puts 1)\n(puts 2)\n(puts 3)")
@@ -40,7 +39,6 @@ describe("eval(script)", function () {
   });
 
   it("expands macros", function () {
-    let _eval = eval.eVaL;
     let bnd = Object.create(rootBinding);
     let ast = parse("(muf 🐒 (macro [] °(puts \"Monkey\")))");
     assert.equal(ast.toString(), "((muf 🐒 (macro [] °(puts \"Monkey\"))))");
