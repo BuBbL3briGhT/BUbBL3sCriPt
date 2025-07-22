@@ -18,36 +18,11 @@ class Fn {
   // }
 
   call(bnd, args) {
-    return this.invoke(
-      args && args.map(function(a) {
-        return _eval(bnd, a);
-      }));
+    args = args.map((a) => _eval(bnd, a));
+    return this.invoke(args);
   }
 
-  // orginalinvoke(bnd, fn, args) {
-  //   var bnd = Object.create(bnd);
-  //   // var q = map(glider, fn.args, args)
-
-  //   var x, y;
-  //   x = fn.args;
-  //   y = args;
-  //   while (x) {
-  //     if (x.first == '&') {
-  //       x = x.rest;
-  //       bnd[x.first] = y
-  //       x = null;                                    y = null;
-  //       break;
-  //     }
-  //     bnd[x.first] = y && y.first;
-  //     x = x.rest;
-  //     y = y && y.rest;
-  //   }
-
-  //   return _eval(bnd, fn);
-  // }
-
-  invoke(args) { //new
-    // console.log("expand (args):", args.toString());
+  invoke(args) {
     let bnd = Object.create(this.bnd);
 
     var x, y;
@@ -65,13 +40,7 @@ class Fn {
       x = x.rest;
       y = y && y.rest;
     }
-    // console.log("bnd", bnd);
-    // console.log("body", this.body);
-    // console.log("body", this.body.toString());
-    // return _eval(bnd, this.body);
 
-    // console.log(this.body.map((xpr) => _eval(bnd, xpr)).toString(), 123);
-    // return this.body.map((xpr) => _eval(bnd, xpr));
     return _eval(bnd, this);
   }
 
