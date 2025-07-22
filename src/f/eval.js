@@ -39,7 +39,7 @@ function eVaL(bnd, xpr) {
           }
           try {
             return q[s.fn](...xpr.rest.map(
-              (a) =>  eVaL(bnd, a)).toArray());
+              (a) => eVaL(bnd, a)).toArray());
           } catch (e) {
             // console.log(s.fn);
             throw e;
@@ -49,7 +49,13 @@ function eVaL(bnd, xpr) {
         return eVaL(bnd,
           xpr.pop().push(eVaL(bnd, s)))
       } else if (s instanceof Fn) {
-        return s.call(bnd, xpr.pop());
+        // return s.call(bnd, xpr.pop());
+        // console.log(1, xpr.pop());
+        // console.log(1.2, bnd);
+        // console.log(2, xpr.pop().
+        //   map(arg => eVaL(bnd, arg)));
+        return s.call(xpr.pop().map(arg =>
+          eVaL(bnd, arg)));
       } else if (s instanceof Function) {
         return s.call(bnd, xpr.pop());
       } else if (s instanceof Macro) {

@@ -17,12 +17,12 @@ class Fn {
   //     }))
   // }
 
-  call(bnd, args) {
-    args = args.map((a) => _eval(bnd, a));
-    return this.invoke(args);
-  }
+  // call(bnd, args) {
+  //   args = args.map((a) => _eval(bnd, a));
+  //   return this.invoke(args);
+  // }
 
-  invoke(args) {
+  call(args) {
     let bnd = Object.create(this.bnd);
 
     var x, y;
