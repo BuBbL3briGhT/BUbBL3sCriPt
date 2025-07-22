@@ -3,6 +3,7 @@ const Vector  = require("../o/vector");
 const Symbol  = require("../o/symbol");
 const Keyword = require("../o/keyword");
 const Bubble  = require("../o/bubble");
+const MacroExpanded = require("../o/macro_expanded");
 
 const parse = require("./parse");
 
@@ -51,8 +52,8 @@ function eVaL(bnd, xpr) {
         return s.call(bnd, xpr.pop());
       } else if (s instanceof Macro) {
         let expanded = s.expand(xpr.pop());
-        // throw new MacroExpanded(expanded);
-        return expanded.evalEach(bnd);
+        throw new MacroExpanded(expanded);
+        // return expanded.evalEach(bnd);
       } else {
         return undefined;
       }

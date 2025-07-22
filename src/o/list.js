@@ -1,4 +1,5 @@
 const AbstractList = require("./abstract_list");
+const MacroExpanded = require("./macro_expanded");
 
 let emptyList;
 
@@ -41,9 +42,21 @@ class List extends AbstractList {
       Vector.emptyVector);
   }
 
+  // evalEach(binding) {
+  //   return this.each(xpr =>
+  //     _eval(binding, xpr));
+  // }
+
   evalEach(binding) {
-    return this.each(xpr =>
-      _eval(binding, xpr));
+    return this.each(xpr => {
+      try {
+        return _eval(binding, xpr)
+      } catch (o) {
+        if (o instanceof MacroExpanded) {
+          o.expanded.evalEach(binding);
+        }
+      }
+    });
   }
 
 
