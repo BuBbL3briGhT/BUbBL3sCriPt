@@ -56,7 +56,6 @@ function eVaL(bnd, xpr) {
       } else if (s instanceof Macro) {
         let expanded = s.expand(xpr.pop());
         return expanded.evalEach(bnd);
-        // return expanded.map(xpr => eVaL(bnd, xpr));
       } else {
         return undefined;
       }

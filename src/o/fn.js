@@ -27,7 +27,6 @@ class Fn {
       y = y && y.rest;
     }
 
-    // return this.body.each(xpr => _eval(bnd, xpr));
     return this.body.evalEach(bnd);
   }
 
