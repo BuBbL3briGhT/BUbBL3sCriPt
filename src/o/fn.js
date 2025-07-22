@@ -17,13 +17,8 @@ class Fn {
   //     }))
   // }
 
-  // call(bnd, args) {
-  //   args = args.map((a) => _eval(bnd, a));
-  //   return this.invoke(args);
-  // }
-
-  call(args) {
-    let bnd = Object.create(this.bnd);
+  call(bnd, args) {
+    bnd = Object.create(bnd);
 
     var x, y;
     x = this.args;
@@ -42,6 +37,10 @@ class Fn {
     }
 
     return _eval(bnd, this);
+  }
+
+  invoke(args) {
+    return this.call(this.bnd, args);
   }
 
   toString() {
