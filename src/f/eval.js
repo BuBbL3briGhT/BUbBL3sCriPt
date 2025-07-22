@@ -39,9 +39,7 @@ function eVaL(bnd, xpr) {
           }
           try {
             return q[s.fn](...xpr.rest.map(
-              function(a) {
-                return eVaL(bnd, a);
-              }).toArray());
+              (a) =>  eVaL(bnd, a)).toArray());
           } catch (e) {
             // console.log(s.fn);
             throw e;
