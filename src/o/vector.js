@@ -29,6 +29,12 @@ class Vector extends AbstractList {
     return formattedElement + " " + accumulatedString;
   };
 
+  toList() {
+    return this.reduce((list, o) => {
+      return list.push(o); },
+      List.emptyList);
+  }
+
 }
 
 class EmptyVector extends Vector {
@@ -38,3 +44,5 @@ class EmptyVector extends Vector {
 emptyVector = new EmptyVector()
 
 module.exports = Vector;
+
+const List = require("./list");

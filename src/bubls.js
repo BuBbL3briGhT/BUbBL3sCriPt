@@ -20,6 +20,4 @@ Bubblescript.loadFile = function (filePath) {
 }
 module.exports = Bubblescript;
 
-// console.log = console.trace;
-
 Bubblescript.loadFile("../lib/core.🫧");

@@ -3,7 +3,7 @@
 class Macro {
   constructor(bnd, args, body) {
     this.bnd = bnd;
-    this.args = args;
+    this.args = args.toList();
     this.body = body;
   }
 
@@ -27,7 +27,7 @@ class Macro {
     let bnd = Object.create(this.bnd);
 
     var x, y;
-    x = this.args.invert();
+    x = this.args;
     y = args;
     while (!x.isEmpty) {
       if (x.first == '&') {
