@@ -1,3 +1,8 @@
+(muf push (fn [a b] (send a :push b)))
+
+(muf mufn (macro [name & z]
+  (list °muf name (push z °fn))))
+
 # (muf puts (fn [msg] (console.log msg)))
 # (mufn puts [& msg] (console.log & msg))
 

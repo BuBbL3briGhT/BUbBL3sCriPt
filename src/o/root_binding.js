@@ -272,14 +272,14 @@ const _eval = eval.eVaL;
     //      list(send, a, quote(_push), b)));
 
     // muf push (fn [a b] (send a :push b))
-    muf(_push, list(fn, vector(a, b),
-         list(send, a, new Keyword("push"), b)));
+    // muf(_push, list(fn, vector(a, b),
+    //      list(send, a, new Keyword("push"), b)));
 
     // console.log(vector(name,amp,z));
     // (muf mufn (macro [name & z]
     //     (list 'muf name (push z 'fn))))
-    muf(mufn, list(macro, vector(name,amp,z),
-        list(_list, quote(_muf), name,
-           list(_push, z, quote(fn)))));
+    // muf(mufn, list(macro, vector(name,amp,z),
+    //     list(_list, quote(_muf), name,
+    //        list(_push, z, quote(fn)))));
 
 })();
