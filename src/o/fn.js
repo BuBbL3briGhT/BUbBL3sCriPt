@@ -27,7 +27,7 @@ class Fn {
       y = y && y.rest;
     }
 
-    return _eval(bnd, this);
+    return this.body.each(xpr => _eval(bnd, xpr));
   }
 
   toString() {

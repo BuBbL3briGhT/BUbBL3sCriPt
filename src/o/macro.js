@@ -7,10 +7,6 @@ class Macro {
     this.body = body;
   }
 
-  // call(bnd, args) {
-  //   return this.expand(args).map((xpr) => _eval(bnd, xpr));
-  // }
-
   expand(args) {
     let bnd = Object.create(this.bnd);
 

@@ -66,11 +66,6 @@ function eVaL(bnd, xpr) {
       return xpr.map((a) => {
         return eVaL(bnd, a)
       });
-    case Fn:
-    // case Macro:
-      return xpr.body.each((xpr) => {
-        return eVaL(bnd, xpr);
-      });
     case Bubble:
       return xpr.pop();
     default:
