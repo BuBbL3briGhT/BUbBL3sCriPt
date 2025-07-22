@@ -1,4 +1,5 @@
 :July 22, 2025
+- puts now handels more thsn one parameter.
 - Macros now work at a rudementary level.
   Because the is np compilation step, they
   are not expanded until they are

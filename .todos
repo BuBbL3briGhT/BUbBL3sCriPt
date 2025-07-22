@@ -1,26 +1,28 @@
 July
+- throw MacroExpanded jit
+- & to append list with params on
+  function call. Use with puts.
 - Package bubblescript to run in browser
 - binding to events
 - bubblescript for web dev
 - Impliment macros and make sure the expand when building the parse tree or just in time.
 - ensure Tokenize and parse &
 - ensure implementation for & in function params.
-- invert seems to be converting list to vector, is bug?
+x invert seems to be converting list to vector, is bug?
 - Clean up the Readme
 - add MiT license
-- Make macros work
-- Rename list to vector and bubbles to buble,. Make both inherit from LinkList class
+x Make macros work
 - Use Typescript?
 - Research lazy evaluation.
 - Better docs, (Literate code style, liyerate
   code documentation generator.
 - Update to use new es6 import
 - namespaces
-- pop, push in bubblescript
-- better pretty printing objects in repl
+x pop, push in bubblescript
+x better pretty printing objects in repl
 - document/integrate multiline repl
 - lazy evaluation, research proof of concept
-- Need to use empty lists and empty
+x Need to use empty lists and empty
   bubbles to make them object oriented
   again and get the best of both worlds by
   using a funtion which sends the message
