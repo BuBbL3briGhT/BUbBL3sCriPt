@@ -55,7 +55,7 @@ class List extends AbstractList {
       if (o instanceof MacroExpanded) {
         let expanded = o.expanded;
         this.o  = expanded.first;
-        this.oo = expanded.rest.conj(this.rest);
+        this.oo = this.rest.conj(expanded.rest.invert());
         return this.each(fn);
       }
     }
