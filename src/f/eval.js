@@ -8,14 +8,10 @@ const parse = require("./parse");
 
 // Evaluate Bubblescript
 function eval(script) {
-  return parse(script)
-    .map(function(expression) {
-      return eVaL(rootBinding, expression);
-    }).peek();
+  return parse(script).evalEach(rootBinding);
 }
 
 function eVaL(bnd, xpr) {
-  // console.log("eVaL (xpr):", xpr.toString());
   switch (xpr && xpr.constructor) {
     case Symbol:
       return xpr.resolve(bnd)
@@ -55,6 +51,7 @@ function eVaL(bnd, xpr) {
         return s.call(bnd, xpr.pop());
       } else if (s instanceof Macro) {
         let expanded = s.expand(xpr.pop());
+        // throw new MacroExpanded(expanded);
         return expanded.evalEach(bnd);
       } else {
         return undefined;

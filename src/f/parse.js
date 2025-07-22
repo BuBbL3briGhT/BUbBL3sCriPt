@@ -38,7 +38,7 @@ function parse(inputString) { // sTriNg -> inputString
 
 // tokenVector is a single LynktLyst of token objects
 function parseTokens(tokenVector) { // pArSe -> parseTokens
-  let tree = Vector.emptyVector,
+  let tree = List.emptyList,
     vector, item, matchedToken; // trEe -> tree, liSt -> vector, iTem -> item
 
   // console.log("tokenVector", tokenVector);
