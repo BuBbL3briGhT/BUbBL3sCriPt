@@ -42,23 +42,26 @@ class List extends AbstractList {
       Vector.emptyVector);
   }
 
-  // evalEach(binding) {
-  //   return this.each(xpr =>
-  //     _eval(binding, xpr));
-  // }
-
   evalEach(binding) {
-    return this.each(xpr => {
-      try {
-        return _eval(binding, xpr)
-      } catch (o) {
-        if (o instanceof MacroExpanded) {
-          o.expanded.evalEach(binding);
-        }
-      }
-    });
+    return this.each(xpr =>
+      _eval(binding, xpr));
   }
 
+  each(fn) {
+    let result;
+    try {
+      result = fn(this.peek());
+    } catch (o) {
+      if (o instanceof MacroExpanded) {
+        let expanded = o.expanded;
+        this.o  = expanded.first;
+        this.oo = expanded.rest.conj(this.rest);
+        return this.each(fn);
+      }
+    }
+    if (this.pop().isEmpty) return result;
+    return this.pop().each(fn);
+  }
 
 }
 
