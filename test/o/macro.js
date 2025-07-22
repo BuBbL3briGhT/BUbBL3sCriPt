@@ -22,9 +22,4 @@ describe("Macro", function () {
     // });
   });
 
-
-  describe("expansion", function () {
-
-
-  });
 });

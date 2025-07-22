@@ -38,7 +38,7 @@ describe("eval(script)", function () {
     assert(result instanceof Vector);
   });
 
-  it("expands macros", function () {
+  it("expands a macro", function () {
     let bnd = Object.create(rootBinding);
     let ast = parse("(muf 🐒 (macro [] °(puts \"Monkey\")))");
     assert.equal(ast.toString(), "((muf 🐒 (macro [] °(puts \"Monkey\"))))");
@@ -51,5 +51,16 @@ describe("eval(script)", function () {
     assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
   });
 
+  it.only("expands a macro a more complex macro", function () {
+    let bnd = Object.create(rootBinding);
+    bnd.puts = null;
+    let ast = parse("(muf 🐒 (macro [🐸 🐷] °(puts (+ 🐸 🐷)) °(puts 🐸)))");
+    assert.equal(ast.toString(), "((muf 🐒 (macro [🐸 🐷] °(puts (+ 🐸 🐷)) °(puts 🐸))))");
+    ast.evalEach(bnd)
+    let fn = parse("(fn [] (* 6 9) (🐒 1 2) (+ 3 4))").evalEach(bnd);
+    assert.equal(fn.body.toString(), "((* 6 9) (🐒 1 2) (+ 3 4))");
+    fn.body.evalEach(bnd);
+    assert.equal(fn.body.toString(), "((* 6 9) (puts (+ 🐸 🐷)) (puts 🐸) (+ 3 4))");
+  });
 });
 
