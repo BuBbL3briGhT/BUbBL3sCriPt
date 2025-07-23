@@ -1,10 +1,6 @@
 const assert = require("assert");
 const tokenize = require("../../src/f/tokenize");
-// Use List for list operations. Note: `blow` was specific to Bubble.
-// We'll use List.make for varargs and List.from for array-like.
-// `count`, `get`, `peek` are static methods on List.
-const List = require("../../src/o/list");
-const { count, get, peek, invert, from: arrayFromList, make: makeList } = List; // Assuming 'from' and 'make' exist
+const Vector = require("../../src/o/vector");
 
 const { TOK_STRING, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,
@@ -14,60 +10,60 @@ describe("tokenize(string)", function() {
 
   it("tokenizes true", function () {
     let tokenList = tokenize("true");
-    assert.equal(peek(tokenList).type, TOK_TRUE);
-    assert.equal(peek(tokenList).value, undefined);
-    assert.equal(peek(tokenList).line, 1);
-    assert.equal(peek(tokenList).column, 1);
+    assert.equal(tokenList.peek().type, TOK_TRUE);
+    assert.equal(tokenList.peek().value, undefined);
+    assert.equal(tokenList.peek().line, 1);
+    assert.equal(tokenList.peek().column, 1);
   });
 
   it("tokenizes true", function () {
     let tokenList = tokenize('(not true)');
-    tokenList = invert(tokenList); // Frivolus invert not sure why this is needed to get the test to pass.
-    assert.equal(get(tokenList, 0).type, '('); // First token
-    assert.equal(get(tokenList, 2).type, TOK_TRUE);
+    tokenList = tokenList.invert(); // Frivolus invert not sure why this is needed to get the test to pass.
+    assert.equal(tokenList.get(0).type, '('); // First token
+    assert.equal(tokenList.get(2).type, TOK_TRUE);
   });
 
   it("tokenizes false", function () {
     let tokenList = tokenize("false");
-    assert.equal(peek(tokenList).type, TOK_FALSE);
-    assert.equal(peek(tokenList).value, undefined);
-    assert.equal(peek(tokenList).line, 1);
-    assert.equal(peek(tokenList).column, 1);
+    assert.equal(tokenList.peek().type, TOK_FALSE);
+    assert.equal(tokenList.peek().value, undefined);
+    assert.equal(tokenList.peek().line, 1);
+    assert.equal(tokenList.peek().column, 1);
   });
 
   it("allows dots in symbols", function () {
     let tokenList = tokenize("console.log");
-    assert.equal(peek(tokenList).type, TOK_SYMBOL);
-    assert.equal(peek(tokenList).value, "console.log");
-    assert.equal(peek(tokenList).line, 1);
-    assert.equal(peek(tokenList).column, 1);
+    assert.equal(tokenList.peek().type, TOK_SYMBOL);
+    assert.equal(tokenList.peek().value, "console.log");
+    assert.equal(tokenList.peek().line, 1);
+    assert.equal(tokenList.peek().column, 1);
   });
 
   it("tokenizes single quote", function () {
     let tokenList = tokenize("'");
-    assert.equal(peek(tokenList).type, "'");
-    assert.equal(peek(tokenList).value, "'");
-    assert.equal(peek(tokenList).line, 1);
-    assert.equal(peek(tokenList).column, 1);
+    assert.equal(tokenList.peek().type, "'");
+    assert.equal(tokenList.peek().value, "'");
+    assert.equal(tokenList.peek().line, 1);
+    assert.equal(tokenList.peek().column, 1);
   });
 
   it("eats comments", function () {
     let tokenList = tokenize("# Hamilton Burger"); // This will produce no tokens
-    assert.equal(peek(tokenList), undefined); // List.air or undefined for empty
+    assert.equal(tokenList.peek(), undefined); // List.air or undefined for empty
 
     tokenList = tokenize("# 🍔4\ncop"); // Line 1 comment, "cop" on line 2
-    assert.equal(peek(tokenList).type, TOK_SYMBOL);
-    assert.equal(peek(tokenList).value, "cop");
-    assert.equal(peek(tokenList).line, 2);
-    assert.equal(peek(tokenList).column, 1);
+    assert.equal(tokenList.peek().type, TOK_SYMBOL);
+    assert.equal(tokenList.peek().value, "cop");
+    assert.equal(tokenList.peek().line, 2);
+    assert.equal(tokenList.peek().column, 1);
   });
 
   it("tokenizes string", function () {
     let tokenList = tokenize('"Hola Berenjena"');
-    assert.equal(peek(tokenList).type, TOK_STRING);
-    assert.equal(peek(tokenList).value, "Hola Berenjena");
-    assert.equal(peek(tokenList).line, 1);
-    assert.equal(peek(tokenList).column, 1);
+    assert.equal(tokenList.peek().type, TOK_STRING);
+    assert.equal(tokenList.peek().value, "Hola Berenjena");
+    assert.equal(tokenList.peek().line, 1);
+    assert.equal(tokenList.peek().column, 1);
   });
 
   it("tokenizes bubbles", function () {
@@ -75,47 +71,47 @@ describe("tokenize(string)", function() {
     // Tokenize returns inverted, so the list is actually like: ) dawg kitty 777 (
     // No, tokenize itself calls invert, so the list is in natural order.
     let tokenList = tokenize('(777 kitty :dawg)');
-    tokenList = invert(tokenList); // Frivolus invert not sure why this is needed to get the test to pass.
-    assert.equal(count(tokenList), 5);
-    assert.equal(get(tokenList, 0).type, '('); // First token
-    assert.equal(get(tokenList, 0).value, '(');
-    assert.equal(get(tokenList, 1).type, TOK_NUMBER);
-    assert.equal(get(tokenList, 1).value, 777);
-    assert.equal(get(tokenList, 2).type, TOK_SYMBOL);
-    assert.equal(get(tokenList, 2).value, "kitty");
-    assert.equal(get(tokenList, 3).type, TOK_KEYWORD);
-    assert.equal(get(tokenList, 3).value, "dawg");
-    assert.equal(get(tokenList, 4).type, ')'); // Last token
-    assert.equal(get(tokenList, 4).value, ')');
+    tokenList = tokenList.invert(); // Frivolus invert not sure why this is needed to get the test to pass.
+    assert.equal(tokenList.count(), 5);
+    assert.equal(tokenList.get(0).type, '('); // First token
+    assert.equal(tokenList.get(0).value, '(');
+    assert.equal(tokenList.get(1).type, TOK_NUMBER);
+    assert.equal(tokenList.get(1).value, 777);
+    assert.equal(tokenList.get(2).type, TOK_SYMBOL);
+    assert.equal(tokenList.get(2).value, "kitty");
+    assert.equal(tokenList.get(3).type, TOK_KEYWORD);
+    assert.equal(tokenList.get(3).value, "dawg");
+    assert.equal(tokenList.get(4).type, ')'); // Last token
+    assert.equal(tokenList.get(4).value, ')');
   });
 
   it("tokenizes balloons", function () {
     // Input: '[sha yaya daya]' -> Output: '[', 'sha', 'yaya', 'daya', ']'
     let tokenList = tokenize('[sha yaya daya]');
-    tokenList = invert(tokenList); // Frivolus invert not sure why this is needed to get the test to pass.
-    assert.equal(count(tokenList), 5);
-    assert.equal(get(tokenList, 0).type, '[');
-    assert.equal(get(tokenList, 1).type, TOK_SYMBOL);
-    assert.equal(get(tokenList, 1).value, 'sha');
-    assert.equal(get(tokenList, 2).type, TOK_SYMBOL);
-    assert.equal(get(tokenList, 2).value, 'yaya');
-    assert.equal(get(tokenList, 3).type, TOK_SYMBOL);
-    assert.equal(get(tokenList, 3).value, 'daya');
-    assert.equal(get(tokenList, 4).type, ']');
+    tokenList = tokenList.invert(); // Frivolus invert not sure why this is needed to get the test to pass.
+    assert.equal(tokenList.count(), 5);
+    assert.equal(tokenList.get(0).type, '[');
+    assert.equal(tokenList.get(1).type, TOK_SYMBOL);
+    assert.equal(tokenList.get(1).value, 'sha');
+    assert.equal(tokenList.get(2).type, TOK_SYMBOL);
+    assert.equal(tokenList.get(2).value, 'yaya');
+    assert.equal(tokenList.get(3).type, TOK_SYMBOL);
+    assert.equal(tokenList.get(3).value, 'daya');
+    assert.equal(tokenList.get(4).type, ']');
   });
 
   // Expected token objects will now include type and value. Line/col can be omitted for now in expected.
-  // Helper `makeList` from List can be used to construct expected lists.
+  // Helper `Vector.make` from List can be used to construct expected lists.
   // Or `List.from` for arrays.
 
   itTokenizes("symbol",
-    makeList({ type: TOK_SYMBOL, value: "symbol", line: 1, column: 1 })
+    Vector.make({ type: TOK_SYMBOL, value: "symbol", line: 1, column: 1 })
   );
   itTokenizes(":keyword",
-    makeList({ type: TOK_KEYWORD, value: "keyword", line: 1, column: 1 })
+    Vector.make({ type: TOK_KEYWORD, value: "keyword", line: 1, column: 1 })
   );
   itTokenizes("(a b c)",
-    makeList(
+    Vector.make(
       { type: '(', value: '(', line: 1, column: 1 },
       { type: TOK_SYMBOL, value: 'a', line: 1, column: 2 },
       { type: TOK_SYMBOL, value: 'b', line: 1, column: 4 },
@@ -124,7 +120,7 @@ describe("tokenize(string)", function() {
     )
   );
   itTokenizes("(+ 2 3)",
-    makeList(
+    Vector.make(
       { type: '(', value: '(', line: 1, column: 1 },
       { type: TOK_SYMBOL, value: '+', line: 1, column: 2 },
       { type: TOK_NUMBER, value: 2, line: 1, column: 4 },
@@ -141,7 +137,7 @@ describe("tokenize(string)", function() {
   // + Dropping the descriptor here because it is getting sent to tokenize and causing the test to fail.
   // itTokenizes("two bubbles: (+ 7 4)(8 2 -)", // Changed description to be unique for `it`
   itTokenizes("(+ 7 4)(8 2 -)", // Changed description to be unique for `it`
-    makeList(
+    Vector.make(
       { type: '(', value: '(', line: 1, column: 1 },
       { type: TOK_SYMBOL, value: '+', line: 1, column: 2 },
       { type: TOK_NUMBER, value: 7, line: 1, column: 4 },
@@ -161,7 +157,7 @@ describe("tokenize(string)", function() {
   // + Dropping the descriptor here because it is getting sent to tokenize and causing the test to fail.
   // itTokenizes("nested bubble: (1 (2))", // Changed description
   itTokenizes("(1 (2))", // Changed description
-    makeList(
+    Vector.make(
       { type: '(', value: '(', line: 1, column: 1 },
       { type: TOK_NUMBER, value: 1, line: 1, column: 2 },
       { type: '(', value: '(', line: 1, column: 4 },
@@ -174,7 +170,7 @@ describe("tokenize(string)", function() {
 
 // expectedTokenObjectsList is a List of token objects {type, value, line, column}
 function itTokenizes(s, expectedTokenObjectsList) {
-  // If expected is just one item and not a list, wrap it for consistency if makeList doesn't handle single items.
+  // If expected is just one item and not a list, wrap it for consistency if Vector.make doesn't handle single items.
   // List.make should handle if it's a single object by creating a list of one.
   it(`tokenizes "${s}"`, function() {
     const actualTokenList = tokenize(s);

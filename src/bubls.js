@@ -3,7 +3,7 @@ const path = require('path');
 
 const Bubblescript = {
       List: require("./o/list"),
-   Bubbles: require("./o/bubbles"),
+    Vector: require("./o/vector"),
     Symbol: require("./o/symbol"),
    Keyword: require("./o/keyword"),
     Bubble: require("./o/bubble"),
@@ -18,7 +18,6 @@ Bubblescript.loadFile = function (filePath) {
   filePath = path.join(__dirname, filePath);
   return Bubblescript.eval(fs.readFileSync(filePath, 'utf-8'))
 }
-
-Bubblescript.loadFile("🫧.bubls");
-
 module.exports = Bubblescript;
+
+Bubblescript.loadFile("../lib/core.🫧");

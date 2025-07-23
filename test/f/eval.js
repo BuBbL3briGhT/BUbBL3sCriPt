@@ -1,15 +1,17 @@
 const assert = require("assert");
 const sinon = require("sinon");
-const Bubbles = require("../../src/o/bubbles");
 const List = require("../../src/o/list");
+const Vector = require("../../src/o/vector");
 const eval = require("../../src/f/eval");
+
+const parse = require("../../src/f/parse");
+const rootBinding = require("../../src/o/root_binding");
 
 describe("eval(script)", function () {
 
   afterEach(function () {
     sinon.restore();
   });
-
 
   it("runs script top to bottom", function () {
     sinon.replace(console, "log", sinon.fake())
@@ -20,7 +22,7 @@ describe("eval(script)", function () {
     assert(console.log.calledWith(3));
   });
 
-  it("evaluates bubblescript", function () {
+  it("evaluates listcript", function () {
     assert.equal(eval("(+ 45 87)"), 132);
   });
 
@@ -33,9 +35,32 @@ describe("eval(script)", function () {
   it("evaluates a vector with ease", function () {
     let result = eval("[1 2 3]");
     // console.log(result);
-    assert(result instanceof List);
+    assert(result instanceof Vector);
   });
 
-});
+  it("expands a macro", function () {
+    let bnd = Object.create(rootBinding);
+    let ast = parse("(muf 🐒 (macro [] °(puts \"Monkey\")))");
+    assert.equal(ast.toString(), "((muf 🐒 (macro [] °(puts \"Monkey\"))))");
+    ast.evalEach(bnd)
+    let fn = parse("(fn [] (🐒))").evalEach(bnd);
+    assert.equal(fn.body.toString(), "((🐒))");
+    fn.body.evalEach(bnd);
+    assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
+    fn.body.evalEach(bnd);
+    assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
+  });
 
+  it("expands a macro a more complex macro", function () {
+    let bnd = Object.create(rootBinding);
+    bnd.puts = null;
+    let ast = parse("(muf 🐒 (macro [🐸 🐷 🦎] (list °puts (list °+ 🐸 🐷 🦎)) (list °puts (+ 🐸 🐷 🐷) 🦎)))");
+    assert.equal(ast.toString(), "((muf 🐒 (macro [🐸 🐷 🦎] (list °puts (list °+ 🐸 🐷 🦎)) (list °puts (+ 🐸 🐷 🐷) 🦎))))");
+    ast.evalEach(bnd)
+    let fn = parse("(fn [🪻] (* 6 9) (🐒 1 2 🪻) (+ 3 4))").evalEach(bnd);
+    assert.equal(fn.body.toString(), "((* 6 9) (🐒 1 2 🪻) (+ 3 4))");
+    fn.body.evalEach(bnd);
+    assert.equal(fn.body.toString(), "((* 6 9) (puts (+ 1 2 🪻)) (puts 5 🪻) (+ 3 4))");
+  });
+});
 

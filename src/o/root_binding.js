@@ -1,7 +1,7 @@
 const parse = require("../f/parse");
 
-const List    = require("../o/list");
-const Bubbles   = require("../o/bubbles");
+const Vector    = require("../o/vector");
+const List   = require("../o/list");
 const Keyword = require("../o/keyword");
 const Fn      = require("../o/fn");
 const Macro   = require("../o/macro");
@@ -9,18 +9,18 @@ const Symbol  = require("../o/symbol");
 const Bubble  = require("../o/bubble");
 
 
-const { map, peek, pop, push, toArray } =
-  Bubbles;
+// const { map, peek, pop, push, toArray } =
+//   List;
 
-const { from: listFromArray, push: listPush} = List;
+// const { from: vectorFromArray, push: vectorPush} = Vector;
 
-// Makes a Bubblescript function from a
+// Makes a Listcript function from a
 // Javascript function.
 // Params:
 //   q: A Javascript function that will be
 //   called for this function.
 // Returns an annonomous function that is
-// sutible for use with bubblescript.
+// sutible for use with listcript.
 // #coreUtilityFunction
 // TODO: Create tests for mkfn.
 function mkfn(q) {
@@ -46,8 +46,8 @@ const rootBinding = {
   console: console,
   Array: Array,
   null: null,
-  Bubbles: Bubbles,
   List: List,
+  Vector: Vector,
 
   muf: function([key,val]) {
     return this[key.toString()]
@@ -56,28 +56,17 @@ const rootBinding = {
   // fn: function([caret, stic]) {
   //   return new Fn(this, caret, stic);
   // },
-  fn: function(_) {
-    // console.log(_);
-    let binding = this;
-    let caret = _.peek();
-    let stic  = _.pop();
-    return new Fn(binding, caret, stic);
+  // fn: function(_) {
+  //   // console.log(_);
+  //   let binding = this;
+  //   let caret = _.peek();
+  //   let stic  = _.pop();
+  //   return new Fn(binding, caret, stic);
+  // },
+
+  fn: function(args) {
+    return new Fn(this, args.first, args.rest)
   },
-  send: mkfn(function([a,b,...c]) {
-    if (b.key)
-      b = b.key;
-    if (c.length > 0) {
-      return a[b](...c);
-    } else
-      return a[b]();
-  }),
-  get: mkfn(function(args) {
-     return args.reduce(
-        (a,b) => a ? a[b] : b);
-  }),
-  export: mkfn(function([ca,[nd,[y]]]) {
-    return ca[nd] = y;
-  }),
 
   macro: function(args) {
     return new Macro(this, args.first, args.rest)
@@ -88,7 +77,7 @@ const rootBinding = {
     x = args.push(new Symbol('fn'));
     var fn = _eval(binding, x);
     return function(...args) {
-      return fn.call(binding, arry.toList(args));
+      return fn.call(binding, arry.toVector(args));
     }
   },
 
@@ -117,77 +106,13 @@ const rootBinding = {
       _eval(this, c) ? t : f);
   },
 
-  print: mkfn(function(vals) {
-    return vals.each(function(value) {
-      document.body.append(value);
-    });
-  }),
-
-  list: function(args) {
-    var binding = this;
-    return args.map(function(arg) {
-      return _eval(binding, arg);
-    }).invert();
-  },
-
-  // list: function(args) {
-  //   return invert(map(invert(args), arg => _eval(this, arg)));
-  // },
-  // list: function(args) {
-  //   (invert
-  //     (map (invert args)
-  //       (curry _eval this)))
-  //       (fn [arg] (_eval this arg))));
-  // },
-
-  "+": mkfn(function(a) {
-    return a.reduce((a,b) => a+b);
-  }),
-  "-": mkfn(function(a) {
-    return a.reduce((a,b) => a-b);
-  }),
-  "*": mkfn(function(a) {
-    return a.reduce((a,b) => a*b);
-  }),
-  "/": mkfn(function(a) {
-    return a.reduce((a,b) => a/b);
-  }),
-  "=": mkfn(function([a, b]) {
-    return a == b;
-  }),
-  not: mkfn(function([y]) {
-    return !y;
-  }),
-  and: mkfn(function(a) {
-    return a.reduce((a,b) => a && b);
-  }),
-  or: mkfn(function(_) {
-    return _.reduce((a,b) => a || b);
-  }),
-  '>': mkfn(([a,b]) => {
-    return a > b;
-  }),
-  '<': mkfn(([a,b]) => {
-    return a < b;
-  }),
   blert: function(msgs) {
     alert(this.concat(msgs));
   },
-  parse: mkfn(function([s]) {
-    return parse(s);
-  }),
-  _eval: mkfn(function([v]) {
-    return _eval(this, v[0]);
-  }),
-  concat: mkfn(function(eeks) {
-    return eeks.join('');
-  }),
+
   expandmacro: function([m,n]) {
     return _eval(this,m).expand(this, n);
   },
-  "new": mkfn(function([m,n]) {
-      return new m(...n.toArray());
-  }),
 
   loop: function([x,...xx]) {
     var binding = Object.create(this),
@@ -222,60 +147,88 @@ const rootBinding = {
         _eval(binding, z)).pop();
     } while(recurCalled);
     return m;
-  }
+  },
+
+  list: mkfn(function(args) {
+    return args;
+  }),
+
+  vector: mkfn(function(args) {
+    return args.toVector();
+  }),
+
+  eval: mkfn(function(args) {
+    return args.map((exp) => _eval(this, exp)).last
+  }),
+
+  send: mkfn(function([a,b,...c]) {
+    if (b.key)
+      b = b.key;
+    if (c.length > 0) {
+      // console.log("a", a);
+      // console.log("b", b);
+      // console.log("c", c);
+      return a[b](...c);
+    } else
+      return a[b]();
+  }),
+  get: mkfn(function(args) {
+     return args.reduce(
+        (a,b) => a ? a[b] : b);
+  }),
+  export: mkfn(function([ca,[nd,[y]]]) {
+    return ca[nd] = y;
+  }),
+  print: mkfn(function(vals) {
+    return vals.each(function(value) {
+      document.body.append(value);
+    });
+  }),
+  "+": mkfn(function(a) {
+    return a.reduce((a,b) => a+b);
+  }),
+  "-": mkfn(function(a) {
+    return a.reduce((a,b) => a-b);
+  }),
+  "*": mkfn(function(a) {
+    return a.reduce((a,b) => a*b);
+  }),
+  "/": mkfn(function(a) {
+    return a.reduce((a,b) => a/b);
+  }),
+  "=": mkfn(function([a, b]) {
+    return a == b;
+  }),
+  not: mkfn(function([y]) {
+    return !y;
+  }),
+  and: mkfn(function(a) {
+    return a.reduce((a,b) => a && b);
+  }),
+  or: mkfn(function(_) {
+    return _.reduce((a,b) => a || b);
+  }),
+  '>': mkfn(([a,b]) => {
+    return a > b;
+  }),
+  '<': mkfn(([a,b]) => {
+    return a < b;
+  }),
+  parse: mkfn(function([s]) {
+    return parse(s);
+  }),
+  _eval: mkfn(function([v]) {
+    return _eval(this, v[0]);
+  }),
+  concat: mkfn(function(eeks) {
+    return eeks.join('');
+  }),
+  "new": mkfn(function([m,n]) {
+      return new m(...n.toArray());
+  }),
 }
 
 module.exports = rootBinding;
 
 const eval = require("../f/eval");
 const _eval = eval.eVaL;
-
-
-(function() {
-  let bnd = rootBinding;
-  let evl = _eval;
-
-  function list(...args) {
-    return Bubbles.from(args);
-  }
-  function glider(...args) {
-    return List.from(args);
-  }
-
-  function quote(m) {
-    return new Bubble(m);
-  }
-
-   let _push = new Symbol('push'),
-       fn = new Symbol('fn'),
-       a = new Symbol('a'),
-       b = new Symbol('b'),
-       send = new Symbol('send'),
-       mufn = new Symbol('mufn'),
-       macro = new Symbol('macro'),
-       name = new Symbol('name'),
-       amp = new Symbol('&'),
-       z = new Symbol('z'),
-      _list = new Symbol('list'),
-      _muf = new Symbol('muf');
-
-    function muf(...args) {
-      // return _eval(bnd, arry.toList(args).push(_muf));
-      return _eval(bnd, Bubbles.from(args).push(_muf));
-    }
-
-    // // muf push (fn [a b] (send a °push b))
-    // muf(_push, list(fn, glider(a, b),
-    //      list(send, a, quote(_push), b)));
-
-    // muf push (fn [a b] (send a :push b))
-    muf(_push, list(fn, glider(a, b),
-         list(send, a, new Keyword("push"), b)));
-
-    // (muf mufn (macro [name & z]
-    //     (list 'muf name (push z 'fn))))
-    muf(mufn, list(macro, glider(name,amp,z),
-        list(_list,quote(_muf), name,
-           list(_push, z, quote(fn)))));
-
-})();

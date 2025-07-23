@@ -1,3 +1,56 @@
+:July 22, 2025
+- puts now handels more thsn one parameter.
+- Macros now work at a rudementary level.
+  Because the is np compilation step, they
+  are not expanded until they are
+  encountered. The plan right now is to
+  unwind the stack and splice the expanded
+  macro into whatever list is being run
+  through. Tgis will involve mutation pf the
+  list sort of, but it should be safe, and in
+  a away isn't ne cessarily umsafe mutation,
+  it may still be tread safe, even though we
+  are not dealing with multiple threads, just
+  a side note, if done correctly. This seems
+  to me to be the only way to remember the
+  expansion, which is the goal of the macros,
+  witjout having an independent upfront pass,
+  which really seems like an argous journey.
+  i think this will work out ok, but for the
+  time being macros can be defined and
+  expanded. mufn is the main example macro
+  right now, ans is usex to define puts. More
+  work to follow on this.
+- List and Vector now share a common abstract
+  base class AbstractList. The abstract base
+  is not meant to be instantiated directly,
+  but combines with with the sub classes
+  Vector and List to create whole useable
+  classes, with all shared functionality
+  centralized in the abstract base, unique
+  functionality on the sub classes. The is a
+  much improved design.
+- Switched back to an object centric design
+  for List and Vector. Hopefully we'll see
+  the benifits of fp in bubblescript, but js
+  really isn't designed for it out of the
+  box, at least how we were doing it. Trying
+  to design list and vector around functions
+  was really more of an experiment, and the
+  experimwnt served it's purpose. This
+  appears to be a part of the core which
+  benifits from oo, and probably willcontinue
+  to. List and Vectors are now terminated and
+  initialized with emptyList and emptyVector
+  respectivly, also reflective of Clojures
+  design.
+- List renamed to Vector, Bubbles renamed to
+  List. This no reflects the Cloujure names,
+  and better reflects standard name
+  expectations. De facto. This should reduce
+  at lot of confusion. We had gotten kind of
+  carried away.
+
 :May 27, 2025
 Update readme.
 Eval order fix.

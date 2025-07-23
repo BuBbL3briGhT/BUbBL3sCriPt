@@ -1,37 +1,30 @@
+const List    = require("../o/list");
+const Vector  = require("../o/vector");
+const Symbol  = require("../o/symbol");
+const Keyword = require("../o/keyword");
+const Bubble  = require("../o/bubble");
+const MacroExpanded = require("../o/macro_expanded");
+
 const parse = require("./parse");
 
-const List    = require("../o/list");
-const Bubbles   = require("../o/bubbles");
-const Keyword = require("../o/keyword");
-const Fn      = require("../o/fn");
-const Macro   = require("../o/macro");
-const Symbol  = require("../o/symbol");
-const Bubble  = require("../o/bubble");
-
-const { map, peek, pop, push, toArray } =
-  Bubbles;
-
-// Evaluate Bubblesscript
+// Evaluate Bubblescript
 function eval(script) {
-  return parse(script)
-    .map(function(expression) {
-      return eVaL(rootBinding, expression);
-    }).peek();
+  return parse(script).evalEach(rootBinding);
 }
 
 function eVaL(bnd, xpr) {
   switch (xpr && xpr.constructor) {
     case Symbol:
       return xpr.resolve(bnd)
-    case Bubbles: {
-      let s = peek(xpr);
+    case List: {
+      let s = xpr.peek();
       if (s instanceof Symbol) {
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
           let q = eVaL(bnd, s);
           if (q != s)
             return eVaL(bnd,
-              push(pop(xpr), q));
+              xpr.pop().push(q));
           else
             return xpr;
         } else /* send */ {
@@ -42,36 +35,32 @@ function eVaL(bnd, xpr) {
             return q[s.fn]()
           }
           try {
-            return q[s.fn](...toArray(map(xpr.rest,
-              function(a) {
-                return eVaL(bnd, a);
-              })));
+            return q[s.fn](...xpr.rest.map(
+              (a) => eVaL(bnd, a)).toArray());
           } catch (e) {
-            console.log(s.fn);
+            // console.log(s.fn);
             throw e;
           }
         }
-      } else if (s instanceof Bubbles) {
+      } else if (s instanceof List) {
         return eVaL(bnd,
-          push(pop(xpr), eVaL(bnd, s)))
+          xpr.pop().push(eVaL(bnd, s)))
       } else if (s instanceof Fn) {
-        return s.call(bnd, pop(xpr));
+        return s.invoke(xpr.pop().map(arg =>
+          eVaL(bnd, arg)));
       } else if (s instanceof Function) {
-        return s.call(bnd, pop(xpr));
+        return s.call(bnd, xpr.pop());
       } else if (s instanceof Macro) {
-        return s.call(bnd, pop(xpr));
+        let expanded = s.expand(xpr.pop());
+        throw new MacroExpanded(expanded);
+        // return expanded.evalEach(bnd);
       } else {
         return undefined;
       }
     }
-    case List:
-      return List.map(xpr, (a) => {
+    case Vector:
+      return xpr.map((a) => {
         return eVaL(bnd, a)
-      });
-    case Fn:
-    // case Macro:
-      return xpr.body.each((xpr) => {
-        return eVaL(bnd, xpr);
       });
     case Bubble:
       return xpr.pop();
@@ -83,13 +72,7 @@ function eVaL(bnd, xpr) {
 eval.eVaL = eVaL;
 module.exports = eval;
 
+const Macro   = require("../o/macro");
+const Fn      = require("../o/fn");
+
 const rootBinding = require("../o/root_binding");
-
-// const Base = require("./base");
-// console.debug('eval Base 88', Base);
-// const Util = require("./util");
-// const rootBinding = Util.makeRootBinding(Base, eval.eVaL);
-// console.debug('rootBinding', rootBinding);
-// eval.rootBinding = rootBinding;
-
-

@@ -1,30 +1,40 @@
+// console.log("load macro");
+
 class Macro {
   constructor(bnd, args, body) {
     this.bnd = bnd;
-    this.args = args;
+    this.args = args.toList();
     this.body = body;
   }
 
-  call(bnd, args) {
-    return evl(this.bnd, invoke(bnd, this, args));
-  }
+  expand(args) {
+    let bnd = Object.create(this.bnd);
 
-  expand(bnd, args) {
-    return invoke(bnd, this, args);
+    var x, y;
+    x = this.args;
+    y = args;
+    while (!x.isEmpty) {
+      if (x.first == '&') {
+        x = x.rest;
+        bnd[x.first] = y
+        x = null;
+        y = null;
+        break;
+      }
+      bnd[x.first] = y && y.first;
+      x = x.rest;
+      y = y && y.rest;
+    }
+    return this.body.map((xpr) => _eval(bnd, xpr));
   }
 
   toString() {
     return "(macro " + this.args.toString() +
       this.body.toString() + ")";
-
-
   }
 }
-
-const invoke = require("../f/invoke");
 
 module.exports = Macro;
 
 const eval = require('../f/eval');
-const evl  = eval.eVaL;
-
+const _eval  = eval.eVaL;
