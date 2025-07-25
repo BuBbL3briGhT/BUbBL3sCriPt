@@ -32,15 +32,33 @@
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">let</span> emptyList, emptyVector;
 
-<span class="hljs-keyword">const</span> keywords    = {},
-      <span class="hljs-variable constant_">TOK_KEYWORD</span> = <span class="hljs-string">&#x27;K&#x27;</span>,
+<span class="hljs-keyword">const</span> keywords    = {};
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">TOK_KEYWORD</span> = <span class="hljs-string">&#x27;K&#x27;</span>,
       <span class="hljs-variable constant_">TOK_NUMBER</span>  = <span class="hljs-string">&#x27;N&#x27;</span>,
       <span class="hljs-variable constant_">TOK_STRING</span>  = <span class="hljs-string">&#x27;S&#x27;</span>,
       <span class="hljs-variable constant_">TOK_SYMBOL</span>  = <span class="hljs-string">&#x27;Y&#x27;</span>,
       <span class="hljs-variable constant_">TOK_TRUE</span>    = <span class="hljs-string">&#x27;T&#x27;</span>,
-      <span class="hljs-variable constant_">TOK_FALSE</span>   = <span class="hljs-string">&#x27;F&#x27;</span>;
+      <span class="hljs-variable constant_">TOK_FALSE</span>   = <span class="hljs-string">&#x27;F&#x27;</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-2">&#x00a7;</a>
+              </div>
+              <p>We define <code>AbstractList</code> which is a
+class that will serve as the abstract
+base class for <code>List</code> and <code>Vector</code>. All
+shared functionality between <code>List</code> and
+<code>Vector</code> is centralized here.</p>
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">AbstractList</span> {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">class</span> <span class="hljs-title class_">AbstractList</span> {
 
   <span class="hljs-keyword">static</span> <span class="hljs-title function_">from</span>(<span class="hljs-params">arrayLike, mapFn, thisArg</span>) {
     <span class="hljs-keyword">let</span> array = <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(arrayLike, mapFn, thisArg);
@@ -113,7 +131,7 @@
       <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;string&quot;</span>:
         <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&quot;&#x27;</span> + o + <span class="hljs-string">&#x27;&quot;&#x27;</span>;
       <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;symbol&quot;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">keyFor</span>(o);
+        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Bymbol</span>.<span class="hljs-title function_">keyFor</span>(o);
       <span class="hljs-attr">default</span>:
         <span class="hljs-keyword">return</span> o.<span class="hljs-title function_">toString</span>();
     }
@@ -155,36 +173,7 @@
       currentNode = currentNode.<span class="hljs-property">oo</span>;
     }
   }
-}
-
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">List</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">AbstractList</span> {
-
-  <span class="hljs-keyword">static</span> <span class="hljs-keyword">get</span> <span class="hljs-title function_">emptyList</span>() { <span class="hljs-keyword">return</span> emptyList; }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-2">
-            <div class="annotation">
-              
-              <div class="sswrap ">
-                <a class="ss" href="#section-2">&#x00a7;</a>
-              </div>
-              <p>static make(…elements) {
-  var head = emptyList;
-  elements = elements.reverse();
-  for (let o of elements)
-    head = new this(o, head);
-  return head;
-}</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>
-  <span class="hljs-keyword">static</span> <span class="hljs-title function_">make</span>(<span class="hljs-params">...elements</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-title function_">_makeList</span>(elements);
-  }</pre></div></div>
+}</pre></div></div>
             
         </li>
         
@@ -194,6 +183,67 @@
               
               <div class="sswrap ">
                 <a class="ss" href="#section-3">&#x00a7;</a>
+              </div>
+              <p><code>List</code> extends <code>AbstractList</code> and is
+the primary object in Bubblescript and
+is the programatic representation of a
+list. e.g. <code>(1 2 3)</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">class</span> <span class="hljs-title class_">List</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">AbstractList</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-4">&#x00a7;</a>
+              </div>
+              <p><code>List.emptyList</code> provides an instance
+of <code>EmptyList</code>, which terminates all
+lists.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> <span class="hljs-keyword">get</span> <span class="hljs-title function_">emptyList</span>() { <span class="hljs-keyword">return</span> emptyList; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-5">&#x00a7;</a>
+              </div>
+              <p><code>List.make</code> makes/creates a new list.
+<code>List.make(1, 2, 3)</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> <span class="hljs-title function_">make</span>(<span class="hljs-params">...elements</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">List</span>.<span class="hljs-title function_">_make</span>(elements);
+  }
+
+  <span class="hljs-keyword">static</span> <span class="hljs-title function_">_make</span>(<span class="hljs-params">elementsArray, currentLinkedList=emptyList</span>) {
+    <span class="hljs-keyword">if</span> (elementsArray.<span class="hljs-property">length</span> &lt; <span class="hljs-number">1</span>)
+      <span class="hljs-keyword">return</span> currentLinkedList;
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">List</span>.<span class="hljs-title function_">_make</span>(elementsArray,
+      <span class="hljs-keyword">new</span> <span class="hljs-title class_">List</span>(elementsArray.<span class="hljs-title function_">pop</span>(),
+        currentLinkedList));
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-6">&#x00a7;</a>
               </div>
               <p>Create a list.</p>
 
@@ -221,7 +271,7 @@
       <span class="hljs-title class_">Vector</span>.<span class="hljs-property">emptyVector</span>);
   }
 
-  <span class="hljs-title function_">evalEach</span>(<span class="hljs-params">binding</span>) {
+  <span class="hljs-title function_">eval</span>(<span class="hljs-params">binding</span>) {
     <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">each</span>(<span class="hljs-function"><span class="hljs-params">xpr</span> =&gt;</span>
       <span class="hljs-title function_">_eval</span>(binding, xpr));
   }
@@ -241,14 +291,6 @@
     <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>().<span class="hljs-property">isEmpty</span>) <span class="hljs-keyword">return</span> result;
     <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">each</span>(fn);
   }
-}
-
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">_makeList</span>(<span class="hljs-params">elementsArray, currentLinkedList=emptyList</span>) {
-  <span class="hljs-keyword">if</span> (elementsArray.<span class="hljs-property">length</span> &lt; <span class="hljs-number">1</span>)
-    <span class="hljs-keyword">return</span> currentLinkedList;
-  <span class="hljs-keyword">return</span> <span class="hljs-title function_">_makeList</span>(elementsArray,
-    <span class="hljs-keyword">new</span> <span class="hljs-title class_">List</span>(elementsArray.<span class="hljs-title function_">pop</span>(),
-      currentLinkedList));
 }
 
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">EmptyList</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">List</span> {
@@ -300,7 +342,7 @@ emptyList = <span class="hljs-keyword">new</span> <span class="hljs-title class_
 emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmptyVector</span>()
 
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Symbol</span> {
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Bymbol</span> {
 
   <span class="hljs-title function_">constructor</span>(<span class="hljs-params">value</span>) {
 
@@ -347,7 +389,7 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
   }
 
   <span class="hljs-keyword">static</span> <span class="hljs-keyword">for</span>(key) {
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Symbol</span>(key);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Bymbol</span>(key);
   }
 
 }
@@ -427,12 +469,12 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
       y = y &amp;&amp; y.<span class="hljs-property">rest</span>;
     }
 
-    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">body</span>.evalEach(bnd);
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">body</span>.<span class="hljs-built_in">eval</span>(bnd);
   }
 
   <span class="hljs-title function_">toString</span>(<span class="hljs-params"></span>) {
     <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">push</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">args</span>)
-      .<span class="hljs-title function_">push</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&quot;fn&quot;</span>))
+      .<span class="hljs-title function_">push</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Bymbol</span>(<span class="hljs-string">&quot;fn&quot;</span>))
       .<span class="hljs-title function_">toString</span>()
   }
 
@@ -473,6 +515,12 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
   }
 }
 
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">MacroExpanded</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">expanded</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">expanded</span> = expanded;
+  }
+}
+
 
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">tokenize</span>(<span class="hljs-params">inputString</span>) {
   <span class="hljs-keyword">let</span> tokens = <span class="hljs-title class_">Vector</span>.<span class="hljs-property">emptyVector</span>;
@@ -483,11 +531,11 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
         </li>
         
         
-        <li id="section-4">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-4">&#x00a7;</a>
+                <a class="ss" href="#section-7">&#x00a7;</a>
               </div>
               <p>Helper to create token objects</p>
 
@@ -498,11 +546,11 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
         </li>
         
         
-        <li id="section-5">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-5">&#x00a7;</a>
+                <a class="ss" href="#section-8">&#x00a7;</a>
               </div>
               <p>console.debug(“createToken”, type, value);</p>
 
@@ -514,11 +562,11 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
         </li>
         
         
-        <li id="section-6">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-6">&#x00a7;</a>
+                <a class="ss" href="#section-9">&#x00a7;</a>
               </div>
               <p>Advances head along string by n characters, updating line and column.</p>
 
@@ -541,11 +589,11 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
         </li>
         
         
-        <li id="section-7">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-7">&#x00a7;</a>
+                <a class="ss" href="#section-10">&#x00a7;</a>
               </div>
               <p>Ensure regex matches from the start of currentString</p>
 
@@ -560,11 +608,11 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
         </li>
         
         
-        <li id="section-8">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-8">&#x00a7;</a>
+                <a class="ss" href="#section-11">&#x00a7;</a>
               </div>
               <p>This should not be reached if called appropriately</p>
 
@@ -584,11 +632,11 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
         </li>
         
         
-        <li id="section-9">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-9">&#x00a7;</a>
+                <a class="ss" href="#section-12">&#x00a7;</a>
               </div>
               <p>This should not be reached</p>
 
@@ -598,16 +646,16 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
     }
   }
 
-  <span class="hljs-keyword">function</span> <span class="hljs-title function_">tokenizeSymbol</span>(<span class="hljs-params"></span>) {</pre></div></div>
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">tokenizeBymbol</span>(<span class="hljs-params"></span>) {</pre></div></div>
             
         </li>
         
         
-        <li id="section-10">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-10">&#x00a7;</a>
+                <a class="ss" href="#section-13">&#x00a7;</a>
               </div>
               <p>Original regex: /^([^\s()[]]*)/, new: /^([^\s()[]{}:”#’.]+)/
 The original was more permissive, let’s stick to a more specific one for now
@@ -620,11 +668,11 @@ let matchResult = currentString.match(/^([^\s()[]{}:”#’.]+)/);</p>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-11">&#x00a7;</a>
+                <a class="ss" href="#section-14">&#x00a7;</a>
               </div>
               <p>console.debug(“currentString”, currentString);</p>
 
@@ -644,11 +692,11 @@ let matchResult = currentString.match(/^([^\s()[]{}:”#’.]+)/);</p>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-12">&#x00a7;</a>
+                <a class="ss" href="#section-15">&#x00a7;</a>
               </div>
               <p>Needing to switch back to the more permissive version in order to get the test for”it should allow dots in symbol name” to pass.
 The more specfic version is probably the better way to go, but for the exisiting functionality to remain working it currently depends on the symbols being allowed to have dots.</p>
@@ -665,11 +713,11 @@ The more specfic version is probably the better way to go, but for the exisiting
         </li>
         
         
-        <li id="section-13">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-13">&#x00a7;</a>
+                <a class="ss" href="#section-16">&#x00a7;</a>
               </div>
               <p>If it’s not a recognized symbol starter or empty, it’s an error.
 This differs from original, which would make empty symbols or take single chars.</p>
@@ -689,11 +737,11 @@ This differs from original, which would make empty symbols or take single chars.
         </li>
         
         
-        <li id="section-14">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-14">&#x00a7;</a>
+                <a class="ss" href="#section-17">&#x00a7;</a>
               </div>
               <p>Advance past the comment line including the newline</p>
 
@@ -705,11 +753,11 @@ This differs from original, which would make empty symbols or take single chars.
         </li>
         
         
-        <li id="section-15">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-15">&#x00a7;</a>
+                <a class="ss" href="#section-18">&#x00a7;</a>
               </div>
               <p>Comment goes to the end of the string</p>
 
@@ -724,11 +772,11 @@ This differs from original, which would make empty symbols or take single chars.
         </li>
         
         
-        <li id="section-16">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-16">&#x00a7;</a>
+                <a class="ss" href="#section-19">&#x00a7;</a>
               </div>
               <p>Keywords start with ‘:’ e.g. :foo
 The regex should match ‘:’ followed by symbol-like characters.</p>
@@ -744,11 +792,11 @@ The regex should match ‘:’ followed by symbol-like characters.</p>
         </li>
         
         
-        <li id="section-17">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-17">&#x00a7;</a>
+                <a class="ss" href="#section-20">&#x00a7;</a>
               </div>
               <p>This implies a ‘:’ was not followed by a valid keyword identifier</p>
 
@@ -764,11 +812,11 @@ The regex should match ‘:’ followed by symbol-like characters.</p>
         </li>
         
         
-        <li id="section-18">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-18">&#x00a7;</a>
+                <a class="ss" href="#section-21">&#x00a7;</a>
               </div>
               <p>console.debug(“char”, char);</p>
 
@@ -810,11 +858,11 @@ The regex should match ‘:’ followed by symbol-like characters.</p>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-19">&#x00a7;</a>
+                <a class="ss" href="#section-22">&#x00a7;</a>
               </div>
               <p>Check for numbers before falling back to symbols</p>
 
@@ -823,17 +871,17 @@ The regex should match ‘:’ followed by symbol-like characters.</p>
             <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/\d/</span>.<span class="hljs-title function_">test</span>(char)) {
           <span class="hljs-title function_">tokenizeNumber</span>();
         } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/[^\s()[\]{}:&quot;#&#x27;.]/</span>.<span class="hljs-title function_">test</span>(char)) { <span class="hljs-comment">// Ensure it&#x27;s a valid start for a symbol</span>
-          <span class="hljs-title function_">tokenizeSymbol</span>();
+          <span class="hljs-title function_">tokenizeBymbol</span>();
         } <span class="hljs-keyword">else</span> {</pre></div></div>
             
         </li>
         
         
-        <li id="section-20">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-20">&#x00a7;</a>
+                <a class="ss" href="#section-23">&#x00a7;</a>
               </div>
               <p>Handle unexpected characters if necessary, or advance past them
 For now, this might mean an error or simply advancing
@@ -851,11 +899,11 @@ Capture current column for accurate error reporting if it’s an unexpected char
         </li>
         
         
-        <li id="section-21">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-21">&#x00a7;</a>
+                <a class="ss" href="#section-24">&#x00a7;</a>
               </div>
               <p>return tokens.invert();</p>
 
@@ -874,11 +922,11 @@ Capture current column for accurate error reporting if it’s an unexpected char
         </li>
         
         
-        <li id="section-22">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-22">&#x00a7;</a>
+                <a class="ss" href="#section-25">&#x00a7;</a>
               </div>
               <p>Ensure the message includes token details if a token is provided</p>
 
@@ -904,11 +952,11 @@ Capture current column for accurate error reporting if it’s an unexpected char
         </li>
         
         
-        <li id="section-23">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-23">&#x00a7;</a>
+                <a class="ss" href="#section-26">&#x00a7;</a>
               </div>
               <p>tokenize now returns a single LynktLyst of token objects</p>
 
@@ -920,11 +968,11 @@ Capture current column for accurate error reporting if it’s an unexpected char
         </li>
         
         
-        <li id="section-24">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-24">&#x00a7;</a>
+                <a class="ss" href="#section-27">&#x00a7;</a>
               </div>
               <p>tokenVector is a single LynktLyst of token objects</p>
 
@@ -937,11 +985,11 @@ Capture current column for accurate error reporting if it’s an unexpected char
         </li>
         
         
-        <li id="section-25">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-25">&#x00a7;</a>
+                <a class="ss" href="#section-28">&#x00a7;</a>
               </div>
               <p>console.log(“tokenVector”, tokenVector);</p>
 
@@ -965,11 +1013,11 @@ Capture current column for accurate error reporting if it’s an unexpected char
         </li>
         
         
-        <li id="section-26">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-26">&#x00a7;</a>
+                <a class="ss" href="#section-29">&#x00a7;</a>
               </div>
               <p>The item to be put in a bubble is the last item pushed to trEe
 This logic might need adjustment if trEe can be empty or not what’s expected</p>
@@ -993,11 +1041,11 @@ This logic might need adjustment if trEe can be empty or not what’s expected</
         </li>
         
         
-        <li id="section-27">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-27">&#x00a7;</a>
+                <a class="ss" href="#section-30">&#x00a7;</a>
               </div>
               <p>expectedType is the type string (e.g., ‘(‘, TOK_NUMBER)
 tokenVector is the current vector of token objects
@@ -1013,11 +1061,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-28">
+        <li id="section-31">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-28">&#x00a7;</a>
+                <a class="ss" href="#section-31">&#x00a7;</a>
               </div>
               <p>Passing contextTokenForEOF to NoMatchError will enrich the message.</p>
 
@@ -1040,11 +1088,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-29">
+        <li id="section-32">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-29">&#x00a7;</a>
+                <a class="ss" href="#section-32">&#x00a7;</a>
               </div>
               <p>tokenVector is the current vector of token objects</p>
 
@@ -1055,11 +1103,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-30">
+        <li id="section-33">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-30">&#x00a7;</a>
+                <a class="ss" href="#section-33">&#x00a7;</a>
               </div>
               <p>console.log(“matchList”)</p>
 
@@ -1071,11 +1119,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-31">
+        <li id="section-34">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-31">&#x00a7;</a>
+                <a class="ss" href="#section-34">&#x00a7;</a>
               </div>
               <p>Expect ‘)’ to start, which is the closing paren of a list vector in reverse (e.g. (c b a) -&gt; ) a b c ( )</p>
 
@@ -1086,11 +1134,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-32">
+        <li id="section-35">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-32">&#x00a7;</a>
+                <a class="ss" href="#section-35">&#x00a7;</a>
               </div>
               <p>console.log(“tokenVector”, tokenVector);</p>
 
@@ -1106,11 +1154,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-33">
+        <li id="section-36">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-33">&#x00a7;</a>
+                <a class="ss" href="#section-36">&#x00a7;</a>
               </div>
               <p>Pass closingParenToken as context for EOF errors when expecting an item for this list.</p>
 
@@ -1124,11 +1172,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-34">
+        <li id="section-37">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-34">&#x00a7;</a>
+                <a class="ss" href="#section-37">&#x00a7;</a>
               </div>
               <p>console.log(vector);</p>
 
@@ -1137,11 +1185,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-35">
+        <li id="section-38">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-35">&#x00a7;</a>
+                <a class="ss" href="#section-38">&#x00a7;</a>
               </div>
               <p>Consumes the opening ‘(‘. Pass closingParenToken for context if ‘(‘ is missing.</p>
 
@@ -1152,11 +1200,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-36">
+        <li id="section-39">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-36">&#x00a7;</a>
+                <a class="ss" href="#section-39">&#x00a7;</a>
               </div>
               <p>return [tokenVector, vector.invert()]; // Invert the collected vector to restore original order // lisT -&gt; vector</p>
 
@@ -1168,11 +1216,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-37">
+        <li id="section-40">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-37">&#x00a7;</a>
+                <a class="ss" href="#section-40">&#x00a7;</a>
               </div>
               <p>tokenVector is the current vector of token objects</p>
 
@@ -1193,11 +1241,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-38">
+        <li id="section-41">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-38">&#x00a7;</a>
+                <a class="ss" href="#section-41">&#x00a7;</a>
               </div>
               <p>Pass closingBracketToken as context for EOF errors.</p>
 
@@ -1208,11 +1256,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-39">
+        <li id="section-42">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-39">&#x00a7;</a>
+                <a class="ss" href="#section-42">&#x00a7;</a>
               </div>
               <p>Vector uses its own push, assuming it’s compatible with LynktLyst structure for lisT</p>
 
@@ -1227,11 +1275,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-40">
+        <li id="section-43">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-40">&#x00a7;</a>
+                <a class="ss" href="#section-43">&#x00a7;</a>
               </div>
               <p>Assuming push prepends items like List.push, so inversion is necessary.</p>
 
@@ -1243,11 +1291,11 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
         </li>
         
         
-        <li id="section-41">
+        <li id="section-44">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-41">&#x00a7;</a>
+                <a class="ss" href="#section-44">&#x00a7;</a>
               </div>
               <p>tokenVector is the current vector of token objects
 contextTokenForEOF provides context if an item is expected but EOF is found.</p>
@@ -1277,7 +1325,7 @@ contextTokenForEOF provides context if an item is expected but EOF is found.</p>
       item = <span class="hljs-literal">false</span>
       <span class="hljs-keyword">break</span>;
     <span class="hljs-keyword">case</span> <span class="hljs-attr">TOK_SYMBOL</span>:
-      item = <span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">for</span>(currentToken.<span class="hljs-property">value</span>); <span class="hljs-comment">// itEm -&gt; item</span>
+      item = <span class="hljs-title class_">Bymbol</span>.<span class="hljs-title function_">for</span>(currentToken.<span class="hljs-property">value</span>); <span class="hljs-comment">// itEm -&gt; item</span>
       <span class="hljs-keyword">break</span>;
     <span class="hljs-keyword">case</span> <span class="hljs-attr">TOK_KEYWORD</span>:
       item = <span class="hljs-title class_">Keyword</span>.<span class="hljs-title function_">for</span>(currentToken.<span class="hljs-property">value</span>); <span class="hljs-comment">// itEm -&gt; item</span>
@@ -1290,11 +1338,11 @@ contextTokenForEOF provides context if an item is expected but EOF is found.</p>
         </li>
         
         
-        <li id="section-42">
+        <li id="section-45">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-42">&#x00a7;</a>
+                <a class="ss" href="#section-45">&#x00a7;</a>
               </div>
               <p>The contextTokenForEOF is not directly passed to matchList here,
 as matchList will establish its own context starting with the ‘)’.</p>
@@ -1308,11 +1356,11 @@ as matchList will establish its own context starting with the ‘)’.</p>
         </li>
         
         
-        <li id="section-43">
+        <li id="section-46">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-43">&#x00a7;</a>
+                <a class="ss" href="#section-46">&#x00a7;</a>
               </div>
               <p>Quoting/Bubble is handled in parseTokens, not here, as it modifies the tree structure directly.
 case ‘°’:
@@ -1326,11 +1374,11 @@ case ‘°’:
         </li>
         
         
-        <li id="section-44">
+        <li id="section-47">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-44">&#x00a7;</a>
+                <a class="ss" href="#section-47">&#x00a7;</a>
               </div>
               <p>If it’s not a special type, it might be an error or an unhandled simple token
 The original code didn’t have a fallback here, it would error in <code>itEm === undefined</code>.
@@ -1345,11 +1393,11 @@ Let’s make it explicit.</p>
         </li>
         
         
-        <li id="section-45">
+        <li id="section-48">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-45">&#x00a7;</a>
+                <a class="ss" href="#section-48">&#x00a7;</a>
               </div>
               <p>If item is not undefined, it means one of the cases matched and created an item.
 We then consume the token.</p>
@@ -1362,37 +1410,37 @@ We then consume the token.</p>
         </li>
         
         
-        <li id="section-46">
+        <li id="section-49">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-46">&#x00a7;</a>
+                <a class="ss" href="#section-49">&#x00a7;</a>
               </div>
               <p>Evaluate Bubblescript</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">function</span> <span class="hljs-title function_">eval</span>(<span class="hljs-params">script</span>) {
-  <span class="hljs-keyword">return</span> <span class="hljs-title function_">parse</span>(script).evalEach(rootBinding);
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">parse</span>(script).<span class="hljs-title function_">each</span>(rootBinding);
 }
 
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">eVaL</span>(<span class="hljs-params">bnd, xpr</span>) {
   <span class="hljs-keyword">switch</span> (xpr &amp;&amp; xpr.<span class="hljs-property">constructor</span>) {
-    <span class="hljs-keyword">case</span> <span class="hljs-title class_">Symbol</span>:
+    <span class="hljs-keyword">case</span> <span class="hljs-title class_">Bymbol</span>:
       <span class="hljs-keyword">return</span> xpr.<span class="hljs-title function_">resolve</span>(bnd)
     <span class="hljs-keyword">case</span> <span class="hljs-title class_">List</span>: {
       <span class="hljs-keyword">let</span> s = xpr.<span class="hljs-title function_">peek</span>();
-      <span class="hljs-keyword">if</span> (s <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Symbol</span>) {
+      <span class="hljs-keyword">if</span> (s <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Bymbol</span>) {
         <span class="hljs-keyword">if</span> (s.<span class="hljs-property">callPattern</span> == <span class="hljs-number">1</span>) {</pre></div></div>
             
         </li>
         
         
-        <li id="section-47">
+        <li id="section-50">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-47">&#x00a7;</a>
+                <a class="ss" href="#section-50">&#x00a7;</a>
               </div>
               <p> x or x/x or x.x/x</p>
 
@@ -1409,11 +1457,11 @@ We then consume the token.</p>
         </li>
         
         
-        <li id="section-48">
+        <li id="section-51">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-48">&#x00a7;</a>
+                <a class="ss" href="#section-51">&#x00a7;</a>
               </div>
               <p>call pattern 2
 x.x or x.x.x or x.x…</p>
@@ -1432,11 +1480,11 @@ x.x or x.x.x or x.x…</p>
         </li>
         
         
-        <li id="section-49">
+        <li id="section-52">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-49">&#x00a7;</a>
+                <a class="ss" href="#section-52">&#x00a7;</a>
               </div>
               <p>console.log(s.fn);</p>
 
@@ -1455,22 +1503,8 @@ x.x or x.x.x or x.x…</p>
         <span class="hljs-keyword">return</span> s.<span class="hljs-title function_">call</span>(bnd, xpr.<span class="hljs-title function_">pop</span>());
       } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Macro</span>) {
         <span class="hljs-keyword">let</span> expanded = s.<span class="hljs-title function_">expand</span>(xpr.<span class="hljs-title function_">pop</span>());
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MacroExpanded</span>(expanded);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-50">
-            <div class="annotation">
-              
-              <div class="sswrap ">
-                <a class="ss" href="#section-50">&#x00a7;</a>
-              </div>
-              <p>return expanded.evalEach(bnd);</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MacroExpanded</span>(expanded);
+      } <span class="hljs-keyword">else</span> {
         <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
       }
     }
@@ -1488,11 +1522,11 @@ x.x or x.x.x or x.x…</p>
         </li>
         
         
-        <li id="section-51">
+        <li id="section-53">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-51">&#x00a7;</a>
+                <a class="ss" href="#section-53">&#x00a7;</a>
               </div>
               <p>Makes a Bubblescript function from a
 Javascript function.
@@ -1516,11 +1550,11 @@ TODO: Create tests for mkfn.</p>
         </li>
         
         
-        <li id="section-52">
+        <li id="section-54">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-52">&#x00a7;</a>
+                <a class="ss" href="#section-54">&#x00a7;</a>
               </div>
               <p>function mkfn(q) {
   return (p) =&gt; {
@@ -1534,11 +1568,11 @@ TODO: Create tests for mkfn.</p>
         </li>
         
         
-        <li id="section-53">
+        <li id="section-55">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-53">&#x00a7;</a>
+                <a class="ss" href="#section-55">&#x00a7;</a>
               </div>
               <p>A man walks into a bar. Bartender says
 what’ll you have?  The man says,
@@ -1562,11 +1596,11 @@ me. 🍸</p>
         </li>
         
         
-        <li id="section-54">
+        <li id="section-56">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-54">&#x00a7;</a>
+                <a class="ss" href="#section-56">&#x00a7;</a>
               </div>
               <p>fn: function([caret, stic]) {
   return new Fn(this, caret, stic);
@@ -1592,7 +1626,7 @@ fn: function(<em>) {
 
   <span class="hljs-attr">jsfn</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">args</span>) {
     <span class="hljs-keyword">var</span> x, binding = <span class="hljs-variable language_">this</span>
-    x = args.<span class="hljs-title function_">push</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&#x27;fn&#x27;</span>));
+    x = args.<span class="hljs-title function_">push</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Bymbol</span>(<span class="hljs-string">&#x27;fn&#x27;</span>));
     <span class="hljs-keyword">var</span> fn = <span class="hljs-title function_">_eval</span>(binding, x);
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span>(<span class="hljs-params">...args</span>) {
       <span class="hljs-keyword">return</span> fn.<span class="hljs-title function_">call</span>(binding, arry.<span class="hljs-title function_">toVector</span>(args));
@@ -1687,11 +1721,11 @@ fn: function(<em>) {
         </li>
         
         
-        <li id="section-55">
+        <li id="section-57">
             <div class="annotation">
               
               <div class="sswrap ">
-                <a class="ss" href="#section-55">&#x00a7;</a>
+                <a class="ss" href="#section-57">&#x00a7;</a>
               </div>
               <p>console.log(“a”, a);
 console.log(“b”, b);
@@ -1757,6 +1791,10 @@ console.log(“c”, c);</p>
   <span class="hljs-string">&quot;new&quot;</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">[m,n]</span>) {
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title function_">m</span>(...n.<span class="hljs-title function_">toArray</span>());
   }),
+}
+
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">eval</span>: <span class="hljs-built_in">eval</span>
 }</pre></div></div>
             
         </li>

@@ -1,13 +1,19 @@
 let emptyList, emptyVector;
 
-const keywords    = {},
-      TOK_KEYWORD = 'K',
+const keywords    = {};
+
+const TOK_KEYWORD = 'K',
       TOK_NUMBER  = 'N',
       TOK_STRING  = 'S',
       TOK_SYMBOL  = 'Y',
       TOK_TRUE    = 'T',
       TOK_FALSE   = 'F';
 
+// We define `AbstractList` which is a
+// class that will serve as the abstract
+// base class for `List` and `Vector`. All
+// shared functionality between `List` and
+// `Vector` is centralized here.
 class AbstractList {
 
   static from(arrayLike, mapFn, thisArg) {
@@ -126,10 +132,19 @@ class AbstractList {
 }
 
 
+// `List` extends `AbstractList` and is
+// the primary object in Bubblescript and
+// is the programatic representation of a
+// list. e.g. `(1 2 3)`
 class List extends AbstractList {
 
+  // `List.emptyList` provides an instance
+  // of `EmptyList`, which terminates all
+  // lists.
   static get emptyList() { return emptyList; }
 
+  // `List.make` makes/creates a new list.
+  // `List.make(1, 2, 3)`
   static make(...elements) {
     return List._make(elements);
   }
