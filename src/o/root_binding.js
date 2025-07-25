@@ -14,7 +14,7 @@ const Bubble  = require("../o/bubble");
 
 // const { from: vectorFromArray, push: vectorPush} = Vector;
 
-// Makes a Listcript function from a
+// Makes a Bubblescript function from a
 // Javascript function.
 // Params:
 //   q: A Javascript function that will be

@@ -81,7 +81,7 @@ class AbstractList {
       case "string":
         return '"' + o + '"';
       case "symbol":
-        return Symbol.keyFor(o);
+        return Bymbol.keyFor(o);
       default:
         return o.toString();
     }
@@ -130,16 +130,16 @@ class List extends AbstractList {
 
   static get emptyList() { return emptyList; }
 
-  // static make(...elements) {
-  //   var head = emptyList;
-  //   elements = elements.reverse();
-  //   for (let o of elements)
-  //     head = new this(o, head);
-  //   return head;
-  // }
-
   static make(...elements) {
-    return _makeList(elements);
+    return List._make(elements);
+  }
+
+  static _make(elementsArray, currentLinkedList=emptyList) {
+    if (elementsArray.length < 1)
+      return currentLinkedList;
+    return List._make(elementsArray,
+      new List(elementsArray.pop(),
+        currentLinkedList));
   }
 
   // Create a list.
@@ -165,7 +165,7 @@ class List extends AbstractList {
       Vector.emptyVector);
   }
 
-  evalEach(binding) {
+  eval(binding) {
     return this.each(xpr =>
       _eval(binding, xpr));
   }
@@ -185,14 +185,6 @@ class List extends AbstractList {
     if (this.pop().isEmpty) return result;
     return this.pop().each(fn);
   }
-}
-
-function _makeList(elementsArray, currentLinkedList=emptyList) {
-  if (elementsArray.length < 1)
-    return currentLinkedList;
-  return _makeList(elementsArray,
-    new List(elementsArray.pop(),
-      currentLinkedList));
 }
 
 class EmptyList extends List {
@@ -244,7 +236,7 @@ class EmptyVector extends Vector {
 emptyVector = new EmptyVector()
 
 
-class Symbol {
+class Bymbol {
 
   constructor(value) {
 
@@ -291,7 +283,7 @@ class Symbol {
   }
 
   static for(key) {
-    return new Symbol(key);
+    return new Bymbol(key);
   }
 
 }
@@ -371,12 +363,12 @@ class Fn {
       y = y && y.rest;
     }
 
-    return this.body.evalEach(bnd);
+    return this.body.eval(bnd);
   }
 
   toString() {
     return this.body.push(this.args)
-      .push(new Symbol("fn"))
+      .push(new Bymbol("fn"))
       .toString()
   }
 
@@ -414,6 +406,12 @@ class Macro {
   toString() {
     return "(macro " + this.args.toString() +
       this.body.toString() + ")";
+  }
+}
+
+class MacroExpanded {
+  constructor(expanded) {
+    this.expanded = expanded;
   }
 }
 
@@ -466,7 +464,7 @@ function tokenize(inputString) {
     }
   }
 
-  function tokenizeSymbol() {
+  function tokenizeBymbol() {
     // Original regex: /^([^\s()[\]]*)/, new: /^([^\s()[\]{}:"#'.]+)/
     // The original was more permissive, let's stick to a more specific one for now
     // but ensure it doesn't break existing symbol logic unintentionally.
@@ -563,7 +561,7 @@ function tokenize(inputString) {
         if (/\d/.test(char)) {
           tokenizeNumber();
         } else if (/[^\s()[\]{}:"#'.]/.test(char)) { // Ensure it's a valid start for a symbol
-          tokenizeSymbol();
+          tokenizeBymbol();
         } else {
           // Handle unexpected characters if necessary, or advance past them
           // For now, this might mean an error or simply advancing
@@ -743,7 +741,7 @@ function matchItem(tokenVector, contextTokenForEOF) {
       item = false
       break;
     case TOK_SYMBOL:
-      item = Symbol.for(currentToken.value); // itEm -> item
+      item = Bymbol.for(currentToken.value); // itEm -> item
       break;
     case TOK_KEYWORD:
       item = Keyword.for(currentToken.value); // itEm -> item
@@ -777,16 +775,16 @@ function matchItem(tokenVector, contextTokenForEOF) {
 
 // Evaluate Bubblescript
 function eval(script) {
-  return parse(script).evalEach(rootBinding);
+  return parse(script).each(rootBinding);
 }
 
 function eVaL(bnd, xpr) {
   switch (xpr && xpr.constructor) {
-    case Symbol:
+    case Bymbol:
       return xpr.resolve(bnd)
     case List: {
       let s = xpr.peek();
-      if (s instanceof Symbol) {
+      if (s instanceof Bymbol) {
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
           let q = eVaL(bnd, s);
@@ -821,7 +819,6 @@ function eVaL(bnd, xpr) {
       } else if (s instanceof Macro) {
         let expanded = s.expand(xpr.pop());
         throw new MacroExpanded(expanded);
-        // return expanded.evalEach(bnd);
       } else {
         return undefined;
       }
@@ -897,7 +894,7 @@ const rootBinding = {
 
   jsfn: function(args) {
     var x, binding = this
-    x = args.push(new Symbol('fn'));
+    x = args.push(new Bymbol('fn'));
     var fn = _eval(binding, x);
     return function(...args) {
       return fn.call(binding, arry.toVector(args));
@@ -1049,4 +1046,8 @@ const rootBinding = {
   "new": mkfn(function([m,n]) {
       return new m(...n.toArray());
   }),
+}
+
+module.exports = {
+  eval: eval
 }
