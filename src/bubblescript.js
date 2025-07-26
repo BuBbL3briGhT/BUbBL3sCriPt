@@ -87,7 +87,7 @@ class AbstractList {
       case "string":
         return '"' + o + '"';
       case "symbol":
-        return Bymbol.keyFor(o);
+        return Slappy.keyFor(o);
       default:
         return o.toString();
     }
@@ -251,7 +251,7 @@ class EmptyVector extends Vector {
 emptyVector = new EmptyVector()
 
 
-class Bymbol {
+class Slappy {
 
   constructor(value) {
 
@@ -298,7 +298,7 @@ class Bymbol {
   }
 
   static for(key) {
-    return new Bymbol(key);
+    return new Slappy(key);
   }
 
 }
@@ -383,7 +383,7 @@ class Fn {
 
   toString() {
     return this.body.push(this.args)
-      .push(new Bymbol("fn"))
+      .push(new Slappy("fn"))
       .toString()
   }
 
@@ -479,7 +479,7 @@ function tokenize(inputString) {
     }
   }
 
-  function tokenizeBymbol() {
+  function tokenizeSlappy() {
     // Original regex: /^([^\s()[\]]*)/, new: /^([^\s()[\]{}:"#'.]+)/
     // The original was more permissive, let's stick to a more specific one for now
     // but ensure it doesn't break existing symbol logic unintentionally.
@@ -576,7 +576,7 @@ function tokenize(inputString) {
         if (/\d/.test(char)) {
           tokenizeNumber();
         } else if (/[^\s()[\]{}:"#'.]/.test(char)) { // Ensure it's a valid start for a symbol
-          tokenizeBymbol();
+          tokenizeSlappy();
         } else {
           // Handle unexpected characters if necessary, or advance past them
           // For now, this might mean an error or simply advancing
@@ -756,7 +756,7 @@ function matchItem(tokenVector, contextTokenForEOF) {
       item = false
       break;
     case TOK_SYMBOL:
-      item = Bymbol.for(currentToken.value); // itEm -> item
+      item = Slappy.for(currentToken.value); // itEm -> item
       break;
     case TOK_KEYWORD:
       item = Keyword.for(currentToken.value); // itEm -> item
@@ -795,11 +795,11 @@ function eval(script) {
 
 function eVaL(bnd, xpr) {
   switch (xpr && xpr.constructor) {
-    case Bymbol:
+    case Slappy:
       return xpr.resolve(bnd)
     case List: {
       let s = xpr.peek();
-      if (s instanceof Bymbol) {
+      if (s instanceof Slappy) {
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
           let q = eVaL(bnd, s);
@@ -909,7 +909,7 @@ const rootBinding = {
 
   jsfn: function(args) {
     var x, binding = this
-    x = args.push(new Bymbol('fn'));
+    x = args.push(new Slappy('fn'));
     var fn = _eval(binding, x);
     return function(...args) {
       return fn.call(binding, arry.toVector(args));

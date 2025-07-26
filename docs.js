@@ -6,7 +6,9 @@ const PORT = 3000;
 const PUBLIC_DIR = path.join(__dirname, 'docs'); // Directory for static files
 
 const server = http.createServer((req, res) => {
-    let filePath = path.join(PUBLIC_DIR, req.url);
+
+    let requestPath =  req.url.split("?")[0]
+    let filePath = path.join(PUBLIC_DIR, requestPath);
 
     // Handle root path or directory requests by serving index.html
     if (filePath.endsWith('/') || !path.extname(filePath)) {
