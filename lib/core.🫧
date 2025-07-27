@@ -1,16 +1,7 @@
 (muf (push a b) (send a :push b)))
 
 (muf (puts & msg)
-  (eval (push msg °console.log)))
-
-# (muf (puts msg) (console.log msg)))
-# (muf (puts & msg) (console.log & msg))
-
-# (muf (puts msg) (console.log msg))
-
-# (muf (puts & msg)
-#   (console.log msg))
-# (muf (puts & msg) msg)
+  (console.log & msg))
 
 (muf (🍎 a b) (console.log a b)))
 
