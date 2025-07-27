@@ -3,8 +3,6 @@
 (muf (puts & msg)
   (console.log & msg))
 
-(muf (🍎 a b) (console.log a b)))
-
 (muf (peek list) (send list :peek)))
 (muf (pop list) (send list :pop)))
 (muf (invert list) (send list :invert)))
