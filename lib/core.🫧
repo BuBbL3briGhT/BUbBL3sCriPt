@@ -1,18 +1,18 @@
-(muf (push a b)
-     (send a :push b))
+(define (push a b)
+  (send a :push b))
 
-(muf (puts & msg)
-     (console.log & msg))
+(define (puts & msg)
+  (console.log & msg))
 
-(muf (peek list)
-     (send list :peek))
+(define (peek list)
+  (send list :peek))
 
-(muf (pop list)
-     (send list :pop))
+(define (pop list)
+  (send list :pop))
 
-(muf (invert list)
-     (send list :invert))
+(define (invert list)
+  (send list :invert))
 
-(muf (reverse list)
-     (send list :invert))
+(define (reverse list)
+  (send list :invert))
 

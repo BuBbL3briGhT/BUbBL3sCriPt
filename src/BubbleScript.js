@@ -1,5 +1,5 @@
 
-// Bubblescript.js
+// BubbleScript.js, A Lisp for JavaScript.
 
 
 let emptyList, emptyVector;
@@ -91,7 +91,7 @@ class AbstractList {
       case "string":
         return '"' + o + '"';
       case "symbol":
-        return Slappy.keyFor(o);
+        return _Symbol.keyFor(o);
       default:
         return o.toString();
     }
@@ -186,7 +186,7 @@ class List extends AbstractList {
 
   eval(binding) {
     return this.each(xpr =>
-      _eval(binding, xpr));
+      ___eval(binding, xpr));
   }
 
   each(fn) {
@@ -255,7 +255,7 @@ class EmptyVector extends Vector {
 emptyVector = new EmptyVector()
 
 
-class Slappy {
+class _Symbol {
 
   constructor(value) {
 
@@ -302,7 +302,7 @@ class Slappy {
   }
 
   static for(key) {
-    return new Slappy(key);
+    return new _Symbol(key);
   }
 
 }
@@ -387,7 +387,7 @@ class Fn {
 
   toString() {
     return this.body.push(this.args)
-      .push(new Slappy("fn"))
+      .push(new _Symbol("fn"))
       .toString()
   }
 
@@ -419,7 +419,7 @@ class Macro {
       x = x.rest;
       y = y && y.rest;
     }
-    return this.body.map((xpr) => _eval(bnd, xpr));
+    return this.body.eval();
   }
 
   toString() {
@@ -483,7 +483,7 @@ function tokenize(inputString) {
     }
   }
 
-  function tokenizeSlappy() {
+  function tokenize_Symbol() {
     // Original regex: /^([^\s()[\]]*)/, new: /^([^\s()[\]{}:"#'.]+)/
     // The original was more permissive, let's stick to a more specific one for now
     // but ensure it doesn't break existing symbol logic unintentionally.
@@ -580,7 +580,7 @@ function tokenize(inputString) {
         if (/\d/.test(char)) {
           tokenizeNumber();
         } else if (/[^\s()[\]{}:"#'.]/.test(char)) { // Ensure it's a valid start for a symbol
-          tokenizeSlappy();
+          tokenize_Symbol();
         } else {
           // Handle unexpected characters if necessary, or advance past them
           // For now, this might mean an error or simply advancing
@@ -760,7 +760,7 @@ function matchItem(tokenVector, contextTokenForEOF) {
       item = false
       break;
     case TOK_SYMBOL:
-      item = Slappy.for(currentToken.value); // itEm -> item
+      item = _Symbol.for(currentToken.value); // itEm -> item
       break;
     case TOK_KEYWORD:
       item = Keyword.for(currentToken.value); // itEm -> item
@@ -793,22 +793,22 @@ function matchItem(tokenVector, contextTokenForEOF) {
 
 
 // Evaluate Bubblescript
-function eval(script) {
+function _eval(script) {
   return parse(script).each(rootBinding);
 }
 
-function eVaL(bnd, xpr) {
+function __eval(bnd, xpr) {
   switch (xpr && xpr.constructor) {
-    case Slappy:
+    case _Symbol:
       return xpr.resolve(bnd)
     case List: {
       let s = xpr.peek();
-      if (s instanceof Slappy) {
+      if (s instanceof _Symbol) {
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
-          let q = eVaL(bnd, s);
+          let q = __eval(bnd, s);
           if (q != s)
-            return eVaL(bnd,
+            return __eval(bnd,
               xpr.pop().push(q));
           else
             return xpr;
@@ -821,18 +821,17 @@ function eVaL(bnd, xpr) {
           }
           try {
             return q[s.fn](...xpr.rest.map(
-              (a) => eVaL(bnd, a)).toArray());
+              (a) => __eval(bnd, a)).toArray());
           } catch (e) {
             // console.log(s.fn);
             throw e;
           }
         }
       } else if (s instanceof List) {
-        return eVaL(bnd,
-          xpr.pop().push(eVaL(bnd, s)))
+        return __eval(bnd,
+          xpr.pop().push(__eval(bnd, s)))
       } else if (s instanceof Fn) {
-        return s.invoke(xpr.pop().map(arg =>
-          eVaL(bnd, arg)));
+        return s.invoke(xpr.pop().eval());
       } else if (s instanceof Function) {
         return s.call(bnd, xpr.pop());
       } else if (s instanceof Macro) {
@@ -843,9 +842,7 @@ function eVaL(bnd, xpr) {
       }
     }
     case Vector:
-      return xpr.map((a) => {
-        return eVaL(bnd, a)
-      });
+      return xpr.eval();
     case Bubble:
       return xpr.pop();
     default:
@@ -865,14 +862,14 @@ function eVaL(bnd, xpr) {
 function mkfn(q) {
   return function (p) {
     return q.call(this,
-      p.map(m => _eval(this, m)))
+      p.map(m => ___eval(this, m)))
   }
 }
 
 // function mkfn(q) {
 //   return (p) => {
 //     return q.call(this,
-//       ...p.map(m => _eval(this, m)))
+//       ...p.map(m => ___eval(this, m)))
 //   }
 // }
 
@@ -890,7 +887,7 @@ const rootBinding = {
 
   muf: function([key,val]) {
     return this[key.toString()]
-      = _eval(this, val);
+      = ___eval(this, val);
   },
   // fn: function([caret, stic]) {
   //   return new Fn(this, caret, stic);
@@ -913,8 +910,8 @@ const rootBinding = {
 
   jsfn: function(args) {
     var x, binding = this
-    x = args.push(new Slappy('fn'));
-    var fn = _eval(binding, x);
+    x = args.push(new _Symbol('fn'));
+    var fn = ___eval(binding, x);
     return function(...args) {
       return fn.call(binding, arry.toVector(args));
     }
@@ -929,20 +926,20 @@ const rootBinding = {
       x = x.pop();
       w = x.peek();
       x = x.pop();
-      binding[k] = _eval(binding, w);
+      binding[k] = ___eval(binding, w);
     }
     return xx.map(z =>
-      _eval(binding, z)).pop();
+      ___eval(binding, z)).pop();
   },
 
   if: function([c,t,f]) {
-    return _eval(this,
-      _eval(this, c) ? t : f);
+    return ___eval(this,
+      ___eval(this, c) ? t : f);
   },
 
   unless: function([c,f,t]) {
-    return _eval(this,
-      _eval(this, c) ? t : f);
+    return ___eval(this,
+      ___eval(this, c) ? t : f);
   },
 
   blert: function(msgs) {
@@ -950,7 +947,7 @@ const rootBinding = {
   },
 
   expandmacro: function([m,n]) {
-    return _eval(this,m).expand(this, n);
+    return ___eval(this,m).expand(this, n);
   },
 
   loop: function([x,...xx]) {
@@ -964,7 +961,7 @@ const rootBinding = {
       x = x.pop();
       v = x.peek();
       x = x.pop();
-      binding[k] = _eval(binding, v);
+      binding[k] = ___eval(binding, v);
     }
 
     binding.recur = function([a]) {
@@ -975,7 +972,7 @@ const rootBinding = {
         a = a.pop();
         w = a.peek();
         a = a.pop();
-        binding[k] = _eval(binding, w);
+        binding[k] = ___eval(binding, w);
       }
       recurCalled = true;
     };
@@ -983,7 +980,7 @@ const rootBinding = {
     do {
       recurCalled = false;
       m = xx.map(z =>
-        _eval(binding, z)).pop();
+        ___eval(binding, z)).pop();
     } while(recurCalled);
     return m;
   },
@@ -997,7 +994,7 @@ const rootBinding = {
   }),
 
   eval: mkfn(function(args) {
-    return args.map((exp) => _eval(this, exp)).last
+    return args.map((exp) => ___eval(this, exp)).last
   }),
 
   send: mkfn(function([a,b,...c]) {
@@ -1056,9 +1053,6 @@ const rootBinding = {
   parse: mkfn(function([s]) {
     return parse(s);
   }),
-  _eval: mkfn(function([v]) {
-    return _eval(this, v[0]);
-  }),
   concat: mkfn(function(eeks) {
     return eeks.join('');
   }),
@@ -1068,5 +1062,5 @@ const rootBinding = {
 }
 
 module.exports = {
-  eval: eval
+  _eval: _eval
 }
