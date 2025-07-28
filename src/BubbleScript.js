@@ -1,5 +1,10 @@
 
-// BubbleScript.js, A Lisp for JavaScript.
+    /*      +
+      *  🫧 BubbleScript.js  *
+     *         +     *           *
+    *   ✨️  A Lisp for JavaScript. *
+     *        *    +   *
+       *  */
 
 
 let emptyList, emptyVector;
