@@ -1,17 +1,17 @@
-(🧡 (push a b)
+(🫧 (push a b)
   (send a :push b))
 
-(💜 (puts & msg)
+(🫧 (puts & msg)
   (console.log & msg))
 
-(🩵 (peek list)
+(🫧 (peek list)
   (send list :peek))
 
-(💛 (pop list)
+(🫧 (pop list)
   (send list :pop))
 
-(🩷 (invert list)
+(🫧 (invert list)
   (send list :invert))
 
-(💚 (reverse list)
+(🫧 (reverse list)
   (send list :invert))
