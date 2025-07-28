@@ -186,7 +186,7 @@ class List extends AbstractList {
 
   eval(binding) {
     return this.each(xpr =>
-      ___eval(binding, xpr));
+      $eval(binding, xpr));
   }
 
   each(fn) {
@@ -797,7 +797,7 @@ function _eval(script) {
   return parse(script).each(rootBinding);
 }
 
-function __eval(bnd, xpr) {
+function $eval(bnd, xpr) {
   switch (xpr && xpr.constructor) {
     case _Symbol:
       return xpr.resolve(bnd)
@@ -806,9 +806,9 @@ function __eval(bnd, xpr) {
       if (s instanceof _Symbol) {
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
-          let q = __eval(bnd, s);
+          let q = $eval(bnd, s);
           if (q != s)
-            return __eval(bnd,
+            return $eval(bnd,
               xpr.pop().push(q));
           else
             return xpr;
@@ -821,15 +821,15 @@ function __eval(bnd, xpr) {
           }
           try {
             return q[s.fn](...xpr.rest.map(
-              (a) => __eval(bnd, a)).toArray());
+              (a) => $eval(bnd, a)).toArray());
           } catch (e) {
             // console.log(s.fn);
             throw e;
           }
         }
       } else if (s instanceof List) {
-        return __eval(bnd,
-          xpr.pop().push(__eval(bnd, s)))
+        return $eval(bnd,
+          xpr.pop().push($eval(bnd, s)))
       } else if (s instanceof Fn) {
         return s.invoke(xpr.pop().eval());
       } else if (s instanceof Function) {
@@ -862,14 +862,14 @@ function __eval(bnd, xpr) {
 function mkfn(q) {
   return function (p) {
     return q.call(this,
-      p.map(m => ___eval(this, m)))
+      p.map(m => $eval(this, m)))
   }
 }
 
 // function mkfn(q) {
 //   return (p) => {
 //     return q.call(this,
-//       ...p.map(m => ___eval(this, m)))
+//       ...p.map(m => $eval(this, m)))
 //   }
 // }
 
@@ -887,7 +887,7 @@ const rootBinding = {
 
   muf: function([key,val]) {
     return this[key.toString()]
-      = ___eval(this, val);
+      = $eval(this, val);
   },
   // fn: function([caret, stic]) {
   //   return new Fn(this, caret, stic);
@@ -911,7 +911,7 @@ const rootBinding = {
   jsfn: function(args) {
     var x, binding = this
     x = args.push(new _Symbol('fn'));
-    var fn = ___eval(binding, x);
+    var fn = $eval(binding, x);
     return function(...args) {
       return fn.call(binding, arry.toVector(args));
     }
@@ -926,20 +926,20 @@ const rootBinding = {
       x = x.pop();
       w = x.peek();
       x = x.pop();
-      binding[k] = ___eval(binding, w);
+      binding[k] = $eval(binding, w);
     }
     return xx.map(z =>
-      ___eval(binding, z)).pop();
+      $eval(binding, z)).pop();
   },
 
   if: function([c,t,f]) {
-    return ___eval(this,
-      ___eval(this, c) ? t : f);
+    return $eval(this,
+      $eval(this, c) ? t : f);
   },
 
   unless: function([c,f,t]) {
-    return ___eval(this,
-      ___eval(this, c) ? t : f);
+    return $eval(this,
+      $eval(this, c) ? t : f);
   },
 
   blert: function(msgs) {
@@ -947,7 +947,7 @@ const rootBinding = {
   },
 
   expandmacro: function([m,n]) {
-    return ___eval(this,m).expand(this, n);
+    return $eval(this,m).expand(this, n);
   },
 
   loop: function([x,...xx]) {
@@ -961,7 +961,7 @@ const rootBinding = {
       x = x.pop();
       v = x.peek();
       x = x.pop();
-      binding[k] = ___eval(binding, v);
+      binding[k] = $eval(binding, v);
     }
 
     binding.recur = function([a]) {
@@ -972,7 +972,7 @@ const rootBinding = {
         a = a.pop();
         w = a.peek();
         a = a.pop();
-        binding[k] = ___eval(binding, w);
+        binding[k] = $eval(binding, w);
       }
       recurCalled = true;
     };
@@ -980,7 +980,7 @@ const rootBinding = {
     do {
       recurCalled = false;
       m = xx.map(z =>
-        ___eval(binding, z)).pop();
+        $eval(binding, z)).pop();
     } while(recurCalled);
     return m;
   },
@@ -994,16 +994,13 @@ const rootBinding = {
   }),
 
   eval: mkfn(function(args) {
-    return args.map((exp) => ___eval(this, exp)).last
+    return args.eval();
   }),
 
   send: mkfn(function([a,b,...c]) {
     if (b.key)
       b = b.key;
     if (c.length > 0) {
-      // console.log("a", a);
-      // console.log("b", b);
-      // console.log("c", c);
       return a[b](...c);
     } else
       return a[b]();
