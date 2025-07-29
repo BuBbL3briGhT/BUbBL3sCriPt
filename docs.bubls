@@ -4,18 +4,36 @@ const path (require 'path')
 
 
 const PORT 3000
+
 (const PUBLiC_DiR
   (path.join __dirname 'docs'))
 
-(const server
-  (fn [req res]
-    ()))
+(const server (http.createServer (fn [req res]))
+     (let requestPath (req.url.split "?"))
+     (let filePath (path.join PUBLiC_DiR requestPath))
+     (if (or (filePath.endsWith '/')
+             (not (path.extname(filePath))))
+       (serveIndex))
+
+     (fs.readFile filePath (fn [err data]
+                               (if err
+                                 (do
+                                   (res.writeHead 404 { 'Content-Type': 'text/html'})
+                                   (res.end '<h1>404 Not Found<h1>'))
+                                 (let [ext (path.extname filePath)
+                                       contentType { html: 'text/html'}])))))
+
+
+
+
+
+
 
 (server.listen PORT
   (fn (puts `Server running on \
             http://localhost:${PORT}`)))
 
-(🫧 (handleRequest req res)
+(muf (handleRequest req res)
     ())
 
 
