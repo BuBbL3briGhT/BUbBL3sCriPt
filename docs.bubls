@@ -1,19 +1,31 @@
-const http (require 'http')
-const fs   (require 'fs')
-const path (require 'path')
+let http (require 'http')
+let fs   (require 'fs')
+let path (require 'path')
+
+let PORT 3000
+
+let PUBLiC_DiR \
+  (path.join __dirname 'docs')
 
 
-const PORT 3000
+(let server
+  (http.createServer (fn [req res]
+    (let requestPath (req.url.split "?"))
+    (let filePath
+      (unless
+        (or
+          (filePath.endsWith '/')
+          (not (path.extname filePath)))
+        (path.join PUBLiC_DiR requestPath)
+        (path.join filePath 'index.html')))
 
-(const PUBLiC_DiR
-  (path.join __dirname 'docs'))
-
-(const server (http.createServer (fn [req res]))
-     (let requestPath (req.url.split "?"))
-     (let filePath (path.join PUBLiC_DiR requestPath))
-     (if (or (filePath.endsWith '/')
+(let server (http.createServer
+  (fn [req res]
+    let requestPath (req.url.split "?")
+    let filePath (path.join PUBLiC_DiR requestPath))
+      (if (or (filePath.endsWith '/')
              (not (path.extname(filePath))))
-       (serveIndex))
+        (serveIndex))
 
      (fs.readFile filePath (fn [err data]
                                (if err
