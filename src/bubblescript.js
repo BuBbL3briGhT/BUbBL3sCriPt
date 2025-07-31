@@ -1064,5 +1064,5 @@ const rootBinding = {
 }
 
 module.exports = {
-  _eval: _eval
+  eval: _eval
 }
