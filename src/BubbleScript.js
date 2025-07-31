@@ -1063,6 +1063,10 @@ const rootBinding = {
   }),
 }
 
-module.exports = {
-  eval: _eval
-}
+const BubbleScript = {
+  List, Vector, Symbol: _Symbol, Keyword,
+  Bubble, Fn, Macro, tokenize, parse, eval:
+  _eval
+};
+
+module.exports = BubbleScript
