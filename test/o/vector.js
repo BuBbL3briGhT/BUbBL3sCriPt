@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Vector  = require("../../src/o/vector");
+const { Vector }  = require("../../src/BubbleScript");
 
 describe("Vector", () => {
 
