@@ -1,7 +1,7 @@
-const Macro = require("../../src/o/macro");
-const Vector = require("../../src/o/vector");
-const List = require("../../src/o/list");
 const assert = require("assert");
+
+const { Macro, Vector, List } =
+  require("../../src/BubbleScript");
 
 describe("Macro", function () {
   describe("new Macro()", function () {
