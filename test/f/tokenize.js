@@ -1,6 +1,7 @@
 const assert = require("assert");
-const tokenize = require("../../src/f/tokenize");
-const Vector = require("../../src/o/vector");
+
+const { tokenize, Vector } =
+  require("../../src/BubbleScript");
 
 const { TOK_STRING, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,
