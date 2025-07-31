@@ -1068,7 +1068,60 @@ const rootBinding = {
   "new": mkfn(function([m,n]) {
       return new m(...n.toArray());
   }),
-}
+};
+
+(function() {
+  let bnd = rootBinding;
+
+  function list(...args) {
+    return List.from(args);
+  }
+
+  function vector(...args) {
+    return Vector.from(args);
+  }
+
+  function quote(m) {
+    return new Bubble(m);
+  }
+
+  function muf(...args) {
+    // return _eval(bnd, arry.toList(args).push(_muf));
+    return $eval(bnd, List.from(args).push(_muf));
+  }
+
+  let _push = new _Symbol('push'),
+       fn = new _Symbol('fn'),
+       a = new _Symbol('a'),
+       b = new _Symbol('b'),
+       send = new _Symbol('send'),
+       mufn = new _Symbol('mufn'),
+       macro = new _Symbol('macro'),
+       name = new _Symbol('name'),
+       amp = new _Symbol('&'),
+       z = new _Symbol('z'),
+      _list = new _Symbol('list'),
+      _muf = new _Symbol('muf'),
+      puts = new _Symbol('puts'),
+      msg = new _Symbol('msg'),
+      consoleLog = new _Symbol('console.log');
+
+  // muf push (fn [a b] (send a °push b))
+  muf(_push, list(fn, vector(a, b),
+       list(send, a, quote(_push), b)));
+
+  // (muf (puts msg) (console.log msg))
+  // (muf puts (fn [msg] (console.log msg)))
+  muf(puts, list(fn, vector(msg),
+    list(consoleLog, msg)));
+
+  // (muf mufn (macro [name & z]
+  //     (list °muf name (push z °fn))))
+  muf(mufn, list(macro, vector(name,amp,z),
+      list(_list,quote(_muf), name,
+         list(_push, z, quote(fn)))));
+
+})();
 
 const BubbleScript = {
   List, Vector, Symbol: _Symbol, Keyword,

@@ -8,6 +8,6 @@ BubbleScript.loadFile = function (filePath) {
   return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
 }
 
-module.exports = BubbleScript;
-
 BubbleScript.loadFile("../lib/core.🫧");
+
+module.exports = BubbleScript;
