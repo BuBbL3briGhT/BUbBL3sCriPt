@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const Bubblescript = require("./bubblescript");
+const Bubblescript = require("./BubbleScript");
 
 // const Bubblescript = {
 //       List: require("./o/list"),
