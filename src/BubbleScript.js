@@ -806,7 +806,7 @@ function matchItem(tokenVector, contextTokenForEOF) {
 
 // Evaluate Bubblescript
 function _eval(script) {
-  return parse(script).each(rootBinding);
+  return parse(script).eval(rootBinding);
 }
 
 function $eval(bnd, xpr) {
@@ -1120,6 +1120,9 @@ const rootBinding = {
   muf(mufn, list(macro, vector(name,amp,z),
       list(_list,quote(_muf), name,
          list(_push, z, quote(fn)))));
+
+
+  console.log(_eval("1"));
 
 })();
 
