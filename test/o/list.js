@@ -1,5 +1,5 @@
 const assert = require("assert");
-const List  = require("../../src/o/list");
+const { List }  = require("../../src/BubbleScript");
 
 describe("List", () => {
 
