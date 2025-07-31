@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 'use strict'
-Error.stackTraceLimit = 100;
+// Error.stackTraceLimit = 100;
 
 const bubls = require('../src/bubls');
 
