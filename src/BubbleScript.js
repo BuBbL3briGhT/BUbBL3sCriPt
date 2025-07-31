@@ -600,6 +600,13 @@ function tokenize(inputString) {
   return tokens;
 }
 
+tokenize.TOK_STRING = TOK_STRING;
+tokenize.TOK_NUMBER = TOK_NUMBER;
+tokenize.TOK_SYMBOL = TOK_SYMBOL;
+tokenize.TOK_KEYWORD = TOK_KEYWORD;
+tokenize.TOK_TRUE = TOK_TRUE;
+tokenize.TOK_FALSE = TOK_FALSE;
+
 
 class ParsingError extends Error {
   constructor(message, token) {
