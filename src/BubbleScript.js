@@ -96,7 +96,7 @@ class AbstractList {
       case "string":
         return '"' + o + '"';
       case "symbol":
-        return _Symbol.keyFor(o);
+        return Symbol.keyFor(o);
       default:
         return o.toString();
     }
@@ -488,7 +488,7 @@ function tokenize(inputString) {
     }
   }
 
-  function tokenize_Symbol() {
+  function tokenizeSymbol() {
     // Original regex: /^([^\s()[\]]*)/, new: /^([^\s()[\]{}:"#'.]+)/
     // The original was more permissive, let's stick to a more specific one for now
     // but ensure it doesn't break existing symbol logic unintentionally.
@@ -585,7 +585,7 @@ function tokenize(inputString) {
         if (/\d/.test(char)) {
           tokenizeNumber();
         } else if (/[^\s()[\]{}:"#'.]/.test(char)) { // Ensure it's a valid start for a symbol
-          tokenize_Symbol();
+          tokenizeSymbol();
         } else {
           // Handle unexpected characters if necessary, or advance past them
           // For now, this might mean an error or simply advancing
