@@ -1,5 +1,5 @@
 const readline = require('readline');
-const createRepl = require("../../src/f/createRepl");
+const createRepl = require("../../src/f/create_repl");
 const { Readable } = require('stream');
 
 describe("createRepl", function () {

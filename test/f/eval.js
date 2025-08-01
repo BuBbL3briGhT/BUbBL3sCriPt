@@ -11,7 +11,7 @@ describe("eval(script)", function () {
     sinon.restore();
   });
 
-  it.only("runs script top to bottom", function () {
+  it("runs script top to bottom", function () {
     sinon.replace(console, "log", sinon.fake())
     _eval("(muf puts (fn [a] (console.log a)))\n(puts 1)\n(puts 2)\n(puts 3)")
     // _eval("(puts 3)\n(puts 2)\n(puts 1)\n(muf puts (fn [a] (console.log a)))"); // fyi: Pass with this under reverse execution.

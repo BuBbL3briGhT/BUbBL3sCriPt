@@ -1121,8 +1121,8 @@ const rootBinding = {
       list(_list,quote(_muf), name,
          list(_push, z, quote(fn)))));
 
-
-  console.log(_eval("1"));
+  // console.log(_eval("1"));
+   // console.log(vector(1));
 
 })();
 
