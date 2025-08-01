@@ -131,6 +131,17 @@ class AbstractList {
     return this.pop().each(fn);
   }
 
+  eval(binding) {
+    return this.each(xpr =>
+      $eval(binding, xpr));
+  }
+
+
+  mapEval(binding) {
+    return this.map(xpr =>
+      $eval(binding, xpr));
+  }
+
   *[Symbol.iterator]() {
     let currentNode = this;
     while (!currentNode.isEmpty) {
@@ -187,16 +198,6 @@ class List extends AbstractList {
     return this.reduce((vector, o) => {
       return vector.push(o); },
       Vector.emptyVector);
-  }
-
-  eval(binding) {
-    return this.each(xpr =>
-      $eval(binding, xpr));
-  }
-
-  mapEval(binding) {
-    return this.map(xpr =>
-      $eval(binding, xpr));
   }
 
   each(fn) {
@@ -861,7 +862,7 @@ function $eval(bnd, xpr) {
       }
     }
     case Vector:
-      return xpr.eval(bnd);
+      return xpr.mapEval(bnd);
     case Bubble:
       return xpr.pop();
     default:

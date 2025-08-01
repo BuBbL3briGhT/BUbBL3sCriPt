@@ -20,7 +20,7 @@ describe("eval(script)", function () {
     assert(console.log.calledWith(3));
   });
 
-  it("evaluates listcript", function () {
+  it("evaluates BubbleScript", function () {
     assert.equal(_eval("(+ 45 87)"), 132);
   });
 
