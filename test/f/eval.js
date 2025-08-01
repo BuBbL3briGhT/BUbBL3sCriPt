@@ -13,7 +13,7 @@ describe("eval(script)", function () {
 
   it("runs script top to bottom", function () {
     sinon.replace(console, "log", sinon.fake())
-    _eval("(muf puts (fn [a] (console.log a)))\n(puts 1)\n(puts 2)\n(puts 3)")
+    _eval("(muf puts (fn [a] (console.log a))) (puts 1) (puts 2) (puts 3)")
     // _eval("(puts 3)\n(puts 2)\n(puts 1)\n(muf puts (fn [a] (console.log a)))"); // fyi: Pass with this under reverse execution.
     assert(console.log.calledWith(1));
     assert(console.log.calledWith(2));

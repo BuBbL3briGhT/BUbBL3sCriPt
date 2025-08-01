@@ -194,6 +194,11 @@ class List extends AbstractList {
       $eval(binding, xpr));
   }
 
+  mapEval(binding) {
+    return this.map(xpr =>
+      $eval(binding, xpr));
+  }
+
   each(fn) {
     let result;
     try {
@@ -361,6 +366,7 @@ class Bubble {
 
 
 class Fn {
+  // TODO: Add name to function
 
   constructor(bnd, args, body) {
     this.bnd = bnd;
@@ -618,6 +624,7 @@ class ParsingError extends Error {
     }
   }
 }
+
 class NoMatchError extends ParsingError {
   constructor(message, token){
     super(message, token); // Pass token to parent for enriched message
@@ -843,7 +850,7 @@ function $eval(bnd, xpr) {
         return $eval(bnd,
           xpr.pop().push($eval(bnd, s)))
       } else if (s instanceof Fn) {
-        return s.invoke(xpr.pop().eval());
+        return s.invoke(xpr.pop().mapEval(bnd));
       } else if (s instanceof Function) {
         return s.call(bnd, xpr.pop());
       } else if (s instanceof Macro) {
@@ -854,7 +861,7 @@ function $eval(bnd, xpr) {
       }
     }
     case Vector:
-      return xpr.eval();
+      return xpr.eval(bnd);
     case Bubble:
       return xpr.pop();
     default:
