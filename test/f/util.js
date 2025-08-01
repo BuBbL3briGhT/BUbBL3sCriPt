@@ -24,9 +24,9 @@ describe("Util", function () {
         assert.equal(typeof fn, 'function');
       }
       const Base = require("../../src/f/base.js");
-      const eval = require("../../src/f/eval.js");
+      const { eval: _eval } = require("../../src/BubbleScript");
       const rootBinding =
-        Util.makeRootBinding(Base, eval._eval);
+        Util.makeRootBinding(Base, _eval._eval);
 
       const functions = Util.getStaticMethods(Base);
       for (const fn of functions) {
