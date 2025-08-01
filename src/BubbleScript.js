@@ -1137,7 +1137,7 @@ const rootBinding = {
 const BubbleScript = {
   List, Vector, Symbol: _Symbol, Keyword,
   Bubble, Fn, Macro, tokenize, parse, eval:
-  _eval
+  _eval, $eval, rootBinding
 }
 
 module.exports = BubbleScript;
