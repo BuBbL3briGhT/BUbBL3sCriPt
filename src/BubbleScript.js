@@ -207,6 +207,8 @@ class List extends AbstractList {
     } catch (o) {
       if (o instanceof MacroExpanded) {
         let expanded = o.expanded;
+        console.log(this.o.toString());
+        console.log(o.expanded.toString());
         this.o  = expanded.first;
         this.oo = this.rest.conj(expanded.rest.invert());
         return this.each(fn);
@@ -215,6 +217,25 @@ class List extends AbstractList {
     if (this.pop().isEmpty) return result;
     return this.pop().each(fn);
   }
+
+  each(fn) {
+    let result;
+    try {
+      result = fn(this.peek());
+    } catch (o) {
+      if (o instanceof MacroExpanded) {
+        let expanded = o.expanded;
+        // console.log(this.o.toString());
+        // console.log(o.expanded.toString());
+        this.o  = expanded;
+        // this.oo = this.rest.conj(expanded.rest.invert());
+        return this.each(fn);
+      }
+    }
+    if (this.pop().isEmpty) return result;
+    return this.pop().each(fn);
+  }
+
 }
 
 class EmptyList extends List {
