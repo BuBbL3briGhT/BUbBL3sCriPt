@@ -389,6 +389,11 @@ function applyArguments(binding, keys, vals) {
       return binding;
     }
 
+    if(val == '&') {
+      applyArguments(binding, keys, vals.next)
+      return binding;
+    }
+
     switch (key.constructor) {
       case List:
       case Vector:
@@ -425,9 +430,6 @@ class Fn {
   invoke(params) {
     let binding = createBinding(this.binding,
       this.params, params);
-    // console.log("invoke", this.name);
-
-    // console.log(binding);
 
     return this.body.eval(binding);
   }
@@ -903,17 +905,9 @@ function $eval(bnd, xpr) {
 // TODO: Create tests for mkfn.
 function mkfn(q) {
   return function (p) {
-    return q.call(this,
-      p.map(m => $eval(this, m)))
+    return q.call(this, p.mapEval(this));
   }
 }
-
-// function mkfn(q) {
-//   return (p) => {
-//     return q.call(this,
-//       ...p.map(m => $eval(this, m)))
-//   }
-// }
 
 
 // A man walks into a bar. Bartender says
