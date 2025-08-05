@@ -210,6 +210,8 @@ class List extends AbstractList {
         this.o  = expanded.first;
         this.oo = this.rest.conj(expanded.rest.invert());
         return this.each(fn);
+      } else {
+        throw o;
       }
     }
     if (this.pop().isEmpty) return result;
@@ -394,8 +396,9 @@ function applyArguments(binding, keys, vals) {
         break;
       case _Symbol:
         binding[key.toString()] = val;
+        break;
       default:
-        throw Error("Invalid parameter type.");
+        throw Error("Invalid parameter type: " + key.constructor );
     }
 
     keys = keys.rest;
@@ -416,12 +419,15 @@ class Fn {
     this.binding = binding;
     this.params = params;
     this.body = body;
-    this.name = opts.name
+    this.name = opts.name;
   }
 
   invoke(params) {
     let binding = createBinding(this.binding,
-      this.params, params)
+      this.params, params);
+    // console.log("invoke", this.name);
+
+    // console.log(binding);
 
     return this.body.eval(binding);
   }
@@ -936,8 +942,9 @@ const rootBinding = {
     // rest as the paramter list, otherwise do a
     // normal key value definition.
     if (key instanceof List) {
+      let name = key.peek().toString();
       return this[key.peek().toString()]
-        = new Fn(this, key.pop(), val);
+        = new Fn(this, key.pop(), val, { name });
     } else {
       return this[key.toString()]
         = $eval(this, val.peek());
