@@ -374,16 +374,17 @@ class Bubble {
 // Binding will be modified.
 function applyArguments(binding, keys, vals) {
   while (!keys.isEmpty) {
-    if (keys.first == '&') {
-      keys = keys.rest;
-      bnd[keys.first] = vals
-      keys = null;
-      vals = null;
-      break;
+    let key = keys.first;
+    let val = vals.first;
+
+    if (key == '&') {
+      binding[key] = vals;
+      return binding;
     }
-    binding[keys.first] = vals && vals.first;
+
+    binding[key] = val;
     keys = keys.rest;
-    vals = vals && vals.rest;
+    vals = vals.rest;
   }
 }
 
