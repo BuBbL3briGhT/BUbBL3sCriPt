@@ -10,6 +10,7 @@
 let emptyList, emptyVector;
 
 const keywords    = {};
+const symbols     = {};
 
 const TOK_KEYWORD = 'K',
       TOK_NUMBER  = 'N',
@@ -144,22 +145,6 @@ class AbstractList {
       $eval(binding, xpr));
   }
 
-  split(delimiter) {
-    console.log(delimiter);
-    if (this.isEmpty) {
-      return List.make(List.emptyList);
-    } else {
-      let tail = this.tail.split(delimiter);
-      if (this.head == delimiter)
-        return tail.push(this.head)
-      if (tail.head == delimiter) {
-        return tail.pop().push(List.make(this.head));
-      }
-      // console.log(tail);
-      return tail.pop().push(tail.head.push(this.head));
-    }
-  }
-
   *[Symbol.iterator]() {
     let currentNode = this;
     while (!currentNode.isEmpty) {
@@ -236,6 +221,24 @@ class List extends AbstractList {
     return this.pop().each(fn);
   }
 
+  split(delimiter) {
+    // console.log(delimiter);
+    if (this.isEmpty) {
+      return List.make(List.emptyList);
+    } else {
+      let tail = this.tail.split(delimiter);
+      if (this.head == delimiter)
+        return tail.push(this.head)
+      if (tail.head == delimiter) {
+        return tail.pop().push(List.make(this.head));
+      }
+      // console.log(tail);
+      return tail.pop().push(tail.head.push(this.head));
+    }
+  }
+
+
+
 }
 
 class EmptyList extends List {
@@ -293,6 +296,9 @@ emptyVector = new EmptyVector()
 class _Symbol {
 
   constructor(value) {
+    if(symbols[value]) {
+      throw new Error("Duplicate symbol initalization");
+    }
 
     this.value = value;
 
@@ -313,6 +319,7 @@ class _Symbol {
     this.segments = segments
     this.callPattern = callPattern
 
+    return symbols[value] = this;
   }
 
   toString() {
@@ -337,7 +344,7 @@ class _Symbol {
   }
 
   static for(key) {
-    return new _Symbol(key);
+    return symbols[key] || new _Symbol(key);
   }
 
 }
@@ -454,7 +461,7 @@ class Fn {
 
   toString() {
     return this.body.push(this.args)
-      .push(new _Symbol("fn"))
+      .push(_Symbol.for("fn"))
       .toString()
   }
 
@@ -984,7 +991,7 @@ const rootBinding = {
 
   jsfn: function(args) {
     var x, binding = this
-    x = args.push(new _Symbol('fn'));
+    x = args.push(_Symbol.for('fn'));
     var fn = $eval(binding, x);
     return function(...args) {
       return fn.call(binding, arry.toVector(args));
@@ -1155,21 +1162,21 @@ rootBinding["🫧"] = rootBinding.muf;
     return $eval(bnd, List.from(args).push(_muf));
   }
 
-  let _push = new _Symbol('push'),
-       fn = new _Symbol('fn'),
-       a = new _Symbol('a'),
-       b = new _Symbol('b'),
-       send = new _Symbol('send'),
-       mufn = new _Symbol('mufn'),
-       macro = new _Symbol('macro'),
-       name = new _Symbol('name'),
-       amp = new _Symbol('&'),
-       z = new _Symbol('z'),
-      _list = new _Symbol('list'),
-      _muf = new _Symbol('muf'),
-      puts = new _Symbol('puts'),
-      msg = new _Symbol('msg'),
-      consoleLog = new _Symbol('console.log');
+  let _push = _Symbol.for('push'),
+       fn = _Symbol.for('fn'),
+       a = _Symbol.for('a'),
+       b = _Symbol.for('b'),
+       send = _Symbol.for('send'),
+       mufn = _Symbol.for('mufn'),
+       macro = _Symbol.for('macro'),
+       name = _Symbol.for('name'),
+       amp = _Symbol.for('&'),
+       z = _Symbol.for('z'),
+      _list = _Symbol.for('list'),
+      _muf = _Symbol.for('muf'),
+      puts = _Symbol.for('puts'),
+      msg = _Symbol.for('msg'),
+      consoleLog = _Symbol.for('console.log');
 
   // muf push (fn [a b] (send a °push b))
   muf(_push, list(fn, vector(a, b),
@@ -1185,9 +1192,6 @@ rootBinding["🫧"] = rootBinding.muf;
   muf(mufn, list(macro, vector(name,amp,z),
       list(_list,quote(_muf), name,
          list(_push, z, quote(fn)))));
-
-  // console.log(_eval("1"));
-   // console.log(vector(1));
 
 })();
 
