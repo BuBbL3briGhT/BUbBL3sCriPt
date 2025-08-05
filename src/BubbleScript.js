@@ -378,7 +378,7 @@ function applyArguments(binding, keys, vals) {
   if (vals instanceof Vector)
     vals = vals.toList();
 
-  while (!keys.isEmpty) {
+  while (!keys.isEmpty && !vals.isEmpty) {
     let key = keys.first;
     let val = vals.first;
 
