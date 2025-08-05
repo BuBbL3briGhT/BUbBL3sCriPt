@@ -373,6 +373,11 @@ class Bubble {
 // binding based on order and position.
 // Binding will be modified.
 function applyArguments(binding, keys, vals) {
+  if (keys instanceof Vector)
+    keys = keys.toList();
+  if (vals instanceof Vector)
+    vals = vals.toList();
+
   while (!keys.isEmpty) {
     let key = keys.first;
     let val = vals.first;
@@ -382,7 +387,17 @@ function applyArguments(binding, keys, vals) {
       return binding;
     }
 
-    binding[key] = val;
+    switch (key.constructor) {
+      case List:
+      case Vector:
+        applyArguments(binding, key, val);
+        break;
+      case _Symbol:
+        binding[key.toString()] = val;
+      default:
+        throw Error("Invalid parameter type.");
+    }
+
     keys = keys.rest;
     vals = vals.rest;
   }
