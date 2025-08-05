@@ -369,6 +369,23 @@ class Bubble {
   }
 }
 
+// Applys the keys and the values to the
+// binding based on order and position.
+// Binding will be modified.
+function applyArguments(binding, keys, vals) {
+  while (!keys.isEmpty) {
+    if (keys.first == '&') {
+      keys = keys.rest;
+      bnd[keys.first] = vals
+      keys = null;
+      vals = null;
+      break;
+    }
+    binding[keys.first] = vals && vals.first;
+    keys = keys.rest;
+    vals = vals && vals.rest;
+  }
+}
 
 class Fn {
   // TODO: Add name to function
@@ -381,23 +398,7 @@ class Fn {
 
   invoke(args) {
     let bnd = Object.create(this.bnd);
-
-    var x, y;
-    x = this.args;
-    y = args;
-    while (!x.isEmpty) {
-      if (x.first == '&') {
-        x = x.rest;
-        bnd[x.first] = y
-        x = null;
-        y = null;
-        break;
-      }
-      bnd[x.first] = y && y.first;
-      x = x.rest;
-      y = y && y.rest;
-    }
-
+    applyArguments(bnd, this.args, args);
     return this.body.eval(bnd);
   }
 

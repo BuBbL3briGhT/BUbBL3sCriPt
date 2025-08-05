@@ -1,6 +1,9 @@
 August
+- Handel & for function parmeter for definition
+  and calling.
 - New define/muf that handels scheme style
   function definitions
+  - Add tests
 - Macro expansion is a bit of a hack, using
   throw, but it seems to be only way to do it
   without compilation step for the time being.
