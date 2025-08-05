@@ -267,6 +267,9 @@ class EmptyVector extends Vector {
 emptyVector = new EmptyVector()
 
 
+// `_Symbol`s are language symbols. Underscored
+// to avoid name clash with the built-in
+// Javascript `Symbol` class/object.
 class _Symbol {
 
   constructor(value) {
@@ -372,7 +375,7 @@ class Fn {
 
   constructor(bnd, args, body) {
     this.bnd = bnd;
-    this.args = args.toList();
+    this.args = args;
     this.body = body;
   }
 
@@ -912,6 +915,25 @@ const rootBinding = {
     return this[key.toString()]
       = $eval(this, val);
   },
+
+  muf: function(args) {
+    let key = args.peek();
+    let val = args.pop();
+
+    // If the key turns out to be a list, then
+    // we do a function definition using the
+    // first item of the list as the key and the
+    // rest as the paramter list, otherwise do a
+    // normal key value definition.
+    if (key instanceof List) {
+      return this[key.peek().toString()]
+        = new Fn(this, key.pop(), val);
+    } else {
+      return this[key.toString()]
+        = $eval(this, val.peek());
+    }
+  },
+
   // fn: function([caret, stic]) {
   //   return new Fn(this, caret, stic);
   // },
@@ -924,7 +946,7 @@ const rootBinding = {
   // },
 
   fn: function(args) {
-    return new Fn(this, args.first, args.rest)
+    return new Fn(this, args.first.toList(), args.rest)
   },
 
   macro: function(args) {
@@ -1080,6 +1102,9 @@ const rootBinding = {
       return new m(...n.toArray());
   }),
 };
+
+// Alias muf to 🫧
+rootBinding["🫧"] = rootBinding.muf;
 
 (function() {
   let bnd = rootBinding;
