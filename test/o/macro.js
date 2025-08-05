@@ -10,8 +10,8 @@ describe("Macro", function () {
       let args = Vector.make(1,2);
       let body = List.emptyList;
       let macro = new Macro(bnd, args, body);
-      assert.equal(macro.bnd, bnd);
-      assert.deepEqual(macro.args, args.toList());
+      assert.equal(macro.binding, bnd);
+      assert.deepEqual(macro.params, args.toList());
       assert.equal(macro.body, body);
     });
   });
