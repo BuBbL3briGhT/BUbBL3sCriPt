@@ -162,6 +162,7 @@ describe("not", function () {
 describe("fn", function () {
   it("makes a function", function () {
     assertEvalTo("((fn [a] a) 1)", 1);
+    assertEvalTo("((fn [[a]] a) [1])", 1);
   });
 });
 
