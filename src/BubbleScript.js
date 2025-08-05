@@ -41,6 +41,8 @@ class AbstractList {
   get isEmpty() { return false; }
   get first() { return this.peek(); }
   get rest() { return this.pop(); }
+  get head() { return this.peek(); }
+  get tail() { return this.pop(); }
   get next() { return this.pop().peek(); }
   get last() { return !this.pop().isEmpty ?
       this.pop().last : this.peek(); }
@@ -140,6 +142,22 @@ class AbstractList {
   mapEval(binding) {
     return this.map(xpr =>
       $eval(binding, xpr));
+  }
+
+  split(delimiter) {
+    console.log(delimiter);
+    if (this.isEmpty) {
+      return List.make(List.emptyList);
+    } else {
+      let tail = this.tail.split(delimiter);
+      if (this.head == delimiter)
+        return tail.push(this.head)
+      if (tail.head == delimiter) {
+        return tail.pop().push(List.make(this.head));
+      }
+      // console.log(tail);
+      return tail.pop().push(tail.head.push(this.head));
+    }
   }
 
   *[Symbol.iterator]() {
