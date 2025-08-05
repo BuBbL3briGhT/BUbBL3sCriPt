@@ -422,6 +422,7 @@ class Fn {
   invoke(params) {
     let binding = createBinding(this.binding,
       this.params, params)
+
     return this.body.eval(binding);
   }
 
@@ -435,33 +436,18 @@ class Fn {
 
 
 class Macro {
-  constructor(bnd, args, body) {
-    this.bnd = bnd;
-    this.args = args.toList();
+  constructor(binding, params, body, opts={}) {
+    this.binding = binding;
+    this.params = params.toList();
     this.body = body;
+    this.name = opts.name;
   }
 
-  expand(args) {
-    let bnd = Object.create(this.bnd);
+  expand(params) {
+    let binding = createBinding(this.binding,
+      this.params, params);
 
-    var x, y;
-    x = this.args;
-    y = args;
-    while (!x.isEmpty) {
-      if (x.first == '&') {
-        x = x.rest;
-        bnd[x.first] = y
-        x = null;
-        y = null;
-        break;
-      }
-      bnd[x.first] = y && y.first;
-      x = x.rest;
-      y = y && y.rest;
-    }
-
-    return this.body.mapEval(bnd);
-    // return this.body.eval(bnd);
+    return this.body.mapEval(binding);
   }
 
   toString() {
