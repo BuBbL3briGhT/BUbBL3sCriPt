@@ -387,19 +387,26 @@ function applyArguments(binding, keys, vals) {
   }
 }
 
+function createBinding(proto, keys, values) {
+  let binding = Object.create(proto);
+  applyArguments(binding, keys, values);
+  return binding;
+}
+
 class Fn {
   // TODO: Add name to function
 
-  constructor(bnd, args, body) {
-    this.bnd = bnd;
-    this.args = args;
+  constructor(binding, params, body, opts={}) {
+    this.binding = binding;
+    this.params = params;
     this.body = body;
+    this.name = opts.name
   }
 
-  invoke(args) {
-    let bnd = Object.create(this.bnd);
-    applyArguments(bnd, this.args, args);
-    return this.body.eval(bnd);
+  invoke(params) {
+    let binding = createBinding(this.binding,
+      this.params, params)
+    return this.body.eval(binding);
   }
 
   toString() {
