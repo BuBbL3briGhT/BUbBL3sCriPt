@@ -60,5 +60,48 @@ describe("eval(script)", function () {
     fn.body.eval(bnd);
     assert.equal(fn.body.toString(), "((* 6 9) (puts (+ 1 2 🪻)) (puts 5 🪻) (+ 3 4))");
   });
+
+  describe("function parameters", function () {
+    it("splats", function () {
+      assert.equal(_eval(
+        "((fn [a b c] (list b c a)) 1 2 3)")
+          .toString(), "(2 3 1)");
+      assert.equal(_eval(
+        "((fn [a & b] (list a b)) 1 2 3)")
+          .toString(), "(1 (2 3))");
+      assert.equal(_eval(
+        "((fn [& a] (pop a)) 1 2 3)")
+          .toString(), "(2 3)");
+      // assert.equal(_eval(
+      //   "((fn [a b & c] (list & c)) 1 2 3)")
+      //     .toString(), "(3)");
+    });
+    it("destructures", function () {
+      assert.equal(_eval(
+        "((fn [a b] (list a b b)) 1 [2 3])")
+          .toString(), "(1 [2 3] [2 3])");
+      assert.equal(_eval(
+        "((fn [a [b c]] (list a b c)) 1 [2 3])")
+          .toString(), "(1 2 3)");
+    });
+    it("splats for outbound functions");
+      // What i mean by outbound function is a
+    // function like console.log. This takes a
+    // different code path than inbound
+    // function. There are a number of subtle
+    // differnces about where functions live and
+    // how the are define, or what the are
+    // composed of, which we are going to need
+    // to dig into identify and probably
+    // classify in order to make the system
+    // that much more robust.
+      // assert.equal(_eval(
+      //   "((fn [a b & c] (console.log & c)) 1 2 3)")
+      //     .toString(), "(3)");
+    it("splats for inbound functions");
+      // assert.equal(_eval(
+      //   "((fn [a b & c] (list & c)) 1 2 3)")
+      //     .toString(), "(3)");
+  });
 });
 

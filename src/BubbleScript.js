@@ -457,7 +457,6 @@ function createBinding(proto, keys, values) {
 }
 
 class Fn {
-  // TODO: Add name to function
 
   constructor(binding, params, body, opts={}) {
     this.binding = binding;
