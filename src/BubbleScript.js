@@ -172,6 +172,20 @@ class AbstractList {
     return result;
   }
 
+  split(value) {
+    let result = this.constructor.make();
+    let b = this.find(value);
+    if (b) {
+      b = b.pop();
+      if (b.find(value))
+        result = b.split(value);
+      else
+        result = result.push(b);
+    }
+    result = result.push(this.until(value));
+    return result;
+  }
+
   // split(delimiter) {
   //   if (this.isEmpty) {
   //     return this.constructor.make(this);
