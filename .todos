@@ -1,4 +1,5 @@
 August
+- write test for applyArguments
 - Implement index and ranges and use to improve
   split, versus using find and until.
 - Handel & for function parmeter for definition

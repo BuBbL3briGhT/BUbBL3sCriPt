@@ -424,7 +424,7 @@ function applyArguments(binding, keys, vals) {
     let val = vals.first;
 
     if (key == sAmp) {
-      binding[key] = vals;
+      binding[keys.next] = vals;
       return binding;
     }
 
@@ -469,7 +469,6 @@ class Fn {
   invoke(params) {
     let binding = createBinding(this.binding,
       this.params, params);
-    console.log(6, binding);
 
     return this.body.eval(binding);
   }
@@ -908,22 +907,24 @@ function $eval(bnd, xpr) {
             let params = xpr.rest;
             console.log(1, params.toString());
             let splits = params.split(sAmp);
-            console.log("hi", splits.toString());
+            console.log(2, splits.toString());
             if (splits.count() > 1) {
               // params = splits.first.mapEval(bnd);
               // params = params.push(1);
               // params = params.conj(List.make(2));
-              params = splits.rest.head.head;
-              console.log(2, params);
-              console.log(4, bnd);
-              params = $eval(bnd, params);
+              // params = splits.rest.head.head;
               console.log(3, params);
+              console.log(4, bnd);
+              // params = $eval(bnd, params);
+              params = $eval(bnd, splits.rest.head.head);
+              params = params.conj(splits.first.mapEval(bnd));
+              console.log(5, params);
               // params = splits.rest;
               // params = $eval(bnd, splits.rest.head);
 
               console.log("params", params.toString());
               // params = splits.first.mapEval(bnd).conj($eval(bnd, splits.rest.head));
-              params = $eval(bnd, splits.rest.head).conj(splits.first.mapEval(bnd));
+              // params = $eval(bnd, splits.rest.head).conj(splits.first.mapEval(bnd));
               // console.log(params.toString());
             } else {
               params = params.mapEval(bnd);
