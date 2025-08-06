@@ -423,12 +423,12 @@ function applyArguments(binding, keys, vals) {
     let key = keys.first;
     let val = vals.first;
 
-    if (key == '&') {
+    if (key == sAmp) {
       binding[key] = vals;
       return binding;
     }
 
-    if(val == '&') {
+    if(val == sAmp) {
       applyArguments(binding, keys, vals.next)
       return binding;
     }
@@ -469,6 +469,7 @@ class Fn {
   invoke(params) {
     let binding = createBinding(this.binding,
       this.params, params);
+    console.log(6, binding);
 
     return this.body.eval(binding);
   }
@@ -874,6 +875,7 @@ function matchItem(tokenVector, contextTokenForEOF) {
   return [tokenVector.pop(), item]; // itEm -> item
 }
 
+const sAmp = _Symbol.for("&");
 
 // Evaluate Bubblescript
 function _eval(script) {
@@ -903,8 +905,31 @@ function $eval(bnd, xpr) {
             return q[s.fn]()
           }
           try {
-            return q[s.fn](...xpr.rest.map(
-              (a) => $eval(bnd, a)).toArray());
+            let params = xpr.rest;
+            console.log(1, params.toString());
+            let splits = params.split(sAmp);
+            console.log("hi", splits.toString());
+            if (splits.count() > 1) {
+              // params = splits.first.mapEval(bnd);
+              // params = params.push(1);
+              // params = params.conj(List.make(2));
+              params = splits.rest.head.head;
+              console.log(2, params);
+              console.log(4, bnd);
+              params = $eval(bnd, params);
+              console.log(3, params);
+              // params = splits.rest;
+              // params = $eval(bnd, splits.rest.head);
+
+              console.log("params", params.toString());
+              // params = splits.first.mapEval(bnd).conj($eval(bnd, splits.rest.head));
+              params = $eval(bnd, splits.rest.head).conj(splits.first.mapEval(bnd));
+              // console.log(params.toString());
+            } else {
+              params = params.mapEval(bnd);
+            }
+
+            return q[s.fn](...params.toArray());
           } catch (e) {
             // console.log(s.fn);
             throw e;
@@ -933,8 +958,6 @@ function $eval(bnd, xpr) {
   }
 };
 
-const sAmp = _Symbol.for("&");
-
 // Makes a Bubblescript function from a
 // Javascript function.
 // Params:
@@ -948,8 +971,10 @@ function mkfn(q) {
   return function (params) {
     // Handel & expansion.
     // let splits = params.split(sAmp);
+    // console.log("hi", splits);
     // if (splits.count() > 1) {
     //   params = splits.first.conj(splits.rest.head);
+    //   console.log(params);
     // }
 
     return q.call(this, params.mapEval(this));
