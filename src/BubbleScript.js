@@ -163,21 +163,30 @@ class AbstractList {
       return new this.constructor(this.head, this.tail.until(value));
   }
 
-  split(delimiter) {
-    if (this.isEmpty) {
-      return this.constructor.make(this);
-    } else {
-      let tail = this.tail.split(delimiter);
-      if (this.head == delimiter)
-        return tail.push(this.head)
-      if (tail.head == delimiter) {
-        return tail.pop().push(this.constructor.make(this.head));
-      }
-      // console.log(tail);
-      // console.log(tail);
-      return tail.pop().push(tail.head.push(this.head));
-    }
+  split(value) {
+    let result = this.constructor.make();
+    let b = this.find(value);
+    if (b)
+      result = result.push(b.pop());
+    result = result.push(this.until(value));
+    return result;
   }
+
+  // split(delimiter) {
+  //   if (this.isEmpty) {
+  //     return this.constructor.make(this);
+  //   } else {
+  //     let tail = this.tail.split(delimiter);
+  //     if (this.head == delimiter)
+  //       return tail.push(this.head)
+  //     if (tail.head == delimiter) {
+  //       return tail.pop().push(this.constructor.make(this.head));
+  //     }
+  //     // console.log(tail);
+  //     // console.log(tail);
+  //     return tail.pop().push(tail.head.push(this.head));
+  //   }
+  // }
 
   *[Symbol.iterator]() {
     let currentNode = this;
