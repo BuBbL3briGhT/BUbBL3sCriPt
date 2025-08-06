@@ -223,6 +223,22 @@ describe("List", () => {
     });
   });
 
+  describe("contains(value)", function () {
+    it("returns true if list contains value", function () {
+      let list = List.make(1, 2, 3);
+      assert.equal(list.contains(3), true)
+      assert.equal(list.contains(4), false)
+    });
+  });
+
+  describe("find(value)", function () {
+    it("returns first instance of value if found in list, otherwise undefined", function () {
+      let list = List.make(1, 2, 3);
+      assert.equal(list.find(3), 3)
+      assert.equal(list.find(4), undefined)
+    });
+  });
+
   describe("split", function () {
 
     it("should split a list", function () {
@@ -238,6 +254,10 @@ describe("List", () => {
       // list = List.make(1, sAmp, sAmp, 2, 3);
       // assert.equal(list.split(_Symbol.for("&")).toString(),
       //   "((1) () (2 3))");
+      //
+      // list = List.make(1, sAmp, sAmp, sAmp, 2, 3);
+      // assert.equal(list.split(_Symbol.for("&")).toString(),
+      //   "((1) () () (2 3))");
 
       list = List.make(1, sAmp, 2, sAmp, 3);
       assert.equal(list.split(_Symbol.for("&")).toString(),
