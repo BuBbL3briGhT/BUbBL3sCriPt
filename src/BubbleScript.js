@@ -156,6 +156,7 @@ class AbstractList {
         return tail.pop().push(this.constructor.make(this.head));
       }
       // console.log(tail);
+      // console.log(tail);
       return tail.pop().push(tail.head.push(this.head));
     }
   }
