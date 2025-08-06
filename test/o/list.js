@@ -239,6 +239,14 @@ describe("List", () => {
     });
   });
 
+  describe("index(value)", function () {
+    it("returns index of first instance of value in list, otherwise returns -1", function () {
+      let list = List.make(1, 2, 3);
+      assert.equal(list.index(3), 2)
+      assert.equal(list.index(4), -1)
+    });
+  });
+
   describe("split", function () {
 
     it("should split a list", function () {
