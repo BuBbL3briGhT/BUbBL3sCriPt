@@ -145,6 +145,24 @@ class AbstractList {
       $eval(binding, xpr));
   }
 
+  find(value) {
+    if (this.isEmpty)
+      return;
+    if (value == this.head)
+      return this;
+    else
+      return this.tail.find(value);
+  }
+
+  until(value) {
+    if (this.isEmpty)
+      return this;
+    if (value == this.head)
+      return this.constructor.emptyList || this.constructor.emptyVector;
+    else
+      return new this.constructor(this.head, this.tail.until(value));
+  }
+
   split(delimiter) {
     if (this.isEmpty) {
       return this.constructor.make(this);
