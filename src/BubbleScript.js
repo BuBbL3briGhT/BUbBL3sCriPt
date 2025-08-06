@@ -947,10 +947,10 @@ const sAmp = _Symbol.for("&");
 function mkfn(q) {
   return function (params) {
     // Handel & expansion.
-    let splits = params.split(sAmp);
-    if (splits.count() > 1) {
-      params = splits.first.conj(splits.rest.head);
-    }
+    // let splits = params.split(sAmp);
+    // if (splits.count() > 1) {
+    //   params = splits.first.conj(splits.rest.head);
+    // }
 
     return q.call(this, params.mapEval(this));
   }

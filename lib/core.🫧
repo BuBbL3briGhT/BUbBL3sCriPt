@@ -1,8 +1,8 @@
 (🫧 (push a b)
   (send a :push b))
 
-(🫧 (puts & msg)
-  (console.log & msg))
+# (🫧 (puts & msg)
+#  (console.log & msg))
 
 (🫧 (peek list)
   (send list :peek))
