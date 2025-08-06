@@ -145,6 +145,21 @@ class AbstractList {
       $eval(binding, xpr));
   }
 
+  split(delimiter) {
+    if (this.isEmpty) {
+      return this.constructor.make(this);
+    } else {
+      let tail = this.tail.split(delimiter);
+      if (this.head == delimiter)
+        return tail.push(this.head)
+      if (tail.head == delimiter) {
+        return tail.pop().push(this.constructor.make(this.head));
+      }
+      // console.log(tail);
+      return tail.pop().push(tail.head.push(this.head));
+    }
+  }
+
   *[Symbol.iterator]() {
     let currentNode = this;
     while (!currentNode.isEmpty) {
@@ -220,24 +235,6 @@ class List extends AbstractList {
     if (this.pop().isEmpty) return result;
     return this.pop().each(fn);
   }
-
-  split(delimiter) {
-    // console.log(delimiter);
-    if (this.isEmpty) {
-      return List.make(List.emptyList);
-    } else {
-      let tail = this.tail.split(delimiter);
-      if (this.head == delimiter)
-        return tail.push(this.head)
-      if (tail.head == delimiter) {
-        return tail.pop().push(List.make(this.head));
-      }
-      // console.log(tail);
-      return tail.pop().push(tail.head.push(this.head));
-    }
-  }
-
-
 
 }
 
