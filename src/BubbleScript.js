@@ -164,14 +164,14 @@ class AbstractList {
   }
 
   split(value) {
-    let result;
+    let result = this.constructor.make();
     let sub = this.find(value);
     if (sub) {
       sub = sub.pop();
       if (sub.find(value))
         result = sub.split(value);
       else
-        result = this.constructor.make(sub);
+        result = result.push(sub);
     }
     result = result.push(this.until(value));
     return result;
@@ -933,6 +933,8 @@ function $eval(bnd, xpr) {
   }
 };
 
+const sAmp = _Symbol.for("&");
+
 // Makes a Bubblescript function from a
 // Javascript function.
 // Params:
@@ -943,8 +945,14 @@ function $eval(bnd, xpr) {
 // #coreUtilityFunction
 // TODO: Create tests for mkfn.
 function mkfn(q) {
-  return function (p) {
-    return q.call(this, p.mapEval(this));
+  return function (params) {
+    // Handel & expansion.
+    let splits = params.split(sAmp);
+    if (splits.count() > 1) {
+      params = splits.first.conj(splits.rest.head);
+    }
+
+    return q.call(this, params.mapEval(this));
   }
 }
 

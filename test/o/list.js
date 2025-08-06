@@ -262,7 +262,12 @@ describe("List", () => {
 
     it("should split a list", function () {
       let sAmp = _Symbol.for("&");
-      let list = List.make(1, 2, sAmp, 3);
+
+      let list = List.make(1, 2, 3);
+      assert.equal(list.split(_Symbol.for("&")).toString(),
+        "((1 2 3))");
+
+      list = List.make(1, 2, sAmp, 3);
       assert.equal(list.split(_Symbol.for("&")).toString(),
         "((1 2) (3))");
 
