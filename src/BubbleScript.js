@@ -74,8 +74,9 @@ class AbstractList {
   }
 
   skip(count) {
-    if (count)
+    if (count && !this.isEmpty)
       return this.pop().skip(--count);
+
     return this;
   }
 
@@ -189,17 +190,12 @@ class AbstractList {
   }
 
   partition(n) {
-    // let result = this.constructor.make();
-    // do {
-    //   result.push
-    //   let list =
-    // } while (!list.isEmpty)
-    // this.take(n);
-    // this.skip(n)
-    // let list = this.s;
-    // while (
-    // return this.first, this.next
-    return this.take(n);
+    if (this.isEmpty)
+      return this;
+
+    return this.skip(n)
+               .partition(n)
+               .push(this.take(n));
   }
 
   *[Symbol.iterator]() {

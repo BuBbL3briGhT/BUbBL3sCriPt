@@ -388,7 +388,7 @@ describe("List", () => {
   });
 
   describe("take(n)", function () {
-    it.only("takes a certian number of items fron the list", function () {
+    it("takes a certian number of items fron the list", function () {
       let list = List.make(1, 2, 3);
       let result = list.take();
       assert.equal(result.toString(), "()");
@@ -408,7 +408,7 @@ describe("List", () => {
   });
 
   describe("partition", function () {
-     it.only("partitions a list", function () {
+     it("partitions a list", function () {
        let list = List.make(1, 2, 3, 4, 5);
        let result = list.partition(2);
        assert.equal(result.toString(),
