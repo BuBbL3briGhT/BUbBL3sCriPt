@@ -62,6 +62,17 @@ class AbstractList {
 
   get(i) { return this.skip(i).peek(); }
 
+  take(count) {
+    if (this.isEmpty)
+      return this;
+
+    if (count)
+      return this.pop().take(--count)
+        .push(this.peek());
+
+    return this.constructor.make()
+  }
+
   skip(count) {
     if (count)
       return this.pop().skip(--count);
@@ -188,6 +199,7 @@ class AbstractList {
     // let list = this.s;
     // while (
     // return this.first, this.next
+    return this.take(n);
   }
 
   *[Symbol.iterator]() {

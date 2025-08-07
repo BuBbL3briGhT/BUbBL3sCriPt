@@ -386,4 +386,21 @@ describe("List", () => {
       assert.deepEqual(iterator2.next().done, true);
     });
   });
+
+  describe("take(n)", function () {
+    it.only("takes a certian number of items fron the list", function () {
+      let list = List.make(1, 2, 3);
+      let result = list.take(2);
+      assert.equal(result.toString(), "(1 2)");
+    });
+  });
+
+  describe("partition", function () {
+     it.only("partitions a list", function () {
+       let list = List.make(1, 2, 3, 4, 5);
+       let result = list.partition(2);
+       assert.equal(result.toString(),
+         "((1 2) (3 4) (5))")
+     });
+  });
 });
