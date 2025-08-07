@@ -177,6 +177,19 @@ class AbstractList {
     return result;
   }
 
+  partition(n) {
+    // let result = this.constructor.make();
+    // do {
+    //   result.push
+    //   let list =
+    // } while (!list.isEmpty)
+    // this.take(n);
+    // this.skip(n)
+    // let list = this.s;
+    // while (
+    // return this.first, this.next
+  }
+
   *[Symbol.iterator]() {
     let currentNode = this;
     while (!currentNode.isEmpty) {
@@ -1109,9 +1122,9 @@ const rootBinding = {
       }, {});
   }),
 
-  obj: mkfn(function(list) {
-    return list.toObject();
-  }),
+  // obj: mkfn(function(list) {
+  //   return list.toObject();
+  // }),
 
   eval: mkfn(function(args) {
     return args.eval();
