@@ -392,6 +392,18 @@ describe("List", () => {
       let list = List.make(1, 2, 3);
       let result = list.take(2);
       assert.equal(result.toString(), "(1 2)");
+      result = list.take(1);
+      assert.equal(result.toString(), "(1)");
+      result = list.take(0);
+      assert.equal(result.toString(), "()");
+      result = list.take();
+      assert.equal(result.toString(), "()");
+      result = list.take(3);
+      assert.equal(result.toString(), "(1 2 3)");
+      result = list.take(4);
+      assert.equal(result.toString(), "(1 2 3)");
+      result = list.take(5);
+      assert.equal(result.toString(), "(1 2 3)");
     });
   });
 
