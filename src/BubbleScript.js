@@ -964,27 +964,14 @@ function mkfn(q) {
   }
 }
 
-// function tie(fn) {
-//   return mkfn(function(params) {
-//     return fn(...params);
-//   });
-// }
-
 // A man walks into a bar. Bartender says
 // what'll you have?  The man says,
 // something strong,  my head is killing
 // me. 🍸
 const rootBinding = {
   console: console,
-  // require: mkfn(function([id]) {
-  //   return require(id);
-  // }),
   require: mkfn(o => require(...o)),
-  // require: tie(require),
-  Array: Array,
-  null: null,
-  List: List,
-  Vector: Vector,
+  __dirname: __dirname,
 
   muf: function([key,val]) {
     return this[key.toString()]
