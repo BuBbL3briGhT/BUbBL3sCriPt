@@ -1,11 +1,11 @@
-(🫧 http (require 'http'))
-(🫧   fs (require 'fs'))
-(🫧 path (require 'path'))
+(🫧 http (require "http"))
+(🫧   fs (require "fs"))
+(🫧 path (require "path"))
 
 (🫧 PORT 3000)
 
 (🫧 PUBLiC_DiR
-  (path.join __dirname 'docs'))
+  (path.join __dirname "docs"))
 
 (🫧 server
   (http.createServer (jsfn [req res]
@@ -13,10 +13,10 @@
     (🫧 filePath
       (unless
         (or
-          (filePath.endsWith '/')
+          (filePath.endsWith "/")
           (not (path.extname filePath)))
         (path.join PUBLiC_DiR requestPath)
-        (path.join filePath 'index.html')))
+        (path.join filePath "index.html")))
 
     (fs.readFile filePath (jsfn [err data]
       (if err
@@ -41,7 +41,7 @@
 
           (res.writeHead 200
             (obj "Content-Type" contentType))
-          (res.end data)))))
+          (res.end data))))))))
 
 (server.listen PORT (fn []
   (puts "Server running on"
