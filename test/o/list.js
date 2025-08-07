@@ -179,9 +179,12 @@ describe("List", () => {
     it("skips", () => {
       let list = List.make(6,7,8);
       assert.equal(list.skip().peek(), 6);
+      assert.equal(list.skip().toString(),
+        "(6 7 8)");
       assert.equal(list.skip(0).peek(), 6);
       assert.equal(list.skip(1).peek(), 7);
       assert.equal(list.skip(2).peek(), 8);
+      assert.equal(list.skip(3).peek(), undefined);
     });
   });
 
@@ -415,4 +418,11 @@ describe("List", () => {
          "((1 2) (3 4) (5))")
      });
   });
+
+  // describe("toObject", function () {
+  //   it("convert the list into aa object", function () {
+  //     let list = List.make("hello", "hola");
+  //     let result = list.toObject();
+  //   });
+  // });
 });
