@@ -1,0 +1,12 @@
+
+(🫧 (hello [a b]) (puts a b))
+(hello [a b])
+(hello °(a b))
+
+(🫧 (hello °(a b)) (puts a b))
+(hello [a b])
+(hello °(a b))
+
+(🫧 (hello [a [b c]]) (puts a b))
+(hello [a [b c]])
+(hello °(a [b c]))

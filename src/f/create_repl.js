@@ -1,6 +1,6 @@
 const Parinfer = require('parinfer');
-const eval = require("../../src/f/eval");
-const parse = require("../../src/f/parse");
+const { eval: _eval, parse } = require("../../src/BubbleScript");
+
 
 function createRepl(rl) {
   rl.on('line', (line) => {
@@ -17,8 +17,8 @@ function createRepl(rl) {
     // Display the processed line (or handle errors/changes)
     console.log(processedLine.text);
     // console.log(processedLine);
-    eval(processedLine.text);
-    // eval(line);
+    _eval(processedLine.text);
+    // _eval(line);
 
   });
 

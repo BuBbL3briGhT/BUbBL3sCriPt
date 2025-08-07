@@ -1,24 +1,17 @@
-(muf push (fn [a b] (send a :push b)))
+(🫧 (push a b)
+  (send a :push b))
 
-(muf mufn (macro [name & z]
-  (list °muf name (push z °fn))))
+(🫧 (puts & msg)
+ (console.log & msg))
 
-(mufn puts [& msg]
-  (eval (push msg °console.log)))
+(🫧 (peek list)
+  (send list :peek))
 
-# (muf puts (fn [msg] (console.log msg)))
-# (mufn puts [& msg] (console.log & msg))
+(🫧 (pop list)
+  (send list :pop))
 
-# (mufn puts [msg] (console.log msg))
+(🫧 (invert list)
+  (send list :invert))
 
-# (mufn puts [& msg]
-#   (console.log msg))
-# (mufn puts [& msg] msg)
-
-(muf 🍎 (fn [a b] (console.log a b)))
-
-(muf peek (fn [list] (send list :peek)))
-(muf pop (fn [list] (send list :pop)))
-(muf invert (fn [list] (send list :invert)))
-(muf reverse (fn [list] (send list :invert)))
-
+(🫧 (reverse list)
+  (send list :invert))

@@ -1,24 +1,14 @@
 const assert = require("assert"); const   fs   = require("fs");
 const  Yaml  = require("yaml");
 
-const parse   = require("../../src/f/parse");
-const List   = require("../../src/o/list");
-const Vector    = require("../../src/o/vector");
-const Keyword = require("../../src/o/keyword");
-const Symbol  = require("../../src/o/symbol");
-const Bubble  = require("../../src/o/bubble");
-const {type}  = require("../../src/z/fns"); // Assuming fns is a valid module
+const { parse, List, Vector, Keyword, Symbol: _Symbol,
+  Bubble } = require("../../src/BubbleScript");
+const {type} = require("../../src/z/fns"); // Assuming fns is a valid module
 
-// Use List's static methods.
-// const { peek, pop, make: List.make, from:
-//   List.from } = List;
-
-// const { make: Vector.make } = Vector;
-
-const symbol = Symbol.for("symbol"),
-      a = Symbol.for("a"),
-      b = Symbol.for("b"),
-      c = Symbol.for("c");
+const symbol = _Symbol.for("symbol"),
+      a = _Symbol.for("a"),
+      b = _Symbol.for("b"),
+      c = _Symbol.for("c");
 
 const keyword = Keyword.for("keyword");
 
@@ -34,7 +24,7 @@ describe("parse(string)", () => {
   });
 
   it("parses (not true) into the correct AST structure", () => {
-    let not = Symbol.for("not");
+    let not = _Symbol.for("not");
     const ast = parse("(not true)");
     const expectedAst = List.make(not, true);
     assert.deepEqual(ast.peek(), expectedAst, "AST for (not true) should be a list of not, true");
@@ -65,15 +55,15 @@ describe("parse(string)", () => {
   //       x))
   itParsesFixture("abs",
     { expects:
-        List.from([Symbol.for("define"),
-          List.from([Symbol.for("abs"),
-                     Symbol.for("x")]),
-          List.from([Symbol.for("if"),
-            List.from([Symbol.for("<"),
-              Symbol.for("x"), 0]),
-            List.from([Symbol.for("-"),
-              Symbol.for("x")]),
-            Symbol.for("x")])])}); // Changed Bubble.from to List.from
+        List.from([_Symbol.for("define"),
+          List.from([_Symbol.for("abs"),
+                     _Symbol.for("x")]),
+          List.from([_Symbol.for("if"),
+            List.from([_Symbol.for("<"),
+              _Symbol.for("x"), 0]),
+            List.from([_Symbol.for("-"),
+              _Symbol.for("x")]),
+            _Symbol.for("x")])])}); // Changed Bubble.from to List.from
 
   // it('should match a single keyword as a bubble', function() {
   //   assertParse(":keyword",
@@ -274,7 +264,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     // Vector.make(c, b, a) creates a -> b -> c -> air
     const ast = parse("1 2 (a b)");
     const expected = Vector.make( // This is the outer vector of expressions
-        List.from([Symbol.for("a"), Symbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
+        List.from([_Symbol.for("a"), _Symbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
         2,
         1
     );
@@ -286,7 +276,7 @@ describe("Parser Structure and Edge Case Tests", () => {
   it("parses a single atom symbol correctly", () => {
     const ast = parse("atom");
     // parse("atom") returns a vector containing one symbol: (atom)
-    const expected = List.make(Symbol.for("atom"));
+    const expected = List.make(_Symbol.for("atom"));
     assert.deepEqual(ast, expected, "AST for single atom symbol");
   });
 
@@ -302,14 +292,14 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   // Expected AST structure:
   //   // Quoted(
   //   //   Vector(
-  //   //     Symbol(a),
+  //   //     _Symbol(a),
   //   //     Vector(
-  //   //       Symbol(b),
+  //   //       _Symbol(b),
   //   //       Keyword(c),
   //   //       Vector( // Balloon becomes a vector
   //   //         1,
   //   //         "s",
-  //   //         Quoted(Symbol(x))
+  //   //         Quoted(_Symbol(x))
   //   //       )
   //   //     )
   //   //   )
@@ -322,14 +312,14 @@ describe("Parser Structure and Edge Case Tests", () => {
   //     new Quoted(
   //       Vector.make( // vector (a ...)
   //         List.from([ // vector [1 "s" 'x] -- assuming balloons are parsed as vectors
-  //           new Quoted(Symbol.for("x")),
+  //           new Quoted(_Symbol.for("x")),
   //           "s",
   //           1
   //         ]),
   //         Keyword.for("c"),
-  //         Symbol.for("b")
+  //         _Symbol.for("b")
   //       ),
-  //       Symbol.for("a")
+  //       _Symbol.for("a")
   //     )
   //   );
   //   assert.deepEqual(ast, expected, "AST for complex nested structure");
@@ -346,7 +336,7 @@ describe("Parser Structure and Edge Case Tests", () => {
       Vector.make(
         1,
         "s",
-        new Bubble(Symbol.for("x"))
+        new Bubble(_Symbol.for("x"))
       )
     );
     assert.deepEqual(ast, expected, "AST for semi complex vector ");
@@ -357,14 +347,14 @@ describe("Parser Structure and Edge Case Tests", () => {
     // Expected AST structure:
     // Bubble(
     //   Vector(
-    //     Symbol(a),
+    //     _Symbol(a),
     //     Vector(
-    //       Symbol(b),
+    //       _Symbol(b),
     //       Keyword(c),
     //       Vector( // Balloon becomes a vector
     //         1,
     //         "s",
-    //         Quoted(Symbol(x))
+    //         Quoted(_Symbol(x))
     //       )
     //     )
     //   )
@@ -377,14 +367,14 @@ describe("Parser Structure and Edge Case Tests", () => {
     const expected = List.make( // Outer vector from parse()
       new Bubble(
         List.make(
-          Symbol.for("a"),
+          _Symbol.for("a"),
           List.make(
-            Symbol.for("b"),
+            _Symbol.for("b"),
             Keyword.for("c"),
             Vector.make(// vector [1 "s" °x] -- assuming balloons are parsed as vectors
               1,
               "s",
-              new Bubble(Symbol.for("x"))
+              new Bubble(_Symbol.for("x"))
             ),
           )
         )
@@ -395,7 +385,7 @@ describe("Parser Structure and Edge Case Tests", () => {
 
   it.skip("parses another complex structure: (define x '(1 [2 keyword]))", () => {
     const input = "(define x '(1 [2 :key]))";
-    // AST: Vector(Symbol(define), Symbol(x), Quoted(Vector(1, Vector(2, Keyword(key)))))
+    // AST: Vector(_Symbol(define), _Symbol(x), Quoted(Vector(1, Vector(2, Keyword(key)))))
     const ast = parse(input);
     const expected = Vector.make( // outer vector from parse
       Vector.make( // vector (define ...)
@@ -408,8 +398,8 @@ describe("Parser Structure and Edge Case Tests", () => {
             1
           )
         ),
-        Symbol.for("x"),
-        Symbol.for("define")
+        _Symbol.for("x"),
+        _Symbol.for("define")
       )
     );
     assert.deepEqual(ast, expected, "AST for (define x '(1 [2 :key]))");

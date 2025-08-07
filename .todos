@@ -1,3 +1,32 @@
+August
+- write test for applyArguments
+- Implement index and ranges and use to improve
+  split, versus using find and until.
+- Handel & for function parmeter for definition
+  and calling.
+- New define/muf that handels scheme style
+  function definitions
+  - Add tests
+- Macro expansion is a bit of a hack, using
+  throw, but it seems to be only way to do it
+  without compilation step for the time being.
+  Need to make sure it is handeled at every
+  layer of evaluation. right now mapEval doesnt
+  handel it, so this probably creates a gnarly
+  bug if macro are used in parameter or within
+  anpther macro, as it would pop all the way up
+  to eval. This should be handeled, but also
+  with mindfulness to not letting the code get
+  unrurally with duplication and unnessecary
+  complexity. something to think about and
+  balance without priorites. Been thinking about
+  a compilation step, which could be useful and
+  this may tir back into this, however, also
+  what to keep moving and playing with the
+  language now that a good part of the base
+  features seem to be present and working.
+  Research and experimention into functional
+  design theory and application.
 July
 - Package bubblescript to run in browser
   - bubblescript for web dev

@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Vector  = require("../../src/o/vector");
+const { Vector, Symbol: _Symbol }  = require("../../src/BubbleScript");
 
 describe("Vector", () => {
 
@@ -219,6 +219,15 @@ describe("Vector", () => {
 
       vector = vector.pop().pop().push(oo);
       assert.equal(vector.toString(), "[1 2 3 [3 2 1]]");
+    });
+  });
+
+  describe("split", function () {
+    it("should split a vector", function () {
+      let sAmp = _Symbol.for("&");
+      let vector = Vector.make(1, 2, sAmp, 3);
+      assert.equal(vector.split(_Symbol.for("&")).toString(),
+        "[[1 2] [3]]");
     });
   });
 

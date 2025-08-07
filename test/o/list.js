@@ -1,5 +1,5 @@
 const assert = require("assert");
-const List  = require("../../src/o/list");
+const { List, Symbol: _Symbol }  = require("../../src/BubbleScript");
 
 describe("List", () => {
 
@@ -109,8 +109,7 @@ describe("List", () => {
       list = list.map(add7);
       assert.equal(list.get(), 8);
 
-      list = list.push(2);
-      list = list.map(add7);
+      list = list.push(2); list = list.map(add7);
       assert.equal(list.get(), 9);
       assert.equal(list.get(1), 15);
 
@@ -223,6 +222,79 @@ describe("List", () => {
       // assert.equal(list.toString(), "(1 2 3 (3 2 1))");
     });
   });
+
+  // describe("contains(value)", function () {
+  //   it("returns true if list contains value", function () {
+  //     let list = List.make(1, 2, 3);
+  //     assert.equal(list.contains(3), true)
+  //     assert.equal(list.contains(4), false)
+  //   });
+  // });
+
+  describe("find(value)", function () {
+    it("returns first instance of value if found in list, otherwise undefined", function () {
+      let list = List.make(1, 2, 3);
+      assert.deepEqual(list.find(1), List.make(1, 2, 3));
+      assert.deepEqual(list.find(2), List.make(2, 3));
+      assert.deepEqual(list.find(3), List.make(3));
+      assert.equal(list.find(4), undefined);
+    });
+  });
+
+  describe("until(value)", function () {
+    it("returns a copy of the list truncated to the item immediatly before the first instance of value", function () {
+      let list = List.make(1, 2, 3);
+      assert.deepEqual(list.until(2), List.make(1));
+      assert.deepEqual(list.until(3), List.make(1, 2));
+      assert.deepEqual(list.until(4), list);
+    });
+  });
+
+  // describe("index(value)", function () {
+  //   it("returns index of first instance of value in list, otherwise returns -1", function () {
+  //     let list = List.make(1, 2, 3);
+  //     assert.equal(list.index(3), 2)
+  //     assert.equal(list.index(4), -1)
+  //   });
+  // });
+
+  describe("split", function () {
+
+    it("should split a list", function () {
+      let sAmp = _Symbol.for("&");
+
+      let list = List.make(1, 2, 3);
+      assert.equal(list.split(_Symbol.for("&")).toString(),
+        "((1 2 3))");
+
+      list = List.make(1, 2, sAmp, 3);
+      assert.equal(list.split(_Symbol.for("&")).toString(),
+        "((1 2) (3))");
+
+      list = List.make(1, sAmp, 2, sAmp, 3);
+      assert.equal(list.split(_Symbol.for("&")).toString(),
+        "((1) (2) (3))");
+
+      list = List.make(1, 2, 3, sAmp);
+      assert.equal(list.split(_Symbol.for("&")).toString(),
+        "((1 2 3) ())");
+
+      list = List.make(sAmp, 1, 2, 3);
+      assert.equal(list.split(_Symbol.for("&")).toString(),
+        "(() (1 2 3))");
+
+      list = List.make(1, sAmp, sAmp, 2, 3);
+      assert.equal(list.split(_Symbol.for("&")).toString(),
+        "((1) () (2 3))");
+
+      list = List.make(1, sAmp, sAmp, sAmp, 2, 3);
+      assert.equal(list.split(_Symbol.for("&")).toString(),
+        "((1) () () (2 3))");
+    });
+
+  });
+
+
 
   describe("Symbol.iterator", () => {
     it("should not yield any values for an empty linkedList (LinkedList.air)", () => {
