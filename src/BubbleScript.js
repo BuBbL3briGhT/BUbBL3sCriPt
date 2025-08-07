@@ -1101,6 +1101,18 @@ const rootBinding = {
     return args.toVector();
   }),
 
+  obj: mkfn(function(list) {
+    return list.partition(2).reduce(
+      function(memo, [key, val]) {
+        memo[key] = val;
+        return memo;
+      }, {});
+  }),
+
+  obj: mkfn(function(list) {
+    return list.toObject();
+  }),
+
   eval: mkfn(function(args) {
     return args.eval();
   }),
