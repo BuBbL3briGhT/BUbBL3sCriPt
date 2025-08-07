@@ -416,6 +416,9 @@ describe("List", () => {
        let result = list.partition(2);
        assert.equal(result.toString(),
          "((1 2) (3 4) (5))")
+       result = list.partition(3);
+       assert.equal(result.toString(),
+         "((1 2 3) (4 5))")
      });
   });
 
