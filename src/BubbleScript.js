@@ -964,6 +964,11 @@ function mkfn(q) {
   }
 }
 
+// function tie(fn) {
+//   return mkfn(function(params) {
+//     return fn(...params);
+//   });
+// }
 
 // A man walks into a bar. Bartender says
 // what'll you have?  The man says,
@@ -971,6 +976,11 @@ function mkfn(q) {
 // me. 🍸
 const rootBinding = {
   console: console,
+  // require: mkfn(function([id]) {
+  //   return require(id);
+  // }),
+  require: mkfn(o => require(...o)),
+  // require: tie(require),
   Array: Array,
   null: null,
   List: List,
