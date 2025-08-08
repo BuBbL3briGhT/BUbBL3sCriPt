@@ -1042,7 +1042,7 @@ const rootBinding = {
     x = args.push(_Symbol.for('fn'));
     fn = $eval(binding, x);
     return function(...args) {
-      return fn.invoke(binding, List.from(args));
+      return fn.invoke(List.from(args));
     }
   },
 
@@ -1135,8 +1135,12 @@ const rootBinding = {
   // }),
 
   eval: mkfn(function(args) {
-    return args.eval();
+    return args.eval(this);
   }),
+
+  do: function(args) {
+    return args.eval(this);
+  },
 
   send: mkfn(function([a,b,...c]) {
     if (b.key)
