@@ -1,4 +1,5 @@
 August
+- Allow raw list at top level in scripts, terminated with \n, continued with \\\n (\<newline>)
 - Better error handling
   - Need to keep track of track line numbers through parsing. Annotations?
   - Error handling, and printing staxk traces form List.eval.
