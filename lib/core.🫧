@@ -10,6 +10,9 @@
 (🫧 (pop list)
   (send list :pop))
 
+(🫧 (shift list)
+  (send list :shift))
+
 (🫧 (invert list)
   (send list :invert))
 

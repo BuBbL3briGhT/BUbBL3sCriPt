@@ -12,10 +12,12 @@
   # bubblescript.
   (path.join __dirname "../docs"))
 
+(puts "PUBLiC_DiR" PUBLiC_DiR)
+
 (🫧 server
   (http.createServer (jsfn [req res]
     (puts "🐈‍⬛️")
-    (🫧 requestPath (pop (req.url.split "?")))
+    (🫧 requestPath (shift (req.url.split "?")))
     (puts "requestPath" requestPath)
     (puts 1 (requestPath.endsWith "/"))
     (🫧 filePath
