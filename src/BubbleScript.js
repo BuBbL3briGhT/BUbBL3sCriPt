@@ -1146,11 +1146,15 @@ const rootBinding = {
     } else
       return a[b]();
   }),
+  // get: mkfn(function(args) {
+  //    return args.reduce(
+  //       (a,b) => a ? a[b] : b);
+  // }),
   get: mkfn(function(args) {
      return args.reduce(
-        (a,b) => a ? a[b] : b);
+        (memo, key) => memo && memo[key]);
   }),
-  export: mkfn(function([ca,[nd,[y]]]) {
+  export: mkfn(function([ca,nd,y]) {
     return ca[nd] = y;
   }),
   print: mkfn(function(vals) {
