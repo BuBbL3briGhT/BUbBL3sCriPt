@@ -4,9 +4,10 @@ const { rootBinding, List} = require("../../src/BubbleScript");
 describe("rootBinding", function () {
    describe("get", function () {
      it.only("gets from object", function () {
-       let obj = { name: "BubbleScript" };
+       let obj = { name: { first: "Kermit" }};
        assert.equal(rootBinding
-         .get(List.make(obj, "name")), "BubbleScript");
+         .get(List.make(obj, "name", "first")),
+         "Kermit");
      });
    });
 });
