@@ -1266,7 +1266,7 @@ rootBinding["🫧"] = rootBinding.muf;
 const BubbleScript = {
   List, Vector, Symbol: _Symbol, Keyword,
   Bubble, Fn, Macro, tokenize, parse, eval:
-  _eval, $eval, rootBinding
+  _eval, $eval, rootBinding, mkfn
 }
 
 module.exports = BubbleScript;
