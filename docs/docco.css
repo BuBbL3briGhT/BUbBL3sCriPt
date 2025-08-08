@@ -390,8 +390,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 pre code {
   display: block; padding: 0.5em;
-  /* color: #000; */
-  color: pink;
+  color: #000;
   background: #f8f8ff
 }
 
@@ -452,8 +451,7 @@ pre .hljs-tag,
 pre .hljs-tag .hljs-title,
 pre .hljs-rules .hljs-property,
 pre .hljs-django .hljs-tag .hljs-keyword {
-  /* color: #000080; */
-  color: pink;
+  color: #000080;
   font-weight: normal
 }
 

@@ -2,37 +2,47 @@
 
 <html>
 <head>
-  <title>bubblescript.js</title>
+  <title>BubbleScript.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-  <link rel="stylesheet" media="all" href="../docco.css?v=1" />
+  <link rel="stylesheet" media="all" href="../docco.css" />
 </head>
 <body>
   <div id="container">
     <div id="background"></div>
-
+    
     <ul class="sections">
-
+        
           <li id="title">
               <div class="annotation">
-                  <h1>bubblescript.js</h1>
+                  <h1>BubbleScript.js</h1>
               </div>
           </li>
-
-
-
+        
+        
+        
         <li id="section-1">
             <div class="annotation">
-
+              
               <div class="sswrap ">
                 <a class="ss" href="#section-1">&#x00a7;</a>
               </div>
-
+              
             </div>
+            
+            <div class="content"><div class='highlight'><pre>
+    <span class="hljs-comment">/*      +
+      *  🫧 BubbleScript.js  *
+     *         +     *           *
+    *   ✨️  A Lisp for JavaScript. *
+     *        *    +   *
+       *  */</span>
 
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">let</span> emptyList, emptyVector;
+
+<span class="hljs-keyword">let</span> emptyList, emptyVector;
 
 <span class="hljs-keyword">const</span> keywords    = {};
+<span class="hljs-keyword">const</span> symbols     = {};
 
 <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">TOK_KEYWORD</span> = <span class="hljs-string">&#x27;K&#x27;</span>,
       <span class="hljs-variable constant_">TOK_NUMBER</span>  = <span class="hljs-string">&#x27;N&#x27;</span>,
@@ -40,13 +50,13 @@
       <span class="hljs-variable constant_">TOK_SYMBOL</span>  = <span class="hljs-string">&#x27;Y&#x27;</span>,
       <span class="hljs-variable constant_">TOK_TRUE</span>    = <span class="hljs-string">&#x27;T&#x27;</span>,
       <span class="hljs-variable constant_">TOK_FALSE</span>   = <span class="hljs-string">&#x27;F&#x27;</span>;</pre></div></div>
-
+            
         </li>
-
-
+        
+        
         <li id="section-2">
             <div class="annotation">
-
+              
               <div class="sswrap ">
                 <a class="ss" href="#section-2">&#x00a7;</a>
               </div>
@@ -57,7 +67,7 @@ shared functionality between <code>List</code> and
 <code>Vector</code> is centralized here.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">class</span> <span class="hljs-title class_">AbstractList</span> {
 
   <span class="hljs-keyword">static</span> <span class="hljs-title function_">from</span>(<span class="hljs-params">arrayLike, mapFn, thisArg</span>) {
@@ -76,6 +86,8 @@ shared functionality between <code>List</code> and
   <span class="hljs-keyword">get</span> <span class="hljs-title function_">isEmpty</span>() { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }
   <span class="hljs-keyword">get</span> <span class="hljs-title function_">first</span>() { <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">peek</span>(); }
   <span class="hljs-keyword">get</span> <span class="hljs-title function_">rest</span>() { <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>(); }
+  <span class="hljs-keyword">get</span> <span class="hljs-title function_">head</span>() { <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">peek</span>(); }
+  <span class="hljs-keyword">get</span> <span class="hljs-title function_">tail</span>() { <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>(); }
   <span class="hljs-keyword">get</span> <span class="hljs-title function_">next</span>() { <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">peek</span>(); }
   <span class="hljs-keyword">get</span> <span class="hljs-title function_">last</span>() { <span class="hljs-keyword">return</span> !<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>().<span class="hljs-property">isEmpty</span> ?
       <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>().<span class="hljs-property">last</span> : <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">peek</span>(); }
@@ -94,9 +106,21 @@ shared functionality between <code>List</code> and
 
   <span class="hljs-title function_">get</span>(<span class="hljs-params">i</span>) { <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">skip</span>(i).<span class="hljs-title function_">peek</span>(); }
 
-  <span class="hljs-title function_">skip</span>(<span class="hljs-params">count</span>) {
+  <span class="hljs-title function_">take</span>(<span class="hljs-params">count</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">isEmpty</span>)
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
+
     <span class="hljs-keyword">if</span> (count)
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">take</span>(--count)
+        .<span class="hljs-title function_">push</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">peek</span>());
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">constructor</span>.<span class="hljs-title function_">make</span>()
+  }
+
+  <span class="hljs-title function_">skip</span>(<span class="hljs-params">count</span>) {
+    <span class="hljs-keyword">if</span> (count &amp;&amp; !<span class="hljs-variable language_">this</span>.<span class="hljs-property">isEmpty</span>)
       <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">skip</span>(--count);
+
     <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
   }
 
@@ -131,7 +155,7 @@ shared functionality between <code>List</code> and
       <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;string&quot;</span>:
         <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&quot;&#x27;</span> + o + <span class="hljs-string">&#x27;&quot;&#x27;</span>;
       <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;symbol&quot;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Slappy</span>.<span class="hljs-title function_">keyFor</span>(o);
+        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">keyFor</span>(o);
       <span class="hljs-attr">default</span>:
         <span class="hljs-keyword">return</span> o.<span class="hljs-title function_">toString</span>();
     }
@@ -166,6 +190,58 @@ shared functionality between <code>List</code> and
     <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">each</span>(fn);
   }
 
+  <span class="hljs-title function_">eval</span>(<span class="hljs-params">binding</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">each</span>(<span class="hljs-function"><span class="hljs-params">xpr</span> =&gt;</span>
+      $eval(binding, xpr));
+  }
+
+
+  <span class="hljs-title function_">mapEval</span>(<span class="hljs-params">binding</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">xpr</span> =&gt;</span>
+      $eval(binding, xpr));
+  }
+
+  <span class="hljs-title function_">find</span>(<span class="hljs-params">value</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">isEmpty</span>)
+      <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">if</span> (value == <span class="hljs-variable language_">this</span>.<span class="hljs-property">head</span>)
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">tail</span>.<span class="hljs-title function_">find</span>(value);
+  }
+
+  <span class="hljs-title function_">until</span>(<span class="hljs-params">value</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">isEmpty</span>)
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
+    <span class="hljs-keyword">if</span> (value == <span class="hljs-variable language_">this</span>.<span class="hljs-property">head</span>)
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">constructor</span>.<span class="hljs-title function_">make</span>();
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-variable language_">this</span>.head, <span class="hljs-variable language_">this</span>.tail.until(value)</span>);
+  }
+
+  <span class="hljs-title function_">split</span>(<span class="hljs-params">value</span>) {
+    <span class="hljs-keyword">let</span> result = <span class="hljs-variable language_">this</span>.<span class="hljs-property">constructor</span>.<span class="hljs-title function_">make</span>();
+    <span class="hljs-keyword">let</span> sub = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">find</span>(value);
+    <span class="hljs-keyword">if</span> (sub) {
+      sub = sub.<span class="hljs-title function_">pop</span>();
+      <span class="hljs-keyword">if</span> (sub.<span class="hljs-title function_">find</span>(value))
+        result = sub.<span class="hljs-title function_">split</span>(value);
+      <span class="hljs-keyword">else</span>
+        result = result.<span class="hljs-title function_">push</span>(sub);
+    }
+    result = result.<span class="hljs-title function_">push</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">until</span>(value));
+    <span class="hljs-keyword">return</span> result;
+  }
+
+  <span class="hljs-title function_">partition</span>(<span class="hljs-params">n</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">isEmpty</span>)
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">skip</span>(n)
+               .<span class="hljs-title function_">partition</span>(n)
+               .<span class="hljs-title function_">push</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">take</span>(n));
+  }
+
   *[<span class="hljs-title class_">Symbol</span>.<span class="hljs-property">iterator</span>]() {
     <span class="hljs-keyword">let</span> currentNode = <span class="hljs-variable language_">this</span>;
     <span class="hljs-keyword">while</span> (!currentNode.<span class="hljs-property">isEmpty</span>) {
@@ -174,13 +250,13 @@ shared functionality between <code>List</code> and
     }
   }
 }</pre></div></div>
-
+            
         </li>
-
-
+        
+        
         <li id="section-3">
             <div class="annotation">
-
+              
               <div class="sswrap ">
                 <a class="ss" href="#section-3">&#x00a7;</a>
               </div>
@@ -190,15 +266,15 @@ is the programatic representation of a
 list. e.g. <code>(1 2 3)</code></p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">class</span> <span class="hljs-title class_">List</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">AbstractList</span> {</pre></div></div>
-
+            
         </li>
-
-
+        
+        
         <li id="section-4">
             <div class="annotation">
-
+              
               <div class="sswrap ">
                 <a class="ss" href="#section-4">&#x00a7;</a>
               </div>
@@ -207,15 +283,15 @@ of <code>EmptyList</code>, which terminates all
 lists.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> <span class="hljs-keyword">get</span> <span class="hljs-title function_">emptyList</span>() { <span class="hljs-keyword">return</span> emptyList; }</pre></div></div>
-
+            
         </li>
-
-
+        
+        
         <li id="section-5">
             <div class="annotation">
-
+              
               <div class="sswrap ">
                 <a class="ss" href="#section-5">&#x00a7;</a>
               </div>
@@ -223,7 +299,7 @@ lists.</p>
 <code>List.make(1, 2, 3)</code></p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> <span class="hljs-title function_">make</span>(<span class="hljs-params">...elements</span>) {
     <span class="hljs-keyword">return</span> <span class="hljs-title class_">List</span>.<span class="hljs-title function_">_make</span>(elements);
   }
@@ -235,20 +311,20 @@ lists.</p>
       <span class="hljs-keyword">new</span> <span class="hljs-title class_">List</span>(elementsArray.<span class="hljs-title function_">pop</span>(),
         currentLinkedList));
   }</pre></div></div>
-
+            
         </li>
-
-
+        
+        
         <li id="section-6">
             <div class="annotation">
-
+              
               <div class="sswrap ">
                 <a class="ss" href="#section-6">&#x00a7;</a>
               </div>
               <p>Create a list.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">o, oo=emptyList</span>) {
     <span class="hljs-variable language_">super</span>(o, oo);
   }
@@ -271,11 +347,6 @@ lists.</p>
       <span class="hljs-title class_">Vector</span>.<span class="hljs-property">emptyVector</span>);
   }
 
-  <span class="hljs-title function_">eval</span>(<span class="hljs-params">binding</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">each</span>(<span class="hljs-function"><span class="hljs-params">xpr</span> =&gt;</span>
-      <span class="hljs-title function_">_eval</span>(binding, xpr));
-  }
-
   <span class="hljs-title function_">each</span>(<span class="hljs-params">fn</span>) {
     <span class="hljs-keyword">let</span> result;
     <span class="hljs-keyword">try</span> {
@@ -286,11 +357,14 @@ lists.</p>
         <span class="hljs-variable language_">this</span>.<span class="hljs-property">o</span>  = expanded.<span class="hljs-property">first</span>;
         <span class="hljs-variable language_">this</span>.<span class="hljs-property">oo</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">rest</span>.<span class="hljs-title function_">conj</span>(expanded.<span class="hljs-property">rest</span>.<span class="hljs-title function_">invert</span>());
         <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">each</span>(fn);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">throw</span> o;
       }
     }
     <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>().<span class="hljs-property">isEmpty</span>) <span class="hljs-keyword">return</span> result;
     <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">each</span>(fn);
   }
+
 }
 
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">EmptyList</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">List</span> {
@@ -339,12 +413,29 @@ emptyList = <span class="hljs-keyword">new</span> <span class="hljs-title class_
   <span class="hljs-keyword">get</span> <span class="hljs-title function_">isEmpty</span>() { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
 }
 
-emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmptyVector</span>()
+emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmptyVector</span>()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-7">&#x00a7;</a>
+              </div>
+              <p><code>_Symbol</code>s are language symbols. Underscored
+to avoid name clash with the built-in
+Javascript <code>Symbol</code> class/object.</p>
 
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Slappy</span> {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">class</span> <span class="hljs-title class_">_Symbol</span> {
 
   <span class="hljs-title function_">constructor</span>(<span class="hljs-params">value</span>) {
+    <span class="hljs-keyword">if</span>(symbols[value]) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Duplicate symbol initalization&quot;</span>);
+    }
 
     <span class="hljs-variable language_">this</span>.<span class="hljs-property">value</span> = value;
 
@@ -365,6 +456,7 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
     <span class="hljs-variable language_">this</span>.<span class="hljs-property">segments</span> = segments
     <span class="hljs-variable language_">this</span>.<span class="hljs-property">callPattern</span> = callPattern
 
+    <span class="hljs-keyword">return</span> symbols[value] = <span class="hljs-variable language_">this</span>;
   }
 
   <span class="hljs-title function_">toString</span>(<span class="hljs-params"></span>) {
@@ -389,7 +481,7 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
   }
 
   <span class="hljs-keyword">static</span> <span class="hljs-keyword">for</span>(key) {
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Slappy</span>(key);
+    <span class="hljs-keyword">return</span> symbols[key] || <span class="hljs-keyword">new</span> <span class="hljs-title function_">_Symbol</span>(key);
   }
 
 }
@@ -439,42 +531,85 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
   <span class="hljs-title function_">inspect</span>(<span class="hljs-params"></span>) {
     <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;°&quot;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">o</span>.<span class="hljs-property">inspect</span>;
   }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-8">&#x00a7;</a>
+              </div>
+              <p>Applys the keys and the values to the
+binding based on order and position.
+Binding will be modified.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">function</span> <span class="hljs-title function_">applyArguments</span>(<span class="hljs-params">binding, keys, vals</span>) {
+  <span class="hljs-keyword">if</span> (keys <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Vector</span>)
+    keys = keys.<span class="hljs-title function_">toList</span>();
+  <span class="hljs-keyword">if</span> (vals <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Vector</span>)
+    vals = vals.<span class="hljs-title function_">toList</span>();
+
+  <span class="hljs-keyword">while</span> (!keys.<span class="hljs-property">isEmpty</span> &amp;&amp; !vals.<span class="hljs-property">isEmpty</span>) {
+    <span class="hljs-keyword">let</span> key = keys.<span class="hljs-property">first</span>;
+    <span class="hljs-keyword">let</span> val = vals.<span class="hljs-property">first</span>;
+
+    <span class="hljs-keyword">if</span> (key == sAmp) {
+      binding[keys.<span class="hljs-property">next</span>] = vals;
+      <span class="hljs-keyword">return</span> binding;
+    }
+
+    <span class="hljs-keyword">if</span>(val == sAmp) {
+      <span class="hljs-title function_">applyArguments</span>(binding, keys, vals.<span class="hljs-property">next</span>)
+      <span class="hljs-keyword">return</span> binding;
+    }
+
+    <span class="hljs-keyword">switch</span> (key.<span class="hljs-property">constructor</span>) {
+      <span class="hljs-keyword">case</span> <span class="hljs-title class_">List</span>:
+      <span class="hljs-keyword">case</span> <span class="hljs-title class_">Vector</span>:
+        <span class="hljs-title function_">applyArguments</span>(binding, key, val);
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">case</span> <span class="hljs-attr">_Symbol</span>:
+        binding[key.<span class="hljs-title function_">toString</span>()] = val;
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-attr">default</span>:
+        <span class="hljs-keyword">throw</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Invalid parameter type: &quot;</span> + key.<span class="hljs-property">constructor</span> );
+    }
+
+    keys = keys.<span class="hljs-property">rest</span>;
+    vals = vals.<span class="hljs-property">rest</span>;
+  }
 }
 
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">createBinding</span>(<span class="hljs-params">proto, keys, values</span>) {
+  <span class="hljs-keyword">let</span> binding = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">create</span>(proto);
+  <span class="hljs-title function_">applyArguments</span>(binding, keys, values);
+  <span class="hljs-keyword">return</span> binding;
+}
 
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">Fn</span> {
 
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">bnd, args, body</span>) {
-    <span class="hljs-variable language_">this</span>.<span class="hljs-property">bnd</span> = bnd;
-    <span class="hljs-variable language_">this</span>.<span class="hljs-property">args</span> = args.<span class="hljs-title function_">toList</span>();
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">binding, params, body, opts={}</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">binding</span> = binding;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">params</span> = params;
     <span class="hljs-variable language_">this</span>.<span class="hljs-property">body</span> = body;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = opts.<span class="hljs-property">name</span>;
   }
 
-  <span class="hljs-title function_">invoke</span>(<span class="hljs-params">args</span>) {
-    <span class="hljs-keyword">let</span> bnd = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">create</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">bnd</span>);
+  <span class="hljs-title function_">invoke</span>(<span class="hljs-params">params</span>) {
+    <span class="hljs-keyword">let</span> binding = <span class="hljs-title function_">createBinding</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">binding</span>,
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">params</span>, params);
 
-    <span class="hljs-keyword">var</span> x, y;
-    x = <span class="hljs-variable language_">this</span>.<span class="hljs-property">args</span>;
-    y = args;
-    <span class="hljs-keyword">while</span> (!x.<span class="hljs-property">isEmpty</span>) {
-      <span class="hljs-keyword">if</span> (x.<span class="hljs-property">first</span> == <span class="hljs-string">&#x27;&amp;&#x27;</span>) {
-        x = x.<span class="hljs-property">rest</span>;
-        bnd[x.<span class="hljs-property">first</span>] = y
-        x = <span class="hljs-literal">null</span>;
-        y = <span class="hljs-literal">null</span>;
-        <span class="hljs-keyword">break</span>;
-      }
-      bnd[x.<span class="hljs-property">first</span>] = y &amp;&amp; y.<span class="hljs-property">first</span>;
-      x = x.<span class="hljs-property">rest</span>;
-      y = y &amp;&amp; y.<span class="hljs-property">rest</span>;
-    }
-
-    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">body</span>.<span class="hljs-built_in">eval</span>(bnd);
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">body</span>.<span class="hljs-built_in">eval</span>(binding);
   }
 
   <span class="hljs-title function_">toString</span>(<span class="hljs-params"></span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">push</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">args</span>)
-      .<span class="hljs-title function_">push</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Slappy</span>(<span class="hljs-string">&quot;fn&quot;</span>))
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">push</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">params</span>)
+      .<span class="hljs-title function_">push</span>(_Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&quot;fn&quot;</span>))
       .<span class="hljs-title function_">toString</span>()
   }
 
@@ -482,31 +617,18 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
 
 
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">Macro</span> {
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">bnd, args, body</span>) {
-    <span class="hljs-variable language_">this</span>.<span class="hljs-property">bnd</span> = bnd;
-    <span class="hljs-variable language_">this</span>.<span class="hljs-property">args</span> = args.<span class="hljs-title function_">toList</span>();
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">binding, params, body, opts={}</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">binding</span> = binding;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">params</span> = params.<span class="hljs-title function_">toList</span>();
     <span class="hljs-variable language_">this</span>.<span class="hljs-property">body</span> = body;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = opts.<span class="hljs-property">name</span>;
   }
 
-  <span class="hljs-title function_">expand</span>(<span class="hljs-params">args</span>) {
-    <span class="hljs-keyword">let</span> bnd = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">create</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">bnd</span>);
+  <span class="hljs-title function_">expand</span>(<span class="hljs-params">params</span>) {
+    <span class="hljs-keyword">let</span> binding = <span class="hljs-title function_">createBinding</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">binding</span>,
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">params</span>, params);
 
-    <span class="hljs-keyword">var</span> x, y;
-    x = <span class="hljs-variable language_">this</span>.<span class="hljs-property">args</span>;
-    y = args;
-    <span class="hljs-keyword">while</span> (!x.<span class="hljs-property">isEmpty</span>) {
-      <span class="hljs-keyword">if</span> (x.<span class="hljs-property">first</span> == <span class="hljs-string">&#x27;&amp;&#x27;</span>) {
-        x = x.<span class="hljs-property">rest</span>;
-        bnd[x.<span class="hljs-property">first</span>] = y
-        x = <span class="hljs-literal">null</span>;
-        y = <span class="hljs-literal">null</span>;
-        <span class="hljs-keyword">break</span>;
-      }
-      bnd[x.<span class="hljs-property">first</span>] = y &amp;&amp; y.<span class="hljs-property">first</span>;
-      x = x.<span class="hljs-property">rest</span>;
-      y = y &amp;&amp; y.<span class="hljs-property">rest</span>;
-    }
-    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">xpr</span>) =&gt;</span> <span class="hljs-title function_">_eval</span>(bnd, xpr));
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">mapEval</span>(binding);
   }
 
   <span class="hljs-title function_">toString</span>(<span class="hljs-params"></span>) {
@@ -527,51 +649,51 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
   <span class="hljs-keyword">let</span> line = <span class="hljs-number">1</span>;
   <span class="hljs-keyword">let</span> column = <span class="hljs-number">1</span>;
   <span class="hljs-keyword">let</span> currentString = inputString; <span class="hljs-comment">// This string will be sliced</span></pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-7">
+        
+        
+        <li id="section-9">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-7">&#x00a7;</a>
+                <a class="ss" href="#section-9">&#x00a7;</a>
               </div>
               <p>Helper to create token objects</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">function</span> <span class="hljs-title function_">createToken</span>(<span class="hljs-params">type, value</span>) {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-8">
+        
+        
+        <li id="section-10">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-8">&#x00a7;</a>
+                <a class="ss" href="#section-10">&#x00a7;</a>
               </div>
               <p>console.debug(“createToken”, type, value);</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>    tokens = tokens.<span class="hljs-title function_">push</span>({ type, value, line, column });
   }</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-9">
+        
+        
+        <li id="section-11">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-9">&#x00a7;</a>
+                <a class="ss" href="#section-11">&#x00a7;</a>
               </div>
               <p>Advances head along string by n characters, updating line and column.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">function</span> <span class="hljs-title function_">advance</span>(<span class="hljs-params">n = <span class="hljs-number">1</span></span>) {
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) {
       <span class="hljs-keyword">if</span> (currentString[i] === <span class="hljs-string">&#x27;\n&#x27;</span>) {
@@ -585,39 +707,39 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
   }
 
   <span class="hljs-keyword">function</span> <span class="hljs-title function_">tokenizeString</span>(<span class="hljs-params"></span>) {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-10">
+        
+        
+        <li id="section-12">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-10">&#x00a7;</a>
+                <a class="ss" href="#section-12">&#x00a7;</a>
               </div>
               <p>Ensure regex matches from the start of currentString</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">let</span> matchResult = currentString.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/^&quot;((?:[^\\&quot;]|\\.)*)&quot;/</span>);
     <span class="hljs-keyword">if</span> (matchResult) {
       <span class="hljs-title function_">createToken</span>(<span class="hljs-variable constant_">TOK_STRING</span>, matchResult[<span class="hljs-number">1</span>]);
       <span class="hljs-title function_">advance</span>(matchResult[<span class="hljs-number">0</span>].<span class="hljs-property">length</span>);
     } <span class="hljs-keyword">else</span> {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-11">
+        
+        
+        <li id="section-13">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-11">&#x00a7;</a>
+                <a class="ss" href="#section-13">&#x00a7;</a>
               </div>
               <p>This should not be reached if called appropriately</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Unterminated string at <span class="hljs-subst">${line}</span>:<span class="hljs-subst">${column}</span>`</span>);
     }
   }
@@ -628,34 +750,34 @@ emptyVector = <span class="hljs-keyword">new</span> <span class="hljs-title clas
       <span class="hljs-title function_">createToken</span>(<span class="hljs-variable constant_">TOK_NUMBER</span>, <span class="hljs-title class_">Number</span>(matchResult[<span class="hljs-number">0</span>]));
       <span class="hljs-title function_">advance</span>(matchResult[<span class="hljs-number">0</span>].<span class="hljs-property">length</span>);
     } <span class="hljs-keyword">else</span> {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-12">
+        
+        
+        <li id="section-14">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-12">&#x00a7;</a>
+                <a class="ss" href="#section-14">&#x00a7;</a>
               </div>
               <p>This should not be reached</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Invalid number at <span class="hljs-subst">${line}</span>:<span class="hljs-subst">${column}</span>`</span>);
     }
   }
 
-  <span class="hljs-keyword">function</span> <span class="hljs-title function_">tokenizeSlappy</span>(<span class="hljs-params"></span>) {</pre></div></div>
-
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">tokenizeSymbol</span>(<span class="hljs-params"></span>) {</pre></div></div>
+            
         </li>
-
-
-        <li id="section-13">
+        
+        
+        <li id="section-15">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-13">&#x00a7;</a>
+                <a class="ss" href="#section-15">&#x00a7;</a>
               </div>
               <p>Original regex: /^([^\s()[]]*)/, new: /^([^\s()[]{}:”#’.]+)/
 The original was more permissive, let’s stick to a more specific one for now
@@ -664,20 +786,20 @@ The key is that it must match something if it’s called.
 let matchResult = currentString.match(/^([^\s()[]{}:”#’.]+)/);</p>
 
             </div>
-
+            
         </li>
-
-
-        <li id="section-14">
+        
+        
+        <li id="section-16">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-14">&#x00a7;</a>
+                <a class="ss" href="#section-16">&#x00a7;</a>
               </div>
               <p>console.debug(“currentString”, currentString);</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">let</span> matchResult = currentString.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/^true/</span>);
     <span class="hljs-keyword">if</span> (matchResult &amp;&amp; matchResult[<span class="hljs-number">0</span>].<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
       <span class="hljs-title function_">createToken</span>(<span class="hljs-variable constant_">TOK_TRUE</span>);
@@ -688,42 +810,42 @@ let matchResult = currentString.match(/^([^\s()[]{}:”#’.]+)/);</p>
         <span class="hljs-title function_">createToken</span>(<span class="hljs-variable constant_">TOK_FALSE</span>);
         <span class="hljs-title function_">advance</span>(matchResult[<span class="hljs-number">0</span>].<span class="hljs-property">length</span>);
       } <span class="hljs-keyword">else</span> {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-15">
+        
+        
+        <li id="section-17">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-15">&#x00a7;</a>
+                <a class="ss" href="#section-17">&#x00a7;</a>
               </div>
               <p>Needing to switch back to the more permissive version in order to get the test for”it should allow dots in symbol name” to pass.
 The more specfic version is probably the better way to go, but for the exisiting functionality to remain working it currently depends on the symbols being allowed to have dots.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">let</span> matchResult = currentString.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/^([^\s()[\]]*)/</span>);
 
         <span class="hljs-keyword">if</span> (matchResult &amp;&amp; matchResult[<span class="hljs-number">0</span>].<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) { <span class="hljs-comment">// Ensure it matches a non-empty symbol</span>
           <span class="hljs-title function_">createToken</span>(<span class="hljs-variable constant_">TOK_SYMBOL</span>, matchResult[<span class="hljs-number">0</span>]);
           <span class="hljs-title function_">advance</span>(matchResult[<span class="hljs-number">0</span>].<span class="hljs-property">length</span>);
         } <span class="hljs-keyword">else</span> {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-16">
+        
+        
+        <li id="section-18">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-16">&#x00a7;</a>
+                <a class="ss" href="#section-18">&#x00a7;</a>
               </div>
               <p>If it’s not a recognized symbol starter or empty, it’s an error.
 This differs from original, which would make empty symbols or take single chars.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Invalid symbol starting with &#x27;<span class="hljs-subst">${currentString[<span class="hljs-number">0</span>]}</span>&#x27; at <span class="hljs-subst">${line}</span>:<span class="hljs-subst">${column}</span>`</span>);
         }
       }
@@ -733,95 +855,95 @@ This differs from original, which would make empty symbols or take single chars.
   <span class="hljs-keyword">function</span> <span class="hljs-title function_">eatComment</span>(<span class="hljs-params"></span>) {
     <span class="hljs-keyword">let</span> newlineIndex = currentString.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
     <span class="hljs-keyword">if</span> (newlineIndex &gt; -<span class="hljs-number">1</span>) {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-17">
+        
+        
+        <li id="section-19">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-17">&#x00a7;</a>
+                <a class="ss" href="#section-19">&#x00a7;</a>
               </div>
               <p>Advance past the comment line including the newline</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      <span class="hljs-title function_">advance</span>(newlineIndex + <span class="hljs-number">1</span>);
     } <span class="hljs-keyword">else</span> {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-18">
+        
+        
+        <li id="section-20">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-18">&#x00a7;</a>
+                <a class="ss" href="#section-20">&#x00a7;</a>
               </div>
               <p>Comment goes to the end of the string</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      <span class="hljs-title function_">advance</span>(currentString.<span class="hljs-property">length</span>);
     }
   }
 
   <span class="hljs-keyword">function</span> <span class="hljs-title function_">tokenizeKeyword</span>(<span class="hljs-params"></span>) {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-19">
+        
+        
+        <li id="section-21">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-19">&#x00a7;</a>
+                <a class="ss" href="#section-21">&#x00a7;</a>
               </div>
               <p>Keywords start with ‘:’ e.g. :foo
 The regex should match ‘:’ followed by symbol-like characters.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">let</span> matchResult = currentString.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/^:([^\s()[\]{}:&quot;#&#x27;.]+)/</span>);
     <span class="hljs-keyword">if</span> (matchResult) {
       <span class="hljs-title function_">createToken</span>(<span class="hljs-variable constant_">TOK_KEYWORD</span>, matchResult[<span class="hljs-number">1</span>]); <span class="hljs-comment">// Value is the keyword without &#x27;:&#x27;</span>
       <span class="hljs-title function_">advance</span>(matchResult[<span class="hljs-number">0</span>].<span class="hljs-property">length</span>); <span class="hljs-comment">// Advance by the length of the full token (e.g., &quot;:foo&quot;)</span>
     } <span class="hljs-keyword">else</span> {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-20">
+        
+        
+        <li id="section-22">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-20">&#x00a7;</a>
+                <a class="ss" href="#section-22">&#x00a7;</a>
               </div>
               <p>This implies a ‘:’ was not followed by a valid keyword identifier</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Invalid keyword at <span class="hljs-subst">${line}</span>:<span class="hljs-subst">${column}</span>`</span>);
     }
   }
 
   <span class="hljs-keyword">while</span> (currentString.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
     <span class="hljs-keyword">const</span> char = currentString[<span class="hljs-number">0</span>];</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-21">
+        
+        
+        <li id="section-23">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-21">&#x00a7;</a>
+                <a class="ss" href="#section-23">&#x00a7;</a>
               </div>
               <p>console.debug(“char”, char);</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>
     <span class="hljs-keyword">switch</span> (char) {
       <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27; &#x27;</span>:
@@ -854,63 +976,70 @@ The regex should match ‘:’ followed by symbol-like characters.</p>
         <span class="hljs-title function_">eatComment</span>();
         <span class="hljs-keyword">break</span>;
       <span class="hljs-attr">default</span>:</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-22">
+        
+        
+        <li id="section-24">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-22">&#x00a7;</a>
+                <a class="ss" href="#section-24">&#x00a7;</a>
               </div>
               <p>Check for numbers before falling back to symbols</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/\d/</span>.<span class="hljs-title function_">test</span>(char)) {
           <span class="hljs-title function_">tokenizeNumber</span>();
         } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/[^\s()[\]{}:&quot;#&#x27;.]/</span>.<span class="hljs-title function_">test</span>(char)) { <span class="hljs-comment">// Ensure it&#x27;s a valid start for a symbol</span>
-          <span class="hljs-title function_">tokenizeSlappy</span>();
+          <span class="hljs-title function_">tokenizeSymbol</span>();
         } <span class="hljs-keyword">else</span> {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-23">
+        
+        
+        <li id="section-25">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-23">&#x00a7;</a>
+                <a class="ss" href="#section-25">&#x00a7;</a>
               </div>
               <p>Handle unexpected characters if necessary, or advance past them
 For now, this might mean an error or simply advancing
 Capture current column for accurate error reporting if it’s an unexpected char.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>          <span class="hljs-keyword">const</span> errorColumn = column;
           <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span> (<span class="hljs-string">`Unexpected character: &#x27;<span class="hljs-subst">${char}</span>&#x27; at <span class="hljs-subst">${line}</span>:<span class="hljs-subst">${errorColumn}</span>`</span>);
         }
         <span class="hljs-keyword">break</span>;
     }
   }</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-24">
+        
+        
+        <li id="section-26">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-24">&#x00a7;</a>
+                <a class="ss" href="#section-26">&#x00a7;</a>
               </div>
               <p>return tokens.invert();</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">return</span> tokens;
 }
+
+tokenize.<span class="hljs-property">TOK_STRING</span> = <span class="hljs-variable constant_">TOK_STRING</span>;
+tokenize.<span class="hljs-property">TOK_NUMBER</span> = <span class="hljs-variable constant_">TOK_NUMBER</span>;
+tokenize.<span class="hljs-property">TOK_SYMBOL</span> = <span class="hljs-variable constant_">TOK_SYMBOL</span>;
+tokenize.<span class="hljs-property">TOK_KEYWORD</span> = <span class="hljs-variable constant_">TOK_KEYWORD</span>;
+tokenize.<span class="hljs-property">TOK_TRUE</span> = <span class="hljs-variable constant_">TOK_TRUE</span>;
+tokenize.<span class="hljs-property">TOK_FALSE</span> = <span class="hljs-variable constant_">TOK_FALSE</span>;
 
 
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">ParsingError</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Error</span> {
@@ -918,24 +1047,25 @@ Capture current column for accurate error reporting if it’s an unexpected char
     <span class="hljs-variable language_">super</span>(message);
     <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = <span class="hljs-string">&quot;ParsingError&quot;</span>;
     <span class="hljs-keyword">if</span> (token) {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-25">
+        
+        
+        <li id="section-27">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-25">&#x00a7;</a>
+                <a class="ss" href="#section-27">&#x00a7;</a>
               </div>
               <p>Ensure the message includes token details if a token is provided</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">message</span> = <span class="hljs-string">`<span class="hljs-subst">${message}</span> (at line <span class="hljs-subst">${token.line}</span>, column <span class="hljs-subst">${token.column}</span>, value: &#x27;<span class="hljs-subst">${token.value}</span>&#x27;)`</span>;
     }
   }
 }
+
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">NoMatchError</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">ParsingError</span> {
   <span class="hljs-title function_">constructor</span>(<span class="hljs-params">message, token</span>){
     <span class="hljs-variable language_">super</span>(message, token); <span class="hljs-comment">// Pass token to parent for enriched message</span>
@@ -948,53 +1078,53 @@ Capture current column for accurate error reporting if it’s an unexpected char
 }
 
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">parse</span>(<span class="hljs-params">inputString</span>) { <span class="hljs-comment">// sTriNg -&gt; inputString</span></pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-26">
+        
+        
+        <li id="section-28">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-26">&#x00a7;</a>
+                <a class="ss" href="#section-28">&#x00a7;</a>
               </div>
               <p>tokenize now returns a single LynktLyst of token objects</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">return</span> <span class="hljs-title function_">parseTokens</span>(<span class="hljs-title function_">tokenize</span>(inputString)); <span class="hljs-comment">// pArSe -&gt; parseTokens</span>
 }</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-27">
+        
+        
+        <li id="section-29">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-27">&#x00a7;</a>
+                <a class="ss" href="#section-29">&#x00a7;</a>
               </div>
               <p>tokenVector is a single LynktLyst of token objects</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">function</span> <span class="hljs-title function_">parseTokens</span>(<span class="hljs-params">tokenVector</span>) { <span class="hljs-comment">// pArSe -&gt; parseTokens</span>
   <span class="hljs-keyword">let</span> tree = <span class="hljs-title class_">List</span>.<span class="hljs-property">emptyList</span>,
     vector, item, matchedToken; <span class="hljs-comment">// trEe -&gt; tree, liSt -&gt; vector, iTem -&gt; item</span></pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-28">
+        
+        
+        <li id="section-30">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-28">&#x00a7;</a>
+                <a class="ss" href="#section-30">&#x00a7;</a>
               </div>
               <p>console.log(“tokenVector”, tokenVector);</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>
   <span class="hljs-keyword">while</span> (tokenVector &amp;&amp; tokenVector.<span class="hljs-title function_">peek</span>()) { <span class="hljs-comment">// Loop while there are tokens</span>
     <span class="hljs-keyword">let</span> currentTokenObject = tokenVector.<span class="hljs-title function_">peek</span>();
@@ -1009,21 +1139,21 @@ Capture current column for accurate error reporting if it’s an unexpected char
         <span class="hljs-keyword">break</span>;
       <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;°&quot;</span>: <span class="hljs-comment">// Bubble</span>
         [tokenVector, matchedToken] = <span class="hljs-title function_">match</span>(<span class="hljs-string">&quot;°&quot;</span>, tokenVector); <span class="hljs-comment">// match consumes the bubble</span></pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-29">
+        
+        
+        <li id="section-31">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-29">&#x00a7;</a>
+                <a class="ss" href="#section-31">&#x00a7;</a>
               </div>
               <p>The item to be put in a bubble is the last item pushed to trEe
 This logic might need adjustment if trEe can be empty or not what’s expected</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span> (!tree || !tree.<span class="hljs-title function_">peek</span>()) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ParsingError</span>(<span class="hljs-string">&quot;Nothing to quote&quot;</span>, matchedToken); <span class="hljs-comment">// trEe -&gt; tree</span>
         <span class="hljs-keyword">let</span> itemToBubble = tree.<span class="hljs-title function_">peek</span>(); <span class="hljs-comment">// trEe -&gt; tree</span>
         tree = tree.<span class="hljs-title function_">pop</span>(); <span class="hljs-comment">// Remove the item // trEe -&gt; tree</span>
@@ -1037,40 +1167,40 @@ This logic might need adjustment if trEe can be empty or not what’s expected</
 
   <span class="hljs-keyword">return</span> tree;
 }</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-30">
+        
+        
+        <li id="section-32">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-30">&#x00a7;</a>
+                <a class="ss" href="#section-32">&#x00a7;</a>
               </div>
               <p>expectedType is the type string (e.g., ‘(‘, TOK_NUMBER)
 tokenVector is the current vector of token objects
 contextTokenForEOF is an optional token that provides context if EOF is encountered.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">function</span> <span class="hljs-title function_">match</span>(<span class="hljs-params">expectedType, tokenVector, contextTokenForEOF</span>) {
   <span class="hljs-keyword">if</span> (!tokenVector || !tokenVector.<span class="hljs-title function_">peek</span>()) {
     <span class="hljs-keyword">let</span> message = <span class="hljs-string">`Unexpected end of input. Expected token type &#x27;<span class="hljs-subst">${expectedType}</span>&#x27;.`</span>;
     <span class="hljs-keyword">if</span> (contextTokenForEOF) {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-31">
+        
+        
+        <li id="section-33">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-31">&#x00a7;</a>
+                <a class="ss" href="#section-33">&#x00a7;</a>
               </div>
               <p>Passing contextTokenForEOF to NoMatchError will enrich the message.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NoMatchError</span>(message + <span class="hljs-string">` Context: part of structure starting near`</span>, contextTokenForEOF);
     } <span class="hljs-keyword">else</span> {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NoMatchError</span>(message); <span class="hljs-comment">// No specific token for context.</span>
@@ -1084,148 +1214,148 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
       <span class="hljs-string">`Token type <span class="hljs-subst">${currentToken.type}</span> did not match expected token type <span class="hljs-subst">${expectedType}</span>`</span>, currentToken);
   }
 }</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-32">
+        
+        
+        <li id="section-34">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-32">&#x00a7;</a>
+                <a class="ss" href="#section-34">&#x00a7;</a>
               </div>
               <p>tokenVector is the current vector of token objects</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">function</span> <span class="hljs-title function_">matchList</span>(<span class="hljs-params">tokenVector</span>) {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-33">
+        
+        
+        <li id="section-35">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-33">&#x00a7;</a>
+                <a class="ss" href="#section-35">&#x00a7;</a>
               </div>
               <p>console.log(“matchList”)</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">let</span> list = <span class="hljs-title class_">List</span>.<span class="hljs-property">emptyList</span>,
     item, closingParenToken, openingParenToken; <span class="hljs-comment">// lisT -&gt; vector, iTem -&gt; item</span></pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-34">
+        
+        
+        <li id="section-36">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-34">&#x00a7;</a>
+                <a class="ss" href="#section-36">&#x00a7;</a>
               </div>
               <p>Expect ‘)’ to start, which is the closing paren of a list vector in reverse (e.g. (c b a) -&gt; ) a b c ( )</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  [tokenVector, closingParenToken] = <span class="hljs-title function_">match</span>(<span class="hljs-string">&#x27;)&#x27;</span>, tokenVector);</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-35">
+        
+        
+        <li id="section-37">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-35">&#x00a7;</a>
+                <a class="ss" href="#section-37">&#x00a7;</a>
               </div>
               <p>console.log(“tokenVector”, tokenVector);</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>
   <span class="hljs-keyword">while</span> (tokenVector.<span class="hljs-title function_">peek</span>() &amp;&amp; tokenVector.<span class="hljs-title function_">peek</span>().<span class="hljs-property">type</span> != <span class="hljs-string">&#x27;(&#x27;</span>) {
     <span class="hljs-keyword">if</span>(tokenVector.<span class="hljs-title function_">peek</span>().<span class="hljs-property">type</span> === <span class="hljs-string">&quot;°&quot;</span>) {
       tokenVector = tokenVector.<span class="hljs-title function_">pop</span>();
       list = list.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">push</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Bubble</span>(list.<span class="hljs-title function_">peek</span>()))
     } <span class="hljs-keyword">else</span> {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-36">
+        
+        
+        <li id="section-38">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-36">&#x00a7;</a>
+                <a class="ss" href="#section-38">&#x00a7;</a>
               </div>
               <p>Pass closingParenToken as context for EOF errors when expecting an item for this list.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      [tokenVector, item] = <span class="hljs-title function_">matchItem</span>(tokenVector, closingParenToken); <span class="hljs-comment">// iTem -&gt; item</span>
       list = list.<span class="hljs-title function_">push</span>(item); <span class="hljs-comment">// Items are pushed in reverse order, inverted later // lisT -&gt; vector, iTem -&gt; item</span>
     }
   }</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-37">
+        
+        
+        <li id="section-39">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-37">&#x00a7;</a>
+                <a class="ss" href="#section-39">&#x00a7;</a>
               </div>
               <p>console.log(vector);</p>
 
             </div>
-
+            
         </li>
-
-
-        <li id="section-38">
+        
+        
+        <li id="section-40">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-38">&#x00a7;</a>
+                <a class="ss" href="#section-40">&#x00a7;</a>
               </div>
               <p>Consumes the opening ‘(‘. Pass closingParenToken for context if ‘(‘ is missing.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  [tokenVector, openingParenToken] = <span class="hljs-title function_">match</span>(<span class="hljs-string">&#x27;(&#x27;</span>, tokenVector, closingParenToken);</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-39">
+        
+        
+        <li id="section-41">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-39">&#x00a7;</a>
+                <a class="ss" href="#section-41">&#x00a7;</a>
               </div>
               <p>return [tokenVector, vector.invert()]; // Invert the collected vector to restore original order // lisT -&gt; vector</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">return</span> [tokenVector, list];
 }</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-40">
+        
+        
+        <li id="section-42">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-40">&#x00a7;</a>
+                <a class="ss" href="#section-42">&#x00a7;</a>
               </div>
               <p>tokenVector is the current vector of token objects</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">function</span> <span class="hljs-title function_">matchVector</span>(<span class="hljs-params">tokenVector</span>) {
   <span class="hljs-keyword">let</span> vector = <span class="hljs-title class_">Vector</span>.<span class="hljs-property">emptyVector</span>,
     item, closingBracketToken, openingBracketToken; <span class="hljs-comment">// lisT -&gt; vector, iTem -&gt; item</span>
@@ -1237,71 +1367,71 @@ contextTokenForEOF is an optional token that provides context if EOF is encounte
       tokenVector = tokenVector.<span class="hljs-title function_">pop</span>();
       vector = vector.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">push</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Bubble</span>(vector.<span class="hljs-title function_">peek</span>()))
     } <span class="hljs-keyword">else</span> {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-41">
+        
+        
+        <li id="section-43">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-41">&#x00a7;</a>
+                <a class="ss" href="#section-43">&#x00a7;</a>
               </div>
               <p>Pass closingBracketToken as context for EOF errors.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      [tokenVector, item] = <span class="hljs-title function_">matchItem</span>(tokenVector, closingBracketToken); <span class="hljs-comment">// iTem -&gt; item</span></pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-42">
+        
+        
+        <li id="section-44">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-42">&#x00a7;</a>
+                <a class="ss" href="#section-44">&#x00a7;</a>
               </div>
               <p>Vector uses its own push, assuming it’s compatible with LynktLyst structure for lisT</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      vector = vector.<span class="hljs-title function_">push</span>(item);  <span class="hljs-comment">// lisT -&gt; vector, iTem -&gt; item</span>
     }
   }
 
   [tokenVector, openingBracketToken] = <span class="hljs-title function_">match</span>(<span class="hljs-string">&#x27;[&#x27;</span>, tokenVector, closingBracketToken);</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-43">
+        
+        
+        <li id="section-45">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-43">&#x00a7;</a>
+                <a class="ss" href="#section-45">&#x00a7;</a>
               </div>
               <p>Assuming push prepends items like List.push, so inversion is necessary.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">return</span> [tokenVector, vector.<span class="hljs-title function_">invert</span>()]; <span class="hljs-comment">// lisT -&gt; vector</span>
 }</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-44">
+        
+        
+        <li id="section-46">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-44">&#x00a7;</a>
+                <a class="ss" href="#section-46">&#x00a7;</a>
               </div>
               <p>tokenVector is the current vector of token objects
 contextTokenForEOF provides context if an item is expected but EOF is found.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">function</span> <span class="hljs-title function_">matchItem</span>(<span class="hljs-params">tokenVector, contextTokenForEOF</span>) {
   <span class="hljs-keyword">if</span> (!tokenVector || !tokenVector.<span class="hljs-title function_">peek</span>()) {
     <span class="hljs-keyword">let</span> message = <span class="hljs-string">&quot;Unexpected end of input. Expected an item.&quot;</span>;
@@ -1325,7 +1455,7 @@ contextTokenForEOF provides context if an item is expected but EOF is found.</p>
       item = <span class="hljs-literal">false</span>
       <span class="hljs-keyword">break</span>;
     <span class="hljs-keyword">case</span> <span class="hljs-attr">TOK_SYMBOL</span>:
-      item = <span class="hljs-title class_">Slappy</span>.<span class="hljs-title function_">for</span>(currentToken.<span class="hljs-property">value</span>); <span class="hljs-comment">// itEm -&gt; item</span>
+      item = _Symbol.<span class="hljs-title function_">for</span>(currentToken.<span class="hljs-property">value</span>); <span class="hljs-comment">// itEm -&gt; item</span>
       <span class="hljs-keyword">break</span>;
     <span class="hljs-keyword">case</span> <span class="hljs-attr">TOK_KEYWORD</span>:
       item = <span class="hljs-title class_">Keyword</span>.<span class="hljs-title function_">for</span>(currentToken.<span class="hljs-property">value</span>); <span class="hljs-comment">// itEm -&gt; item</span>
@@ -1334,33 +1464,33 @@ contextTokenForEOF provides context if an item is expected but EOF is found.</p>
       item = currentToken.<span class="hljs-property">value</span>; <span class="hljs-comment">// Value is already a string // itEm -&gt; item</span>
       <span class="hljs-keyword">break</span>;
       <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;)&#x27;</span>: <span class="hljs-comment">// Start of a nested list vector.</span></pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-45">
+        
+        
+        <li id="section-47">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-45">&#x00a7;</a>
+                <a class="ss" href="#section-47">&#x00a7;</a>
               </div>
               <p>The contextTokenForEOF is not directly passed to matchList here,
 as matchList will establish its own context starting with the ‘)’.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">return</span> <span class="hljs-title function_">matchList</span>(tokenVector);
     <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;]&#x27;</span>: <span class="hljs-comment">// Start of a nested vector vector.</span>
       <span class="hljs-keyword">return</span> <span class="hljs-title function_">matchVector</span>(tokenVector);</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-46">
+        
+        
+        <li id="section-48">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-46">&#x00a7;</a>
+                <a class="ss" href="#section-48">&#x00a7;</a>
               </div>
               <p>Quoting/Bubble is handled in parseTokens, not here, as it modifies the tree structure directly.
 case ‘°’:
@@ -1368,137 +1498,146 @@ case ‘°’:
   break;</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>    <span class="hljs-attr">default</span>:</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-47">
+        
+        
+        <li id="section-49">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-47">&#x00a7;</a>
+                <a class="ss" href="#section-49">&#x00a7;</a>
               </div>
               <p>If it’s not a special type, it might be an error or an unhandled simple token
 The original code didn’t have a fallback here, it would error in <code>itEm === undefined</code>.
 Let’s make it explicit.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NoMatchError</span>(
         <span class="hljs-string">`No match found for token type <span class="hljs-subst">${currentToken.type}</span>`</span>, currentToken);
   }</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-48">
+        
+        
+        <li id="section-50">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-48">&#x00a7;</a>
+                <a class="ss" href="#section-50">&#x00a7;</a>
               </div>
               <p>If item is not undefined, it means one of the cases matched and created an item.
 We then consume the token.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">return</span> [tokenVector.<span class="hljs-title function_">pop</span>(), item]; <span class="hljs-comment">// itEm -&gt; item</span>
-}</pre></div></div>
+}
 
+<span class="hljs-keyword">const</span> sAmp = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&quot;&amp;&quot;</span>);</pre></div></div>
+            
         </li>
-
-
-        <li id="section-49">
+        
+        
+        <li id="section-51">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-49">&#x00a7;</a>
+                <a class="ss" href="#section-51">&#x00a7;</a>
               </div>
               <p>Evaluate Bubblescript</p>
 
             </div>
-
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">function</span> <span class="hljs-title function_">eval</span>(<span class="hljs-params">script</span>) {
-  <span class="hljs-keyword">return</span> <span class="hljs-title function_">parse</span>(script).<span class="hljs-title function_">each</span>(rootBinding);
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">function</span> <span class="hljs-title function_">_eval</span>(<span class="hljs-params">script</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">parse</span>(script).<span class="hljs-built_in">eval</span>(rootBinding);
 }
 
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">eVaL</span>(<span class="hljs-params">bnd, xpr</span>) {
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">$eval</span>(<span class="hljs-params">bnd, xpr</span>) {
   <span class="hljs-keyword">switch</span> (xpr &amp;&amp; xpr.<span class="hljs-property">constructor</span>) {
-    <span class="hljs-keyword">case</span> <span class="hljs-title class_">Slappy</span>:
+    <span class="hljs-keyword">case</span> <span class="hljs-attr">_Symbol</span>:
       <span class="hljs-keyword">return</span> xpr.<span class="hljs-title function_">resolve</span>(bnd)
     <span class="hljs-keyword">case</span> <span class="hljs-title class_">List</span>: {
       <span class="hljs-keyword">let</span> s = xpr.<span class="hljs-title function_">peek</span>();
-      <span class="hljs-keyword">if</span> (s <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Slappy</span>) {
+      <span class="hljs-keyword">if</span> (s <span class="hljs-keyword">instanceof</span> _Symbol) {
         <span class="hljs-keyword">if</span> (s.<span class="hljs-property">callPattern</span> == <span class="hljs-number">1</span>) {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-50">
+        
+        
+        <li id="section-52">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-50">&#x00a7;</a>
+                <a class="ss" href="#section-52">&#x00a7;</a>
               </div>
               <p> x or x/x or x.x/x</p>
 
             </div>
-
-            <div class="content"><div class='highlight'><pre>          <span class="hljs-keyword">let</span> q = <span class="hljs-title function_">eVaL</span>(bnd, s);
+            
+            <div class="content"><div class='highlight'><pre>          <span class="hljs-keyword">let</span> q = $eval(bnd, s);
           <span class="hljs-keyword">if</span> (q != s)
-            <span class="hljs-keyword">return</span> <span class="hljs-title function_">eVaL</span>(bnd,
+            <span class="hljs-keyword">return</span> $eval(bnd,
               xpr.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">push</span>(q));
           <span class="hljs-keyword">else</span>
             <span class="hljs-keyword">return</span> xpr;
         } <span class="hljs-keyword">else</span> <span class="hljs-comment">/* send */</span> {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-51">
+        
+        
+        <li id="section-53">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-51">&#x00a7;</a>
+                <a class="ss" href="#section-53">&#x00a7;</a>
               </div>
               <p>call pattern 2
 x.x or x.x.x or x.x…</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>          <span class="hljs-keyword">let</span> q = s.<span class="hljs-title function_">resolveRoot</span>(bnd)
           <span class="hljs-keyword">if</span> (!xpr.<span class="hljs-property">rest</span>) {
             <span class="hljs-keyword">return</span> q[s.<span class="hljs-property">fn</span>]()
           }
           <span class="hljs-keyword">try</span> {
-            <span class="hljs-keyword">return</span> q[s.<span class="hljs-property">fn</span>](...xpr.<span class="hljs-property">rest</span>.<span class="hljs-title function_">map</span>(
-              <span class="hljs-function">(<span class="hljs-params">a</span>) =&gt;</span> <span class="hljs-title function_">eVaL</span>(bnd, a)).<span class="hljs-title function_">toArray</span>());
+            <span class="hljs-keyword">let</span> params = xpr.<span class="hljs-property">rest</span>;
+            <span class="hljs-keyword">let</span> splits = params.<span class="hljs-title function_">split</span>(sAmp);
+            <span class="hljs-keyword">if</span> (splits.<span class="hljs-title function_">count</span>() &gt; <span class="hljs-number">1</span>) {
+              params = $eval(bnd, splits.<span class="hljs-property">rest</span>.<span class="hljs-property">head</span>.<span class="hljs-property">head</span>);
+              params = params.<span class="hljs-title function_">conj</span>(splits.<span class="hljs-property">first</span>.<span class="hljs-title function_">mapEval</span>(bnd));
+            } <span class="hljs-keyword">else</span> {
+              params = params.<span class="hljs-title function_">mapEval</span>(bnd);
+            }
+
+            <span class="hljs-keyword">return</span> q[s.<span class="hljs-property">fn</span>](...params);
           } <span class="hljs-keyword">catch</span> (e) {</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-52">
+        
+        
+        <li id="section-54">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-52">&#x00a7;</a>
+                <a class="ss" href="#section-54">&#x00a7;</a>
               </div>
               <p>console.log(s.fn);</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">throw</span> e;
           }
         }
       } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">List</span>) {
-        <span class="hljs-keyword">return</span> <span class="hljs-title function_">eVaL</span>(bnd,
-          xpr.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">push</span>(<span class="hljs-title function_">eVaL</span>(bnd, s)))
+        <span class="hljs-keyword">return</span> $eval(bnd,
+          xpr.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">push</span>($eval(bnd, s)))
       } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Fn</span>) {
-        <span class="hljs-keyword">return</span> s.<span class="hljs-title function_">invoke</span>(xpr.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">arg</span> =&gt;</span>
-          <span class="hljs-title function_">eVaL</span>(bnd, arg)));
+        <span class="hljs-keyword">return</span> s.<span class="hljs-title function_">invoke</span>(xpr.<span class="hljs-title function_">pop</span>().<span class="hljs-title function_">mapEval</span>(bnd));
       } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Function</span>) {
         <span class="hljs-keyword">return</span> s.<span class="hljs-title function_">call</span>(bnd, xpr.<span class="hljs-title function_">pop</span>());
       } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Macro</span>) {
@@ -1509,24 +1648,22 @@ x.x or x.x.x or x.x…</p>
       }
     }
     <span class="hljs-keyword">case</span> <span class="hljs-title class_">Vector</span>:
-      <span class="hljs-keyword">return</span> xpr.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">a</span>) =&gt;</span> {
-        <span class="hljs-keyword">return</span> <span class="hljs-title function_">eVaL</span>(bnd, a)
-      });
+      <span class="hljs-keyword">return</span> xpr.<span class="hljs-title function_">mapEval</span>(bnd);
     <span class="hljs-keyword">case</span> <span class="hljs-title class_">Bubble</span>:
       <span class="hljs-keyword">return</span> xpr.<span class="hljs-title function_">pop</span>();
     <span class="hljs-attr">default</span>:
       <span class="hljs-keyword">return</span> xpr;
   }
 };</pre></div></div>
-
+            
         </li>
-
-
-        <li id="section-53">
+        
+        
+        <li id="section-55">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-53">&#x00a7;</a>
+                <a class="ss" href="#section-55">&#x00a7;</a>
               </div>
               <p>Makes a Bubblescript function from a
 Javascript function.
@@ -1539,40 +1676,42 @@ sutible for use with Bubblescript.
 TODO: Create tests for mkfn.</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">function</span> <span class="hljs-title function_">mkfn</span>(<span class="hljs-params">q</span>) {
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> (<span class="hljs-params">p</span>) {
-    <span class="hljs-keyword">return</span> q.<span class="hljs-title function_">call</span>(<span class="hljs-variable language_">this</span>,
-      p.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> <span class="hljs-title function_">_eval</span>(<span class="hljs-variable language_">this</span>, m)))
-  }
-}</pre></div></div>
-
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) {</pre></div></div>
+            
         </li>
-
-
-        <li id="section-54">
+        
+        
+        <li id="section-56">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-54">&#x00a7;</a>
+                <a class="ss" href="#section-56">&#x00a7;</a>
               </div>
-              <p>function mkfn(q) {
-  return (p) =&gt; {
-    return q.call(this,
-      …p.map(m =&gt; _eval(this, m)))
-  }
+              <p>Handel &amp; expansion.
+let splits = params.split(sAmp);
+console.log(“hi”, splits);
+if (splits.count() &gt; 1) {
+  params = splits.first.conj(splits.rest.head);
+  console.log(params);
 }</p>
 
             </div>
-
+            
+            <div class="content"><div class='highlight'><pre>
+    <span class="hljs-keyword">return</span> q.<span class="hljs-title function_">call</span>(<span class="hljs-variable language_">this</span>, params.<span class="hljs-title function_">mapEval</span>(<span class="hljs-variable language_">this</span>));
+  }
+}</pre></div></div>
+            
         </li>
-
-
-        <li id="section-55">
+        
+        
+        <li id="section-57">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-55">&#x00a7;</a>
+                <a class="ss" href="#section-57">&#x00a7;</a>
               </div>
               <p>A man walks into a bar. Bartender says
 what’ll you have?  The man says,
@@ -1580,27 +1719,56 @@ something strong,  my head is killing
 me. 🍸</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> rootBinding = {
   <span class="hljs-attr">console</span>: <span class="hljs-variable language_">console</span>,
-  <span class="hljs-title class_">Array</span>: <span class="hljs-title class_">Array</span>,
-  <span class="hljs-attr">null</span>: <span class="hljs-literal">null</span>,
-  <span class="hljs-title class_">List</span>: <span class="hljs-title class_">List</span>,
-  <span class="hljs-title class_">Vector</span>: <span class="hljs-title class_">Vector</span>,
+  <span class="hljs-attr">require</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> <span class="hljs-built_in">require</span>(...o)),
+  <span class="hljs-attr">__dirname</span>: __dirname,
 
   <span class="hljs-attr">muf</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">[key,val]</span>) {
     <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>[key.<span class="hljs-title function_">toString</span>()]
-      = <span class="hljs-title function_">_eval</span>(<span class="hljs-variable language_">this</span>, val);
-  },</pre></div></div>
+      = $eval(<span class="hljs-variable language_">this</span>, val);
+  },
 
+  <span class="hljs-attr">muf</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">args</span>) {
+    <span class="hljs-keyword">let</span> key = args.<span class="hljs-title function_">peek</span>();
+    <span class="hljs-keyword">let</span> val = args.<span class="hljs-title function_">pop</span>();</pre></div></div>
+            
         </li>
-
-
-        <li id="section-56">
+        
+        
+        <li id="section-58">
             <div class="annotation">
-
+              
               <div class="sswrap ">
-                <a class="ss" href="#section-56">&#x00a7;</a>
+                <a class="ss" href="#section-58">&#x00a7;</a>
+              </div>
+              <p>If the key turns out to be a list, then
+we do a function definition using the
+first item of the list as the key and the
+rest as the paramter list, otherwise do a
+normal key value definition.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (key <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">List</span>) {
+      <span class="hljs-keyword">let</span> name = key.<span class="hljs-title function_">peek</span>().<span class="hljs-title function_">toString</span>();
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>[key.<span class="hljs-title function_">peek</span>().<span class="hljs-title function_">toString</span>()]
+        = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Fn</span>(<span class="hljs-variable language_">this</span>, key.<span class="hljs-title function_">pop</span>(), val, { name });
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>[key.<span class="hljs-title function_">toString</span>()]
+        = $eval(<span class="hljs-variable language_">this</span>, val.<span class="hljs-title function_">peek</span>());
+    }
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-59">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-59">&#x00a7;</a>
               </div>
               <p>fn: function([caret, stic]) {
   return new Fn(this, caret, stic);
@@ -1614,10 +1782,10 @@ fn: function(<em>) {
 },</p>
 
             </div>
-
+            
             <div class="content"><div class='highlight'><pre>
   <span class="hljs-attr">fn</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">args</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Fn</span>(<span class="hljs-variable language_">this</span>, args.<span class="hljs-property">first</span>, args.<span class="hljs-property">rest</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Fn</span>(<span class="hljs-variable language_">this</span>, args.<span class="hljs-property">first</span>.<span class="hljs-title function_">toList</span>(), args.<span class="hljs-property">rest</span>)
   },
 
   <span class="hljs-attr">macro</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">args</span>) {
@@ -1625,11 +1793,11 @@ fn: function(<em>) {
   },
 
   <span class="hljs-attr">jsfn</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">args</span>) {
-    <span class="hljs-keyword">var</span> x, binding = <span class="hljs-variable language_">this</span>
-    x = args.<span class="hljs-title function_">push</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Slappy</span>(<span class="hljs-string">&#x27;fn&#x27;</span>));
-    <span class="hljs-keyword">var</span> fn = <span class="hljs-title function_">_eval</span>(binding, x);
+    <span class="hljs-keyword">let</span> binding = <span class="hljs-variable language_">this</span>, x, fn;
+    x = args.<span class="hljs-title function_">push</span>(_Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;fn&#x27;</span>));
+    fn = $eval(binding, x);
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span>(<span class="hljs-params">...args</span>) {
-      <span class="hljs-keyword">return</span> fn.<span class="hljs-title function_">call</span>(binding, arry.<span class="hljs-title function_">toVector</span>(args));
+      <span class="hljs-keyword">return</span> fn.<span class="hljs-title function_">invoke</span>(<span class="hljs-title class_">List</span>.<span class="hljs-title function_">from</span>(args));
     }
   },
 
@@ -1642,20 +1810,20 @@ fn: function(<em>) {
       x = x.<span class="hljs-title function_">pop</span>();
       w = x.<span class="hljs-title function_">peek</span>();
       x = x.<span class="hljs-title function_">pop</span>();
-      binding[k] = <span class="hljs-title function_">_eval</span>(binding, w);
+      binding[k] = $eval(binding, w);
     }
     <span class="hljs-keyword">return</span> xx.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">z</span> =&gt;</span>
-      <span class="hljs-title function_">_eval</span>(binding, z)).<span class="hljs-title function_">pop</span>();
+      $eval(binding, z)).<span class="hljs-title function_">pop</span>();
   },
 
   <span class="hljs-attr">if</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">[c,t,f]</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-title function_">_eval</span>(<span class="hljs-variable language_">this</span>,
-      <span class="hljs-title function_">_eval</span>(<span class="hljs-variable language_">this</span>, c) ? t : f);
+    <span class="hljs-keyword">return</span> $eval(<span class="hljs-variable language_">this</span>,
+      $eval(<span class="hljs-variable language_">this</span>, c) ? t : f);
   },
 
   <span class="hljs-attr">unless</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">[c,f,t]</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-title function_">_eval</span>(<span class="hljs-variable language_">this</span>,
-      <span class="hljs-title function_">_eval</span>(<span class="hljs-variable language_">this</span>, c) ? t : f);
+    <span class="hljs-keyword">return</span> $eval(<span class="hljs-variable language_">this</span>,
+      $eval(<span class="hljs-variable language_">this</span>, c) ? t : f);
   },
 
   <span class="hljs-attr">blert</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">msgs</span>) {
@@ -1663,7 +1831,7 @@ fn: function(<em>) {
   },
 
   <span class="hljs-attr">expandmacro</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">[m,n]</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-title function_">_eval</span>(<span class="hljs-variable language_">this</span>,m).<span class="hljs-title function_">expand</span>(<span class="hljs-variable language_">this</span>, n);
+    <span class="hljs-keyword">return</span> $eval(<span class="hljs-variable language_">this</span>,m).<span class="hljs-title function_">expand</span>(<span class="hljs-variable language_">this</span>, n);
   },
 
   <span class="hljs-attr">loop</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">[x,...xx]</span>) {
@@ -1677,7 +1845,7 @@ fn: function(<em>) {
       x = x.<span class="hljs-title function_">pop</span>();
       v = x.<span class="hljs-title function_">peek</span>();
       x = x.<span class="hljs-title function_">pop</span>();
-      binding[k] = <span class="hljs-title function_">_eval</span>(binding, v);
+      binding[k] = $eval(binding, v);
     }
 
     binding.<span class="hljs-property">recur</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">[a]</span>) {
@@ -1688,7 +1856,7 @@ fn: function(<em>) {
         a = a.<span class="hljs-title function_">pop</span>();
         w = a.<span class="hljs-title function_">peek</span>();
         a = a.<span class="hljs-title function_">pop</span>();
-        binding[k] = <span class="hljs-title function_">_eval</span>(binding, w);
+        binding[k] = $eval(binding, w);
       }
       recurCalled = <span class="hljs-literal">true</span>;
     };
@@ -1696,7 +1864,7 @@ fn: function(<em>) {
     <span class="hljs-keyword">do</span> {
       recurCalled = <span class="hljs-literal">false</span>;
       m = xx.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">z</span> =&gt;</span>
-        <span class="hljs-title function_">_eval</span>(binding, z)).<span class="hljs-title function_">pop</span>();
+        $eval(binding, z)).<span class="hljs-title function_">pop</span>();
     } <span class="hljs-keyword">while</span>(recurCalled);
     <span class="hljs-keyword">return</span> m;
   },
@@ -1709,39 +1877,68 @@ fn: function(<em>) {
     <span class="hljs-keyword">return</span> args.<span class="hljs-title function_">toVector</span>();
   }),
 
+  <span class="hljs-attr">obj</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">list</span>) {
+    <span class="hljs-keyword">return</span> list.<span class="hljs-title function_">partition</span>(<span class="hljs-number">2</span>).<span class="hljs-title function_">reduce</span>(
+      <span class="hljs-keyword">function</span>(<span class="hljs-params">memo, [key, val]</span>) {
+        memo[key] = val;
+        <span class="hljs-keyword">return</span> memo;
+      }, {});
+  }),</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-60">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-60">&#x00a7;</a>
+              </div>
+              <p>obj: mkfn(function(list) {
+  return list.toObject();
+}),</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+  <span class="hljs-attr">do</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">args</span>) {
+    <span class="hljs-keyword">return</span> args.<span class="hljs-built_in">eval</span>(<span class="hljs-variable language_">this</span>);
+  },
+
   <span class="hljs-attr">eval</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">args</span>) {
-    <span class="hljs-keyword">return</span> args.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">exp</span>) =&gt;</span> <span class="hljs-title function_">_eval</span>(<span class="hljs-variable language_">this</span>, exp)).<span class="hljs-property">last</span>
+    <span class="hljs-keyword">return</span> args.<span class="hljs-built_in">eval</span>(<span class="hljs-variable language_">this</span>);
   }),
 
   <span class="hljs-attr">send</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">[a,b,...c]</span>) {
     <span class="hljs-keyword">if</span> (b.<span class="hljs-property">key</span>)
       b = b.<span class="hljs-property">key</span>;
-    <span class="hljs-keyword">if</span> (c.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {</pre></div></div>
-
-        </li>
-
-
-        <li id="section-57">
-            <div class="annotation">
-
-              <div class="sswrap ">
-                <a class="ss" href="#section-57">&#x00a7;</a>
-              </div>
-              <p>console.log(“a”, a);
-console.log(“b”, b);
-console.log(“c”, c);</p>
-
-            </div>
-
-            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">return</span> a[b](...c);
+    <span class="hljs-keyword">if</span> (c.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> a[b](...c);
     } <span class="hljs-keyword">else</span>
       <span class="hljs-keyword">return</span> a[b]();
+  }),</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-61">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-61">&#x00a7;</a>
+              </div>
+              <p>get: mkfn(function(args) {
+   return args.reduce(
+      (a,b) =&gt; a ? a[b] : b);
+}),</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attr">get</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">yeahyeahyeahs</span>) {
+     <span class="hljs-keyword">return</span> yeahyeahyeahs.<span class="hljs-title function_">reduce</span>(
+        <span class="hljs-function">(<span class="hljs-params">memo,key</span>) =&gt;</span> memo &amp;&amp; memo[key]);
   }),
-  <span class="hljs-attr">get</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">args</span>) {
-     <span class="hljs-keyword">return</span> args.<span class="hljs-title function_">reduce</span>(
-        <span class="hljs-function">(<span class="hljs-params">a,b</span>) =&gt;</span> a ? a[b] : b);
-  }),
-  <span class="hljs-attr">export</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">[ca,[nd,[y]]]</span>) {
+  <span class="hljs-attr">export</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">[ca,nd,y]</span>) {
     <span class="hljs-keyword">return</span> ca[nd] = y;
   }),
   <span class="hljs-attr">print</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">vals</span>) {
@@ -1782,23 +1979,141 @@ console.log(“c”, c);</p>
   <span class="hljs-attr">parse</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">[s]</span>) {
     <span class="hljs-keyword">return</span> <span class="hljs-title function_">parse</span>(s);
   }),
-  <span class="hljs-attr">_eval</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">[v]</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-title function_">_eval</span>(<span class="hljs-variable language_">this</span>, v[<span class="hljs-number">0</span>]);
-  }),
   <span class="hljs-attr">concat</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">eeks</span>) {
     <span class="hljs-keyword">return</span> eeks.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;&#x27;</span>);
   }),
   <span class="hljs-string">&quot;new&quot;</span>: <span class="hljs-title function_">mkfn</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">[m,n]</span>) {
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title function_">m</span>(...n.<span class="hljs-title function_">toArray</span>());
   }),
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-62">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-62">&#x00a7;</a>
+              </div>
+              <p>Alias muf to 🫧</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>rootBinding[<span class="hljs-string">&quot;🫧&quot;</span>] = rootBinding.<span class="hljs-property">muf</span>;
+
+(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">let</span> bnd = rootBinding;
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">list</span>(<span class="hljs-params">...args</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">List</span>.<span class="hljs-title function_">from</span>(args);
+  }
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">vector</span>(<span class="hljs-params">...args</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Vector</span>.<span class="hljs-title function_">from</span>(args);
+  }
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">quote</span>(<span class="hljs-params">m</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Bubble</span>(m);
+  }
+
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">muf</span>(<span class="hljs-params">...args</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-63">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-63">&#x00a7;</a>
+              </div>
+              <p>return _eval(bnd, arry.toList(args).push(_muf));</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> $eval(bnd, <span class="hljs-title class_">List</span>.<span class="hljs-title function_">from</span>(args).<span class="hljs-title function_">push</span>(_muf));
+  }
+
+  <span class="hljs-keyword">let</span> _push = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;push&#x27;</span>),
+       fn = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;fn&#x27;</span>),
+       a = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;a&#x27;</span>),
+       b = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;b&#x27;</span>),
+       send = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;send&#x27;</span>),
+       mufn = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;mufn&#x27;</span>),
+       macro = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;macro&#x27;</span>),
+       name = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;name&#x27;</span>),
+       amp = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;&amp;&#x27;</span>),
+       z = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;z&#x27;</span>),
+      _list = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;list&#x27;</span>),
+      _muf = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;muf&#x27;</span>),
+      puts = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;puts&#x27;</span>),
+      msg = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;msg&#x27;</span>),
+      consoleLog = _Symbol.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;console.log&#x27;</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-64">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-64">&#x00a7;</a>
+              </div>
+              <p>muf push (fn [a b] (send a °push b))</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-title function_">muf</span>(_push, <span class="hljs-title function_">list</span>(fn, <span class="hljs-title function_">vector</span>(a, b),
+       <span class="hljs-title function_">list</span>(send, a, <span class="hljs-title function_">quote</span>(_push), b)));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-65">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-65">&#x00a7;</a>
+              </div>
+              <p>(muf (puts msg) (console.log msg))
+(muf puts (fn [msg] (console.log msg)))</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-title function_">muf</span>(puts, <span class="hljs-title function_">list</span>(fn, <span class="hljs-title function_">vector</span>(msg),
+    <span class="hljs-title function_">list</span>(consoleLog, msg)));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-66">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-66">&#x00a7;</a>
+              </div>
+              <p>(muf mufn (macro [name &amp; z]
+    (list °muf name (push z °fn))))</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-title function_">muf</span>(mufn, <span class="hljs-title function_">list</span>(macro, <span class="hljs-title function_">vector</span>(name,amp,z),
+      <span class="hljs-title function_">list</span>(_list,<span class="hljs-title function_">quote</span>(_muf), name,
+         <span class="hljs-title function_">list</span>(_push, z, <span class="hljs-title function_">quote</span>(fn)))));
+
+})();
+
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">BubbleScript</span> = {
+  <span class="hljs-title class_">List</span>, <span class="hljs-title class_">Vector</span>, <span class="hljs-title class_">Symbol</span>: _Symbol, <span class="hljs-title class_">Keyword</span>,
+  <span class="hljs-title class_">Bubble</span>, <span class="hljs-title class_">Fn</span>, <span class="hljs-title class_">Macro</span>, tokenize, parse, <span class="hljs-attr">eval</span>:
+  _eval, $eval, rootBinding
 }
 
-<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
-  <span class="hljs-attr">eval</span>: <span class="hljs-built_in">eval</span>
-}</pre></div></div>
-
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-title class_">BubbleScript</span>;</pre></div></div>
+            
         </li>
-
+        
     </ul>
   </div>
 </body>
