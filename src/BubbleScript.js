@@ -1134,13 +1134,13 @@ const rootBinding = {
   //   return list.toObject();
   // }),
 
-  eval: mkfn(function(args) {
-    return args.eval(this);
-  }),
-
   do: function(args) {
     return args.eval(this);
   },
+
+  eval: mkfn(function(args) {
+    return args.eval(this);
+  }),
 
   send: mkfn(function([a,b,...c]) {
     if (b.key)
