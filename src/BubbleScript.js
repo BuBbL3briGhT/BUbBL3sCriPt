@@ -1038,11 +1038,11 @@ const rootBinding = {
   },
 
   jsfn: function(args) {
-    var x, binding = this
+    let binding = this, x, fn;
     x = args.push(_Symbol.for('fn'));
-    var fn = $eval(binding, x);
+    fn = $eval(binding, x);
     return function(...args) {
-      return fn.call(binding, arry.toVector(args));
+      return fn.invoke(binding, List.from(args));
     }
   },
 

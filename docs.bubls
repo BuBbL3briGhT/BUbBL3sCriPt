@@ -43,6 +43,6 @@
             (obj "Content-Type" contentType))
           (res.end data))))))))
 
-(server.listen PORT (fn []
+(server.listen PORT (jsfn []
   (puts "Server running on"
       (+ "http://localhost:" PORT))))
