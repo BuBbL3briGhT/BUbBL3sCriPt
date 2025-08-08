@@ -45,4 +45,4 @@
 
 (server.listen PORT (fn []
   (puts "Server running on"
-      (concat "http://localhost:" PORT))))
+      (+ "http://localhost:" PORT))))
