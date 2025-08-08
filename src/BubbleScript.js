@@ -1150,9 +1150,9 @@ const rootBinding = {
   //    return args.reduce(
   //       (a,b) => a ? a[b] : b);
   // }),
-  get: mkfn(function(args) {
-     return args.reduce(
-        (memo, key) => memo && memo[key]);
+  get: mkfn(function(yeahyeahyeahs) {
+     return yeahyeahyeahs.reduce(
+        (memo,key) => memo && memo[key]);
   }),
   export: mkfn(function([ca,nd,y]) {
     return ca[nd] = y;
