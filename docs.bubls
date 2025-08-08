@@ -1,3 +1,6 @@
+(puts "docs.bubls")
+(puts "starting webserver")
+
 (🫧 http (require "http"))
 (🫧   fs (require "fs"))
 (🫧 path (require "path"))
@@ -12,14 +15,13 @@
   # bubblescript.
   (path.join __dirname "../docs"))
 
-(puts "PUBLiC_DiR" PUBLiC_DiR)
+(puts "Public directory:" PUBLiC_DiR)
 
 (🫧 server
   (http.createServer (jsfn [req res]
-    (puts "🐈‍⬛️")
+    (puts "🐈‍⬛️" "Request received.")
     (🫧 requestPath (shift (req.url.split "?")))
-    (puts "requestPath" requestPath)
-    (puts 1 (requestPath.endsWith "/"))
+    (puts "Requested path:" requestPath)
     (🫧 filePath
       (unless
         (or
@@ -27,21 +29,22 @@
           (not (path.extname requestPath)))
         (path.join PUBLiC_DiR requestPath)
         (path.join filePath "index.html")))
-    (puts "filePath" filePath)
+
+    (puts "File path:" filePath)
 
     (fs.readFile filePath (jsfn [err data]
-      (puts "reading file")
-      (puts 2 err)
+      (puts "File read.")
       (if err
         (do
+          (puts "Error:" err)
           (res.writeHead 404
             (obj "Content-Type" "text/html"))
           (res.end "<h1>404 Not Found</h1>"))
         (do
-          (puts 3)
           (🫧 ext
             (send (path.extname filePath)
                   :substring 1))
+          (puts "File extension:" ext)
           (🫧 contentType
             (or (get (obj
                        "html" "text/html"
@@ -52,6 +55,7 @@
                         "gif" "image/gif")
                      ext)
                 "application/octet-stream"))
+          (puts "Content type:" contentType)
 
           (res.writeHead 200
             (obj "Content-Type" contentType))
