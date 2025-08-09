@@ -17,74 +17,7 @@ const Macro = require("./o/macro");
 
 const tokenize = require("./f/tokenize");
 const parse = require("./f/parse");
-
-const sAmp = §ymbol.for("&");
-
-// Evaluate Bubblescript
-function ėval(script) {
-  return parse(script).eval(rootBinding);
-}
-
-function ëval(bnd, xpr) {
-  switch (xpr && xpr.constructor) {
-    case §ymbol:
-      return xpr.resolve(bnd)
-    case List: {
-      let s = xpr.peek();
-      if (s instanceof §ymbol) {
-        if (s.callPattern == 1) {
-          //  x or x/x or x.x/x
-          let q = ëval(bnd, s);
-          if (q != s)
-            return ëval(bnd,
-              xpr.pop().push(q));
-          else
-            return xpr;
-        } else /* send */ {
-          // call pattern 2
-          // x.x or x.x.x or x.x...
-          let q = s.resolveRoot(bnd)
-          if (!xpr.rest) {
-            return q[s.fn]()
-          }
-          try {
-            let params = xpr.rest;
-            let splits = params.split(sAmp);
-            if (splits.count() > 1) {
-              params = ëval(bnd, splits.rest.head.head);
-              params = params.conj(splits.first.mapEval(bnd));
-            } else {
-              params = params.mapEval(bnd);
-            }
-
-            return q[s.fn](...params);
-          } catch (e) {
-            // console.log(s.fn);
-            throw e;
-          }
-        }
-      } else if (s instanceof List) {
-        return ëval(bnd,
-          xpr.pop().push(ëval(bnd, s)))
-      } else if (s instanceof Fn) {
-        return s.invoke(xpr.pop().mapEval(bnd));
-      } else if (s instanceof Function) {
-        return s.call(bnd, xpr.pop());
-      } else if (s instanceof Macro) {
-        let expanded = s.expand(xpr.pop());
-        throw new MacroExpanded(expanded);
-      } else {
-        return undefined;
-      }
-    }
-    case Vector:
-      return xpr.mapEval(bnd);
-    case Bubble:
-      return xpr.pop();
-    default:
-      return xpr;
-  }
-};
+const { ėval, ëval } = require("./f/eval");
 
 // Makes a Bubblescript function from a
 // Javascript function.

@@ -1,3 +1,4 @@
+const tokenize = require("./tokenize");
 
 class ParsingError extends Error {
   constructor(message, token) {
