@@ -1,4 +1,4 @@
-const { ëval } = require("./f/eval");
+const { ëval } = require("../f/eval");
 
 // Makes a Bubblescript function from a
 // Javascript function.
@@ -77,7 +77,7 @@ const rootBinding = {
 
   jsfn: function(args) {
     let binding = this, x, fn;
-    x = args.push(§ymbol.for('fn'));
+    x = args.push(Ṣymbol.for('fn'));
     fn = ëval(binding, x);
     return function(...args) {
       return fn.invoke(List.from(args));

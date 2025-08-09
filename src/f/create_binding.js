@@ -1,6 +1,6 @@
 const List = require("../o/list");
 const Vector = require("../o/vector");
-const §ymbol = require("../o/symbol");
+const Ṣymbol = require("../o/symbol");
 
 // Applys the keys and the values to the
 // binding based on order and position.
@@ -30,7 +30,7 @@ function applyArguments(binding, keys, vals) {
       case Vector:
         applyArguments(binding, key, val);
         break;
-      case §ymbol:
+      case Ṣymbol:
         binding[key.toString()] = val;
         break;
       default:

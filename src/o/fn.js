@@ -18,7 +18,7 @@ class Fn {
 
   toString() {
     return this.body.push(this.params)
-      .push(§ymbol.for("fn"))
+      .push(Ṣymbol.for("fn"))
       .toString()
   }
 

@@ -165,7 +165,7 @@ function matchItem(tokenVector, contextTokenForEOF) {
       item = false
       break;
     case TOK_SYMBOL:
-      item = §ymbol.for(currentToken.value); // itEm -> item
+      item = Ṣymbol.for(currentToken.value); // itEm -> item
       break;
     case TOK_KEYWORD:
       item = Keyword.for(currentToken.value); // itEm -> item

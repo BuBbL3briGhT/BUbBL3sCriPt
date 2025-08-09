@@ -43,4 +43,4 @@ class EmptyVector extends Vector {
 
 emptyVector = new EmptyVector()
 
-moduble.exports = Vector;
+module.exports = Vector;
