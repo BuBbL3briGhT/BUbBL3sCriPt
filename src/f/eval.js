@@ -5,6 +5,7 @@ const Fn = require("../o/fn");
 const { Macro, MacroExpanded } = require("../o/macro");
 const Bubble = require("../o/bubble");
 const Ṣymbol = require("../o/symbol.js");
+const parse = require("./parse.js");
 
 const sAmp = Ṣymbol.for("&");
 

@@ -74,8 +74,8 @@ const rootBinding = require("./o/root_binding");
 
 const BubbleScript = {
   List, Vector, Ṣymbol, Keyword, Bubble, Fn,
-  Macro, tokenize, parse, ėval, ëval,
-  rootBinding, mkfn
+  Macro, tokenize, parse, eval: ėval, ėval,
+  ëval, rootBinding
 }
 
-module.exports = BubblerScript;
+module.exports = BubbleScript;

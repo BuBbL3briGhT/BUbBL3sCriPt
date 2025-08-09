@@ -1,3 +1,6 @@
+const List = require("../o/list");
+const Fn = require("../o/fn");
+const { Macro }= require("../o/macro");
 const { ëval } = require("../f/eval");
 
 // Makes a Bubblescript function from a
@@ -68,7 +71,8 @@ const rootBinding = {
   // },
 
   fn: function(args) {
-    return new Fn(this, args.first.toList(), args.rest)
+    // return new Fn(this, args.first.toList(), args.rest)
+    return new Fn(this, List.from(args.first), args.rest)
   },
 
   macro: function(args) {

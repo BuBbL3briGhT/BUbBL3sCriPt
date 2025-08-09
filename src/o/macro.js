@@ -1,9 +1,10 @@
-const createBinding = require("../f/create_binding.js");
+const createBinding = require("../f/create_binding");
+const List = require("../o/list");
 
 class Macro {
   constructor(binding, params, body, opts={}) {
     this.binding = binding;
-    this.params = params.toList();
+    this.params = List.from(params);
     this.body = body;
     this.name = opts.name;
   }

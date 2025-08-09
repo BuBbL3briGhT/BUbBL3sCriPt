@@ -1,3 +1,4 @@
+const List = require("../o/list");
 const tokenize = require("./tokenize");
 
 class ParsingError extends Error {

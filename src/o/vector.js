@@ -20,7 +20,6 @@ class Vector extends AbstractList {
   push(element) {
     return new Vector(element, this);
   }
-
   toString() {
     return "[" + this._toString() + "]";
   }
@@ -29,11 +28,11 @@ class Vector extends AbstractList {
     return formattedElement + " " + accumulatedString;
   };
 
-  toList() {
-    return this.reduce((list, o) => {
-      return list.push(o); },
-      List.emptyList);
-  }
+  // toList() {
+  //   return this.reduce((list, o) => {
+  //     return list.push(o); },
+  //     List.emptyList);
+  // }
 
 }
 
