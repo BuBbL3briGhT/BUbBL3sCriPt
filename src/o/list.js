@@ -1,3 +1,6 @@
+
+const emptyList;
+
 const AbstractList = require("./abstract_list");
 
 // `List` extends `AbstractList` and is
