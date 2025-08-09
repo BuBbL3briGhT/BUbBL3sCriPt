@@ -1,5 +1,7 @@
 const assert = require("assert");
-const { List, Symbol: _Symbol }  = require("../../src/BubbleScript");
+
+const List = require("../../src/o/list");
+const Ṣymbol = require("../../src/o/symbol");
 
 describe("List", () => {
 
