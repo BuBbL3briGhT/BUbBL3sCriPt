@@ -20,8 +20,6 @@ const parse = require("./f/parse");
 const { ėval, ëval } = require("./f/eval");
 const rootBinding = require("./o/root_binding");
 
-AbstractList.configure({ ëval });
-
 (function() {
   let bnd = rootBinding;
 

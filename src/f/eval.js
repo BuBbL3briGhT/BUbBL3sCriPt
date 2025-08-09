@@ -1,3 +1,4 @@
+const AbstractList = require("../o/abstract_list");
 const §ymbol = require("../o/symbol.js");
 
 const sAmp = §ymbol.for("&");
@@ -67,5 +68,7 @@ function ëval(bnd, xpr) {
       return xpr;
   }
 };
+
+AbstractList.configure({ ëval });
 
 module.exports = { ėval, ëval };
