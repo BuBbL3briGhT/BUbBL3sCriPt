@@ -6,14 +6,15 @@ const { Macro, MacroExpanded } = require("../o/macro");
 const Bubble = require("../o/bubble");
 const Ṣymbol = require("../o/symbol.js");
 const parse = require("./parse.js");
+const events = require("../events");
 
 const sAmp = Ṣymbol.for("&");
 
 let rootBinding;
 
-function configure(config) {
+events.on("configure", function (config) {
   rootBinding = config.rootBinding;
-}
+});
 
 // Evaluate Bubblescript
 function ėval(script) {
@@ -81,6 +82,4 @@ function ëval(bnd, xpr) {
   }
 };
 
-AbstractList.configure({ ëval });
-
-module.exports = { ėval, ëval, configure };
+module.exports = { ėval, ëval };

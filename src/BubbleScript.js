@@ -18,6 +18,15 @@ const tokenize = require("./f/tokenize");
 const parse = require("./f/parse");
 const { ėval, ëval } = require("./f/eval");
 const rootBinding = require("./o/root_binding");
+const events = require("./events");
+
+const BubbleScript = {
+  List, Vector, Ṣymbol, Keyword, Bubble, Fn,
+  Macro, tokenize, parse, eval: ėval, ėval,
+  ëval, rootBinding
+}
+
+events.emit("configure", BubbleScript);
 
 (function() {
   let bnd = rootBinding;
@@ -71,11 +80,5 @@ const rootBinding = require("./o/root_binding");
          list(_push, z, quote(fn)))));
 
 })();
-
-const BubbleScript = {
-  List, Vector, Ṣymbol, Keyword, Bubble, Fn,
-  Macro, tokenize, parse, eval: ėval, ėval,
-  ëval, rootBinding
-}
 
 module.exports = BubbleScript;

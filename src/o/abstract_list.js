@@ -1,31 +1,17 @@
+const events = require("../events");
 
 let ëval;
+
+events.on("configure", function (config) {
+  ëval = config.ëval;
+});
 
 // Let's define `AbstractList` which is a
 // class that will serve as the abstract
 // base class for `List` and `Vector`. All
 // shared functionality between `List` and
 // `Vector` is centralized here.
-//
-// After `AbstractList` is imported with
-// `require` it needs to be configured by
-// invoking `AbstractList.configure` with `ëval`
-// once that function is available and before it
-// is first employed. Doing this will staisfy
-// the depedencies for `#eval' and `#mapEval`.
-// Not doing so will result in a null reference
-// error, which is expected functionality.
-//
-//     const AbstractList = require("path/to/abstract_list");
-//     const { ëval } = require("path/to/eval");
-//     AbstractList.configure({ ëval: ëval });
-//     👍
-//
 class AbstractList {
-
-  static configure(config) {
-    ëval = config.ëval;
-  }
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
