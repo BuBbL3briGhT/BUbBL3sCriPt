@@ -18,24 +18,8 @@ const List = require("./o/list");
 const Vector = require("./o/vector");
 const §ymbol = require("./o/symbol");
 const Keyword = require("./o/keyword");
+const Bubble = require("./o/bubble");
 
-class Bubble {
-  constructor(o) {
-    this.o = o;
-  }
-
-  pop() {
-    return this.o;
-  }
-
-  toString() {
-    return "°" + this.o;
-  }
-
-  inspect() {
-    return "°" + this.o.inspect;
-  }
-}
 
 // Applys the keys and the values to the
 // binding based on order and position.
