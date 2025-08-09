@@ -4,9 +4,9 @@ const Vector = require("../o/vector");
 const Fn = require("../o/fn");
 const { Macro, MacroExpanded } = require("../o/macro");
 const Bubble = require("../o/bubble");
-const §ymbol = require("../o/symbol.js");
+const Ṣymbol = require("../o/symbol.js");
 
-const sAmp = §ymbol.for("&");
+const sAmp = Ṣymbol.for("&");
 
 // Evaluate Bubblescript
 function ėval(script) {
@@ -15,11 +15,11 @@ function ėval(script) {
 
 function ëval(bnd, xpr) {
   switch (xpr && xpr.constructor) {
-    case §ymbol:
+    case Ṣymbol:
       return xpr.resolve(bnd)
     case List: {
       let s = xpr.peek();
-      if (s instanceof §ymbol) {
+      if (s instanceof Ṣymbol) {
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
           let q = ëval(bnd, s);

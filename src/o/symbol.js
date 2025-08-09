@@ -1,9 +1,9 @@
 const symbols = {};
 
-// `§ymbol`s are language symbols. Alternatively
+// `Ṣymbol`s are language symbols. Alternatively
 // to avoid name clash with the built-in
 // Javascript `Symbol` class/object.
-class §ymbol {
+class Ṣymbol {
 
   constructor(value) {
     if(symbols[value]) {
@@ -54,9 +54,9 @@ class §ymbol {
   }
 
   static for(key) {
-    return symbols[key] || new §ymbol(key);
+    return symbols[key] || new Ṣymbol(key);
   }
 
 }
 
-module.exports = §ymbol;
+module.exports = Ṣymbol;

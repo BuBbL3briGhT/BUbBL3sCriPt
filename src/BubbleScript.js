@@ -9,7 +9,7 @@
 const AbstractList = require("./o/abstract_list");
 const List = require("./o/list");
 const Vector = require("./o/vector");
-const §ymbol = require("./o/symbol");
+const Ṣymbol = require("./o/symbol");
 const Keyword = require("./o/keyword");
 const Bubble = require("./o/bubble");
 const Fn = require("./o/fn");
@@ -39,21 +39,21 @@ const rootBinding = require("./o/root_binding");
     return ëval(bnd, List.from(args).push(_muf));
   }
 
-  let _push = §ymbol.for('push'),
-       fn = §ymbol.for('fn'),
-       a = §ymbol.for('a'),
-       b = §ymbol.for('b'),
-       send = §ymbol.for('send'),
-       mufn = §ymbol.for('mufn'),
-       macro = §ymbol.for('macro'),
-       name = §ymbol.for('name'),
-       amp = §ymbol.for('&'),
-       z = §ymbol.for('z'),
-      _list = §ymbol.for('list'),
-      _muf = §ymbol.for('muf'),
-      puts = §ymbol.for('puts'),
-      msg = §ymbol.for('msg'),
-      consoleLog = §ymbol.for('console.log');
+  let _push = Ṣymbol.for('push'),
+       fn = Ṣymbol.for('fn'),
+       a = Ṣymbol.for('a'),
+       b = Ṣymbol.for('b'),
+       send = Ṣymbol.for('send'),
+       mufn = Ṣymbol.for('mufn'),
+       macro = Ṣymbol.for('macro'),
+       name = Ṣymbol.for('name'),
+       amp = Ṣymbol.for('&'),
+       z = Ṣymbol.for('z'),
+      _list = Ṣymbol.for('list'),
+      _muf = Ṣymbol.for('muf'),
+      puts = Ṣymbol.for('puts'),
+      msg = Ṣymbol.for('msg'),
+      consoleLog = Ṣymbol.for('console.log');
 
   // muf push (fn [a b] (send a °push b))
   muf(_push, list(fn, vector(a, b),
@@ -72,10 +72,10 @@ const rootBinding = require("./o/root_binding");
 
 })();
 
-const Bubble§cript = {
-  List, Vector, §ymbol, Keyword, Bubble, Fn,
+const BubbleScript = {
+  List, Vector, Ṣymbol, Keyword, Bubble, Fn,
   Macro, tokenize, parse, ėval, ëval,
   rootBinding, mkfn
 }
 
-module.exports = Bubble§cript;
+module.exports = BubblerScript;
