@@ -266,34 +266,34 @@ describe("List", () => {
   describe("split", function () {
 
     it("should split a list", function () {
-      let sAmp = _Symbol.for("&");
+      let sAmp = Ṣymbol.for("&");
 
       let list = List.make(1, 2, 3);
-      assert.equal(list.split(_Symbol.for("&")).toString(),
+      assert.equal(list.split(Ṣymbol.for("&")).toString(),
         "((1 2 3))");
 
       list = List.make(1, 2, sAmp, 3);
-      assert.equal(list.split(_Symbol.for("&")).toString(),
+      assert.equal(list.split(Ṣymbol.for("&")).toString(),
         "((1 2) (3))");
 
       list = List.make(1, sAmp, 2, sAmp, 3);
-      assert.equal(list.split(_Symbol.for("&")).toString(),
+      assert.equal(list.split(Ṣymbol.for("&")).toString(),
         "((1) (2) (3))");
 
       list = List.make(1, 2, 3, sAmp);
-      assert.equal(list.split(_Symbol.for("&")).toString(),
+      assert.equal(list.split(Ṣymbol.for("&")).toString(),
         "((1 2 3) ())");
 
       list = List.make(sAmp, 1, 2, 3);
-      assert.equal(list.split(_Symbol.for("&")).toString(),
+      assert.equal(list.split(Ṣymbol.for("&")).toString(),
         "(() (1 2 3))");
 
       list = List.make(1, sAmp, sAmp, 2, 3);
-      assert.equal(list.split(_Symbol.for("&")).toString(),
+      assert.equal(list.split(Ṣymbol.for("&")).toString(),
         "((1) () (2 3))");
 
       list = List.make(1, sAmp, sAmp, sAmp, 2, 3);
-      assert.equal(list.split(_Symbol.for("&")).toString(),
+      assert.equal(list.split(Ṣymbol.for("&")).toString(),
         "((1) () () (2 3))");
     });
 
