@@ -1,5 +1,16 @@
 const List = require("../o/list");
+const Keyword = require("../o/keyword");
+const Ṣymbol = require("../o/symbol");
 const tokenize = require("./tokenize");
+
+const {
+  TOK_STRiNG,
+  TOK_NUMBER,
+  TOK_SYMBOL,
+  TOK_KEYWORD,
+  TOK_TRUE,
+  TOK_FALSE
+} = tokenize.tokenTypes;
 
 class ParsingError extends Error {
   constructor(message, token) {
@@ -171,7 +182,7 @@ function matchItem(tokenVector, contextTokenForEOF) {
     case TOK_KEYWORD:
       item = Keyword.for(currentToken.value); // itEm -> item
       break;
-    case TOK_STRING:
+    case TOK_STRiNG:
       item = currentToken.value; // Value is already a string // itEm -> item
       break;
       case ')': // Start of a nested list vector.

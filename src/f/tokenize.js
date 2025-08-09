@@ -2,7 +2,7 @@ const Vector = require("../o/vector");
 
 const TOK_KEYWORD = 'K',
       TOK_NUMBER  = 'N',
-      TOK_STRING  = 'S',
+      TOK_STRiNG  = 'S',
       TOK_SYMBOL  = 'Y',
       TOK_TRUE    = 'T',
       TOK_FALSE   = 'F';
@@ -37,7 +37,7 @@ function tokenize(inputString) {
     // Ensure regex matches from the start of currentString
     let matchResult = currentString.match(/^"((?:[^\\"]|\\.)*)"/);
     if (matchResult) {
-      createToken(TOK_STRING, matchResult[1]);
+      createToken(TOK_STRiNG, matchResult[1]);
       advance(matchResult[0].length);
     } else {
       // This should not be reached if called appropriately
@@ -168,11 +168,13 @@ function tokenize(inputString) {
   return tokens;
 }
 
-tokenize.TOK_STRING = TOK_STRING;
-tokenize.TOK_NUMBER = TOK_NUMBER;
-tokenize.TOK_SYMBOL = TOK_SYMBOL;
-tokenize.TOK_KEYWORD = TOK_KEYWORD;
-tokenize.TOK_TRUE = TOK_TRUE;
-tokenize.TOK_FALSE = TOK_FALSE;
+tokenize.tokenTypes = {
+ TOK_STRiNG,
+ TOK_NUMBER,
+ TOK_SYMBOL,
+ TOK_KEYWORD,
+ TOK_TRUE,
+ TOK_FALSE
+};
 
 module.exports = tokenize;
