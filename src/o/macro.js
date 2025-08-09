@@ -28,4 +28,6 @@ class MacroExpanded {
   }
 }
 
+List.configure({ MacroExpanded });
+
 module.exports = { Macro, MacroExpanded };

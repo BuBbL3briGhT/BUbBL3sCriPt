@@ -1,6 +1,6 @@
 const AbstractList = require("./abstract_list");
 
-  let emptyList;
+let emptyList, MacroExpanded;
 
 // `List` extends `AbstractList` and is
 // the primary object in Bubblescript and
@@ -12,6 +12,10 @@ class List extends AbstractList {
   // of `EmptyList`, which terminates all
   // lists.
   static get emptyList() { return emptyList; }
+
+  static configure(config) {
+    MacroExpanded = config.MacroExpanded;
+  }
 
   // `List.make` makes/creates a new list.
   // `List.make(1, 2, 3)`
