@@ -1,9 +1,14 @@
 const assert = require("assert"); const   fs   = require("fs");
 const  Yaml  = require("yaml");
 
-const { parse, List, Vector, Keyword, Ṣymbol,
-  Bubble } = require("../../src/BubbleScript");
-const {type} = require("../../src/z/fns"); // Assuming fns is a valid module
+const parse = require("../../src/f/parse");
+const List = require("../../src/o/list");
+const Vector = require("../../src/o/vector");
+const Keyword = require("../../src/o/keyword");
+const Ṣymbol = require("../../src/o/symbol");
+const Bubble = require("../../src/o/bubble");
+
+const { type } = require("../../src/z/fns"); // Assuming fns is a valid module
 
 const symbol = Ṣymbol.for("symbol"),
       a = Ṣymbol.for("a"),
