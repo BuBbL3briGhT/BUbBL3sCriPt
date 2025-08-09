@@ -1,4 +1,6 @@
 August
+- {} objects syntax
+- events for loading and configuration
 - Allow raw list at top level in scripts, terminated with \n, continued with \\\n (\<newline>)
 - Better error handling
   - Need to keep track of track line numbers through parsing. Annotations?
