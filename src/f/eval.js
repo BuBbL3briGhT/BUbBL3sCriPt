@@ -9,6 +9,12 @@ const parse = require("./parse.js");
 
 const sAmp = Ṣymbol.for("&");
 
+let rootBinding;
+
+function configure(config) {
+  rootBinding = config.rootBinding;
+}
+
 // Evaluate Bubblescript
 function ėval(script) {
   return parse(script).eval(rootBinding);
@@ -77,4 +83,4 @@ function ëval(bnd, xpr) {
 
 AbstractList.configure({ ëval });
 
-module.exports = { ėval, ëval };
+module.exports = { ėval, ëval, configure };

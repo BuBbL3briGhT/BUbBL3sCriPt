@@ -1,7 +1,7 @@
 const List = require("../o/list");
 const Fn = require("../o/fn");
 const { Macro }= require("../o/macro");
-const { ëval } = require("../f/eval");
+const { ëval, configure: configureEval } = require("../f/eval");
 
 // Makes a Bubblescript function from a
 // Javascript function.
@@ -251,5 +251,7 @@ const rootBinding = {
 
 // Alias muf to 🫧
 rootBinding["🫧"] = rootBinding.muf;
+
+configureEval({ rootBinding });
 
 module.exports = rootBinding;
