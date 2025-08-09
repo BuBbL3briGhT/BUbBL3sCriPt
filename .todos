@@ -1,5 +1,7 @@
 August
-- {} objects syntax
+- let tokenize and parse use list
+- fix parse to move top down, or beginning to end.
+- {} object parseing
 - events for loading and configuration
 - Allow raw list at top level in scripts, terminated with \n, continued with \\\n (\<newline>)
 - Better error handling

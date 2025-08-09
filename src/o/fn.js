@@ -1,4 +1,5 @@
 const createBinding = require("../f/create_binding.js");
+const Ṣymbol = require("./symbol");
 
 class Fn {
 
