@@ -1028,9 +1028,6 @@ const rootBinding = {
 // Alias muf to 🫧
 rootBinding["🫧"] = rootBinding.muf;
 
-AbstractList.eval = $eval;
-eval.AbstractList = AbstractList;
-
 (function() {
   let bnd = rootBinding;
 
