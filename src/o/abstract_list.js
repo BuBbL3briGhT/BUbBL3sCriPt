@@ -23,7 +23,7 @@ let ëval;
 //
 class AbstractList {
 
-  static configure(config={}) {
+  static configure(config) {
     ëval = config.ëval;
   }
 
@@ -149,15 +149,13 @@ class AbstractList {
 
   eval(binding) {
     return this.each(xpr =>
-      _əval(binding, xpr));
+      ëval(binding, xpr));
   }
 
   eval(binding) {
     return this.each(xpr =>
-      _əval(binding, xpr));
+     ëval(binding, xpr));
   }
-
-
 
   mapEval(binding) {
     return this.map(xpr =>
