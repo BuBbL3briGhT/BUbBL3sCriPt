@@ -1,6 +1,6 @@
 const AbstractList = require("./abstract_list");
 
-  let emptyVector;
+let emptyVector;
 
 class Vector extends AbstractList {
 
@@ -20,6 +20,7 @@ class Vector extends AbstractList {
   push(element) {
     return new Vector(element, this);
   }
+
   toString() {
     return "[" + this._toString() + "]";
   }
