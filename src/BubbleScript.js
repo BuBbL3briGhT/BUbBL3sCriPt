@@ -13,8 +13,7 @@ const §ymbol = require("./o/symbol");
 const Keyword = require("./o/keyword");
 const Bubble = require("./o/bubble");
 const Fn = require("./o/fn");
-const Macro = require("./o/macro");
-
+const { Macro } = require("./o/macro");
 const tokenize = require("./f/tokenize");
 const parse = require("./f/parse");
 const { ėval, ëval } = require("./f/eval");

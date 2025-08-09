@@ -27,4 +27,4 @@ class MacroExpanded {
   }
 }
 
-module.exports = Macro;
+module.exports = { Macro, MacroExpanded };

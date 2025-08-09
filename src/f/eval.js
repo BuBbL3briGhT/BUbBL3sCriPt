@@ -1,4 +1,9 @@
 const AbstractList = require("../o/abstract_list");
+const List = require("../o/list");
+const Vector = require("../o/vector");
+const Fn = require("../o/fn");
+const { Macro, MacroExpanded } = require("../o/macro");
+const Bubble = require("../o/bubble");
 const §ymbol = require("../o/symbol.js");
 
 const sAmp = §ymbol.for("&");
