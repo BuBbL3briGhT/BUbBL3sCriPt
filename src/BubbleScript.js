@@ -24,16 +24,7 @@ const TOK_KEYWORD = 'K',
 // base class for `List` and `Vector`. All
 // shared functionality between `List` and
 // `Vector` is centralized here.
-const AbstractListFactory = require("./o/abstract_list_factory");
-const AbstractList = AbstractListFactory.createAbstractList($eval);
-
-const abstractListFactory = require("./o/abstract_list");
-const AbstractList = abstractListFactory({ eval: $eval });
-
-AbstractList.eval = $eval;
-eval.AbstractList = AbstractList;
-
-
+const AbstractList = require("./o/abstract_list");
 
 // `List` extends `AbstractList` and is
 // the primary object in Bubblescript and
@@ -1036,6 +1027,9 @@ const rootBinding = {
 
 // Alias muf to 🫧
 rootBinding["🫧"] = rootBinding.muf;
+
+AbstractList.eval = $eval;
+eval.AbstractList = AbstractList;
 
 (function() {
   let bnd = rootBinding;
