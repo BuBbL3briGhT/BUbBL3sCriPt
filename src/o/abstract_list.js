@@ -152,14 +152,9 @@ class AbstractList {
       ëval(binding, xpr));
   }
 
-  eval(binding) {
-    return this.each(xpr =>
-     ëval(binding, xpr));
-  }
-
   mapEval(binding) {
     return this.map(xpr =>
-      AbstractList.eval(binding, xpr));
+      ëval(binding, xpr));
   }
 
   find(value) {
