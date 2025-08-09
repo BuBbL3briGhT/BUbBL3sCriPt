@@ -1,11 +1,11 @@
 const assert = require("assert");
 
-const { tokenize, Vector } =
-  require("../../src/BubbleScript");
+const tokenize = require("../../src/f/tokenize");
+const Vector = require("../../src/o/vector");
 
-const { TOK_STRING, TOK_NUMBER,
+const { TOK_STRiNG, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,
-  TOK_FALSE} = tokenize;
+  TOK_FALSE} = tokenize.tokenTypes;
 
 describe("tokenize(string)", function() {
 
