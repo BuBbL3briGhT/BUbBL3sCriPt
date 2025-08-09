@@ -4,6 +4,9 @@
 (🫧 (puts & msg)
  (console.log & msg))
 
+(🫧 (poot & msg)
+ (console.log & msg))
+
 (🫧 (peek list)
   (send list :peek))
 
