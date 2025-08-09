@@ -2,6 +2,8 @@ const List = require("../o/list");
 const Vector = require("../o/vector");
 const Ṣymbol = require("../o/symbol");
 
+let sAmp = Ṣymbol.for("&");
+
 // Applys the keys and the values to the
 // binding based on order and position.
 // Binding will be modified.
