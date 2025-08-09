@@ -1,6 +1,6 @@
 const AbstractList = require("./abstract_list");
 
-const emptyList;
+  let emptyList;
 
 // `List` extends `AbstractList` and is
 // the primary object in Bubblescript and

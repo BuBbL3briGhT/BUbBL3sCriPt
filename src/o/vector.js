@@ -1,6 +1,6 @@
 const AbstractList = require("./abstract_list");
 
-const emptyVector;
+  let emptyVector;
 
 class Vector extends AbstractList {
 
