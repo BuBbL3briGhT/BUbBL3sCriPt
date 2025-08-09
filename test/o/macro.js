@@ -12,7 +12,7 @@ describe("Macro", function () {
       let body = List.emptyList;
       let macro = new Macro(bnd, args, body);
       assert.equal(macro.binding, bnd);
-      assert.deepEqual(macro.params, args.toList());
+      assert.deepEqual(macro.params, List.from(args));
       assert.equal(macro.body, body);
     });
   });
