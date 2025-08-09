@@ -6,9 +6,6 @@
      *        *    +   *
        *  */
 
-const keywords    = {};
-const symbols     = {};
-
 const TOK_KEYWORD = 'K',
       TOK_NUMBER  = 'N',
       TOK_STRING  = 'S',
@@ -21,34 +18,6 @@ const List = require("./o/list");
 const Vector = require("./o/vector");
 const §ymbol = require("./o/symbol");
 const Keyword = require("./o/keyword");
-
-class Keyword {
-  constructor(key) {
-    if(keywords[key]) {
-      throw new Keyword.DoopError(key);
-    }
-    this.key = key;
-    return keywords[key] = this;
-  }
-
-  toString() {
-    return ":" + this.key;
-  }
-
-  static for(key) {
-    return keywords[key] || new Keyword(key);
-  }
-}
-
-class KeywordDoopError extends Error {
-  constructor(key) {
-    super(`Keyword with key '${key}' already exists.`);
-    this.name = "KeywordDoopError";
-  }
-}
-
-Keyword.DoopError = KeywordDoopError;
-
 
 class Bubble {
   constructor(o) {

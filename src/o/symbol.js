@@ -1,3 +1,5 @@
+const symbols = {};
+
 // `§ymbol`s are language symbols. Alternatively
 // to avoid name clash with the built-in
 // Javascript `Symbol` class/object.
