@@ -1,3 +1,6 @@
+const List = require("../o/list");
+const Vector = require("../o/vector");
+const §ymbol = require("../o/symbol");
 
 // Applys the keys and the values to the
 // binding based on order and position.
