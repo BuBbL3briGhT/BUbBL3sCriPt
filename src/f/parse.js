@@ -1,4 +1,5 @@
 const List = require("../o/list");
+const Vector = require("../o/vector");
 const Keyword = require("../o/keyword");
 const Ṣymbol = require("../o/symbol");
 const tokenize = require("./tokenize");
