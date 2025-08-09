@@ -71,8 +71,7 @@ const rootBinding = {
   // },
 
   fn: function(args) {
-    // return new Fn(this, args.first.toList(), args.rest)
-    return new Fn(this, List.from(args.first), args.rest)
+    return new Fn(this, args.first.toList(), args.rest)
   },
 
   macro: function(args) {

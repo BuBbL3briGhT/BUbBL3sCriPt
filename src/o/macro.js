@@ -4,7 +4,7 @@ const List = require("../o/list");
 class Macro {
   constructor(binding, params, body, opts={}) {
     this.binding = binding;
-    this.params = List.from(params);
+    this.params = params.toList();
     this.body = body;
     this.name = opts.name;
   }

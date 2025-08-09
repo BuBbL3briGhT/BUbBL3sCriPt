@@ -9,9 +9,9 @@ let sAmp = Ṣymbol.for("&");
 // Binding will be modified.
 function applyArguments(binding, keys, vals) {
   if (keys instanceof Vector)
-    keys = List.from(keys);
+    keys = keys.toList();
   if (vals instanceof Vector)
-    vals = List.from(vals);
+    vals = vals.toList();
 
   while (!keys.isEmpty && !vals.isEmpty) {
     let key = keys.first;

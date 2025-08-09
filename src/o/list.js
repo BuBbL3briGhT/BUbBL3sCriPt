@@ -48,11 +48,11 @@ class List extends AbstractList {
     return accumulatedString + " " + formattedElement;
   };
 
-  toVector() {
-    return this.reduce((vector, o) => {
-      return vector.push(o); },
-      Vector.emptyVector);
-  }
+  // toVector() {
+  //   return this.reduce((vector, o) => {
+  //     return vector.push(o); },
+  //     Vector.emptyVector);
+  // }
 
   each(fn) {
     let result;

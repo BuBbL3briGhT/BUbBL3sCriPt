@@ -1,4 +1,5 @@
 const AbstractList = require("./abstract_list");
+const List = require("./list");
 
 let emptyVector;
 
@@ -29,11 +30,11 @@ class Vector extends AbstractList {
     return formattedElement + " " + accumulatedString;
   };
 
-  // toList() {
-  //   return this.reduce((list, o) => {
-  //     return list.push(o); },
-  //     List.emptyList);
-  // }
+  toList() {
+    return this.reduce((list, o) => {
+      return list.push(o); },
+      List.emptyList);
+  }
 
 }
 
