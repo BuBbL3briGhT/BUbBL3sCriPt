@@ -1,11 +1,11 @@
 const assert = require("assert");
 
-const { tokenize, Vector } =
-  require("../../src/BubbleScript");
+const tokenize = require("../../src/f/tokenize");
+const Vector = require("../../src/o/vector");
 
-const { TOK_STRING, TOK_NUMBER,
+const { TOK_STRiNG, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,
-  TOK_FALSE} = tokenize;
+  TOK_FALSE} = tokenize.tokenTypes;
 
 describe("tokenize(string)", function() {
 
@@ -61,7 +61,7 @@ describe("tokenize(string)", function() {
 
   it("tokenizes string", function () {
     let tokenList = tokenize('"Hola Berenjena"');
-    assert.equal(tokenList.peek().type, TOK_STRING);
+    assert.equal(tokenList.peek().type, TOK_STRiNG);
     assert.equal(tokenList.peek().value, "Hola Berenjena");
     assert.equal(tokenList.peek().line, 1);
     assert.equal(tokenList.peek().column, 1);
