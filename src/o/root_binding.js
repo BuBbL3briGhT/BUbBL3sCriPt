@@ -1,5 +1,6 @@
 const List = require("../o/list");
 const Fn = require("../o/fn");
+const Ṣymbol = require("../o/symbol");
 const { Macro }= require("../o/macro");
 const { ëval } = require("../f/eval");
 
@@ -251,4 +252,4 @@ const rootBinding = {
 // Alias muf to 🫧
 rootBinding["🫧"] = rootBinding.muf;
 
-module.exports = rootBinding;
+module.exports = { rootBinding, mkfn };

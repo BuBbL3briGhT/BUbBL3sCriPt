@@ -17,7 +17,7 @@ const { Macro } = require("./o/macro");
 const tokenize = require("./f/tokenize");
 const parse = require("./f/parse");
 const { ėval, ëval } = require("./f/eval");
-const rootBinding = require("./o/root_binding");
+const { rootBinding } = require("./o/root_binding");
 const events = require("./events");
 
 const BubbleScript = {
