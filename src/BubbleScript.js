@@ -1,6 +1,6 @@
 
     /*      +
-      *  🫧 BubbleScript.js  *
+      *  🫧 Ɓůɓɓļɛ§çŕịpŧ.js  *
      *         +     *           *
     *   ✨️  A Lisp for JavaScript. *
      *        *    +   *
@@ -143,10 +143,10 @@ class EmptyVector extends Vector {
 emptyVector = new EmptyVector()
 
 
-// `_Symbol`s are language symbols. Underscored
+// `§ymbol`s are language symbols. Underscored
 // to avoid name clash with the built-in
 // Javascript `Symbol` class/object.
-class _Symbol {
+class §ymbol {
 
   constructor(value) {
     if(symbols[value]) {
@@ -197,7 +197,7 @@ class _Symbol {
   }
 
   static for(key) {
-    return symbols[key] || new _Symbol(key);
+    return symbols[key] || new §ymbol(key);
   }
 
 }
@@ -277,7 +277,7 @@ function applyArguments(binding, keys, vals) {
       case Vector:
         applyArguments(binding, key, val);
         break;
-      case _Symbol:
+      case §ymbol:
         binding[key.toString()] = val;
         break;
       default:
@@ -313,7 +313,7 @@ class Fn {
 
   toString() {
     return this.body.push(this.params)
-      .push(_Symbol.for("fn"))
+      .push(§ymbol.for("fn"))
       .toString()
   }
 
@@ -681,7 +681,7 @@ function matchItem(tokenVector, contextTokenForEOF) {
       item = false
       break;
     case TOK_SYMBOL:
-      item = _Symbol.for(currentToken.value); // itEm -> item
+      item = §ymbol.for(currentToken.value); // itEm -> item
       break;
     case TOK_KEYWORD:
       item = Keyword.for(currentToken.value); // itEm -> item
@@ -712,25 +712,25 @@ function matchItem(tokenVector, contextTokenForEOF) {
   return [tokenVector.pop(), item]; // itEm -> item
 }
 
-const sAmp = _Symbol.for("&");
+const sAmp = §ymbol.for("&");
 
 // Evaluate Bubblescript
-function _eval(script) {
+function ėval(script) {
   return parse(script).eval(rootBinding);
 }
 
-function $eval(bnd, xpr) {
+function ëval(bnd, xpr) {
   switch (xpr && xpr.constructor) {
-    case _Symbol:
+    case §ymbol:
       return xpr.resolve(bnd)
     case List: {
       let s = xpr.peek();
-      if (s instanceof _Symbol) {
+      if (s instanceof §ymbol) {
         if (s.callPattern == 1) {
           //  x or x/x or x.x/x
-          let q = $eval(bnd, s);
+          let q = ëval(bnd, s);
           if (q != s)
-            return $eval(bnd,
+            return ëval(bnd,
               xpr.pop().push(q));
           else
             return xpr;
@@ -745,7 +745,7 @@ function $eval(bnd, xpr) {
             let params = xpr.rest;
             let splits = params.split(sAmp);
             if (splits.count() > 1) {
-              params = $eval(bnd, splits.rest.head.head);
+              params = ëval(bnd, splits.rest.head.head);
               params = params.conj(splits.first.mapEval(bnd));
             } else {
               params = params.mapEval(bnd);
@@ -758,8 +758,8 @@ function $eval(bnd, xpr) {
           }
         }
       } else if (s instanceof List) {
-        return $eval(bnd,
-          xpr.pop().push($eval(bnd, s)))
+        return ëval(bnd,
+          xpr.pop().push(ëval(bnd, s)))
       } else if (s instanceof Fn) {
         return s.invoke(xpr.pop().mapEval(bnd));
       } else if (s instanceof Function) {
@@ -814,7 +814,7 @@ const rootBinding = {
 
   muf: function([key,val]) {
     return this[key.toString()]
-      = $eval(this, val);
+      = ëval(this, val);
   },
 
   muf: function(args) {
@@ -832,7 +832,7 @@ const rootBinding = {
         = new Fn(this, key.pop(), val, { name });
     } else {
       return this[key.toString()]
-        = $eval(this, val.peek());
+        = ëval(this, val.peek());
     }
   },
 
@@ -857,8 +857,8 @@ const rootBinding = {
 
   jsfn: function(args) {
     let binding = this, x, fn;
-    x = args.push(_Symbol.for('fn'));
-    fn = $eval(binding, x);
+    x = args.push(§ymbol.for('fn'));
+    fn = ëval(binding, x);
     return function(...args) {
       return fn.invoke(List.from(args));
     }
@@ -873,20 +873,20 @@ const rootBinding = {
       x = x.pop();
       w = x.peek();
       x = x.pop();
-      binding[k] = $eval(binding, w);
+      binding[k] = ëval(binding, w);
     }
     return xx.map(z =>
-      $eval(binding, z)).pop();
+      ëval(binding, z)).pop();
   },
 
   if: function([c,t,f]) {
-    return $eval(this,
-      $eval(this, c) ? t : f);
+    return ëval(this,
+      ëval(this, c) ? t : f);
   },
 
   unless: function([c,f,t]) {
-    return $eval(this,
-      $eval(this, c) ? t : f);
+    return ëval(this,
+      ëval(this, c) ? t : f);
   },
 
   blert: function(msgs) {
@@ -894,7 +894,7 @@ const rootBinding = {
   },
 
   expandmacro: function([m,n]) {
-    return $eval(this,m).expand(this, n);
+    return ëval(this,m).expand(this, n);
   },
 
   loop: function([x,...xx]) {
@@ -908,7 +908,7 @@ const rootBinding = {
       x = x.pop();
       v = x.peek();
       x = x.pop();
-      binding[k] = $eval(binding, v);
+      binding[k] = ëval(binding, v);
     }
 
     binding.recur = function([a]) {
@@ -919,7 +919,7 @@ const rootBinding = {
         a = a.pop();
         w = a.peek();
         a = a.pop();
-        binding[k] = $eval(binding, w);
+        binding[k] = ëval(binding, w);
       }
       recurCalled = true;
     };
@@ -927,7 +927,7 @@ const rootBinding = {
     do {
       recurCalled = false;
       m = xx.map(z =>
-        $eval(binding, z)).pop();
+        ëval(binding, z)).pop();
     } while(recurCalled);
     return m;
   },
@@ -1028,6 +1028,8 @@ const rootBinding = {
 // Alias muf to 🫧
 rootBinding["🫧"] = rootBinding.muf;
 
+AbstractList.configure({ ëval: ëval });
+
 (function() {
   let bnd = rootBinding;
 
@@ -1044,25 +1046,25 @@ rootBinding["🫧"] = rootBinding.muf;
   }
 
   function muf(...args) {
-    // return _eval(bnd, arry.toList(args).push(_muf));
-    return $eval(bnd, List.from(args).push(_muf));
+    // return ėval(bnd, arry.toList(args).push(_muf));
+    return ëval(bnd, List.from(args).push(_muf));
   }
 
-  let _push = _Symbol.for('push'),
-       fn = _Symbol.for('fn'),
-       a = _Symbol.for('a'),
-       b = _Symbol.for('b'),
-       send = _Symbol.for('send'),
-       mufn = _Symbol.for('mufn'),
-       macro = _Symbol.for('macro'),
-       name = _Symbol.for('name'),
-       amp = _Symbol.for('&'),
-       z = _Symbol.for('z'),
-      _list = _Symbol.for('list'),
-      _muf = _Symbol.for('muf'),
-      puts = _Symbol.for('puts'),
-      msg = _Symbol.for('msg'),
-      consoleLog = _Symbol.for('console.log');
+  let _push = §ymbol.for('push'),
+       fn = §ymbol.for('fn'),
+       a = §ymbol.for('a'),
+       b = §ymbol.for('b'),
+       send = §ymbol.for('send'),
+       mufn = §ymbol.for('mufn'),
+       macro = §ymbol.for('macro'),
+       name = §ymbol.for('name'),
+       amp = §ymbol.for('&'),
+       z = §ymbol.for('z'),
+      _list = §ymbol.for('list'),
+      _muf = §ymbol.for('muf'),
+      puts = §ymbol.for('puts'),
+      msg = §ymbol.for('msg'),
+      consoleLog = §ymbol.for('console.log');
 
   // muf push (fn [a b] (send a °push b))
   muf(_push, list(fn, vector(a, b),
@@ -1081,10 +1083,10 @@ rootBinding["🫧"] = rootBinding.muf;
 
 })();
 
-const BubbleScript = {
-  List, Vector, Symbol: _Symbol, Keyword,
-  Bubble, Fn, Macro, tokenize, parse, eval:
-  _eval, $eval, rootBinding, mkfn
+const Bubble§cript = {
+  List, Vector, §ymbol, Keyword, Bubble, Fn,
+  Macro, tokenize, parse, ėval, ëval,
+  rootBinding, mkfn
 }
 
-module.exports = BubbleScript;
+module.exports = Bubble§cript;

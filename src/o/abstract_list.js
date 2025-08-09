@@ -1,17 +1,15 @@
 
-getEval() {
-  return _eval ||= require("../f/eval");
-}
+const ëval;
 
 class AbstractList {
+
+  static configure(config={}) {
+    ëval = config.ëval;
+  }
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
     return this.make(...array);
-  }
-
-  static get eval() {
-    return this._eval ||= require("../f/eval");
   }
 
   constructor(o, oo) {
@@ -131,12 +129,12 @@ class AbstractList {
 
   eval(binding) {
     return this.each(xpr =>
-      getEval(binding, xpr));
+      _əval(binding, xpr));
   }
 
   eval(binding) {
     return this.each(xpr =>
-      getEval()(binding, xpr));
+      _əval(binding, xpr));
   }
 
 
