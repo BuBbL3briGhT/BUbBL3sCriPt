@@ -2,6 +2,7 @@ const List = require("../o/list");
 const Vector = require("../o/vector");
 const Keyword = require("../o/keyword");
 const Ṣymbol = require("../o/symbol");
+const Bubble = require("../o/bubble");
 const tokenize = require("./tokenize");
 
 const {
