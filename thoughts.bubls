@@ -3,6 +3,22 @@
           math/basic :into math
           list])
 
-poot (math/abs -7)
+puts (math/abs -7)
 
+puts (math/integral formula)
 
+puts (pop [1 2 3])
+
+(require "list" :as :list)
+
+(require "list") list ✨️
+
+°(1 2 3) list/pop
+
+✨️ list (require "list")
+
+list/pop °(1 2 3)
+
+(✨️ list (require "list"))
+
+(list/pop °(1 2 3))
