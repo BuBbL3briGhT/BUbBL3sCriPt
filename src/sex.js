@@ -27,16 +27,20 @@ class Tokenizer {
     this.string = string;
   }
 
-  *tokenize() {
-    yield {
-      line: 1,
-      columm: 1,
-      type: 1,
-      value: ""
-    };
-    yield 2;
-    yield this.string;
+  tokenize() {
+    return this.string;
   }
+
+  // *tokenize() {
+  //   yield {
+  //     line: 1,
+  //     columm: 1,
+  //     type: 1,
+  //     value: ""
+  //   };
+  //   yield 2;
+  //   yield this.string;
+  // }
 }
 
 const tokenizer = new Tokenizer(string);
