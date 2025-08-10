@@ -12,8 +12,8 @@ const sAmp = Ṣymbol.for("&");
 
 let rootBinding;
 
-events.on("configure", function (config) {
-  rootBinding = config.rootBinding;
+events.on("init", function (bubls) {
+  rootBinding = bubls.rootBinding;
 });
 
 // Evaluate Bubblescript

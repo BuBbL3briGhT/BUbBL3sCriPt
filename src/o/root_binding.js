@@ -246,7 +246,7 @@ const rootBinding = {
   }),
   "new": mkfn(function([m,n]) {
       return new m(...n.toArray());
-  }),
+  })
 };
 
 // Alias muf to 🫧

@@ -26,7 +26,7 @@ const BubbleScript = {
   ëval, rootBinding
 }
 
-events.emit("configure", BubbleScript);
+events.emit("init", BubbleScript);
 
 (function() {
   let bnd = rootBinding;

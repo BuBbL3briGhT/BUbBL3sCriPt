@@ -2,8 +2,8 @@ const events = require("../events");
 
 let ëval;
 
-events.on("configure", function (config) {
-  ëval = config.ëval;
+events.on("init", function (bubls) {
+  ëval = bubls.ëval;
 });
 
 // Let's define `AbstractList` which is a

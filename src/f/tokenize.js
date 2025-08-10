@@ -7,7 +7,6 @@ const TOK_KEYWORD = 'K',
       TOK_TRUE    = 'T',
       TOK_FALSE   = 'F';
 
-
 function tokenize(inputString) {
   let tokens = Vector.emptyVector;
   let line = 1;

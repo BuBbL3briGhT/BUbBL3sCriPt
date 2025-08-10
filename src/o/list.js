@@ -3,7 +3,7 @@ const events = require("../events");
 
 let emptyList, MacroExpanded;
 
-events.on("configure", function (config) {
+events.on("init", function (bubls) {
   MacroExpanded = require("./macro").MacroExpanded;
 });
 
