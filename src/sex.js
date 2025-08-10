@@ -37,6 +37,7 @@ class Tokenator {
       const char = this.string[this.turtle++];
       switch (char) {
         case '(':
+        case ')':
           return { value: this.createToken(char, char) };
           break;
         default:
@@ -65,10 +66,10 @@ class Tokenator {
   tokenizeSymbol () {
     let _string = this.string.substr(this.turtle-1, 32);
     let matchResult = _string.match(/^([^\s()[\]]*)/);
-    // console.log(matchResult);
     if (matchResult && matchResult[0].length > 0) { // Ensure it matches a non-empty symbol
-      this.advance(matchResult[0].length);
-      return this.createToken(TOK_SYMBOL, matchResult[0]);
+      let token = this.createToken(TOK_SYMBOL, matchResult[0]);
+      this.advance(matchResult[0].length-1);
+      return token;
     }
 
     throw new Error(`Invalid symbol starting with '${currentString[0]}' at ${line}:${column}`);
