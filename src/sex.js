@@ -8,34 +8,13 @@ const TOK_KEYWORD = 'K',
       TOK_FALSE   = 'F';
 
 
-function tokenize(string) {
-
-  // return iterable
-  //
-  return {
-    next() {
-      return {
-        value: {
-          type: 1,
-          value: 1,
-          line: 1,
-          columm: 1
-        }
-      }
-    }
-    // *[Symbol.iterator]() {
-
-    // }
-  }
-}
-
 function* tokenize(string) {
   yield {
     value: {
       line: 1,
       columm: 1,
       type: 1,
-      value: 1
+      value: string
     }
   }
   yield {
@@ -55,15 +34,6 @@ function* tokenize(string) {
     }
   }
 }
-
-// console.log(tokenize("love"));
-// let tokeniter = tokenize("love");
-// console.log(tokeniter);
-// console.log(tokeniter.next());
-// console.log(tokeniter.next());
-// console.log(tokeniter.next());
-// console.log(tokeniter.next());
-// console.log(tokeniter.next());
 
 const tokens = tokenize("love");
 for(const token of tokens) {
