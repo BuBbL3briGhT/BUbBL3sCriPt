@@ -38,6 +38,9 @@ class Tokenator {
       switch (char) {
         case '(':
           return { value: this.createToken(char, char) };
+          break;
+        default:
+          return { value: this.createToken(char, char) };
       }
     }
     return { done: true };
@@ -52,7 +55,7 @@ class Tokenator {
   }
 }
 
-const tokenator = new Tokenator(string);
+const tokenator = new Tokenator(string, { file: "imaginary" });
 // console.log(tokenator.next());
 for (const token of tokenator) {
   console.log(token);
