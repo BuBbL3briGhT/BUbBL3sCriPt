@@ -40,7 +40,7 @@ class Tokenator {
           return { value: this.createToken(char, char) };
           break;
         default:
-          return { value: this.createToken(char, char) };
+          throw new Error(`Unexpected character: '${char}' at ${this.line}:${this.column}`);
       }
     }
     return { done: true };
