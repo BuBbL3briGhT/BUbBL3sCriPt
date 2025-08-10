@@ -25,12 +25,15 @@ const string = "(love)";
 class Tokenizer {
 
   *tokenize(string) {
-      let turtle = 0;
+      var turtle = 0;
     const hare   = string.length;
 
     while(turtle < hare) {
-      let char = string[turtle++];
-      yield char;
+      const char = string[turtle++];
+      switch (char) {
+        case '(':
+          yield char;
+      }
     }
   }
 
