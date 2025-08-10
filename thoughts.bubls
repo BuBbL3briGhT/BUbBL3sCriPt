@@ -1,0 +1,8 @@
+
+(require [math/advanced :as math
+          math/basic :into math
+          list])
+
+poot (math/abs -7)
+
+
