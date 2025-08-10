@@ -23,12 +23,15 @@ const string = "(love)";
 // }
 
 class Tokenizer {
-  constructor(string) {
-    this.string = string;
-  }
 
-  tokenize() {
-    return this.string;
+  *tokenize(string) {
+      let turtle = 0;
+    const hare   = string.length;
+
+    while(turtle < hare) {
+      let char = string[turtle++];
+      yield char;
+    }
   }
 
   // *tokenize() {
@@ -43,8 +46,8 @@ class Tokenizer {
   // }
 }
 
-const tokenizer = new Tokenizer(string);
-const tokens = tokenizer.tokenize()
+const tokenizer = new Tokenizer();
+const tokens = tokenizer.tokenize(string)
 for(const token of tokens) {
   console.log(token);
 }
