@@ -40,10 +40,17 @@ class Tokenator {
           return { value: this.createToken(char, char) };
           break;
         default:
+          if (/[^\s()[\]{}:"#'.]/.test(char)) { // Ensure it's a valid start for a symbol
+            return { value: this.tokenizeSymbol(); }
+          }
           throw new Error(`Unexpected character: '${char}' at ${this.line}:${this.column}`);
       }
     }
     return { done: true };
+  }
+
+  tokenizeSymbol () {
+
   }
 
   createToken(type, value) {
