@@ -1,4 +1,4 @@
-
+const assert = require("assert");
 
 const TOK_KEYWORD = 'K',
       TOK_NUMBER  = 'N',
@@ -7,32 +7,52 @@ const TOK_KEYWORD = 'K',
       TOK_TRUE    = 'T',
       TOK_FALSE   = 'F';
 
+// const string = "love";
+const string = "(love)";
 
-function* tokenize(string) {
-  yield {
-    line: 1,
-    columm: 1,
-    type: 1,
-    value: string
+// function* tokenize(string) {
+//   let line = 1;
+//   let column = 1;
+
+//   yield {
+//     line: 1,
+//     columm: 1,
+//     type: 1,
+//     value: ""
+//   }
+// }
+
+class Tokenizer {
+  constructor(string) {
+    this.string = string;
   }
-  yield {
-    line: 1,
-    columm: 2,
-    type: 1,
-    value: 1
-  }
-  yield {
-    line: 1,
-    columm: 3,
-    type: 1,
-    value: 1
+
+  *tokenize() {
+    yield {
+      line: 1,
+      columm: 1,
+      type: 1,
+      value: ""
+    };
+    yield 2;
+    yield this.string;
   }
 }
 
-const tokens = tokenize("love");
+const tokenizer = new Tokenizer(string);
+const tokens = tokenizer.tokenize()
 for(const token of tokens) {
   console.log(token);
 }
-console.log(tokens.next());
-console.log(tokens.next());
+
+
+// const tokens = tokenize("love");
+// for(const token of tokens) {
+//   console.log(token);
+// }
+
+
+// describe("tokenize", function () {
+//   it(""
+// });
 
