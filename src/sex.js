@@ -10,28 +10,22 @@ const TOK_KEYWORD = 'K',
 
 function* tokenize(string) {
   yield {
-    value: {
-      line: 1,
-      columm: 1,
-      type: 1,
-      value: string
-    }
+    line: 1,
+    columm: 1,
+    type: 1,
+    value: string
   }
   yield {
-    value: {
-      line: 1,
-      columm: 2,
-      type: 1,
-      value: 1
-    }
+    line: 1,
+    columm: 2,
+    type: 1,
+    value: 1
   }
   yield {
-    value: {
-      line: 1,
-      columm: 3,
-      type: 1,
-      value: 1
-    }
+    line: 1,
+    columm: 3,
+    type: 1,
+    value: 1
   }
 }
 
@@ -39,4 +33,6 @@ const tokens = tokenize("love");
 for(const token of tokens) {
   console.log(token);
 }
+console.log(tokens.next());
+console.log(tokens.next());
 
