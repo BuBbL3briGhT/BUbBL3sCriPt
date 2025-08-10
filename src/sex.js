@@ -57,11 +57,16 @@ function* tokenize(string) {
 }
 
 // console.log(tokenize("love"));
-let tokeniter = tokenize("love");
-console.log(tokeniter);
-console.log(tokeniter.next());
-console.log(tokeniter.next());
-console.log(tokeniter.next());
-console.log(tokeniter.next());
-console.log(tokeniter.next());
+// let tokeniter = tokenize("love");
+// console.log(tokeniter);
+// console.log(tokeniter.next());
+// console.log(tokeniter.next());
+// console.log(tokeniter.next());
+// console.log(tokeniter.next());
+// console.log(tokeniter.next());
+
+const tokens = tokenize("love");
+for(const token of tokens) {
+  console.log(token);
+}
 
