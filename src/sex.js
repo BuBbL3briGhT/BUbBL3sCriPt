@@ -29,8 +29,39 @@ function tokenize(string) {
   }
 }
 
-console.log(tokenize("love"));
+function* tokenize(string) {
+  yield {
+    value: {
+      line: 1,
+      columm: 1,
+      type: 1,
+      value: 1
+    }
+  }
+  yield {
+    value: {
+      line: 1,
+      columm: 2,
+      type: 1,
+      value: 1
+    }
+  }
+  yield {
+    value: {
+      line: 1,
+      columm: 3,
+      type: 1,
+      value: 1
+    }
+  }
+}
+
+// console.log(tokenize("love"));
 let tokeniter = tokenize("love");
 console.log(tokeniter);
+console.log(tokeniter.next());
+console.log(tokeniter.next());
+console.log(tokeniter.next());
+console.log(tokeniter.next());
 console.log(tokeniter.next());
 
