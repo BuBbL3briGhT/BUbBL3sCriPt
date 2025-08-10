@@ -41,7 +41,7 @@ class Tokenator {
           break;
         default:
           if (/[^\s()[\]{}:"#'.]/.test(char)) { // Ensure it's a valid start for a symbol
-            return { value: this.tokenizeSymbol(); }
+            return { value: this.tokenizeSymbol() };
           }
           throw new Error(`Unexpected character: '${char}' at ${this.line}:${this.column}`);
       }
@@ -49,8 +49,29 @@ class Tokenator {
     return { done: true };
   }
 
-  tokenizeSymbol () {
+  // Advances turtle along string by n characters, updating line and column.
+  advance(n = 1) {
+    for (let i = 0; i < n; i++) {
+      if (this.string[i+this.turtle] === '\n') {
+        this.line++;
+        this.column = 1;
+      } else {
+        this.column++;
+      }
+    }
+    this.turtle = this.turtle+n;
+  }
 
+  tokenizeSymbol () {
+    let _string = this.string.substr(this.turtle-1, 32);
+    let matchResult = _string.match(/^([^\s()[\]]*)/);
+    // console.log(matchResult);
+    if (matchResult && matchResult[0].length > 0) { // Ensure it matches a non-empty symbol
+      this.advance(matchResult[0].length);
+      return this.createToken(TOK_SYMBOL, matchResult[0]);
+    }
+
+    throw new Error(`Invalid symbol starting with '${currentString[0]}' at ${line}:${column}`);
   }
 
   createToken(type, value) {
