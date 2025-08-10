@@ -35,9 +35,16 @@ class Tokenator {
   next() {
     if (this.turtle < this.hare) {
       const char = this.string[this.turtle++];
-      return { value: char, done: false };
+      switch (char) {
+        case '(':
+          return { value: this.createToken(char, char) };
+      }
     }
     return { done: true };
+  }
+
+  createToken(type, value) {
+    return { type, value, line: this.line, column: this.column, file: this.file };
   }
 
   [Symbol.iterator]() {
