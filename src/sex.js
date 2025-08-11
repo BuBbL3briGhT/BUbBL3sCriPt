@@ -57,6 +57,9 @@ class Tokenizer {
           token = this.createToken(char, char);
           this.advance();
           break;
+        case '"':
+          token = this.tokenizeString();
+          break;
         case ':':
           token = this.tokenizeKeyword();
           break;
@@ -87,18 +90,34 @@ class Tokenizer {
     this.tortuga += n;
   }
 
+  getSub(length) {
+    return this.string.substr(this.tortuga, length);
+  }
+
   // Returns a sub-string of this.string
   // beginning at the current tortuga position
   // and continuing for 64 characters to the end
   // of the string.
   get sub() {
-    return this.string.substr(this.tortuga, 64);
+    return this.getSub(64);
+  }
+
+  tokenizeString() {
+    let match= this.getSub().match(/^"((?:[^\\"]|\\.)*)"/);
+    if (match) {
+      const token = this.createToken(TOK_STRiNG, match[1]);
+      this.advance(match[0].length);
+      return token;
+    } else {
+      // This should not be reached if called appropriately
+      throw new Error(`Unterminated string at ${line}:${column}`);
+    }
   }
 
   tokenizeNumber() {
-    let match = this.sub.match(/^\d+(?:\.\d+)?/);
+    const match = this.sub.match(/^\d+(?:\.\d+)?/);
     if (match) {
-      let token = this.createToken(TOK_NUMBER, Number(match[0]));
+      const token = this.createToken(TOK_NUMBER, Number(match[0]));
       this.advance(match[0].length);
       return token;
     } else {
@@ -108,9 +127,9 @@ class Tokenizer {
   }
 
   tokenizeSymbol () {
-    let match = this.sub.match(/^([^\s()[\]]*)/);
+    const match = this.sub.match(/^([^\s()[\]]*)/);
     if (match && match[0].length > 0) { // Ensure it matches a non-empty symbol
-      let token = this.createToken(TOK_SYMBOL, match[0]);
+      const token = this.createToken(TOK_SYMBOL, match[0]);
       this.advance(match[0].length);
       return token;
     }
@@ -121,9 +140,9 @@ class Tokenizer {
   tokenizeKeyword() {
     // Keywords start with ':' e.g. :foo
     // The regex should match ':' followed by symbol-like characters.
-    let match = this.sub.match(/^:([^\s()[\]{}:"#'.]+)/);
+    const match = this.sub.match(/^:([^\s()[\]{}:"#'.]+)/);
     if (match) {
-      let token = this.createToken(TOK_KEYWORD, match[1]); // Value is the keyword without ':'
+      const token = this.createToken(TOK_KEYWORD, match[1]); // Value is the keyword without ':'
       this.advance(match[0].length); // Advance by the length of the full token (e.g., ":foo")
       return token;
     } else {
@@ -155,6 +174,16 @@ class Tokenizer {
 // }
 
 describe("Tokenizer", function () {
+  it("tokenizes a string", function () {
+    let tokenizer = new Tokenizer('"string"');
+    assert.deepEqual([
+      {
+        type: 'S', value: 'string',
+        line: 1, column: 1
+      }
+    ], [...tokenizer]);
+  });
+
   it("tokenizes a symbol", function () {
     let tokenizer = new Tokenizer('symbol');
     assert.deepEqual([
