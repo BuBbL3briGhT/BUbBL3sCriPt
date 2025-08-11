@@ -37,7 +37,7 @@ class Tokenizer {
   constructor(string, opts={}) {
     this.string = string;
     this.hare = string.length;
-    this.tourtuga = 0;
+    this.tortuga = 0;
     this.line = 1;
     this.column = 1;
     this.filePath = opts.filePath;
@@ -66,36 +66,40 @@ class Tokenizer {
       }
     }
 
-    return { value: token, done: !!token };
+    return { value: token, done: !token };
   }
 
   // Advances turtle along string by n characters, updating line and column.
   advance(n = 1) {
     for (let i = 0; i < n; i++) {
-      if (this.string[i+this.turtle] === '\n') {
+      if (this.string[this.tortuga] === '\n') {
         this.line++;
         this.column = 1;
       } else {
         this.column++;
       }
     }
-    this.turtle = this.turtle+n;
+    this.tortuga += n;
   }
 
   tokenizeSymbol () {
-    let _string = this.string.substr(this.turtle-1, 32);
-    let matchResult = _string.match(/^([^\s()[\]]*)/);
-    if (matchResult && matchResult[0].length > 0) { // Ensure it matches a non-empty symbol
-      let token = this.createToken(TOK_SYMBOL, matchResult[0]);
-      this.advance(matchResult[0].length-1);
+    let _string = this.string.substr(this.tortuga, 32);
+    let match = _string.match(/^([^\s()[\]]*)/);
+    if (match && match[0].length > 0) { // Ensure it matches a non-empty symbol
+      let token = this.createToken(TOK_SYMBOL, match[0]);
+      this.advance(match[0].length);
       return token;
     }
 
-    throw new Error(`Invalid symbol starting with '${currentString[0]}' at ${line}:${column}`);
+    throw new Error(`Invalid symbol starting with '${this.string[this.tortuga]}' at ${this.line}:${this.column}`);
   }
 
   createToken(type, value) {
-    return { type, value, line: this.line, column: this.column, file: this.file };
+    return {
+      type, value,
+      line: this.line, column: this.column,
+      filePath: this.filePath
+    };
   }
 
   [Symbol.iterator]() {
@@ -103,63 +107,72 @@ class Tokenizer {
   }
 }
 
-const tokenator = new Tokenator(string, { file: "imaginary" });
-// console.log(tokenator.next());
-for (const token of tokenator) {
+const tokenizer = new Tokenizer(string, { filePath: "imaginary" });
+for (const token of tokenizer) {
   console.log(token);
 }
+// console.log(tokenizer.next());
+// console.log(tokenizer.next());
+// console.log(tokenizer.next());
+// console.log(tokenizer.next());
 
-process.exit(0);
-
-// class Tokens {
-//   constructor(string) {
-//     this.string
-//   }
+// const tokenator = new Tokenator(string, { file: "imaginary" });
+// // console.log(tokenator.next());
+// for (const token of tokenator) {
+//   console.log(token);
 // }
 
-class Tokenizer {
+// process.exit(0);
 
-  *tokenize(string) {
-      var turtle = 0;
-    const hare   = string.length;
-      var line   = 1;
-      var column = 1;
+// // class Tokens {
+// //   constructor(string) {
+// //     this.string
+// //   }
+// // }
 
-    while(turtle < hare) {
-      const char = string[turtle++];
-      switch (char) {
-        case '(':
-          yield char;
-      }
-    }
-  }
+// class Tokenizer {
 
-  // *tokenize() {
-  //   yield {
-  //     line: 1,
-  //     columm: 1,
-  //     type: 1,
-  //     value: ""
-  //   };
-  //   yield 2;
-  //   yield this.string;
-  // }
-}
+//   *tokenize(string) {
+//       var turtle = 0;
+//     const hare   = string.length;
+//       var line   = 1;
+//       var column = 1;
 
-const tokenizer = new Tokenizer();
-const tokens = tokenizer.tokenize(string)
-for(const token of tokens) {
-  console.log(token);
-}
+//     while(turtle < hare) {
+//       const char = string[turtle++];
+//       switch (char) {
+//         case '(':
+//           yield char;
+//       }
+//     }
+//   }
 
+//   // *tokenize() {
+//   //   yield {
+//   //     line: 1,
+//   //     columm: 1,
+//   //     type: 1,
+//   //     value: ""
+//   //   };
+//   //   yield 2;
+//   //   yield this.string;
+//   // }
+// }
 
-// const tokens = tokenize("love");
+// const tokenizer = new Tokenizer();
+// const tokens = tokenizer.tokenize(string)
 // for(const token of tokens) {
 //   console.log(token);
 // }
 
 
-// describe("tokenize", function () {
-//   it(""
-// });
+// // const tokens = tokenize("love");
+// // for(const token of tokens) {
+// //   console.log(token);
+// // }
+
+
+// // describe("tokenize", function () {
+// //   it(""
+// // });
 
