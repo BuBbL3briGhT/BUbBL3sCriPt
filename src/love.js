@@ -7,32 +7,6 @@ const TOK_KEYWORD = 'K',
       TOK_TRUE    = 'T',
       TOK_FALSE   = 'F';
 
-// const string = "love";
-const string = "(love)";
-
-// function* tokenize(string) {
-//   let line = 1;
-//   let column = 1;
-
-//   yield {
-//     line: 1,
-//     columm: 1,
-//     type: 1,
-//     value: ""
-//   }
-
-
-// class Tokenizer {
-//   *tokenize(string) {
-//     const tokenizer = Object.create(this);
-//     tokenizer.string = string;
-//     while(tokenizer.tortuga < tokenizer.hare) {
-//       yield tokenizer.nextToken();
-//     }
-//   }
-// }
-
-// class TokensIterator {
 class Tokenizer {
   constructor(string, opts={}) {
     this.string = string;
@@ -77,6 +51,9 @@ class Tokenizer {
           break;
         case ':':
           token = this.tokenizeKeyword();
+          break;
+        case '#':
+          this.eatComment();
           break;
         default:
           if (/\d/.test(char)) {
@@ -166,6 +143,19 @@ class Tokenizer {
       throw new Error(`Invalid keyword at ${this.line}:${this.column}`);
     }
   }
+
+  eatComment() {
+    const sub = this.getSub()
+    const newlineIndex = sub.indexOf("\n");
+    if (newlineIndex > -1) {
+      // Advance past the comment line including the newline
+      this.advance(newlineIndex + 1);
+    } else {
+      // Comment goes to the end of the string
+      this.advance(sub.length);
+    }
+  }
+
 
   createToken(type, value) {
     const token = {
@@ -292,6 +282,11 @@ describe("Tokenizer", function () {
         line: 1, column: 30
       }
     ], [...tokenizer]);
+  });
+
+  it("eats comments", function () {
+    const tokenizer = new Tokenizer("# comment...");
+    assert.deepEqual([], [...tokenizer]);
   });
 
   it("etc, etc...", function () {
