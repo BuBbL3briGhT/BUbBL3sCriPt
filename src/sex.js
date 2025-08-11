@@ -115,14 +115,32 @@ class Tokenizer {
 describe("Tokenizer", function () {
   it("Tokenizes BubbleScript", function () {
     let tokenizer = new Tokenizer("love");
-    let tokens = [...tokenizer];
     assert.deepEqual([
       {
         type: 'Y', value: 'love',
         line: 1, column: 1,
         filePath: undefined
       }
-    ], tokens);
+    ], [...tokenizer]);
+
+    tokenizer = new Tokenizer("(love)", { filePath: "👟" });
+    assert.deepEqual([
+      {
+        type: '(', value: '(',
+        line: 1, column: 1,
+        filePath: "👟"
+      },
+      {
+        type: 'Y', value: 'love',
+        line: 1, column: 2,
+        filePath: "👟"
+      },
+      {
+        type: ')', value: ')',
+        line: 1, column: 6,
+        filePath: "👟"
+      }
+    ], [...tokenizer]);
 
   });
 });
