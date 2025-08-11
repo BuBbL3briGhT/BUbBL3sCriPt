@@ -19,15 +19,20 @@ class Parser {
   }
 
   next() {
-    let token;
+    let expression;
     for (const token of this.tokens) {
 
-      // switch (token.type) {
+      switch (token.type) {
+        case TOK_SYMBOL:
+          expression = Ṣymbol.for(token.value);
+          break;
+      }
 
-      return { value: token, done: !token };
+      // return { value: token, done: !token };
+      return { value: expression, done: !expression };
     }
     // const token = this.tokens.next().value;
-    return { value: token, done: !token };
+    return { value: expression, done: !expression };
   }
 
   [Symbol.iterator]() {
