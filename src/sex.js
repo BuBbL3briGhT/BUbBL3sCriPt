@@ -56,6 +56,10 @@ class Tokenizer {
         case '\t':
           this.advance(); // Consumes whitespace, updates column
           break;
+        case '\n':
+        case '\r':
+          this.advance(); // Consumes newline, updates line and column
+          break;
         case '(':
         case ')':
         case '[':
@@ -91,7 +95,8 @@ class Tokenizer {
   // Advances turtle along string by n characters, updating line and column.
   advance(n = 1) {
     for (let i = 0; i < n; i++) {
-      if (this.string[this.tortuga] === '\n') {
+       const char = this.string[this.tortuga];
+      if (char === '\n' || char === '\r') {
         this.line++;
         this.column = 1;
       } else {
@@ -216,6 +221,22 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
+  it("tokenizes a\\nb\\rc", function () {
+    let tokenizer = new Tokenizer("a\nb\rc");
+    assert.deepEqual([
+      {
+        type: 'Y', value: 'a',
+        line: 1, column: 1
+      }, {
+        type: 'Y', value: 'b',
+        line: 2, column: 1
+      }, {
+        type: 'Y', value: 'c',
+        line: 3, column: 1
+      }
+    ], [...tokenizer]);
+  });
+
   it("tokenizes a string", function () {
     let tokenizer = new Tokenizer('"string"');
     assert.deepEqual([
@@ -273,7 +294,6 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
-
   it("etc, etc...", function () {
     let tokenizer = new Tokenizer("((love))");
     assert.deepEqual([
@@ -296,68 +316,3 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 });
-// console.log(tokenizer.next());
-// console.log(tokenizer.next());
-// console.log(tokenizer.next());
-// console.log(tokenizer.next());
-
-// const tokenator = new Tokenator(string, { file: "imaginary" });
-// // console.log(tokenator.next());
-// for (const token of tokenator) {
-//   console.log(token);
-// }
-
-// process.exit(0);
-
-// // class Tokens {
-// //   constructor(string) {
-// //     this.string
-// //   }
-// // }
-
-// class Tokenizer {
-
-//   *tokenize(string) {
-//       var turtle = 0;
-//     const hare   = string.length;
-//       var line   = 1;
-//       var column = 1;
-
-//     while(turtle < hare) {
-//       const char = string[turtle++];
-//       switch (char) {
-//         case '(':
-//           yield char;
-//       }
-//     }
-//   }
-
-//   // *tokenize() {
-//   //   yield {
-//   //     line: 1,
-//   //     columm: 1,
-//   //     type: 1,
-//   //     value: ""
-//   //   };
-//   //   yield 2;
-//   //   yield this.string;
-//   // }
-// }
-
-// const tokenizer = new Tokenizer();
-// const tokens = tokenizer.tokenize(string)
-// for(const token of tokens) {
-//   console.log(token);
-// }
-
-
-// // const tokens = tokenize("love");
-// // for(const token of tokens) {
-// //   console.log(token);
-// // }
-
-
-// // describe("tokenize", function () {
-// //   it(""
-// // });
-
