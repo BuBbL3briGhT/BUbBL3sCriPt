@@ -57,6 +57,9 @@ class Tokenizer {
           token = this.createToken(char, char);
           this.advance();
           break;
+        case ':':
+          token = this.tokenizeKeyword();
+          break;
         default:
           if (/\d/.test(char)) {
             token = this.tokenizeNumber();
@@ -84,9 +87,16 @@ class Tokenizer {
     this.tortuga += n;
   }
 
+  // Returns a sub-string of this.string
+  // beginning at the current tortuga position
+  // and continuing for 64 characters to the end
+  // of the string.
+  get sub() {
+    return this.string.substr(this.tortuga, 64);
+  }
+
   tokenizeNumber() {
-    let _string = this.string.substr(this.tortuga, 32);
-    let match = _string.match(/^\d+(?:\.\d+)?/);
+    let match = this.sub.match(/^\d+(?:\.\d+)?/);
     if (match) {
       let token = this.createToken(TOK_NUMBER, Number(match[0]));
       this.advance(match[0].length);
@@ -98,8 +108,7 @@ class Tokenizer {
   }
 
   tokenizeSymbol () {
-    let _string = this.string.substr(this.tortuga, 32);
-    let match = _string.match(/^([^\s()[\]]*)/);
+    let match = this.sub.match(/^([^\s()[\]]*)/);
     if (match && match[0].length > 0) { // Ensure it matches a non-empty symbol
       let token = this.createToken(TOK_SYMBOL, match[0]);
       this.advance(match[0].length);
@@ -107,6 +116,20 @@ class Tokenizer {
     }
 
     throw new Error(`Invalid symbol starting with '${this.string[this.tortuga]}' at ${this.line}:${this.column}`);
+  }
+
+  tokenizeKeyword() {
+    // Keywords start with ':' e.g. :foo
+    // The regex should match ':' followed by symbol-like characters.
+    let match = this.sub.match(/^:([^\s()[\]{}:"#'.]+)/);
+    if (match) {
+      let token = this.createToken(TOK_KEYWORD, match[1]); // Value is the keyword without ':'
+      this.advance(match[0].length); // Advance by the length of the full token (e.g., ":foo")
+      return token;
+    } else {
+      // This implies a ':' was not followed by a valid keyword identifier
+      throw new Error(`Invalid keyword at ${this.line}:${this.column}`);
+    }
   }
 
   createToken(type, value) {
@@ -133,10 +156,10 @@ class Tokenizer {
 
 describe("Tokenizer", function () {
   it("tokenizes a symbol", function () {
-    let tokenizer = new Tokenizer("love");
+    let tokenizer = new Tokenizer('symbol');
     assert.deepEqual([
       {
-        type: 'Y', value: 'love',
+        type: 'Y', value: 'symbol',
         line: 1, column: 1
       }
     ], [...tokenizer]);
@@ -146,6 +169,14 @@ describe("Tokenizer", function () {
     const tokenizer = new Tokenizer("1");
     assert.deepEqual([
       { type: 'N', value: 1,
+        line: 1, column: 1 }
+    ], [...tokenizer]);
+  });
+
+  it("tokenizes a keyword", function () {
+    const tokenizer = new Tokenizer(":keyword");
+    assert.deepEqual([
+      { type: 'K', value: "keyword",
         line: 1, column: 1 }
     ], [...tokenizer]);
   });
