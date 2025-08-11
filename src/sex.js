@@ -107,10 +107,25 @@ class Tokenizer {
   }
 }
 
-const tokenizer = new Tokenizer(string, { filePath: "imaginary" });
-for (const token of tokenizer) {
-  console.log(token);
-}
+// const tokenizer = new Tokenizer(string, { filePath: "imaginary" });
+// for (const token of tokenizer) {
+//   console.log(token);
+// }
+
+describe("Tokenizer", function () {
+  it("Tokenizes BubbleScript", function () {
+    let tokenizer = new Tokenizer("love");
+    let tokens = [...tokenizer];
+    assert.deepEqual([
+      {
+        type: 'Y', value: 'love',
+        line: 1, column: 1,
+        filePath: undefined
+      }
+    ], tokens);
+
+  });
+});
 // console.log(tokenizer.next());
 // console.log(tokenizer.next());
 // console.log(tokenizer.next());
