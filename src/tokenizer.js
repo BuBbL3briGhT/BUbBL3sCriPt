@@ -7,6 +7,7 @@ const TOK_KEYWORD  = 'K',
       TOK_NEWLiNE  = 'L';
 
 class Tokenizer {
+
   constructor(string, opts={}) {
     this.string = string;
     this.hare = string.length;
@@ -172,6 +173,17 @@ class Tokenizer {
   [Symbol.iterator]() {
     return this;
   }
+
+  static tokenTypes = {
+    TOK_STRiNG,
+    TOK_NUMBER,
+    TOK_SYMBOL,
+    TOK_KEYWORD,
+    TOK_TRUE,
+    TOK_FALSE,
+    TOK_NEWLiNE
+  };
+
 }
 
 module.exports = Tokenizer;

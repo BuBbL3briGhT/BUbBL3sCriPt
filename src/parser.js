@@ -6,7 +6,8 @@ const {
   TOK_SYMBOL,
   TOK_KEYWORD,
   TOK_TRUE,
-  TOK_FALSE
+  TOK_FALSE,
+  TOK_NEWLiNE
 } = Tokenizer.tokenTypes;
 
 class Parser {
@@ -15,30 +16,26 @@ class Parser {
     this.tokens = tokens;
   }
 
-}
+  next() {
+    // for (const token of this.tokens) {
+    //   return { value: token, done: !token };
+    // }
+    const token = this.tokens.next().value;
+    return { value: token, done: !token };
+  }
 
-class ParsingError extends Error {
-  constructor(message, token) {
-    super(message);
-    this.name = "ParsingError";
-    if (token) {
-      // Ensure the message includes token details if a token is provided
-      this.message = `${message} (at line ${token.line}, column ${token.column}, value: '${token.value}')`;
-    }
+  [Symbol.iterator]() {
+    return this;
   }
 }
 
-class NoMatchError extends ParsingError {
-  constructor(message, token){
-    super(message, token); // Pass token to parent for enriched message
-    this.name = "NoMatchError";
-    if (token) {
-      this.token = token; // Attach token for better error reporting
-      this.message = `${message} (at line ${token.line}, column ${token.column}, value: '${token.value}')`;
-    }
-  }
-}
+const input = "hi-ho";
+const tokenizer = new Tokenizer(input);
+const parser = new Parser(tokenizer);
 
+for (const expression of parser) {
+  console.log(expression);
+}
 
 
 
