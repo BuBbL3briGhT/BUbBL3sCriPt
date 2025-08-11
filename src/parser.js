@@ -67,53 +67,6 @@ class Parser {
   }
 }
 
-// throw new ParsingError("No matching ')' for list " + JSON.stringify(list.token));
-// throw new ParsingError(
-//   "No matching ')' for list" +
-//   list.token.line );
-
-
-
-// for (const token of this.tokens) {
-//   if (token.type === ')')
-//     return list;
-//   else
-//     list = list.push
-
-//   switch (token.type) {
-//     case ")":
-//     default:
-//       throw new TokenNoMatchError(token);
-//   }
-// }
-// }
-// for (const token of this.tokens) {
-//   switch (token.type) {
-//     case TOK_SYMBOL:
-//       o = Ṣymbol.for(token.value);
-//       break;
-//     case TOK_NUMBER:
-//       o = token.value;
-//       break;
-//     case "(":
-//       o = this.parseList();
-//       break;
-//     default:
-//       throw new TokenNoMatchError(token);
-//   }
-// }
-// }
-
-// class ParsingError extends Error {
-//   constructor(message, token) {
-//     super(message);
-//     this.name = "ParsingError";
-//     if (token) {
-//       // Ensure the message includes token details if a token is provided
-//       this.message = `${message} (at line ${token.line}, column ${token.column}, value: '${token.value}')`;
-//     }
-//   }
-// }
 
 const assert = require("assert");
 
@@ -163,6 +116,14 @@ describe("Parser", function () {
   // });
 });
 
+class NoMatchError extends Error {
+  name = "NoMatchError";
+
+  constructor(token){
+    super("No match for token " +
+      JSON.stringify(token));
+  }
+}
 
 // const input = "hi-ho";
 // const tokenizer = new Tokenizer(input);
@@ -172,11 +133,3 @@ describe("Parser", function () {
 //   console.log(expression);
 // }
 
-class NoMatchError extends Error {
-  name = "NoMatchError";
-
-  constructor(token){
-    super("No match for token " +
-      JSON.stringify(token));
-  }
-}
