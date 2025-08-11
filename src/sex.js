@@ -47,11 +47,15 @@ class Tokenizer {
 
     let token;
 
-    if (this.tortuga < this.hare) {
+    while (this.tortuga < this.hare && !token) {
 
       const char = this.string[this.tortuga];
 
       switch (char) {
+        case ' ':
+        case '\t':
+          this.advance(); // Consumes whitespace, updates column
+          break;
         case '(':
         case ')':
           token = this.createToken(char, char);
@@ -209,6 +213,28 @@ describe("Tokenizer", function () {
         line: 1, column: 1 }
     ], [...tokenizer]);
   });
+
+  it("tokenizes everything", function () {
+    let tokenizer = new Tokenizer('"string" symbol :keyword 777 12.333');
+    assert.deepEqual([
+      { type: 'S', value: 'string',
+        line: 1, column: 1
+      }, {
+        type: 'Y', value: 'symbol',
+        line: 1, column: 10
+      }, {
+        type: 'K', value: 'keyword',
+        line: 1, column: 17
+      }, {
+        type: 'N', value: 777,
+        line: 1, column: 26
+      }, {
+        type: 'N', value: 12.333,
+        line: 1, column: 30
+      }
+    ], [...tokenizer]);
+  });
+
 
   it("etc, etc...", function () {
     let tokenizer = new Tokenizer("((love))");
