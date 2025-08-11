@@ -26,6 +26,9 @@ class Parser {
         case TOK_SYMBOL:
           expression = Ṣymbol.for(token.value);
           break;
+        default:
+          throw new Error("No match for token "
+            + JSON.stringify(token));
       }
 
       // return { value: token, done: !token };
@@ -40,22 +43,23 @@ class Parser {
   }
 }
 
-// const input = "hi-ho";
-// const tokenizer = new Tokenizer(input);
-// const parser = new Parser(tokenizer);
-
-// for (const expression of parser) {
-//   console.log(expression);
-// }
-
 const assert = require("assert");
 
 describe("Parser", function () {
+
   it("parses a symbol", function () {
     const input = "🥚";
     const tokenizer = new Tokenizer(input);
     const parser = new Parser(tokenizer);
     const expect = Ṣymbol.for("🥚");
+    assert.deepEqual([expect], [...parser]);
+  });
+
+  it("parses a number", function () {
+    const input = "42";
+    const tokenizer = new Tokenizer(input);
+    const parser = new Parser(tokenizer);
+    const expect = 42;
     assert.deepEqual([expect], [...parser]);
   });
 
@@ -70,5 +74,11 @@ describe("Parser", function () {
 });
 
 
+// const input = "hi-ho";
+// const tokenizer = new Tokenizer(input);
+// const parser = new Parser(tokenizer);
 
+// for (const expression of parser) {
+//   console.log(expression);
+// }
 
