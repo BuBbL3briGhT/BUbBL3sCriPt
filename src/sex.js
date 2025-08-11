@@ -145,7 +145,14 @@ describe("Tokenizer", function () {
         line: 1, column: 8
       }
     ], [...tokenizer]);
+  });
 
+  it("tokenizes a number", function () {
+    const tokenizer = new Tokenizer("1");
+    assert.deepEqual([
+      { type: 'N', value: 1,
+        line: 1, column: 1 }
+    ], [...tokenizer]);
   });
 });
 // console.log(tokenizer.next());
