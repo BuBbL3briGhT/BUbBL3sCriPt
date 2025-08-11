@@ -19,12 +19,15 @@ class Parser {
   }
 
   next() {
-    let expression;
+    let expr; // expression
     for (const token of this.tokens) {
 
       switch (token.type) {
         case TOK_SYMBOL:
-          expression = Ṣymbol.for(token.value);
+          expr = Ṣymbol.for(token.value);
+          break;
+        case TOK_NUMBER:
+          expr = token.value;
           break;
         default:
           throw new Error("No match for token "
@@ -32,10 +35,10 @@ class Parser {
       }
 
       // return { value: token, done: !token };
-      return { value: expression, done: !expression };
+      return { value: expr, done: !expr };
     }
     // const token = this.tokens.next().value;
-    return { value: expression, done: !expression };
+    return { value: expr, done: !expr };
   }
 
   [Symbol.iterator]() {
