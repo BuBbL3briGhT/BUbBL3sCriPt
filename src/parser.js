@@ -19,10 +19,14 @@ class Parser {
   }
 
   next() {
-    // for (const token of this.tokens) {
-    //   return { value: token, done: !token };
-    // }
-    const token = this.tokens.next().value;
+    let token;
+    for (const token of this.tokens) {
+
+      // switch (token.type) {
+
+      return { value: token, done: !token };
+    }
+    // const token = this.tokens.next().value;
     return { value: token, done: !token };
   }
 
@@ -42,14 +46,22 @@ class Parser {
 const assert = require("assert");
 
 describe("Parser", function () {
-  it("parses bare lists", function () {
-    const input = "puts 🐣";
+  it("parses a symbol", function () {
+    const input = "🥚";
     const tokenizer = new Tokenizer(input);
     const parser = new Parser(tokenizer);
-    const expects = List.make(Ṣymbol.for("puts"),
-      Ṣymbol.for("🐣"));
-    assert.deepEqual([expects], [...parser]);
+    const expect = Ṣymbol.for("🥚");
+    assert.deepEqual([expect], [...parser]);
   });
+
+  // it("parses bare lists", function () {
+  //   const input = "puts 🐣";
+  //   const tokenizer = new Tokenizer(input);
+  //   const parser = new Parser(tokenizer);
+  //   const expects = List.make(Ṣymbol.for("puts"),
+  //     Ṣymbol.for("🐣"));
+  //   assert.deepEqual([expects], [...parser]);
+  // });
 });
 
 

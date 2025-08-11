@@ -157,7 +157,6 @@ class Tokenizer {
     }
   }
 
-
   createToken(type, value) {
     const token = {
       type, value,
