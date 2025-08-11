@@ -21,33 +21,52 @@ const string = "(love)";
 //     value: ""
 //   }
 
+
+// class Tokenizer {
+//   *tokenize(string) {
+//     const tokenizer = Object.create(this);
+//     tokenizer.string = string;
+//     while(tokenizer.tortuga < tokenizer.hare) {
+//       yield tokenizer.nextToken();
+//     }
+//   }
+// }
+
 // class TokensIterator {
-class Tokenator {
+class Tokenizer {
   constructor(string, opts={}) {
-    this.hare = string.length;
-    this.turtle = 0;
     this.string = string;
+    this.hare = string.length;
+    this.tourtuga = 0;
     this.line = 1;
     this.column = 1;
-    this.file = opts.file;
+    this.filePath = opts.filePath;
   }
 
   next() {
-    if (this.turtle < this.hare) {
-      const char = this.string[this.turtle++];
+
+    let token;
+
+    if (this.tortuga < this.hare) {
+
+      const char = this.string[this.tortuga];
+
       switch (char) {
         case '(':
         case ')':
-          return { value: this.createToken(char, char) };
+          token = this.createToken(char, char);
+          this.advance();
           break;
         default:
           if (/[^\s()[\]{}:"#'.]/.test(char)) { // Ensure it's a valid start for a symbol
-            return { value: this.tokenizeSymbol() };
+            token = this.tokenizeSymbol();
+            break;
           }
           throw new Error(`Unexpected character: '${char}' at ${this.line}:${this.column}`);
       }
     }
-    return { done: true };
+
+    return { value: token, done: !!token };
   }
 
   // Advances turtle along string by n characters, updating line and column.
