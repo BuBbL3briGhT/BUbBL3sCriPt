@@ -95,11 +95,15 @@ class Tokenizer {
   }
 
   createToken(type, value) {
-    return {
+    const token = {
       type, value,
-      line: this.line, column: this.column,
-      filePath: this.filePath
-    };
+      line: this.line, column: this.column
+    }
+
+    if (this.filePath)
+      token.filePath = this.filePath;
+
+    return token;
   }
 
   [Symbol.iterator]() {
@@ -118,8 +122,7 @@ describe("Tokenizer", function () {
     assert.deepEqual([
       {
         type: 'Y', value: 'love',
-        line: 1, column: 1,
-        filePath: undefined
+        line: 1, column: 1
       }
     ], [...tokenizer]);
 
