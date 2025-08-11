@@ -1,9 +1,10 @@
-const TOK_KEYWORD = 'K',
-      TOK_NUMBER  = 'N',
-      TOK_STRiNG  = 'S',
-      TOK_SYMBOL  = 'Y',
-      TOK_TRUE    = 'T',
-      TOK_FALSE   = 'F';
+const TOK_KEYWORD  = 'K',
+      TOK_NUMBER   = 'N',
+      TOK_STRiNG   = 'S',
+      TOK_SYMBOL   = 'Y',
+      TOK_TRUE     = 'T',
+      TOK_FALSE    = 'F',
+      TOK_NEWLiNE  = 'L';
 
 class Tokenizer {
   constructor(string, opts={}) {
@@ -30,6 +31,7 @@ class Tokenizer {
           break;
         case '\n':
         case '\r':
+          token = this.createToken(TOK_NEWLiNE, char);
           this.advance(); // Consumes newline, updates line and column
           break;
         case '(':

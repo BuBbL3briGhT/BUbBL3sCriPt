@@ -40,8 +40,14 @@ describe("Tokenizer", function () {
         type: 'Y', value: 'a',
         line: 1, column: 1
       }, {
+        type: 'L', value: '\n',
+        line: 1, column: 2
+      }, {
         type: 'Y', value: 'b',
         line: 2, column: 1
+      }, {
+        type: 'L', value: '\r',
+        line: 2, column: 2
       }, {
         type: 'Y', value: 'c',
         line: 3, column: 1
@@ -109,6 +115,14 @@ describe("Tokenizer", function () {
   it("eats comments", function () {
     const tokenizer = new Tokenizer("# comment...");
     assert.deepEqual([], [...tokenizer]);
+  });
+
+  it("tokenize new lines", function () {
+    const tokenizer = new Tokenizer("\n");
+    assert.deepEqual([
+      { type: 'L', value: "\n",
+        line: 1, column: 1 }
+    ], [...tokenizer]);
   });
 
 
