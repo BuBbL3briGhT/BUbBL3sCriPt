@@ -126,22 +126,23 @@ describe("Tokenizer", function () {
       }
     ], [...tokenizer]);
 
-    tokenizer = new Tokenizer("(love)", { filePath: "👟" });
+    tokenizer = new Tokenizer("((love))");
     assert.deepEqual([
       {
         type: '(', value: '(',
-        line: 1, column: 1,
-        filePath: "👟"
-      },
-      {
+        line: 1, column: 1
+      }, {
+        type: '(', value: '(',
+        line: 1, column: 2
+      }, {
         type: 'Y', value: 'love',
-        line: 1, column: 2,
-        filePath: "👟"
-      },
-      {
+        line: 1, column: 3
+      }, {
         type: ')', value: ')',
-        line: 1, column: 6,
-        filePath: "👟"
+        line: 1, column: 7
+      }, {
+        type: ')', value: ')',
+        line: 1, column: 8
       }
     ], [...tokenizer]);
 
