@@ -1,9 +1,9 @@
 
-  const Tokenizer = require("./tokenizer");
+  const Tokenizer = require( "./tokenizer" );
 
-  const      List = require("./o/list");
+  const      List = require(   "./o/list"  );
 
-  const    Ṣymbol = require("./o/symbol");
+  const    Ṣymbol = require(  "./o/symbol" );
 
 
   const                                     {
@@ -21,7 +21,7 @@
 
                      constructor(tokens) {
 
-                 this.tokens = tokens;
+    this.tokens = tokens;
 
                                          }
 
@@ -39,36 +39,37 @@
 
                            nextToken() {
 
-       return this.tokens.next().value;
+    return this.tokens.next().value;
 
                                        }
 
                           parse(token) {
 
-                                let o;
+                             let o;
 
                 switch (token.type) {
 
-      case TOK_SYMBOL:
+                  case TOK_SYMBOL:
 
-               o = Ṣymbol.for(token.value);
-                   break;
+   o = Ṣymbol.for(token.value);
+       break;
 
-      case TOK_NUMBER:
+                  case TOK_NUMBER:
 
-               o = token.value;
-                   break;
-      case "(":
+              o = token.value;
+                  break;
 
-               o = this.parseList();
-          // o.line = token.line;
-        // o.column = token.column;
-          // o.file = token.file;
-                   break;
+                         case "(":
 
-      default:
+         o = this.parseList();
+    // o.line = token.line;
+  // o.column = token.column;
+    // o.file = token.file;
+             break;
 
-          throw new TokenNoMatchError(token);
+                          default:
+
+     throw new TokenNoMatchError(token);
 
                                     }
 
@@ -81,19 +82,19 @@
 
        const token = this.nextToken();
 
-    if (token)
+                            if (token)
 
-        if (token.type === ')')
+            if (token.type === ')')
 
-            return list;
+                    return list;
 
-        else
+                               else
 
-            return this.parseList(list)
-                       .push(this.parse(token));
+    return this.parseList(list)
+               .push(this.parse(token));
 
 
-      throw new UnexpectedEndOfInputError();
+     throw new UnexpectedEndOfInputError();
 
                                         }
 
