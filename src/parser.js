@@ -29,29 +29,38 @@ class Parser {
   }
 
   parse(token) {
-    let o;
+
+           let o;
+
     switch (token.type) {
+
       case TOK_SYMBOL:
-        o = Ṣymbol.for(token.value);
-        break;
+
+               o = Ṣymbol.for(token.value);
+                   break;
+
       case TOK_NUMBER:
-        o = token.value;
-        break;
+
+               o = token.value;
+                   break;
       case "(":
-        const list = List.make()
-          list.line = token.line;
-          list.column = token.column;
-          list.file = token.file;
-        o = this.parseList(list);
-        break;
+
+               o = this.parseList();
+          // o.line = token.line;
+        // o.column = token.column;
+          // o.file = token.file;
+                   break;
+
       default:
-        throw new TokenNoMatchError(token);
+
+          throw new TokenNoMatchError(token);
+
     }
 
     return o;
   }
 
-  parseList(list) {
+  parseList(list = List.make()) {
     const token = this.nextToken();
     if (token)
       if (token.type === ')')
