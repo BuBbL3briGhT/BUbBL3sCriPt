@@ -111,6 +111,35 @@ describe("Tokenizer", function () {
     assert.deepEqual([], [...tokenizer]);
   });
 
+
+  (function () {
+    const string = "(apple 🍏 orange 🍊 pina 🪅)";
+    it("tokenizes " + string, function () {
+      let tokenizer = new Tokenizer(string, { filePath: "imaginary" });
+      assert.deepEqual({ type: '(', value: '(',
+        line: 1, column: 1, filePath:
+        'imaginary' }, { type: 'Y', value:
+          'apple', line: 1, column: 2, filePath:
+          'imaginary' }, { type: 'Y', value:
+            '🍏', line: 1, column: 8, filePath:
+            'imaginary' }, { type: 'Y', value:
+              'orange', line: 1, column: 11,
+              filePath: 'imaginary' }, { type:
+                'Y', value: '🍊', line: 1,
+                column: 18, filePath:
+                'imaginary' }, { type: 'Y',
+                  value: 'pina', line: 1,
+                  column: 21, filePath:
+                  'imaginary' }, { type: 'Y',
+                      value: '🪅', line: 1,
+                      column: 26, filePath:
+                    'imaginary' }, { type: ')',
+                      value: ')', line: 1,
+                      column: 28, filePath:
+                      'imaginary' }, [...tokenizer]);
+    });
+  });
+
   it("etc, etc...", function () {
     let tokenizer = new Tokenizer("((love))");
     assert.deepEqual([

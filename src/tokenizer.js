@@ -1,9 +1,3 @@
-//
-// const tokenizer = new Tokenizer(string, { filePath: "imaginary" });
-// for (const token of tokenizer) {
-//   console.log(token);
-// }
-
 const TOK_KEYWORD = 'K',
       TOK_NUMBER  = 'N',
       TOK_STRiNG  = 'S',
