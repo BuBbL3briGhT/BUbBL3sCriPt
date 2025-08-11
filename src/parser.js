@@ -1,38 +1,53 @@
-const Tokenizer = require("./tokenizer");
-const List = require("./o/list");
-const Ṣymbol = require("./o/symbol");
 
-const {
-  TOK_STRiNG,
-  TOK_NUMBER,
-  TOK_SYMBOL,
-  TOK_KEYWORD,
-  TOK_TRUE,
-  TOK_FALSE,
-  TOK_NEWLiNE
-} = Tokenizer.tokenTypes;
+  const Tokenizer = require("./tokenizer");
 
-class Parser {
+  const      List = require("./o/list");
 
-  constructor(tokens) {
-    this.tokens = tokens;
-  }
+  const    Ṣymbol = require("./o/symbol");
 
-  next() {
+
+  const                                     {
+
+      TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
+
+      TOK_KEYWORD, TOK_TRUE, TOK_FALSE,
+
+      TOK_NEWLiNE
+
+  }            =         Tokenizer.tokenTypes;
+
+
+                                class Parser {
+
+                     constructor(tokens) {
+
+                 this.tokens = tokens;
+
+                                         }
+
+
+                                 next() {
+
     const token = this.nextToken();
-    const o = token && this.parse(token);
-    return { value: o, done: !o };
-  }
 
-  nextToken() {
-    return this.tokens.next().value;
-  }
+    const     o = token && this.parse(token);
 
-  parse(token) {
+      return { value: o, done: !o };
 
-           let o;
+                                       }
 
-    switch (token.type) {
+
+                           nextToken() {
+
+       return this.tokens.next().value;
+
+                                       }
+
+                          parse(token) {
+
+                                let o;
+
+                switch (token.type) {
 
       case TOK_SYMBOL:
 
@@ -55,26 +70,41 @@ class Parser {
 
           throw new TokenNoMatchError(token);
 
-    }
+                                    }
 
-    return o;
-  }
+                             return o;
 
-  parseList(list = List.make()) {
-    const token = this.nextToken();
+                                       }
+
+
+         parseList(list = List.make()) {
+
+       const token = this.nextToken();
+
     if (token)
-      if (token.type === ')')
-        return list;
-      else
-        return this.parseList(list).push(this.parse(token));
-    else
-      throw new UnexpectedEndOfInputError();
-  }
 
-  [Symbol.iterator]() {
-    return this;
-  }
-}
+        if (token.type === ')')
+
+            return list;
+
+        else
+
+            return this.parseList(list)
+                       .push(this.parse(token));
+
+
+      throw new UnexpectedEndOfInputError();
+
+                                        }
+
+
+                    [Symbol.iterator]() {
+
+                          return this;
+
+                                        }
+
+                                             }
 
 
 const assert = require("assert");
