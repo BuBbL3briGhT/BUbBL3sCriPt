@@ -58,10 +58,17 @@ class Tokenizer {
           break;
         case '(':
         case ')':
+        case '[':
+        case ']':
+        case '{':
+        case '}':
+        case '.':
+        case "°":
           token = this.createToken(char, char);
           this.advance();
           break;
         case '"':
+        case "'":
           token = this.tokenizeString();
           break;
         case ':':
@@ -178,6 +185,37 @@ class Tokenizer {
 // }
 
 describe("Tokenizer", function () {
+  it("tokenizes ()[]{}.°", function () {
+    let tokenizer = new Tokenizer("()[]{}.°");
+    assert.deepEqual([
+      {
+        type: '(', value: '(',
+        line: 1, column: 1
+      }, {
+        type: ')', value: ')',
+        line: 1, column: 2
+      }, {
+        type: '[', value: '[',
+        line: 1, column: 3
+      }, {
+        type: ']', value: ']',
+        line: 1, column: 4
+      }, {
+        type: '{', value: '{',
+        line: 1, column: 5
+      }, {
+        type: '}', value: '}',
+        line: 1, column: 6
+      }, {
+        type: '.', value: '.',
+        line: 1, column: 7
+      }, {
+        type: '°', value: '°',
+        line: 1, column: 8
+      }
+    ], [...tokenizer]);
+  });
+
   it("tokenizes a string", function () {
     let tokenizer = new Tokenizer('"string"');
     assert.deepEqual([
