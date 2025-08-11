@@ -4,6 +4,7 @@
   const      List = require(   "./o/list"  );
 
   const    Ṣymbol = require(  "./o/symbol" );
+  const        Ṣy = Ṣymbol;
 
 
   const                                     {
@@ -143,6 +144,15 @@ describe("Parser", function () {
     const parser = new Parser(tokenizer);
     // const expect = Bubble.blow(83, 24, 3);
     const expect = List.make(83, 24, 3);
+    assert.deepEqual([expect], [...parser]);
+  });
+
+  it("parses a list of symbols", function () {
+    const input = "(a b c)";
+    const tokenizer = new Tokenizer(input);
+    const parser = new Parser(tokenizer);
+    const expect = List.make(Ṣy.for('a'),
+            Ṣy.for('b'), Ṣy.for('c'));
     assert.deepEqual([expect], [...parser]);
   });
 
