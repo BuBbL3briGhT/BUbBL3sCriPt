@@ -58,11 +58,13 @@ class Tokenizer {
           this.advance();
           break;
         default:
-          if (/[^\s()[\]{}:"#'.]/.test(char)) { // Ensure it's a valid start for a symbol
+          if (/\d/.test(char)) {
+            token = this.tokenizeNumber();
+          } else if (/[^\s()[\]{}:"#'.]/.test(char)) { // Ensure it's a valid start for a symbol
             token = this.tokenizeSymbol();
-            break;
+          } else {
+            throw new Error(`Unexpected character: '${char}' at ${this.line}:${this.column}`);
           }
-          throw new Error(`Unexpected character: '${char}' at ${this.line}:${this.column}`);
       }
     }
 
@@ -80,6 +82,19 @@ class Tokenizer {
       }
     }
     this.tortuga += n;
+  }
+
+  tokenizeNumber() {
+    let _string = this.string.substr(this.tortuga, 32);
+    let match = _string.match(/^\d+(?:\.\d+)?/);
+    if (match) {
+      let token = this.createToken(TOK_NUMBER, Number(match[0]));
+      this.advance(match[0].length);
+      return token;
+    } else {
+      // This should not be reached
+      throw new Error(`Invalid number at ${this.line}:${this.column}`);
+    }
   }
 
   tokenizeSymbol () {
@@ -117,7 +132,7 @@ class Tokenizer {
 // }
 
 describe("Tokenizer", function () {
-  it("Tokenizes BubbleScript", function () {
+  it("tokenizes a symbol", function () {
     let tokenizer = new Tokenizer("love");
     assert.deepEqual([
       {
@@ -125,8 +140,18 @@ describe("Tokenizer", function () {
         line: 1, column: 1
       }
     ], [...tokenizer]);
+  });
 
-    tokenizer = new Tokenizer("((love))");
+  it("tokenizes a number", function () {
+    const tokenizer = new Tokenizer("1");
+    assert.deepEqual([
+      { type: 'N', value: 1,
+        line: 1, column: 1 }
+    ], [...tokenizer]);
+  });
+
+  it("etc, etc...", function () {
+    let tokenizer = new Tokenizer("((love))");
     assert.deepEqual([
       {
         type: '(', value: '(',
@@ -144,14 +169,6 @@ describe("Tokenizer", function () {
         type: ')', value: ')',
         line: 1, column: 8
       }
-    ], [...tokenizer]);
-  });
-
-  it("tokenizes a number", function () {
-    const tokenizer = new Tokenizer("1");
-    assert.deepEqual([
-      { type: 'N', value: 1,
-        line: 1, column: 1 }
     ], [...tokenizer]);
   });
 });
