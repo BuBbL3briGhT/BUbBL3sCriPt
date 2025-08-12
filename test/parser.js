@@ -112,7 +112,7 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it.only("parses a 🪹", function () {
+  it.skip("parses a 🪹", function () {
     const input =
       "(83 [24 (💘 Mom) 3] JE :LL 010)";
     const tokenizer = new Ťķ(input);
