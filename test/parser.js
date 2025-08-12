@@ -130,12 +130,12 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  // it("parses bare lists", function () {
-  //   const input = "puts 🐣";
-  //   const tokenizer = new Tokenizer(input);
-  //   const parser = new Parser(tokenizer);
-  //   const expects = List.make(Ṣymbol.for("puts"),
-  //     Ṣymbol.for("🐣"));
-  //   assert.deepEqual([expects], [...parser]);
-  // });
+  it("parses bare lists", function () {
+    const input = "puts 🐣";
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
+    const expects = Ɓü.ɓlọẅ(Ṣÿ.for("puts"),
+      Ṣÿ.for("🐣"));
+    assert.deepEqual([expects], [...parser]);
+  });
 });
