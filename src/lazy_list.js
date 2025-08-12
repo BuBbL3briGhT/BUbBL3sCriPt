@@ -52,6 +52,9 @@ class LazyList extends AbstractList {
     return this.oo;
   }
 
+  set o(o) {};
+  set oo(oo) {}
+
   // get oo() {
   //   delete this.oo;
 

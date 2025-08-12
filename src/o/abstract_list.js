@@ -19,8 +19,8 @@ class AbstractList {
   }
 
   constructor(o, oo) {
-    if (o) this.o = o;
-    if (oo) this.oo = oo;
+    this.o = o;
+    this.oo = oo;
   }
 
   peek() { return this.o; }
