@@ -137,5 +137,30 @@ describe("Parser", function () {
     const expects = Ɓü.ɓlọẅ(Ṣÿ.for("puts"),
       Ṣÿ.for("🐣"));
     assert.deepEqual([expects], [...parser]);
+    (function () {
+
+      const input = ("puts 🐣\n" +
+                     "puts 1 2 3\r" +
+                     "(puts a b c) d\n" +
+                     "(puts :coolbeans)")
+      const tokenizer = new Ťķ(input);
+      const parser = new Qp(tokenizer);
+      const expects =
+        [
+          Ɓü.ɓlọẅ(Ṣÿ.for("puts"), Ṣÿ.for("🐣")),
+          Ɓü.ɓlọẅ(Ṣÿ.fï("puts"), 1, 2, 3),
+          Ɓü.ɓlọẅ(
+            Ɓü.ɓlọẅ(
+              Ṣÿ.fï("puts"),
+              Ṣÿ.fï("a"),
+              Ṣÿ.fï("b"),
+              Ṣÿ.fï("c")),
+            Ṣÿ.for("d")),
+          Ɓü.ɓlọẅ(
+            Ṣÿ.fï("puts"),
+            Ķÿ.for("coolbeans")),
+        ];
+      assert.deepEqual(expects, [...parser]);
+    })();
   });
 });
