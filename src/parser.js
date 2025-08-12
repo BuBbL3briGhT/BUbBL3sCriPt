@@ -1,10 +1,9 @@
 
-  const Tokenizer = require( "./tokenizer" );
+  const        Ťķ = require( "./tokenizer" );
 
-  const      List = require(   "./o/list"  );
+  const        Ļÿ = require(   "./o/list"  );
 
-  const    Ṣymbol = require(  "./o/symbol" );
-  const        Ṣÿ = Ṣymbol;
+  const        Ṣÿ = require(  "./o/symbol" );
 
   const        Ķÿ = require( "./o/keyword" );
 
@@ -17,10 +16,10 @@
 
       TOK_NEWLiNE
 
-  }            =         Tokenizer.tokenTypes;
+  }            =                Ťķ.tokenTypes;
 
 
-                                class Parser {
+                                  class Qp {
 
                      constructor(tokens) {
 
@@ -86,7 +85,7 @@
                                        }
 
 
-         parseList(list = List.make()) {
+         parseList(list = Ļÿ.make()) {
 
        const token = this.nextToken();
 
@@ -122,51 +121,51 @@ describe("Parser", function () {
 
   it("parses a symbol", function () {
     const input = "🥚";
-    const tokenizer = new Tokenizer(input);
-    const parser = new Parser(tokenizer);
-    const expect = Ṣymbol.for(input);
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
+    const expect = Ṣÿ.for(input);
     assert.deepEqual([expect], [...parser]);
   });
 
   it("parses a number", function () {
     const input = "42";
-    const tokenizer = new Tokenizer(input);
-    const parser = new Parser(tokenizer);
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
     const expect = 42;
     assert.deepEqual([expect], [...parser]);
   });
 
   it("parses a keyword", function () {
     const input = ":🥚";
-    const tokenizer = new Tokenizer(input);
-    const parser = new Parser(tokenizer);
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
     const expect = Ķÿ.for("🥚");
     assert.deepEqual([expect], [...parser]);
   });
 
   it("parses a list", function() {
     const input = "()";
-    const tokenizer = new Tokenizer(input);
-    const parser = new Parser(tokenizer);
-    const expect = List.make();
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
+    const expect = Ļÿ.make();
     // const expect = Bubble.blow();
     assert.deepEqual([expect], [...parser]);
   });
 
   it("parses a list of numbers", function () {
     const input = "(83 24 3)";
-    const tokenizer = new Tokenizer(input);
-    const parser = new Parser(tokenizer);
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
     // const expect = Bubble.blow(83, 24, 3);
-    const expect = List.make(83, 24, 3);
+    const expect = Ļÿ.make(83, 24, 3);
     assert.deepEqual([expect], [...parser]);
   });
 
   it("parses a list of symbols", function () {
     const input = "(a b c)";
-    const tokenizer = new Tokenizer(input);
-    const parser = new Parser(tokenizer);
-    const expect = List.make(Ṣÿ.for('a'),
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
+    const expect = Ļÿ.make(Ṣÿ.for('a'),
             Ṣÿ.for('b'), Ṣÿ.for('c'));
     assert.deepEqual([expect], [...parser]);
   });
