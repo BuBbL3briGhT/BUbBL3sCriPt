@@ -9,6 +9,9 @@
 
       const    Ķÿ = require( "./o/keyword" );
 
+    const  { TokenNoMatchError }
+                  = require( "./errors" );
+
 
      if (!Ɓů.ɓlọẅ) {
 
@@ -19,6 +22,12 @@
      if (!Ṣÿ.fï) {
 
                  Ṣÿ.fï = Ṣÿ.for;
+
+                                     }
+
+     if (!Ðķ.mƙ) {
+
+                 Ðķ.mƙ = Ðķ.make;
 
                                      }
 
@@ -61,6 +70,8 @@
                                        }
 
                           parse(token) {
+
+      console.log("parse", token);
 
                              let o;
 
@@ -236,8 +247,7 @@ describe("Parser", function () {
     const input = "()";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓů.make();
-    // const expect = Bubble.blow();
+    const expect = Ɓů.ɓlọẅ();
     assert.deepEqual([expect], [...parser]);
   });
 
@@ -245,8 +255,7 @@ describe("Parser", function () {
     const input = "(83 24 3)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    // const expect = Bubble.blow(83, 24, 3);
-    const expect = Ɓů.make(83, 24, 3);
+    const expect = Ɓů.ɓlọẅ(83, 24, 3);
     assert.deepEqual([expect], [...parser]);
   });
 
@@ -254,8 +263,21 @@ describe("Parser", function () {
     const input = "(a b c)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓů.make(Ṣÿ.for('a'),
+    const expect = Ɓů.ɓlọẅ(Ṣÿ.for('a'),
             Ṣÿ.for('b'), Ṣÿ.for('c'));
+    assert.deepEqual([expect], [...parser]);
+  });
+
+  it.only("parses a 🪹", function () {
+    const input =
+      "(83 [24 (💘 Mom) 3] JE :LL 010)";
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
+    const expect =
+      (Ɓů.ɓlọẅ(83, (Ðķ.mƙ(24, 3))));
+    // for (const o of parser) {
+    //    console.log(o);
+    // }
     assert.deepEqual([expect], [...parser]);
   });
 
@@ -269,14 +291,6 @@ describe("Parser", function () {
   // });
 });
 
-class NoMatchError extends Error {
-  name = "NoMatchError";
-
-  constructor(token){
-    super("No match for token " +
-      JSON.stringify(token));
-  }
-}
 
 // const input = "hi-ho";
 // const tokenizer = new Tokenizer(input);
