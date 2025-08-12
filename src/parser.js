@@ -52,6 +52,7 @@
                 switch (token.type) {
 
                   case TOK_NUMBER:
+                  case TOK_STRiNG:
 
               o = token.value;
                   break;
@@ -118,6 +119,14 @@
 const assert = require("assert");
 
 describe("Parser", function () {
+
+  it("parses a sTriNg", function () {
+    const input = '"🥚🟫"';
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
+    const expect = "🥚🟫";
+    assert.deepEqual([expect], [...parser]);
+  });
 
   it("parses a symbol", function () {
     const input = "🥚";
