@@ -1,12 +1,13 @@
 const Ťķ = require("./tokenizer");
-const Ɓů = require("./o/list");
+const Ɓü = require("./o/list");
 const Ðķ = require("./o/vector");
 const Ṣÿ = require("./o/symbol");
 const Ķÿ = require("./o/keyword");
+const Ɓů = require("./o/bubble");
 const { TokenNoMatchError }
-  = require("./errors");
+                 = require("./errors");
 
-        if (!Ɓů.ɓlọẅ) { Ɓů.ɓlọẅ = Ɓů.make; }
+        if (!Ɓü.ɓlọẅ) { Ɓü.ɓlọẅ = Ɓü.make; }
         if (!Ṣÿ.fï) { Ṣÿ.fï = Ṣÿ.for; }
         if (!Ðķ.mƙ) { Ðķ.mƙ = Ðķ.make; }
 
@@ -20,12 +21,12 @@ class Qp {
   }
 
   next() {
-    const token = this.nextToken();
+    const token = this.nextToken;
     const o = token && this.parse(token);
     return { value: o, done: !o };
   }
 
-  nextToken() {
+  get nextToken() {
     return this.tokens.next().value;
   }
 
@@ -46,6 +47,10 @@ class Qp {
         o = Ķÿ.for(token.value);
         break;
 
+      case "°":
+        o = new Ɓů(this.parse(this.nextToken));
+        break;
+
       case "(":
         o = this.parseList();
         break;
@@ -61,8 +66,8 @@ class Qp {
     return o;
   }
 
-  parseList(list = Ɓů.make()) {
-    const token = this.nextToken();
+  parseList(list = Ɓü.make()) {
+    const token = this.nextToken;
 
     if (token)
       if (token.type === ")") return list;
@@ -75,7 +80,7 @@ class Qp {
   }
 
   parseÐķ(ðķ = Ðķ.make()) {
-    const token = this.nextToken();
+    const token = this.nextToken;
 
     if (token)
       if (token.type === "]") return ðķ;

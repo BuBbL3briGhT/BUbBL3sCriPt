@@ -1,10 +1,11 @@
 const assert = require("assert");
 const Qp = require("../src/parser");
 const Ťķ = require("../src/tokenizer");
-const Ɓů = require("../src/o/list");
+const Ɓü = require("../src/o/list");
 const Ðķ = require("../src/o/vector");
 const Ṣÿ = require("../src/o/symbol");
 const Ķÿ = require("../src/o/keyword");
+const Ɓů = require("../src/o/bubble");
 
 const { TokenNoMatchError } = require("../src/errors");
 
@@ -41,11 +42,19 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
+  it("parses °", function () {
+    const input = "°r2d2";
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
+    const expecting = new Ɓů(Ṣÿ.for("r2d2"));
+    assert.deepEqual([expecting], [...parser]);
+  });
+
   it("parses a list", function () {
     const input = "()";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓů.ɓlọẅ();
+    const expect = Ɓü.ɓlọẅ();
     assert.deepEqual([expect], [...parser]);
   });
 
@@ -87,7 +96,7 @@ describe("Parser", function () {
     const input = "()";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓů.ɓlọẅ();
+    const expect = Ɓü.ɓlọẅ();
     assert.deepEqual([expect], [...parser]);
   });
 
@@ -95,7 +104,7 @@ describe("Parser", function () {
     const input = "(83 24 3)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓů.ɓlọẅ(83, 24, 3);
+    const expect = Ɓü.ɓlọẅ(83, 24, 3);
     assert.deepEqual([expect], [...parser]);
   });
 
@@ -103,7 +112,7 @@ describe("Parser", function () {
     const input = "(a b c)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓů.ɓlọẅ(Ṣÿ.for("a"), Ṣÿ.for("b"), Ṣÿ.for("c"));
+    const expect = Ɓü.ɓlọẅ(Ṣÿ.for("a"), Ṣÿ.for("b"), Ṣÿ.for("c"));
     assert.deepEqual([expect], [...parser]);
   });
 
@@ -111,9 +120,9 @@ describe("Parser", function () {
     const input = "(83 [24 H i (Mom 💘) 3] J̌Ẹ :LL 010)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓů.ɓlọẅ(
+    const expect = Ɓü.ɓlọẅ(
       83,
-      Ðķ.mƙ(24, Ṣÿ.fï("H"), Ṣÿ.fï("i"), Ɓů.ɓlọẅ(Ṣÿ.fï("Mom"), Ṣÿ.fï("💘")), 3),
+      Ðķ.mƙ(24, Ṣÿ.fï("H"), Ṣÿ.fï("i"), Ɓü.ɓlọẅ(Ṣÿ.fï("Mom"), Ṣÿ.fï("💘")), 3),
       Ṣÿ.fï("J̌Ẹ"),
       Ķÿ.for("LL"),
       10,
