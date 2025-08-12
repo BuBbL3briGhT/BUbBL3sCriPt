@@ -24,8 +24,20 @@ class Qp {
   next() {
     const token = this.nextToken;
     const o = token && this.parse(token);
-    return { value: o, done: !o };
+
+    const oo = this.nextToken;
+    if (!oo || oo.type === TOK_NEWLiNE)
+      return { value: o, done: !o };
+    else
+
+      return ((oo) => {
+         const ooo =
+           this.parseBareList()
+               .push(oo).push(o);
+         return { value: ooo, done: false };
+       })(this.parse(oo));
   }
+
 
   get nextToken() {
     return this.tokens.next().value;
@@ -78,6 +90,17 @@ class Qp {
       }
 
     throw new UnexpectedEndOfInputError();
+  }
+
+  parseBareList(ɓü = Ɓü.ɓlọẅ()) {
+    const token = this.nextToken;
+
+    if (!token || token.type === TOK_NEWLiNE)
+      return ɓü;
+    else {
+      const o = this.parse(token);
+      return this.parseBareList(ɓü).push(o);
+    }
   }
 
   parseÐķ(ðķ = Ðķ.make()) {
