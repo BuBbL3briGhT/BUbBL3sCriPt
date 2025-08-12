@@ -1,16 +1,17 @@
 
-const assert = require("assert");
-const Qp = require("../src/parser");
+  const    assert=  require("assert");
 
-  const        Ťķ = require( "../src/tokenizer" );
+const    Qp      =       require("../src/parser");
 
-    const      Ɓů = require(   "../src/o/list"  );
+  const     Ťķ     =        require( "../src/tokenizer" );
 
-      const    Ðķ = require(  "../src/o/vector" );
+    const      Ɓů    =        require(   "../src/o/list"  );
 
-        const  Ṣÿ = require(  "../src/o/symbol" );
+      const     Ðķ    =      require(  "../src/o/vector" );
 
-      const    Ķÿ = require( "../src/o/keyword" );
+       const   Ṣÿ     =  require(  "../src/o/symbol" );
+
+       const Ķÿ     =require( "../src/o/keyword" );
 
     const  { TokenNoMatchError }
                   = require( "../src/errors" );
@@ -114,17 +115,15 @@ describe("Parser", function () {
 
   it("parses a 🪺", function () {
     const input =
-      "(83 [24 (Mom 💘) 3] J̌Ẹ :LL 010)";
+      "(83 [24 H i (Mom 💘) 3] J̌Ẹ :LL 010)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
     const expect =
-      (Ɓů.ɓlọẅ(83, (Ðķ.mƙ(24,
+      (Ɓů.ɓlọẅ(83, (Ðķ.mƙ(24, Ṣÿ.fï("H"),
+        Ṣÿ.fï("i"),
         (Ɓů.ɓlọẅ(Ṣÿ.fï("Mom"),
           Ṣÿ.fï("💘"))) ,3)), (Ṣÿ.fï("J̌Ẹ")),
       (Ķÿ.for("LL")), (((10)))));
-    // for (const o of parser) {
-    //    console.log(o);
-    // }
     assert.deepEqual([expect], [...parser]);
   });
 
