@@ -163,4 +163,10 @@ describe("Parser", function () {
       assert.deepEqual(expects, [...parser]);
     })();
   });
+
+  // it("should be able to escape new lines to continue a bare list");
+  it("parses escaped newlines for bare lists");
+  // TODO: Add bare list parsing option (with or
+  // without) to parser and tokenizer.
+  it("should be able to turn off bare list parsing");
 });

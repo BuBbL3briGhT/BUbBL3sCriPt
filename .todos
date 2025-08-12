@@ -1,4 +1,10 @@
 August
+- Iterator for eval, integrate new parser and tokenizer.
+- configuration for bare list parsing, with or without. Tokenizer can ignore newline tokens for this
+- Allow esacping new lines for continuing bare list
+- bare list (list without outer parens)
+- parser, improved
+- tokenizer, improved
 - let tokenize and parse use list
 - fix parse to move top down, or beginning to end.
 - {} object parseing
