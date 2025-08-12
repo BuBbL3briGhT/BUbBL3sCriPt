@@ -71,8 +71,6 @@
 
                           parse(token) {
 
-      console.log("parse", token);
-
                              let o;
 
                 switch (token.type) {
@@ -130,10 +128,12 @@
 
                     return list;
 
-                               else
+                               else {
 
-    return this.parseList(list)
-               .push(this.parse(token));
+          const o = this.parse(token)
+    return this.parseList(list).push(o);
+
+                                    }
 
 
      throw new UnexpectedEndOfInputError();

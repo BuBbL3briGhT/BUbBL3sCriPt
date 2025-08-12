@@ -112,13 +112,16 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it.skip("parses a 🪹", function () {
+  it("parses a 🪺", function () {
     const input =
-      "(83 [24 (💘 Mom) 3] JE :LL 010)";
+      "(83 [24 (Mom 💘) 3] J̌Ẹ :LL 010)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
     const expect =
-      (Ɓů.ɓlọẅ(83, (Ðķ.mƙ(24, 3))));
+      (Ɓů.ɓlọẅ(83, (Ðķ.mƙ(24,
+        (Ɓů.ɓlọẅ(Ṣÿ.fï("Mom"),
+          Ṣÿ.fï("💘"))) ,3)), (Ṣÿ.fï("J̌Ẹ")),
+      (Ķÿ.for("LL")), (((10)))));
     // for (const o of parser) {
     //    console.log(o);
     // }
