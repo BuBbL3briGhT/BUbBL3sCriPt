@@ -4,7 +4,9 @@
   const      List = require(   "./o/list"  );
 
   const    Ṣymbol = require(  "./o/symbol" );
-  const        Ṣy = Ṣymbol;
+  const        Ṣÿ = Ṣymbol;
+
+  const        Ķÿ = require( "./o/keyword" );
 
 
   const                                     {
@@ -50,15 +52,20 @@
 
                 switch (token.type) {
 
-                  case TOK_SYMBOL:
-
-   o = Ṣymbol.for(token.value);
-       break;
-
                   case TOK_NUMBER:
 
               o = token.value;
                   break;
+
+                  case TOK_SYMBOL:
+
+      o = Ṣÿ.for(token.value);
+          break;
+
+                 case TOK_KEYWORD:
+
+      o = Ķÿ.for(token.value);
+          break;
 
                          case "(":
 
@@ -117,7 +124,7 @@ describe("Parser", function () {
     const input = "🥚";
     const tokenizer = new Tokenizer(input);
     const parser = new Parser(tokenizer);
-    const expect = Ṣymbol.for("🥚");
+    const expect = Ṣymbol.for(input);
     assert.deepEqual([expect], [...parser]);
   });
 
@@ -126,6 +133,14 @@ describe("Parser", function () {
     const tokenizer = new Tokenizer(input);
     const parser = new Parser(tokenizer);
     const expect = 42;
+    assert.deepEqual([expect], [...parser]);
+  });
+
+  it("parses a keyword", function () {
+    const input = ":🥚";
+    const tokenizer = new Tokenizer(input);
+    const parser = new Parser(tokenizer);
+    const expect = Ķÿ.for("🥚");
     assert.deepEqual([expect], [...parser]);
   });
 
@@ -151,8 +166,8 @@ describe("Parser", function () {
     const input = "(a b c)";
     const tokenizer = new Tokenizer(input);
     const parser = new Parser(tokenizer);
-    const expect = List.make(Ṣy.for('a'),
-            Ṣy.for('b'), Ṣy.for('c'));
+    const expect = List.make(Ṣÿ.for('a'),
+            Ṣÿ.for('b'), Ṣÿ.for('c'));
     assert.deepEqual([expect], [...parser]);
   });
 
