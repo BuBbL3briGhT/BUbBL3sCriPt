@@ -1,7 +1,9 @@
 const assert = require("assert");
-const Tokenizer = require("../src/tokenizer");
+const Ðķ = require("../src/tokenizer");
+const Tokenizer = Ðķ;
 
 describe("Tokenizer", function () {
+
   it("tokenizes ()[]{}.°", function () {
     let tokenizer = new Tokenizer("()[]{}.°");
     assert.deepEqual([
@@ -153,6 +155,30 @@ describe("Tokenizer", function () {
                       'imaginary' }, [...tokenizer]);
     });
   });
+
+
+  (function () {
+
+     const inpůt =
+      "(83 [24 (💘 Mom) 3] JE :LL 010)";
+
+     it("tokenizes " + inpůt, function () {
+
+         const ðķ = new Ðķ(inpůt);
+
+         // console.log([...ðķ]);
+         const expects = [
+              { type: '(', value: '(', line: 1, column: 1 },   { type: 'N', value: 83, line: 1, column: 2 },    { type: '[', value: '[', line: 1, column: 5 },   { type: 'N', value: 24, line: 1, column: 6 },
+              { type: '(', value: '(', line: 1, column: 9 },   { type: 'Y', value: '💘', line: 1, column: 10 },                                                  { type: 'Y', value: 'Mom', line: 1, column: 13 },                                                 { type: ')', value: ')', line: 1, column: 16 },
+              { type: 'N', value: 3, line: 1, column: 18 },    { type: ']', value: ']', line: 1, column: 19 },  { type: 'Y', value: 'JE', line: 1, column: 21 },
+              { type: 'K', value: 'LL', line: 1, column: 24 },
+              { type: 'N', value: 10, line: 1, column: 28 },   { type: ')', value: ')', line: 1, column: 31 }
+            ]
+
+         assert.deepEqual(expects, [...ðķ]);
+     });
+
+  })();
 
   it("etc, etc...", function () {
     let tokenizer = new Tokenizer("((love))");
