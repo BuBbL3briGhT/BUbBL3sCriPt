@@ -10,6 +10,7 @@
   "dependencies": {
     "debounce": "^2.2.0",
     "parinfer": "^3.13.1",
+    "prettier": "^3.6.2",
     "yaml": "^2.7.0"
   },
   "devDependencies": {

@@ -1,24 +1,14 @@
+const assert = require("assert");
+const Qp = require("../src/parser");
+const Ťķ = require("../src/tokenizer");
+const Ɓů = require("../src/o/list");
+const Ðķ = require("../src/o/vector");
+const Ṣÿ = require("../src/o/symbol");
+const Ķÿ = require("../src/o/keyword");
 
-  const    assert=  require("assert");
-
-const    Qp      =       require("../src/parser");
-
-  const     Ťķ     =        require( "../src/tokenizer" );
-
-    const      Ɓů    =        require(   "../src/o/list"  );
-
-      const     Ðķ    =      require(  "../src/o/vector" );
-
-       const   Ṣÿ     =  require(  "../src/o/symbol" );
-
-       const Ķÿ     =require( "../src/o/keyword" );
-
-    const  { TokenNoMatchError }
-                  = require( "../src/errors" );
-
+const { TokenNoMatchError } = require("../src/errors");
 
 describe("Parser", function () {
-
   it("parses a sTriNg", function () {
     const input = '"🥚🟫"';
     const tokenizer = new Ťķ(input);
@@ -51,7 +41,7 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a list", function() {
+  it("parses a list", function () {
     const input = "()";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -59,7 +49,7 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a vector", function() {
+  it("parses a vector", function () {
     const input = "[]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -67,28 +57,33 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a vector of nŮmbƏr§", function() {
+  it("parses a vector of nŮmbƏr§", function () {
     const input = "[1 2 31 2 31 2 3]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect =
-      (Ðķ.make(1, 2, 31, 2, 31, 2, 3));
+    const expect = Ðķ.make(1, 2, 31, 2, 31, 2, 3);
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a vəcĶtoŘ of sŸmbỌĻ§", function() {
+  it("parses a vəcĶtoŘ of sŸmbỌĻ§", function () {
     const input = "[z qw x z qw x z qw x]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect =
-      (Ðķ.make(Ṣÿ.fï("z"), Ṣÿ.fï("qw"),
-        Ṣÿ.fï("x"), Ṣÿ.fï("z"), Ṣÿ.fï("qw"),
-        Ṣÿ.fï("x"), Ṣÿ.fï("z"), Ṣÿ.fï("qw"),
-        Ṣÿ.fï("x")));
+    const expect = Ðķ.make(
+      Ṣÿ.fï("z"),
+      Ṣÿ.fï("qw"),
+      Ṣÿ.fï("x"),
+      Ṣÿ.fï("z"),
+      Ṣÿ.fï("qw"),
+      Ṣÿ.fï("x"),
+      Ṣÿ.fï("z"),
+      Ṣÿ.fï("qw"),
+      Ṣÿ.fï("x"),
+    );
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a list", function() {
+  it("parses a list", function () {
     const input = "()";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -108,22 +103,21 @@ describe("Parser", function () {
     const input = "(a b c)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓů.ɓlọẅ(Ṣÿ.for('a'),
-            Ṣÿ.for('b'), Ṣÿ.for('c'));
+    const expect = Ɓů.ɓlọẅ(Ṣÿ.for("a"), Ṣÿ.for("b"), Ṣÿ.for("c"));
     assert.deepEqual([expect], [...parser]);
   });
 
   it("parses a 🪺", function () {
-    const input =
-      "(83 [24 H i (Mom 💘) 3] J̌Ẹ :LL 010)";
+    const input = "(83 [24 H i (Mom 💘) 3] J̌Ẹ :LL 010)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect =
-      (Ɓů.ɓlọẅ(83, (Ðķ.mƙ(24, Ṣÿ.fï("H"),
-        Ṣÿ.fï("i"),
-        (Ɓů.ɓlọẅ(Ṣÿ.fï("Mom"),
-          Ṣÿ.fï("💘"))) ,3)), (Ṣÿ.fï("J̌Ẹ")),
-      (Ķÿ.for("LL")), (((10)))));
+    const expect = Ɓů.ɓlọẅ(
+      83,
+      Ðķ.mƙ(24, Ṣÿ.fï("H"), Ṣÿ.fï("i"), Ɓů.ɓlọẅ(Ṣÿ.fï("Mom"), Ṣÿ.fï("💘")), 3),
+      Ṣÿ.fï("J̌Ẹ"),
+      Ķÿ.for("LL"),
+      10,
+    );
     assert.deepEqual([expect], [...parser]);
   });
 
