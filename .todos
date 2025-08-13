@@ -1,4 +1,26 @@
 August
+- better error handeling.
+- bubl native each
+- bubl native map
+- bubls native list functions
+- logging configu
+- exception log
+- repl log
+- ensure townhouses handheld teams.
+- ensure tokenizer handels tabs.
+- Token type for list delimiteir, open close.
+- token type for vector delimiter, open, close.
+- single line comment token type )consumed with comment by tokenizer, or emmited depending on tokenizer configuration config.
+- comma token type )emitted or consumed by tokenizer depending upon configuration.
+- continue & implementation, needs more work, exteranl and internal functions.
+
+
+- comma token type
+- semicolon token type
+- handl ctrl-z for repl
+- comma at end of line, continues bare list, otherwise the are ignored, but for the sake of bare list continuation they must be passed from the tokenizer and handeled/considered by the parser.
+- semi colon terminates bare list
+- each and map for core
 - Iterator for eval, integrate new parser and tokenizer.
 - configuration for bare list parsing, with or without. Tokenizer can ignore newline tokens for this
 - Allow esacping new lines for continuing bare list

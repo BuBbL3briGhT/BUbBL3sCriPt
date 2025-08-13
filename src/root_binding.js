@@ -80,9 +80,13 @@ const rootBinding = {
   },
 
   jsfn: function(args) {
-    let binding = this, x, fn;
-    x = args.push(Ṣymbol.for('fn'));
-    fn = ëval(binding, x);
+    console.log("jsfn args", args);
+    const binding = this;
+    const x = args.push(Ṣymbol.for('fn'));
+    const fn = ëval(binding, x);
+    if (!fn)
+      console.log("not fn", fn, x);
+
     return function(...args) {
       return fn.invoke(List.from(args));
     }

@@ -67,6 +67,26 @@ if (path) {
 
   r3pL(); /* StaRt r3pL */
 
+  rl.on('close', () => {
+    console.log('Readline interface closed.');
+  });
+
+  rl.on('pause', () => {
+    console.log('Readline input paused.');
+  });
+
+  rl.on('resume', () => {
+    console.log('Readline input resumed.');
+  });
+
+  rl.on('SIGCONT', () => {
+    // Executed when the program is resumed from the background
+    console.log('\nProgram resumed. Re-prompting...');
+    rl.prompt();
+  });
+
+
+
   // const readline = require('readline');
   // const Parinfer = require('parinfer'); // Assuming you have the parinfer module installed
 

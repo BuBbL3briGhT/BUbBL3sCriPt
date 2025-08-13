@@ -21,3 +21,25 @@
 
 (🫧 (reverse list)
   (send list :invert))
+
+# 🫧 (each list fn),
+#   (send list :each fn)
+
+(🫧 (each list fn)
+  (send list :each fn))
+
+# (🫧 (each list fn)
+#   (send list :each
+#     (jsfn params (fn & params))))
+
+# 🫧 (each list fn),
+#   (send list :each
+#     (jsfn params (fn & params)))
+
+# (🫧 (each list fn)
+#   (send list :each
+#     (jsfn [& params] (fn & params))))
+
+# (🫧 (each list fn)
+#   (send list :each
+#     (jsfn [& params] (eval (push params fn)))))
