@@ -1,11 +1,11 @@
 const assert = require("assert");
 const Qp = require("../src/parser");
+const Ðķ = require("../src/vector");
+const Ķÿ = require("../src/keyword");
 const Ťķ = require("../src/tokenizer");
 const Ɓü = require("../src/list");
-const Ðķ = require("../src/vector");
-const Ṣÿ = require("../src/symbol");
-const Ķÿ = require("../src/keyword");
 const Ɓů = require("../src/bubble");
+const Ṣÿ = require("../src/symbol");
 
 const { TokenNoMatchError } = require("../src/errors");
 
@@ -34,6 +34,22 @@ describe("Parser", function () {
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
     const expect = Ṣÿ.for(input);
+    assert.deepEqual([expect], [...parser]);
+  });
+
+  it("parses true", function () {
+    const input = "true";
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
+    const expect = true;
+    assert.deepEqual([expect], [...parser]);
+  });
+
+  it.only("parses false", function () {
+    const input = "false";
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
+    const expect = false;
     assert.deepEqual([expect], [...parser]);
   });
 

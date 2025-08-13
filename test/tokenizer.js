@@ -77,6 +77,26 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
+  it("tokenizes true", function () {
+    let tokenizer = new Tokenizer('true');
+    assert.deepEqual([
+      {
+        type: 'T', value: true,
+        line: 1, column: 1
+      }
+    ], [...tokenizer]);
+  });
+
+  it("tokenizes false", function () {
+    let tokenizer = new Tokenizer('false');
+    assert.deepEqual([
+      {
+        type: 'F', value: false,
+        line: 1, column: 1
+      }
+    ], [...tokenizer]);
+  });
+
   it("tokenizes a number", function () {
     const tokenizer = new Tokenizer("1");
     assert.deepEqual([

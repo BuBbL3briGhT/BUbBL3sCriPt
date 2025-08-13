@@ -1,9 +1,9 @@
+const Ðķ = require("./vector");
+const Ķÿ = require("./keyword");
 const Ťķ = require("./tokenizer");
 const Ɓü = require("./list");
-const Ðķ = require("./vector");
-const Ṣÿ = require("./symbol");
-const Ķÿ = require("./keyword");
 const Ɓů = require("./bubble");
+const Ṣÿ = require("./symbol");
 const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");
@@ -68,6 +68,8 @@ class Qp {
     switch (token.type) {
       case TOK_NUMBER:
       case TOK_STRiNG:
+      case TOK_TRUE:
+      case TOK_FALSE:
         o = token.value;
         break;
 

@@ -3,7 +3,9 @@ const TOK_KEYWORD  = 'K',
       TOK_STRiNG   = 'S',
       TOK_SYMBOL   = 'Y',
       TOK_TRUE     = 'T',
+      TOK_TRüE     = 'T',
       TOK_FALSE    = 'F',
+      TOK_FåLSē    = 'F',
       TOK_NEWLiNE  = 'L';
 
 class Tokenizer {
@@ -123,8 +125,19 @@ class Tokenizer {
   tokenizeSymbol () {
     const match = this.sub.match(/^([^\s()[\]]*)/);
     if (match && match[0].length > 0) { // Ensure it matches a non-empty symbol
-      const token = this.createToken(TOK_SYMBOL, match[0]);
-      this.advance(match[0].length);
+      let token;
+      const value = match[0];
+      switch (value) {
+        case "true":
+          token = this.createToken(TOK_TRüE, true);
+          break
+        case "false":
+          token = this.createToken(TOK_FåLSē, false);
+          break;
+        default:
+          token = this.createToken(TOK_SYMBOL, value);
+      }
+      this.advance(value.length);
       return token;
     }
 

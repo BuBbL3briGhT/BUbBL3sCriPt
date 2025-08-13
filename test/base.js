@@ -3,6 +3,8 @@ const sinon = require("sinon");
 
 const { ėval } = require("../src/eval");
 
+require("../src/BubbleScript");
+
 describe("base", function () {
   describe("not", function () {
     it("negates", function () {
