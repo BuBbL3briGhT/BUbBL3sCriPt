@@ -1,8 +1,8 @@
 const assert = require("assert");
 const sinon = require("sinon");
 
-const List = require("../src/o/list");
-const Vector = require("../src/o/vector");
+const List = require("../src/list");
+const Vector = require("../src/vector");
 const rootBinding = require("../src/root_binding");
 
 const { ëval: ëvål } = require("../src/eval");

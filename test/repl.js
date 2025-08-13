@@ -1,5 +1,5 @@
 const readline = require('readline');
-const Repl = require("../../src/o/repl");
+const Repl = require("../../src/repl");
 
 describe("Repl", function () {
   it("Creates an interactive Bubblescript repl", function () {

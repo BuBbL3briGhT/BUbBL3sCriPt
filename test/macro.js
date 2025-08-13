@@ -1,8 +1,8 @@
 const assert = require("assert");
 
-const { Macro } = require("../../src/o/macro");
-const Vector = require("../../src/o/vector");
-const List = require("../../src/o/list");
+const { Macro } = require("../../src/macro");
+const Vector = require("../../src/vector");
+const List = require("../../src/list");
 
 describe("Macro", function () {
   describe("new Macro()", function () {

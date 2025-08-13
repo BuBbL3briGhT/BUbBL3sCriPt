@@ -1,7 +1,7 @@
 const assert = require("assert");
 
-const tokenize = require("../../src/f/tokenize");
-const Vector = require("../../src/o/vector");
+const tokenize = require("../../src/tokenize");
+const Vector = require("../../src/vector");
 
 const { TOK_STRiNG, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,

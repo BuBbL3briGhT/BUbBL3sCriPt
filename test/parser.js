@@ -1,11 +1,11 @@
 const assert = require("assert");
 const Qp = require("../src/parser");
 const Ťķ = require("../src/tokenizer");
-const Ɓü = require("../src/o/list");
-const Ðķ = require("../src/o/vector");
-const Ṣÿ = require("../src/o/symbol");
-const Ķÿ = require("../src/o/keyword");
-const Ɓů = require("../src/o/bubble");
+const Ɓü = require("../src/list");
+const Ðķ = require("../src/vector");
+const Ṣÿ = require("../src/symbol");
+const Ķÿ = require("../src/keyword");
+const Ɓů = require("../src/bubble");
 
 const { TokenNoMatchError } = require("../src/errors");
 

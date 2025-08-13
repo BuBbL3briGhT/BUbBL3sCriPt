@@ -1,7 +1,7 @@
 const assert = require("assert");
 
-const List = require("../../src/o/list");
-const Ṣymbol = require("../../src/o/symbol");
+const List = require("../../src/list");
+const Ṣymbol = require("../../src/symbol");
 
 describe("List", () => {
 
