@@ -1,5 +1,5 @@
 const Parinfer = require('parinfer');
-const { eval: _eval, parse } = require("../../src/BubbleScript");
+const { eval: _eval, parse } = require("../src/BubbleScript");
 
 
 function createRepl(rl) {

@@ -1,7 +1,7 @@
 const assert = require("assert");
 
-const Vector = require("../../src/vector");
-const Ṣymbol = require("../../src/symbol");
+const Vector = require("../src/vector");
+const Ṣymbol = require("../src/symbol");
 
 describe("Vector", () => {
 

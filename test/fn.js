@@ -1,7 +1,7 @@
 const assert = require("assert");
-const Ṣymbol = require("../../src/symbol");
-const Fn = require("../../src/fn");
-const List = require("../../src/list");
+const Ṣymbol = require("../src/symbol");
+const Fn = require("../src/fn");
+const List = require("../src/list");
 
 describe("Fn", function () {
   describe("toString", function () {

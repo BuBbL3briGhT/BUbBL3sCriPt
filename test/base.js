@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { eval: _eval }= require("../../src/BubbleScript");
+const { eval: _eval }= require("../src/BubbleScript");
 const sinon = require("sinon");
 
 describe("base", function () {

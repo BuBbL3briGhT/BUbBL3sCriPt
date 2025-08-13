@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { rootBinding, List} = require("../../src/BubbleScript");
+const { rootBinding, List} = require("../src/BubbleScript");
 
 describe("rootBinding", function () {
    describe("get", function () {

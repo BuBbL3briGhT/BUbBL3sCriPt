@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Util = require("../../src/util.js");
+const Util = require("../src/util.js");
 
 describe("Util", function () {
   describe("getStaticMethods", function () {
@@ -23,8 +23,8 @@ describe("Util", function () {
       function assertFunction(fn) {
         assert.equal(typeof fn, 'function');
       }
-      const Base = require("../../src/base.js");
-      const { eval: _eval } = require("../../src/BubbleScript");
+      const Base = require("../src/base.js");
+      const { eval: _eval } = require("../src/BubbleScript");
       const rootBinding =
         Util.makeRootBinding(Base, _eval._eval);
 
@@ -42,7 +42,7 @@ describe("Util", function () {
 
   describe("makeFunction", function() {
     it.skip("Makes a Bubblescript/Javascript interop function.", function () {
-      const eval = require("../../src/eval.js");
+      const eval = require("../src/eval.js");
       const _fn = (_) => _; // Simple pass thru function for test.
       const fn = Util.
         makeFunction(_fn, eval.eVaL);
