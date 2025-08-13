@@ -7,7 +7,7 @@ const sinon = require("sinon");
 
 // const { ėval } = require("../src/eval");
 
-const { List, Vector, rootBinding, ėval } =
+const { List, Vector, rootBinding, ėval, parse } =
   require("../src/BubbleScript");
 
 describe("eval(script)", function () {
