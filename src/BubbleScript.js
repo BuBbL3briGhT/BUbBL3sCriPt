@@ -6,18 +6,18 @@
      *        *    +   *
        *  */
 
-const AbstractList = require("./o/abstract_list");
-const List = require("./o/list");
-const Vector = require("./o/vector");
-const Ṣymbol = require("./o/symbol");
-const Keyword = require("./o/keyword");
-const Bubble = require("./o/bubble");
-const Fn = require("./o/fn");
-const { Macro } = require("./o/macro");
-const tokenize = require("./f/tokenize");
-const parse = require("./f/parse");
-const { ėval, ëval } = require("./f/eval");
-const { rootBinding } = require("./o/root_binding");
+const AbstractList = require("./abstract_list");
+const List = require("./list");
+const Vector = require("./vector");
+const Ṣymbol = require("./symbol");
+const Keyword = require("./keyword");
+const Bubble = require("./bubble");
+const Fn = require("./fn");
+const { Macro } = require("./macro");
+const tokenize = require("./tokenize");
+const parse = require("./parse");
+const { ėval, ëval } = require("./eval");
+const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
 const BubbleScript = {

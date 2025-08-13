@@ -1,4 +1,4 @@
-const List = require("./o/list");
+const List = require("./list");
 
 class LazyList extends List {
 

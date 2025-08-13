@@ -1,10 +1,10 @@
-const AbstractList = require("../o/abstract_list");
-const List = require("../o/list");
-const Vector = require("../o/vector");
-const Fn = require("../o/fn");
-const { Macro, MacroExpanded } = require("../o/macro");
-const Bubble = require("../o/bubble");
-const Ṣymbol = require("../o/symbol.js");
+const AbstractList = require("../abstract_list");
+const List = require("../list");
+const Vector = require("../vector");
+const Fn = require("../fn");
+const { Macro, MacroExpanded } = require("../macro");
+const Bubble = require("../bubble");
+const Ṣymbol = require("../symbol.js");
 const parse = require("./parse.js");
 const events = require("../events");
 

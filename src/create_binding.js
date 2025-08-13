@@ -1,6 +1,6 @@
-const List = require("../o/list");
-const Vector = require("../o/vector");
-const Ṣymbol = require("../o/symbol");
+const List = require("../list");
+const Vector = require("../vector");
+const Ṣymbol = require("../symbol");
 
 let sAmp = Ṣymbol.for("&");
 

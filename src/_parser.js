@@ -1,9 +1,9 @@
 const Ťķ = require("./tokenizer");
-const Ɓü = require("./o/list");
-const Ðķ = require("./o/vector");
-const Ṣÿ = require("./o/symbol");
-const Ķÿ = require("./o/keyword");
-const Ɓů = require("./o/bubble");
+const Ɓü = require("./list");
+const Ðķ = require("./vector");
+const Ṣÿ = require("./symbol");
+const Ķÿ = require("./keyword");
+const Ɓů = require("./bubble");
 const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");

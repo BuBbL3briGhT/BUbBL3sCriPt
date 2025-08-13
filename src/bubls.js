@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const BubbleScript = require("./BubbleScript");
-const { mkfn }  = require("./o/root_binding");
+const { mkfn }  = require("./root_binding");
 
 BubbleScript.load = function (filePath) {
   filePath = path.join(__dirname, filePath);

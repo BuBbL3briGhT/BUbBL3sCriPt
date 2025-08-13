@@ -1,8 +1,8 @@
-const List = require("../o/list");
-const Vector = require("../o/vector");
-const Keyword = require("../o/keyword");
-const Ṣymbol = require("../o/symbol");
-const Bubble = require("../o/bubble");
+const List = require("../list");
+const Vector = require("../vector");
+const Keyword = require("../keyword");
+const Ṣymbol = require("../symbol");
+const Bubble = require("../bubble");
 const tokenize = require("./tokenize");
 
 const {
