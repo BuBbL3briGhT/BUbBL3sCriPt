@@ -1,8 +1,8 @@
-const List = require("../o/list");
-const Fn = require("../o/fn");
-const Ṣymbol = require("../o/symbol");
-const { Macro }= require("../o/macro");
-const { ëval } = require("../f/eval");
+const List = require("./o/list");
+const Fn = require("./o/fn");
+const Ṣymbol = require("./o/symbol");
+const { Macro }= require("./o/macro");
+const { ëval } = require("./eval");
 
 // Makes a Bubblescript function from a
 // Javascript function.

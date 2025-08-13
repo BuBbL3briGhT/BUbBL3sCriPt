@@ -1,9 +1,11 @@
 const assert = require("assert");
 const sinon = require("sinon");
 
-const { List, Vector, eval: _eval, parse,
-  rootBinding } =
-  require("../../src/BubbleScript");
+const List = require("../src/o/list");
+const Vector = require("../src/o/vector");
+const rootBinding = require("../src/root_binding");
+
+const { ëval: ëvål } = require("../src/eval");
 
 describe("eval(script)", function () {
 
@@ -13,25 +15,25 @@ describe("eval(script)", function () {
 
   it("runs script top to bottom", function () {
     sinon.replace(console, "log", sinon.fake())
-    _eval("(muf puts (fn [a] (console.log a))) (puts 1) (puts 2) (puts 3)")
-    // _eval("(puts 3)\n(puts 2)\n(puts 1)\n(muf puts (fn [a] (console.log a)))"); // fyi: Pass with this under reverse execution.
+    ëvål("(muf puts (fn [a] (console.log a))) (puts 1) (puts 2) (puts 3)")
+    // ëvål("(puts 3)\n(puts 2)\n(puts 1)\n(muf puts (fn [a] (console.log a)))"); // fyi: Pass with this under reverse execution.
     assert(console.log.calledWith(1));
     assert(console.log.calledWith(2));
     assert(console.log.calledWith(3));
   });
 
   it("evaluates BubbleScript", function () {
-    assert.equal(_eval("(+ 45 87)"), 132);
+    assert.equal(ëvål("(+ 45 87)"), 132);
   });
 
   it("can console.log", function () {
     sinon.replace(console, "log", sinon.fake())
-    _eval('(console.log "Bonjour Marbre")');
+    ëvål('(console.log "Bonjour Marbre")');
     assert(console.log.calledWith("Bonjour Marbre"));
   });
 
   it("evaluates a vector with ease", function () {
-    let result = _eval("[1 2 3]");
+    let result = ëvål("[1 2 3]");
     // console.log(result);
     assert(result instanceof Vector);
   });
@@ -63,24 +65,24 @@ describe("eval(script)", function () {
 
   describe("function parameters", function () {
     it("splats", function () {
-      assert.equal(_eval(
+      assert.equal(ëvål(
         "((fn [a b c] (list b c a)) 1 2 3)")
           .toString(), "(2 3 1)");
-      assert.equal(_eval(
+      assert.equal(ëvål(
         "((fn [a & b] (list a b)) 1 2 3)")
           .toString(), "(1 (2 3))");
-      assert.equal(_eval(
+      assert.equal(ëvål(
         "((fn [& a] (pop a)) 1 2 3)")
           .toString(), "(2 3)");
-      // assert.equal(_eval(
+      // assert.equal(ëvål(
       //   "((fn [a b & c] (list & c)) 1 2 3)")
       //     .toString(), "(3)");
     });
     it("destructures", function () {
-      assert.equal(_eval(
+      assert.equal(ëvål(
         "((fn [a b] (list a b b)) 1 [2 3])")
           .toString(), "(1 [2 3] [2 3])");
-      assert.equal(_eval(
+      assert.equal(ëvål(
         "((fn [a [b c]] (list a b c)) 1 [2 3])")
           .toString(), "(1 2 3)");
     });
@@ -95,11 +97,11 @@ describe("eval(script)", function () {
     // to dig into identify and probably
     // classify in order to make the system
     // that much more robust.
-      // assert.equal(_eval(
+      // assert.equal(ëvål(
       //   "((fn [a b & c] (console.log & c)) 1 2 3)")
       //     .toString(), "(3)");
     it("splats for inbound functions");
-      // assert.equal(_eval(
+      // assert.equal(ëvål(
       //   "((fn [a b & c] (list & c)) 1 2 3)")
       //     .toString(), "(3)");
   });
