@@ -1,5 +1,5 @@
 const AbstractList = require("./abstract_list");
-const events = require("../events");
+const events = require("./events");
 
 let emptyList, MacroExpanded;
 

@@ -1,6 +1,6 @@
 const assert = require("assert");
 const sinon = require("sinon");
-const bubls = require("../src/bubls");
+const bubls = require("../../src/bubls");
 
 const { eval } = bubls;
 

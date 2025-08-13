@@ -1,5 +1,5 @@
-const createBinding = require("../create_binding");
-const List = require("../list");
+const createBinding = require("./create_binding");
+const List = require("./list");
 
 class Macro {
   constructor(binding, params, body, opts={}) {

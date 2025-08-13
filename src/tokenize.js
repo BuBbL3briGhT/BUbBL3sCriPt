@@ -1,4 +1,4 @@
-const Vector = require("../vector");
+const Vector = require("./vector");
 
 const TOK_KEYWORD = 'K',
       TOK_NUMBER  = 'N',
