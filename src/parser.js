@@ -23,11 +23,14 @@ class Qp {
 
   next() {
     const token = this.nextTokenSkipNewLines;
-    const o = token && this.parse(token);
+
+    if (!token) { return { done: true } }
+
+    const o = this.parse(token);
 
     const oo = this.nextToken;
     if (!oo || oo.type === TOK_NEWLiNE)
-      return { value: o, done: !o };
+      return { value: o, done: false };
     else
 
       return ((oo) => {
@@ -37,6 +40,7 @@ class Qp {
          return { value: ooo, done: false };
        })(this.parse(oo));
   }
+
 
   get nextToken() {
     return this.getNextToken();
@@ -60,7 +64,6 @@ class Qp {
 
     return token.value;
   }
-
 
   parse(token) {
     let o;

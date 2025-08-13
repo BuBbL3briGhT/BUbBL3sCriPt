@@ -45,7 +45,7 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it.only("parses false", function () {
+  it("parses false", function () {
     const input = "false";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
