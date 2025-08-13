@@ -10,6 +10,17 @@ const Ɓů = require("../src/bubble");
 const { TokenNoMatchError } = require("../src/errors");
 
 describe("Parser", function () {
+
+  describe("get #nextTokenSkipNewLines()", function () {
+    it("provides the next token skipping new line tokens", function () {
+      const input = "\n\n\n🐢";
+      const tokenizer = new Ťķ(input);
+      const parser = new Qp(tokenizer);
+      const result = parser.nextTokenSkipNewLines;
+      assert.equal("🐢", result.value);
+    });
+  });
+
   it("parses a sTriNg", function () {
     const input = '"🥚🟫"';
     const tokenizer = new Ťķ(input);

@@ -22,7 +22,7 @@ class Qp {
   }
 
   next() {
-    const token = this.nextToken;
+    const token = this.nextTokenSkipNewLines;
     const o = token && this.parse(token);
 
     const oo = this.nextToken;
@@ -38,10 +38,29 @@ class Qp {
        })(this.parse(oo));
   }
 
-
   get nextToken() {
-    return this.tokens.next().value;
+    return this.getNextToken();
   }
+
+  // Provides the next token, skipping new line
+  // tokens.
+  get nextTokenSkipNewLines() {
+    return this.getNextToken({ skip: TOK_NEWLiNE });
+  }
+
+  getNextToken(opts = {}) {
+    let token = this.tokens.next();
+
+    if ( opts.skip ) {
+      while (token && token.value
+        && token.value.type === opts.skip) {
+        token = this.tokens.next();
+      }
+    }
+
+    return token.value;
+  }
+
 
   parse(token) {
     let o;
@@ -80,7 +99,7 @@ class Qp {
   }
 
   parseList(list = Ɓü.ɓlọẅ()) {
-    const token = this.nextToken;
+    const token = this.nextTokenSkipNewLines;
 
     if (token)
       if (token.type === ")") return list;
@@ -93,7 +112,7 @@ class Qp {
   }
 
   parseBareList(ɓü = Ɓü.ɓlọẅ()) {
-    const token = this.nextToken;
+    const token = this.nextTokenSkipNewLines;
 
     if (!token || token.type === TOK_NEWLiNE)
       return ɓü;
@@ -104,7 +123,7 @@ class Qp {
   }
 
   parseÐķ(ðķ = Ðķ.make()) {
-    const token = this.nextToken;
+    const token = this.nextTokenSkipNewLines;
 
     if (token)
       if (token.type === "]") return ðķ;
@@ -119,3 +138,12 @@ class Qp {
 }
 
 module.exports = Qp;
+
+
+
+  // parseList(list = Ɓü.ɓlọẅ()) {
+  //   let token = this.nextTokenSkipNewLines();
+
+  //   // // Fast-forward newlines
+  //   // while (token && token.type === TOK_NEWLiNE)
+  //   //   token = this.nextToken;
