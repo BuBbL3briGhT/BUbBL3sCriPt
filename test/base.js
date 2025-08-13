@@ -1,15 +1,16 @@
 const assert = require("assert");
-const { eval: _eval }= require("../src/BubbleScript");
 const sinon = require("sinon");
+
+const { ėval } = require("../src/eval");
 
 describe("base", function () {
   describe("not", function () {
     it("negates", function () {
       // console.log(Base);
-      // console.log(_eval.rootBinding);
-      // console.log("eval not", _eval("not"));
-      // console.log("(not 1)", _eval("(not 1)"));
-      // console.log("(not 0)", _eval("(not 0)"));
+      // console.log(ėval.rootBinding);
+      // console.log("eval not", ėval("not"));
+      // console.log("(not 1)", ėval("(not 1)"));
+      // console.log("(not 0)", ėval("(not 0)"));
       assertEvalTo("(not 1)", false);
       assertEvalTo("(not 0)", true);
       assertEvalTo("(not true)", false);
@@ -20,7 +21,7 @@ describe("base", function () {
   describe("+", function () {
     it("sums", function () {
       // console.log(Base);
-      // console.log(_eval("(+ 1 1)"));
+      // console.log(ėval("(+ 1 1)"));
       assertEvalTo("(+ 1)", 1);
       assertEvalTo("(+ 1 1)", 2);
       assertEvalTo("(+ 1 1 1)", 3);
@@ -128,7 +129,7 @@ describe("base", function () {
   describe("muf", function () {
      it.skip("defines", function () {
        assertEvalTo("a", undefined);
-       _eval("(muf a 1)");
+       ėval("(muf a 1)");
        assertEvalTo("a", 1);
      });
   });
@@ -173,11 +174,11 @@ describe("base", function () {
 });
 
 function assertEval(expression, expected=true) {
-  assert.equal(_eval(expression), expected,
+  assert.equal(ėval(expression), expected,
     expression + " => " + expected);
 }
 
 function assertEvalTo(expression, expected) {
-  assert.equal(_eval(expression), expected,
+  assert.equal(ėval(expression), expected,
     expression + " => " + expected);
 }
