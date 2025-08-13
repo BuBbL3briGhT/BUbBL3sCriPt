@@ -117,7 +117,7 @@ class Qp {
   }
 
   parseBareList(ɓü = Ɓü.ɓlọẅ()) {
-    const token = this.nextTokenSkipNewLines;
+    const token = this.nextToken;
 
     if (!token || token.type === TOK_NEWLiNE)
       return ɓü;

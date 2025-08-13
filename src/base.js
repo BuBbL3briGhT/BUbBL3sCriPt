@@ -10,7 +10,7 @@
 // All static functions in this class will
 // are included in the root bound object.
 
-const { Fn } = require("../BubbleScript");
+const { Fn } = require("./BubbleScript");
 
 class Base {
 
@@ -88,5 +88,5 @@ Base['<'] = (a,b) => {
 
 module.exports = Base;
 
-const { eval } = require("../BubbleScript");
+const { eval } = require("./BubbleScript");
 const _eval = eval.eVaL;
