@@ -67,21 +67,21 @@ if (path) {
 
   r3pL(); /* StaRt r3pL */
 
-  rl.on('close', () => {
-    console.log('Readline interface closed.');
-  });
+  // rl.on('close', () => {
+  //   console.log('Readline interface closed.');
+  // });
 
-  rl.on('pause', () => {
-    console.log('Readline input paused.');
-  });
+  // rl.on('pause', () => {
+  //   console.log('Readline input paused.');
+  // });
 
-  rl.on('resume', () => {
-    console.log('Readline input resumed.');
-  });
+  // rl.on('resume', () => {
+  //   console.log('Readline input resumed.');
+  // });
 
   rl.on('SIGCONT', () => {
     // Executed when the program is resumed from the background
-    console.log('\nProgram resumed. Re-prompting...');
+    // console.log('\nProgram resumed. Re-prompting...');
     rl.prompt();
   });
 
