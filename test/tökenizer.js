@@ -4,6 +4,22 @@ const Tokenizer = Ðķ;
 
 describe("Tokenizer", function () {
 
+  it.only("tokenizes the number 1", function () {
+    const tokenizer = new Tokenizer("1");
+    assert.deepEqual([
+      { type: 'N', value: 1,
+        line: 1, column: 1 }
+    ], [...tokenizer]);
+  });
+
+  it.only("tokenizes the number 12", function () {
+    const tokenizer = new Tokenizer("12");
+    assert.deepEqual([
+      { type: 'N', value: 12,
+        line: 1, column: 1 }
+    ], [...tokenizer]);
+  });
+
   it("tokenizes ()[]{}.°", function () {
     let tokenizer = new Tokenizer("()[]{}.°");
     assert.deepEqual([
@@ -94,14 +110,6 @@ describe("Tokenizer", function () {
         type: 'F', value: false,
         line: 1, column: 1
       }
-    ], [...tokenizer]);
-  });
-
-  it.only("tokenizes a number", function () {
-    const tokenizer = new Tokenizer("1");
-    assert.deepEqual([
-      { type: 'N', value: 1,
-        line: 1, column: 1 }
     ], [...tokenizer]);
   });
 

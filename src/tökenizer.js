@@ -1,6 +1,7 @@
 const LazyList = require("./lazy_list");
 const TOK_NUMBER  = 'N';
 
+// Bubblescript string tokenizer using list as input.
 class Tökenizer {
 
   constructor (inpůt) {
@@ -27,9 +28,11 @@ class Tökenizer {
   }
 
   tokenizeNumber () {
-    const _value = this.tortuga.peek();
+    const matcher = new NumberMatcher(this.tortuga);
+    const _value = matcher.match;
+    this.tortuga = matcher.tortuga;
+
     const value = Number(_value);
-    this.tortuga = this.tortuga.pop();
     return this.createToken(TOK_NUMBER, value);
   }
 
@@ -41,6 +44,40 @@ class Tökenizer {
     return this;
   }
 
+}
+
+// Matches number at head of list.
+class NumberMatcher {
+
+  static charIsNumber(char) {
+    switch (char) {
+      case '1':
+      case '2':
+        return true;
+    }
+    return false;
+  }
+
+  constructor (tortuga) {
+    this.tortuga = tortuga;
+  }
+
+  get match() {
+    const value = this.matchWholeNumber();
+    return value;
+  }
+
+  matchWholeNumber () {
+    let value = "";
+    let char = this.tortuga.peek()
+
+    while (NumberMatcher.charIsNumber(char)) {
+      value += char;
+      this.tortuga = this.tortuga.pop();
+      char = this.tortuga.peek();
+    }
+    return value;
+  }
 }
 
 module.exports = Tökenizer;
