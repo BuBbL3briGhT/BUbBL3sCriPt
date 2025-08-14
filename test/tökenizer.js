@@ -30,7 +30,15 @@ describe("Tokenizer", function () {
     }
 
     assertTokenizes("1", 1);
-    assertTokenizes("12", 12);
+    assertTokenizes("2", 2);
+    assertTokenizes("3", 3);
+    assertTokenizes("4", 4);
+    assertTokenizes("5", 5);
+    assertTokenizes("6", 6);
+    assertTokenizes("7", 7);
+    assertTokenizes("8", 8);
+    assertTokenizes("9", 9);
+    assertTokenizes("0", 0);
     assertTokenizes("1234567890", 1234567890);
   });
 
