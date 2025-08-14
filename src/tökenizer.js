@@ -55,10 +55,8 @@ class Tökenizer {
 
 }
 
-// Matches number at head of list.
-class NumberMatcher {
-
-  static charIsNumber(char) {
+class Char {
+  static isNum(char) {
     switch (char) {
       case '1':
       case '2':
@@ -74,6 +72,11 @@ class NumberMatcher {
     }
     return false;
   }
+}
+
+
+// Matches number at head of list.
+class NumberMatcher {
 
   constructor (tortuga) {
     this.tortuga = tortuga;
@@ -82,13 +85,14 @@ class NumberMatcher {
   get match() {
     let value = this.matchWholeNumber();
 
-    if ( this.tortuga.peek() === "." &&
-         NumberMatcher.charIsNumber(
-           this.tortuga.pop().peek()) ) {
+    if ( this.tortuga.peek() === "." ) {
+      const deci = this.tortuga.pop()
+      const char = deci.peek();
 
-        this.tortuga = this.tortuga.pop();
+      if ( Char.isNum(char) ) {
+        this.tortuga = deci;
         value += "." + this.matchWholeNumber()
-
+      }
     }
 
     return value;
@@ -98,11 +102,12 @@ class NumberMatcher {
     let value = "";
     let char = this.tortuga.peek()
 
-    while (NumberMatcher.charIsNumber(char)) {
+    while (Char.isNum(char)) {
       value += char;
       this.tortuga = this.tortuga.pop();
       char = this.tortuga.peek();
     }
+
     return value;
   }
 }
