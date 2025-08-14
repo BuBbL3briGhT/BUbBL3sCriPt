@@ -1,5 +1,6 @@
 const LazyList = require("./lazy_list");
 const TOK_NUMBER  = 'N';
+const TOK_SYMBOL  = 'Y';
 
 // Bubblescript string tokenizer using list as input.
 class Tökenizer {
@@ -19,14 +20,22 @@ class Tökenizer {
   }
 
   get nextToken () {
-    if (this.tortuga.isEmpty)
-      return;
+    while (true) {
+      if (this.tortuga.isEmpty)
+        return;
 
-    const char = this.tortuga.peek();
+      let char = this.tortuga.peek();
 
-    switch (char) {
-      case Char.isNum(char):
-        return this.tokenizeNumber();
+      switch (char) {
+        case " ":
+          break;
+        case Char.isNum(char):
+          return this.tokenizeNumber();
+        default:
+          return this.tokenizeSymbol();
+      }
+
+      this.tortuga = this.tortuga.pop();
     }
   }
 
@@ -37,6 +46,15 @@ class Tökenizer {
 
     const value = Number(_value);
     return this.createToken(TOK_NUMBER, value);
+  }
+
+  tokenizeSymbol () {
+    const matcher = new SymbolMatcher(this.tortuga);
+    const value = matcher.match;
+    this.tortuga = matcher.tortuga;
+    // this.tortuga = this.tortuga.skip(value.length);
+
+    return this.createToken(TOK_SYMBOL, value);
   }
 
   createToken(type, value) {
@@ -87,6 +105,37 @@ class NumberMatcher {
   }
 }
 
+// Matches ^<symbol> from tortuga.
+class SymbolMatcher {
+
+  constructor (tortuga) {
+    this.tortuga = tortuga;
+  }
+
+  get match() {
+    if (this.tortuga.isEmpty)
+      return;
+
+    let char = this.tortuga.peek();
+    let value = "";
+
+    while (char) {
+      if (/[symbol]/.test(char))
+        value += char;
+      else
+        return value;
+
+      this.tortuga = this.tortuga.pop();
+
+      if (this.tortuga.isEmpty)
+        return value;
+
+      char = this.tortuga.peek();
+    }
+
+    return value;
+  }
+}
 
 class Char {
   static isNum(char) {

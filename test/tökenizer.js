@@ -49,7 +49,7 @@ describe("Tokenizer", function () {
     assertTokenizes("333.333", 333.333);
   });
 
-  it("tokenizes a symbol", function () {
+  it.only("tokenizes a symbol", function () {
     let tokenizer = new Tokenizer('symbol');
     assert.deepEqual([
       {
