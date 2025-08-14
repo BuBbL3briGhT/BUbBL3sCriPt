@@ -49,6 +49,16 @@ describe("Tokenizer", function () {
     assertTokenizes("333.333", 333.333);
   });
 
+  it("tokenizes a symbol", function () {
+    let tokenizer = new Tokenizer('symbol');
+    assert.deepEqual([
+      {
+        type: 'Y', value: 'symbol',
+        line: 1, column: 1
+      }
+    ], [...tokenizer]);
+  });
+
   it("tokenizes ()[]{}.°", function () {
     let tokenizer = new Tokenizer("()[]{}.°");
     assert.deepEqual([
@@ -107,16 +117,6 @@ describe("Tokenizer", function () {
     assert.deepEqual([
       {
         type: 'S', value: 'string',
-        line: 1, column: 1
-      }
-    ], [...tokenizer]);
-  });
-
-  it("tokenizes a symbol", function () {
-    let tokenizer = new Tokenizer('symbol');
-    assert.deepEqual([
-      {
-        type: 'Y', value: 'symbol',
         line: 1, column: 1
       }
     ], [...tokenizer]);

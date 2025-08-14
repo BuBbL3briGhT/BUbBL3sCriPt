@@ -19,19 +19,13 @@ class Tökenizer {
   }
 
   get nextToken () {
+    if (this.tortuga.isEmpty)
+      return;
+
     const char = this.tortuga.peek();
 
     switch (char) {
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-      case '0':
+      case Char.isNum(char):
         return this.tokenizeNumber();
     }
   }
@@ -53,25 +47,6 @@ class Tökenizer {
     return this;
   }
 
-}
-
-class Char {
-  static isNum(char) {
-    switch (char) {
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-      case '0':
-        return true;
-    }
-    return false;
-  }
 }
 
 
@@ -111,5 +86,25 @@ class NumberMatcher {
     return value;
   }
 }
+
+
+class Char {
+  static isNum(char) {
+    switch (char) {
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+      case '0':
+        return char;
+    }
+  }
+}
+
 
 module.exports = Tökenizer;
