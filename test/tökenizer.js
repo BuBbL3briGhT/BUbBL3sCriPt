@@ -20,6 +20,20 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
+  it.only("tokenizes numbers", function () {
+    function assertTokenizes(value, expects) {
+      const tokenizer = new Tokenizer(value);
+      assert.deepEqual([
+        { type: 'N', value: expects,
+          line: 1, column: 1 }
+      ], [...tokenizer]);
+    }
+
+    assertTokenizes("1", 1);
+    assertTokenizes("12", 12);
+    assertTokenizes("1234567890", 1234567890);
+  });
+
   it("tokenizes ()[]{}.°", function () {
     let tokenizer = new Tokenizer("()[]{}.°");
     assert.deepEqual([
