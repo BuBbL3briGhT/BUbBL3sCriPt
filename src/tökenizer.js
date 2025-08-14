@@ -80,7 +80,17 @@ class NumberMatcher {
   }
 
   get match() {
-    const value = this.matchWholeNumber();
+    let value = this.matchWholeNumber();
+
+    if ( this.tortuga.peek() === "." &&
+         NumberMatcher.charIsNumber(
+           this.tortuga.pop().peek()) ) {
+
+        this.tortuga = this.tortuga.pop();
+        value += "." + this.matchWholeNumber()
+
+    }
+
     return value;
   }
 

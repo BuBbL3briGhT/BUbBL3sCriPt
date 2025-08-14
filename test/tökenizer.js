@@ -29,6 +29,7 @@ describe("Tokenizer", function () {
       ], [...tokenizer]);
     }
 
+    assertTokenizes("0", 0);
     assertTokenizes("1", 1);
     assertTokenizes("2", 2);
     assertTokenizes("3", 3);
@@ -38,8 +39,14 @@ describe("Tokenizer", function () {
     assertTokenizes("7", 7);
     assertTokenizes("8", 8);
     assertTokenizes("9", 9);
-    assertTokenizes("0", 0);
     assertTokenizes("1234567890", 1234567890);
+    assertTokenizes("0123456789", 123456789);
+
+    // Deciminals
+    assertTokenizes("0.1", 0.1);
+    assertTokenizes("1.1", 1.1);
+    assertTokenizes("22.22", 22.22);
+    assertTokenizes("333.333", 333.333);
   });
 
   it("tokenizes ()[]{}.°", function () {
