@@ -21,31 +21,35 @@ describe("Tokenizer", function () {
   });
 
   it.only("tokenizes numbers", function () {
-    assertTokenizesNumber("0", 0);
-    assertTokenizesNumber("1", 1);
-    assertTokenizesNumber("2", 2);
-    assertTokenizesNumber("3", 3);
-    assertTokenizesNumber("4", 4);
-    assertTokenizesNumber("5", 5);
-    assertTokenizesNumber("6", 6);
-    assertTokenizesNumber("7", 7);
-    assertTokenizesNumber("8", 8);
-    assertTokenizesNumber("9", 9);
-    assertTokenizesNumber("1234567890", 1234567890);
-    assertTokenizesNumber("0123456789", 123456789);
+    (function (assert = assertTokenizesNumber) {
+      assert("0", 0);
+      assert("1", 1);
+      assert("2", 2);
+      assert("3", 3);
+      assert("4", 4);
+      assert("5", 5);
+      assert("6", 6);
+      assert("7", 7);
+      assert("8", 8);
+      assert("9", 9);
+      assert("1234567890", 1234567890);
+      assert("0123456789", 123456789);
 
-    // Deciminals
-    assertTokenizesNumber("0.1", 0.1);
-    assertTokenizesNumber("1.1", 1.1);
-    assertTokenizesNumber("22.22", 22.22);
-    assertTokenizesNumber("333.333", 333.333);
+      // Deciminals
+      assert("0.1", 0.1);
+      assert("1.1", 1.1);
+      assert("22.22", 22.22);
+      assert("333.333", 333.333);
+    }());
   });
 
   it.only("tokenizes a symbol", function () {
-    assertTokenizesSymbol("symbol", "symbol");
-    assertTokenizesSymbol("lobmys", "lobmys");
-    assertTokenizesSymbol("SyMBoL", "SyMBoL");
-    assertTokenizesSymbol("SYMBOL", "SYMBOL");
+    (function (assert = assertTokenizesSymbol) {
+      assert("symbol", "symbol");
+      assert("lobmys", "lobmys");
+      assert("SyMBoL", "SyMBoL");
+      assert("SYMBOL", "SYMBOL");
+    })();
   });
 
   it("tokenizes ()[]{}.°", function () {
