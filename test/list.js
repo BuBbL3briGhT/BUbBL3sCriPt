@@ -6,10 +6,17 @@ const Ṣymbol = require("../src/symbol");
 describe("List", () => {
 
   describe("#get isEmpty?", function () {
-    it.only("Returns true for an empty list.", function () {
+
+    it("Returns true for an empty list.", function () {
       const list = List.emptyList;
       assert.equal(list["isEmpty?"], true);
     });
+
+    it("Returns false if the list is not empty.", function () {
+      const list = List.make(1);
+      assert.equal(list["isEmpty?"], false);
+    });
+
   });
 
   describe("emptyList", function () {
