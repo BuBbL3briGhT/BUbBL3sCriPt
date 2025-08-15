@@ -49,6 +49,7 @@ describe("Tokenizer", function () {
       assert("lobmys", "lobmys");
       assert("SyMBoL", "SyMBoL");
       assert("SYMBOL", "SYMBOL");
+      assert("symbol123", "symbol123");
     })();
   });
 

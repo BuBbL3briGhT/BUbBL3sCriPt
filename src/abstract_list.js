@@ -200,10 +200,4 @@ class AbstractList {
 const prototype = AbstractList.prototype;
 prototype["includes?"] = prototype.find;
 
-// const isEmptyDescriptor =
-//   Object.getOwnPropertyDescriptor(prototype,
-//     "isEmpty");
-// Object.defineProperty(prototype, "isEmpty?",
-//   { get: isEmptyDescriptor.get });
-
 module.exports = AbstractList;
