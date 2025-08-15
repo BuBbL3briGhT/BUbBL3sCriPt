@@ -34,6 +34,8 @@ class Tökenizer {
         case "(":
         case ")":
         case "[":
+        case "]":
+        case "°":
           const token = this.createToken(char, char);
           this.tortuga = this.tortuga.pop()
           return token;

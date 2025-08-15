@@ -74,6 +74,20 @@ describe("Tokenizer", function () {
     });
   });
 
+  it.only("tokenizes ]", function () {
+    assertTokenizes(']', {
+      type: "]", value: "]",
+      line: 1, column: 1
+    });
+  });
+
+  it.only("tokenizes °", function () {
+    assertTokenizes('°', {
+      type: "°", value: "°",
+      line: 1, column: 1
+    });
+  });
+
   it("tokenizes ()[]{}.°", function () {
     let tokenizer = new Tokenizer("()[]{}.°");
     assert.deepEqual([
