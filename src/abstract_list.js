@@ -193,4 +193,8 @@ class AbstractList {
   }
 }
 
+// Aliases
+const prototype = AbstractList.prototype;
+prototype["includes?"] = prototype.find;
+
 module.exports = AbstractList;

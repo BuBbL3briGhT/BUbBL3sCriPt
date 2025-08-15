@@ -1,4 +1,5 @@
 const LazyList = require("./lazy_list");
+const List = require("./list");
 const TOK_NUMBER  = 'N';
 const TOK_SYMBOL  = 'Y';
 
@@ -108,7 +109,7 @@ class NumberMatcher {
 }
 
 // Symbol Delimiters
-const symDelim = List.make(' ', '\n', '\r');
+const symDelims = List.make(' ', '\n', '\r');
 
 // SymbolMatcher: Matches ^<symbol> from
 // tortuga.
@@ -125,7 +126,7 @@ class SymbolMatcher {
 
     let char = this.tortuga.peek();
 
-    if (symDelim.test(char))
+    if (symDelims["includes?"](char))
       throw Error("First character is a " +
         "symbol delimeter. (" + char + ")");
 
@@ -139,7 +140,7 @@ class SymbolMatcher {
     char = this.tortuga.peek();
 
     while (char) {
-      if (symDelim["includes?"](char))
+      if (symDelims["includes?"](char))
         return result;
       else
         result += char;
