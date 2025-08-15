@@ -31,6 +31,11 @@ class Tökenizer {
         case " ":
           break;
 
+        case "(":
+          const token = this.createToken(char, char);
+          this.tortuga = this.tortuga.pop()
+          return token;
+
         case Char.isNum(char):
           return this.tokenizeNumber();
 
