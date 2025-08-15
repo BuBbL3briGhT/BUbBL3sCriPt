@@ -108,16 +108,11 @@ class NumberMatcher {
 }
 
 // Symbol Delimiters
-// const symDelim = /[ \n\r\t\\l]/;
-const symDelim = /[ \n\r]/;
+const symDelim = List.make(' ', '\n', '\r');
 
 // SymbolMatcher: Matches ^<symbol> from
 // tortuga.
 class SymbolMatcher {
-
-  // static symbolDelimiters = List(' ', '\n', '\r', '\t', '\l');
-  // static symbolDelimers = /[ \n\r\t\l]/
-  // static reject = /[ \n\r\t\l]/; // Symbol Delimiters
 
   constructor (tortuga) {
     this.tortuga = tortuga;
@@ -138,20 +133,20 @@ class SymbolMatcher {
 
     this.tortuga = this.tortuga.pop();
 
-    if (this.tortuga.isEmpty)
+    if (this.tortuga["isEmpty?"])
       return result;
 
     char = this.tortuga.peek();
 
     while (char) {
-      if (symDelim.test(char))
+      if (symDelim["includes?"](char))
         return result;
       else
         result += char;
 
       this.tortuga = this.tortuga.pop();
 
-      if (this.tortuga.isEmpty)
+      if (this.tortuga["isEmpty?"])
         return result;
 
       char = this.tortuga.peek();
