@@ -21,42 +21,31 @@ describe("Tokenizer", function () {
   });
 
   it.only("tokenizes numbers", function () {
-    function assertTokenizes(value, expects) {
-      const tokenizer = new Tokenizer(value);
-      assert.deepEqual([
-        { type: 'N', value: expects,
-          line: 1, column: 1 }
-      ], [...tokenizer]);
-    }
-
-    assertTokenizes("0", 0);
-    assertTokenizes("1", 1);
-    assertTokenizes("2", 2);
-    assertTokenizes("3", 3);
-    assertTokenizes("4", 4);
-    assertTokenizes("5", 5);
-    assertTokenizes("6", 6);
-    assertTokenizes("7", 7);
-    assertTokenizes("8", 8);
-    assertTokenizes("9", 9);
-    assertTokenizes("1234567890", 1234567890);
-    assertTokenizes("0123456789", 123456789);
+    assertTokenizesNumber("0", 0);
+    assertTokenizesNumber("1", 1);
+    assertTokenizesNumber("2", 2);
+    assertTokenizesNumber("3", 3);
+    assertTokenizesNumber("4", 4);
+    assertTokenizesNumber("5", 5);
+    assertTokenizesNumber("6", 6);
+    assertTokenizesNumber("7", 7);
+    assertTokenizesNumber("8", 8);
+    assertTokenizesNumber("9", 9);
+    assertTokenizesNumber("1234567890", 1234567890);
+    assertTokenizesNumber("0123456789", 123456789);
 
     // Deciminals
-    assertTokenizes("0.1", 0.1);
-    assertTokenizes("1.1", 1.1);
-    assertTokenizes("22.22", 22.22);
-    assertTokenizes("333.333", 333.333);
+    assertTokenizesNumber("0.1", 0.1);
+    assertTokenizesNumber("1.1", 1.1);
+    assertTokenizesNumber("22.22", 22.22);
+    assertTokenizesNumber("333.333", 333.333);
   });
 
   it.only("tokenizes a symbol", function () {
-    let tokenizer = new Tokenizer('symbol');
-    assert.deepEqual([
-      {
-        type: 'Y', value: 'symbol',
-        line: 1, column: 1
-      }
-    ], [...tokenizer]);
+    assertTokenizesSymbol("symbol", "symbol");
+    assertTokenizesSymbol("lobmys", "lobmys");
+    assertTokenizesSymbol("SyMBoL", "SyMBoL");
+    assertTokenizesSymbol("SYMBOL", "SYMBOL");
   });
 
   it("tokenizes ()[]{}.°", function () {
@@ -259,3 +248,22 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 });
+
+
+function assertTokenizes(input, expects) {
+  const tokenizer = new Tokenizer(input);
+  assert.deepEqual([expects],
+    [...tokenizer]);
+}
+
+function assertTokenizesNumber(input, expects) {
+  assertTokenizes(input,
+    { type: 'N', value: expects,
+      line: 1, column: 1 });
+}
+
+function assertTokenizesSymbol(input, expects) {
+  assertTokenizes(input,
+    { type: 'Y', value: expects,
+      line: 1, column: 1 });
+}
