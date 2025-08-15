@@ -5,6 +5,13 @@ const Ṣymbol = require("../src/symbol");
 
 describe("List", () => {
 
+  describe("#get isEmpty?", function () {
+    it.only("Returns true for an empty list.", function () {
+      const list = List.emptyList;
+      assert.equal(list["isEmpty?"], true);
+    });
+  });
+
   describe("emptyList", function () {
     describe("toString", function () {
       it("should return a formatted string representation of an empty linkedList", function () {

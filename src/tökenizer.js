@@ -22,7 +22,7 @@ class Tökenizer {
 
   get nextToken () {
     while (true) {
-      if (this.tortuga.isEmpty)
+      if (this.tortuga["isEmpty?"])
         return;
 
       let char = this.tortuga.peek();
@@ -120,7 +120,7 @@ class SymbolMatcher {
   }
 
   get match() {
-    if (this.tortuga.isEmpty)
+    if (this.tortuga["isEmpty?"])
       // Cannot match a symbol on an empty list.
       throw Error("Tortuga is empty.");
 
