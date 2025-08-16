@@ -37,6 +37,10 @@ class Tökenizer {
       let char = this.tortuga.peek();
 
       switch (char) {
+        case "#":
+          this.eatComment();
+          break;
+
         case " ":
           this.step();
           break;
@@ -79,13 +83,25 @@ class Tökenizer {
 
       if (token) return token;
 
-      this.tortuga = this.tortuga.pop();
     }
   }
 
   step(n=1) {
     this.tortuga = this.tortuga.skip(n);
     this.column += 1;
+  }
+
+  eatComment () {
+    for (const char of this.tortuga) {
+      this.step();
+      switch (char) {
+        case "\n":
+        case "\r":
+          this.line++;
+          this.column=0;
+          return;
+      }
+    }
   }
 
   tokenizeNumber () {
