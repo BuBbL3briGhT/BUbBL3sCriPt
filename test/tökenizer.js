@@ -141,7 +141,7 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
-  it.only("tokenizes a string", function () {
+  it("tokenizes a string", function () {
     let tokenizer = new Tokenizer('"string"');
     assert.deepEqual([
       {
@@ -151,7 +151,9 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
-  it("tokenizes true", function () {
+  it("throw error for unterminated strings");
+
+  it.only("tokenizes true", function () {
     let tokenizer = new Tokenizer('true');
     assert.deepEqual([
       {
