@@ -119,7 +119,7 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
-  it.only("tokenizes a\\nb\\rc", function () {
+  it("tokenizes a\\nb\\rc", function () {
     let tokenizer = new Tokenizer("a\nb\rc");
     assert.deepEqual([
       {
