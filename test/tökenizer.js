@@ -241,7 +241,7 @@ describe("Tokenizer", function () {
                       column: 28, filePath:
                       'imaginary' }, [...tokenizer]);
     });
-  });
+  })();
 
 
   (function () {
