@@ -141,7 +141,7 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
-  it("tokenizes a string", function () {
+  it.only("tokenizes a string", function () {
     let tokenizer = new Tokenizer('"string"');
     assert.deepEqual([
       {

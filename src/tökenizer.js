@@ -2,6 +2,7 @@ const LazyList = require("./lazy_list");
 const List = require("./list");
 const TOK_NUMBER  = 'N',
       TOK_SYMBOL  = 'Y',
+      TOK_STRiNG  = 'S',
       TOK_NEWLiNE  = 'L';
 
 // Bubblescript string tokenizer using list as input.
@@ -61,6 +62,10 @@ class Tökenizer {
           token = this.tokenizeNumber();
           break;
 
+        case '"':
+          token = this.tokenizeString();
+          break;
+
         default:
           token = this.tokenizeSymbol();
       }
@@ -96,8 +101,25 @@ class Tökenizer {
     return token;
   }
 
-  createToken(type, value) {
-    return { type, value, line: this.line, column: this.column };
+  tokenizeString () {
+    let value = "";
+    let { line, column } = this;
+
+    let char = this.tortuga.peek();
+    this.step();
+    char = this.tortuga.peek();
+    while (char && char !== '"') {
+      value += char;
+      this.step();
+      char = this.tortuga.peek();
+    }
+    this.step();
+
+    return this.createToken(TOK_STRiNG, value, line, column);
+  }
+
+  createToken(type, value, line = this.line, column = this.column) {
+    return { type, value, line, column };
   }
 
   [Symbol.iterator]() {
