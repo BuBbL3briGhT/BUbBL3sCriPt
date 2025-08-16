@@ -173,7 +173,7 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
-  it.only("tokenizes a keyword", function () {
+  it("tokenizes a keyword", function () {
     const tokenizer = new Tokenizer(":keyword");
     assert.deepEqual([
       { type: 'K', value: "keyword",
