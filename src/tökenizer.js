@@ -1,14 +1,22 @@
 const LazyList = require("./lazy_list");
 const List = require("./list");
-const TOK_NUMBER  = 'N';
-const TOK_SYMBOL  = 'Y';
+const TOK_NUMBER   = 'N',
+      TOK_SYMBOL   = 'Y',
+      TOK_KEYWORD  = 'K',
+      TOK_STRiNG   = 'S',
+      TOK_TRUE     = 'T',
+      TOK_FALSE    = 'F',
+      TOK_NEWLiNE  = 'L';
 
 // Bubblescript string tokenizer using list as input.
 class Tökenizer {
 
-  constructor (inpůt) {
+  constructor (inpůt, opts = {}) {
     const inpůtty = inpůt[Symbol.iterator]();
     this.tortuga = new LazyList(inpůtty);
+    this.line = 1;
+    this.column = 1;
+    this.file = opts.file;
   }
 
   next () {
@@ -21,6 +29,8 @@ class Tökenizer {
   }
 
   get nextToken () {
+    let token;
+
     while (true) {
       if (this.tortuga["isEmpty?"])
         return;
@@ -28,26 +38,70 @@ class Tökenizer {
       let char = this.tortuga.peek();
 
       switch (char) {
+        case "#":
+          this.eatComment();
+          break;
+
         case " ":
+          this.step();
+          break;
+
+        case "\n":
+        case "\r":
+          token = this.createToken(TOK_NEWLiNE, char);
+          this.step();
+          this.line += 1;
+          this.column = 1;
           break;
 
         case "(":
         case ")":
         case "[":
         case "]":
+        case "}":
+        case "{":
+        case ".":
         case "°":
-          const token = this.createToken(char, char);
-          this.tortuga = this.tortuga.pop()
-          return token;
+          token = this.createToken(char, char);
+          this.step();
+          break;
 
         case Char.isNum(char):
-          return this.tokenizeNumber();
+          token = this.tokenizeNumber();
+          break;
+
+        case '"':
+          token = this.tokenizeString();
+          break;
+
+        case ':':
+          token = this.tokenizeKeyword();
+          break;
 
         default:
-          return this.tokenizeSymbol();
+          token = this.tokenizeSymbol();
       }
 
-      this.tortuga = this.tortuga.pop();
+      if (token) return token;
+
+    }
+  }
+
+  step(n=1) {
+    this.tortuga = this.tortuga.skip(n);
+    this.column += 1;
+  }
+
+  eatComment () {
+    for (const char of this.tortuga) {
+      this.step();
+      switch (char) {
+        case "\n":
+        case "\r":
+          this.line++;
+          this.column=0;
+          return;
+      }
     }
   }
 
@@ -57,7 +111,25 @@ class Tökenizer {
     this.tortuga = matcher.tortuga;
 
     const value = Number(_value);
-    return this.createToken(TOK_NUMBER, value);
+    const token = this.createToken(TOK_NUMBER, value);
+    this.column += _value.length
+    return token;
+  }
+
+  tokenizeKeyword () {
+    let line = this.line;
+    let column = this.column;
+    this.step();
+
+    const matcher = new SymbolMatcher(this.tortuga);
+    const value = matcher.match;
+    this.tortuga = matcher.tortuga;
+
+    let token;
+    token = this.createToken(TOK_KEYWORD, value, line, column);
+    this.column += value.length;
+
+    return token;
   }
 
   tokenizeSymbol () {
@@ -66,11 +138,48 @@ class Tökenizer {
     this.tortuga = matcher.tortuga;
     // this.tortuga = this.tortuga.skip(value.length);
 
-    return this.createToken(TOK_SYMBOL, value);
+    let token;
+    switch (value) {
+      case "true":
+        token = this.createToken(TOK_TRUE, true);
+        this.column += 4;
+        break;
+      case "false":
+        token = this.createToken(TOK_FALSE, false);
+        this.column += 5;
+        break;
+      default:
+        token = this.createToken(TOK_SYMBOL, value);
+        this.column += value.length;
+    }
+
+    return token;
   }
 
-  createToken(type, value) {
-    return { type, value, line: 1, column: 1 };
+  tokenizeString () {
+    let value = "";
+    let { line, column } = this;
+
+    let char = this.tortuga.peek();
+    this.step();
+    char = this.tortuga.peek();
+    while (char && char !== '"') {
+      value += char;
+      this.step();
+      char = this.tortuga.peek();
+    }
+    this.step();
+
+    return this.createToken(TOK_STRiNG, value, line, column);
+  }
+
+  createToken(type, value, line = this.line, column = this.column) {
+    const token = { type, value, line, column };
+
+    if (this.file)
+      token.file = this.file;
+
+    return token;
   }
 
   [Symbol.iterator]() {
@@ -118,7 +227,7 @@ class NumberMatcher {
 }
 
 // Symbol Delimiters
-const symDelims = List.make(' ', '\n', '\r');
+const symDelims = List.make(' ', '\n', '\r', ')', ']', '}');
 
 // SymbolMatcher: Matches ^<symbol> from
 // tortuga.
@@ -183,6 +292,5 @@ class Char {
     }
   }
 }
-
 
 module.exports = Tökenizer;
