@@ -26,7 +26,10 @@ class AbstractList {
   peek() { return this.o; }
   pop()  { return this.oo; }
 
+
   get isEmpty() { return false; }
+  get ["isEmpty?"]() { return this.isEmpty; }
+  get ["empty?"]() { return this.isEmpty; }
   get first() { return this.peek(); }
   get rest() { return this.pop(); }
   get head() { return this.peek(); }
@@ -192,5 +195,9 @@ class AbstractList {
     }
   }
 }
+
+// Aliases
+const prototype = AbstractList.prototype;
+prototype["includes?"] = prototype.find;
 
 module.exports = AbstractList;
