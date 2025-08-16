@@ -163,7 +163,7 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
-  it.only("tokenizes false", function () {
+  it("tokenizes false", function () {
     let tokenizer = new Tokenizer('false');
     assert.deepEqual([
       {
@@ -173,7 +173,7 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
-  it("tokenizes a keyword", function () {
+  it.only("tokenizes a keyword", function () {
     const tokenizer = new Tokenizer(":keyword");
     assert.deepEqual([
       { type: 'K', value: "keyword",
@@ -214,7 +214,6 @@ describe("Tokenizer", function () {
         line: 1, column: 1 }
     ], [...tokenizer]);
   });
-
 
   (function () {
     const string = "(apple 🍏 orange 🍊 pina 🪅)";

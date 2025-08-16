@@ -2,6 +2,7 @@ const LazyList = require("./lazy_list");
 const List = require("./list");
 const TOK_NUMBER   = 'N',
       TOK_SYMBOL   = 'Y',
+      TOK_KEYWORD  = 'K',
       TOK_STRiNG   = 'S',
       TOK_TRUE     = 'T',
       TOK_FALSE    = 'F',
@@ -68,6 +69,10 @@ class Tökenizer {
           token = this.tokenizeString();
           break;
 
+        case ':':
+          token = this.tokenizeKeyword();
+          break;
+
         default:
           token = this.tokenizeSymbol();
       }
@@ -90,6 +95,22 @@ class Tökenizer {
 
     const value = Number(_value);
     return this.createToken(TOK_NUMBER, value);
+  }
+
+  tokenizeKeyword () {
+    let line = this.line;
+    let column = this.column;
+    this.step();
+
+    const matcher = new SymbolMatcher(this.tortuga);
+    const value = matcher.match;
+    this.tortuga = matcher.tortuga;
+
+    let token;
+    token = this.createToken(TOK_KEYWORD, value, line, column);
+    this.column += value.length;
+
+    return token;
   }
 
   tokenizeSymbol () {
