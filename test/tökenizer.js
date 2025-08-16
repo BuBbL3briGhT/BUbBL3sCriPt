@@ -218,28 +218,28 @@ describe("Tokenizer", function () {
   (function () {
     const string = "(apple 🍏 orange 🍊 pina 🪅)";
     it("tokenizes " + string, function () {
-      let tokenizer = new Tokenizer(string, { filePath: "imaginary" });
-      assert.deepEqual({ type: '(', value: '(',
-        line: 1, column: 1, filePath:
+      let tokenizer = new Tokenizer(string, { file: "imaginary" });
+      assert.deepEqual([{ type: '(', value: '(',
+        line: 1, column: 1, file:
         'imaginary' }, { type: 'Y', value:
-          'apple', line: 1, column: 2, filePath:
+          'apple', line: 1, column: 2, file:
           'imaginary' }, { type: 'Y', value:
-            '🍏', line: 1, column: 8, filePath:
+            '🍏', line: 1, column: 8, file:
             'imaginary' }, { type: 'Y', value:
               'orange', line: 1, column: 11,
-              filePath: 'imaginary' }, { type:
+              file: 'imaginary' }, { type:
                 'Y', value: '🍊', line: 1,
-                column: 18, filePath:
+                column: 18, file:
                 'imaginary' }, { type: 'Y',
                   value: 'pina', line: 1,
-                  column: 21, filePath:
+                  column: 21, file:
                   'imaginary' }, { type: 'Y',
                       value: '🪅', line: 1,
-                      column: 26, filePath:
+                      column: 26, file:
                     'imaginary' }, { type: ')',
                       value: ')', line: 1,
-                      column: 28, filePath:
-                      'imaginary' }, [...tokenizer]);
+                      column: 28, file:
+                      'imaginary' }], [...tokenizer]);
     });
   })();
 

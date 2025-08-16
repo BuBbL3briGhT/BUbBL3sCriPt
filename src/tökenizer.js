@@ -11,11 +11,12 @@ const TOK_NUMBER   = 'N',
 // Bubblescript string tokenizer using list as input.
 class Tökenizer {
 
-  constructor (inpůt) {
+  constructor (inpůt, opts = {}) {
     const inpůtty = inpůt[Symbol.iterator]();
     this.tortuga = new LazyList(inpůtty);
     this.line = 1;
     this.column = 1;
+    this.file = opts.file;
   }
 
   next () {
@@ -173,7 +174,12 @@ class Tökenizer {
   }
 
   createToken(type, value, line = this.line, column = this.column) {
-    return { type, value, line, column };
+    const token = { type, value, line, column };
+
+    if (this.file)
+      token.file = this.file;
+
+    return token;
   }
 
   [Symbol.iterator]() {
@@ -286,6 +292,5 @@ class Char {
     }
   }
 }
-
 
 module.exports = Tökenizer;
