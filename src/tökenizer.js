@@ -10,6 +10,8 @@ class Tökenizer {
   constructor (inpůt) {
     const inpůtty = inpůt[Symbol.iterator]();
     this.tortuga = new LazyList(inpůtty);
+    this.line = 1;
+    this.column = 1;
   }
 
   next () {
@@ -32,12 +34,15 @@ class Tökenizer {
 
       switch (char) {
         case " ":
+          this.step();
           break;
 
         case "\n":
         case "\r":
           token = this.createToken(TOK_NEWLiNE, char);
           this.step();
+          this.line += 1;
+          this.column = 1;
           break;
 
         case "(":
@@ -65,6 +70,7 @@ class Tökenizer {
 
   step(n=1) {
     this.tortuga = this.tortuga.skip(n);
+    this.column += 1;
   }
 
   tokenizeNumber () {
@@ -82,11 +88,13 @@ class Tökenizer {
     this.tortuga = matcher.tortuga;
     // this.tortuga = this.tortuga.skip(value.length);
 
-    return this.createToken(TOK_SYMBOL, value);
+    const token = this.createToken(TOK_SYMBOL, value);
+    this.column += value.length;
+    return token;
   }
 
   createToken(type, value) {
-    return { type, value, line: 1, column: 1 };
+    return { type, value, line: this.line, column: this.column };
   }
 
   [Symbol.iterator]() {
