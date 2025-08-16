@@ -110,7 +110,9 @@ class Tökenizer {
     this.tortuga = matcher.tortuga;
 
     const value = Number(_value);
-    return this.createToken(TOK_NUMBER, value);
+    const token = this.createToken(TOK_NUMBER, value);
+    this.column += _value.length
+    return token;
   }
 
   tokenizeKeyword () {
@@ -219,7 +221,7 @@ class NumberMatcher {
 }
 
 // Symbol Delimiters
-const symDelims = List.make(' ', '\n', '\r');
+const symDelims = List.make(' ', '\n', '\r', ')', ']', '}');
 
 // SymbolMatcher: Matches ^<symbol> from
 // tortuga.
