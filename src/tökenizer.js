@@ -227,7 +227,8 @@ class NumberMatcher {
 }
 
 // Symbol Delimiters
-const symDelims = List.make(' ', '\n', '\r', ')', ']', '}');
+const symDelims = List.make(' ', '\n', '\r',
+    ')', ']', '}', ',');
 
 // SymbolMatcher: Matches ^<symbol> from
 // tortuga.
