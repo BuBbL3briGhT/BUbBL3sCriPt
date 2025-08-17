@@ -81,6 +81,20 @@ describe("Tokenizer", function () {
       });
   });
 
+  it("tokenizes ;", function () {
+    assertTokenizes(';', {
+      type: ";", value: ";",
+      line: 1, column: 1
+    });
+    assertTokenizes('a;', {
+        type: "Y", value: "a",
+        line: 1, column: 1
+      }, {
+        type: ";", value: ";",
+        line: 1, column: 2
+      });
+  });
+
   it("tokenizes [", function () {
     assertTokenizes('[', {
       type: "[", value: "[",

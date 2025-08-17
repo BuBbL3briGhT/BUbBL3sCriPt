@@ -64,6 +64,7 @@ class Tökenizer {
         case ".":
         case "°":
         case ",":
+        case ";":
           token = this.createToken(char, char);
           this.step();
           break;
@@ -228,7 +229,7 @@ class NumberMatcher {
 
 // Symbol Delimiters
 const symDelims = List.make(' ', '\n', '\r',
-    ')', ']', '}', ',');
+    ')', ']', '}', ',', ';');
 
 // SymbolMatcher: Matches ^<symbol> from
 // tortuga.
