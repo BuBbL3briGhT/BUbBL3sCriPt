@@ -1,4 +1,5 @@
-August
+August:
+
 - better error handeling.
 - bubl native each
 - bubl native map
@@ -13,7 +14,6 @@ August
 - single line comment token type )consumed with comment by tokenizer, or emmited depending on tokenizer configuration config.
 - comma token type )emitted or consumed by tokenizer depending upon configuration.
 - continue & implementation, needs more work, exteranl and internal functions.
-
 
 - comma token type
 - semicolon token type
@@ -37,8 +37,8 @@ August
   - Error handling, and printing staxk traces form List.eval.
   - Interleaved stack traces js -> bubls -> js -> ...
 - write test for applyArguments
-- Implement index and ranges and use to improve
-  split, versus using find and until.
+- Implement index and ranges and use index to
+  improve split, versus using find and until.
 - Handel & for function parmeter for definition
   and calling.
 - New define/muf that handels scheme style
