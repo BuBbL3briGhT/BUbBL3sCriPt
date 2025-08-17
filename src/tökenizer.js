@@ -9,8 +9,6 @@ const TOK_NUMBER   = 'N',
       TOK_NEWLiNE  = 'L';
 
 
-const lineTerminators = List.make("\n", "\r");
-
 // Bubblescript string tokenizer using list as
 // input.
 class Tökenizer {
@@ -50,7 +48,7 @@ class Tökenizer {
           this.step();
           break;
 
-        case lineTerminators.find(char) && char:
+        case Char.isNewline(char):
           token = this.createToken(TOK_NEWLiNE, char);
           this.step();
           this.line += 1;
@@ -98,7 +96,7 @@ class Tökenizer {
   eatComment () {
     for (const char of this.tortuga) {
       this.step();
-      if (lineTerminators.find(char)) {
+      if (Char.isNewline(char)) {
         this.line++;
         this.column=0;
         return;
@@ -277,6 +275,8 @@ class SymbolMatcher {
 }
 
 class Char {
+  static newlineChars = List.make("\n", "\r");
+
   static isNum(char) {
     switch (char) {
       case '1':
@@ -291,6 +291,10 @@ class Char {
       case '0':
         return char;
     }
+  }
+
+  static isNewline(char) {
+    return this.newlineChars.find(char) && char;
   }
 }
 
