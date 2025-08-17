@@ -63,6 +63,7 @@ class Tökenizer {
         case "{":
         case ".":
         case "°":
+        case ",":
           token = this.createToken(char, char);
           this.step();
           break;

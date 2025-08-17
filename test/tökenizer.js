@@ -67,6 +67,13 @@ describe("Tokenizer", function () {
     });
   });
 
+  it("tokenizes ,", function () {
+    assertTokenizes(',', {
+      type: ",", value: ",",
+      line: 1, column: 1
+    });
+  });
+
   it("tokenizes [", function () {
     assertTokenizes('[', {
       type: "[", value: "[",
