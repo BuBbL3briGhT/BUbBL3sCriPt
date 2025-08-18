@@ -5,8 +5,7 @@ const Fn = require("./fn");
 const { Macro, MacroExpanded } = require("./macro");
 const Bubble = require("./bubble");
 const Ṣymbol = require("./symbol");
-const Tokenizer = require("./tökenizer");
-const { Parser } = require("./parse");
+const { parse } = require("./parse");
 const LazyList = require("./lazy_list");
 const events = require("./events");
 
@@ -20,10 +19,7 @@ events.on("init", function (bubls) {
 
 // Evaluate Bubblescript
 function ėval(script) {
-  const ťķ = new Tokenizer(script);
-  const pṣ = new Parser(ťķ);
-  const lazy = new LazyList(pṣ);
-  return lazy.eval(rootBinding);
+  return parse(script).eval(rootBinding);
 }
 
 function ëval(bnd, xpr) {

@@ -23,8 +23,7 @@ const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
 // }
 
 function parse(inputString) {
-  const ťķ = new Ťķ(inputString);
-  const pṣ = new Parser(ťķ);
+  const pṣ = new Parser(tokenize(inputString));
   return new LazyList(pṣ);
 }
 
