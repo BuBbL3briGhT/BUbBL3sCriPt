@@ -1,193 +1,157 @@
-const List = require("./list");
-const Vector = require("./vector");
-const Keyword = require("./keyword");
-const Ṣymbol = require("./symbol");
-const Bubble = require("./bubble");
-const tokenize = require("./tokenize");
-const { ParsingError, NoMatchError } =
-                      require("./errors");
+const Ðķ = require("./vector");
+const Ķÿ = require("./keyword");
+const Ťķ = require("./tökenizer");
+const Ɓü = require("./list");
+const Ɓů = require("./bubble");
+const Ṣÿ = require("./symbol");
+const { TokenNoMatchError,
+        UnexpectedEndOfInputError }
+                 = require("./errors");
 
-const {
-  TOK_STRiNG,
-  TOK_NUMBER,
-  TOK_SYMBOL,
-  TOK_KEYWORD,
-  TOK_TRUE,
-  TOK_FALSE
-} = tokenize.tokenTypes;
+        if (!Ɓü.ɓlọẅ) { Ɓü.ɓlọẅ = Ɓü.make; }
+        if (!Ṣÿ.fï) { Ṣÿ.fï = Ṣÿ.for; }
+        if (!Ðķ.mƙ) { Ðķ.mƙ = Ðķ.make; }
 
-function parse(inputString) { // sTriNg -> inputString
-  // tokenize now returns a single LynktLyst of token objects
-  return parseTokens(tokenize(inputString)); // pArSe -> parseTokens
+const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
+  TOK_KEYWORD, TOK_TRUE, TOK_FALSE, TOK_NEWLiNE,
+} = Ťķ.tokenTypes;
+
+
+// function parse(inputString) { // sTriNg -> inputString
+//   // tokenize now returns a single LynktLyst of token objects
+//   return parseTokens(tokenize(inputString)); // pArSe -> parseTokens
+// }
+
+function parse(inputString) {
+  const ťķ = new Ťķ(inputString);
+  const pṣ = new Parser(ťķ);
+  return new LazyList(pṣ);
 }
 
-// tokenVector is a single LynktLyst of token objects
-function parseTokens(tokenVector) { // pArSe -> parseTokens
-  let tree = List.emptyList,
-    vector, item, matchedToken; // trEe -> tree, liSt -> vector, iTem -> item
+class Parser {
+  constructor(tokens) {
+    this.tokens = tokens;
+  }
 
-  // console.log("tokenVector", tokenVector);
+  next() {
+    const token = this.nextTokenSkipNewLines;
 
-  while (tokenVector && tokenVector.peek()) { // Loop while there are tokens
-    let currentTokenObject = tokenVector.peek();
-    switch (currentTokenObject.type) {
-      case ')': // End of a List vector
-        [tokenVector, vector] = matchList(tokenVector); // liSt -> vector
-        tree = tree.push(vector); // trEe -> tree, liSt -> vector
+    if (!token) { return { done: true } }
+
+    const o = this.parse(token);
+
+    const oo = this.nextToken;
+    if (!oo || oo.type === TOK_NEWLiNE)
+      return { value: o, done: false };
+    else
+
+      return ((oo) => {
+         const ooo =
+           this.parseBareList()
+               .push(oo).push(o);
+         return { value: ooo, done: false };
+       })(this.parse(oo));
+  }
+
+
+  get nextToken() {
+    return this.getNextToken();
+  }
+
+  // Provides the next token, skipping new line
+  // tokens.
+  get nextTokenSkipNewLines() {
+    return this.getNextToken({ skip: TOK_NEWLiNE });
+  }
+
+  getNextToken(opts = {}) {
+    let token = this.tokens.next();
+
+    if ( opts.skip ) {
+      while (token && token.value
+        && token.value.type === opts.skip) {
+        token = this.tokens.next();
+      }
+    }
+
+    return token.value;
+  }
+
+  parse(token) {
+    let o;
+
+    switch (token.type) {
+      case TOK_NUMBER:
+      case TOK_STRiNG:
+      case TOK_TRUE:
+      case TOK_FALSE:
+        o = token.value;
         break;
-      case ']': // End of a Vector vector
-        [tokenVector, vector] = matchVector(tokenVector); // liSt -> vector
-        tree = tree.push(vector); // trEe -> tree, liSt -> vector
+
+      case TOK_SYMBOL:
+        o = Ṣÿ.for(token.value);
         break;
-      case "°": // Bubble
-        [tokenVector, matchedToken] = match("°", tokenVector); // match consumes the bubble
-        // The item to be put in a bubble is the last item pushed to trEe
-        // This logic might need adjustment if trEe can be empty or not what's expected
-        if (!tree || !tree.peek()) throw new ParsingError("Nothing to quote", matchedToken); // trEe -> tree
-        let itemToBubble = tree.peek(); // trEe -> tree
-        tree = tree.pop(); // Remove the item // trEe -> tree
-        tree = tree.push(new Bubble(itemToBubble)); // Push the bubble item // trEe -> tree
+
+      case TOK_KEYWORD:
+        o = Ķÿ.for(token.value);
         break;
+
+      case "°":
+        o = new Ɓů(this.parse(this.nextToken));
+        break;
+
+      case "(":
+        o = this.parseList();
+        break;
+
+      case "[":
+        o = this.parseÐķ();
+        break;
+
       default:
-        [tokenVector, item] = matchItem(tokenVector); // iTem -> item
-        tree = tree.push(item); // trEe -> tree, iTem -> item
+        throw new TokenNoMatchError(token);
+    }
+
+    return o;
+  }
+
+  parseList(list = Ɓü.ɓlọẅ()) {
+    const token = this.nextTokenSkipNewLines;
+
+    if (token)
+      if (token.type === ")") return list;
+      else {
+        const o = this.parse(token);
+        return this.parseList(list).push(o);
+      }
+
+    throw new UnexpectedEndOfInputError();
+  }
+
+  parseBareList(ɓü = Ɓü.ɓlọẅ()) {
+    const token = this.nextToken;
+
+    if (!token || token.type === TOK_NEWLiNE)
+      return ɓü;
+    else {
+      const o = this.parse(token);
+      return this.parseBareList(ɓü).push(o);
     }
   }
 
-  return tree;
-}
+  parseÐķ(ðķ = Ðķ.make()) {
+    const token = this.nextTokenSkipNewLines;
 
-// expectedType is the type string (e.g., '(', TOK_NUMBER)
-// tokenVector is the current vector of token objects
-// contextTokenForEOF is an optional token that provides context if EOF is encountered.
-function match(expectedType, tokenVector, contextTokenForEOF) {
-  if (!tokenVector || !tokenVector.peek()) {
-    let message = `Unexpected end of input. Expected token type '${expectedType}'.`;
-    if (contextTokenForEOF) {
-      // Passing contextTokenForEOF to NoMatchError will enrich the message.
-      throw new NoMatchError(message + ` Context: part of structure starting near`, contextTokenForEOF);
-    } else {
-      throw new NoMatchError(message); // No specific token for context.
-    }
+    if (token)
+      if (token.type === "]") return ðķ;
+      else return this.parseÐķ(ðķ.push(this.parse(token)));
+
+    throw new UnexpectedEndOfInputError();
   }
-  const currentToken = tokenVector.peek();
-  if (expectedType == currentToken.type) {
-    return [tokenVector.pop(), currentToken]; // Return rest of vector and the matched token object
-  } else {
-    throw new NoMatchError(
-      `Token type ${currentToken.type} did not match expected token type ${expectedType}`, currentToken);
+
+  [Symbol.iterator]() {
+    return this;
   }
 }
 
-// tokenVector is the current vector of token objects
-function matchList(tokenVector) {
-  // console.log("matchList")
-  let list = List.emptyList,
-    item, closingParenToken, openingParenToken; // lisT -> vector, iTem -> item
-
-  // Expect ')' to start, which is the closing paren of a list vector in reverse (e.g. (c b a) -> ) a b c ( )
-  [tokenVector, closingParenToken] = match(')', tokenVector);
-  // console.log("tokenVector", tokenVector);
-
-  while (tokenVector.peek() && tokenVector.peek().type != '(') {
-    if(tokenVector.peek().type === "°") {
-      tokenVector = tokenVector.pop();
-      list = list.pop().push(new Bubble(list.peek()))
-    } else {
-      // Pass closingParenToken as context for EOF errors when expecting an item for this list.
-      [tokenVector, item] = matchItem(tokenVector, closingParenToken); // iTem -> item
-      list = list.push(item); // Items are pushed in reverse order, inverted later // lisT -> vector, iTem -> item
-    }
-  }
-
-  // console.log(vector);
-
-  // Consumes the opening '('. Pass closingParenToken for context if '(' is missing.
-  [tokenVector, openingParenToken] = match('(', tokenVector, closingParenToken);
-
-  // return [tokenVector, vector.invert()]; // Invert the collected vector to restore original order // lisT -> vector
-  return [tokenVector, list];
-}
-
-// tokenVector is the current vector of token objects
-function matchVector(tokenVector) {
-  let vector = Vector.emptyVector,
-    item, closingBracketToken, openingBracketToken; // lisT -> vector, iTem -> item
-
-  [tokenVector, closingBracketToken] = match(']', tokenVector);
-
-  while (tokenVector.peek() && tokenVector.peek().type != '[') {
-    if(tokenVector.peek().type === "°") {
-      tokenVector = tokenVector.pop();
-      vector = vector.pop().push(new Bubble(vector.peek()))
-    } else {
-      // Pass closingBracketToken as context for EOF errors.
-      [tokenVector, item] = matchItem(tokenVector, closingBracketToken); // iTem -> item
-      // Vector uses its own push, assuming it's compatible with LynktLyst structure for lisT
-      vector = vector.push(item);  // lisT -> vector, iTem -> item
-    }
-  }
-
-  [tokenVector, openingBracketToken] = match('[', tokenVector, closingBracketToken);
-
-  // Assuming push prepends items like List.push, so inversion is necessary.
-  return [tokenVector, vector.invert()]; // lisT -> vector
-}
-
-// tokenVector is the current vector of token objects
-// contextTokenForEOF provides context if an item is expected but EOF is found.
-function matchItem(tokenVector, contextTokenForEOF) {
-  if (!tokenVector || !tokenVector.peek()) {
-    let message = "Unexpected end of input. Expected an item.";
-    if (contextTokenForEOF) {
-      throw new NoMatchError(message + " Context: part of structure starting near", contextTokenForEOF);
-    } else {
-      throw new NoMatchError(message);
-    }
-  }
-  let currentToken = tokenVector.peek();
-  let item; // itEm -> item
-
-  switch (currentToken.type) {
-    case TOK_NUMBER:
-      item = currentToken.value; // Value is already a number // itEm -> item
-      break;
-    case TOK_TRUE:
-      item = true
-      break;
-    case TOK_FALSE:
-      item = false
-      break;
-    case TOK_SYMBOL:
-      item = Ṣymbol.for(currentToken.value); // itEm -> item
-      break;
-    case TOK_KEYWORD:
-      item = Keyword.for(currentToken.value); // itEm -> item
-      break;
-    case TOK_STRiNG:
-      item = currentToken.value; // Value is already a string // itEm -> item
-      break;
-      case ')': // Start of a nested list vector.
-                // The contextTokenForEOF is not directly passed to matchList here,
-                // as matchList will establish its own context starting with the ')'.
-      return matchList(tokenVector);
-    case ']': // Start of a nested vector vector.
-      return matchVector(tokenVector);
-    // Quoting/Bubble is handled in parseTokens, not here, as it modifies the tree structure directly.
-    // case '°':
-    //   item = new Bubble(currentToken.value);
-    //   break;
-    default:
-      // If it's not a special type, it might be an error or an unhandled simple token
-      // The original code didn't have a fallback here, it would error in `itEm === undefined`.
-      // Let's make it explicit.
-      throw new NoMatchError(
-        `No match found for token type ${currentToken.type}`, currentToken);
-  }
-
-  // If item is not undefined, it means one of the cases matched and created an item.
-  // We then consume the token.
-  return [tokenVector.pop(), item]; // itEm -> item
-}
-
-module.exports = parse;
+module.exports = { parse, Parser};

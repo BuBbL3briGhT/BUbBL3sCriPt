@@ -6,7 +6,7 @@ const { Macro, MacroExpanded } = require("./macro");
 const Bubble = require("./bubble");
 const Ṣymbol = require("./symbol");
 const Tokenizer = require("./tökenizer");
-const Parser = require("./parser");
+const { Parser } = require("./parse");
 const LazyList = require("./lazy_list");
 const events = require("./events");
 
