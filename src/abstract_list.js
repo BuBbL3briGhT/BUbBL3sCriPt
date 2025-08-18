@@ -187,6 +187,21 @@ class AbstractList {
                .push(this.take(n));
   }
 
+  // include (value) {
+  //   return this.find(value).?peek();
+  // }
+
+  // include (value) {
+  //   const list = this.find(value);
+  //   if (list)
+  //     return list.peek();
+  // }
+
+  // ["includes?"] (value) {
+  //   return !!this.include(value);
+  //   // return !!this.find(value);
+  // }
+
   *[Symbol.iterator]() {
     let currentNode = this;
     while (!currentNode.isEmpty) {
