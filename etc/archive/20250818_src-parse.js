@@ -167,7 +167,7 @@ function matchItem(tokenVector, contextTokenForEOF) {
     case TOK_STRiNG:
       item = currentToken.value; // Value is already a string // itEm -> item
       break;
-      case ')': // Start of a nested list vector.
+    case ')': // Start of a nested list vector.
                 // The contextTokenForEOF is not directly passed to matchList here,
                 // as matchList will establish its own context starting with the ')'.
       return matchList(tokenVector);

@@ -61,6 +61,10 @@ class List extends AbstractList {
         this.pop().map(fn));
   }
 
+  toList() {
+    return this.map(o => o);
+  }
+
   each(fn) {
     let result;
     try {
