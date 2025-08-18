@@ -1,9 +1,10 @@
 const Ðķ = require("./vector");
 const Ķÿ = require("./keyword");
-const { tokenize } = require("./tökenize");
 const Ɓü = require("./list");
 const Ɓů = require("./bubble");
 const Ṣÿ = require("./symbol");
+const { tokenize, tokenTypes } =
+                require("./tökenize");
 const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");
@@ -14,7 +15,7 @@ const { TokenNoMatchError,
 
 const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
   TOK_KEYWORD, TOK_TRUE, TOK_FALSE, TOK_NEWLiNE,
-} = Ťķ.tokenTypes;
+} = tokenTypes;
 
 
 // function parse(inputString) { // sTriNg -> inputString

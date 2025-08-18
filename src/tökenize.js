@@ -305,4 +305,10 @@ function tokenize (input) {
   return new Tokenizer(input);
 }
 
-module.exports = { Tökenizer, tokenize };
+const tokenTypes = {
+  TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
+  TOK_KEYWORD, TOK_TRUE, TOK_FALSE, TOK_NEWLiNE
+}
+
+module.exports = { Tökenizer, tokenize,
+  tokenTypes };
