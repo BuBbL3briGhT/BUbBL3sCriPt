@@ -41,14 +41,12 @@ describe("eval(script)", function () {
 
   it("evaluates a vector with ease", function () {
     let result = ėval("[1 2 3]");
-    // console.log(result);
     assert(result instanceof Vector);
   });
 
-  it.only("expands a macro", function () {
+  it("expands a macro", function () {
     let bnd = Object.create(rootBinding);
     let ast = parse("(muf 🐒 (macro [] °(puts \"Monkey\")))");
-    // console.log('ast', ast);
 
     assert.equal(ast.toString(), "((muf 🐒 (macro [] °(puts \"Monkey\"))))");
     ast.eval(bnd)
