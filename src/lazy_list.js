@@ -4,6 +4,10 @@ class LazyList extends List {
 
   constructor (itty) {
     super();
+    // console.log('itty', itty);
+    // console.trace();
+    if (!itty.next)
+      throw Error("First parametor is not an iterator: " + { itty });
     this.itty = itty;
   }
 
@@ -25,6 +29,8 @@ class LazyList extends List {
   }
 
   wakeUp() {
+    console.log('this.itty', this.itty);
+    console.log('this.itty.next', this.itty.next);
     const o = this.itty.next();
     this.set({ o: o.value, isEmpty: o.done });
   }
