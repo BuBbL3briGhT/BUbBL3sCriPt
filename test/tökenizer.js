@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Ðķ = require("../src/tökenizer");
+const { Tökenizer: Ðķ } = require("../src/tökenize");
 const Tokenizer = Ðķ;
 
 describe("Tokenizer", function () {

@@ -302,7 +302,7 @@ class Char {
 }
 
 function tokenize (input) {
-  return new Tokenizer(input);
+  return new Tökenizer(input);
 }
 
 const tokenTypes = {

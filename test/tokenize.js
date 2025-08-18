@@ -1,11 +1,11 @@
 const assert = require("assert");
 
-const tokenize = require("../src/tokenize");
+const { tokenize, tokenTypes } = require("../src/tökenize");
 const Vector = require("../src/vector");
 
 const { TOK_STRiNG, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,
-  TOK_FALSE} = tokenize.tokenTypes;
+  TOK_FALSE} = tokenTypes;
 
 describe("tokenize(string)", function() {
 

@@ -1,8 +1,8 @@
 const assert = require("assert");
-const Qp = require("../src/parser");
+const { Parser: Qp } = require("../src/parse");
 const Ðķ = require("../src/vector");
 const Ķÿ = require("../src/keyword");
-const Ťķ = require("../src/tokenizer");
+const { Tökenizer: Ťķ } = require("../src/tökenize");
 const Ɓü = require("../src/list");
 const Ɓů = require("../src/bubble");
 const Ṣÿ = require("../src/symbol");
