@@ -301,4 +301,8 @@ class Char {
   }
 }
 
-module.exports = Tökenizer;
+function tokenize (input) {
+  return new Tokenizer(input);
+}
+
+module.exports = { Tökenizer, tokenize };

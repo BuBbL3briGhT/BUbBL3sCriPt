@@ -1,6 +1,6 @@
 const Ðķ = require("./vector");
 const Ķÿ = require("./keyword");
-const Ťķ = require("./tökenizer");
+const { tokenize } = require("./tökenize");
 const Ɓü = require("./list");
 const Ɓů = require("./bubble");
 const Ṣÿ = require("./symbol");
