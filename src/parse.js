@@ -4,6 +4,8 @@ const Keyword = require("./keyword");
 const Ṣymbol = require("./symbol");
 const Bubble = require("./bubble");
 const tokenize = require("./tokenize");
+const { ParsingError, NoMatchError } =
+                      require("./errors");
 
 const {
   TOK_STRiNG,
@@ -13,28 +15,6 @@ const {
   TOK_TRUE,
   TOK_FALSE
 } = tokenize.tokenTypes;
-
-class ParsingError extends Error {
-  constructor(message, token) {
-    super(message);
-    this.name = "ParsingError";
-    if (token) {
-      // Ensure the message includes token details if a token is provided
-      this.message = `${message} (at line ${token.line}, column ${token.column}, value: '${token.value}')`;
-    }
-  }
-}
-
-class NoMatchError extends ParsingError {
-  constructor(message, token){
-    super(message, token); // Pass token to parent for enriched message
-    this.name = "NoMatchError";
-    if (token) {
-      this.token = token; // Attach token for better error reporting
-      this.message = `${message} (at line ${token.line}, column ${token.column}, value: '${token.value}')`;
-    }
-  }
-}
 
 function parse(inputString) { // sTriNg -> inputString
   // tokenize now returns a single LynktLyst of token objects
