@@ -14,6 +14,14 @@ class Range extends LazyList {
   }
 
 
+  get oo() {
+    if ( !this.isEmpty )
+      this.set({ oo: new Range(this.o+this.step, this.end, this.step) });
+
+    return this.oo;
+  }
+
+
   wakeUp () {
   }
 
