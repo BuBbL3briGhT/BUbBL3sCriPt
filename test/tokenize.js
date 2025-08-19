@@ -41,22 +41,25 @@ describe("tokenize(string)", function() {
     ], [...tokens]);
   });
 
-  // it("tokenizes single quote", function () {
-  //   let tokens = tokenize("'");
-  //   assert.deepEqual([
-  //     { type: "'", value: "'", line: 1, column: 1 }
-  //   ], [...tokens]);
-  // });
+  it.skip("tokenizes single quote", function () {
+    let tokens = tokenize("'");
+    assert.deepEqual([
+      { type: "'", value: "'", line: 1, column: 1 }
+    ], [...tokens]);
+  });
 
-  it("eats comments", function () {
-    let tokenList = tokenize("# Hamilton Burger"); // This will produce no tokens
-    assert.equal(tokenList.peek(), undefined); // List.air or undefined for empty
+  it.only("eats comments", function () {
+    (function () {
+      const tokens = tokenize("# Hamilton Burger"); // This will produce no tokens
+      assert.deepEqual([], [...tokens]);
+    })();
 
-    tokenList = tokenize("# 🍔4\ncop"); // Line 1 comment, "cop" on line 2
-    assert.equal(tokenList.peek().type, TOK_SYMBOL);
-    assert.equal(tokenList.peek().value, "cop");
-    assert.equal(tokenList.peek().line, 2);
-    assert.equal(tokenList.peek().column, 1);
+    (function () {
+      const tokens = tokenize("# 🍔4\ncop"); // Line 1 comment, "cop" on line 2
+      assert.deepEqual([
+        { type: TOK_SYMBOL, value: "cop", line: 2, column: 1 }
+      ], [...tokens]);
+    })();
   });
 
   it("tokenizes string", function () {

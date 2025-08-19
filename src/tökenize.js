@@ -100,7 +100,7 @@ class Tökenizer {
       this.step();
       if (Char.isNewline(char)) {
         this.line++;
-        this.column=0;
+        this.column=1;
         return;
       }
     }
