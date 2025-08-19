@@ -10,25 +10,21 @@ const { TOK_STRiNG, TOK_NUMBER,
 
 describe("tokenize(string)", function() {
 
-  it.only("tokenizes true", function () {
+  it("tokenizes true", function () {
     let tokenList = tokenize("true");
-    // console.log(tokenList);
-    // console.log([...tokenList]);
     assert.deepEqual([...tokenList],
       [{ type: TOK_TRUE, value: true,
         line: 1, column: 1}]);
-
-    // assert.equal(tokenList.peek().type, TOK_TRUE);
-    // assert.equal(tokenList.peek().value, undefined);
-    // assert.equal(tokenList.peek().line, 1);
-    // assert.equal(tokenList.peek().column, 1);
   });
 
-  it("tokenizes true", function () {
-    let tokenList = tokenize('(not true)');
-    tokenList = tokenList.invert(); // Frivolus invert not sure why this is needed to get the test to pass.
-    assert.equal(tokenList.get(0).type, '('); // First token
-    assert.equal(tokenList.get(2).type, TOK_TRUE);
+  it.only("tokenizes not true", function () {
+    let tokens = tokenize('(not true)');
+    assert.deepEqual([
+      { type: '(', value: '(', line: 1, column: 1 },
+      { type: 'Y', value: 'not', line: 1, column: 2 },
+      { type: 'T', value: true, line: 1, column: 6 },
+      { type: ')', value: ')', line: 1, column: 10 }
+    ], [...tokens]);
   });
 
   it("tokenizes false", function () {
