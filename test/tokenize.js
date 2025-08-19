@@ -62,12 +62,13 @@ describe("tokenize(string)", function() {
     })();
   });
 
-  it("tokenizes string", function () {
-    let tokenList = tokenize('"Hola Berenjena"');
-    assert.equal(tokenList.peek().type, TOK_STRiNG);
-    assert.equal(tokenList.peek().value, "Hola Berenjena");
-    assert.equal(tokenList.peek().line, 1);
-    assert.equal(tokenList.peek().column, 1);
+  it.only("tokenizes string", function () {
+    const tokens = tokenize('"Hola Berenjena"');
+    assert.deepEqual([
+      { type: TOK_STRiNG,
+        value: "Hola Berenjena",
+        line: 1, column: 1 }
+    ], [...tokens]);
   });
 
   it("tokenizes bubbles", function () {
