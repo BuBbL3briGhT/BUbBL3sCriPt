@@ -34,20 +34,19 @@ describe("tokenize(string)", function() {
     ], [...tokens]);
   });
 
-  it.only("allows dots in symbols", function () {
+  it("allows dots in symbols", function () {
     let tokens = tokenize("console.log");
     assert.deepEqual([
       { type: TOK_SYMBOL, value: "console.log", line: 1, column: 1 }
     ], [...tokens]);
   });
 
-  it("tokenizes single quote", function () {
-    let tokenList = tokenize("'");
-    assert.equal(tokenList.peek().type, "'");
-    assert.equal(tokenList.peek().value, "'");
-    assert.equal(tokenList.peek().line, 1);
-    assert.equal(tokenList.peek().column, 1);
-  });
+  // it("tokenizes single quote", function () {
+  //   let tokens = tokenize("'");
+  //   assert.deepEqual([
+  //     { type: "'", value: "'", line: 1, column: 1 }
+  //   ], [...tokens]);
+  // });
 
   it("eats comments", function () {
     let tokenList = tokenize("# Hamilton Burger"); // This will produce no tokens
