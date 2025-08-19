@@ -1,6 +1,5 @@
-const LazyList = require("./lazy_list");
 
-class Range extends LazyList {
+class Range {
 
   constructor (startend, end, step) {
     if (!end) {
@@ -13,16 +12,16 @@ class Range extends LazyList {
     this.step = step || 1;
   }
 
+  next () {
+    if (this.i >= this.end)
+      return { done: true }
 
-  get oo() {
-    if ( !this.isEmpty )
-      this.set({ oo: new Range(this.o+this.step, this.end, this.step) });
-
-    return this.oo;
+    const value = this.i;
+    this.i += this.step;
+    return { value, done: false };
   }
 
-
-  wakeUp () {
+  [Symbol.iterator] () {
+    return this;
   }
-
 }
