@@ -1,4 +1,5 @@
 const assert = require("assert");
+const LazyList = require("../src/lazy_list");
 
 const { tokenize, tokenTypes } = require("../src/tökenize");
 const Vector = require("../src/vector");
@@ -9,12 +10,18 @@ const { TOK_STRiNG, TOK_NUMBER,
 
 describe("tokenize(string)", function() {
 
-  it("tokenizes true", function () {
+  it.only("tokenizes true", function () {
     let tokenList = tokenize("true");
-    assert.equal(tokenList.peek().type, TOK_TRUE);
-    assert.equal(tokenList.peek().value, undefined);
-    assert.equal(tokenList.peek().line, 1);
-    assert.equal(tokenList.peek().column, 1);
+    // console.log(tokenList);
+    // console.log([...tokenList]);
+    assert.deepEqual([...tokenList],
+      [{ type: TOK_TRUE, value: true,
+        line: 1, column: 1}]);
+
+    // assert.equal(tokenList.peek().type, TOK_TRUE);
+    // assert.equal(tokenList.peek().value, undefined);
+    // assert.equal(tokenList.peek().line, 1);
+    // assert.equal(tokenList.peek().column, 1);
   });
 
   it("tokenizes true", function () {
