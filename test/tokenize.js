@@ -27,19 +27,18 @@ describe("tokenize(string)", function() {
     ], [...tokens]);
   });
 
-  it.only("tokenizes false", function () {
+  it("tokenizes false", function () {
     let tokens = tokenize("false");
     assert.deepEqual([
       { type: 'F', value: false, line: 1, column: 1 }
     ], [...tokens]);
   });
 
-  it("allows dots in symbols", function () {
-    let tokenList = tokenize("console.log");
-    assert.equal(tokenList.peek().type, TOK_SYMBOL);
-    assert.equal(tokenList.peek().value, "console.log");
-    assert.equal(tokenList.peek().line, 1);
-    assert.equal(tokenList.peek().column, 1);
+  it.only("allows dots in symbols", function () {
+    let tokens = tokenize("console.log");
+    assert.deepEqual([
+      { type: TOK_SYMBOL, value: "console.log", line: 1, column: 1 }
+    ], [...tokens]);
   });
 
   it("tokenizes single quote", function () {
