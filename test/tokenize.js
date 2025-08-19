@@ -17,7 +17,7 @@ describe("tokenize(string)", function() {
         line: 1, column: 1}]);
   });
 
-  it.only("tokenizes not true", function () {
+  it("tokenizes not true", function () {
     let tokens = tokenize('(not true)');
     assert.deepEqual([
       { type: '(', value: '(', line: 1, column: 1 },
@@ -27,12 +27,11 @@ describe("tokenize(string)", function() {
     ], [...tokens]);
   });
 
-  it("tokenizes false", function () {
-    let tokenList = tokenize("false");
-    assert.equal(tokenList.peek().type, TOK_FALSE);
-    assert.equal(tokenList.peek().value, undefined);
-    assert.equal(tokenList.peek().line, 1);
-    assert.equal(tokenList.peek().column, 1);
+  it.only("tokenizes false", function () {
+    let tokens = tokenize("false");
+    assert.deepEqual([
+      { type: 'F', value: false, line: 1, column: 1 }
+    ], [...tokens]);
   });
 
   it("allows dots in symbols", function () {
