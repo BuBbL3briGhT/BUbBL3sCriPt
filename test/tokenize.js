@@ -62,7 +62,7 @@ describe("tokenize(string)", function() {
     })();
   });
 
-  it.only("tokenizes string", function () {
+  it("tokenizes string", function () {
     const tokens = tokenize('"Hola Berenjena"');
     assert.deepEqual([
       { type: TOK_STRiNG,
@@ -71,23 +71,17 @@ describe("tokenize(string)", function() {
     ], [...tokens]);
   });
 
-  it("tokenizes bubbles", function () {
+  it.only("tokenizes bubbles", function () {
     // Input: '(777 kitty :dawg)' -> Output tokens: '(', '777', 'kitty', ':dawg', ')'
-    // Tokenize returns inverted, so the list is actually like: ) dawg kitty 777 (
-    // No, tokenize itself calls invert, so the list is in natural order.
-    let tokenList = tokenize('(777 kitty :dawg)');
-    tokenList = tokenList.invert(); // Frivolus invert not sure why this is needed to get the test to pass.
-    assert.equal(tokenList.count(), 5);
-    assert.equal(tokenList.get(0).type, '('); // First token
-    assert.equal(tokenList.get(0).value, '(');
-    assert.equal(tokenList.get(1).type, TOK_NUMBER);
-    assert.equal(tokenList.get(1).value, 777);
-    assert.equal(tokenList.get(2).type, TOK_SYMBOL);
-    assert.equal(tokenList.get(2).value, "kitty");
-    assert.equal(tokenList.get(3).type, TOK_KEYWORD);
-    assert.equal(tokenList.get(3).value, "dawg");
-    assert.equal(tokenList.get(4).type, ')'); // Last token
-    assert.equal(tokenList.get(4).value, ')');
+    let tokens = tokenize('(777 kitty :dawg)');
+
+    assert.deepEqual([
+      { type: "(", value: "(", line: 1, column: 1 },
+      { type: TOK_NUMBER, value: 777, line: 1, column: 2 },
+      { type: TOK_SYMBOL, value: "kitty", line: 1, column: 6 },
+      { type: TOK_KEYWORD, value: "dawg", line: 1, column: 12 },
+      { type: ")", value: ")", line: 1, column: 17 }
+    ], [...tokens]);
   });
 
   it("tokenizes balloons", function () {
