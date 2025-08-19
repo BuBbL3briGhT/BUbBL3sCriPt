@@ -1,15 +1,15 @@
 
 class Range {
 
-  constructor (startend, end, step) {
-    if (!end) {
-      this.i = 0;
-      this.end = startend || Infinity;
-    } else {
-      this.i = startend;
+  constructor (endstart, end, step=1) {
+    this.step = step;
+    if (end) {
+      this.i = endstart;
       this.end = end;
+    } else {
+      this.i = 0;
+      this.end = endstart || Infinity;
     }
-    this.step = step || 1;
   }
 
   next () {
