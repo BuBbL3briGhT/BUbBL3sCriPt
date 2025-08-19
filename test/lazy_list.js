@@ -16,7 +16,7 @@ describe("LazyList", function () {
       const lazy = new LazyList([1,2,3][Symbol.iterator]());
       const actual = lazy.toList();
       const expected = List.make(1, 2, 3);
-      assert.deepEqual(expected, actual);
+      assert.deepEqual(actual, expected);
     });
   });
 });

@@ -56,7 +56,7 @@ class List extends AbstractList {
   // }
 
   map(fn) {
-    if (this.isEmpty) return this;
+    if (this.isEmpty) return List.emptyList;
     return new List(fn(this.peek()),
         this.pop().map(fn));
   }

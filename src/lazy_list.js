@@ -2,6 +2,8 @@ const List = require("./list");
 
 class LazyList extends List {
 
+  get emptyList () { return List.emptyList }
+
   constructor (itty) {
 
     if (!itty.next)
