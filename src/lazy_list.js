@@ -6,8 +6,21 @@ class LazyList extends List {
 
   constructor (itty) {
 
-    if (!itty.next)
-      throw Error("First parametor is not an iterator: " + { itty });
+    if (!itty.next) {
+      // Check to see if itty is iterable.
+      if (itty[Symbol.iterator]) {
+        // if it is call the iterator method to get the iterator.
+        itty = itty[Symbol.iterator]();
+
+        // One final check to make sure we got an iterator back from the iterator method.
+        if (!itty.next)
+          throw Error("Iterator method returned an object that is not an iterator: " + { itty });
+
+      } else {
+        // If itty is niether an iterator or iterable (has a Symbol.iterator function) raise an error.
+        throw Error("First parameter is niether an iterator nor iterable: " + { itty });
+      }
+    }
 
     super();
     this.itty = itty;
