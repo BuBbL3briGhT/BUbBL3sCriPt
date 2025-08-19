@@ -12,7 +12,7 @@ describe("LazyList", function () {
 
 
   describe("#toList", function () {
-    it.only("renders the lazy list as a list", function () {
+    it("renders the lazy list as a list", function () {
       // const lazy = new LazyList([1,2,3][Symbol.iterator]());
       const lazy = new LazyList([1,2,3]);
       const actual = lazy.toList();

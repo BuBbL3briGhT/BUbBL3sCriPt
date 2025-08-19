@@ -278,7 +278,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     assert.deepEqual(ast, expected, "AST for multiple top-level expressions");
   });
 
-  it.only("parses a single atom symbol correctly", () => {
+  it("parses a single atom symbol correctly", () => {
     const ast = parse("atom").toList();
     // parse("atom") returns a vector containing one symbol: (atom)
     const expected = List.make(Ṣymbol.for("atom"));
@@ -330,12 +330,12 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   assert.deepEqual(ast, expected, "AST for complex nested structure");
   // });
 
-  it("parses a semi complex vector", () => {
+  it.only("parses a semi complex vector", () => {
     const input = "[1 \"s\" °x]";
     // const input = "[°x]";
     // const input = "[x]";
     // const input = "[1]";
-    const ast = parse(input);
+    const ast = parse(input).toList();
     // console.log(ast);
     const expected = List.make( // Outer list from parse()
       Vector.make(

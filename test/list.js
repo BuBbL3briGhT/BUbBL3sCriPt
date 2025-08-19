@@ -20,7 +20,7 @@ describe("List", () => {
   });
 
   describe("#toList", function () {
-    it.only("return a copy of the list", function () {
+    it("return a copy of the list", function () {
       const list = List.make(1, 2, 3)
       const expected = list;
       const actual = list.toList();
