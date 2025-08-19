@@ -48,7 +48,7 @@ describe("tokenize(string)", function() {
     ], [...tokens]);
   });
 
-  it.only("eats comments", function () {
+  it("eats comments", function () {
     (function () {
       const tokens = tokenize("# Hamilton Burger"); // This will produce no tokens
       assert.deepEqual([], [...tokens]);
@@ -71,7 +71,7 @@ describe("tokenize(string)", function() {
     ], [...tokens]);
   });
 
-  it.only("tokenizes bubbles", function () {
+  it("tokenizes bubbles", function () {
     // Input: '(777 kitty :dawg)' -> Output tokens: '(', '777', 'kitty', ':dawg', ')'
     let tokens = tokenize('(777 kitty :dawg)');
 
@@ -84,19 +84,16 @@ describe("tokenize(string)", function() {
     ], [...tokens]);
   });
 
-  it("tokenizes balloons", function () {
+  it.only("tokenizes balloons", function () {
     // Input: '[sha yaya daya]' -> Output: '[', 'sha', 'yaya', 'daya', ']'
-    let tokenList = tokenize('[sha yaya daya]');
-    tokenList = tokenList.invert(); // Frivolus invert not sure why this is needed to get the test to pass.
-    assert.equal(tokenList.count(), 5);
-    assert.equal(tokenList.get(0).type, '[');
-    assert.equal(tokenList.get(1).type, TOK_SYMBOL);
-    assert.equal(tokenList.get(1).value, 'sha');
-    assert.equal(tokenList.get(2).type, TOK_SYMBOL);
-    assert.equal(tokenList.get(2).value, 'yaya');
-    assert.equal(tokenList.get(3).type, TOK_SYMBOL);
-    assert.equal(tokenList.get(3).value, 'daya');
-    assert.equal(tokenList.get(4).type, ']');
+    let tokens = tokenize('[sha yaya daya]');
+    assert.deepEqual([
+      { type: "[", value: "[", line: 1, column: 1 },
+      { type: TOK_SYMBOL, value: "sha", line: 1, column: 2 },
+      { type: TOK_SYMBOL, value: "yaya", line: 1, column: 6 },
+      { type: TOK_SYMBOL, value: "daya", line: 1, column: 11 },
+      { type: "]", value: "]", line: 1, column: 15 }
+    ], [...tokens]);
   });
 
   // Expected token objects will now include type and value. Line/col can be omitted for now in expected.
