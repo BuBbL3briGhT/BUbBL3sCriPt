@@ -286,7 +286,7 @@ describe("Parser Structure and Edge Case Tests", () => {
   });
 
   it("parses a single atom number correctly", () => {
-    const ast = parse("123");
+    const ast = parse("123").toList();
     // parse("123") returns a vector containing one number: (123)
     const expected = List.make(123);
     assert.deepEqual(ast, expected, "AST for single atom number");
@@ -330,21 +330,17 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   assert.deepEqual(ast, expected, "AST for complex nested structure");
   // });
 
-  it.only("parses a semi complex vector", () => {
+  it("parses a semi complex vector", () => {
     const input = "[1 \"s\" °x]";
     // const input = "[°x]";
     // const input = "[x]";
     // const input = "[1]";
-    const ast = parse(input).toList();
+    const ast = parse(input);
     // console.log(ast);
-    const expected = List.make( // Outer list from parse()
-      Vector.make(
-        1,
-        "s",
-        new Bubble(Ṣymbol.for("x"))
-      )
-    );
-    assert.deepEqual(ast, expected, "AST for semi complex vector ");
+    const expected =
+      Vector.make(1, "s",
+        new Bubble(Ṣymbol.for("x")));
+    assert.deepEqual([...ast], [expected], "AST for semi complex vector ");
   });
 
   it.skip("parses a complex nested structure with quotes, list, and balloons (arrays)", () => {
