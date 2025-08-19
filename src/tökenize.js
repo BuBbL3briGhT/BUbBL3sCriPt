@@ -8,7 +8,9 @@ const TOK_NUMBER   = 'N',
       TOK_FALSE    = 'F',
       TOK_NEWLiNE  = 'L';
 
-// Bubblescript string tokenizer using list as input.
+
+// Bubblescript string tokenizer using list as
+// input.
 class Tökenizer {
 
   constructor (inpůt, opts = {}) {
@@ -46,8 +48,7 @@ class Tökenizer {
           this.step();
           break;
 
-        case "\n":
-        case "\r":
+        case Char.isNewline(char):
           token = this.createToken(TOK_NEWLiNE, char);
           this.step();
           this.line += 1;
@@ -62,6 +63,8 @@ class Tökenizer {
         case "{":
         case ".":
         case "°":
+        case ",":
+        case ";":
           token = this.createToken(char, char);
           this.step();
           break;
@@ -95,12 +98,10 @@ class Tökenizer {
   eatComment () {
     for (const char of this.tortuga) {
       this.step();
-      switch (char) {
-        case "\n":
-        case "\r":
-          this.line++;
-          this.column=0;
-          return;
+      if (Char.isNewline(char)) {
+        this.line++;
+        this.column=1;
+        return;
       }
     }
   }
@@ -227,7 +228,8 @@ class NumberMatcher {
 }
 
 // Symbol Delimiters
-const symDelims = List.make(' ', '\n', '\r', ')', ']', '}');
+const symDelims = List.make(' ', '\n', '\r',
+    ')', ']', '}', ',', ';');
 
 // SymbolMatcher: Matches ^<symbol> from
 // tortuga.
@@ -276,6 +278,8 @@ class SymbolMatcher {
 }
 
 class Char {
+  static newlineChars = List.make("\n", "\r");
+
   static isNum(char) {
     switch (char) {
       case '1':
@@ -291,6 +295,20 @@ class Char {
         return char;
     }
   }
+
+  static isNewline(char) {
+    return this.newlineChars.find(char) && char;
+  }
 }
 
-module.exports = Tökenizer;
+function tokenize (input) {
+  return new Tökenizer(input);
+}
+
+const tokenTypes = {
+  TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
+  TOK_KEYWORD, TOK_TRUE, TOK_FALSE, TOK_NEWLiNE
+}
+
+module.exports = { Tökenizer, tokenize,
+  tokenTypes };

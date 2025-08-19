@@ -55,6 +55,16 @@ class List extends AbstractList {
   //     Vector.emptyVector);
   // }
 
+  map(fn) {
+    if (this.isEmpty) return List.emptyList;
+    return new List(fn(this.peek()),
+        this.pop().map(fn));
+  }
+
+  toList() {
+    return this.map(o => o);
+  }
+
   each(fn) {
     let result;
     try {

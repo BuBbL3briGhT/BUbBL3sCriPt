@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Ðķ = require("../src/tökenizer");
+const { Tökenizer: Ðķ } = require("../src/tökenize");
 const Tokenizer = Ðķ;
 
 describe("Tokenizer", function () {
@@ -65,6 +65,34 @@ describe("Tokenizer", function () {
       type: ")", value: ")",
       line: 1, column: 1
     });
+  });
+
+  it("tokenizes ,", function () {
+    assertTokenizes(',', {
+      type: ",", value: ",",
+      line: 1, column: 1
+    });
+    assertTokenizes('a,', {
+        type: "Y", value: "a",
+        line: 1, column: 1
+      }, {
+        type: ",", value: ",",
+        line: 1, column: 2
+      });
+  });
+
+  it("tokenizes ;", function () {
+    assertTokenizes(';', {
+      type: ";", value: ";",
+      line: 1, column: 1
+    });
+    assertTokenizes('a;', {
+        type: "Y", value: "a",
+        line: 1, column: 1
+      }, {
+        type: ";", value: ";",
+        line: 1, column: 2
+      });
   });
 
   it("tokenizes [", function () {
@@ -291,9 +319,9 @@ describe("Tokenizer", function () {
 });
 
 
-function assertTokenizes(input, expects) {
+function assertTokenizes(input, ...expects) {
   const tokenizer = new Tokenizer(input);
-  assert.deepEqual([expects],
+  assert.deepEqual(expects,
     [...tokenizer]);
 }
 

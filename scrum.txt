@@ -1,0 +1,16 @@
+
+Tue Aug 19 09:42:40 EDT 2025
+
+Y: Worked on bug fixes that cropped up from
+refactoring and pairing parse and Parser
+(parse.js) and tokenize and Tokenizer
+(tokenize.js)  into their own dedicated modules.
+Also worked on the module refactoring.
+
+T: Finish up fixes on the module refactoring and
+move onto to features and more refactoring. Add
+test, identify and fix bug, and make things
+better and more solid. Unify and harmonize, keep
+miving forward.
+
+B: No blockers, time and will.

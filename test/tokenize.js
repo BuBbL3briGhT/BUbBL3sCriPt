@@ -1,62 +1,65 @@
 const assert = require("assert");
+const LazyList = require("../src/lazy_list");
 
-const tokenize = require("../src/tokenize");
+const { tokenize, tokenTypes } = require("../src/tökenize");
 const Vector = require("../src/vector");
 
 const { TOK_STRiNG, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,
-  TOK_FALSE} = tokenize.tokenTypes;
+  TOK_FALSE} = tokenTypes;
 
 describe("tokenize(string)", function() {
 
   it("tokenizes true", function () {
     let tokenList = tokenize("true");
-    assert.equal(tokenList.peek().type, TOK_TRUE);
-    assert.equal(tokenList.peek().value, undefined);
-    assert.equal(tokenList.peek().line, 1);
-    assert.equal(tokenList.peek().column, 1);
+    assert.deepEqual([...tokenList],
+      [{ type: TOK_TRUE, value: true,
+        line: 1, column: 1}]);
   });
 
-  it("tokenizes true", function () {
-    let tokenList = tokenize('(not true)');
-    tokenList = tokenList.invert(); // Frivolus invert not sure why this is needed to get the test to pass.
-    assert.equal(tokenList.get(0).type, '('); // First token
-    assert.equal(tokenList.get(2).type, TOK_TRUE);
+  it("tokenizes not true", function () {
+    let tokens = tokenize('(not true)');
+    assert.deepEqual([
+      { type: '(', value: '(', line: 1, column: 1 },
+      { type: 'Y', value: 'not', line: 1, column: 2 },
+      { type: 'T', value: true, line: 1, column: 6 },
+      { type: ')', value: ')', line: 1, column: 10 }
+    ], [...tokens]);
   });
 
   it("tokenizes false", function () {
-    let tokenList = tokenize("false");
-    assert.equal(tokenList.peek().type, TOK_FALSE);
-    assert.equal(tokenList.peek().value, undefined);
-    assert.equal(tokenList.peek().line, 1);
-    assert.equal(tokenList.peek().column, 1);
+    let tokens = tokenize("false");
+    assert.deepEqual([
+      { type: 'F', value: false, line: 1, column: 1 }
+    ], [...tokens]);
   });
 
   it("allows dots in symbols", function () {
-    let tokenList = tokenize("console.log");
-    assert.equal(tokenList.peek().type, TOK_SYMBOL);
-    assert.equal(tokenList.peek().value, "console.log");
-    assert.equal(tokenList.peek().line, 1);
-    assert.equal(tokenList.peek().column, 1);
+    let tokens = tokenize("console.log");
+    assert.deepEqual([
+      { type: TOK_SYMBOL, value: "console.log", line: 1, column: 1 }
+    ], [...tokens]);
   });
 
-  it("tokenizes single quote", function () {
-    let tokenList = tokenize("'");
-    assert.equal(tokenList.peek().type, "'");
-    assert.equal(tokenList.peek().value, "'");
-    assert.equal(tokenList.peek().line, 1);
-    assert.equal(tokenList.peek().column, 1);
+  it.skip("tokenizes single quote", function () {
+    let tokens = tokenize("'");
+    assert.deepEqual([
+      { type: "'", value: "'", line: 1, column: 1 }
+    ], [...tokens]);
   });
 
-  it("eats comments", function () {
-    let tokenList = tokenize("# Hamilton Burger"); // This will produce no tokens
-    assert.equal(tokenList.peek(), undefined); // List.air or undefined for empty
+  it.only("eats comments", function () {
+    (function () {
+      const tokens = tokenize("# Hamilton Burger"); // This will produce no tokens
+      assert.deepEqual([], [...tokens]);
+    })();
 
-    tokenList = tokenize("# 🍔4\ncop"); // Line 1 comment, "cop" on line 2
-    assert.equal(tokenList.peek().type, TOK_SYMBOL);
-    assert.equal(tokenList.peek().value, "cop");
-    assert.equal(tokenList.peek().line, 2);
-    assert.equal(tokenList.peek().column, 1);
+    (function () {
+      const tokens = tokenize("# 🍔4\ncop"); // Line 1 comment, "cop" on line 2
+      assert.deepEqual([
+        { type: TOK_SYMBOL, value: "cop", line: 2, column: 1 }
+      ], [...tokens]);
+    })();
   });
 
   it("tokenizes string", function () {

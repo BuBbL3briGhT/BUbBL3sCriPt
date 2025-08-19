@@ -1,0 +1,45 @@
+
+
+## Project Update
+Sun Aug 17 14:14:29 EDT 2025
+
+Today: Today is Sunday, so it would be nice to
+take a break. But i thought i might scribble out
+some thoughts. If we blindly proceed, we will certianly arrive at our evetual destination. Having done the work, this will certianly be a more prosporuse and advantageous destination than of we had refused.
+
+Next Steps: Having now two or three implementations of the tokenizer. The newest tokenizers uses iterators and a lazy list.
+
+This is very awesome, because having a working implementation of not only a list, but a lazy list, we have been able to greatly simolify the code of both the tokenizer and the parser. We can simply work through the list and no that it will be ucrementally loaded as needed. There is very little upfront cost, and the full cost of loading the data is distributed over the runtime of the processing, incrementally.
+
+The basic implementation we now have in order to start with looks good, and that serve as a baseline from which we can continue to improve upon. A proof concept, if you will, however, this is not novel, only novel to us, and we are thankfully now to have asertained it.
+We wish to spen time improving the bare list, as we have called it. Specfically in contiuing theseover multiple lines, and also allowing them to be escaped.
+
+What is a bare list?
+
+Say you have the code
+
+    (puts 1 2 3)
+
+This is a list. Since lists are automatically evaluated as function calls, this will invoke the puts function with the arguments 1, 2 and 3.
+
+Now, a bare list, allows you to omit the wrapping parentesis, which are typically what signifies a list. So...
+
+    puts 1 2 3
+
+Becomes an equvilent line of code.
+
+Bare list simply treat any sucession of atoms, list items or bubbles even without outer parens, which occure on a single line as a list themselves.
+
+To elaborate. The following code creates a function, but does not invoke it.
+
+    (fn [a b c] (puts a b c))
+
+To invoke that function with the values 1, 2 and 3 while we defined it, we could write...
+
+   (fn [a b c] (puts a b c)) 1 2 3
+
+instead. Simply by appending the arguments to tje line. The evaluator intereats this as.
+
+   ((fn [a b c] (puts a b c)) 1 2 3)
+
+
