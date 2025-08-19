@@ -3,10 +3,10 @@ class Range {
 
   constructor (startend, end, step) {
     if (!end) {
-      this.start = 0;
+      this.i = 0;
       this.end = startend || Infinity;
     } else {
-      this.start = startend;
+      this.i = startend;
       this.end = end;
     }
     this.step = step || 1;
@@ -25,3 +25,5 @@ class Range {
     return this;
   }
 }
+
+module.exports = Range;
