@@ -174,14 +174,17 @@ const rootBinding = {
       }, {});
   }),
 
-  range: mkfn(function (yippies) {
-    // return new Range(...yippies);
-    return new LazyList(new Range(...yippies));
-  }),
-
   // obj: mkfn(function(list) {
   //   return list.toObject();
   // }),
+
+  range: mkfn(function (yippies) {
+    return new Range(...yippies);
+  }),
+
+  lazy: mkfn(function (itty) {
+    return new LazyList(...itty);
+  }),
 
   do: function(args) {
     return args.eval(this);
