@@ -4,4 +4,6 @@ const [map] (reqůire "../../lib/list")
 describe "list" (fn []
   (describe "map" (fn []
     (it "maps a list" (fn []
-      (assert.equal (map °(1 2 3) ++) °(2 3 4);
+      (assert.deepEqual
+        (map °(1 2 3) ++)
+        °(2 3 4);
