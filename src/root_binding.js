@@ -35,7 +35,11 @@ function mkfn(q) {
 // me. 🍸
 const rootBinding = {
   console: console,
-  require: mkfn(o => require(...o)),
+  // Js require
+  ["reqūire"]: mkfn(o => require(...o)),
+
+  // Bubblescript require
+  ["reqůire"]: mkfn(function (path) { }),
   __dirname: __dirname,
 
   muf: function([key,val]) {
