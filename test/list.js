@@ -35,6 +35,14 @@ describe("List", () => {
           List.make(1,2,3),
           List.make(4,5,6)));
     });
+    it("unzips uneven list", function () {
+      const list = List.make(1,5,2,6,3,7,4);
+      const result = list.unzip();
+      assert.deepEqual(result,
+        List.make(
+          List.make(1,2,3,4),
+          List.make(5,6,7)));
+    });
   });
 
   describe("#get isEmpty?", function () {
