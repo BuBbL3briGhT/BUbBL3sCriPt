@@ -11,6 +11,16 @@ const { TokenNoMatchError } = require("../src/errors");
 
 describe("Parser", function () {
 
+  it("semi-colon closes open list", function () {
+    const input = '(puts "hello";'
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
+    const result = parser;
+    assert.deepEqual([...parser],
+      [Ɓü.make(Ṣÿ.for("puts"), "hello")]);
+  });
+  // it.only("closes all open lists and vectors with semi-colon", function () {
+
   describe("get #nextTokenSkipNewLines()", function () {
     it("provides the next token skipping new line tokens", function () {
       const input = "\n\n\n🐢";

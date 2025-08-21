@@ -120,10 +120,13 @@ class Parser {
     const token = this.nextTokenSkipNewLines;
 
     if (token)
-      if (token.type === ")") return list;
-      else {
-        const o = this.parse(token);
-        return this.parseList(list).push(o);
+      switch (token.type) {
+        case ")":
+        case ";":
+          return list;
+        default:
+          const o = this.parse(token);
+          return this.parseList(list).push(o);
       }
 
     throw new UnexpectedEndOfInputError();
