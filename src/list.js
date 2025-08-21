@@ -65,6 +65,19 @@ class List extends AbstractList {
     return this.map(o => o);
   }
 
+  zip (list) {
+    if (this.isEmpty)
+      return list;
+
+    if (list.isEmpty)
+      return this;
+
+    return this.pop()
+      .zip(list.pop())
+      .push(list.peek())
+      .push(this.peek());
+  }
+
   each(fn) {
     let result;
     try {

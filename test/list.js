@@ -5,6 +5,16 @@ const Ṣymbol = require("../src/symbol");
 
 describe("List", () => {
 
+  describe("#zip(list)", function () {
+    it("zips two lists", function () {
+      const list1 = List.make(1,2,3);
+      const list2 = List.make(4,5,6);
+      const result = list1.zip(list2);
+      assert.deepEqual([...result],
+        [1,4,2,5,3,6]);
+    });
+  });
+
   describe("#get isEmpty?", function () {
 
     it("Returns true for an empty list.", function () {
