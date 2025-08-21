@@ -64,6 +64,15 @@ describe("Parser", function () {
          Ɓü.make(Ṣÿ.for("puts"),
            "hello, again")]);
     });
+
+    it("closes opens bare list open list and vector", function () {
+      const input = 'puts "hello" (1 [2 (3;'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ɓü.make(Ṣÿ.for("puts"), "hello",
+           Ɓü.make(1, Ðķ.make(2,
+             Ɓü.make(3))))]);
+    });
   });
 
   describe("get #nextTokenSkipNewLines()", function () {
