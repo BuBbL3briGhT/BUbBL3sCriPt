@@ -5,9 +5,3 @@ describe "list" (fn []
   (describe "map" (fn []
     (it "maps a list" (fn []
       (assert.equal (map °(1 2 3) ++) °(2 3 4);
-
-describe "list" =>
-  describe "map" =>
-    it "maps a list" =>
-      assert.equal (map °(1 2 3) ++) °(2 3 4);
-
