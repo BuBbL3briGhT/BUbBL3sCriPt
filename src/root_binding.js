@@ -178,14 +178,6 @@ const rootBinding = {
   //   return list.toObject();
   // }),
 
-  range: mkfn(function (yippies) {
-    return new Range(...yippies);
-  }),
-
-  lazy: mkfn(function (itty) {
-    return new LazyList(...itty);
-  }),
-
   do: function(args) {
     return args.eval(this);
   },
@@ -206,10 +198,25 @@ const rootBinding = {
   //    return args.reduce(
   //       (a,b) => a ? a[b] : b);
   // }),
+  //
   get: mkfn(function(yeahyeahyeahs) {
+    // console.log(yeahyeahyeahs);
      return yeahyeahyeahs.reduce(
         (memo,key) => memo && memo[key]);
   }),
+
+  range: mkfn(function (yippies) {
+    return new Range(...yippies);
+  }),
+
+  lazy: mkfn(function (itty) {
+    return new LazyList(...itty);
+  }),
+
+  // map: mkfn(function ([o, fn]) {
+  //   return o.map(fn);
+  // }),
+
   export: mkfn(function([ca,nd,y]) {
     return ca[nd] = y;
   }),

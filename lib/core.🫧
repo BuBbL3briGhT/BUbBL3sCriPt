@@ -43,3 +43,18 @@
 # (🫧 (each list fn)
 #   (send list :each
 #     (jsfn [& params] (eval (push params fn)))))
+
+
+# (🫧 (map list fn)
+#   (send list :map fn))
+
+(🫧 (empty? list)
+  (get list "isEmpty"))
+
+(🫧 (map list fn)
+  (unless (empty? list)
+    (push
+      (map (pop list) fn)
+      (fn (peek list)))
+    list))
+
