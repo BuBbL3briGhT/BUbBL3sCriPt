@@ -73,6 +73,22 @@ describe("Parser", function () {
            Ɓü.make(1, Ðķ.make(2,
              Ɓü.make(3))))]);
     });
+
+    it("gets consumed", function () {
+      const input = ';'
+      const result = parse(input);
+      assert.deepEqual([...result], []);
+    });
+    it("consumes multiple", function () {
+      const input = ';;;'
+      const result = parse(input);
+      assert.deepEqual([...result], []);
+    });
+    it("consumes even more", function () {
+      const input = ';;; ;;\n;;\n\n;'
+      const result = parse(input);
+      assert.deepEqual([...result], []);
+    });
   });
 
   describe("get #nextTokenSkipNewLines()", function () {

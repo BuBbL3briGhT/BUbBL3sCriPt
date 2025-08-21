@@ -39,6 +39,12 @@ class Parser {
 
     if (!token) { return { done: true } }
 
+    // Skip semi-colon tokens
+    if (token.type === ";") {
+      delete this.sticky; // Make sure to clear the sticky.
+      return this.next();
+    }
+
     const o = this.parse(token);
 
     if (this.sticky) delete this.sticky;
