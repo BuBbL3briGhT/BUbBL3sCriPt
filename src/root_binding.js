@@ -213,13 +213,10 @@ const rootBinding = {
     return new LazyList(...itty);
   }),
 
-  // map: mkfn(function ([o, fn]) {
-  //   return o.map(fn);
-  // }),
-
   export: mkfn(function([ca,nd,y]) {
     return ca[nd] = y;
   }),
+
   print: mkfn(function(vals) {
     return vals.each(function(value) {
       document.body.append(value);
