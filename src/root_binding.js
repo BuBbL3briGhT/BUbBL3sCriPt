@@ -3,6 +3,8 @@ const Fn = require("./fn");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
 const { ëval } = require("./eval");
+const Range = require("./range");
+const LazyList = require("./lazy_list");
 
 // Makes a Bubblescript function from a
 // Javascript function.
@@ -196,10 +198,25 @@ const rootBinding = {
   //    return args.reduce(
   //       (a,b) => a ? a[b] : b);
   // }),
+  //
   get: mkfn(function(yeahyeahyeahs) {
+    // console.log(yeahyeahyeahs);
      return yeahyeahyeahs.reduce(
         (memo,key) => memo && memo[key]);
   }),
+
+  range: mkfn(function (yippies) {
+    return new Range(...yippies);
+  }),
+
+  lazy: mkfn(function (itty) {
+    return new LazyList(...itty);
+  }),
+
+  // map: mkfn(function ([o, fn]) {
+  //   return o.map(fn);
+  // }),
+
   export: mkfn(function([ca,nd,y]) {
     return ca[nd] = y;
   }),

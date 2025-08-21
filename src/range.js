@@ -1,7 +1,9 @@
+const { Sequence } = require("./sequence");
 
-class Range {
+class Range extends Sequence {
 
   constructor (endstart, end, step=1) {
+    super();
     this.step = step;
     if (end) {
       this.i = endstart;
@@ -21,9 +23,6 @@ class Range {
     return { value, done: false };
   }
 
-  [Symbol.iterator] () {
-    return this;
-  }
 }
 
 module.exports = Range;
