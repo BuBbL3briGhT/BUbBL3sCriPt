@@ -13,6 +13,17 @@ describe("List", () => {
       assert.deepEqual([...result],
         [1,4,2,5,3,6]);
     });
+
+    it("zips uneven lists", function () {
+      const list1 = List.make(1,2,3);
+      const list2 = List.make(4,5,6,7,8);
+      const result = list1.zip(list2);
+      assert.deepEqual([...result],
+        [1,4,2,5,3,6,7,8]);
+      const result2 = list2.zip(list1);
+      assert.deepEqual([...result2],
+        [4,1,5,2,6,3,7,8]);
+    });
   });
 
   describe("#get isEmpty?", function () {
