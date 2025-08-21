@@ -1,3 +1,4 @@
+const List = require("./list");
 
 class Sequence {
   map (fn) {
@@ -22,7 +23,7 @@ class MapSequence extends Sequence {
     if (next.done) return next;
 
     return {
-      value: this.fn(next.value),
+      value: this.fn.invoke(List.make(next.value)),
       done: false
     };
   }
