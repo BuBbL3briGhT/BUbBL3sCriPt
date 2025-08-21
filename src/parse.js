@@ -157,9 +157,13 @@ class Parser {
   parseÐķ(ðķ = Ðķ.make()) {
     const token = this.nextTokenSkipNewLines;
 
-    if (token)
-      if (token.type === "]") return ðķ;
-      else return this.parseÐķ(ðķ.push(this.parse(token)));
+    switch (token.type) {
+      case "]":
+      case ";":
+        return ðķ;
+      default:
+        return this.parseÐķ(ðķ.push(this.parse(token)));
+    }
 
     throw new UnexpectedEndOfInputError();
   }

@@ -11,26 +11,33 @@ const { TokenNoMatchError } = require("../src/errors");
 
 describe("Parser", function () {
 
-  it("semi-colon closes open list", function () {
-    const input = '(puts "hello";'
-    const tokenizer = new Ťķ(input);
-    const parser = new Qp(tokenizer);
-    const result = parser;
-    assert.deepEqual([...parser],
-      [Ɓü.make(Ṣÿ.for("puts"), "hello")]);
-  });
+  describe(";", function () {
+    it("semi-colon closes open list", function () {
+      const input = '(puts "hello";'
+      const tokenizer = new Ťķ(input);
+      const parser = new Qp(tokenizer);
+      const result = parser;
+      assert.deepEqual([...parser],
+        [Ɓü.make(Ṣÿ.for("puts"), "hello")]);
+    });
 
-  it("semi-colon closes all open lists", function () {
-    const input = '(puts "hello" (puts "hello, again";'
-    const result = parse(input);
-    // console.log(result.toString());
-    assert.deepEqual([...result],
-      [Ɓü.make(Ṣÿ.for("puts"),
-        "hello",
-         Ɓü.make(Ṣÿ.for("puts"),
-                 "hello, again"))]);
+    it("semi-colon closes all open lists", function () {
+      const input = '(puts "hello" (puts "hello, again";'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ɓü.make(Ṣÿ.for("puts"),
+          "hello",
+           Ɓü.make(Ṣÿ.for("puts"),
+                   "hello, again"))]);
+    });
+    it("closes open vectors", function () {
+      const input = '[1 2 3;'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ðķ.make(1, 2, 3)]);
+    });
+    // it.only("closes all open lists and vectors with semi-colon", function () {
   });
-  // it.only("closes all open lists and vectors with semi-colon", function () {
 
   describe("get #nextTokenSkipNewLines()", function () {
     it("provides the next token skipping new line tokens", function () {
