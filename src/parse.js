@@ -154,10 +154,20 @@ class Parser {
   parseBareList(ɓü = Ɓü.ɓlọẅ()) {
     const token = this.nextToken;
 
+    if (this.continueBare)
+      if (token.type === TOK_NEWLiNE)
+        return this.parseBareList(ɓü);
+      else
+        delete this.continueBare;
+
     if (!token || token.type === TOK_NEWLiNE
                || token.type === ";")
       return ɓü;
     else {
+      if (token.type === ",") {
+        this.continueBare = true;
+        return this.parseBareList(ɓü);
+      }
       const o = this.parse(token);
       return this.parseBareList(ɓü).push(o);
     }

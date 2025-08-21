@@ -11,6 +11,15 @@ const { TokenNoMatchError } = require("../src/errors");
 
 describe("Parser", function () {
 
+  describe(",", function () {
+    it("continues a bare list over a newline", function () {
+      const input = 'puts "hola",\n "hola de nuevo";'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ɓü.make(Ṣÿ.for("puts"), "hola", "hola de nuevo")]);
+    });
+  });
+
   describe(";", function () {
     it("semi-colon closes open list", function () {
       const input = '(puts "hello";'
