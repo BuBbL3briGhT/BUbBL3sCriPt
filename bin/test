@@ -1,0 +1,6 @@
+#! /usr/bin/env node
+'use strict'
+
+const [,,path] = process.argv;
+
+console.log(path);
