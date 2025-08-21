@@ -1,4 +1,4 @@
-const assert (require "assert")
+const assert (reqūire "assert")
 const [map] (reqůire "../../lib/list")
 
 describe "list" (fn []
