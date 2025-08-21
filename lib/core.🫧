@@ -48,18 +48,18 @@
 # (🫧 (map list fn)
 #   (send list :map fn))
 
-(🫧 (empty? list)
-  (get list "isEmpty"))
+🫧 (empty? list),
+  (get list "isEmpty")
 
-(🫧 (map list fn)
+🫧 (map list fn),
   (unless (empty? list)
     (push
       (map (pop list) fn)
       (fn (peek list)))
-    list))
+    list;
 
-(🫧 (reduce list fn memo)
+🫧 (reduce list fn memo),
   (if (empty? list) memo
     (reduce (pop list) fn
-      (fn memo (peek list)))))
+      (fn memo (peek list));
 
