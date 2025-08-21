@@ -30,6 +30,7 @@ describe("Parser", function () {
            Ɓü.make(Ṣÿ.for("puts"),
                    "hello, again"))]);
     });
+
     it("closes 1 open vector", function () {
       const input = '[1 2 3;'
       const result = parse(input);
@@ -54,7 +55,15 @@ describe("Parser", function () {
               Ðķ.make(4,
                 Ɓü.make(Ðķ.make(5)))))))]);
     });
-    // it.only("closes all open lists and vectors with semi-colon", function () {
+
+    it("closes an open bare list", function () {
+      const input = 'puts "hello"; puts "hello, again"'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ɓü.make(Ṣÿ.for("puts"), "hello"),
+         Ɓü.make(Ṣÿ.for("puts"),
+           "hello, again")]);
+    });
   });
 
   describe("get #nextTokenSkipNewLines()", function () {

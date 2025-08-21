@@ -41,8 +41,7 @@ class Parser {
 
     const o = this.parse(token);
 
-    if (this.sticky)
-      delete this.sticky;
+    if (this.sticky) delete this.sticky;
 
     const oo = this.nextToken;
     if (!oo || oo.type === TOK_NEWLiNE)
@@ -53,6 +52,9 @@ class Parser {
          const ooo =
            this.parseBareList()
                .push(oo).push(o);
+
+         if (this.sticky) delete this.sticky;
+
          return { value: ooo, done: false };
        })(this.parse(oo));
   }
@@ -146,7 +148,8 @@ class Parser {
   parseBareList(ɓü = Ɓü.ɓlọẅ()) {
     const token = this.nextToken;
 
-    if (!token || token.type === TOK_NEWLiNE)
+    if (!token || token.type === TOK_NEWLiNE
+               || token.type === ";")
       return ɓü;
     else {
       const o = this.parse(token);
