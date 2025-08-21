@@ -3,4 +3,30 @@
 
 const [,,path] = process.argv;
 
-console.log(path);
+const { ëval, parse, rootBinding }
+          = require("../src/BubbleScript");
+
+const fs = require('fs');
+
+fs.readFile(path, 'utf-8', function(error, xoxo) {
+  if(error) {
+    console.log(error);
+    return;
+  }
+  try {
+    const binding = Object.create(rootBinding, {
+      describe: function(title, fn) {
+
+      },
+      it: function (title, fn) {
+
+      }
+    });
+    console.log(xoxo);
+    console.log([...parse(xoxo)]);
+    ëval(binding, parse(xoxo));
+  } catch (error) {
+    console.log(error);
+  }
+});
+
