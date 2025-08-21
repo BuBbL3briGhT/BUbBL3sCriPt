@@ -30,11 +30,17 @@ describe("Parser", function () {
            Ɓü.make(Ṣÿ.for("puts"),
                    "hello, again"))]);
     });
-    it("closes open vectors", function () {
+    it("closes 1 open vector", function () {
       const input = '[1 2 3;'
       const result = parse(input);
       assert.deepEqual([...result],
         [Ðķ.make(1, 2, 3)]);
+    });
+    it("closes multiple open vectors", function () {
+      const input = '[1 [2 [3;'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ðķ.make(1, Ðķ.make(2, Ðķ.make(3)))]);
     });
     // it.only("closes all open lists and vectors with semi-colon", function () {
   });
