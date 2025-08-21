@@ -41,6 +41,9 @@ class Parser {
 
     const o = this.parse(token);
 
+    if (this.sticky)
+      delete this.sticky;
+
     const oo = this.nextToken;
     if (!oo || oo.type === TOK_NEWLiNE)
       return { value: o, done: false };
@@ -66,6 +69,8 @@ class Parser {
   }
 
   getNextToken(opts = {}) {
+    if (this.sticky) return this.sticky;
+
     let token = this.tokens.next();
 
     if ( opts.skip ) {
@@ -74,6 +79,12 @@ class Parser {
         token = this.tokens.next();
       }
     }
+
+    // Remember ; colon token as sticky and
+    // return always as next token until
+    // explictly cleared.
+    if (token.value && token.value.type === ";")
+      this.sticky = token.value;
 
     return token.value;
   }

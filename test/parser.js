@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { Parser: Qp } = require("../src/parse");
+const { Parser: Qp, parse } = require("../src/parse");
 const Ðķ = require("../src/vector");
 const Ķÿ = require("../src/keyword");
 const { Tökenizer: Ťķ } = require("../src/tökenize");
@@ -18,6 +18,17 @@ describe("Parser", function () {
     const result = parser;
     assert.deepEqual([...parser],
       [Ɓü.make(Ṣÿ.for("puts"), "hello")]);
+  });
+
+  it("semi-colon closes all open lists", function () {
+    const input = '(puts "hello" (puts "hello, again";'
+    const result = parse(input);
+    // console.log(result.toString());
+    assert.deepEqual([...result],
+      [Ɓü.make(Ṣÿ.for("puts"),
+        "hello",
+         Ɓü.make(Ṣÿ.for("puts"),
+                 "hello, again"))]);
   });
   // it.only("closes all open lists and vectors with semi-colon", function () {
 
