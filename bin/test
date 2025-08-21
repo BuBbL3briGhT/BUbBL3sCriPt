@@ -3,7 +3,7 @@
 
 const [,,path] = process.argv;
 
-const { ëval, parse, rootBinding }
+const { parse, rootBinding }
           = require("../src/BubbleScript");
 
 const fs = require('fs');
@@ -15,16 +15,13 @@ fs.readFile(path, 'utf-8', function(error, xoxo) {
   }
   try {
     const binding = Object.create(rootBinding, {
-      describe: function(title, fn) {
-
-      },
-      it: function (title, fn) {
-
-      }
+      describe: function(title, fn) { },
+      it: function (title, fn) { }
     });
-    console.log(xoxo);
-    console.log([...parse(xoxo)]);
-    ëval(binding, parse(xoxo));
+    parse(xoxo).eval(binding);
+    // console.log(xoxo);
+    // console.log([...parse(xoxo)]);
+    // ëval(binding, parse(xoxo));
   } catch (error) {
     console.log(error);
   }
