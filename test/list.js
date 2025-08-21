@@ -26,6 +26,17 @@ describe("List", () => {
     });
   });
 
+  describe("#zip(list)", function () {
+    it("unzips a list", function () {
+      const list = List.make(1,4,2,5,3,6);
+      const result = list.unzip();
+      assert.deepEqual(result,
+        List.make(
+          List.make(1,2,3),
+          List.make(4,5,6)));
+    });
+  });
+
   describe("#get isEmpty?", function () {
 
     it("Returns true for an empty list.", function () {

@@ -78,6 +78,24 @@ class List extends AbstractList {
       .push(this.peek());
   }
 
+  unzip () {
+    if (this.isEmpty)
+      return List.make(this, List.make());
+
+    const a = this.peek();
+    const b = this.pop();
+
+    if (b.isEmpty)
+      return List.make(this, List.make());
+
+    const c = b.peek();
+    const d = b.pop();
+
+    const [e, f] = d.unzip();
+    return List.make(e.push(a), f.push(c));
+  }
+
+
   each(fn) {
     let result;
     try {
