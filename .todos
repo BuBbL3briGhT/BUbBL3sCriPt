@@ -1,5 +1,18 @@
 August:
+- Actually we could just do
+  - const [menu [sad happy]] xoxo This should
+    work differently depending if xoxo is an
+    object or a list. Assuming xoxo is an
+    object, menu would be assigned locally the
+    vale of xoxo.menu or xoxo/menu (same thing),
+    and happy would be assigned the value of
+    xoxo.sad. The neat yhimg about this is the
+    vector could be constructed dynamically.
 
+- parse ObjectMap { menu, sad: happy }
+  - ObjectMap extends List
+  - new ObjectMap(§menu, List.make(§sad, §happy))
+- Rename List to Bubbles
 - bubblescript files should not pollute the
   rootBinding/global namespace. They should
   instead get their own binding and be allowed
