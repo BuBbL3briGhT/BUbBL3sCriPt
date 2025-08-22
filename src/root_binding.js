@@ -1,4 +1,5 @@
 const List = require("./list");
+const Vector = require("./vector");
 const Fn = require("./fn");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
@@ -70,7 +71,24 @@ const rootBinding = {
 
   const: function (list) {
     const key = list.peek();
-    console.log(key);
+    const value = list.pop();
+
+    switch (key.constructor) {
+      case List:
+        // List sets a function
+        break;
+      case Vector:
+        // Vector destructures
+        break;
+      default:
+        // Symbol sets
+        const sKey = key.toString();
+        if (Object.hasOwn(this, sKey))
+          throw new Error("const " + sKey + " already set");
+        // return this[sKey]
+        //   = ëval(this, value.peek());
+        return this[sKey] = value.eval(this);
+    }
   },
 
   // fn: function([caret, stic]) {
