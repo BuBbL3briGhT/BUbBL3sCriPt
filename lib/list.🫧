@@ -1,0 +1,14 @@
+🫧 (map list fn),
+  (unless (empty? list)
+    (push
+      (map (pop list) fn)
+      (fn (peek list)))
+    list;
+
+🫧 (reduce list fn memo),
+  (if (empty? list) memo
+    (reduce (pop list) fn
+      (fn memo (peek list));
+
+module.exports (obj "map" map "reduce" reduce)
+
