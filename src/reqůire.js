@@ -10,7 +10,7 @@ function reqůire(path) {
   let moduleExports;
   binding.module = {
     exports: function(module) {
-      moduleExports  = module.peek()
+      moduleExports = module.peek();
     }
   }
   // TODO: Set require relative to current file directory.

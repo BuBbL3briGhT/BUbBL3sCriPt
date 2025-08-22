@@ -9,3 +9,4 @@ describe "list" (fn []
         °(2 3 4);
 
 puts "Holla!"
+puts assert

@@ -68,6 +68,11 @@ const rootBinding = {
     }
   },
 
+  const: function (list) {
+    const key = list.peek();
+    console.log(key);
+  },
+
   // fn: function([caret, stic]) {
   //   return new Fn(this, caret, stic);
   // },
