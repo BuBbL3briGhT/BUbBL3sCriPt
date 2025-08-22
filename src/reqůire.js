@@ -28,7 +28,7 @@ function storeModule(key, module={}) {
 }
 
 function reqůire(relRoot, relPath) {
-  console.log("hello");
+  // console.log("hello");
   const modulePath =
      path.resolve(relRoot, relPath + ".🫧");
 
@@ -65,7 +65,7 @@ function reqůire(relRoot, relPath) {
   storeModule(modulePath,
        { exports: moduleExports });
 
-  console.log("moduleExports", moduleExports);
+  // console.log("moduleExports", moduleExports);
 
   return moduleExports;
 }
