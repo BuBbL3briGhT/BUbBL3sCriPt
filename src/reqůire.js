@@ -30,7 +30,7 @@ function storeModule(key, module={}) {
 function reqůire(relRoot, relPath) {
   console.log("hello");
   const modulePath =
-     path.resolve(relRoot, relPath);
+     path.resolve(relRoot, relPath + ".🫧");
 
   let module = getModule(modulePath);
   if (module) return module.exports;
@@ -53,8 +53,14 @@ function reqůire(relRoot, relPath) {
     getReqůireFor(path.dirname(modulePath));
   binding.reqůire = mkfn(o => _reqůire(...o));
 
-  parse(fs.readFileSync(modulePath, 'utf-8'))
-                             .eval(binding);
+  const parseTree =
+    parse(fs.readFileSync(modulePath, 'utf-8'));
+  try {
+    parseTree.eval(binding);
+  } catch (error) {
+    console.log("Error evaluating " + modulePath);
+    throw error;
+  }
 
   storeModule(modulePath,
        { exports: moduleExports });
