@@ -1,3 +1,4 @@
+console.log reqůire
 const assert (reqūire "assert")
 const [map] (reqůire "../../lib/list")
 # const [equal] (reqūire "assert")

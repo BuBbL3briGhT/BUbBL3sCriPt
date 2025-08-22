@@ -35,9 +35,11 @@ fs.readFile(testPath, 'utf-8', function(error, xoxo) {
       }),
       it: mkfn(function([title, fn]) {
         console.log("    " + title);
-      }),
-      reqůire: mkfn(o => _reqůire(...o))
+      })
     });
+
+    binding.reqůire =  mkfn(o => _reqůire(...o));
+
 
     parse(xoxo).eval(binding);
   } catch (error) {

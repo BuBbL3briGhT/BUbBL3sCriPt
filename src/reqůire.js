@@ -26,9 +26,8 @@ function storeModule(key, module={}) {
   module[key] = module;
 }
 
-// TODO: Require needs to be generated relative to the file which calls it.
-// TODO: Module exports need to be stored in a registry.
 function reqůire(relRoot, relPath) {
+  console.log("hello");
   const modulePath =
      path.resolve(relRoot, relPath);
 
@@ -53,13 +52,13 @@ function reqůire(relRoot, relPath) {
     getReqůireFor(path.dirname(modulePath));
   binding.reqůire = mkfn(o => _reqůire(...o));
 
-  // TODO: Set require relative to current file directory.
-  // filePath = path.join(__dirname, filePath);
   parse(fs.readFileSync(modulePath, 'utf-8'))
                              .eval(binding);
 
   storeModule(modulePath,
        { exports: moduleExports });
+
+  console.log("moduleExports", moduleExports);
 
   return moduleExports;
 }

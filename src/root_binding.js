@@ -41,7 +41,7 @@ const rootBinding = {
   ["reqūire"]: mkfn(o => require(...o)),
 
   // Bubblescript require
-  ["reqůire"]: mkfn(o => reqůire(...o)),
+  // ["reqůire"]: mkfn(o => reqůire(...o)),
 
   __dirname: __dirname,
 
@@ -80,6 +80,8 @@ const rootBinding = {
       case Vector:
         // Vector destructures
         const o = value.eval(this);
+        console.log("value", value);
+        console.log("o", o);
         for (const k of key) {
           const sKey = k.toString();
           if (Object.hasOwn(this, sKey))
