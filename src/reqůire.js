@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { ëval } = require("./eval");
 const { parse } = require("./parse");
+const mkfn = require("./util/mkfn");
 
 const modules = {};
 let _rootBinding;
