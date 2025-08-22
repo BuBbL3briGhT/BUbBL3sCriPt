@@ -5,6 +5,7 @@ const { Macro }= require("./macro");
 const { ëval } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
+const reqůire = require("./reqůire");
 
 // Makes a Bubblescript function from a
 // Javascript function.
@@ -39,7 +40,8 @@ const rootBinding = {
   ["reqūire"]: mkfn(o => require(...o)),
 
   // Bubblescript require
-  ["reqůire"]: mkfn(function (path) { }),
+  ["reqůire"]: mkfn(o => reqůire(...o)),
+
   __dirname: __dirname,
 
   muf: function([key,val]) {

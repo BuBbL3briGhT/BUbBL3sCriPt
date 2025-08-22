@@ -19,9 +19,6 @@ fs.readFile(path, 'utf-8', function(error, xoxo) {
       it: function (title, fn) { }
     });
     parse(xoxo).eval(binding);
-    // console.log(xoxo);
-    // console.log([...parse(xoxo)]);
-    // ëval(binding, parse(xoxo));
   } catch (error) {
     console.log(error);
   }
