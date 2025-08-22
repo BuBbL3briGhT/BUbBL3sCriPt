@@ -22,6 +22,7 @@
 // }
 function mkfn(q) {
   return function (params) {
+    // console.log("params", params);
     return q.call(this, params.mapEval(this));
   }
 }

@@ -40,9 +40,9 @@ function reqůire(relRoot, relPath) {
 
   let moduleExports;
   binding.module = {
-    exports: mkfn(function([exports]) {
+    exports: function(exports) {
       moduleExports = exports;
-    })
+    }
   }
 
   // Curry a require function for the dirnameof

@@ -12,5 +12,5 @@ describe "list" (fn []
 
 puts "Holla!"
 # puts assert
-#puts map
+puts (send map "toString")
 puts equal
