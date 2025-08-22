@@ -1,5 +1,6 @@
 const assert (reqūire "assert")
-const [map] (reqůire "../../lib/list")
+#const [map] (reqůire "../../lib/list")
+const [equal] (reqūire "assert")
 
 describe "list" (fn []
   (describe "map" (fn []
@@ -9,4 +10,6 @@ describe "list" (fn []
         °(2 3 4);
 
 puts "Holla!"
-puts assert
+# puts assert
+#puts map
+puts equal

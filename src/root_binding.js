@@ -79,6 +79,15 @@ const rootBinding = {
         break;
       case Vector:
         // Vector destructures
+        const o = value.eval(this);
+        for (const k of key) {
+          const sKey = k.toString();
+          if (Object.hasOwn(this, sKey))
+            throw new Error("const " + sKey + " already set");
+
+          this[sKey] = o[sKey];
+          console.log(sKey);
+        }
         break;
       default:
         // Symbol sets
