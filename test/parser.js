@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { Parser: Qp } = require("../src/parse");
+const { Parser: Qp, parse } = require("../src/parse");
 const Ðķ = require("../src/vector");
 const Ķÿ = require("../src/keyword");
 const { Tökenizer: Ťķ } = require("../src/tökenize");
@@ -10,6 +10,95 @@ const Ṣÿ = require("../src/symbol");
 const { TokenNoMatchError } = require("../src/errors");
 
 describe("Parser", function () {
+
+  describe(",", function () {
+    it("continues a bare list over a newline", function () {
+      const input = 'puts "hola",\n "hola de nuevo";'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ɓü.make(Ṣÿ.for("puts"), "hola", "hola de nuevo")]);
+    });
+  });
+
+  describe(";", function () {
+    it("semi-colon closes open list", function () {
+      const input = '(puts "hello";'
+      const tokenizer = new Ťķ(input);
+      const parser = new Qp(tokenizer);
+      const result = parser;
+      assert.deepEqual([...parser],
+        [Ɓü.make(Ṣÿ.for("puts"), "hello")]);
+    });
+
+    it("semi-colon closes all open lists", function () {
+      const input = '(puts "hello" (puts "hello, again";'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ɓü.make(Ṣÿ.for("puts"),
+          "hello",
+           Ɓü.make(Ṣÿ.for("puts"),
+                   "hello, again"))]);
+    });
+
+    it("closes 1 open vector", function () {
+      const input = '[1 2 3;'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ðķ.make(1, 2, 3)]);
+    });
+
+    it("closes multiple open vectors", function () {
+      const input = '[1 [2 [3;'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ðķ.make(1, Ðķ.make(2, Ðķ.make(3)))]);
+    });
+
+    it("closes multiple open vectors and lists", function () {
+      const input = '[(1 [2 (3 [4 ([5;'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ðķ.make(Ɓü.make(1,
+          Ðķ.make(2,
+            Ɓü.make(3,
+              Ðķ.make(4,
+                Ɓü.make(Ðķ.make(5)))))))]);
+    });
+
+    it("closes an open bare list", function () {
+      const input = 'puts "hello"; puts "hello, again"'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ɓü.make(Ṣÿ.for("puts"), "hello"),
+         Ɓü.make(Ṣÿ.for("puts"),
+           "hello, again")]);
+    });
+
+    it("closes opens bare list open list and vector", function () {
+      const input = 'puts "hello" (1 [2 (3;'
+      const result = parse(input);
+      assert.deepEqual([...result],
+        [Ɓü.make(Ṣÿ.for("puts"), "hello",
+           Ɓü.make(1, Ðķ.make(2,
+             Ɓü.make(3))))]);
+    });
+
+    it("gets consumed", function () {
+      const input = ';'
+      const result = parse(input);
+      assert.deepEqual([...result], []);
+    });
+    it("consumes multiple", function () {
+      const input = ';;;'
+      const result = parse(input);
+      assert.deepEqual([...result], []);
+    });
+    it("consumes even more", function () {
+      const input = ';;; ;;\n;;\n\n;'
+      const result = parse(input);
+      assert.deepEqual([...result], []);
+    });
+  });
 
   describe("get #nextTokenSkipNewLines()", function () {
     it("provides the next token skipping new line tokens", function () {

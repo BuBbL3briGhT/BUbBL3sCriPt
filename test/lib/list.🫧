@@ -1,0 +1,12 @@
+const assert (reqūire "assert")
+const [map] (reqůire "../../lib/list")
+
+describe "list" (fn []
+  (describe "map" (fn []
+    (it "maps a list" (fn []
+      (assert.deepEqual
+        (map °(1 2 3) ++)
+        °(2 3 4);
+
+puts "Holla!"
+puts assert

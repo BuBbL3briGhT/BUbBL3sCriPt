@@ -1,0 +1,26 @@
+#! /usr/bin/env node
+'use strict'
+
+const [,,path] = process.argv;
+
+const { parse, rootBinding }
+          = require("../src/BubbleScript");
+
+const fs = require('fs');
+
+fs.readFile(path, 'utf-8', function(error, xoxo) {
+  if(error) {
+    console.log(error);
+    return;
+  }
+  try {
+    const binding = Object.create(rootBinding, {
+      describe: function(title, fn) { },
+      it: function (title, fn) { }
+    });
+    parse(xoxo).eval(binding);
+  } catch (error) {
+    console.log(error);
+  }
+});
+

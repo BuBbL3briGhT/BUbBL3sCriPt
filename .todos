@@ -1,6 +1,34 @@
 August:
+- Actually we could just do
+  - const [menu [sad happy]] xoxo This should
+    work differently depending if xoxo is an
+    object or a list. Assuming xoxo is an
+    object, menu would be assigned locally the
+    vale of xoxo.menu or xoxo/menu (same thing),
+    and happy would be assigned the value of
+    xoxo.sad. The neat yhimg about this is the
+    vector could be constructed dynamically.
+
+- parse ObjectMap { menu, sad: happy }
+  - ObjectMap extends List
+  - new ObjectMap(§menu, List.make(§sad, §happy))
+- Rename List to Bubbles
+- bubblescript files should not pollute the
+  rootBinding/global namespace. They should
+  instead get their own binding and be allowed
+  to export a module object. Would like to add
+  some object syntax. Also, thinking about a
+  const function that works similiar to js
+  const, bassically define/muf with a check.
+- const { map } (require "list");
+  - This would extract the map function into
+    "map" symbol locally.
+- const list (require "list");
+- list/map °(1 2 3);
 
 - better error handeling.
+  - Missing closing parens or braces should give line number and colimn with helpful error message
+  - better error for when getting such and such is not a function. continue improving
 - bubl native each
 - bubl native map
 - bubls native list functions

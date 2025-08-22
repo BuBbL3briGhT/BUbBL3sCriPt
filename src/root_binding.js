@@ -1,10 +1,12 @@
 const List = require("./list");
+const Vector = require("./vector");
 const Fn = require("./fn");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
 const { ëval } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
+const reqůire = require("./reqůire");
 
 // Makes a Bubblescript function from a
 // Javascript function.
@@ -35,7 +37,12 @@ function mkfn(q) {
 // me. 🍸
 const rootBinding = {
   console: console,
-  require: mkfn(o => require(...o)),
+  // Js require
+  ["reqūire"]: mkfn(o => require(...o)),
+
+  // Bubblescript require
+  ["reqůire"]: mkfn(o => reqůire(...o)),
+
   __dirname: __dirname,
 
   muf: function([key,val]) {
@@ -59,6 +66,28 @@ const rootBinding = {
     } else {
       return this[key.toString()]
         = ëval(this, val.peek());
+    }
+  },
+
+  const: function (list) {
+    const key = list.peek();
+    const value = list.pop();
+
+    switch (key.constructor) {
+      case List:
+        // List sets a function
+        break;
+      case Vector:
+        // Vector destructures
+        break;
+      default:
+        // Symbol sets
+        const sKey = key.toString();
+        if (Object.hasOwn(this, sKey))
+          throw new Error("const " + sKey + " already set");
+        // return this[sKey]
+        //   = ëval(this, value.peek());
+        return this[sKey] = value.eval(this);
     }
   },
 
@@ -213,13 +242,10 @@ const rootBinding = {
     return new LazyList(...itty);
   }),
 
-  // map: mkfn(function ([o, fn]) {
-  //   return o.map(fn);
-  // }),
-
   export: mkfn(function([ca,nd,y]) {
     return ca[nd] = y;
   }),
+
   print: mkfn(function(vals) {
     return vals.each(function(value) {
       document.body.append(value);

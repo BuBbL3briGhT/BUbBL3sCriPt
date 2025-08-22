@@ -39,7 +39,15 @@ class Parser {
 
     if (!token) { return { done: true } }
 
+    // Skip semi-colon tokens
+    if (token.type === ";") {
+      delete this.sticky; // Make sure to clear the sticky.
+      return this.next();
+    }
+
     const o = this.parse(token);
+
+    if (this.sticky) delete this.sticky;
 
     const oo = this.nextToken;
     if (!oo || oo.type === TOK_NEWLiNE)
@@ -50,6 +58,9 @@ class Parser {
          const ooo =
            this.parseBareList()
                .push(oo).push(o);
+
+         if (this.sticky) delete this.sticky;
+
          return { value: ooo, done: false };
        })(this.parse(oo));
   }
@@ -66,6 +77,8 @@ class Parser {
   }
 
   getNextToken(opts = {}) {
+    if (this.sticky) return this.sticky;
+
     let token = this.tokens.next();
 
     if ( opts.skip ) {
@@ -74,6 +87,12 @@ class Parser {
         token = this.tokens.next();
       }
     }
+
+    // Remember ; colon token as sticky and
+    // return always as next token until
+    // explictly cleared.
+    if (token.value && token.value.type === ";")
+      this.sticky = token.value;
 
     return token.value;
   }
@@ -120,10 +139,13 @@ class Parser {
     const token = this.nextTokenSkipNewLines;
 
     if (token)
-      if (token.type === ")") return list;
-      else {
-        const o = this.parse(token);
-        return this.parseList(list).push(o);
+      switch (token.type) {
+        case ")":
+        case ";":
+          return list;
+        default:
+          const o = this.parse(token);
+          return this.parseList(list).push(o);
       }
 
     throw new UnexpectedEndOfInputError();
@@ -132,9 +154,20 @@ class Parser {
   parseBareList(ɓü = Ɓü.ɓlọẅ()) {
     const token = this.nextToken;
 
-    if (!token || token.type === TOK_NEWLiNE)
+    if (this.continueBare)
+      if (token.type === TOK_NEWLiNE)
+        return this.parseBareList(ɓü);
+      else
+        delete this.continueBare;
+
+    if (!token || token.type === TOK_NEWLiNE
+               || token.type === ";")
       return ɓü;
     else {
+      if (token.type === ",") {
+        this.continueBare = true;
+        return this.parseBareList(ɓü);
+      }
       const o = this.parse(token);
       return this.parseBareList(ɓü).push(o);
     }
@@ -143,9 +176,13 @@ class Parser {
   parseÐķ(ðķ = Ðķ.make()) {
     const token = this.nextTokenSkipNewLines;
 
-    if (token)
-      if (token.type === "]") return ðķ;
-      else return this.parseÐķ(ðķ.push(this.parse(token)));
+    switch (token.type) {
+      case "]":
+      case ";":
+        return ðķ;
+      default:
+        return this.parseÐķ(ðķ.push(this.parse(token)));
+    }
 
     throw new UnexpectedEndOfInputError();
   }
