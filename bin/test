@@ -29,14 +29,19 @@ fs.readFile(testPath, 'utf-8', function(error, xoxo) {
 
     const _reqůire =
       getReqůireFor(path.dirname(testPath));
-    const binding = Object.create(rootBinding, {
-      describe: mkfn(function([title, fn]) {
+    const binding = Object.create(rootBinding);
+
+    binding.describe =
+      mkfn(function([title, fn]) {
         console.log("  " + title);
-      }),
-      it: mkfn(function([title, fn]) {
+        // console.log(fn);
+      });
+
+    binding.it =
+      mkfn(function([title, fn]) {
         console.log("    " + title);
-      })
-    });
+        // console.log(fn);
+      });
 
     binding.reqůire =  mkfn(o => _reqůire(...o));
 
