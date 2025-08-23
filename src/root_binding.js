@@ -1,5 +1,6 @@
 const List = require("./list");
 const Vector = require("./vector");
+const ObjectMap = require("./object_map");
 const Fn = require("./fn");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
@@ -50,14 +51,22 @@ const rootBinding = {
   const: function (list) {
     const key = list.peek();
     const value = list.pop();
+    let o;
 
     switch (key.constructor) {
       case List:
         // List sets a function
         break;
+      case ObjectMap:
+        o = value.eval(this);
+        for (const k of key) {
+          const _k = k.toString();
+          this[_k] = o[_k];
+        }
+        break;
       case Vector:
         // Vector destructures
-        const o = value.eval(this);
+        o = value.eval(this);
         // console.log("value", value);
         // console.log("o", o);
         for (const k of key) {

@@ -1,4 +1,4 @@
-const * (reqůire "core")
+# const * (reqůire "core")
 
 (🫧 (pop list)
   (send list "pop"))
@@ -18,5 +18,5 @@ const * (reqůire "core")
     (reduce (pop list) fn
       (fn memo (peek list));
 
-module.exports (obj "map" map "reduce" reduce)
+module.exports { reduce map }
 

@@ -3,6 +3,7 @@ const Ķÿ = require("./keyword");
 const Ɓü = require("./list");
 const Ɓů = require("./bubble");
 const Ṣÿ = require("./symbol");
+const ObjectMap = require("./object_map");
 const LazyList = require("./lazy_list");
 const { tokenize, tokenTypes } =
                 require("./tökenize");
@@ -128,6 +129,10 @@ class Parser {
         o = this.parseÐķ();
         break;
 
+      case "{":
+        o = this.parseObjectMap();
+        break;
+
       default:
         throw new TokenNoMatchError(token);
     }
@@ -146,6 +151,22 @@ class Parser {
         default:
           const o = this.parse(token);
           return this.parseList(list).push(o);
+      }
+
+    throw new UnexpectedEndOfInputError();
+  }
+
+  parseObjectMap(objectMap = ObjectMap.make()) {
+    const token = this.nextTokenSkipNewLines;
+
+    if (token)
+      switch (token.type) {
+        case "}":
+        case ";":
+          return objectMap;
+        default:
+          const o = this.parse(token);
+          return this.parseObjectMap(objectMap).push(o);
       }
 
     throw new UnexpectedEndOfInputError();
