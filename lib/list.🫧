@@ -1,9 +1,20 @@
-🫧 (map list fn),
-  (unless (empty? list)
+(🫧 (pop list)
+  (send list "pop"))
+
+(🫧 (empty? list)
+  (get list "isEmpty"))
+
+# (console.log "empty" (empty? °(1)))
+
+(🫧 (map list fn)
+  (console.log "list" list)
+  (console.log "empty list" (empty? list))
+  # (console.log "pop list" (pop list))
+  (if (empty? list)
+    list
     (push
       (map (pop list) fn)
-      (fn (peek list)))
-    list;
+      (fn (peek list)));
 
 🫧 (reduce list fn memo),
   (if (empty? list) memo

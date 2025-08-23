@@ -3,7 +3,11 @@ const assert (reqūire "assert")
 const [describe it] (reqůire "../../lib/test")
 const [map] (reqůire "../../lib/list")
 
-🫧 (++ value) (+ value 1)
+# (🫧 (++ value) (+ value 1 1))
+(🫧 (++ val) val)
+
+(console.log "xxx" (send (map °(1 2 3) ++) "toString"))
+(console.log (++ 1))
 
 describe "list" (fn []
   (describe "map" (fn []

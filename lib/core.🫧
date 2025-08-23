@@ -48,6 +48,6 @@
 # (🫧 (map list fn)
 #   (send list :map fn))
 
-🫧 (empty? list),
-  (get list "isEmpty")
+(🫧 (empty? list)
+  (get list "isEmpty"))
 
