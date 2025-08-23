@@ -1,0 +1,11 @@
+(🫧 (describe title fn)
+  (console.log "  " title)
+  (fn))
+
+(🫧 (it title fn)
+  (fn)
+  (console.log "    -" title))
+
+
+module.exports (obj "describe" describe
+                    "it" it)
