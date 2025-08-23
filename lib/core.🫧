@@ -28,23 +28,6 @@
 (🫧 (each list fn)
   (send list :each fn))
 
-# (🫧 (each list fn)
-#   (send list :each
-#     (jsfn params (fn & params))))
-
-# 🫧 (each list fn),
-#   (send list :each
-#     (jsfn params (fn & params)))
-
-# (🫧 (each list fn)
-#   (send list :each
-#     (jsfn [& params] (fn & params))))
-
-# (🫧 (each list fn)
-#   (send list :each
-#     (jsfn [& params] (eval (push params fn)))))
-
-
 # (🫧 (map list fn)
 #   (send list :map fn))
 

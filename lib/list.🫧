@@ -9,7 +9,7 @@
     list
     (push
       (map (pop list) fn)
-      (fn (peek list)));
+      (fn (peek list)))))
 
 (🫧 (reduce list fn memo)
   (if (empty? list) memo
