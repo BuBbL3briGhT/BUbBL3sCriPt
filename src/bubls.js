@@ -9,7 +9,7 @@ BubbleScript.load = function (filePath) {
   return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
 }
 
-BubbleScript.load("../lib/core.🫧");
+// BubbleScript.load("../lib/core.🫧");
 
 function configure(config) {
   let rëqůire = config.require
