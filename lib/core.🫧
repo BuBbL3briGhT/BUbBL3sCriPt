@@ -29,5 +29,7 @@
   (get list "isEmpty"))
 
 if module (module.exports {
-  pop puts
-;
+  pop puts each reverse reverseCowgirl
+  empty? invert shift peek poot push slap
+  stick pluck && PARTY!!!! #spank
+};

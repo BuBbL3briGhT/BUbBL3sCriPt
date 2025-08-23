@@ -6,6 +6,7 @@
 # const { map } (reqůire "list")
 const * (reqůire "core")
 
+puts "r" reverse
 puts "r" reqůire
 puts "pop" pop
 # puts "c" (reqůire "core")
