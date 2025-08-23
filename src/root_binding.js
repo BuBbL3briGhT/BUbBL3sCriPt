@@ -10,6 +10,8 @@ const LazyList = require("./lazy_list");
 const reqůire = require("./reqůire");
 const mkfn = require("./util/mkfn");
 
+const starSymbol = Ṣymbol.for("*");
+
 // A man walks into a bar. Bartender says
 // what'll you have?  The man says,
 // something strong,  my head is killing
@@ -52,6 +54,15 @@ const rootBinding = {
     const key = list.peek();
     const value = list.pop();
     let o;
+
+    if (key === starSymbol) {
+      o = value.eval(this);
+
+      for (const k in o) {
+        this[k] = o[k];
+      }
+      return;
+    }
 
     switch (key.constructor) {
       case List:

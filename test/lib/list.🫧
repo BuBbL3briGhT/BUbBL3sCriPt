@@ -3,9 +3,10 @@
 # (const list (reqůire "../../lib/list"))
 const * (reqůire "../../lib/list")
 # const { map } (reqůire "../../lib/list")
-const { map } (reqůire "list")
+# const { map } (reqůire "list")
 
-puts map
+# puts map
+puts reduce
 # puts *
 
 
