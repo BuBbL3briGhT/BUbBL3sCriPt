@@ -28,3 +28,4 @@
 (🫧 (empty? list)
   (get list "isEmpty"))
 
+(if module (module.exports { pop puts }))

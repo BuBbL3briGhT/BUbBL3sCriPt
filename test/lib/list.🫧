@@ -1,12 +1,18 @@
 (const assert (reqūire "assert"))
 # (const list (reqůire "list"))
 # (const list (reqůire "../../lib/list"))
-const * (reqůire "../../lib/list")
+# const * (reqůire "../../lib/list")
 # const { map } (reqůire "../../lib/list")
 # const { map } (reqůire "list")
+const * (reqůire "core")
 
-# puts map
-puts reduce
+puts "r" reqůire
+# puts "c" (reqůire "core")
+# puts "l" (reqůire "../../lib/list")
+
+puts "pop" pop
+puts puts
+# puts reduce
 # puts *
 
 
