@@ -28,9 +28,12 @@ function storeModule(key, module={}) {
 }
 
 function reqůire(relRoot, relPath) {
-  // console.log("hello");
   const modulePath =
-     path.resolve(relRoot, relPath + ".🫧");
+   (relPath[0] == ".") ?
+     path.resolve(relRoot, relPath + ".🫧") :
+     path.resolve(__dirname, "../lib",
+       relPath + ".🫧");
+
 
   let module = getModule(modulePath);
   if (module) return module.exports;
