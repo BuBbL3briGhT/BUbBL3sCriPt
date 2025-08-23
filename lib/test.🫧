@@ -1,10 +1,10 @@
 (🫧 (describe title fn)
-  (console.log "  " title)
+  (puts "  " title)
   (fn))
 
 (🫧 (it title fn)
   (fn)
-  (console.log "    -" title))
+  (puts "    -" title))
 
 
 module.exports (obj "describe" describe

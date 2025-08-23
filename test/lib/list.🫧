@@ -1,24 +1,10 @@
-console.log reqůire
 const assert (reqūire "assert")
 const [describe it] (reqůire "../../lib/test")
 const [map] (reqůire "../../lib/list")
 
-# (🫧 (++ value) (+ value 1 1))
-(🫧 (++ val) val)
-
-(console.log "xxx" (send (map °(1 2 3) ++) "toString"))
-(console.log (++ 1))
-
 describe "list" (fn []
   (describe "map" (fn []
     (it "maps a list" (fn []
-      (console.log "in it");
-      # (assert.equal 1 1);
-      # (assert.deepEqual
-      #   (map °(1 2 3) ++)
-      #   °(2 3 4);
-
-puts "Holla!"
-# puts assert
-puts (send map "toString")
-puts equal
+      (assert.deepEqual
+        (map °(1 2 3) ++)
+        °(2 3 4);
