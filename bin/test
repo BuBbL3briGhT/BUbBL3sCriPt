@@ -1,23 +1,51 @@
 #! /usr/bin/env node
-'use strict'
+'use strict';
 
-const [,,path] = process.argv;
+const { getReqůireFor } =
+            require("../src/reqůire");
+
+const [,,relTestPath] = process.argv;
 
 const { parse, rootBinding }
           = require("../src/BubbleScript");
 
-const fs = require('fs');
+const { mkfn } =
+           require("../src/root_binding");
 
-fs.readFile(path, 'utf-8', function(error, xoxo) {
+const fs = require('fs');
+const path = require('path');
+
+// const testPath =
+//   path.resolve(__dirname, relTestPath);
+
+const testPath = path.resolve(relTestPath);
+
+fs.readFile(testPath, 'utf-8', function(error, xoxo) {
   if(error) {
     console.log(error);
     return;
   }
   try {
-    const binding = Object.create(rootBinding, {
-      describe: function(title, fn) { },
-      it: function (title, fn) { }
-    });
+
+    const _reqůire =
+      getReqůireFor(path.dirname(testPath));
+    const binding = Object.create(rootBinding);
+
+    // binding.describe =
+    //   mkfn(function([title, fn]) {
+    //     console.log("  " + title);
+    //     // console.log(fn);
+    //   });
+
+    // binding.it =
+    //   mkfn(function([title, fn]) {
+    //     console.log("    " + title);
+    //     // console.log(fn);
+    //   });
+
+    binding.reqůire =  mkfn(o => _reqůire(...o));
+
+
     parse(xoxo).eval(binding);
   } catch (error) {
     console.log(error);

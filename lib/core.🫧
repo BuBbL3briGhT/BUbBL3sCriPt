@@ -1,65 +1,11 @@
-(🫧 (push a b)
-  (send a :push b))
-
 (🫧 (puts & msg)
  (console.log & msg))
 
 (🫧 (poot & msg)
  (console.log & msg))
 
-(🫧 (peek list)
-  (send list :peek))
-
-(🫧 (pop list)
-  (send list :pop))
-
-(🫧 (shift list)
-  (send list :shift))
-
-(🫧 (invert list)
-  (send list :invert))
-
-(🫧 (reverse list)
-  (send list :invert))
-
-# 🫧 (each list fn),
-#   (send list :each fn)
-
-(🫧 (each list fn)
-  (send list :each fn))
-
-# (🫧 (each list fn)
-#   (send list :each
-#     (jsfn params (fn & params))))
-
-# 🫧 (each list fn),
-#   (send list :each
-#     (jsfn params (fn & params)))
-
-# (🫧 (each list fn)
-#   (send list :each
-#     (jsfn [& params] (fn & params))))
-
-# (🫧 (each list fn)
-#   (send list :each
-#     (jsfn [& params] (eval (push params fn)))))
-
-
-# (🫧 (map list fn)
-#   (send list :map fn))
-
-🫧 (empty? list),
-  (get list "isEmpty")
-
-🫧 (map list fn),
-  (unless (empty? list)
-    (push
-      (map (pop list) fn)
-      (fn (peek list)))
-    list;
-
-🫧 (reduce list fn memo),
-  (if (empty? list) memo
-    (reduce (pop list) fn
-      (fn memo (peek list));
-
+if module (module.exports {
+  pop puts each reverse reverseCowgirl
+  empty? invert shift peek poot push slap
+  stick pluck && PARTY!!!! #spank
+};

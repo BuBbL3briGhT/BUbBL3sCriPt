@@ -1,6 +1,7 @@
 const AbstractList = require("./abstract_list");
 const List = require("./list");
 const Vector = require("./vector");
+const ObjectMap = require("./object_map");
 const Fn = require("./fn");
 const { Macro, MacroExpanded } = require("./macro");
 const Bubble = require("./bubble");
@@ -76,6 +77,8 @@ function ëval(bnd, xpr) {
     }
     case Vector:
       return xpr.mapEval(bnd);
+    case ObjectMap:
+      return xpr.createObject(bnd);
     case Bubble:
       return xpr.pop();
     default:

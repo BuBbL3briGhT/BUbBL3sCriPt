@@ -1,5 +1,6 @@
 const List = require("./list");
 const Vector = require("./vector");
+const ObjectMap = require("./object_map");
 const Fn = require("./fn");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
@@ -7,29 +8,9 @@ const { ëval } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
 const reqůire = require("./reqůire");
+const mkfn = require("./util/mkfn");
 
-// Makes a Bubblescript function from a
-// Javascript function.
-// Params:
-//   q: A Javascript function that will be
-//   called for this function.
-// Returns an annonomous function that is
-// sutible for use with Bubblescript.
-// #coreUtilityFunction
-// TODO: Create tests for mkfn.
-function mkfn(q) {
-  return function (params) {
-    // Handel & expansion.
-    // let splits = params.split(sAmp);
-    // console.log("hi", splits);
-    // if (splits.count() > 1) {
-    //   params = splits.first.conj(splits.rest.head);
-    //   console.log(params);
-    // }
-
-    return q.call(this, params.mapEval(this));
-  }
-}
+const starSymbol = Ṣymbol.for("*");
 
 // A man walks into a bar. Bartender says
 // what'll you have?  The man says,
@@ -41,7 +22,7 @@ const rootBinding = {
   ["reqūire"]: mkfn(o => require(...o)),
 
   // Bubblescript require
-  ["reqůire"]: mkfn(o => reqůire(...o)),
+  // ["reqůire"]: mkfn(o => reqůire(...o)),
 
   __dirname: __dirname,
 
@@ -72,13 +53,41 @@ const rootBinding = {
   const: function (list) {
     const key = list.peek();
     const value = list.pop();
+    let o;
+
+    if (key === starSymbol) {
+      o = value.eval(this);
+
+      for (const k in o) {
+        this[k] = o[k];
+      }
+      return;
+    }
 
     switch (key.constructor) {
       case List:
         // List sets a function
         break;
+      case ObjectMap:
+        o = value.eval(this);
+        for (const k of key) {
+          const _k = k.toString();
+          this[_k] = o[_k];
+        }
+        break;
       case Vector:
         // Vector destructures
+        o = value.eval(this);
+        // console.log("value", value);
+        // console.log("o", o);
+        for (const k of key) {
+          const sKey = k.toString();
+          if (Object.hasOwn(this, sKey))
+            throw new Error("const " + sKey + " already set");
+
+          this[sKey] = o[sKey];
+          // console.log(sKey);
+        }
         break;
       default:
         // Symbol sets

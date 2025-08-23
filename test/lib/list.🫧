@@ -1,12 +1,33 @@
-const assert (reqūire "assert")
-const [map] (reqůire "../../lib/list")
+(const assert (reqūire "assert"))
+# (const list (reqůire "list"))
+# (const list (reqůire "../../lib/list"))
+# const * (reqůire "../../lib/list")
+# const { map } (reqůire "../../lib/list")
+# const { map } (reqůire "list")
+const * (reqůire "core")
 
-describe "list" (fn []
+puts "r" reverse
+puts "r" reqůire
+puts "pop" pop
+# puts "c" (reqůire "core")
+# puts "l" (reqůire "../../lib/list")
+
+puts "pop" pop
+puts puts
+# puts reduce
+# puts *
+
+
+(const { describe it }
+  (reqůire "../../lib/test"))
+(const { map } (reqůire "../../lib/list"))
+
+(describe "list" (fn []
   (describe "map" (fn []
     (it "maps a list" (fn []
       (assert.deepEqual
         (map °(1 2 3) ++)
-        °(2 3 4);
+        °(2 3 4)
+;
 
-puts "Holla!"
-puts assert
+
