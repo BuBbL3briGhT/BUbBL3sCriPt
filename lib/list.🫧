@@ -1,3 +1,5 @@
+const * (reqůire "core")
+
 (🫧 (pop list)
   (send list "pop"))
 

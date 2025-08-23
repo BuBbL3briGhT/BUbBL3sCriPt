@@ -1,11 +1,9 @@
 (🫧 (describe title fn)
-  (puts "  " title)
+  (puts '  ' title)
   (fn))
 
 (🫧 (it title fn)
   (fn)
-  (puts "    -" title))
+  (puts '    -' title))
 
-
-module.exports (obj "describe" describe
-                    "it" it)
+(module.exports { describe it })

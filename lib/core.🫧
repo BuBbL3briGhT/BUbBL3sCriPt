@@ -22,14 +22,8 @@
 (🫧 (reverse list)
   (send list :invert))
 
-# 🫧 (each list fn),
-#   (send list :each fn)
-
 (🫧 (each list fn)
   (send list :each fn))
-
-# (🫧 (map list fn)
-#   (send list :map fn))
 
 (🫧 (empty? list)
   (get list "isEmpty"))
