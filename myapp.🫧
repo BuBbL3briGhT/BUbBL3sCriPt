@@ -11,3 +11,5 @@
   (list °const what (list °reqůire where))))
 
 (import * from "list")
+
+puts (map (range 3) ++)
