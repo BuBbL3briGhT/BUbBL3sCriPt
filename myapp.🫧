@@ -19,7 +19,7 @@
 
 (defMacro (-> head & tail)
   (reduce tail (fn [memo i]
-    (let [fn (peek i))
+    (let [fn (peek i)]
       (push (push (pop i) memo) fn))
     head))
 
