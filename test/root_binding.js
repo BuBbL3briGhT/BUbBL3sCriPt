@@ -20,5 +20,13 @@ describe("rootBinding", function () {
       const list = List.make(1, Keyword.for("toString"))
       assert.equal(rootBinding.send(list), "1");
     });
+
+    it("sends messages to objects", function () {
+      const list = List.make({
+        meatballs: function () {
+          meatballsCalled = true; },
+        Keyword.for("meatballs"))
+      assert.equal(rootBinding.send(list), "1");
+    });
   });
 });
