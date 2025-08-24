@@ -24,6 +24,7 @@ function ėval(script) {
 }
 
 function ëval(bnd, xpr) {
+  // console.log("xpr", xpr);
   switch (xpr && xpr.constructor) {
     case Ṣymbol:
       return xpr.resolve(bnd)
@@ -39,6 +40,8 @@ function ëval(bnd, xpr) {
           else
             return xpr;
         } else /* send */ {
+
+          // console.log("xpr", xpr);
           // call pattern 2
           // x.x or x.x.x or x.x...
           let q = s.resolveRoot(bnd)
