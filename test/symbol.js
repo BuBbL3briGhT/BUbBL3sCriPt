@@ -21,5 +21,11 @@ describe("Ṣymbol", function () {
        assert(symbol instanceof Ṣymbol);
        assert.equal(symbol.value, "symbol");
      });
+
+     it("return symbol for key (toString, special case)", function () {
+       const symbol = Ṣymbol.for("toString");
+       assert(symbol instanceof Ṣymbol);
+       assert.equal(symbol.value, "toString");
+     });
    });
 });
