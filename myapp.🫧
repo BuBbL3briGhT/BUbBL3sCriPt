@@ -8,5 +8,7 @@
 # puts (send (expandmacro import * from "list") "toString")
 
 def m (expandmacro import * from "list")
-puts (send m :toString)
+# puts "toString"
+puts :toString
+# puts (send m :toString)
 
