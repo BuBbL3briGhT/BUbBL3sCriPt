@@ -22,6 +22,19 @@ puts (++ 5)
       (fn (peek list)))
 ;
 
+(fn []
+  🫧 _puts puts
+  ((fn [& list]
+    (_puts & list))))
+
+(let [puts puts]
+  ((fn [& list]
+    (_puts & list))))
+
+🫧 puts (let { puts }
+  (fn [& list]
+    (_puts & list)))
+
 puts map
 
 
