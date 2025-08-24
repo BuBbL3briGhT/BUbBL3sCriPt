@@ -46,4 +46,3 @@ module.exports {
   each empty? invert map peek pop push reduce
   reverse shift
 }
-
