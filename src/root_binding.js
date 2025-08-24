@@ -26,7 +26,7 @@ const rootBinding = {
 
   __dirname: __dirname,
 
-  muf: function(args) {
+  define: function(args) {
     let key = args.peek();
     let val = args.pop();
 
@@ -292,7 +292,7 @@ const rootBinding = {
 };
 
 // Alias muf to 🫧
-rootBinding["🫧"] = rootBinding.muf;
-rootBinding.define = rootBinding.muf;
+rootBinding["🫧"] = rootBinding.define;
+rootBinding.muf = rootBinding.define;
 
 module.exports = { rootBinding, mkfn };
