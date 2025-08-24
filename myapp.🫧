@@ -10,7 +10,9 @@
 (🫧 (++ n) (+ n 1))
 
 /* puts ++ */
-puts (toString ++)
+/* puts (toString ++) */
+
+puts (++ 5)
 
 (stop)
 puts puts
