@@ -8,7 +8,7 @@
 🫧 import (macro [what from where]
   (list °const what (list °reqůire where)))
 
-🫧 (toString o) (send o "toString")
+🫧 (toString o) (send o :toString)
 
 # puts (toString (expandmacro import * from "list"))
 # puts (send (expandmacro import * from "list") "toString")
