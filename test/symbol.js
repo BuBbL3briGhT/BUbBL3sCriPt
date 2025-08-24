@@ -10,12 +10,12 @@
 //
 
 const assert = require("assert");
-const Symbol = require("../src/symbol");
+const Ṣymbol = require("../src/symbol");
 
-describe("Symbol", function () {
+describe("Ṣymbol", function () {
    describe(".for(key)", function () {
      it("return symbol for key", function () {
-       const symbol = Symbol.for("symbol");
+       const symbol = Ṣymbol.for("symbol");
        assert(symbol instanceof Symbol);
        assert.equal(symbol.key, "symbol");
      });
