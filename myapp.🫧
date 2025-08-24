@@ -15,14 +15,15 @@
 
 import * from "list";
 
-/*
 
-🫧 defineMacro (macro [[name & params] & body])
-  (list °🫧 name (conj
-     (list °macro (toVector params))
-     body))
+/******
 
-(defineMacro (import what from where)
-  (list °const what (list °reqůire where)))
+  🫧 defineMacro (macro [[name & params] & body])
+    (list °🫧 name (conj
+       (list °macro (toVector params))
+       body))
 
-*/
+  (defineMacro (import what from where)
+    (list °const what (list °reqůire where)))
+
+*******/
