@@ -13,6 +13,16 @@
 (import * from "list")
 
 # puts (map (range 3) ++)
-puts (toString (map (range 3) ++))
+# puts (toString (map (range 3) ++))
 
-puts (-> (range 3) (map ++) toString)
+(puts (-> (range 3) (map ++) toString))
+
+(defMacro (-> head & tail)
+  (reduce tail (fn [memo i]
+    (let [fn (peek i))
+      (push (push (pop i) memo) fn))
+    head))
+
+
+
+
