@@ -1,4 +1,4 @@
-const keywords = {};
+const keywords = Object.create(null);
 
 class Keyword {
   constructor(key) {
