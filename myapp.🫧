@@ -2,5 +2,5 @@
 🫧 import (macro [what from where]
   (list °const what (list °reqůire where)))
 
-import * from "list";
+puts (expandmacro import * from "list")
 
