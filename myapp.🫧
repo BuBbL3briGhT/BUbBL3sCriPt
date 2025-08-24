@@ -12,4 +12,7 @@
 
 (import * from "list")
 
-puts (map (range 3) ++)
+# puts (map (range 3) ++)
+puts (toString (map (range 3) ++))
+
+puts (-> (range 3) (map ++) toString)
