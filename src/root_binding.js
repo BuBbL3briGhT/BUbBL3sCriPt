@@ -221,14 +221,13 @@ const rootBinding = {
     [receipient, list] = list.plop();
     [message, params] = list.plop();
 
-    console.log("list", list);
-    console.log("receipient", receipient);
-    console.log("params", params);
+    // console.log("list", list);
+    // console.log("receipient", receipient);
+    // console.log("params", params);
 
     if (message.key) message = message.key;
 
     return receipient[message](...params);
-
   }),
 
   get: mkfn(function(yeahyeahyeahs) {

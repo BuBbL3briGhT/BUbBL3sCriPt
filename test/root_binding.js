@@ -1,4 +1,5 @@
 const assert = require("assert");
+const Keyword = require("../src/keyword");
 const { rootBinding, List} = require("../src/BubbleScript");
 
 describe("rootBinding", function () {
@@ -13,4 +14,11 @@ describe("rootBinding", function () {
          { first: "Kermit" });
      });
    });
+
+  describe("send", function () {
+    it("sends messages to objects", function () {
+      const list = List.make(1, Keyword.for("toString"))
+      assert.equal(rootBinding.send(list), "1");
+    });
+  });
 });
