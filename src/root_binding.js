@@ -225,13 +225,13 @@ const rootBinding = {
     console.log("message", message);
     console.log("list", list);
 
-    if (b.key)
-      b = b.key.toString();
+    if (message.key)
+      message = message.key.toString();
 
-    if (c.length > 0) {
-      return a[b](...c);
-    } else
-      return a[b]();
+    if (params)
+      return receipient[message](...params);
+    else
+      return receipient[message]();
 
   }),
 
