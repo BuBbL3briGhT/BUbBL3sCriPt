@@ -225,13 +225,9 @@ const rootBinding = {
     console.log("receipient", receipient);
     console.log("params", params);
 
-    if (message.key)
-      message = message.key.toString();
+    if (message.key) message = message.key;
 
-    if (params)
-      return receipient[message](...params);
-    else
-      return receipient[message]();
+    return receipient[message](...params);
 
   }),
 
