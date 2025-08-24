@@ -146,9 +146,11 @@ const rootBinding = {
   // },
 
   expandmacro: function(o) {
-    const [m, n] = o.plop();
-    console.log(m, n);
-    return ëval(this,m).expand(this, n);
+    const [head, tail] = o.plop();
+    // return head.eval(this).expand(this, tail);
+    return ëval(this, head).expand(this, tail);
+    // console.log(m, n);
+    // return ëval(this,m).expand(this, n);
   },
 
   loop: function([x,...xx]) {
