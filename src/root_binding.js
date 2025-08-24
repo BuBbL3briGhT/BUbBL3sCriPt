@@ -141,7 +141,12 @@ const rootBinding = {
     alert(this.concat(msgs));
   },
 
-  expandmacro: function([m,n]) {
+  // expandmacro: function([m,n]) {
+  //   return ëval(this,m).expand(this, n);
+  // },
+
+  expandmacro: function([m,...n]) {
+    console.log(m, n);
     return ëval(this,m).expand(this, n);
   },
 
