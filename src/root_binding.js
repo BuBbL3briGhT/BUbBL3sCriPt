@@ -13,8 +13,8 @@ const mkfn = require("./util/mkfn");
 const starSymbol = Ṣymbol.for("*");
 
 // A man walks into a bar. Bartender says
-// what'll you have?  The man says,
-// something strong,  my head is killing
+// what'll you have? The man says,
+// something strong, my head is killing
 // me. 🍸
 const rootBinding = {
   console: console,
@@ -25,11 +25,6 @@ const rootBinding = {
   // ["reqůire"]: mkfn(o => reqůire(...o)),
 
   __dirname: __dirname,
-
-  muf: function([key,val]) {
-    return this[key.toString()]
-      = ëval(this, val);
-  },
 
   muf: function(args) {
     let key = args.peek();
@@ -99,17 +94,6 @@ const rootBinding = {
         return this[sKey] = value.eval(this);
     }
   },
-
-  // fn: function([caret, stic]) {
-  //   return new Fn(this, caret, stic);
-  // },
-  // fn: function(_) {
-  //   // console.log(_);
-  //   let binding = this;
-  //   let caret = _.peek();
-  //   let stic  = _.pop();
-  //   return new Fn(binding, caret, stic);
-  // },
 
   fn: function(args) {
     return new Fn(this, args.first.toList(), args.rest)
@@ -212,10 +196,6 @@ const rootBinding = {
       }, {});
   }),
 
-  // obj: mkfn(function(list) {
-  //   return list.toObject();
-  // }),
-
   do: function(args) {
     return args.eval(this);
   },
@@ -232,11 +212,7 @@ const rootBinding = {
     } else
       return a[b]();
   }),
-  // get: mkfn(function(args) {
-  //    return args.reduce(
-  //       (a,b) => a ? a[b] : b);
-  // }),
-  //
+
   get: mkfn(function(yeahyeahyeahs) {
     // console.log(yeahyeahyeahs);
      return yeahyeahyeahs.reduce(
