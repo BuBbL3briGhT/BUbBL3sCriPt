@@ -230,6 +230,16 @@ const rootBinding = {
     return receipient[message](...params);
   }),
 
+  stop: function () {
+    // console.error("stopped");
+    // const obj = {};
+    // Error.captureStackTrace(obj, this.stop);
+    // console.log(obj.stack);
+    // console.log(this);
+    // console.log(this.__proto__);
+    process.exit();
+  },
+
   get: mkfn(function(yeahyeahyeahs) {
     // console.log(yeahyeahyeahs);
      return yeahyeahyeahs.reduce(

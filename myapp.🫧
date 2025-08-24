@@ -6,9 +6,12 @@
 #
 
 puts puts
+(stop)
 puts +
 puts ++
+
 stop
+
 (🫧 (++ n) (+ n 1))
 (🫧 (toString o) (send o :toString))
 
