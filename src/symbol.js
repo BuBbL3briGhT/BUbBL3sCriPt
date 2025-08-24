@@ -1,4 +1,4 @@
-const symbols = {};
+const symbols = Object.create(null);
 
 // `Ṣymbol`s are language symbols. Alternatively
 // to avoid name clash with the built-in
