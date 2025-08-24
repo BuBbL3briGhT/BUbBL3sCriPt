@@ -5,14 +5,16 @@
 #    bin/bubls myapp.🫧
 #
 
-puts puts
-(stop)
-puts +
+(🫧 (++ n) (+ n 1))
+
 puts ++
+
+(stop)
+puts puts
+puts +
 
 stop
 
-(🫧 (++ n) (+ n 1))
 (🫧 (toString o) (send o :toString))
 
 (🫧 import (macro [what from where]
