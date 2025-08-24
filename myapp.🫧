@@ -10,10 +10,10 @@
 🫧 import (macro [what from where]
   (list °const what (list °reqůire where)))
 
+import * from "list";
+
 # 🫧 m (expandmacro import * from "list")
 # puts (toString m)
-
-import * from "list";
 
 
 /******
