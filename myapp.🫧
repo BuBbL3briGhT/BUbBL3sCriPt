@@ -9,4 +9,4 @@
 
 def m (expandmacro import * from "list")
 # puts "toString"
-puts (send m :toString)
+puts (send m :toString 1)

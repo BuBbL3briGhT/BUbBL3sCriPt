@@ -218,12 +218,12 @@ const rootBinding = {
   send: mkfn(function(list) {
     let receipient, message, params;
 
-    [receipient, [message, params]] =
-      list.plop().plop();
+    [receipient, list] = list.plop();
+    [message, params] = list.plop();
 
-    console.log("receipient", receipient);
-    console.log("message", message);
     console.log("list", list);
+    console.log("receipient", receipient);
+    console.log("params", params);
 
     if (message.key)
       message = message.key.toString();
