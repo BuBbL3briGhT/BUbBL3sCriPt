@@ -14,7 +14,17 @@
 
 puts (++ 5)
 
+(🫧 (map list fn)
+  (if (empty? list)
+    list
+    (push
+      (map (pop list) fn)
+      (fn (peek list)))
+;
+
 puts map
+
+
 
 (stop)
 puts puts
