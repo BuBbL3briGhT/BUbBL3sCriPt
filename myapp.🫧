@@ -10,8 +10,13 @@
 🫧 import (macro [what from where]
   (list °const what (list °reqůire where)))
 
-defineMacro (import what from where),
-  (list °const what (list °reqůire where))
+🫧 defineMacro (macro [[name & params] & body])
+  (list °🫧 name (conj
+     (list °macro (toVector params))
+     body))
+
+(defineMacro (import what from where)
+  (list °const what (list °reqůire where)))
 
 # 🫧 m (expandmacro import * from "list")
 # puts (toString m)
