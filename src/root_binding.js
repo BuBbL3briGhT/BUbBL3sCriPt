@@ -217,8 +217,8 @@ const rootBinding = {
 
   send: mkfn(function(list) {
     let recipient, message;
-    [reciepient, list] = list.plop();
-    [message, list] = list.plop();
+    [reciepient, [message, list]] =
+      list.plop().plop();
 
     console.log("reciepient", reciepient);
     console.log("message", message);
