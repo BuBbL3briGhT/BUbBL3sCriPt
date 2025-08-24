@@ -1,4 +1,5 @@
 'use strict'
+
 // Mocha test suite for Symbol class/module.
 //
 // To run individually:
@@ -18,7 +19,7 @@ describe("Ṣymbol", function () {
      it("return symbol for key", function () {
        const symbol = Ṣymbol.for("symbol");
        assert(symbol instanceof Ṣymbol);
-       assert.equal(symbol.key, "symbol");
+       assert.equal(symbol.value, "symbol");
      });
    });
 });
