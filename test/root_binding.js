@@ -24,17 +24,17 @@ describe("rootBinding", function () {
     it("sends messages to objects", function () {
       let meatballsCalled = false;
 
-      const list = List.make({
+      const list = List.make(
+        {
           meatballs: function () {
             meatballsCalled = true;
           }
         },
-        Keyword.for("meatballs"));
+        Keyword.for("meatballs")
+      );
 
       assert(!meatballsCalled);
-
       rootBinding.send(list);
-
       assert(meatballsCalled);
     });
   });
