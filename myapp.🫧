@@ -12,8 +12,8 @@
 
 import * from "list";
 
-# 🫧 m (expandmacro import * from "list")
-# puts (toString m)
+/* 🫧 m (expandmacro import * from "list") */
+/* puts (toString m) */
 
 
 /******
