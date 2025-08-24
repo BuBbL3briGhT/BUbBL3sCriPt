@@ -1,3 +1,14 @@
+// Mocha test suite for Symbol class/module.
+//
+// To run individually:
+//
+//   npx mocha test/symbol.js
+//
+// To run as part of project tests:
+//
+//   npm test
+//
+
 const assert = require("assert");
 const Symbol = require("../src/symbol");
 
