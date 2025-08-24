@@ -9,6 +9,10 @@
 
 def m (expandmacro import * from "list")
 # puts "toString"
-puts :toString
 # puts (send m :toString)
+
+# puts :toString
+# puts °:toString
+console.log :toString
+console.log :xxx
 
