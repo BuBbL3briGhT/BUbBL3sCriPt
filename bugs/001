@@ -3,6 +3,7 @@ date: Sat Aug 23 23:18:42 EDT 2025
 version: fdc1a39
 owner: BamBi
 assignedTo: BamBi
+status: resolved
 
 ---
 
@@ -15,3 +16,8 @@ Recieving the following error when try to run.
         at createBinding (/data/data/com.termux/files/home/bubblescript/src/create_binding.js:49:3)
         at Macro.expand (/data/data/com.termux/files/home/bubblescript/src/macro.js:13:19)
         at Object.expandmacro (/data/data/com.termux/files/home/bubblescript/src/root_binding.js:150:25)                                                   at ëval (/data/data/com.termux/files/home/bubblescript/src/eval.js:70:18)                         at ëval (/data/data/com.termux/files/home/bubblescript/src/eval.js:37:20)                         at /data/data/com.termux/files/home/bubblescript/src/abstract_list.js:146:7                       at List.map (/data/data/com.termux/files/home/bubblescript/src/list.js:60:21)                     at List.mapEval (/data/data/com.termux/files/home/bubblescript/src/abstract_list.js:145:17)       at ëval (/data/data/com.termux/files/home/bubblescript/src/eval.js:68:35)
+
+---
+
+There was an error in the way the expandmacro function
+was calling expand. The issue is fixed in e282b94
