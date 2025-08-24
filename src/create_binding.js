@@ -13,6 +13,8 @@ function applyArguments(binding, keys, vals) {
   if (vals instanceof Vector)
     vals = vals.toList();
 
+  // console.log("keys", keys);
+  // console.log("vals", vals);
   while (!keys.isEmpty && !vals.isEmpty) {
     let key = keys.first;
     let val = vals.first;

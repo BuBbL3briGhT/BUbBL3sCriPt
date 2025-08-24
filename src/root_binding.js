@@ -141,16 +141,10 @@ const rootBinding = {
     alert(this.concat(msgs));
   },
 
-  // expandmacro: function([m,n]) {
-  //   return ëval(this,m).expand(this, n);
-  // },
-
-  expandmacro: function(o) {
-    const [head, tail] = o.plop();
-    // return head.eval(this).expand(this, tail);
-    return ëval(this, head).expand(this, tail);
-    // console.log(m, n);
-    // return ëval(this,m).expand(this, n);
+  expandmacro: function(list) {
+    const [head, tail] = list.plop();
+    const macro = ëval(this, head);
+    return macro.expand(tail);
   },
 
   loop: function([x,...xx]) {

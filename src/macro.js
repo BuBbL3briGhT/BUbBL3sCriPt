@@ -10,6 +10,8 @@ class Macro {
   }
 
   expand(params) {
+    // console.log("params", params);
+    // console.log("this.params", this.params);
     let binding = createBinding(this.binding,
       this.params, params);
 
