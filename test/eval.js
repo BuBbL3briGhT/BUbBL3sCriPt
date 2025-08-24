@@ -7,13 +7,18 @@ const sinon = require("sinon");
 
 // const { ėval } = require("../src/eval");
 
-const { List, Vector, rootBinding, ėval, parse } =
+const { List, Vector, rootBinding, ėval, ëval, parse } =
   require("../src/BubbleScript");
 
 describe("eval(script)", function () {
 
   afterEach(function () {
     sinon.restore();
+  });
+
+  it("evaluates a keyword", function() {
+    const p = parse(":keyword");
+    assert.deepEqual([...ëval({}, p)], "");
   });
 
   it("runs script top to bottom", function () {
