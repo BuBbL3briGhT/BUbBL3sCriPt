@@ -291,8 +291,9 @@ const rootBinding = {
   })
 };
 
-// Alias muf to 🫧
-rootBinding["🫧"] = rootBinding.define;
+// Aliases
 rootBinding.muf = rootBinding.define;
+rootBinding.def = rootBinding.define;
+rootBinding["🫧"] = rootBinding.define;
 
 module.exports = { rootBinding, mkfn };
