@@ -5,9 +5,12 @@
 #    bin/bubls myapp.🫧
 #
 
+(🫧 (toString o) (send o :toString))
+
 (🫧 (++ n) (+ n 1))
 
-puts ++
+/* puts ++ */
+puts (toString ++)
 
 (stop)
 puts puts
@@ -15,7 +18,6 @@ puts +
 
 stop
 
-(🫧 (toString o) (send o :toString))
 
 (🫧 import (macro [what from where]
   (list °const what (list °reqůire where))))
