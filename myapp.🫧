@@ -6,7 +6,7 @@
 
 # puts (toString (expandmacro import * from "list"))
 # puts (send (expandmacro import * from "list") "toString")
-puts (send
-        (expandmacro import * from "list")
-        :toString")
+
+define m (expandmacro import * from "list")
+puts (send m :toString)
 

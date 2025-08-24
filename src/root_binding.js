@@ -206,13 +206,25 @@ const rootBinding = {
     return args.eval(this);
   }),
 
-  send: mkfn(function([a,b,...c]) {
+  // send: mkfn(function([a,b,...c]) {
+  //   if (b.key)
+  //     b = b.key;
+  //   if (c.length > 0) {
+  //     return a[b](...c);
+  //   } else
+  //     return a[b]();
+  // }),
+
+  send: mkfn(function(list) {
+    console.log(list);
     if (b.key)
-      b = b.key;
+      b = b.key.toString();
+
     if (c.length > 0) {
       return a[b](...c);
     } else
       return a[b]();
+
   }),
 
   get: mkfn(function(yeahyeahyeahs) {
@@ -281,5 +293,6 @@ const rootBinding = {
 
 // Alias muf to 🫧
 rootBinding["🫧"] = rootBinding.muf;
+rootBinding.define = rootBinding.muf;
 
 module.exports = { rootBinding, mkfn };
