@@ -1,3 +1,9 @@
+# This is here for testing purposes.
+#
+# To run:
+#
+#    bin/bubls myapp.🫧
+#
 
 🫧 import (macro [what from where]
   (list °const what (list °reqůire where)))
@@ -10,5 +16,5 @@
 def m (expandmacro import * from "list")
 # puts "toString"
 # puts (send m :toString)
-puts toString
+puts (toString toString)
 # puts (toString m)
