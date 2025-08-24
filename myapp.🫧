@@ -4,6 +4,9 @@
 
 # 🫧 (toString o) (send o "toString")
 
-#puts (toString (expandmacro import * from "list"))
-puts (send (expandmacro import * from "list") "toString")
+# puts (toString (expandmacro import * from "list"))
+# puts (send (expandmacro import * from "list") "toString")
+puts (send
+        (expandmacro import * from "list")
+        :toString")
 
