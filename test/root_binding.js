@@ -22,11 +22,20 @@ describe("rootBinding", function () {
     });
 
     it("sends messages to objects", function () {
+      let meatballsCalled = false;
+
       const list = List.make({
-        meatballs: function () {
-          meatballsCalled = true; },
-        Keyword.for("meatballs"))
-      assert.equal(rootBinding.send(list), "1");
+          meatballs: function () {
+            meatballsCalled = true;
+          }
+        },
+        Keyword.for("meatballs"));
+
+      assert(!meatballsCalled);
+
+      rootBinding.send(list);
+
+      assert(meatballsCalled);
     });
   });
 });
