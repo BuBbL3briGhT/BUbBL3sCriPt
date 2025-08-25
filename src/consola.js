@@ -2,9 +2,10 @@
 const consola = {
 
   registro(objeto) {
-    const trace = {}
+    const trace = {};
     Error.captureStackTrace(trace, this.registro);
-    console.log(trace.stack);
+    const stackTrace = trace.stack.split("\n");
+    console.log(stackTrace[1]);
     switch (typeof objeto) {
       // case "object":
       //   this.registroObjeto(objeto);
