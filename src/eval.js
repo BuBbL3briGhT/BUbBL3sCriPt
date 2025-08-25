@@ -24,6 +24,7 @@ function ėval(script) {
 }
 
 function ëval(bnd, xpr) {
+  // console.log("xpr", xpr);
   switch (xpr && xpr.constructor) {
     case Ṣymbol:
       return xpr.resolve(bnd)
@@ -39,23 +40,29 @@ function ëval(bnd, xpr) {
           else
             return xpr;
         } else /* send */ {
+          // console.log("xpr", xpr);
           // call pattern 2
           // x.x or x.x.x or x.x...
-          let q = s.resolveRoot(bnd)
-          if (!xpr.rest) {
-            return q[s.fn]()
+          let params;
+          let resolvedRoot = s.resolveRoot(bnd)
+          if (resolvedRoot === undefined) {
+            // consola.registro(s + " is undefined");
+            throw new TypeError(s + ` is undefined. file: ${s.file}, line: ${s.line}, column: ${s.column}`);
           }
+          const fn = resolvedRoot[s.fn];
           try {
-            let params = xpr.rest;
-            let splits = params.split(sAmp);
-            if (splits.count() > 1) {
-              params = ëval(bnd, splits.rest.head.head);
-              params = params.conj(splits.first.mapEval(bnd));
-            } else {
-              params = params.mapEval(bnd);
+            if (xpr.rest) {
+              params = xpr.rest;
+              let splits = params.split(sAmp);
+              if (splits.count() > 1) {
+                params = ëval(bnd, splits.rest.head.head);
+                params = params.conj(splits.first.mapEval(bnd));
+              } else {
+                params = params.mapEval(bnd);
+              }
             }
 
-            return q[s.fn](...params);
+            return fn(...params);
           } catch (e) {
             // console.log(s.fn);
             throw e;

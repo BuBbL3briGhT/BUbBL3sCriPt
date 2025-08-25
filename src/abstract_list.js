@@ -187,6 +187,19 @@ class AbstractList {
                .push(this.take(n));
   }
 
+  // Simple little method returns a peek and
+  // a pop. Use to skim the list, just to get
+  // the head and the tail broken up into a list
+  // which can the be destructed into locals
+  // or otherwise manipulated. There might be
+  // a more conventenal what to do this, but
+  // this is serving my purposes for the time begin.
+  // #LongLivePlop! ✨️
+  plop() {
+    return this.constructor.
+      make(this.peek(), this.pop());
+  }
+
   // include (value) {
   //   return this.find(value).?peek();
   // }

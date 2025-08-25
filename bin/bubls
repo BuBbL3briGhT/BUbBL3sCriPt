@@ -17,6 +17,10 @@ if (path === "-v" || path ==="--version") {
   process.exit();
 }
 
+const reqůire = getReqůireFor(process.cwd());
+const binding = Object.create(rootBinding);
+binding.reqůire = mkfn(o => reqůire(...o));
+
 if (path) {
 
   const fs = require('fs');
@@ -27,7 +31,7 @@ if (path) {
       return;
     }
     try {
-      bubls.eval(xoxo);
+      parse(xoxo, { file: path }).eval(binding);
     } catch (error) {
       console.log(error);
     }
@@ -42,10 +46,6 @@ if (path) {
     output: process.stdout
   });
 
-  const reqůire = getReqůireFor(process.cwd());
-  const binding = Object.create(rootBinding);
-  binding.reqůire = mkfn(o => reqůire(...o));
-
   function r3pL() {
     rl.question("%< ", (xoxo) => {
       try {
@@ -53,7 +53,6 @@ if (path) {
           rl.close();
           return;
         }
-        // let result = bubls.eval(xoxo);
         let result = parse(xoxo).eval(binding);
         if (result && result.toString) {
           // console.log(result);

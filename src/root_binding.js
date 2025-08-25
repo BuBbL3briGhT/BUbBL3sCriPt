@@ -9,15 +9,18 @@ const Range = require("./range");
 const LazyList = require("./lazy_list");
 const reqůire = require("./reqůire");
 const mkfn = require("./util/mkfn");
+ const consola = require("./consola");
 
 const starSymbol = Ṣymbol.for("*");
 
+consola.registro({starSymbol, consola});
+
 // A man walks into a bar. Bartender says
-// what'll you have?  The man says,
-// something strong,  my head is killing
+// what'll you have? The man says,
+// something strong, my head is killing
 // me. 🍸
 const rootBinding = {
-  console: console,
+  console, consola,
   // Js require
   ["reqūire"]: mkfn(o => require(...o)),
 
@@ -26,12 +29,7 @@ const rootBinding = {
 
   __dirname: __dirname,
 
-  muf: function([key,val]) {
-    return this[key.toString()]
-      = ëval(this, val);
-  },
-
-  muf: function(args) {
+  define: function(args) {
     let key = args.peek();
     let val = args.pop();
 
@@ -100,17 +98,6 @@ const rootBinding = {
     }
   },
 
-  // fn: function([caret, stic]) {
-  //   return new Fn(this, caret, stic);
-  // },
-  // fn: function(_) {
-  //   // console.log(_);
-  //   let binding = this;
-  //   let caret = _.peek();
-  //   let stic  = _.pop();
-  //   return new Fn(binding, caret, stic);
-  // },
-
   fn: function(args) {
     return new Fn(this, args.first.toList(), args.rest)
   },
@@ -157,8 +144,10 @@ const rootBinding = {
     alert(this.concat(msgs));
   },
 
-  expandmacro: function([m,n]) {
-    return ëval(this,m).expand(this, n);
+  expandmacro: function(list) {
+    const [head, tail] = list.plop();
+    const macro = ëval(this, head);
+    return macro.expand(tail);
   },
 
   loop: function([x,...xx]) {
@@ -212,10 +201,6 @@ const rootBinding = {
       }, {});
   }),
 
-  // obj: mkfn(function(list) {
-  //   return list.toObject();
-  // }),
-
   do: function(args) {
     return args.eval(this);
   },
@@ -224,19 +209,40 @@ const rootBinding = {
     return args.eval(this);
   }),
 
-  send: mkfn(function([a,b,...c]) {
-    if (b.key)
-      b = b.key;
-    if (c.length > 0) {
-      return a[b](...c);
-    } else
-      return a[b]();
-  }),
-  // get: mkfn(function(args) {
-  //    return args.reduce(
-  //       (a,b) => a ? a[b] : b);
+  // send: mkfn(function([a,b,...c]) {
+  //   if (b.key)
+  //     b = b.key;
+  //   if (c.length > 0) {
+  //     return a[b](...c);
+  //   } else
+  //     return a[b]();
   // }),
-  //
+
+  send: mkfn(function(list) {
+    let receipient, message, params;
+
+    [receipient, list] = list.plop();
+    [message, params] = list.plop();
+
+    // console.log("list", list);
+    // console.log("receipient", receipient);
+    // console.log("params", params);
+
+    if (message.key) message = message.key;
+
+    return receipient[message](...params);
+  }),
+
+  stop: function () {
+    // console.error("stopped");
+    // const obj = {};
+    // Error.captureStackTrace(obj, this.stop);
+    // console.log(obj.stack);
+    // console.log(this);
+    // console.log(this.__proto__);
+    process.exit();
+  },
+
   get: mkfn(function(yeahyeahyeahs) {
     // console.log(yeahyeahyeahs);
      return yeahyeahyeahs.reduce(
@@ -301,7 +307,9 @@ const rootBinding = {
   })
 };
 
-// Alias muf to 🫧
-rootBinding["🫧"] = rootBinding.muf;
+// Aliases
+rootBinding.muf = rootBinding.define;
+rootBinding.def = rootBinding.define;
+rootBinding["🫧"] = rootBinding.define;
 
 module.exports = { rootBinding, mkfn };
