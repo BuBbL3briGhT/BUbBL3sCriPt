@@ -52,7 +52,9 @@ function ëval(bnd, xpr) {
             if (resolvedRoot === undefined) {
               // consola.registro(s + " is undefined");
               // const error = new BubbleScriptError(s + ` is undefined. file: ${s.file}, line: ${s.line}, column: ${s.column}`);
-              const error = new BubbleScriptError(s + ` is not defined.`);
+              const error = new
+                BubbleScriptError(s +
+                  ` is not defined.`);
               error.stack = "";
               throw error;
             }
