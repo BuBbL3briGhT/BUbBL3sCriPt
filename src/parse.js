@@ -100,6 +100,7 @@ class Parser {
 
   parse(token) {
     let o;
+    const { line, column, file } = token;
 
     switch (token.type) {
       case TOK_NUMBER:
@@ -136,6 +137,9 @@ class Parser {
       default:
         throw new TokenNoMatchError(token);
     }
+
+    if (o)
+      Object.assign(o, { line, column, file });
 
     return o;
   }

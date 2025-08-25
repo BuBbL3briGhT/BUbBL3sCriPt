@@ -40,7 +40,6 @@ function ëval(bnd, xpr) {
           else
             return xpr;
         } else /* send */ {
-
           // console.log("xpr", xpr);
           // call pattern 2
           // x.x or x.x.x or x.x...
