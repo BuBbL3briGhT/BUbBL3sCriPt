@@ -27,7 +27,6 @@ puts (++ 5)
 
 puts map
 
-
 (stop)
 puts puts
 puts +
