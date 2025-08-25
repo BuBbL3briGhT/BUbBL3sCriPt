@@ -47,10 +47,12 @@ function ëval(bnd, xpr) {
             // call pattern 2
             // x.x or x.x.x or x.x...
             let params;
+            // throw new Error("test error");
             let resolvedRoot = s.resolveRoot(bnd)
             if (resolvedRoot === undefined) {
               // consola.registro(s + " is undefined");
-              const error = new BubbleScriptError(s + ` is undefined. file: ${s.file}, line: ${s.line}, column: ${s.column}`);
+              // const error = new BubbleScriptError(s + ` is undefined. file: ${s.file}, line: ${s.line}, column: ${s.column}`);
+              const error = new BubbleScriptError(s + ` is undefined.`);
               error.stack = "";
               throw error;
             }
@@ -99,7 +101,8 @@ function ëval(bnd, xpr) {
   } catch (error) {
     if (error instanceof BubbleScriptError) {
       const { file, line, column } = xpr;
-      const trace = `   at (${file}:${line}:${column})`;
+      // const trace = `   at ${fn} (${file}:${line}:${column})`;
+      const trace = `   at ${file}:${line}:${column}`;
       if (error.stack !== "")
         error.stack += "\n";
       error.stack += trace;

@@ -13,7 +13,7 @@ const mkfn = require("./util/mkfn");
 
 const starSymbol = Ṣymbol.for("*");
 
-consola.registro({starSymbol, consola});
+// consola.registro({starSymbol, consola});
 
 // A man walks into a bar. Bartender says
 // what'll you have? The man says,
