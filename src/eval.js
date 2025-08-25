@@ -69,7 +69,7 @@ function ëval(bnd, xpr) {
                 }
               }
 
-              return fn(...params);
+              return resolvedRoot[s.fn](...params);
             } catch (e) {
               // console.log(s.fn);
               throw e;

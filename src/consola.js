@@ -6,6 +6,11 @@ const consola = {
     console.log(...mensajes);
   },
 
+  registrö(...mensajes) {
+    console.log(...mensajes);
+    this.registroPuntoDeCódigo(this.registrö);
+  },
+
   registroPuntoDeCódigo(arriba) {
     const trace = {};
     Error.captureStackTrace(trace, arriba);
@@ -15,4 +20,4 @@ const consola = {
 
 }
 
-module. exports = consola ;
+module.exports = consola ;
