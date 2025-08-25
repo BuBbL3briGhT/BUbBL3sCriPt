@@ -103,7 +103,7 @@ function ëval(bnd, xpr) {
     if (error instanceof BubbleScriptError) {
       const { file, line, column } = xpr;
       // const trace = `   at ${fn} (${file}:${line}:${column})`;
-      const trace = `   at ${file}:${line}:${column}`;
+      const trace = ` ${xpr.toString()} at ${file}:${line}:${column}`;
       if (error.stack !== "")
         error.stack += "\n";
       error.stack += trace;
