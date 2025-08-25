@@ -21,8 +21,8 @@ events.on("init", function (bubls) {
 });
 
 // Evaluate Bubblescript
-function ėval(script) {
-  return parse(script).eval(rootBinding);
+function ėval(script, opts={}) {
+  return parse(script, opts).eval(rootBinding);
 }
 
 function ëval(bnd, xpr) {
@@ -56,7 +56,6 @@ function ëval(bnd, xpr) {
               error.stack = "";
               throw error;
             }
-            const fn = resolvedRoot[s.fn];
             try {
               if (xpr.rest) {
                 params = xpr.rest;
