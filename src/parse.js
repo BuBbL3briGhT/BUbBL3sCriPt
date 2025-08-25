@@ -138,8 +138,8 @@ class Parser {
         throw new TokenNoMatchError(token);
     }
 
-    if (o)
-      Object.assign(o, { line, column, file });
+    if (o) Object.assign(o,
+      { line, column, file });
 
     return o;
   }

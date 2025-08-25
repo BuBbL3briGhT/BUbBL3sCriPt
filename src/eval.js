@@ -47,7 +47,7 @@ function ëval(bnd, xpr) {
           let resolvedRoot = s.resolveRoot(bnd)
           if (resolvedRoot === undefined) {
             // consola.registro(s + " is undefined");
-            throw new TypeError(s + " is undefined.");
+            throw new TypeError(s + ` is undefined. file: ${s.file}, line: ${s.line}, column: ${s.column}`);
           }
           const fn = resolvedRoot[s.fn];
           try {
