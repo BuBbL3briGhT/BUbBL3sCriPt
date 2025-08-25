@@ -5,6 +5,8 @@
 #    bin/bubls myapp.🫧
 #
 
+(no.no)
+
 (consola.registro "Hola")
 
 (🫧 (toString o) (send o :toString))

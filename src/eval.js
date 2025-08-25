@@ -46,6 +46,8 @@ function ëval(bnd, xpr) {
           // x.x or x.x.x or x.x...
           let params;
           let resolvedRoot = s.resolveRoot(bnd)
+
+          const fn = resolvedRoot[s.fn];
           try {
             if (xpr.rest) {
               params = xpr.rest;
@@ -58,7 +60,7 @@ function ëval(bnd, xpr) {
               }
             }
 
-            return resolvedRoot[s.fn](...params);
+            return fn(...params);
           } catch (e) {
             // console.log(s.fn);
             throw e;
