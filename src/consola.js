@@ -2,30 +2,16 @@
 const consola = {
 
   registro(...mensajes) {
-    const trace = {};
-    Error.captureStackTrace(trace, this.registro);
-    const stackTrace = trace.stack.split("\n");
-    console.log(stackTrace[1]);
-    for(const mensaje of mensajes) {
-      switch (typeof mensaje) {
-        // case "object":
-        //   this.registroObjeto(objeto);
-        //   break;
-        default:
-          console.log(mensaje);
-      }
-    }
+    this.registroPuntoDeCódigo(this.registro);
+    console.log(...mensajes);
   },
 
-  registroObjeto(objeto) {
-    // for (const llave, valor in objeto) {
-    //   if (Object.hasOwn(objeto, llave)) {
-
-    //   }
-    // }
+  registroPuntoDeCódigo(arriba) {
+    const trace = {};
+    Error.captureStackTrace(trace, arriba);
+    const stackTrace = trace.stack.split("\n");
+    console.log(stackTrace[1]);
   }
-
-
 }
 
 module. exports = consola ;
