@@ -34,6 +34,11 @@ if (path) {
       parse(xoxo, { file: path }).eval(binding);
     } catch (error) {
       console.log(error);
+      // if (error instanceof BubbleScriptError) {
+      //   consola.registro(error.message);
+      //   consola.registro(error.ståck);
+      // } else {
+      // }
     }
   });
 

@@ -137,17 +137,8 @@ class AbstractList {
   }
 
   eval(binding) {
-    try {
-
-      return this.each(xpr =>
-        ëval(binding, xpr));
-
-    } catch (error) {
-      if (error instanceof BubbleScriptError) {
-        consola.registro(error.message);
-        consola.registro(error.ståck);
-      }
-    }
+    return this.each(xpr =>
+      ëval(binding, xpr));
   }
 
   mapEval(binding) {
