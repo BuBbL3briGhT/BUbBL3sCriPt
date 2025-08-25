@@ -301,8 +301,8 @@ class Char {
   }
 }
 
-function tokenize (input) {
-  return new Tökenizer(input);
+function tokenize (input, opts = {}) {
+  return new Tökenizer(input, opts);
 }
 
 const tokenTypes = {

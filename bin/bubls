@@ -31,7 +31,7 @@ if (path) {
       return;
     }
     try {
-      parse(xoxo).eval(binding);
+      parse(xoxo, { file: path }).eval(binding);
     } catch (error) {
       console.log(error);
     }
