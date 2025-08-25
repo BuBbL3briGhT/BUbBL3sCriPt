@@ -9,6 +9,7 @@ const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const LazyList = require("./lazy_list");
 const events = require("./events");
+const consola = require("./consola");
 
 const sAmp = Ṣymbol.for("&");
 
@@ -24,6 +25,7 @@ function ėval(script) {
 }
 
 function ëval(bnd, xpr) {
+
   try {
     switch (xpr && xpr.constructor) {
       case Ṣymbol:
@@ -93,7 +95,7 @@ function ëval(bnd, xpr) {
     }
   } catch (error) {
     const { file, line, column } = xpr;
-    console.log({ file, line, column });
+    consola.registro({xpr}, `(${file}:${line}:${column})`);
     throw error;
   }
 };
