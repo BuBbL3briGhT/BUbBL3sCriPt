@@ -2,8 +2,23 @@
 const consola = {
 
   registro(objeto) {
-    console.log(objeto);
+    switch (typeof objeto) {
+      // case "object":
+      //   this.registroObjeto(objeto);
+      //   break;
+      default:
+        console.log(objeto);
+    }
+  },
+
+  registroObjeto(objeto) {
+    // for (const llave, valor in objeto) {
+    //   if (Object.hasOwn(objeto, llave)) {
+
+    //   }
+    // }
   }
+
 
 }
 
