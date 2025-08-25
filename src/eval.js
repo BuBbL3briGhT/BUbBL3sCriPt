@@ -44,18 +44,18 @@ function ëval(bnd, xpr) {
           // console.log("xpr", xpr);
           // call pattern 2
           // x.x or x.x.x or x.x...
+          let params;
           let resolvedRoot = s.resolveRoot(bnd)
-          if (!xpr.rest) {
-            return resolvedRoot[s.fn]()
-          }
           try {
-            let params = xpr.rest;
-            let splits = params.split(sAmp);
-            if (splits.count() > 1) {
-              params = ëval(bnd, splits.rest.head.head);
-              params = params.conj(splits.first.mapEval(bnd));
-            } else {
-              params = params.mapEval(bnd);
+            if (xpr.rest) {
+              params = xpr.rest;
+              let splits = params.split(sAmp);
+              if (splits.count() > 1) {
+                params = ëval(bnd, splits.rest.head.head);
+                params = params.conj(splits.first.mapEval(bnd));
+              } else {
+                params = params.mapEval(bnd);
+              }
             }
 
             return resolvedRoot[s.fn](...params);
