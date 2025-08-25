@@ -6,7 +6,7 @@ const consola = {
     Error.captureStackTrace(trace, this.registro);
     const stackTrace = trace.stack.split("\n");
     console.log(stackTrace[1]);
-    for(const mensaje in mensajes) {
+    for(const mensaje of mensajes) {
       switch (typeof mensaje) {
         // case "object":
         //   this.registroObjeto(objeto);
