@@ -46,7 +46,10 @@ function ëval(bnd, xpr) {
           // x.x or x.x.x or x.x...
           let params;
           let resolvedRoot = s.resolveRoot(bnd)
-
+          if (resolvedRoot === undefined) {
+            // consola.registro(s + " is undefined");
+            throw new TypeError(s + " is undefined.");
+          }
           const fn = resolvedRoot[s.fn];
           try {
             if (xpr.rest) {
