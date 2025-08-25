@@ -9,6 +9,7 @@ const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const LazyList = require("./lazy_list");
 const events = require("./events");
+const { BubbleScriptError } = require("./errors");
 const consola = require("./consola");
 
 const sAmp = Ṣymbol.for("&");
@@ -49,7 +50,9 @@ function ëval(bnd, xpr) {
             let resolvedRoot = s.resolveRoot(bnd)
             if (resolvedRoot === undefined) {
               // consola.registro(s + " is undefined");
-              throw new TypeError(s + ` is undefined. file: ${s.file}, line: ${s.line}, column: ${s.column}`);
+              const error = new BubbleScriptError(s + ` is undefined. file: ${s.file}, line: ${s.line}, column: ${s.column}`);
+              error.stack = "";
+              throw error;
             }
             const fn = resolvedRoot[s.fn];
             try {
@@ -94,9 +97,17 @@ function ëval(bnd, xpr) {
         return xpr;
     }
   } catch (error) {
-    const { file, line, column } = xpr;
-    consola.registro({xpr}, `(${file}:${line}:${column})`);
+    if (error instanceof BubbleScriptError) {
+      const { file, line, column } = xpr;
+      const trace = `   at (${file}:${line}:${column})`;
+      if (error.stack !== "")
+        error.stack += "\n";
+      error.stack += trace;
+    }
     throw error;
+    // const { file, line, column } = xpr;
+    // consola.registro({xpr}, `(${file}:${line}:${column})`);
+    // throw error;
   }
 };
 

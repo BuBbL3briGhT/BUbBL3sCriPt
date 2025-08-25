@@ -7,6 +7,8 @@ const { rootBinding } = require('../src/root_binding');
 const { getReqůireFor } = require("../src/reqůire");
 const mkfn = require("../src/util/mkfn");
 const { parse } = require("../src/parse");
+const { BubbleScriptError } = require("../src/errors");
+const consola = require("../src/consola");
 
 let path = process.argv[2];
 
@@ -33,11 +35,11 @@ if (path) {
     try {
       parse(xoxo, { file: path }).eval(binding);
     } catch (error) {
-      console.log(error);
       // if (error instanceof BubbleScriptError) {
       //   consola.registro(error.message);
-      //   consola.registro(error.ståck);
+      //   consola.registro(error.stack);
       // } else {
+        console.log(error);
       // }
     }
   });

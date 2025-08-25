@@ -30,8 +30,15 @@ class NoMatchError extends ParsingError {
   }
 }
 
+class BubbleScriptError extends Error {
+  constructor(message) {
+    super(message);
+  }
+}
+
 module.exports = {
   TokenNoMatchError,
   ParsingError,
-  NoMatchError
+  NoMatchError,
+  BubbleScriptError
 };
