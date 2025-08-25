@@ -8,6 +8,9 @@
 (consola.registro "Hola")
 
 (no)
+
+const no { no: (fn [] (consola.log "Hola Cola") }
+
 (no.no)
 
 
