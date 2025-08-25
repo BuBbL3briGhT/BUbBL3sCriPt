@@ -44,9 +44,9 @@ function ëval(bnd, xpr) {
           // console.log("xpr", xpr);
           // call pattern 2
           // x.x or x.x.x or x.x...
-          let q = s.resolveRoot(bnd)
+          let resolvedRoot = s.resolveRoot(bnd)
           if (!xpr.rest) {
-            return q[s.fn]()
+            return resolvedRoot[s.fn]()
           }
           try {
             let params = xpr.rest;
@@ -58,7 +58,7 @@ function ëval(bnd, xpr) {
               params = params.mapEval(bnd);
             }
 
-            return q[s.fn](...params);
+            return resolvedRoot[s.fn](...params);
           } catch (e) {
             // console.log(s.fn);
             throw e;

@@ -12,6 +12,7 @@ const consola = {
     const stackTrace = trace.stack.split("\n");
     console.log(stackTrace[1]);
   }
+
 }
 
 module. exports = consola ;
