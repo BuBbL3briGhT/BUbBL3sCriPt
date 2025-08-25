@@ -9,6 +9,8 @@
 
 (🫧 (toString o) (send o :toString))
 
+(consola.registro {toString})
+
 (🫧 (++ n) (+ n 1))
 
 /* puts ++ */
