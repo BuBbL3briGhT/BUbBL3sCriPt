@@ -1,17 +1,19 @@
 
 const consola = {
 
-  registro(objeto) {
+  registro(...mensajes) {
     const trace = {};
     Error.captureStackTrace(trace, this.registro);
     const stackTrace = trace.stack.split("\n");
     console.log(stackTrace[1]);
-    switch (typeof objeto) {
-      // case "object":
-      //   this.registroObjeto(objeto);
-      //   break;
-      default:
-        console.log(objeto);
+    for(const mensaje in mensajes) {
+      switch (typeof mensaje) {
+        // case "object":
+        //   this.registroObjeto(objeto);
+        //   break;
+        default:
+          console.log(mensaje);
+      }
     }
   },
 
