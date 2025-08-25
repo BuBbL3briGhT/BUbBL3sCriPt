@@ -9,6 +9,7 @@ const Range = require("./range");
 const LazyList = require("./lazy_list");
 const reqůire = require("./reqůire");
 const mkfn = require("./util/mkfn");
+ const consola = require("./consola");
 
 const starSymbol = Ṣymbol.for("*");
 
@@ -17,7 +18,7 @@ const starSymbol = Ṣymbol.for("*");
 // something strong, my head is killing
 // me. 🍸
 const rootBinding = {
-  console: console,
+  console, consola,
   // Js require
   ["reqūire"]: mkfn(o => require(...o)),
 
