@@ -35,12 +35,12 @@ if (path) {
     try {
       parse(xoxo, { file: path }).eval(binding);
     } catch (error) {
-      // if (error instanceof BubbleScriptError) {
-      //   consola.registro(error.message);
-      //   consola.registro(error.stack);
-      // } else {
+      if (error instanceof BubbleScriptError) {
+        consola.registro(error.message);
+        consola.registro(error.stack);
+      } else {
         console.log(error);
-      // }
+      }
     }
   });
 

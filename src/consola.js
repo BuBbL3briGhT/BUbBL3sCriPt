@@ -2,7 +2,7 @@
 const consola = {
 
   registro(...mensajes) {
-    this.registroPuntoDeCódigo(this.registro);
+    // this.registroPuntoDeCódigo(this.registro);
     console.log(...mensajes);
   },
 
