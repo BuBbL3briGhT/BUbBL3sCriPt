@@ -30,6 +30,8 @@ function ëval(binding, expression) {
   return expression.eval(binding);
 }
 
+module.exports = { ėval, ëval };
+
 // function ëval(binding, expression) {
 //   switch (expression.constructor) {
 //     case Ṣymbol:
@@ -234,4 +236,3 @@ function ëval(binding, expression) {
 //   }
 // }
 
-module.exports = { ėval, ëval };
