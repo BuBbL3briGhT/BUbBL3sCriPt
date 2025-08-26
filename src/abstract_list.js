@@ -136,14 +136,14 @@ class AbstractList {
     return this.pop().each(fn);
   }
 
-  eval(binding) {
+  evalEach(binding) {
     return this.each(xpr =>
-      ëval(binding, xpr));
+      xpr.eval(binding));
   }
 
   mapEval(binding) {
     return this.map(xpr =>
-      ëval(binding, xpr));
+      xpr.eval(binding));
   }
 
   find(value) {
