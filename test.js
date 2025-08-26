@@ -7,4 +7,7 @@ function hola() {
   console.log(this);
 };
 
-hola();
+// hola();
+
+console.log(global);
+console.log(this.global);
