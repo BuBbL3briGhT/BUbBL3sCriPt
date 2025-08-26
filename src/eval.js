@@ -12,30 +12,13 @@
 // const { BubbleScriptError } = require("./errors");
 // const consola = require("./consola");
 
-const sAmp = Ṣymbol.for("&");
+// const sAmp = Ṣymbol.for("&");
 
-let rootBinding;
+// let rootBinding;
 
-events.on("init", function (bubls) {
-  rootBinding = bubls.rootBinding;
-});
-
-// const bi = {
-//   // Dynamically load root binding.
-//   get rootBinding() {
-//     Object.defineProperty(this, "rootBinding", {
-//       value: require("./root_binding")
-//     });
-//   }
-// }
-
-Object.defineProperty(this, "rootBinding", {
-  get: function () {
-    Object.defineProperty(this, "rootBinding", {
-      value: require("./root_binding");
-    });
-  }
-});
+// events.on("init", function (bubls) {
+//   rootBinding = bubls.rootBinding;
+// });
 
 function memoize(object, property, fn) {
   Object.defineProperty(object, property, {
@@ -47,12 +30,34 @@ function memoize(object, property, fn) {
   });
 }
 
-memoize(this, "rootBinding", function() {
-  return require("./root_binding");
-});
+memoize(this, "rootBinding",
+  () => require("./root_binding"));
 
 
-memoize(this, "rootBinding", () => require("./root_binding"));
+// const bi = {
+//   // Dynamically load root binding.
+//   get rootBinding() {
+//     Object.defineProperty(this, "rootBinding", {
+//       value: require("./root_binding")
+//     });
+//   }
+// }
+
+// Object.defineProperty(this, "rootBinding", {
+//   get: function () {
+//     Object.defineProperty(this, "rootBinding", {
+//       value: require("./root_binding");
+//     });
+//   }
+// });
+
+// memoize(this, "rootBinding", function() {
+//   return require("./root_binding");
+// });
+
+
+// memoize(this, "rootBinding", () => require("./root_binding"));
+
 
 // function getRootBinding() {
 //   return rootBinding ||= require("./root_binding");
@@ -69,8 +74,6 @@ function ėval(script, opts={}) {
   return parse(script, opts).
     evalEach(rootBinding);
 }
-
-
 
 
 function ëval(binding, expression) {
