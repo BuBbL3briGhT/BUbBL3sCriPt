@@ -6,7 +6,8 @@ console.log(this.hello);
 
 function hola() {
   // console.log(this);
-  console.log(global);
+  // console.log(global);
+  console.log(global === this);
 };
 
 hola();
