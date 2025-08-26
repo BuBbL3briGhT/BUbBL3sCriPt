@@ -117,10 +117,14 @@ function ëval(bnd, xpr) {
 //   }
 // }
 
-function evalList(bnd, list) {
-  let [head, tail] = list.plop()
+function evalList(binding, list, callStack=List.make()) {
+  let [head, tail] = list.plop();
   switch (head.constructor) {
     case Ṣymbol:
+      const headValue = ëval(binding, head);
+    case List:
+      return ëval(binding,
+        tail.push(ëval(binding, head)))
 
   }
   if (head instanceof Ṣymbol) {
