@@ -119,10 +119,9 @@ function ëval(bnd, xpr) {
 
 function evalList(binding, list, callStack=List.make()) {
   let [head, tail] = list.plop();
+  // callStack = callStack.push({ fn: head }
   switch (head.constructor) {
     case Ṣymbol:
-      const headValue = ëval(binding, head);
-      return ëval(binding, tail.push(headValue));
     case List:
       const headValue = ëval(binding, head);
       return ëval(binding, tail.push(headValue));
