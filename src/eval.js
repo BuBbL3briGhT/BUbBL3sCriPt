@@ -28,7 +28,7 @@ function ėval(script, opts={}) {
 function ëval(binding, expression) {
   switch (expression.constructor) {
     case Ṣymbol:
-      return xpr.resolve(bnd)
+      return expression.eval(binding)
     case List:
       return evalList(bnd, xpr);
     case Vector:
