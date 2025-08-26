@@ -22,7 +22,7 @@ events.on("init", function (bubls) {
 
 // Evaluate Bubblescript
 function ėval(script, opts={}) {
-  return parse(script, opts).eval(rootBinding);
+  return parse(script, opts).evalEach(rootBinding);
 }
 
 function ëval(binding, expression) {
