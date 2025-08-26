@@ -102,7 +102,7 @@ class List extends AbstractList {
         const headValue = head.eval(binding);
         return tail.push(headValue).eval();
       case List:
-        const headValue = ëvalList(binding, head);
+        const headValue = head.eval(binding);
         return ëvalList(binding, tail.push(headValue));
       case Fn:
         return head.invoke(tail.mapEval(binding));
