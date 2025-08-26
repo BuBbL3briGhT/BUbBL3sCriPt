@@ -25,8 +25,8 @@ function ėval(script, opts={}) {
   return parse(script, opts).eval(rootBinding);
 }
 
-function ëval(bnd, xpr) {
-  switch (xpr && xpr.constructor) {
+function ëval(binding, expression) {
+  switch (expression.constructor) {
     case Ṣymbol:
       return xpr.resolve(bnd)
     case List:
