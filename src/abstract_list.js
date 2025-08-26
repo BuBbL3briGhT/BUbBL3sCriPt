@@ -138,13 +138,14 @@ class AbstractList {
 
   evalEach(binding) {
     return this.each(xpr => xpr.eval(binding));
-    return this.each(ëval.bind(null, binding));
   }
 
   mapEval(binding) {
     return this.map(xpr => xpr.eval(binding));
-    return this.each(ëval.bind(null, binding));
-    return this.each(curry(ëval, binding));
+  }
+
+  eval(binding) {
+    // List evaluation logic.
   }
 
   find(value) {
