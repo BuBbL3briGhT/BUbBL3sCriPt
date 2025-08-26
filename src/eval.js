@@ -20,6 +20,19 @@ events.on("init", function (bubls) {
   rootBinding = bubls.rootBinding;
 });
 
+function getRootBinding() {
+  return rootBinding ||= require("./root_binding");
+}
+
+
+this...
+
+function getRootBinding() {
+  const rootBinding = require("./root_binding");
+  getRootBinding = function () { return rootBinding };
+  return rootBinding;
+}
+
 // Evaluate Bubblescript
 function ėval(script, opts={}) {
   return parse(script, opts).
