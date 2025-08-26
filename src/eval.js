@@ -35,11 +35,24 @@ Object.defineProperty(this, "rootBinding", {
       value: require("./root_binding");
     });
   }
+});
+
+function memoize(object, property, fn) {
+  Object.defineProperty(object, property, {
+    get: function () {
+      Object.defineProperty(object, property, {
+        value: fn()
+      });
+    }
+  });
 }
 
 memoize(this, "rootBinding", function() {
-  require("./root_binding");
+  return require("./root_binding");
 });
+
+
+memoize(this, "rootBinding", () => require("./root_binding"));
 
 // function getRootBinding() {
 //   return rootBinding ||= require("./root_binding");
