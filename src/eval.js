@@ -117,6 +117,21 @@ function ëval(bnd, xpr) {
 //   }
 // }
 
+function ēval(binding, expression) {
+  switch (expression.constructor) {
+    case Ṣymbol:
+      return expression.eval(binding);
+    case List:
+      return expression.eval(binding);
+    case Fn:
+      return expression.eval(binding);
+    case Macro:
+      return expression.eval(binding);
+    case Function:
+      return expression.call(binding);
+  }
+}
+
 function evalList(binding, list, callStack=List.make()) {
   const [head, tail] = list.plop();
   const { file, line, column } = list;
