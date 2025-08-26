@@ -26,36 +26,53 @@ function ėval(script, opts={}) {
 }
 
 function ëval(bnd, xpr) {
-  try {
-    switch (xpr && xpr.constructor) {
-      case Ṣymbol:
-        return xpr.resolve(bnd)
-      case List:
-        return evalList(bnd, xpr);
-      case Vector:
-        return xpr.mapEval(bnd);
-      case ObjectMap:
-        return xpr.createObject(bnd);
-      case Bubble:
-        return xpr.pop();
-      default:
-        return xpr;
-    }
-  } catch (error) {
-    if (error instanceof BubbleScriptError) {
-      const { file, line, column } = xpr;
-      // const trace = `   at ${fn} (${file}:${line}:${column})`;
-      const trace = ` ${xpr.toString()} at ${file}:${line}:${column}`;
-      if (error.stack !== "")
-        error.stack += "\n";
-      error.stack += trace;
-    }
-    throw error;
-    // const { file, line, column } = xpr;
-    // consola.registro({xpr}, `(${file}:${line}:${column})`);
-    // throw error;
+  switch (xpr && xpr.constructor) {
+    case Ṣymbol:
+      return xpr.resolve(bnd)
+    case List:
+      return evalList(bnd, xpr);
+    case Vector:
+      return xpr.mapEval(bnd);
+    case ObjectMap:
+      return xpr.createObject(bnd);
+    case Bubble:
+      return xpr.pop();
+    default:
+      return xpr;
   }
 };
+
+// function ëval(bnd, xpr) {
+//   try {
+//     switch (xpr && xpr.constructor) {
+//       case Ṣymbol:
+//         return xpr.resolve(bnd)
+//       case List:
+//         return evalList(bnd, xpr);
+//       case Vector:
+//         return xpr.mapEval(bnd);
+//       case ObjectMap:
+//         return xpr.createObject(bnd);
+//       case Bubble:
+//         return xpr.pop();
+//       default:
+//         return xpr;
+//     }
+//   } catch (error) {
+//     if (error instanceof BubbleScriptError) {
+//       const { file, line, column } = xpr;
+//       // const trace = `   at ${fn} (${file}:${line}:${column})`;
+//       const trace = ` ${xpr.toString()} at ${file}:${line}:${column}`;
+//       if (error.stack !== "")
+//         error.stack += "\n";
+//       error.stack += trace;
+//     }
+//     throw error;
+//     // const { file, line, column } = xpr;
+//     // consola.registro({xpr}, `(${file}:${line}:${column})`);
+//     // throw error;
+//   }
+// };
 
 // function evalList(bnd, list) {
 //   let s = list.peek();
