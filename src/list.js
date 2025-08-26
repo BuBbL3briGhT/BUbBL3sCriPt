@@ -95,7 +95,9 @@ class List extends AbstractList {
 
   eval(binding) {
     // List evaluation logic.
-     const [head, tail] = this.plop();
+    const [head, tail] = this.plop();
+    const headValue = head.eval(binding);
+    return headValue.eval(tail);
 
     switch (head.constructor) {
       case Ṣymbol:
