@@ -2,6 +2,8 @@ console.log(this);
 
 this.hello = "Bonjure";
 
-// console.log(hello);
+function hola() {
+  console.log(this.hello);
+};
 
-console.log(this.hello);
+hola();
