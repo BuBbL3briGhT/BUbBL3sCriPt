@@ -122,9 +122,10 @@ function evalList(binding, list, callStack=List.make()) {
   switch (head.constructor) {
     case Ṣymbol:
       const headValue = ëval(binding, head);
+      return ëval(binding, tail.push(headValue));
     case List:
-      return ëval(binding,
-        tail.push(ëval(binding, head)))
+      const headValue = ëval(binding, head);
+      return ëval(binding, tail.push(headValue));
 
   }
   if (head instanceof Ṣymbol) {
