@@ -57,9 +57,69 @@ function ëval(bnd, xpr) {
   }
 };
 
+// function evalList(bnd, list) {
+//   let s = list.peek();
+//   if (s instanceof Ṣymbol) {
+//     if (s.callPattern == 1) {
+//       //  x or x/x or x.x/x
+//       let q = ëval(bnd, s);
+//       if (q != s)
+//         return ëval(bnd,
+//           list.pop().push(q));
+//       else
+//         return list;
+//     } else /* send */ {
+//       // console.log("list", xpr);
+//       // call pattern 2
+//       // x.x or x.x.x or x.x...
+//       let params;
+//       // throw new Error("test error");
+//       let resolvedRoot = s.resolveRoot(bnd)
+//       if (resolvedRoot === undefined) {
+//         // consola.registro(s + " is undefined");
+//         // const error = new BubbleScriptError(s + ` is undefined. file: ${s.file}, line: ${s.line}, column: ${s.column}`);
+//         const error = new
+//           BubbleScriptError(s +
+//             ` is not defined.`);
+//         error.stack = "";
+//         throw error;
+//       }
+//       try {
+//         if (list.rest) {
+//           params = list.rest;
+//           let splits = params.split(sAmp);
+//           if (splits.count() > 1) {
+//             params = ëval(bnd, splits.rest.head.head);
+//             params = params.conj(splits.first.mapEval(bnd));
+//           } else {
+//             params = params.mapEval(bnd);
+//           }
+//         }
+
+//         return resolvedRoot[s.fn](...params);
+//       } catch (e) {
+//         // console.log(s.fn);
+//         throw e;
+//       }
+//     }
+//   } else if (s instanceof List) {
+//     return ëval(bnd,
+//       list.pop().push(ëval(bnd, s)))
+//   } else if (s instanceof Fn) {
+//     return s.invoke(list.pop().mapEval(bnd));
+//   } else if (s instanceof Function) {
+//     return s.call(bnd, list.pop());
+//   } else if (s instanceof Macro) {
+//     let expanded = s.expand(list.pop());
+//     throw new MacroExpanded(expanded);
+//   } else {
+//     return undefined;
+//   }
+// }
+
 function evalList(bnd, list) {
-  let s = list.peek();
-  if (s instanceof Ṣymbol) {
+  let [head, tail] = list.plop()
+  if (head instanceof Ṣymbol) {
     if (s.callPattern == 1) {
       //  x or x/x or x.x/x
       let q = ëval(bnd, s);
