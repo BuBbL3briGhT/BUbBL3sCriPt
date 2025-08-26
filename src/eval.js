@@ -126,6 +126,8 @@ function evalList(binding, list, callStack=List.make()) {
     case List:
       const headValue = ëval(binding, head);
       return ëval(binding, tail.push(headValue));
+    case Fn:
+      return s.invoke(tail.mapEval(bnd));
 
   }
   if (head instanceof Ṣymbol) {
