@@ -26,21 +26,25 @@ function ėval(script, opts={}) {
 }
 
 function ëval(binding, expression) {
-  switch (expression.constructor) {
-    case Ṣymbol:
-      return expression.eval(binding)
-    case List:
-      return expression.eval(binding)
-    case Vector:
-      return xpr.mapEval(bnd);
-    case ObjectMap:
-      return xpr.createObject(bnd);
-    case Bubble:
-      return xpr.pop();
-    default:
-      return xpr;
-  }
-};
+  return expression.eval(binding);
+}
+
+// function ëval(binding, expression) {
+//   switch (expression.constructor) {
+//     case Ṣymbol:
+//       return expression.eval(binding)
+//     case List:
+//       return expression.eval(binding)
+//     case Vector:
+//       return xpr.mapEval(bnd);
+//     case ObjectMap:
+//       return xpr.createObject(bnd);
+//     case Bubble:
+//       return xpr.pop();
+//     default:
+//       return xpr;
+//   }
+// };
 
 // function ëval(bnd, xpr) {
 //   try {
