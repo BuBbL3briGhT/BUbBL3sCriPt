@@ -30,7 +30,7 @@ function ëval(binding, expression) {
     case Ṣymbol:
       return expression.eval(binding)
     case List:
-      return evalList(bnd, xpr);
+      return expression.eval(binding)
     case Vector:
       return xpr.mapEval(bnd);
     case ObjectMap:
