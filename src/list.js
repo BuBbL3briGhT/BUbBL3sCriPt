@@ -95,6 +95,25 @@ class List extends AbstractList {
 
   eval(binding) {
     // List evaluation logic.
+     const [head, tail] = this.plop();
+
+    switch (head.constructor) {
+      case Ṣymbol:
+        const headValue = head.eval(binding);
+        return tail.push(headValue).eval();
+      case List:
+        const headValue = ëvalList(binding, head);
+        return ëvalList(binding, tail.push(headValue));
+      case Fn:
+        return head.invoke(tail.mapEval(binding));
+      case Function:
+        return head.call(binding, tail);
+      case Macro:
+        const expanded = head.expand(tail);
+        throw new MacroExpanded(expanded);
+      default:
+        return undefined;
+    }
   }
 
   each(fn) {
