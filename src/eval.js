@@ -120,12 +120,15 @@ function ëval(bnd, xpr) {
 function evalList(binding, list, callStack=List.make()) {
   const [head, tail] = list.plop();
   const { file, line, column } = list;
-  callStack = callStack.push({ head, file, line, column });
+
+  callStack = callStack.push({
+    head, file, line, column
+  });
 
   switch (head.constructor) {
     case Ṣymbol:
-      const headValue = head.resolve(binding);
-      return ëvalList(binding, tail.push(headValue));
+      const headValue = head.eval(binding);
+      return tail.push(headValue).eval();
     case List:
       const headValue = ëvalList(binding, head);
       return ëvalList(binding, tail.push(headValue));
