@@ -144,10 +144,6 @@ class AbstractList {
     return this.map(xpr => xpr.eval(binding));
   }
 
-  eval(binding) {
-    // List evaluation logic.
-  }
-
   find(value) {
     if (this.isEmpty)
       return;

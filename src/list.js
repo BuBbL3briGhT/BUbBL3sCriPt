@@ -93,6 +93,9 @@ class List extends AbstractList {
       b.push(that.peek()));
   }
 
+  eval(binding) {
+    // List evaluation logic.
+  }
 
   each(fn) {
     let result;
