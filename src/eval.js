@@ -37,6 +37,10 @@ Object.defineProperty(this, "rootBinding", {
   }
 }
 
+memoize(this, "rootBinding", function() {
+  require("./root_binding");
+});
+
 // function getRootBinding() {
 //   return rootBinding ||= require("./root_binding");
 // }
