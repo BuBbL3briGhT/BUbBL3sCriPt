@@ -119,8 +119,12 @@ function ëval(bnd, xpr) {
 
 function evalList(bnd, list) {
   let [head, tail] = list.plop()
+  switch (head.constructor) {
+    case Ṣymbol:
+
+  }
   if (head instanceof Ṣymbol) {
-    if (s.callPattern == 1) {
+    if (head.callPattern == 1) {
       //  x or x/x or x.x/x
       let q = ëval(bnd, s);
       if (q != s)
