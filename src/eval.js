@@ -118,13 +118,17 @@ function ëval(bnd, xpr) {
 // }
 
 function evalList(binding, list, callStack=List.make()) {
-  let [head, tail] = list.plop();
-  // callStack = callStack.push({ fn: head }
+  const [head, tail] = list.plop();
+  const { file, line, column } = list;
+  callStack = callStack.push({ head, file, line, column }
+
   switch (head.constructor) {
     case Ṣymbol:
-    case List:
       const headValue = ëval(binding, head);
-      return ëval(binding, tail.push(headValue));
+      return ëvalList(binding, tail.push(headValue));
+    case List:
+      const headValue = ëvalList(binding, head);
+      return ëvalList(binding, tail.push(headValue));
     case Fn:
       return s.invoke(tail.mapEval(bnd));
 
