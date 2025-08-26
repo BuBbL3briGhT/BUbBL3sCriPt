@@ -20,11 +20,19 @@ events.on("init", function (bubls) {
   rootBinding = bubls.rootBinding;
 });
 
-const binding = {
-  // Dynamically load root binding.
-  get rootBinding() {
+// const bi = {
+//   // Dynamically load root binding.
+//   get rootBinding() {
+//     Object.defineProperty(this, "rootBinding", {
+//       value: require("./root_binding")
+//     });
+//   }
+// }
+
+Object.defineProperty(this, "rootBinding", {
+  get: function () {
     Object.defineProperty(this, "rootBinding", {
-      value: require("./root_binding")
+      value: require("./root_binding");
     });
   }
 }
