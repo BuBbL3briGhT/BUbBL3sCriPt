@@ -20,24 +20,33 @@ events.on("init", function (bubls) {
   rootBinding = bubls.rootBinding;
 });
 
-function getRootBinding() {
-  return rootBinding ||= require("./root_binding");
+const binding = {
+  // Dynamically load root binding.
+  get rootBinding() {
+    Object.defineProperty(this, "rootBinding", {
+      value: require("./root_binding")
+    });
+  }
 }
 
+// function getRootBinding() {
+//   return rootBinding ||= require("./root_binding");
+// }
 
-this...
-
-function getRootBinding() {
-  const rootBinding = require("./root_binding");
-  getRootBinding = function () { return rootBinding };
-  return rootBinding;
-}
+// function getRootBinding() {
+//   const rootBinding = require("./root_binding");
+//   getRootBinding = function () { return rootBinding };
+//   return rootBinding;
+// }
 
 // Evaluate Bubblescript
 function ėval(script, opts={}) {
   return parse(script, opts).
     evalEach(rootBinding);
 }
+
+
+
 
 function ëval(binding, expression) {
   return expression.eval(binding);
