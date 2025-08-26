@@ -133,6 +133,12 @@ function evalList(binding, list, callStack=List.make()) {
       return head.invoke(tail.mapEval(binding));
     case Function:
       return head.call(binding, tail);
+    case Macro:
+      const expanded = head.expand(tail);
+      throw new MacroExpanded(expanded);
+    default:
+      return undefined;
+  }
 
 
   }
