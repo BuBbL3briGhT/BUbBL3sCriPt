@@ -33,6 +33,22 @@ function memoize(object, property, fn) {
 memoize(this, "rootBinding",
   () => require("./root_binding"));
 
+// Evaluate Bubblescript
+function ėval(script, opts={}) {
+  return parse(script, opts).
+    evalEach(this.rootBinding);
+}
+
+ėval = ėval.bind(this);
+
+module.exports = { ėval };
+
+// function ëval(binding, expression) {
+//   return expression.eval(binding);
+// }
+
+// module.exports = { ėval, ëval };
+
 
 // const bi = {
 //   // Dynamically load root binding.
@@ -69,18 +85,6 @@ memoize(this, "rootBinding",
 //   return rootBinding;
 // }
 
-// Evaluate Bubblescript
-function ėval(script, opts={}) {
-  return parse(script, opts).
-    evalEach(rootBinding);
-}
-
-
-function ëval(binding, expression) {
-  return expression.eval(binding);
-}
-
-module.exports = { ėval, ëval };
 
 // function ëval(binding, expression) {
 //   switch (expression.constructor) {
