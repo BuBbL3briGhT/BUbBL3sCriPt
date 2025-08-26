@@ -137,13 +137,11 @@ class AbstractList {
   }
 
   evalEach(binding) {
-    return this.each(expression =>
-      expression.eval(binding));
+    return this.each(xpr => xpr.eval(binding));
   }
 
   mapEval(binding) {
-    return this.map(expression =>
-      expression.eval(binding));
+    return this.map(xpr => xpr.eval(binding));
   }
 
   find(value) {
