@@ -120,11 +120,8 @@ function ëval(bnd, xpr) {
 function ēval(binding, expression) {
   switch (expression.constructor) {
     case Ṣymbol:
-      return expression.eval(binding);
     case List:
-      return expression.eval(binding);
     case Fn:
-      return expression.eval(binding);
     case Macro:
       return expression.eval(binding);
     case Function:
