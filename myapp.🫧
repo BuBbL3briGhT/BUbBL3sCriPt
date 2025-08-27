@@ -5,9 +5,21 @@
 #    bin/bubls myapp.🫧
 #
 
+(consola.registro "Hola")
+
+
+(🫧 (😄) (😊))
+
+🫧 (😊) (no.no)
+
+(😄)
+
+(no)
+
+const no { no: (fn [] (consola.log "Hola Cola") }
+
 (no.no)
 
-(consola.registro "Hola")
 
 (🫧 (toString o) (send o :toString))
 

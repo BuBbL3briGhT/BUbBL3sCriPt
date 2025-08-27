@@ -10,11 +10,19 @@ class Fn {
     this.name = opts.name;
   }
 
-  invoke(params) {
-    let binding = createBinding(this.binding,
-      this.params, params);
+  // invoke(params) {
+  //   let binding = createBinding(this.binding,
+  //     this.params, params);
 
-    return this.body.eval(binding);
+  //   return this.body.eval(binding);
+  // }
+
+  call(binding, params) {
+    const fnBinding = createBinding(this.binding,
+      this.params,
+      params.mapEval(binding));
+
+    return this.body.eval(fnBinding);
   }
 
   toString() {

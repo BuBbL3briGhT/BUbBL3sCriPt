@@ -2,8 +2,13 @@
 const consola = {
 
   registro(...mensajes) {
-    this.registroPuntoDeCódigo(this.registro);
+    // this.registroPuntoDeCódigo(this.registro);
     console.log(...mensajes);
+  },
+
+  registrö(...mensajes) {
+    console.log(...mensajes);
+    this.registroPuntoDeCódigo(this.registrö);
   },
 
   registroPuntoDeCódigo(arriba) {
@@ -15,4 +20,4 @@ const consola = {
 
 }
 
-module. exports = consola ;
+module.exports = consola ;

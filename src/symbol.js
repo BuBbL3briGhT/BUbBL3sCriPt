@@ -47,10 +47,10 @@ class Ṣymbol {
       }, bnd)
   }
 
-  resolve(bnd) {
-    var r = this.resolveRoot(bnd)
-    if (r) r = r[this.fn];
-    return r;
+  eval(binding) {
+    var root = this.resolveRoot(binding)
+    if (root) root = root[this.fn];
+    return root;
   }
 
   static for(key) {
