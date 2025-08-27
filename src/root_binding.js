@@ -130,13 +130,18 @@ const rootBinding = {
   }),
 
   if: specialForm(function([c,t,f]) {
-    return ëval(this,
-      ëval(this, c) ? t : f);
+    // consola.registro({ c, f, t });
+    const conditionValue =
+              evalExpression(this, c);
+    if (conditionValue)
+      return evalExpression(this, t);
+    else if (f)
+      return evalExpression(this, f);
   }),
 
   unless: specialForm(function([c,f,t]) {
-    return ëval(this,
-      ëval(this, c) ? t : f);
+    return evalExpression(this,
+      evalExpression(this, c) ? t : f);
   }),
 
   blert: specialForm(function(msgs) {
