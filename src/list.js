@@ -2,6 +2,7 @@ const AbstractList = require("./abstract_list");
 const events = require("./events");
 const Ṣymbol = require("./symbol");
 const Fn = require("./fn");
+const consola = require("./consola");
 
 let emptyList, MacroExpanded;
 
@@ -109,7 +110,7 @@ class List extends AbstractList {
 
   eval(binding) {
     // List evaluation logic.
-    console.log({head: this.head,
+    consola.registro({head: this.head,
        headValue: this.head.eval(binding) });
     return Fn.call(binding,
          this.head.eval(binding), this.tail);
