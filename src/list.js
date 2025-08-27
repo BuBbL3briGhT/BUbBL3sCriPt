@@ -99,6 +99,14 @@ class List extends AbstractList {
     return head.eval(binding)
                .call(binding, tail);
 
+    return this.head
+               .eval(binding)
+               .call(binding, this.tail);
+
+    return this.peek()
+               .eval(binding)
+               .call(binding, this.pop());
+
     // return headValue.eval(tail);
     // const headValue = head.eval(binding);
     // return headValue.eval(tail);
