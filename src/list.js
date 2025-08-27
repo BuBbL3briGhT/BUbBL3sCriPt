@@ -5,6 +5,16 @@ const Ṣymbol = require("./symbol");
 
 let emptyList, MacroExpanded;
 
+function call(binding, fn, params) {
+  switch (fn.constructor) {
+    case Function:
+      return fn.call(binding,
+        ...params.mapEval(binding));
+  }
+
+  return fn.call(binding, params);
+}
+
 events.on("init", function (bubls) {
   MacroExpanded = require("./macro").MacroExpanded;
 });
@@ -95,17 +105,35 @@ class List extends AbstractList {
       b.push(that.peek()));
   }
 
+  // call(binding, params) {
+  //   const value = this.eval(binding);
+
+  //   switch (value.constructor) {
+  //     case Function:
+  //       return value.call(binding,
+  //         ...params.mapEval(binding));
+  //   }
+
+  //   return value.call(binding, params);
+  // }
+
+  call(binding, params) {
+    call(binding, this.eval(binding), params);
+  }
+
   eval(binding) {
     // List evaluation logic.
-    const headValue = this.head.eval(binding);
-    // console.log({head: this.head, headValue});
-    switch (headValue.constructor) {
-      case Function:
-        return headValue.call(binding,
-          ...this.tail.mapEval(binding));
-    }
+    return this.head.call(binding, this.tail);
 
-    return headValue.call(binding, this.tail);
+    // const headValue = this.head.eval(binding);
+    // // console.log({head: this.head, headValue});
+    // switch (headValue.constructor) {
+    //   case Function:
+    //     return headValue.call(binding,
+    //       ...this.tail.mapEval(binding));
+    // }
+
+    // return headValue.call(binding, this.tail);
 
     // const headValue = this.head.eval(binding);
     // switch (this.head.constructor) {
