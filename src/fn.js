@@ -10,14 +10,16 @@ class Fn {
     this.name = opts.name;
   }
 
-  static call(binding, fn, params) {
-    switch (fn.constructor) {
+  static call(binding, what, params) {
+    const whatValue = what.eval(binding);
+
+    switch (whatValue.constructor) {
       case Function:
-        return fn.call(binding,
+        return whatValue.call(binding,
           ...params.mapEval(binding));
     }
 
-    return fn.call(binding, params);
+    return whatValue.call(binding, params);
   }
 
   // invoke(params) {

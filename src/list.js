@@ -109,8 +109,11 @@ class List extends AbstractList {
 
   eval(binding) {
     // List evaluation logic.
-    return Fn.call(binding,
-      this.head.eval(binding), this.tail);
+    return Fn.call(binding, this.head,
+                            this.tail);
+
+    // return Fn.call(binding,
+    //   this.head.eval(binding), this.tail);
 
     // return this.head.call(binding, this.tail);
 
