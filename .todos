@@ -1,4 +1,6 @@
 August:
+- Apply & (bubblescript spread) where applicable
+- fix puts
 - Log exceptions to file. (Add config option)
 - Actually we could just do
   - const [menu [sad happy]] xoxo This should
