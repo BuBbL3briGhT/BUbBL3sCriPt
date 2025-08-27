@@ -6,7 +6,7 @@ const List = require("./list");
 // const { Macro, MacroExpanded } = require("./macro");
 // const Bubble = require("./bubble");
 const Ṣymbol = require("./symbol");
-// const { parse } = require("./parse");
+const { parse } = require("./parse");
 // const LazyList = require("./lazy_list");
 // const events = require("./events");
 // const { BubbleScriptError } = require("./errors");
@@ -26,7 +26,8 @@ function memoize(object, property, fn) {
       Object.defineProperty(object, property, {
         value: fn()
       });
-    }
+    },
+    configurable: true
   });
 }
 
@@ -54,7 +55,7 @@ function evalExpression(binding, expression) {
 }
 
 function ëval(binding, expression) {
-  return expression.eval(binding);
+  return expression.evalEach(binding);
 }
 
 // List#eval: Evaluates list.
