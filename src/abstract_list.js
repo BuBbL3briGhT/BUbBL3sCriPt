@@ -4,15 +4,9 @@ let ëval;
 
 events.on("init", function (bubls) {
   ëval = bubls.ëval;
+  evalExpression = bubls.evalExpression;
 });
 
-function evalExpression(binding) {
-  return function(expression) {
-    return expression.eval ?
-      expression.eval(binding) :
-      expression;
-  }
-}
 
 // Let's define `AbstractList` which is a
 // class that will serve as the abstract

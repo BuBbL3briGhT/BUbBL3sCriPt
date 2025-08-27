@@ -47,11 +47,22 @@ function ėval(script, opts={}) {
 
 // module.exports = { ėval };
 
+// Returns a function that evaluates the given
+// expression using the binding passed to the
+// outer function.
+function evalExpression(binding) {
+  return function(expression) {
+    return expression.eval ?
+      expression.eval(binding) :
+      expression;
+  }
+}
+
 function ëval(binding, expression) {
   return expression.eval(binding);
 }
 
-module.exports = { ėval, ëval };
+module.exports = { ėval, ëval, evalExpression };
 
 
 // const bi = {
