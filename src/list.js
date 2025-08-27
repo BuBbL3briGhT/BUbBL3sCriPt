@@ -119,7 +119,6 @@ class List extends AbstractList {
     //     throw new MacroExpanded(expanded);
     //   default:
     //     return undefined;
-    }
   }
 
   each(fn) {
