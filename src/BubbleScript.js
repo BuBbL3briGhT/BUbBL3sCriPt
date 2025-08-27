@@ -45,7 +45,8 @@ events.emit("init", BubbleScript);
 
   function muf(...args) {
     // return ėval(bnd, arry.toList(args).push(_muf));
-    return ëval(bnd, List.from(args).push(_muf));
+    // return ëval(bnd, List.from(args).push(_muf));
+    return List.from(args).push(_muf).eval(bnd);
   }
 
   let _push = Ṣymbol.for('push'),
