@@ -2,20 +2,38 @@ QADBDB
 Running list of known bugs which we are fixing or have fixed.
 
 
+Wed Aug 27 16:49:23 EDT 2025
+[🦤 f07950c]
+Encountered by Kandi
+
+  %< puts "Hello"
+  undefined List { o: 'Hello', oo: EmptyList { o: undefined, oo: undefined } }
+  TypeError: Cannot read properties of undefined (reading 'constructor')
+    at Fn.call (/data/data/com.termux/files/home/bubblescript/src/fn.js:14:16)
+    at List.eval (/data/data/com.termux/files/home/bubblescript/src/list.js:115:15)
+    at Fn.call (/data/data/com.termux/files/home/bubblescript/src/fn.js:36:24)
+    at Fn.call (/data/data/com.termux/files/home/bubblescript/src/fn.js:20:15)
+    at List.eval (/data/data/com.termux/files/home/bubblescript/src/list.js:115:15)
+    at evalExpression (/data/data/com.termux/files/home/bubblescript/src/eval.js:56:16)
+    at LazyList.each (/data/data/com.termux/files/home/bubblescript/src/list.js:173:16)
+    at LazyList.evalEach (/data/data/com.termux/files/home/bubblescript/src/abstract_list.js:142:17)
+    at /data/data/com.termux/files/home/bubblescript/bin/bubls:63:34
+    at [_onLine] [as _onLine] (node:internal/readline/interface:467:7) puts at undefined:undefined:undefined
+
 Wed Aug 27 16:33:15 EDT 2025
 [🦤 f07950c]
 Encountered by Kandi
 
-%< (consola.registrö "Hola")
-Hola
-TypeError: this.registroPuntoDeCódigo is not a function
-  at Object.registrö (/data/data/com.termux/files/home/bubblescript/src/consola.js:11:10)
-  at Fn.call (/data/data/com.termux/files/home/bubblescript/src/fn.js:16:19)
-  at List.eval (/data/data/com.termux/files/home/bubblescript/src/list.js:115:15)
-  at evalExpression (/data/data/com.termux/files/home/bubblescript/src/eval.js:56:16)
-  at LazyList.each (/data/data/com.termux/files/home/bubblescript/src/list.js:173:16)
-  at LazyList.evalEach (/data/data/com.termux/files/home/bubblescript/src/abstract_list.js:142:17)
-  at /data/data/com.termux/files/home/bubblescript/bin/bubls:63:34
-  at [_onLine] [as _onLine] (node:internal/readline/interface:467:7)
-  at [_line] [as _line] (node:internal/readline/interface:941:18)
-  at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1457:22)
+  %< (consola.registrö "Hola")
+  Hola
+  TypeError: this.registroPuntoDeCódigo is not a function
+    at Object.registrö (/data/data/com.termux/files/home/bubblescript/src/consola.js:11:10)
+    at Fn.call (/data/data/com.termux/files/home/bubblescript/src/fn.js:16:19)
+    at List.eval (/data/data/com.termux/files/home/bubblescript/src/list.js:115:15)
+    at evalExpression (/data/data/com.termux/files/home/bubblescript/src/eval.js:56:16)
+    at LazyList.each (/data/data/com.termux/files/home/bubblescript/src/list.js:173:16)
+    at LazyList.evalEach (/data/data/com.termux/files/home/bubblescript/src/abstract_list.js:142:17)
+    at /data/data/com.termux/files/home/bubblescript/bin/bubls:63:34
+    at [_onLine] [as _onLine] (node:internal/readline/interface:467:7)
+    at [_line] [as _line] (node:internal/readline/interface:941:18)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1457:22)
