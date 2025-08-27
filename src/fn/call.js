@@ -9,4 +9,4 @@ function call(binding, fn, params) {
   return fn.call(binding, params);
 }
 
-module.export = call;
+module.exports = call;
