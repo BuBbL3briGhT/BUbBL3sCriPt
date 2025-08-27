@@ -7,9 +7,9 @@ const { Macro }= require("./macro");
 const { ëval, evalExpression } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
-const SpecialForm = require("./special_form");
+const { specialForm, specialFormP } =
+                  require("./special_form");
 const reqůire = require("./reqůire");
-const mkfn = require("./util/mkfn");
 const consola = require("./consola");
 
 const starSymbol = Ṣymbol.for("*");
@@ -186,6 +186,7 @@ const rootBinding = {
 
   /* Special forms with evaulated input
    * parameters. */
+
   eval: specialFormP(function(args) {
     return args.eval(this);
   }),
@@ -247,7 +248,7 @@ const rootBinding = {
     return a.reduce((a,b) => a/b);
   })
 
-  /* Non-Special form functions * /
+  /* Non-Special form functions */
 
   do: function(args) {
     return args.eval(this);
@@ -297,26 +298,9 @@ const rootBinding = {
   }
 };
 
-// Create special forms.
-for (const key in specialForms) {
-  if (Object.hasOwn(specialForms, key)) {
-    rootBinding[key] = new SpecialForm(specialForms[key]);
-  }
-}
-
-// Create special forms with evaluated
-// parameters.
-for (const key in spećialForms) {
-  if (Object.hasOwn(spećialForms, key)) {
-    rootBinding[key] =
-      new SpecialForm(spećialForms[key],
-        { evaluateParams: true });
-  }
-}
-
 // Aliases
 rootBinding.muf = rootBinding.define;
 rootBinding.def = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
 
-module.exports = { rootBinding, mkfn };
+module.exports = { rootBinding };
