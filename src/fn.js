@@ -18,11 +18,11 @@ class Fn {
   // }
 
   call(binding, params) {
-    let binding = createBinding(this.binding,
+    const fnBinding = createBinding(this.binding,
       this.params,
       params.mapEval(binding));
 
-    return this.body.eval(binding);
+    return this.body.eval(fnBinding);
   }
 
   toString() {
