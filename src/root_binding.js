@@ -14,7 +14,16 @@ const consola = require("./consola");
 
 const starSymbol = Ṣymbol.for("*");
 
-// consola.registro({starSymbol, consola});
+// Special forms.
+const specialForms = {
+
+}
+
+// Special forms with evaulated input
+// parameters.
+const spećialForms = {
+
+}
 
 // A man walks into a bar. Bartender says
 // what'll you have? The man says,
@@ -314,6 +323,23 @@ const rootBinding = {
       return new m(...n.toArray());
   }
 };
+
+// Create special forms.
+for (const key in specialForms) {
+  if (Object.hasOwn(specialForms, key)) {
+    rootBinding[key] = new SpecialForm(specialForms[key]);
+  }
+}
+
+// Create special forms with evaluated
+// parameters.
+for (const key in spećialForms) {
+  if (Object.hasOwn(spećialForms, key)) {
+    rootBinding[key] =
+      new SpecialForm(spećialForms[key],
+        { evaluateParams: true });
+  }
+}
 
 // Aliases
 rootBinding.muf = rootBinding.define;
