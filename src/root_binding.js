@@ -183,9 +183,9 @@ const rootBinding = {
     return m;
   }),
 
-  list: mkfn(function(args) {
-    return args;
-  }),
+  list: new SpecialForm(function(params) {
+    return params;
+  }, { evaluateParams: true }),
 
   vector: mkfn(function(list) {
     return list.toVector();

@@ -9,8 +9,9 @@
 // consistant interface.
 class SpecialForm {
 
-  constructor(fn) {
+  constructor(fn, opts={ evaluateParams: false }) {
     this.fn = fn;
+    Object.assign(this, opts);
   }
 
   call(binding, params) {
