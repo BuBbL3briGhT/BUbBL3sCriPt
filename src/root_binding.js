@@ -7,9 +7,10 @@ const { Macro }= require("./macro");
 const { ëval, evalExpression } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
+const CoreFunction = require("./core_function");
 const reqůire = require("./reqůire");
 const mkfn = require("./util/mkfn");
- const consola = require("./consola");
+const consola = require("./consola");
 
 const starSymbol = Ṣymbol.for("*");
 
@@ -29,7 +30,7 @@ const rootBinding = {
 
   __dirname: __dirname,
 
-  define: function(args) {
+  define: new CoreFunction(function(args) {
     let key = args.peek();
     let val = args.pop();
 
@@ -46,9 +47,9 @@ const rootBinding = {
       return this[key.toString()]
         = evalExpression(this, val.peek());
     }
-  },
+  }),
 
-  const: function (list) {
+  const: new CoreFunction(function (list) {
     const key = list.peek();
     const value = list.pop();
     let o;
@@ -96,26 +97,26 @@ const rootBinding = {
         //   = ëval(this, value.peek());
         return this[sKey] = value.eval(this);
     }
-  },
+  }),
 
-  fn: function(args) {
+  fn: new CoreFunction(function(args) {
     return new Fn(this, args.first.toList(), args.rest)
-  },
+  }),
 
-  macro: function(args) {
+  macro: new CoreFunction(function(args) {
     return new Macro(this, args.first, args.rest)
-  },
+  }),
 
-  jsfn: function(args) {
+  jsfn: new CoreFunction(function(args) {
     const binding = this;
     const x = args.push(Ṣymbol.for('fn'));
     const fn = ëval(binding, x);
     return function(...args) {
       return fn.invoke(List.from(args));
     }
-  },
+  }),
 
-  let: function([x,...xx]) {
+  let: new CoreFunction(function([x,...xx]) {
     let binding = Object.create(this);
     x = x.invert();
     while (!x.isEmpty) {
@@ -128,29 +129,29 @@ const rootBinding = {
     }
     return xx.map(z =>
       ëval(binding, z)).pop();
-  },
+  }),
 
-  if: function([c,t,f]) {
+  if: new CoreFunction(function([c,t,f]) {
     return ëval(this,
       ëval(this, c) ? t : f);
-  },
+  }),
 
-  unless: function([c,f,t]) {
+  unless: new CoreFunction(function([c,f,t]) {
     return ëval(this,
       ëval(this, c) ? t : f);
-  },
+  }),
 
-  blert: function(msgs) {
+  blert: new CoreFunction(function(msgs) {
     alert(this.concat(msgs));
-  },
+  }),
 
-  expandmacro: function(list) {
+  expandmacro: new CoreFunction(function(list) {
     const [head, tail] = list.plop();
     const macro = ëval(this, head);
     return macro.expand(tail);
-  },
+  }),
 
-  loop: function([x,...xx]) {
+  loop: new CoreFunction(function([x,...xx]) {
     var binding = Object.create(this),
       m, recurCalled;
 
@@ -183,7 +184,7 @@ const rootBinding = {
         ëval(binding, z)).pop();
     } while(recurCalled);
     return m;
-  },
+  }),
 
   list: mkfn(function(args) {
     return args;

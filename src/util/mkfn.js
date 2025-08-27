@@ -1,3 +1,5 @@
+const CoreFunction = require("../core_function");
+
 // Makes a Bubblescript function from a
 // Javascript function.
 // Params:
@@ -21,10 +23,10 @@
 //   }
 // }
 function mkfn(q) {
-  return function (params) {
+  return new CoreFunction(function (params) {
     // console.log("params", params);
     return q.call(this, params.mapEval(this));
-  }
+  });
 }
 
 module.exports = mkfn;

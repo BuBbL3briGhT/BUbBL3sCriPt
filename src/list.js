@@ -98,14 +98,23 @@ class List extends AbstractList {
   eval(binding) {
     // List evaluation logic.
     const headValue = this.head.eval(binding);
-    switch (this.head.constructor) {
-      case Ṣymbol:
-        if (this.head.callPattern === 2) {
-          return headValue.call(binding,
-            ...this.tail.mapEval(binding));
-        }
+    switch (this.headValue.constructor) {
+      case Function:
+        return headValue.call(binding,
+          ...this.tail.mapEval(binding));
     }
+
     return headValue.call(binding, this.tail);
+
+    // const headValue = this.head.eval(binding);
+    // switch (this.head.constructor) {
+    //   case Ṣymbol:
+    //     if (this.head.callPattern === 2) {
+    //       return headValue.call(binding,
+    //         ...this.tail.mapEval(binding));
+    //     }
+    // }
+    // return headValue.call(binding, this.tail);
 
     // return this.head
     //            .eval(binding)
