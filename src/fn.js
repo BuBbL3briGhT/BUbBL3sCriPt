@@ -10,6 +10,16 @@ class Fn {
     this.name = opts.name;
   }
 
+  static call(binding, fn, params) {
+    switch (fn.constructor) {
+      case Function:
+        return fn.call(binding,
+          ...params.mapEval(binding));
+    }
+
+    return fn.call(binding, params);
+  }
+
   // invoke(params) {
   //   let binding = createBinding(this.binding,
   //     this.params, params);

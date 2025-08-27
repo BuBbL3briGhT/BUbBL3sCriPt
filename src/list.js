@@ -1,8 +1,7 @@
 const AbstractList = require("./abstract_list");
 const events = require("./events");
-const call = require("./fn/call");
-
 const Ṣymbol = require("./symbol");
+const Fn = require("./symbol");
 
 let emptyList, MacroExpanded;
 
@@ -108,14 +107,12 @@ class List extends AbstractList {
   //   return value.call(binding, params);
   // }
 
-  call(binding, parameterList) {
-    return call(binding, this.eval(binding),
-                parameterList);
-  }
-
   eval(binding) {
     // List evaluation logic.
-    return this.head.call(binding, this.tail);
+    return Fn.call(binding,
+      this.head.eval(binding), this.tail);
+
+    // return this.head.call(binding, this.tail);
 
     // const headValue = this.head.eval(binding);
     // // console.log({head: this.head, headValue});

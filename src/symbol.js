@@ -1,5 +1,4 @@
 const symbols = Object.create(null);
-const call = require("./fn/call");
 
 // `Ṣymbol`s are language symbols. Alternatively
 // to avoid name clash with the built-in
@@ -52,11 +51,6 @@ class Ṣymbol {
     var root = this.resolveRoot(binding)
     if (root) root = root[this.fn];
     return root;
-  }
-
-  call(binding, parameterList) {
-    return call(binding, this.eval(binding),
-                parameterList);
   }
 
   static for(key) {
