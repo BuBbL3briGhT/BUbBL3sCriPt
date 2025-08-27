@@ -1,0 +1,23 @@
+Si bien la capacidad de escribir código es un
+desarrollo fenomenal de la IA y abre las puertas
+a innumerables posibilidades, confiar en ella es
+como poner las cosas en orden.
+
+Lo que se gana en un cambio de rumbo acortado
+(quizás exponencialmente) se pierde en
+comprensión, así como en elecciones y
+preferencias personales, lo cual se traduce en
+deuda técnica. Claro que, si nunca se va a mirar
+el código, ¿qué importa?  Pero entonces, ¿qué
+sentido tiene que escriba código?
+
+Ciertamente, el código es instrumental, y la
+comprensión que se obtiene vale la pena. El
+código es genial porque es expresivo y
+particulado. Explicar intenciones en lenguaje
+natural se descompone rápidamente, incluso en
+instrucciones de persona a persona. El código
+sirve como intermediario, y su valor es
+incalculable. (Explicación).
+
+¡Bendito sea el código!
