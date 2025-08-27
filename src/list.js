@@ -108,8 +108,9 @@ class List extends AbstractList {
   //   return value.call(binding, params);
   // }
 
-  call(binding, params) {
-    call(binding, this.eval(binding), params);
+  call(binding, parameterList) {
+    return call(binding, this.eval(binding),
+                parameterList);
   }
 
   eval(binding) {

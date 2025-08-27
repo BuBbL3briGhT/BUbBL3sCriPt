@@ -53,6 +53,11 @@ class Ṣymbol {
     return root;
   }
 
+  call(binding, parameterList) {
+    return call(binding, this.eval(binding),
+                parameterList);
+  }
+
   static for(key) {
     return symbols[key] || new Ṣymbol(key);
   }
