@@ -1,4 +1,5 @@
 const symbols = Object.create(null);
+const call = require("./fn/call");
 
 // `Ṣymbol`s are language symbols. Alternatively
 // to avoid name clash with the built-in
