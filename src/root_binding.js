@@ -99,8 +99,9 @@ const rootBinding = {
     }
   }),
 
-  fn: new CoreFunction(function(args) {
-    return new Fn(this, args.first.toList(), args.rest)
+  fn: new CoreFunction(function(list) {
+    return new Fn(this, list.first.toList(),
+                        list.rest)
   }),
 
   macro: new CoreFunction(function(args) {

@@ -1,7 +1,11 @@
 const AbstractList = require("./abstract_list");
-const List = require("./list");
+const events = require("./events");
 
-let emptyVector;
+let emptyVector, List;
+
+events.on("init", function (bubls) {
+  List = bubls.List;
+});
 
 class Vector extends AbstractList {
 
