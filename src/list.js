@@ -1,6 +1,8 @@
 const AbstractList = require("./abstract_list");
 const events = require("./events");
 
+const Ṣymbol = require("./symbol");
+
 let emptyList, MacroExpanded;
 
 events.on("init", function (bubls) {
