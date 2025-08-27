@@ -1,19 +1,10 @@
 const AbstractList = require("./abstract_list");
 const events = require("./events");
+const call = require("./fn/call");
 
 const Ṣymbol = require("./symbol");
 
 let emptyList, MacroExpanded;
-
-function call(binding, fn, params) {
-  switch (fn.constructor) {
-    case Function:
-      return fn.call(binding,
-        ...params.mapEval(binding));
-  }
-
-  return fn.call(binding, params);
-}
 
 events.on("init", function (bubls) {
   MacroExpanded = require("./macro").MacroExpanded;
