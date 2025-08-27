@@ -190,8 +190,8 @@ const rootBinding = {
     return args;
   }),
 
-  vector: mkfn(function(args) {
-    return args.toVector();
+  vector: mkfn(function(list) {
+    return list.toVector();
   }),
 
   obj: mkfn(function(list) {
@@ -219,12 +219,22 @@ const rootBinding = {
   //     return a[b]();
   // }),
 
-  send: mkfn(function(list) {
-    let receipient, message, params;
+  // send: mkfn(function(list) {
+  //   let receipient, message, params;
 
-    [receipient, list] = list.plop();
-    [message, params] = list.plop();
+  //   [receipient, list] = list.plop();
+  //   [message, params] = list.plop();
 
+  //   // console.log("list", list);
+  //   // console.log("receipient", receipient);
+  //   // console.log("params", params);
+
+  //   if (message.key) message = message.key;
+
+  //   return receipient[message](...params);
+  // }),
+
+  send: function(receipient, message, params) {
     // console.log("list", list);
     // console.log("receipient", receipient);
     // console.log("params", params);
@@ -232,7 +242,7 @@ const rootBinding = {
     if (message.key) message = message.key;
 
     return receipient[message](...params);
-  }),
+  },
 
   stop: function () {
     // console.error("stopped");
@@ -258,9 +268,9 @@ const rootBinding = {
     return new LazyList(...itty);
   }),
 
-  export: mkfn(function([ca,nd,y]) {
+  export: function(ca,nd,y) {
     return ca[nd] = y;
-  }),
+  },
 
   print: mkfn(function(vals) {
     return vals.each(function(value) {
@@ -279,33 +289,33 @@ const rootBinding = {
   "/": mkfn(function(a) {
     return a.reduce((a,b) => a/b);
   }),
-  "=": mkfn(function([a, b]) {
+  "=": function(a, b) {
     return a == b;
-  }),
-  not: mkfn(function([y]) {
+  },
+  not: function(y) {
     return !y;
-  }),
+  },
   and: mkfn(function(a) {
     return a.reduce((a,b) => a && b);
   }),
   or: mkfn(function(_) {
     return _.reduce((a,b) => a || b);
   }),
-  '>': mkfn(([a,b]) => {
+  '>': (a,b) => {
     return a > b;
-  }),
-  '<': mkfn(([a,b]) => {
+  },
+  '<': (a,b) => {
     return a < b;
-  }),
-  parse: mkfn(function([s]) {
+  },
+  parse: function(s) {
     return parse(s);
-  }),
+  },
   concat: mkfn(function(eeks) {
     return eeks.join('');
   }),
-  "new": mkfn(function([m,n]) {
+  "new": function(m,n) {
       return new m(...n.toArray());
-  })
+  }
 };
 
 // Aliases
