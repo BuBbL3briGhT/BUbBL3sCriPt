@@ -95,9 +95,21 @@ class List extends AbstractList {
 
   eval(binding) {
     // List evaluation logic.
-    return this.head
-               .eval(binding)
-               .call(binding, this.tail);
+    const headValue = this.head.eval(binding);
+
+    switch (headValue.constructor) {
+      case Function:
+        return headValue.call(binding,
+          ...this.tail);
+      default:
+        return headValue.call(binding,
+          this.tail);
+    }
+
+    // return this.head
+    //            .eval(binding)
+    //            .call(binding, this.tail);
+
 
     // return headValue.eval(tail);
     // const headValue = head.eval(binding);
