@@ -14,10 +14,20 @@ const consola = require("./consola");
 
 const starSymbol = Ṣymbol.for("*");
 
-// Special forms.
-const specialForms = {
 
-  define: function(args) {
+// A man walks into a bar. Bartender says
+// what'll you have? The man says,
+// something strong, my head is killing
+// me. 🍸
+const rootBinding = {
+  console, consola,
+  // Js require
+  ["reqūire"]: require,
+  __dirname: __dirname,
+
+  /* Special form functions */
+
+  define: specialForm(function(args) {
     let key = args.peek();
     let val = args.pop();
 
@@ -34,9 +44,9 @@ const specialForms = {
       return this[key.toString()]
         = evalExpression(this, val.peek());
     }
-  },
+  }),
 
-  const: function (list) {
+  const: specialForm(function (list) {
     const key = list.peek();
     const value = list.pop();
     let o;
@@ -84,27 +94,27 @@ const specialForms = {
         //   = ëval(this, value.peek());
         return this[sKey] = value.eval(this);
     }
-  },
+  }),
 
-  fn: function(list) {
+  fn: specialForm(function(list) {
     return new Fn(this, list.first.toList(),
                         list.rest)
-  },
+  }),
 
-  macro: function(args) {
+  macro: specialForm(function(args) {
     return new Macro(this, args.first, args.rest)
-  },
+  }),
 
-  jsfn: function(args) {
+  jsfn: specialForm(function(args) {
     const binding = this;
     const x = args.push(Ṣymbol.for('fn'));
     const fn = ëval(binding, x);
     return function(...args) {
       return fn.invoke(List.from(args));
     }
-  },
+  }),
 
-  let: function([x,...xx]) {
+  let: specialForm(function([x,...xx]) {
     let binding = Object.create(this);
     x = x.invert();
     while (!x.isEmpty) {
@@ -117,29 +127,29 @@ const specialForms = {
     }
     return xx.map(z =>
       ëval(binding, z)).pop();
-  },
+  }),
 
-  if: function([c,t,f]) {
+  if: specialForm(function([c,t,f]) {
     return ëval(this,
       ëval(this, c) ? t : f);
-  },
+  }),
 
-  unless: function([c,f,t]) {
+  unless: specialForm(function([c,f,t]) {
     return ëval(this,
       ëval(this, c) ? t : f);
-  },
+  }),
 
-  blert: function(msgs) {
+  blert: specialForm(function(msgs) {
     alert(this.concat(msgs));
-  },
+  }),
 
-  expandmacro: function(list) {
+  expandmacro: specialForm(function(list) {
     const [head, tail] = list.plop();
     const macro = ëval(this, head);
     return macro.expand(tail);
-  },
+  }),
 
-  loop: function([x,...xx]) {
+  loop: specialForm(function([x,...xx]) {
     var binding = Object.create(this),
       m, recurCalled;
 
@@ -172,111 +182,76 @@ const specialForms = {
         ëval(binding, z)).pop();
     } while(recurCalled);
     return m;
-  }
-}
+  })
 
-// Special forms with evaulated input
-// parameters.
-const spećialForms = {
-  eval: function(args) {
+  /* Special forms with evaulated input
+   * parameters. */
+  eval: specialFormP(function(args) {
     return args.eval(this);
-  },
+  }),
 
-  list: function(params) {
+  list: specialFormP(function(params) {
     return params;
-  },
+  }),
 
-  vector: function(list) {
+  vector: specialFormP(function(list) {
     return list.toVector();
-  },
+  }),
 
-  obj: function(list) {
+  obj: specialFormP(function(list) {
     return list.partition(2).reduce(
       function(memo, [key, val]) {
         memo[key] = val;
         return memo;
       }, {});
-  },
+  }),
 
-  print: function(vals) {
+  print: specialFormP(function(vals) {
     return vals.each(function(value) {
       document.body.append(value);
     });
-  },
+  }),
 
-  get: function(yeahyeahyeahs) {
+  get: specialFormP(function(yeahyeahyeahs) {
     // console.log(yeahyeahyeahs);
      return yeahyeahyeahs.reduce(
         (memo,key) => memo && memo[key]);
-  },
+  }),
 
-  range: function (yippies) {
+  range: specialFormP(function (yippies) {
     return new Range(...yippies);
-  },
+  }),
 
-  lazy: function (itty) {
+  lazy: specialFormP(function (itty) {
     return new LazyList(...itty);
-  },
-  "+": function(a) {
+  }),
+  "+": specialFormP(function(a) {
     return a.reduce((a,b) => a+b);
-  },
-  "-": function(a) {
+  }),
+  "-": specialFormP(function(a) {
     return a.reduce((a,b) => a-b);
-  },
-  "*": function(a) {
+  }),
+  "*": specialFormP(function(a) {
     return a.reduce((a,b) => a*b);
-  },
-  and: function(a) {
+  }),
+  and: specialFormP(function(a) {
     return a.reduce((a,b) => a && b);
-  },
-  or: function(_) {
+  }),
+  or: specialFormP(function(_) {
     return _.reduce((a,b) => a || b);
-  },
-  concat: function(eeks) {
+  }),
+  concat: specialFormP(function(eeks) {
     return eeks.join('');
-  },
-  "/": function(a) {
+  }),
+  "/": specialFormP(function(a) {
     return a.reduce((a,b) => a/b);
-  }
-}
+  })
 
-// A man walks into a bar. Bartender says
-// what'll you have? The man says,
-// something strong, my head is killing
-// me. 🍸
-const rootBinding = {
-  console, consola,
-  // Js require
-  ["reqūire"]: require,
-  __dirname: __dirname,
+  /* Non-Special form functions * /
 
   do: function(args) {
     return args.eval(this);
   },
-
-  // send: mkfn(function([a,b,...c]) {
-  //   if (b.key)
-  //     b = b.key;
-  //   if (c.length > 0) {
-  //     return a[b](...c);
-  //   } else
-  //     return a[b]();
-  // }),
-
-  // send: mkfn(function(list) {
-  //   let receipient, message, params;
-
-  //   [receipient, list] = list.plop();
-  //   [message, params] = list.plop();
-
-  //   // console.log("list", list);
-  //   // console.log("receipient", receipient);
-  //   // console.log("params", params);
-
-  //   if (message.key) message = message.key;
-
-  //   return receipient[message](...params);
-  // }),
 
   send: function(receipient, message, ...params) {
     // console.log("list", list);
