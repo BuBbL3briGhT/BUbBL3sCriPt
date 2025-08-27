@@ -1,4 +1,5 @@
 August:
+- Log exceptions to file. (Add config option)
 - Actually we could just do
   - const [menu [sad happy]] xoxo This should
     work differently depending if xoxo is an
