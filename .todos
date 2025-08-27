@@ -1,4 +1,8 @@
 August:
+- multiline repl
+  - open new line automatically when expression is not complete
+- single line repl should only run expression when complete. Show error message.
+- fix test
 - Apply & (bubblescript spread) where applicable
 - fix puts
 - Log exceptions to file. (Add config option)
