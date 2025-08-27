@@ -41,13 +41,17 @@ function ėval(script, opts={}) {
 
 ėval = ėval.bind(this);
 
-module.exports = { ėval };
-
-// function ëval(binding, expression) {
-//   return expression.eval(binding);
+// function ëval(binding, ) {
+//   throw new Error("Deprecated: Use List#eval inplace of this function.");
 // }
 
-// module.exports = { ėval, ëval };
+// module.exports = { ėval };
+
+function ëval(binding, expression) {
+  return expression.eval(binding);
+}
+
+module.exports = { ėval, ëval };
 
 
 // const bi = {
