@@ -22,11 +22,9 @@ const SpecialForm = require("../special_form");
 //     return q.call(this, params.mapEval(this));
 //   }
 // }
-function mkfn(q) {
-  return new SpecialForm(function (params) {
-    // console.log("params", params);
-    return q.call(this, params.mapEval(this));
-  });
+function mkfn(fn) {
+  return new SpecialForm(fn,
+    { evaluateParams: true });
 }
 
 module.exports = mkfn;

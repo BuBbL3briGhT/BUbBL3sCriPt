@@ -10,8 +10,14 @@
 class SpecialForm {
 
   constructor(fn, opts={ evaluateParams: false }) {
-    this.fn = fn;
-    Object.assign(this, opts);
+    if (opts.evaluateParams) {
+      this.fn = function (params) {
+        return fn.call(this,
+          params.mapEval(this));
+      }
+    } else {
+      this.fn = fn;
+    }
   }
 
   call(binding, params) {
