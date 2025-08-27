@@ -13,6 +13,10 @@ class Keyword {
     return ":" + this.key;
   }
 
+  eval(binding) {
+    return this;
+  }
+
   static for(key) {
     return keywords[key] || new Keyword(key);
   }
