@@ -27,10 +27,10 @@
 
 i find Ai a very useful to as an answer engine,
 which greatly speed things up while really not
-corridor to much. Honestly, hair pulling and
-fustration. The understanding comes along with
-doing it yourself, and quick and good answers
-reduces friction along the merry way.
+forfeiting too much. Honestly, mostly hair
+pulling and fustration. Understanding comes
+along with doing it yourself, and quick and good
+answers reduces friction along the merry way.
 
 We still need to learn our tools, and the
 problem domain, and that requires time. Time is
@@ -41,6 +41,7 @@ generation will certianly be the favored and
 true solution to many tasks, especialy
 monatonmous ones, or even ones looking over the
 ledge. Finding the right mix is the maxium.
+
 
 Even with instant answers, hot and ready, the
 occasional deep dive, or even semi reagular
