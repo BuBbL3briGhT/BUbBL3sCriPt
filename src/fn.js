@@ -10,16 +10,14 @@ class Fn {
     this.name = opts.name;
   }
 
-  static call(binding, what, params) {
-    const whatValue = what.eval(binding);
-
-    switch (whatValue.constructor) {
+  static call(binding, fn, params) {
+    switch (fn.constructor) {
       case Function:
-        return whatValue.call(binding,
+        return fn.call(binding,
           ...params.mapEval(binding));
     }
 
-    return whatValue.call(binding, params);
+    return fn.call(binding, params);
   }
 
   // invoke(params) {
@@ -30,11 +28,21 @@ class Fn {
   // }
 
   call(binding, params) {
-    const fnBinding = createBinding(this.binding,
-      this.params,
-      params.mapEval(binding));
+    try {
+      const fnBinding = createBinding(this.binding,
+        this.params,
+        params.mapEval(binding));
 
-    return this.body.eval(fnBinding);
+      return this.body.eval(fnBinding);
+    } catch (error) {
+      error.stack += this.trace;
+      throw error;
+    }
+  }
+
+  get trace () {
+    const { name, file, line, column } = this;
+    return ` ${name} at ${file}:${line}:${column}`;
   }
 
   toString() {
