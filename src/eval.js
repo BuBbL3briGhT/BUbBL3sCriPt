@@ -1,11 +1,11 @@
 // const AbstractList = require("./abstract_list");
-// const List = require("./list");
+const List = require("./list");
 // const Vector = require("./vector");
 // const ObjectMap = require("./object_map");
 // const Fn = require("./fn");
 // const { Macro, MacroExpanded } = require("./macro");
 // const Bubble = require("./bubble");
-// const Ṣymbol = require("./symbol");
+const Ṣymbol = require("./symbol");
 // const { parse } = require("./parse");
 // const LazyList = require("./lazy_list");
 // const events = require("./events");
@@ -56,6 +56,46 @@ function evalExpression(binding, expression) {
 function ëval(binding, expression) {
   return expression.eval(binding);
 }
+
+// List#eval: Evaluates list.
+// List.eval = function(binding) {
+//   // List evaluation logic.
+//   const headValue = this.head.eval(binding);
+//   switch (this.head.constructor) {
+//     case Ṣymbol:
+//       if (this.head.callPattern === 2) {
+//         return headValue.call(binding,
+//           ...this.tail.mapEval(binding));
+//       }
+//   }
+//   return headValue.call(binding, this.tail);
+
+//   // return this.head
+//   //            .eval(binding)
+//   //            .call(binding, this.tail);
+
+
+//   // return headValue.eval(tail);
+//   // const headValue = head.eval(binding);
+//   // return headValue.eval(tail);
+
+//   // switch (head.constructor) {
+//   //   case Ṣymbol:
+//   //     const headValue = head.eval(binding);
+//   //     return tail.push(headValue).eval();
+//   //   case List:
+//   //     const headValue = head.eval(binding);
+//   //     return ëvalList(binding, tail.push(headValue));
+//   //   case Fn:
+//   //     return head.invoke(tail.mapEval(binding));
+//   //   case Function:
+//   //     return head.call(binding, tail);
+//   //   case Macro:
+//   //     const expanded = head.expand(tail);
+//   //     throw new MacroExpanded(expanded);
+//   //   default:
+//   //     return undefined;
+// }
 
 module.exports = { ėval, ëval, evalExpression };
 

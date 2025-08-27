@@ -4,7 +4,7 @@ const ObjectMap = require("./object_map");
 const Fn = require("./fn");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
-const { ëval } = require("./eval");
+const { ëval, evalExpression } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
 const reqůire = require("./reqůire");
@@ -44,7 +44,7 @@ const rootBinding = {
         = new Fn(this, key.pop(), val, { name });
     } else {
       return this[key.toString()]
-        = ëval(this, val.peek());
+        = evalExpression(this, val.peek());
     }
   },
 
