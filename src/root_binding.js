@@ -182,7 +182,7 @@ const rootBinding = {
         ëval(binding, z)).pop();
     } while(recurCalled);
     return m;
-  })
+  }),
 
   /* Special forms with evaulated input
    * parameters. */
