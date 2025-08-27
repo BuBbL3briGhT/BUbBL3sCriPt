@@ -23,9 +23,11 @@ const { parse } = require("./parse");
 function memoize(object, property, fn) {
   Object.defineProperty(object, property, {
     get: function () {
+      const value = fn();
       Object.defineProperty(object, property, {
-        value: fn()
+        value
       });
+      return value;
     },
     configurable: true
   });
