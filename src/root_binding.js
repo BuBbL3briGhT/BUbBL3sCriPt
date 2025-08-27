@@ -226,27 +226,34 @@ const rootBinding = {
   lazy: specialFormP(function (itty) {
     return new LazyList(...itty);
   }),
+
   "+": specialFormP(function(a) {
     return a.reduce((a,b) => a+b);
   }),
+
   "-": specialFormP(function(a) {
     return a.reduce((a,b) => a-b);
   }),
+
   "*": specialFormP(function(a) {
     return a.reduce((a,b) => a*b);
   }),
+
   and: specialFormP(function(a) {
     return a.reduce((a,b) => a && b);
   }),
+
   or: specialFormP(function(_) {
     return _.reduce((a,b) => a || b);
   }),
+
   concat: specialFormP(function(eeks) {
     return eeks.join('');
   }),
+
   "/": specialFormP(function(a) {
     return a.reduce((a,b) => a/b);
-  })
+  }),
 
   /* Non-Special form functions */
 
