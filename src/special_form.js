@@ -36,7 +36,7 @@ class SpecialForm {
 // Helper creates a Special Form (Function)
 // without evaluated params.
 function specialForm(fn) {
-  return new SpecialFormFn(fn);
+  return new SpecialForm(fn);
 }
 
 // Helper creates a Special Form (Function)
