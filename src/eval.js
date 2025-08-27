@@ -8,41 +8,41 @@ const List = require("./list");
 const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 // const LazyList = require("./lazy_list");
-// const events = require("./events");
+const events = require("./events");
 // const { BubbleScriptError } = require("./errors");
 // const consola = require("./consola");
 
 // const sAmp = Ṣymbol.for("&");
 
-// let rootBinding;
+let rootBinding;
 
-// events.on("init", function (bubls) {
-//   rootBinding = bubls.rootBinding;
-// });
+events.on("init", function (bubls) {
+  rootBinding = bubls.rootBinding;
+});
 
-function memoize(object, property, fn) {
-  Object.defineProperty(object, property, {
-    get: function () {
-      const value = fn();
-      Object.defineProperty(object, property, {
-        value
-      });
-      return value;
-    },
-    configurable: true
-  });
-}
+// function memoize(object, property, fn) {
+//   Object.defineProperty(object, property, {
+//     get: function () {
+//       const value = fn();
+//       Object.defineProperty(object, property, {
+//         value
+//       });
+//       return value;
+//     },
+//     configurable: true
+//   });
+// }
 
-memoize(this, "rootBinding",
-  () => require("./root_binding"));
+// memoize(this, "rootBinding",
+//   () => require("./root_binding"));
 
 // Evaluate Bubblescript
 function ėval(script, opts={}) {
   return parse(script, opts).
-    evalEach(this.rootBinding);
+    evalEach(rootBinding);
 }
 
-ėval = ėval.bind(this);
+// ėval = ėval.bind(this);
 
 // function ëval(binding, ) {
 //   throw new Error("Deprecated: Use List#eval inplace of this function.");
