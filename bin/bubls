@@ -33,7 +33,7 @@ if (path) {
       return;
     }
     try {
-      parse(xoxo, { file: path }).eval(binding);
+      parse(xoxo, { file: path }).evalEach(binding);
     } catch (error) {
       if (error instanceof BubbleScriptError) {
         consola.registro(error.name +
@@ -61,7 +61,7 @@ if (path) {
           rl.close();
           return;
         }
-        let result = parse(xoxo).eval(binding);
+        let result = parse(xoxo).evalEach(binding);
         if (result && result.toString) {
           // console.log(result);
           try {

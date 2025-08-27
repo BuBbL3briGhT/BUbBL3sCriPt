@@ -6,6 +6,14 @@ events.on("init", function (bubls) {
   ëval = bubls.ëval;
 });
 
+function evalExpression(binding) {
+  return function(expression) {
+    return expression.eval ?
+      expression.eval(binding) :
+      expression;
+  }
+}
+
 // Let's define `AbstractList` which is a
 // class that will serve as the abstract
 // base class for `List` and `Vector`. All
@@ -137,11 +145,13 @@ class AbstractList {
   }
 
   evalEach(binding) {
-    return this.each(xpr => xpr.eval(binding));
+    // return this.each(xpr => xpr.eval(binding));
+    return this.each(evalExpression(binding));
   }
 
   mapEval(binding) {
-    return this.map(xpr => xpr.eval(binding));
+    // return this.map(xpr => xpr.eval(binding));
+    return this.map(evalExpression(binding));
   }
 
   find(value) {
