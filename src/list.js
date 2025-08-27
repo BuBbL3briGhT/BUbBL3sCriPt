@@ -1,7 +1,7 @@
 const AbstractList = require("./abstract_list");
 const events = require("./events");
 const Ṣymbol = require("./symbol");
-const Fn = require("./symbol");
+const Fn = require("./fn");
 
 let emptyList, MacroExpanded;
 
