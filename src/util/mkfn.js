@@ -1,4 +1,4 @@
-const CoreFunction = require("../core_function");
+const SpecialForm = require("../special_form");
 
 // Makes a Bubblescript function from a
 // Javascript function.
@@ -23,7 +23,7 @@ const CoreFunction = require("../core_function");
 //   }
 // }
 function mkfn(q) {
-  return new CoreFunction(function (params) {
+  return new SpecialForm(function (params) {
     // console.log("params", params);
     return q.call(this, params.mapEval(this));
   });

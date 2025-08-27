@@ -7,7 +7,7 @@ const { Macro }= require("./macro");
 const { ëval, evalExpression } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
-const CoreFunction = require("./core_function");
+const SpecialForm = require("./special_form");
 const reqůire = require("./reqůire");
 const mkfn = require("./util/mkfn");
 const consola = require("./consola");
@@ -23,14 +23,10 @@ const starSymbol = Ṣymbol.for("*");
 const rootBinding = {
   console, consola,
   // Js require
-  ["reqūire"]: mkfn(o => require(...o)),
-
-  // Bubblescript require
-  // ["reqůire"]: mkfn(o => reqůire(...o)),
-
+  ["reqūire"]: require,
   __dirname: __dirname,
 
-  define: new CoreFunction(function(args) {
+  define: new SpecialForm(function(args) {
     let key = args.peek();
     let val = args.pop();
 
@@ -49,7 +45,7 @@ const rootBinding = {
     }
   }),
 
-  const: new CoreFunction(function (list) {
+  const: new SpecialForm(function (list) {
     const key = list.peek();
     const value = list.pop();
     let o;
@@ -99,16 +95,16 @@ const rootBinding = {
     }
   }),
 
-  fn: new CoreFunction(function(list) {
+  fn: new SpecialForm(function(list) {
     return new Fn(this, list.first.toList(),
                         list.rest)
   }),
 
-  macro: new CoreFunction(function(args) {
+  macro: new SpecialForm(function(args) {
     return new Macro(this, args.first, args.rest)
   }),
 
-  jsfn: new CoreFunction(function(args) {
+  jsfn: new SpecialForm(function(args) {
     const binding = this;
     const x = args.push(Ṣymbol.for('fn'));
     const fn = ëval(binding, x);
@@ -117,7 +113,7 @@ const rootBinding = {
     }
   }),
 
-  let: new CoreFunction(function([x,...xx]) {
+  let: new SpecialForm (function([x,...xx]) {
     let binding = Object.create(this);
     x = x.invert();
     while (!x.isEmpty) {
@@ -132,27 +128,27 @@ const rootBinding = {
       ëval(binding, z)).pop();
   }),
 
-  if: new CoreFunction(function([c,t,f]) {
+  if: new SpecialForm(function([c,t,f]) {
     return ëval(this,
       ëval(this, c) ? t : f);
   }),
 
-  unless: new CoreFunction(function([c,f,t]) {
+  unless: new SpecialForm(function([c,f,t]) {
     return ëval(this,
       ëval(this, c) ? t : f);
   }),
 
-  blert: new CoreFunction(function(msgs) {
+  blert: new SpecialForm(function(msgs) {
     alert(this.concat(msgs));
   }),
 
-  expandmacro: new CoreFunction(function(list) {
+  expandmacro: new SpecialForm(function(list) {
     const [head, tail] = list.plop();
     const macro = ëval(this, head);
     return macro.expand(tail);
   }),
 
-  loop: new CoreFunction(function([x,...xx]) {
+  loop: new SpecialForm(function([x,...xx]) {
     var binding = Object.create(this),
       m, recurCalled;
 

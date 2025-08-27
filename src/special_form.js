@@ -7,7 +7,7 @@
 // evaluating the paramer list. This matches how
 // Macros and Fn is called to maintain a
 // consistant interface.
-class CoreFunction {
+class SpecialForm {
 
   constructor(fn) {
     this.fn = fn;
@@ -19,4 +19,4 @@ class CoreFunction {
 
 }
 
-module.exports = CoreFunction;
+module.exports = SpecialForm;
