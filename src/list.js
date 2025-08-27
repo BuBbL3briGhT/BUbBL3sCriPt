@@ -110,8 +110,8 @@ class List extends AbstractList {
 
   eval(binding) {
     // List evaluation logic.
-    consola.registro({head: this.head,
-       headValue: this.head.eval(binding) });
+    // consola.registro({head: this.head,
+    //    headValue: this.head.eval(binding) });
     return Fn.call(binding,
          this.head.eval(binding), this.tail);
 
