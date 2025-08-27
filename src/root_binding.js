@@ -234,7 +234,7 @@ const rootBinding = {
   //   return receipient[message](...params);
   // }),
 
-  send: function(receipient, message, params) {
+  send: function(receipient, message, ...params) {
     // console.log("list", list);
     // console.log("receipient", receipient);
     // console.log("params", params);
