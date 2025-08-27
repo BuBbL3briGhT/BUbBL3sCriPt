@@ -178,7 +178,66 @@ const specialForms = {
 // Special forms with evaulated input
 // parameters.
 const spećialForms = {
+  eval: function(args) {
+    return args.eval(this);
+  },
 
+  list: function(params) {
+    return params;
+  },
+
+  vector: function(list) {
+    return list.toVector();
+  },
+
+  obj: function(list) {
+    return list.partition(2).reduce(
+      function(memo, [key, val]) {
+        memo[key] = val;
+        return memo;
+      }, {});
+  },
+
+  print: function(vals) {
+    return vals.each(function(value) {
+      document.body.append(value);
+    });
+  },
+
+  get: function(yeahyeahyeahs) {
+    // console.log(yeahyeahyeahs);
+     return yeahyeahyeahs.reduce(
+        (memo,key) => memo && memo[key]);
+  },
+
+  range: function (yippies) {
+    return new Range(...yippies);
+  },
+
+  lazy: function (itty) {
+    return new LazyList(...itty);
+  },
+  "+": function(a) {
+    return a.reduce((a,b) => a+b);
+  },
+  "-": function(a) {
+    return a.reduce((a,b) => a-b);
+  },
+  "*": function(a) {
+    return a.reduce((a,b) => a*b);
+  },
+  and: function(a) {
+    return a.reduce((a,b) => a && b);
+  },
+  or: function(_) {
+    return _.reduce((a,b) => a || b);
+  },
+  concat: function(eeks) {
+    return eeks.join('');
+  },
+  "/": function(a) {
+    return a.reduce((a,b) => a/b);
+  }
 }
 
 // A man walks into a bar. Bartender says
@@ -191,29 +250,9 @@ const rootBinding = {
   ["reqūire"]: require,
   __dirname: __dirname,
 
-  list: new SpecialForm(function(params) {
-    return params;
-  }, { evaluateParams: true }),
-
-  vector: mkfn(function(list) {
-    return list.toVector();
-  }),
-
-  obj: mkfn(function(list) {
-    return list.partition(2).reduce(
-      function(memo, [key, val]) {
-        memo[key] = val;
-        return memo;
-      }, {});
-  }),
-
   do: function(args) {
     return args.eval(this);
   },
-
-  eval: mkfn(function(args) {
-    return args.eval(this);
-  }),
 
   // send: mkfn(function([a,b,...c]) {
   //   if (b.key)
@@ -259,53 +298,16 @@ const rootBinding = {
     process.exit();
   },
 
-  get: mkfn(function(yeahyeahyeahs) {
-    // console.log(yeahyeahyeahs);
-     return yeahyeahyeahs.reduce(
-        (memo,key) => memo && memo[key]);
-  }),
-
-  range: mkfn(function (yippies) {
-    return new Range(...yippies);
-  }),
-
-  lazy: mkfn(function (itty) {
-    return new LazyList(...itty);
-  }),
-
   export: function(ca,nd,y) {
     return ca[nd] = y;
   },
 
-  print: mkfn(function(vals) {
-    return vals.each(function(value) {
-      document.body.append(value);
-    });
-  }),
-  "+": mkfn(function(a) {
-    return a.reduce((a,b) => a+b);
-  }),
-  "-": mkfn(function(a) {
-    return a.reduce((a,b) => a-b);
-  }),
-  "*": mkfn(function(a) {
-    return a.reduce((a,b) => a*b);
-  }),
-  "/": mkfn(function(a) {
-    return a.reduce((a,b) => a/b);
-  }),
   "=": function(a, b) {
     return a == b;
   },
   not: function(y) {
     return !y;
   },
-  and: mkfn(function(a) {
-    return a.reduce((a,b) => a && b);
-  }),
-  or: mkfn(function(_) {
-    return _.reduce((a,b) => a || b);
-  }),
   '>': (a,b) => {
     return a > b;
   },
@@ -315,9 +317,6 @@ const rootBinding = {
   parse: function(s) {
     return parse(s);
   },
-  concat: mkfn(function(eeks) {
-    return eeks.join('');
-  }),
   "new": function(m,n) {
       return new m(...n.toArray());
   }
