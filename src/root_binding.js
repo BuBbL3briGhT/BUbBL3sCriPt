@@ -88,13 +88,17 @@ const rootBinding = {
   }),
 
   definir: formaMuyEspecial(function(burbujas) {
-    // let llave = burbujas.ojeada();
-    // let valor = burbujas.estallido();
     const { premira: llave, resto: valor }
       = burbujas;
 
     consola.registro({ llave, valor });
 
+    // Si la clave resulta ser una lista,
+    // entonces realizamos una definición de
+    // función usando el primer elemento de la
+    // lista como clave y el resto como lista de
+    // parámetros; de lo contrario, realizamos
+    // una definición de valor de clave normal.
     if (llave instanceof Lista) {
       let nombre = llave.ojeada().encodar();
       return this[nombre] = new Fn(this,
