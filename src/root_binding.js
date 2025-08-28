@@ -36,11 +36,14 @@ const rootBinding = {
     // first item of the list as the key and the
     // rest as the paramter list, otherwise do a
     // normal key value definition.
-    // Si la clave resulta ser una lista, entonces
-    // realizamos una definición de función usando el
-    // primer elemento de la lista como clave y el
-    // resto como lista de parámetros; de lo contrario, realizamos una
-    // definición de valor de clave normal.
+    //
+    // Si la clave resulta ser una lista,
+    // entonces realizamos una definición de
+    // función usando el primer elemento de la
+    // lista como clave y el resto como lista de
+    // parámetros; de lo contrario, realizamos
+    // una definición de valor de clave normal.
+    //
     if (key instanceof List) {
       let name = key.peek().toString();
       return this[key.peek().toString()]
