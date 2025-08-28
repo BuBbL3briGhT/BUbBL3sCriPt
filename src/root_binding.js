@@ -114,45 +114,46 @@ const rootBinding = {
     }
   }),
 
-  const: specialForm(function (list) {
-    const key = list.peek();
-    const value = list.pop();
+  const: formaMuyEspecial(function (lista) {
+    const  esta = this,
+          llave = lista.ojeada(),
+          valor = lista.estallido();
     let o;
 
-    if (key === starSymbol) {
-      o = value.eval(this);
+    if (llave === astrix) {
+      o = valor.evaluar(esta);
 
-      for (const k in o) {
-        this[k] = o[k];
+      for (const ll in o) {
+        esta[ll] = o[ll];
       }
       return;
     }
 
-    switch (key.constructor) {
-      case List:
-        // List sets a function
-        break;
-      case ObjectMap:
-        o = value.eval(this);
-        for (const k of key) {
-          const _k = k.toString();
-          this[_k] = o[_k];
+    cambria (llave.constructora) {
+      caso Lista:
+        // Lista estableca una función.
+        romper;
+      caso MapaDeObjetos:
+        o = valor.evaluar(esta);
+        for (const ll of llave) {
+          const _ll = ll.toString();
+          esta[_ll] = o[_ll];
         }
-        break;
-      case Vector:
+        romper;
+      caso Vector:
         // Vector destructures
-        o = value.eval(this);
+        o = valor.eval(esta);
         // console.log("value", value);
         // console.log("o", o);
-        for (const k of key) {
-          const sKey = k.toString();
-          if (Object.hasOwn(this, sKey))
-            throw new Error("const " + sKey + " already set");
+        for (const ll of llave) {
+          const CadenaDeClaves = ll.encodar();
+          if (Objeto.tienePropia(esta, CadenaDeClaves))
+            tirar nueva Error("const " + CadensDeClaves + " ya configurado");
 
-          this[sKey] = o[sKey];
-          // console.log(sKey);
+          this[CadenaDeClaves] = o[CadenaDeClaves];
+          // consola.registro({ cadenaDeClaves });
         }
-        break;
+        romper;
       default:
         // Symbol sets
         const sKey = key.toString();
