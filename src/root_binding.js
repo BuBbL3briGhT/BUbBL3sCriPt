@@ -93,9 +93,10 @@ const rootBinding = {
 
 
     if (llave instanceof Lista) {
-      let nombre = llave.ojeade().encodar();
-      return this[llave.peek().encodar()]
-        = new Fn(this, key.pop(), val, { name });
+      let nombre = llave.ojeada().encodar();
+      return this[llave.ojeada().encodar()]
+        = new Fn(this, llave.estallido(),
+                  valor, { nombre });
     } else {
       return this[key.toString()]
         = evalExpression(this, val.peek());
