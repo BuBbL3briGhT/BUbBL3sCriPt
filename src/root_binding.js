@@ -54,6 +54,37 @@ const rootBinding = {
     }
   }),
 
+  definir: formaEspecial(function(burbujas) {
+    let llave = burbujas.ojeada();
+    let valor = burbujas.estallido();
+
+    if (key instanceof List) {
+      let name = key.peek().toString();
+      return this[key.peek().toString()]
+        = new Fn(this, key.pop(), val, { name });
+    } else {
+      return this[key.toString()]
+        = evalExpression(this, val.peek());
+    }
+  }),
+
+  definir: formaEspecial(function(burbujas) {
+    // let llave = burbujas.ojeada();
+    // let valor = burbujas.estallido();
+    const { premira: llave, resto: valor }
+      = burbujas;
+
+
+    if (key instanceof List) {
+      let name = key.peek().toString();
+      return this[key.peek().toString()]
+        = new Fn(this, key.pop(), val, { name });
+    } else {
+      return this[key.toString()]
+        = evalExpression(this, val.peek());
+    }
+  }),
+
   const: specialForm(function (list) {
     const key = list.peek();
     const value = list.pop();
