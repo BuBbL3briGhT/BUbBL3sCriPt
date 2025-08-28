@@ -85,6 +85,23 @@ const rootBinding = {
     }
   }),
 
+  definir: formaEspecial(function(burbujas) {
+    // let llave = burbujas.ojeada();
+    // let valor = burbujas.estallido();
+    const { premira: llave, resto: valor }
+      = burbujas;
+
+
+    if (llave instanceof Lista) {
+      let nombre = llave.ojeade().encodar();
+      return this[llave.peek().encodar()]
+        = new Fn(this, key.pop(), val, { name });
+    } else {
+      return this[key.toString()]
+        = evalExpression(this, val.peek());
+    }
+  }),
+
   const: specialForm(function (list) {
     const key = list.peek();
     const value = list.pop();
