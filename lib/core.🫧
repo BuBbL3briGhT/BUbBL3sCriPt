@@ -1,14 +1,14 @@
 (🫧 (puts & msg)
- (console.log & msg))
+  (console.log & msg))
 
 (🫧 (poot & msg)
- (console.log & msg))
+  (console.log & msg))
 
 (🫧definir (pone & mensajes)
- (consola.registro & mensajes))
+  (consola.registro & mensajes))
 
 if module (module.exports {
-  pop puts each reverse reverseCowgirl
-  empty? invert shift peek poot push slap
-  stick pluck && PARTY!!!! #spank
+  pone pop puts each reverse reverseCowgirl
+  empty? invert shift peek poot push slap stick
+  pluck && PARTY!!!! #spank
 };
