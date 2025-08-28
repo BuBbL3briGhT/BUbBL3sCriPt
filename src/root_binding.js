@@ -100,9 +100,11 @@ const rootBinding = {
     // parámetros; de lo contrario, realizamos
     // una definición de valor de clave normal.
     if (llave instanceof Lista) {
-      let nombre = llave.ojeada().encodar();
+      const nombre = llave.premira.encodar(),
+        parámetros = llave.resto;
+
       return this[nombre] = new Fn(this,
-          llave.estallido(), valor, { nombre });
+               parámetros, valor, { nombre });
     } else {
       return this[llave.encodar()]
         = expresiónDeEvaluación(this,
