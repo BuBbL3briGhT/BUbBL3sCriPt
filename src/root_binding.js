@@ -85,21 +85,20 @@ const rootBinding = {
     }
   }),
 
-  definir: formaEspecial(function(burbujas) {
+  definir: formaMuyEspecial(function(burbujas) {
     // let llave = burbujas.ojeada();
     // let valor = burbujas.estallido();
     const { premira: llave, resto: valor }
       = burbujas;
 
-
     if (llave instanceof Lista) {
       let nombre = llave.ojeada().encodar();
-      return this[llave.ojeada().encodar()]
-        = new Fn(this, llave.estallido(),
-                  valor, { nombre });
+      return this[nombre] = new Fn(this,
+          llave.estallido(), valor, { nombre });
     } else {
-      return this[key.toString()]
-        = evalExpression(this, val.peek());
+      return this[llave.encodar()]
+        = expresiónDeEvaluación(this,
+                           valor.ojeada());
     }
   }),
 
