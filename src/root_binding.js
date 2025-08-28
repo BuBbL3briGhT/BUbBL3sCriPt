@@ -88,8 +88,9 @@ const rootBinding = {
   }),
 
   definir: formaMuyEspecial(function(burbujas) {
-    const { premira: llave, resto: valor }
-      = burbujas;
+    const esta = this,
+        { premira: llave, resto: valor }
+               = burbujas;
 
     consola.registro({ llave, valor });
 
@@ -104,11 +105,11 @@ const rootBinding = {
         parámetros = llave.resto,
             cuerpo = valor;
 
-      return this[nombre] = new Fn(this,
+      return esta[nombre] = new Fn(esta,
                parámetros, cuerpo, { nombre });
     } else {
-      return this[llave.encodar()]
-        = expresiónDeEvaluación(this,
+      return esta[llave.encodar()]
+        = expresiónDeEvaluación(esta,
                            valor.ojeada());
     }
   }),
