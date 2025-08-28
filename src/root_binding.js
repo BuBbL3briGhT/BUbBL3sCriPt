@@ -14,6 +14,8 @@ const consola = require("./consola");
 
 const starSymbol = Ṣymbol.for("*");
 
+const formaMuyEspecial = specialForm;
+const formaEspecial = specialFormP;
 
 // A man walks into a bar. Bartender says
 // what'll you have? The man says,
@@ -90,6 +92,8 @@ const rootBinding = {
     // let valor = burbujas.estallido();
     const { premira: llave, resto: valor }
       = burbujas;
+
+    consola.registro({ llave, valor });
 
     if (llave instanceof Lista) {
       let nombre = llave.ojeada().encodar();
