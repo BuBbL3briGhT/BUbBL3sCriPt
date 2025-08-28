@@ -2,6 +2,32 @@
 
 # rename original nuevo [dir]
 
+
+function camelizar() {
+  echo $1 | sed -E 's/_([a-z])/\U\1/g' | sed -E 's/^(.)/\L\1/'
+
+}
+
+function pascalizar() {
+  echo $1 | sed -E 's/_([a-z])/\U\1/g' | sed -E 's/^(.)/\U\1/'
+}
+
+function subrayar() {
+  echo $1 | sed -E 's/([A-Z])/_\L\1/g' | sed -E 's/^_//'
+}
+
+camelizar $1
+camelizar $2
+pascalizar $1
+pascalizar $2
+subrayar $1
+subrayar $2
+exit
+
+
+camelloVieja="$(camelizar \"$1\")"
+camelloNuevo="$(camelizar \"$2\")"
+
 # orginal_texto = $1;
 # nuevo_texto
 # echo $1 $2
@@ -25,4 +51,4 @@ for file in $files; do
   # rename old to new
   # mv "$file" "$new_path"
 done
-# IFS=$" \t\n"
+# IFS=$" \t\n"e
