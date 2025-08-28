@@ -27,15 +27,20 @@ const rootBinding = {
 
   /* Special form functions */
 
-  define: specialForm(function(args) {
-    let key = args.peek();
-    let val = args.pop();
+  definir: formaEspecial(function(burbujas) {
+    let llave = burbujas.ojeada();
+    let valor = burbujas.estallido();
 
     // If the key turns out to be a list, then
     // we do a function definition using the
     // first item of the list as the key and the
     // rest as the paramter list, otherwise do a
     // normal key value definition.
+    // Si la clave resulta ser una lista, entonces
+    // realizamos una definición de función usando el
+    // primer elemento de la lista como clave y el
+    // resto como lista de parámetros; de lo contrario, realizamos una
+    // definición de valor de clave normal.
     if (key instanceof List) {
       let name = key.peek().toString();
       return this[key.peek().toString()]
