@@ -1,0 +1,85 @@
+
+    /*      +
+      *  🫧 Ɓůɓɓļɛ§çŕịpŧ.js  *
+     *         +     *           *
+    *   ✨️  A Lisp for JavaScript. *
+     *        *    +   *
+       *  */
+
+const AbstractList = require("./abstract_list");
+const List = require("./list");
+const Vector = require("./vector");
+const Ṣymbol = require("./symbol");
+const Keyword = require("./keyword");
+const Quote = require("./quote");
+const Fn = require("./fn");
+const { Macro } = require("./macro");
+const { tokenize } = require("./tökenize");
+const { Parser, parse } = require("./parse");
+const { ėval, ëval, evalExpression } = require("./eval");
+const { rootBinding } = require("./root_binding");
+const events = require("./events");
+
+const QuoteScript = {
+  List, Vector, Ṣymbol, Keyword, Quote, Fn,
+  Macro, tokenize, Parser, parse, eval: ėval,
+  ėval, ëval, evalExpression, rootBinding
+}
+
+events.emit("init", QuoteScript);
+
+(function() {
+  let bnd = rootBinding;
+
+  function list(...args) {
+    return List.from(args);
+  }
+
+  function vector(...args) {
+    return Vector.from(args);
+  }
+
+  function quote(m) {
+    return new Quote(m);
+  }
+
+  function muf(...args) {
+    // return ėval(bnd, arry.toList(args).push(_muf));
+    // return ëval(bnd, List.from(args).push(_muf));
+    return List.from(args).push(_muf).eval(bnd);
+  }
+
+  let _push = Ṣymbol.for('push'),
+       fn = Ṣymbol.for('fn'),
+       a = Ṣymbol.for('a'),
+       b = Ṣymbol.for('b'),
+       send = Ṣymbol.for('send'),
+       mufn = Ṣymbol.for('mufn'),
+       macro = Ṣymbol.for('macro'),
+       name = Ṣymbol.for('name'),
+       amp = Ṣymbol.for('&'),
+       z = Ṣymbol.for('z'),
+      _list = Ṣymbol.for('list'),
+      _muf = Ṣymbol.for('muf'),
+      puts = Ṣymbol.for('puts'),
+      msg = Ṣymbol.for('msg'),
+      consoleLog = Ṣymbol.for('console.log');
+
+  // muf push (fn [a b] (send a °push b))
+  muf(_push, list(fn, vector(a, b),
+       list(send, a, quote(_push), b)));
+
+  // (muf (puts msg) (console.log msg))
+  // (muf puts (fn [msg] (console.log msg)))
+  muf(puts, list(fn, vector(msg),
+    list(consoleLog, msg)));
+
+  // (muf mufn (macro [name & z]
+  //     (list °muf name (push z °fn))))
+  muf(mufn, list(macro, vector(name,amp,z),
+      list(_list,quote(_muf), name,
+         list(_push, z, quote(fn)))));
+
+})();
+
+module.exports = QuoteScript;

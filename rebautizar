@@ -4,6 +4,7 @@
 # TODO: Dry run option
 # TODO implement limit to xirectory
 # TODO: Check for issues, files that already exist, warn
+# TODo: Add directories to ignore option.
 
 # rename original nuevo [dir]
 
