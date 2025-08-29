@@ -41,10 +41,10 @@ function formaEspecial(fn) {
 
 // Helper creates a Special Form (Function)
 // with evaluated params.
-function formaEspecialP(fn) {
+function formaMuyEspecial(fn) {
   return new FormaEspecial(fn,
     { evaluteParams: true });
 }
 
 module.exports = { FormaEspecial, formaEspecial,
-  formaEspecialP };
+  formaMuyEspecial };

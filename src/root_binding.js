@@ -7,7 +7,7 @@ const { Macro }= require("./macro");
 const { ëval, evalExpression } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
-const { formaEspecial, formaEspecialP } =
+const { formaEspecial, formaMuyEspecial } =
                   require("./forma_especial");
 const reqůire = require("./reqůire");
 const consola = require("./consola");
@@ -15,7 +15,7 @@ const consola = require("./consola");
 const starSymbol = Ṣymbol.for("*");
 
 const formaMuyEspecial = formaEspecial;
-const formaEspecial = formaEspecialP;
+const formaEspecial = formaMuyEspecial;
 
 // A man walks into a bar. Bartender says
 // what'll you have? The man says,
@@ -261,19 +261,19 @@ const rootBinding = {
   /* Special forms with evaulated input
    * parameters. */
 
-  eval: formaEspecialP(function(args) {
+  eval: formaMuyEspecial(function(args) {
     return args.eval(this);
   }),
 
-  list: formaEspecialP(function(params) {
+  list: formaMuyEspecial(function(params) {
     return params;
   }),
 
-  vector: formaEspecialP(function(list) {
+  vector: formaMuyEspecial(function(list) {
     return list.toVector();
   }),
 
-  obj: formaEspecialP(function(list) {
+  obj: formaMuyEspecial(function(list) {
     return list.partition(2).reduce(
       function(memo, [key, val]) {
         memo[key] = val;
@@ -281,51 +281,51 @@ const rootBinding = {
       }, {});
   }),
 
-  print: formaEspecialP(function(vals) {
+  print: formaMuyEspecial(function(vals) {
     return vals.each(function(value) {
       document.body.append(value);
     });
   }),
 
-  get: formaEspecialP(function(yeahyeahyeahs) {
+  get: formaMuyEspecial(function(yeahyeahyeahs) {
     // console.log(yeahyeahyeahs);
      return yeahyeahyeahs.reduce(
         (memo,key) => memo && memo[key]);
   }),
 
-  range: formaEspecialP(function (yippies) {
+  range: formaMuyEspecial(function (yippies) {
     return new Range(...yippies);
   }),
 
-  lazy: formaEspecialP(function (itty) {
+  lazy: formaMuyEspecial(function (itty) {
     return new LazyList(...itty);
   }),
 
-  "+": formaEspecialP(function(a) {
+  "+": formaMuyEspecial(function(a) {
     return a.reduce((a,b) => a+b);
   }),
 
-  "-": formaEspecialP(function(a) {
+  "-": formaMuyEspecial(function(a) {
     return a.reduce((a,b) => a-b);
   }),
 
-  "*": formaEspecialP(function(a) {
+  "*": formaMuyEspecial(function(a) {
     return a.reduce((a,b) => a*b);
   }),
 
-  and: formaEspecialP(function(a) {
+  and: formaMuyEspecial(function(a) {
     return a.reduce((a,b) => a && b);
   }),
 
-  or: formaEspecialP(function(_) {
+  or: formaMuyEspecial(function(_) {
     return _.reduce((a,b) => a || b);
   }),
 
-  concat: formaEspecialP(function(eeks) {
+  concat: formaMuyEspecial(function(eeks) {
     return eeks.join('');
   }),
 
-  "/": formaEspecialP(function(a) {
+  "/": formaMuyEspecial(function(a) {
     return a.reduce((a,b) => a/b);
   }),
 
