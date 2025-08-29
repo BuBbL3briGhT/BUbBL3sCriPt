@@ -5,9 +5,12 @@
 # TODO implement limit to xirectory
 # TODO: Check for issues, files that already exist, warn
 # TODo: Add directories to ignore option.
+# TODO: Needs to renames symbol tokens, not
+# partial tokens, so Bubble -> Quote shouldn't
+# change BubbleScript, match symbol delimiters on
+# the outside of symbol being rename (){}[] \nEOT"
 
 # rename original nuevo [dir]
-
 
 function camelizar() {
   echo $1 | sed -E 's/_([a-z])/\U\1/g' | sed -E 's/^(.)/\L\1/'
