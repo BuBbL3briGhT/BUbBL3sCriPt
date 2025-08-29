@@ -1,4 +1,4 @@
-const SpecialForm = require("../special_form");
+const FormaEspecial = require("../forma_especial");
 
 // Makes a Bubblescript function from a
 // Javascript function.
@@ -23,7 +23,7 @@ const SpecialForm = require("../special_form");
 //   }
 // }
 function mkfn(fn) {
-  return new SpecialForm(fn,
+  return new FormaEspecial(fn,
     { evaluateParams: true });
 }
 

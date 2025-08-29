@@ -14,7 +14,7 @@
 // be evaluated against the binding before being
 // passed to the special form function. This
 // value defaults to false.
-class SpecialForm {
+class FormaEspecial {
 
   constructor(fn, opts={ evaluateParams: false }) {
     if (opts.evaluateParams) {
@@ -35,16 +35,16 @@ class SpecialForm {
 
 // Helper creates a Special Form (Function)
 // without evaluated params.
-function specialForm(fn) {
-  return new SpecialForm(fn);
+function formaEspecial(fn) {
+  return new FormaEspecial(fn);
 }
 
 // Helper creates a Special Form (Function)
 // with evaluated params.
-function specialFormP(fn) {
-  return new SpecialForm(fn,
+function formaEspecialP(fn) {
+  return new FormaEspecial(fn,
     { evaluteParams: true });
 }
 
-module.exports = { SpecialForm, specialForm,
-  specialFormP };
+module.exports = { FormaEspecial, formaEspecial,
+  formaEspecialP };

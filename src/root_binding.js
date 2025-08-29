@@ -7,15 +7,15 @@ const { Macro }= require("./macro");
 const { ëval, evalExpression } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
-const { specialForm, specialFormP } =
-                  require("./special_form");
+const { formaEspecial, formaEspecialP } =
+                  require("./forma_especial");
 const reqůire = require("./reqůire");
 const consola = require("./consola");
 
 const starSymbol = Ṣymbol.for("*");
 
-const formaMuyEspecial = specialForm;
-const formaEspecial = specialFormP;
+const formaMuyEspecial = formaEspecial;
+const formaEspecial = formaEspecialP;
 
 // A man walks into a bar. Bartender says
 // what'll you have? The man says,
@@ -165,16 +165,16 @@ const rootBinding = {
     }
   }),
 
-  fn: specialForm(function(list) {
+  fn: formaEspecial(function(list) {
     return new Fn(this, list.first.toList(),
                         list.rest)
   }),
 
-  macro: specialForm(function(args) {
+  macro: formaEspecial(function(args) {
     return new Macro(this, args.first, args.rest)
   }),
 
-  jsfn: specialForm(function(args) {
+  jsfn: formaEspecial(function(args) {
     const binding = this;
     const x = args.push(Ṣymbol.for('fn'));
     const fn = ëval(binding, x);
@@ -183,7 +183,7 @@ const rootBinding = {
     }
   }),
 
-  let: specialForm(function([x,...xx]) {
+  let: formaEspecial(function([x,...xx]) {
     let binding = Object.create(this);
     x = x.invert();
     while (!x.isEmpty) {
@@ -198,7 +198,7 @@ const rootBinding = {
       ëval(binding, z)).pop();
   }),
 
-  if: specialForm(function([c,t,f]) {
+  if: formaEspecial(function([c,t,f]) {
     // consola.registro({ c, f, t });
     const conditionValue =
               evalExpression(this, c);
@@ -208,22 +208,22 @@ const rootBinding = {
       return evalExpression(this, f);
   }),
 
-  unless: specialForm(function([c,f,t]) {
+  unless: formaEspecial(function([c,f,t]) {
     return evalExpression(this,
       evalExpression(this, c) ? t : f);
   }),
 
-  blert: specialForm(function(msgs) {
+  blert: formaEspecial(function(msgs) {
     alert(this.concat(msgs));
   }),
 
-  expandmacro: specialForm(function(list) {
+  expandmacro: formaEspecial(function(list) {
     const [head, tail] = list.plop();
     const macro = ëval(this, head);
     return macro.expand(tail);
   }),
 
-  loop: specialForm(function([x,...xx]) {
+  loop: formaEspecial(function([x,...xx]) {
     var binding = Object.create(this),
       m, recurCalled;
 
@@ -261,19 +261,19 @@ const rootBinding = {
   /* Special forms with evaulated input
    * parameters. */
 
-  eval: specialFormP(function(args) {
+  eval: formaEspecialP(function(args) {
     return args.eval(this);
   }),
 
-  list: specialFormP(function(params) {
+  list: formaEspecialP(function(params) {
     return params;
   }),
 
-  vector: specialFormP(function(list) {
+  vector: formaEspecialP(function(list) {
     return list.toVector();
   }),
 
-  obj: specialFormP(function(list) {
+  obj: formaEspecialP(function(list) {
     return list.partition(2).reduce(
       function(memo, [key, val]) {
         memo[key] = val;
@@ -281,51 +281,51 @@ const rootBinding = {
       }, {});
   }),
 
-  print: specialFormP(function(vals) {
+  print: formaEspecialP(function(vals) {
     return vals.each(function(value) {
       document.body.append(value);
     });
   }),
 
-  get: specialFormP(function(yeahyeahyeahs) {
+  get: formaEspecialP(function(yeahyeahyeahs) {
     // console.log(yeahyeahyeahs);
      return yeahyeahyeahs.reduce(
         (memo,key) => memo && memo[key]);
   }),
 
-  range: specialFormP(function (yippies) {
+  range: formaEspecialP(function (yippies) {
     return new Range(...yippies);
   }),
 
-  lazy: specialFormP(function (itty) {
+  lazy: formaEspecialP(function (itty) {
     return new LazyList(...itty);
   }),
 
-  "+": specialFormP(function(a) {
+  "+": formaEspecialP(function(a) {
     return a.reduce((a,b) => a+b);
   }),
 
-  "-": specialFormP(function(a) {
+  "-": formaEspecialP(function(a) {
     return a.reduce((a,b) => a-b);
   }),
 
-  "*": specialFormP(function(a) {
+  "*": formaEspecialP(function(a) {
     return a.reduce((a,b) => a*b);
   }),
 
-  and: specialFormP(function(a) {
+  and: formaEspecialP(function(a) {
     return a.reduce((a,b) => a && b);
   }),
 
-  or: specialFormP(function(_) {
+  or: formaEspecialP(function(_) {
     return _.reduce((a,b) => a || b);
   }),
 
-  concat: specialFormP(function(eeks) {
+  concat: formaEspecialP(function(eeks) {
     return eeks.join('');
   }),
 
-  "/": specialFormP(function(a) {
+  "/": formaEspecialP(function(a) {
     return a.reduce((a,b) => a/b);
   }),
 
