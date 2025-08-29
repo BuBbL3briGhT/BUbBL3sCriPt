@@ -3,8 +3,9 @@
 function enumerarTodosLosFichas() {
   # grep -oP '\w+' $1
   # grep -oP '\w+' $1 | sort | uniq | wc -l
-  # grep -oP '\w+' $1 | sort | uniq
-  grep -oP '\w+' $1 | sort | uniq -c
+  grep -oP '\w+' $1 | sort | uniq | cat -n
+  # grep -oP '\w+' $1 | sort | uniq -c
+  # grep -oP '\w+' $1 | sort | uniq -c | sort
 }
 
 enumerarTodosLosFichas "$1"
