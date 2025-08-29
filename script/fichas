@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+
+function enumerarTodosLosFichas() {
+  # grep -oP '\w+' $1
+  # grep -oP '\w+' $1 | sort | uniq | wc -l
+  # grep -oP '\w+' $1 | sort | uniq
+  grep -oP '\w+' $1 | sort | uniq -c
+}
+
+enumerarTodosLosFichas "$1"
