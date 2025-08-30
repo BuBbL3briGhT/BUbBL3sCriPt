@@ -11,7 +11,6 @@ function buscar_y_reemplazar_símbolo() {
 
   echo "$archivo" ":" "$simbolo" "->" "$reemplazo"
 
-  return
 
   # Loop through the file line by line
   while IFS= read -r line; do
@@ -21,38 +20,39 @@ function buscar_y_reemplazar_símbolo() {
 
     # Extract the non-words for this line and put
     # them into an array
-    non_words=($(grep -oP '\W+' <<< "$line"))
+    # non_words=($(grep -oP '\W+' <<< "$line"))
 
     # Perform a sample token replacement (e.g.,
     # replace 'two' with 'two_two')
-    for i in "${!words[@]}"; do
-        if [[ "${words[i]}" == "two" ]]; then
-            words[i]="two_two"
-        fi
-    done
+    # for i in "${!words[@]}"; do
+    #     if [[ "${words[i]}" == "$simbolo" ]]; then
+    #         words[i]="$reemplazo"
+    #     fi
+    # done
 
     # Reconstruct the line
-    reconstructed_line=""
-    for i in "${!words[@]}"; do
-        reconstructed_line+="${words[i]}"
-        # Append the corresponding non-word token if it exists
-        if [[ -n "${non_words[i]}" ]]; then
-            reconstructed_line+="${non_words[i]}"
-        fi
-    done
+    # reconstructed_line=""
+    # for i in "${!words[@]}"; do
+    #     reconstructed_line+="${words[i]}"
+    #     # Append the corresponding non-word token if it exists
+    #     if [[ -n "${non_words[i]}" ]]; then
+    #         reconstructed_line+="${non_words[i]}"
+    #     fi
+    # done
 
     # Handle the trailing non-word token if it exists
-    if [[ "${#words[@]}" -lt "${#non_words[@]}" ]]; then
-        reconstructed_line+="${non_words[-1]}"
-    fi
+    # if [[ "${#words[@]}" -lt "${#non_words[@]}" ]]; then
+    #     reconstructed_line+="${non_words[-1]}"
+    # fi
 
-    echo "$reconstructed_line"
+    # echo "$reconstructed_line"
 
-  done < "$file"
+  done < "$archivo"
 
 }
 
-buscar_y_reemplazar_símbolo "file_path" \
+buscar_y_reemplazar_símbolo \
+  "./src/abstract_list.js" \
   "AbstractList" \
   "ListaAbstracta"
 
