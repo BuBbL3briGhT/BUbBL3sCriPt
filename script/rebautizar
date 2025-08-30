@@ -35,7 +35,8 @@ function buscar_y_reemplazar_símbolo() {
         fi
     done
 
-    # Reconstruct the line
+    # Reconstruir la linea.
+    # Reconstruct the line.
     # reconstructed_line=""
     # for i in "${!words[@]}"; do
     #     reconstructed_line+="${words[i]}"
