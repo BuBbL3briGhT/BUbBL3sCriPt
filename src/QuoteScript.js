@@ -11,7 +11,7 @@ const List = require("./list");
 const Vector = require("./vector");
 const Ṣymbol = require("./symbol");
 const Keyword = require("./keyword");
-const Bubble = require("./bubble");
+const Quote = require("./quote");
 const Fn = require("./fn");
 const { Macro } = require("./macro");
 const { tokenize } = require("./tökenize");
@@ -20,13 +20,13 @@ const { ėval, ëval, evalExpression } = require("./eval");
 const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
-const BubbleScript = {
-  List, Vector, Ṣymbol, Keyword, Bubble, Fn,
+const QuoteScript = {
+  List, Vector, Ṣymbol, Keyword, Quote, Fn,
   Macro, tokenize, Parser, parse, eval: ėval,
   ėval, ëval, evalExpression, rootBinding
 }
 
-events.emit("init", BubbleScript);
+events.emit("init", QuoteScript);
 
 (function() {
   let bnd = rootBinding;
@@ -40,7 +40,7 @@ events.emit("init", BubbleScript);
   }
 
   function quote(m) {
-    return new Bubble(m);
+    return new Quote(m);
   }
 
   function muf(...args) {
@@ -82,4 +82,4 @@ events.emit("init", BubbleScript);
 
 })();
 
-module.exports = BubbleScript;
+module.exports = QuoteScript;

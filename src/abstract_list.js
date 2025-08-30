@@ -4,7 +4,9 @@ let ëval;
 
 events.on("init", function (bubls) {
   ëval = bubls.ëval;
+  evalExpression = bubls.evalExpression;
 });
+
 
 // Let's define `AbstractList` which is a
 // class that will serve as the abstract
@@ -137,11 +139,13 @@ class AbstractList {
   }
 
   evalEach(binding) {
-    return this.each(xpr => xpr.eval(binding));
+    return this.each(evalExpression
+      .bind(null, binding));
   }
 
   mapEval(binding) {
-    return this.map(xpr => xpr.eval(binding));
+    return this.map(evalExpression
+      .bind(null, binding));
   }
 
   find(value) {

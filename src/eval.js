@@ -1,45 +1,48 @@
 // const AbstractList = require("./abstract_list");
-// const List = require("./list");
+const List = require("./list");
 // const Vector = require("./vector");
 // const ObjectMap = require("./object_map");
 // const Fn = require("./fn");
 // const { Macro, MacroExpanded } = require("./macro");
 // const Bubble = require("./bubble");
-// const Ṣymbol = require("./symbol");
-// const { parse } = require("./parse");
+const Ṣymbol = require("./symbol");
+const { parse } = require("./parse");
 // const LazyList = require("./lazy_list");
-// const events = require("./events");
+const events = require("./events");
 // const { BubbleScriptError } = require("./errors");
 // const consola = require("./consola");
 
 // const sAmp = Ṣymbol.for("&");
 
-// let rootBinding;
+let rootBinding;
 
-// events.on("init", function (bubls) {
-//   rootBinding = bubls.rootBinding;
-// });
+events.on("init", function (bubls) {
+  rootBinding = bubls.rootBinding;
+});
 
-function memoize(object, property, fn) {
-  Object.defineProperty(object, property, {
-    get: function () {
-      Object.defineProperty(object, property, {
-        value: fn()
-      });
-    }
-  });
-}
+// function memoize(object, property, fn) {
+//   Object.defineProperty(object, property, {
+//     get: function () {
+//       const value = fn();
+//       Object.defineProperty(object, property, {
+//         value
+//       });
+//       return value;
+//     },
+//     configurable: true
+//   });
+// }
 
-memoize(this, "rootBinding",
-  () => require("./root_binding"));
+// memoize(this, "rootBinding",
+//   () => require("./root_binding"));
 
 // Evaluate Bubblescript
 function ėval(script, opts={}) {
   return parse(script, opts).
-    evalEach(this.rootBinding);
+    evalEach(rootBinding);
 }
 
-ėval = ėval.bind(this);
+// ėval = ėval.bind(this);
 
 // function ëval(binding, ) {
 //   throw new Error("Deprecated: Use List#eval inplace of this function.");
@@ -47,11 +50,57 @@ function ėval(script, opts={}) {
 
 // module.exports = { ėval };
 
-function ëval(binding, expression) {
-  return expression.eval(binding);
+// Evaluates an expression.
+function evalExpression(binding, expression) {
+  return expression.eval ?
+    expression.eval(binding) : expression;
 }
 
-module.exports = { ėval, ëval };
+function ëval(binding, expression) {
+  return expression.evalEach(binding);
+}
+
+// List#eval: Evaluates list.
+// List.eval = function(binding) {
+//   // List evaluation logic.
+//   const headValue = this.head.eval(binding);
+//   switch (this.head.constructor) {
+//     case Ṣymbol:
+//       if (this.head.callPattern === 2) {
+//         return headValue.call(binding,
+//           ...this.tail.mapEval(binding));
+//       }
+//   }
+//   return headValue.call(binding, this.tail);
+
+//   // return this.head
+//   //            .eval(binding)
+//   //            .call(binding, this.tail);
+
+
+//   // return headValue.eval(tail);
+//   // const headValue = head.eval(binding);
+//   // return headValue.eval(tail);
+
+//   // switch (head.constructor) {
+//   //   case Ṣymbol:
+//   //     const headValue = head.eval(binding);
+//   //     return tail.push(headValue).eval();
+//   //   case List:
+//   //     const headValue = head.eval(binding);
+//   //     return ëvalList(binding, tail.push(headValue));
+//   //   case Fn:
+//   //     return head.invoke(tail.mapEval(binding));
+//   //   case Function:
+//   //     return head.call(binding, tail);
+//   //   case Macro:
+//   //     const expanded = head.expand(tail);
+//   //     throw new MacroExpanded(expanded);
+//   //   default:
+//   //     return undefined;
+// }
+
+module.exports = { ėval, ëval, evalExpression };
 
 
 // const bi = {

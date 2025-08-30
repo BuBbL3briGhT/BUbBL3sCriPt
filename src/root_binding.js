@@ -4,16 +4,18 @@ const ObjectMap = require("./object_map");
 const Fn = require("./fn");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
-const { ëval } = require("./eval");
+const { ëval, evalExpression } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
+const { formaEspecial, formaMuyEspecial } =
+                  require("./forma_especial");
 const reqůire = require("./reqůire");
-const mkfn = require("./util/mkfn");
- const consola = require("./consola");
+const consola = require("./consola");
 
 const starSymbol = Ṣymbol.for("*");
 
-// consola.registro({starSymbol, consola});
+const formaMuyEspecial = formaEspecial;
+const formaEspecial = formaMuyEspecial;
 
 // A man walks into a bar. Bartender says
 // what'll you have? The man says,
@@ -22,71 +24,136 @@ const starSymbol = Ṣymbol.for("*");
 const rootBinding = {
   console, consola,
   // Js require
-  ["reqūire"]: mkfn(o => require(...o)),
-
-  // Bubblescript require
-  // ["reqůire"]: mkfn(o => reqůire(...o)),
-
+  ["reqūire"]: require,
   __dirname: __dirname,
 
-  define: function(args) {
-    let key = args.peek();
-    let val = args.pop();
+  /* Special form functions */
+
+  definir: formaEspecial(function(burbujas) {
+    let llave = burbujas.ojeada();
+    let valor = burbujas.estallido();
 
     // If the key turns out to be a list, then
     // we do a function definition using the
     // first item of the list as the key and the
     // rest as the paramter list, otherwise do a
     // normal key value definition.
+    //
+    // Si la clave resulta ser una lista,
+    // entonces realizamos una definición de
+    // función usando el primer elemento de la
+    // lista como clave y el resto como lista de
+    // parámetros; de lo contrario, realizamos
+    // una definición de valor de clave normal.
+    //
     if (key instanceof List) {
       let name = key.peek().toString();
       return this[key.peek().toString()]
         = new Fn(this, key.pop(), val, { name });
     } else {
       return this[key.toString()]
-        = ëval(this, val.peek());
+        = evalExpression(this, val.peek());
     }
-  },
+  }),
 
-  const: function (list) {
-    const key = list.peek();
-    const value = list.pop();
+  definir: formaEspecial(function(burbujas) {
+    let llave = burbujas.ojeada();
+    let valor = burbujas.estallido();
+
+    if (key instanceof List) {
+      let name = key.peek().toString();
+      return this[key.peek().toString()]
+        = new Fn(this, key.pop(), val, { name });
+    } else {
+      return this[key.toString()]
+        = evalExpression(this, val.peek());
+    }
+  }),
+
+  definir: formaEspecial(function(burbujas) {
+    // let llave = burbujas.ojeada();
+    // let valor = burbujas.estallido();
+    const { premira: llave, resto: valor }
+      = burbujas;
+
+
+    if (key instanceof List) {
+      let name = key.peek().toString();
+      return this[key.peek().toString()]
+        = new Fn(this, key.pop(), val, { name });
+    } else {
+      return this[key.toString()]
+        = evalExpression(this, val.peek());
+    }
+  }),
+
+  definir: formaMuyEspecial(function(burbujas) {
+    const esta = this,
+        { premira: llave, resto: valor }
+               = burbujas;
+
+    consola.registro({ llave, valor });
+
+    // Si la clave resulta ser una lista,
+    // entonces realizamos una definición de
+    // función usando el primer elemento de la
+    // lista como clave y el resto como lista de
+    // parámetros; de lo contrario, realizamos
+    // una definición de valor de clave normal.
+    if (llave instanceof Lista) {
+      const nombre = llave.premira.encodar(),
+        parámetros = llave.resto,
+            cuerpo = valor;
+
+      return esta[nombre] = new Fn(esta,
+               parámetros, cuerpo, { nombre });
+    } else {
+      return esta[llave.encodar()]
+        = expresiónDeEvaluación(esta,
+                           valor.ojeada());
+    }
+  }),
+
+  const: formaMuyEspecial(function (lista) {
+    const  esta = this,
+          llave = lista.ojeada(),
+          valor = lista.estallido();
     let o;
 
-    if (key === starSymbol) {
-      o = value.eval(this);
+    if (llave === astrix) {
+      o = valor.evaluar(esta);
 
-      for (const k in o) {
-        this[k] = o[k];
+      for (const ll in o) {
+        esta[ll] = o[ll];
       }
       return;
     }
 
-    switch (key.constructor) {
-      case List:
-        // List sets a function
-        break;
-      case ObjectMap:
-        o = value.eval(this);
-        for (const k of key) {
-          const _k = k.toString();
-          this[_k] = o[_k];
+    cambria (llave.constructora) {
+      caso Lista:
+        // Lista estableca una función.
+        romper;
+      caso MapaDeObjetos:
+        o = valor.evaluar(esta);
+        for (const ll of llave) {
+          const _ll = ll.toString();
+          esta[_ll] = o[_ll];
         }
-        break;
-      case Vector:
+        romper;
+      caso Vector:
         // Vector destructures
-        o = value.eval(this);
+        o = valor.eval(esta);
         // console.log("value", value);
         // console.log("o", o);
-        for (const k of key) {
-          const sKey = k.toString();
-          if (Object.hasOwn(this, sKey))
-            throw new Error("const " + sKey + " already set");
+        for (const ll of llave) {
+          const CadenaDeClaves = ll.encodar();
+          if (Objeto.tienePropia(esta, CadenaDeClaves))
+            tirar nueva Error("const " + CadensDeClaves + " ya configurado");
 
-          this[sKey] = o[sKey];
-          // console.log(sKey);
+          this[CadenaDeClaves] = o[CadenaDeClaves];
+          // consola.registro({ cadenaDeClaves });
         }
-        break;
+        romper;
       default:
         // Symbol sets
         const sKey = key.toString();
@@ -96,26 +163,27 @@ const rootBinding = {
         //   = ëval(this, value.peek());
         return this[sKey] = value.eval(this);
     }
-  },
+  }),
 
-  fn: function(args) {
-    return new Fn(this, args.first.toList(), args.rest)
-  },
+  fn: formaEspecial(function(list) {
+    return new Fn(this, list.first.toList(),
+                        list.rest)
+  }),
 
-  macro: function(args) {
+  macro: formaEspecial(function(args) {
     return new Macro(this, args.first, args.rest)
-  },
+  }),
 
-  jsfn: function(args) {
+  jsfn: formaEspecial(function(args) {
     const binding = this;
     const x = args.push(Ṣymbol.for('fn'));
     const fn = ëval(binding, x);
     return function(...args) {
       return fn.invoke(List.from(args));
     }
-  },
+  }),
 
-  let: function([x,...xx]) {
+  let: formaEspecial(function([x,...xx]) {
     let binding = Object.create(this);
     x = x.invert();
     while (!x.isEmpty) {
@@ -128,29 +196,34 @@ const rootBinding = {
     }
     return xx.map(z =>
       ëval(binding, z)).pop();
-  },
+  }),
 
-  if: function([c,t,f]) {
-    return ëval(this,
-      ëval(this, c) ? t : f);
-  },
+  if: formaEspecial(function([c,t,f]) {
+    // consola.registro({ c, f, t });
+    const conditionValue =
+              evalExpression(this, c);
+    if (conditionValue)
+      return evalExpression(this, t);
+    else if (f)
+      return evalExpression(this, f);
+  }),
 
-  unless: function([c,f,t]) {
-    return ëval(this,
-      ëval(this, c) ? t : f);
-  },
+  unless: formaEspecial(function([c,f,t]) {
+    return evalExpression(this,
+      evalExpression(this, c) ? t : f);
+  }),
 
-  blert: function(msgs) {
+  blert: formaEspecial(function(msgs) {
     alert(this.concat(msgs));
-  },
+  }),
 
-  expandmacro: function(list) {
+  expandmacro: formaEspecial(function(list) {
     const [head, tail] = list.plop();
     const macro = ëval(this, head);
     return macro.expand(tail);
-  },
+  }),
 
-  loop: function([x,...xx]) {
+  loop: formaEspecial(function([x,...xx]) {
     var binding = Object.create(this),
       m, recurCalled;
 
@@ -183,17 +256,24 @@ const rootBinding = {
         ëval(binding, z)).pop();
     } while(recurCalled);
     return m;
-  },
-
-  list: mkfn(function(args) {
-    return args;
   }),
 
-  vector: mkfn(function(args) {
-    return args.toVector();
+  /* Special forms with evaulated input
+   * parameters. */
+
+  eval: formaMuyEspecial(function(args) {
+    return args.eval(this);
   }),
 
-  obj: mkfn(function(list) {
+  list: formaMuyEspecial(function(params) {
+    return params;
+  }),
+
+  vector: formaMuyEspecial(function(list) {
+    return list.toVector();
+  }),
+
+  obj: formaMuyEspecial(function(list) {
     return list.partition(2).reduce(
       function(memo, [key, val]) {
         memo[key] = val;
@@ -201,29 +281,61 @@ const rootBinding = {
       }, {});
   }),
 
+  print: formaMuyEspecial(function(vals) {
+    return vals.each(function(value) {
+      document.body.append(value);
+    });
+  }),
+
+  get: formaMuyEspecial(function(yeahyeahyeahs) {
+    // console.log(yeahyeahyeahs);
+     return yeahyeahyeahs.reduce(
+        (memo,key) => memo && memo[key]);
+  }),
+
+  range: formaMuyEspecial(function (yippies) {
+    return new Range(...yippies);
+  }),
+
+  lazy: formaMuyEspecial(function (itty) {
+    return new LazyList(...itty);
+  }),
+
+  "+": formaMuyEspecial(function(a) {
+    return a.reduce((a,b) => a+b);
+  }),
+
+  "-": formaMuyEspecial(function(a) {
+    return a.reduce((a,b) => a-b);
+  }),
+
+  "*": formaMuyEspecial(function(a) {
+    return a.reduce((a,b) => a*b);
+  }),
+
+  and: formaMuyEspecial(function(a) {
+    return a.reduce((a,b) => a && b);
+  }),
+
+  or: formaMuyEspecial(function(_) {
+    return _.reduce((a,b) => a || b);
+  }),
+
+  concat: formaMuyEspecial(function(eeks) {
+    return eeks.join('');
+  }),
+
+  "/": formaMuyEspecial(function(a) {
+    return a.reduce((a,b) => a/b);
+  }),
+
+  /* Non-Special form functions */
+
   do: function(args) {
     return args.eval(this);
   },
 
-  eval: mkfn(function(args) {
-    return args.eval(this);
-  }),
-
-  // send: mkfn(function([a,b,...c]) {
-  //   if (b.key)
-  //     b = b.key;
-  //   if (c.length > 0) {
-  //     return a[b](...c);
-  //   } else
-  //     return a[b]();
-  // }),
-
-  send: mkfn(function(list) {
-    let receipient, message, params;
-
-    [receipient, list] = list.plop();
-    [message, params] = list.plop();
-
+  send: function(receipient, message, ...params) {
     // console.log("list", list);
     // console.log("receipient", receipient);
     // console.log("params", params);
@@ -231,7 +343,7 @@ const rootBinding = {
     if (message.key) message = message.key;
 
     return receipient[message](...params);
-  }),
+  },
 
   stop: function () {
     // console.error("stopped");
@@ -243,68 +355,28 @@ const rootBinding = {
     process.exit();
   },
 
-  get: mkfn(function(yeahyeahyeahs) {
-    // console.log(yeahyeahyeahs);
-     return yeahyeahyeahs.reduce(
-        (memo,key) => memo && memo[key]);
-  }),
-
-  range: mkfn(function (yippies) {
-    return new Range(...yippies);
-  }),
-
-  lazy: mkfn(function (itty) {
-    return new LazyList(...itty);
-  }),
-
-  export: mkfn(function([ca,nd,y]) {
+  export: function(ca,nd,y) {
     return ca[nd] = y;
-  }),
+  },
 
-  print: mkfn(function(vals) {
-    return vals.each(function(value) {
-      document.body.append(value);
-    });
-  }),
-  "+": mkfn(function(a) {
-    return a.reduce((a,b) => a+b);
-  }),
-  "-": mkfn(function(a) {
-    return a.reduce((a,b) => a-b);
-  }),
-  "*": mkfn(function(a) {
-    return a.reduce((a,b) => a*b);
-  }),
-  "/": mkfn(function(a) {
-    return a.reduce((a,b) => a/b);
-  }),
-  "=": mkfn(function([a, b]) {
+  "=": function(a, b) {
     return a == b;
-  }),
-  not: mkfn(function([y]) {
+  },
+  not: function(y) {
     return !y;
-  }),
-  and: mkfn(function(a) {
-    return a.reduce((a,b) => a && b);
-  }),
-  or: mkfn(function(_) {
-    return _.reduce((a,b) => a || b);
-  }),
-  '>': mkfn(([a,b]) => {
+  },
+  '>': (a,b) => {
     return a > b;
-  }),
-  '<': mkfn(([a,b]) => {
+  },
+  '<': (a,b) => {
     return a < b;
-  }),
-  parse: mkfn(function([s]) {
+  },
+  parse: function(s) {
     return parse(s);
-  }),
-  concat: mkfn(function(eeks) {
-    return eeks.join('');
-  }),
-  "new": mkfn(function([m,n]) {
+  },
+  "new": function(m,n) {
       return new m(...n.toArray());
-  })
+  }
 };
 
 // Aliases
@@ -312,4 +384,4 @@ rootBinding.muf = rootBinding.define;
 rootBinding.def = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
 
-module.exports = { rootBinding, mkfn };
+module.exports = { rootBinding };

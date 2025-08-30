@@ -1,3 +1,5 @@
+const FormaEspecial = require("../forma_especial");
+
 // Makes a Bubblescript function from a
 // Javascript function.
 // Params:
@@ -20,11 +22,9 @@
 //     return q.call(this, params.mapEval(this));
 //   }
 // }
-function mkfn(q) {
-  return function (params) {
-    // console.log("params", params);
-    return q.call(this, params.mapEval(this));
-  }
+function mkfn(fn) {
+  return new FormaEspecial(fn,
+    { evaluateParams: true });
 }
 
 module.exports = mkfn;

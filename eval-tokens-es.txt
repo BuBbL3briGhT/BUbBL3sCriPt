@@ -1,0 +1,31 @@
+1 1
+2 2
+3 Lista abstracta
+4 Burbuja
+5 Error de script de burbuja
+6 Script de burbuja
+7 Obsoleto
+8 Dinámicamente
+9 Error
+10 Evaluar
+11 Evalúa 12 Fn 13 Función 14 ListaPerezosa
+15 Lista 16 Macro 17 MacroExpandida 18 Objeto
+19 MapaDeObjetos 20 Uso
+21 Vector 22 Lista abstracta 23 An 24 At 25 Bi 26
+Enlazar 27 Enlazar 28 Bnd 29 Burbuja 30 Bubls 31
+Llamar 32 Patrón de llamada 33 Pila de llamadas 34
+Caso 35 Capturar 36 Columna 37 Configurable 38
+Conj 39 Consola 40 Consola
+41 constante 42 constructor 43 recuento 44 crear
+objeto 45 predeterminado 46 definir propiedad 47
+definido 48 e 49 otro 50 error 51 errores 52
+evaluar 53 evaluar cada 54 evaluar expresión 55
+evaluar lista 56 evaluación 57 eventos 58 expandir
+59 expandido 60 exportaciones 61 expresión
+62 archivo 63 primero 64 función 65 para 66
+función 67 obtener 68 obtenerEnlaceRaíz 69
+encabezado 70 ValorDeEncabezado 71 si 72
+inicializar 73 in situ 74 instancia de 75 invocar
+76 es 77 lista_perezosa 78 dejar 79 línea 80 lista
+81 cargar 82 registro 83 lógica 84 macro 85 crear
+86 mapEval 87 memorizar 88 módulo 89 n 90 nuevo

@@ -1,5 +1,8 @@
 const AbstractList = require("./abstract_list");
 const events = require("./events");
+const Ṣymbol = require("./symbol");
+const Fn = require("./fn");
+const consola = require("./consola");
 
 let emptyList, MacroExpanded;
 
@@ -95,30 +98,10 @@ class List extends AbstractList {
 
   eval(binding) {
     // List evaluation logic.
-    return this.head
-               .eval(binding)
-               .call(binding, this.tail);
-
-    // return headValue.eval(tail);
-    // const headValue = head.eval(binding);
-    // return headValue.eval(tail);
-
-    // switch (head.constructor) {
-    //   case Ṣymbol:
-    //     const headValue = head.eval(binding);
-    //     return tail.push(headValue).eval();
-    //   case List:
-    //     const headValue = head.eval(binding);
-    //     return ëvalList(binding, tail.push(headValue));
-    //   case Fn:
-    //     return head.invoke(tail.mapEval(binding));
-    //   case Function:
-    //     return head.call(binding, tail);
-    //   case Macro:
-    //     const expanded = head.expand(tail);
-    //     throw new MacroExpanded(expanded);
-    //   default:
-    //     return undefined;
+    consola.registro({head: this.head,
+       headValue: this.head.eval(binding) });
+    return Fn.call(binding,
+         this.head.eval(binding), this.tail);
   }
 
   each(fn) {
