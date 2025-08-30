@@ -1,6 +1,3 @@
-#! /usr/bin/env bash
-
-cat << EOF > symbol_map.txt
   # AbstractList -> LystAbstractía
 
   AbstractList -> ListaDeResúmenes
@@ -20,9 +17,3 @@ cat << EOF > symbol_map.txt
   value -> valor
   it -> él
   for -> para
-EOF
-
-
-cat < symbol_map.txt
-
-# Translation provided by Google https://www.google.com
