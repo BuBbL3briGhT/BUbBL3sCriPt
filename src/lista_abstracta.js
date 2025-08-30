@@ -8,12 +8,12 @@ events.on("init", function (bubls) {
 });
 
 
-// Let's define `AbstractList` which is a
+// Let's define `ListaAbstracta` which is a
 // class that will serve as the abstract
 // base class for `List` and `Vector`. All
 // shared functionality between `List` and
 // `Vector` is centralized here.
-class AbstractList {
+class ListaAbstracta {
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
@@ -227,7 +227,7 @@ class AbstractList {
 }
 
 // Aliases
-const prototype = AbstractList.prototype;
+const prototype = ListaAbstracta.prototype;
 prototype["includes?"] = prototype.find;
 
-module.exports = AbstractList;
+module.exports = ListaAbstracta;
