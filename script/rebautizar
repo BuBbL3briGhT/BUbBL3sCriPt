@@ -6,10 +6,10 @@ function buscar_y_reemplazar_símbolo() {
   # echo "$1" ":" "$2" "->" "$3"
 
     archivo="$1"
-    símbolo="$2"
+    simbolo="$2"
   reemplazo="$3"
 
-  echo "$archivo" ":" "$símbolo" "->" "$reemplazo"
+  echo "$archivo" ":" "$simbolo" "->" "$reemplazo"
 
   return
 
