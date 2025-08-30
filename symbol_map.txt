@@ -148,3 +148,28 @@
   send -> enviar
   rest -> descansar
 
+  memo -> memorándum
+  instance of -> instancia de
+  file -> archivo
+  expression -> expresión
+  be -> ser
+  an -> un
+  bubble -> burbuja
+  z -> z
+  tokenize -> tokenizar
+  results -> resultados
+  expects -> espera
+  call -> llamar
+  body -> cuerpo
+  count -> contar
+  ast -> ast
+
+  balloon -> globo
+  iterator -> iterado
+  empty vector -> vector vacío
+  on -> en
+  rl -> rl
+  null -> nula (feminina)
+  null -> nulo (masculino)
+  break -> romper
+
