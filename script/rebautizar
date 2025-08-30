@@ -14,26 +14,20 @@ function buscar_y_reemplazar_símbolo() {
 
   # Loop through the file line by line
   while IFS= read -r linea; do
-    # Extract the words for this line and put them
-    # into an array
     # Extrae las palabras de esta línea y
     # colócalas en una matriz.
+    # Extract the words for this line and put them
+    # into an array
     palabras=($(grep -oP '\w+' <<< "$linea"))
 
-    # Extract the non-words for this line and put
-    # them into an array
     # Extrae las palabras no literales de esta
     # línea y colócalas en una matriz.
+    # Extract the non-words for this line and put
+    # them into an array
     sin_palabras=($(grep -oP '\W+' <<< "$linea"))
 
-    # Perform a sample token replacement (e.g.,
-    # replace 'two' with 'two_two')
-    # Realizar un reemplazo de token de muestra
-    # (por ejemplo, reemplazar 'dos' con
-    # 'dos_dos')
-
-    # Find and replace token.
     # Buscar y reemplazar token
+    # Find and replace token.
     for i in "${!palabras[@]}"; do
         if [[ "${palabras[i]}" == \
                        "$simbolo" ]]; then
