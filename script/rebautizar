@@ -13,14 +13,18 @@ function buscar_y_reemplazar_símbolo() {
 
 
   # Loop through the file line by line
-  while IFS= read -r line; do
+  while IFS= read -r linea; do
     # Extract the words for this line and put them
     # into an array
-    words=($(grep -oP '\w+' <<< "$line"))
+    # Extrae las palabras de esta línea y
+    # colócalas en una matriz.
+    words=($(grep -oP '\w+' <<< "$linea"))
 
     # Extract the non-words for this line and put
     # them into an array
-    # non_words=($(grep -oP '\W+' <<< "$line"))
+    # Extrae las sin palabras de esta línea y
+    # colócalas en una matriz.
+    non_words=($(grep -oP '\W+' <<< "$linea"))
 
     # Perform a sample token replacement (e.g.,
     # replace 'two' with 'two_two')
