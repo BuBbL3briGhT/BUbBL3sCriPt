@@ -1,5 +1,14 @@
 #! /usr/bin/env bash
 
+# alias eco=echo
+
+function buscar_y_reemplazar_símbolo() {
+  echo "$1" " -> " "$2"
+}
+
+buscar_y_reemplazar_símbolo "AbstractList" "ListaAbstracta"
+
+exit
 
 # TODO: Dry run option
 # TODO implement limit to xirectory
