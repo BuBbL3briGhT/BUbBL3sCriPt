@@ -5,7 +5,13 @@
 function buscar_y_reemplazar_símbolo() {
   # echo "$1" ":" "$2" "->" "$3"
 
-  file="$1"
+    archivo="$1"
+    símbolo="$2"
+  reemplazo="$3"
+
+  echo "$archivo" ":" "$símbolo" "->" "$reemplazo"
+
+  return
 
   # Loop through the file line by line
   while IFS= read -r line; do
@@ -43,9 +49,6 @@ function buscar_y_reemplazar_símbolo() {
     echo "$reconstructed_line"
 
   done < "$file"
-
-  # Display the final output
-  cat reconstructed_file.txt
 
 }
 
