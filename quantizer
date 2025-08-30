@@ -125,6 +125,16 @@ cat << EOF > symbol_map.txt
   exports -> exportaciones
   8 -> ocho
 
+  ėval -> ëval
+  tokenizes -> tokeniza
+  static -> estática (feminina)
+  static -> estático (masculino)
+  should -> debería
+  includes -> incluye
+  macro -> macro
+  tokens -> fichas
+
+
 EOF
 
 
