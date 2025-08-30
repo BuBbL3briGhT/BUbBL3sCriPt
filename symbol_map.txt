@@ -128,4 +128,23 @@
   macro -> macro
   tokens -> fichas
 
+  Ɓū -> Ɓū
+  ëval -> bien
+  in -> en
+  char -> carbonizarse
+  next -> próxima (valintina)
+  next -> próximo (valintino)
+  var -> nuestro
+  first -> primera (feminina)
+  first -> primero (masculino)
+  empty list -> lista vacía
+  y -> y
+  7 -> sieta
+  throw -> tirar
+  q -> q
+  parses -> analiza
+  expect -> esperar
+  as -> como
+  send -> enviar
+  rest -> descansar
 
