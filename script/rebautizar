@@ -9,33 +9,35 @@ function buscar_y_reemplazar_símbolo() {
     simbolo="$2"
   reemplazo="$3"
 
-  echo "$archivo" ":" "$simbolo" "->" "$reemplazo"
+  # echo "$archivo" ":" "$simbolo" "->" "$reemplazo"
 
 
   # Loop through the file line by line
   while IFS= read -r linea; do
-    echo "$linea"
+    # echo "$linea"
     # Extrae las palabras de esta línea y
     # colócalas en una matriz.
     # Extract the words for this line and put them
     # into an array
     palabras=($(grep -oP '\w+' <<< "$linea"))
-    echo "${palabras[*]}"
+    # echo "${palabras[*]}"
 
     # # Extrae las palabras no literales de esta
     # # línea y colócalas en una matriz.
     # # Extract the non-words for this line and put
     # # them into an array
-    # sin_palabras=($(grep -oP '\W+' <<< "$linea"))
+    sin_palabras=($(grep -oP '\W+' <<< "$linea"))
+    # echo "${sin_palabras[*]}"
 
     # # Buscar y reemplazar token
     # # Find and replace token.
-    # for i in "${!palabras[@]}"; do
-    #     if [[ "${palabras[i]}" == \
-    #                    "$simbolo" ]]; then
-    #         palabras[i]="$reemplazo"
-    #     fi
-    # done
+    for i in "${!palabras[@]}"; do
+        if [[ "${palabras[i]}" == \
+                       "$simbolo" ]]; then
+            palabras[i]="$reemplazo"
+        fi
+    done
+    echo "${palabras[*]}"
 
     # # Reconstruir la linea.
     # # Reconstruct the line.
@@ -108,12 +110,31 @@ function buscar_y_reemplazar_símbolo() {
 
 }
 
+
+# cat "./src/abstract_list.js" | \
+#   head -n5
+
 # buscar_y_reemplazar_símbolo \
 #   "./src/abstract_list.js" \
 #   "AbstractList" \
 #   "ListaAbstracta"
+
+# cat "./src/abstract_list.js" | \
+#   head -n5 | \
+#   buscar_y_reemplazar_símbolo \
+#     "" \
+#     "AbstractList" \
+#     "ListaAbstracta"
+
+# cat "./src/abstract_list.js" | \
+#   head -n5 | \
+#   buscar_y_reemplazar_símbolo \
+#     "" \
+#     "function" \
+#     "función"
+
 cat "./src/abstract_list.js" | \
-  head -n5 | \
+  head -n20 | \
   buscar_y_reemplazar_símbolo \
     "" \
     "AbstractList" \
