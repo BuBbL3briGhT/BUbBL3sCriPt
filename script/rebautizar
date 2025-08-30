@@ -37,12 +37,16 @@ function buscar_y_reemplazar_símbolo() {
 
     # Reconstruir la linea.
     # Reconstruct the line.
-    # reconstructed_line=""
-    # for i in "${!words[@]}"; do
-    #     reconstructed_line+="${words[i]}"
-    #     # Append the corresponding non-word token if it exists
-    #     if [[ -n "${non_words[i]}" ]]; then
-    #         reconstructed_line+="${non_words[i]}"
+    nueva_linea=""
+    salida
+
+
+    # for i in "${!palabras[@]}"; do
+    #     nueva_linea+="${palabras[i]}"
+    #     # Append the corresponding non-word token
+    #     # if it exists
+    #     if [[ -n "${sin_palabras[i]}" ]]; then
+    #         nueva_linea+="${sin_palabras[i]}"
     #     fi
     # done
 
