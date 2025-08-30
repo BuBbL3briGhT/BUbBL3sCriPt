@@ -154,6 +154,22 @@ cat << EOF > symbol_map.txt
   send -> enviar
   rest -> descansar
 
+  memo -> memorándum
+  instance of -> instancia de
+  file -> archivo
+  expression -> expresión
+  be -> ser
+  an -> un
+  bubble -> burbuja
+  z -> z
+  tokenize -> tokenizar
+  results -> resultados
+  expects -> espera
+  call -> llamar
+  body -> cuerpo
+  count -> contar
+  ast -> ast
+
 EOF
 
 
