@@ -5,21 +5,20 @@
 function buscar_y_reemplazar_símbolo() {
   # echo "$1" ":" "$2" "->" "$3"
 
-# Create a sample file
-cat << EOF > test_file.txt
-This is line one.
-And this is line two, which has some $ymbols and !.
-EOF
+  file="$1"
 
   # Loop through the file line by line
   while IFS= read -r line; do
-    # Extract the words for this line and put them into an array
+    # Extract the words for this line and put them
+    # into an array
     words=($(grep -oP '\w+' <<< "$line"))
 
-    # Extract the non-words for this line and put them into an array
+    # Extract the non-words for this line and put
+    # them into an array
     non_words=($(grep -oP '\W+' <<< "$line"))
 
-    # Perform a sample token replacement (e.g., replace 'two' with 'two_two')
+    # Perform a sample token replacement (e.g.,
+    # replace 'two' with 'two_two')
     for i in "${!words[@]}"; do
         if [[ "${words[i]}" == "two" ]]; then
             words[i]="two_two"
