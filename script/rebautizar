@@ -18,22 +18,26 @@ function buscar_y_reemplazar_símbolo() {
     # into an array
     # Extrae las palabras de esta línea y
     # colócalas en una matriz.
-    words=($(grep -oP '\w+' <<< "$linea"))
+    palabras=($(grep -oP '\w+' <<< "$linea"))
 
     # Extract the non-words for this line and put
     # them into an array
     # Extrae las palabras no literales de esta
     # línea y colócalas en una matriz.
-    non_words=($(grep -oP '\W+' <<< "$linea"))
+    sin_palabras=($(grep -oP '\W+' <<< "$linea"))
 
     # Perform a sample token replacement (e.g.,
     # replace 'two' with 'two_two')
     # Realizar un reemplazo de token de muestra
     # (por ejemplo, reemplazar 'dos' con
     # 'dos_dos')
-    for i in "${!words[@]}"; do
-        if [[ "${words[i]}" == "$simbolo" ]]; then
-            words[i]="$reemplazo"
+
+    # Find and replace token.
+    # Buscar y reemplazar token
+    for i in "${!palabras[@]}"; do
+        if [[ "${palabras[i]}" == \
+                       "$simbolo" ]]; then
+            palabras[i]="$reemplazo"
         fi
     done
 
