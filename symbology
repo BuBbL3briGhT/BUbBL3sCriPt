@@ -1,6 +1,11 @@
 list: lista
 value: valor
 
+AbstractList:
+  ListAbstractia
+
+exit
+
 1 const function this assert returngqa list a 2
 value it for line vector require 3 column new type
 List if equal let fn make b result o deepEqual the
