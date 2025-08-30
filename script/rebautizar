@@ -3,10 +3,12 @@
 # alias eco=echo
 
 function buscar_y_reemplazar_símbolo() {
-  echo "$1" " -> " "$2"
+  echo "$1" " -> " "$2" $3
 }
 
-buscar_y_reemplazar_símbolo "AbstractList" "ListaAbstracta"
+buscar_y_reemplazar_símbolo "AbstractList" \
+  "ListaAbstracta" \
+  "file_path"
 
 exit
 
