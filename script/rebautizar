@@ -28,11 +28,14 @@ function buscar_y_reemplazar_símbolo() {
 
     # Perform a sample token replacement (e.g.,
     # replace 'two' with 'two_two')
-    # for i in "${!words[@]}"; do
-    #     if [[ "${words[i]}" == "$simbolo" ]]; then
-    #         words[i]="$reemplazo"
-    #     fi
-    # done
+    # Realizar un reemplazo de token de muestra
+    # (por ejemplo, reemplazar 'dos' con
+    # 'dos_dos')
+    for i in "${!words[@]}"; do
+        if [[ "${words[i]}" == "$simbolo" ]]; then
+            words[i]="$reemplazo"
+        fi
+    done
 
     # Reconstruct the line
     # reconstructed_line=""
