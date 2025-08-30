@@ -3,7 +3,52 @@
 # alias eco=echo
 
 function buscar_y_reemplazar_símbolo() {
-  echo "$1" ":" "$2" "->" "$3"
+  # echo "$1" ":" "$2" "->" "$3"
+ #!/bin/bash
+
+# Create a sample file
+cat << EOF > test_file.txt
+This is line one.
+And this is line two, which has some $ymbols and !.
+EOF
+
+# Loop through the file line by line
+while IFS= read -r line; do
+    # Extract the words for this line and put them into an array
+    words=($(grep -oP '\w+' <<< "$line"))
+
+    # Extract the non-words for this line and put them into an array
+    non_words=($(grep -oP '\W+' <<< "$line"))
+
+    # Perform a sample token replacement (e.g., replace 'two' with 'two_two')
+    for i in "${!words[@]}"; do
+        if [[ "${words[i]}" == "two" ]]; then
+            words[i]="two_two"
+        fi
+    done
+
+    # Reconstruct the line
+    reconstructed_line=""
+    for i in "${!words[@]}"; do
+        reconstructed_line+="${words[i]}"
+        # Append the corresponding non-word token if it exists
+        if [[ -n "${non_words[i]}" ]]; then
+            reconstructed_line+="${non_words[i]}"
+        fi
+    done
+
+    # Handle the trailing non-word token if it exists
+    if [[ "${#words[@]}" -lt "${#non_words[@]}" ]]; then
+        reconstructed_line+="${non_words[-1]}"
+    fi
+
+    echo "$reconstructed_line"
+
+done < test_file.txt > reconstructed_file.txt
+
+# Display the final output
+cat reconstructed_file.txt
+
 }
 
 buscar_y_reemplazar_símbolo "file_path" \
