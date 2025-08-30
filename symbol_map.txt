@@ -17,3 +17,46 @@
   value -> valor
   it -> él
   for -> para
+
+  line -> línea
+  vector -> vector
+  require -> requerir
+  3 -> tres
+  column -> columna
+  new -> nueva (feminine)
+  new -> nuevo (masculine)
+  feminine -> feminina (feminina)
+  feminine -> feminino (masculine)
+  masculine -> masculina (feminina)
+  masculine -> masculino (masculino)
+  type -> tipo
+  if -> si
+  equal -> igual
+  let -> dejar
+  fn -> fn
+  make -> hacer
+
+  b -> b
+  result -> resultado
+  o -> oh
+  deep equal -> profundo igul
+  the -> la (feminina)
+  the -> el (masculino)
+  to string -> encodar
+  describe -> describir
+  token -> simbólica (feminina)
+  token -> simbólico (masculino)
+  console -> consola
+  binding -> vinculante
+  push -> empujar
+  x -> incógnita
+  log -> registro
+  symbol -> símbolo
+  input -> aporte
+  error -> error
+  s -> s
+  parse -> analizar gramaticalmente
+  tokenizer -> tokenizador
+  true -> veradadera (feminina)
+  true -> veradadero (masculino)
+
