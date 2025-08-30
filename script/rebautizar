@@ -11,10 +11,9 @@ function buscar_y_reemplazar_símbolo() {
 
   # echo "$archivo" ":" "$simbolo" "->" "$reemplazo"
 
-
   # Loop through the file line by line
   while IFS= read -r linea; do
-    echo "$linea"
+    # echo "$linea"
     # Extrae las palabras de esta línea y
     # colócalas en una matriz.
     # Extract the words for this line and put them
@@ -26,7 +25,11 @@ function buscar_y_reemplazar_símbolo() {
     # # línea y colócalas en una matriz.
     # # Extract the non-words for this line and put
     # # them into an array
-    sin_palabras=($(grep -oP '\W+' <<< "$linea"))
+    # sin_palabras=($(grep -oP '\W+' <<< "$linea"))
+    # sin_palabras=($(grep -oP '\W+' <<< "$linea"))
+    # https://stackoverflow.com/a/32931403/30654127
+    mapfile -t sin_palabras < <(grep -oP '\W+' <<< "$linea")
+    # grep -oP '\W+' <<< "$linea"
     # echo "${sin_palabras[*]}"
 
     # # Buscar y reemplazar token
