@@ -1,4 +1,7 @@
 #! /usr/bin/env bash
+#
+# Translation provided by Google
+# https://www.google.com/
 
 cat << EOF > symbol_map.txt
   # AbstractList -> LystAbstractía
@@ -20,9 +23,26 @@ cat << EOF > symbol_map.txt
   value -> valor
   it -> él
   for -> para
+
+  line -> línea
+  vector -> vector
+  require -> requerir
+  3 -> tres
+  column -> columna
+  new -> nueva (feminine)
+  new -> nuevo (masculine)
+  feminine -> feminina (feminina)
+  feminine -> feminino (masculine)
+  masculine -> masculina (feminina)
+  masculine -> masculino (masculino)
+  type -> tipo
+  if -> si
+  equal -> igual
+  let -> dejar
+  fn -> fn
+  make -> hacer
 EOF
 
 
 cat < symbol_map.txt
 
-# Translation provided by Google https://www.google.com
