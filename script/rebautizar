@@ -43,7 +43,7 @@ EOF
 
     echo "$reconstructed_line"
 
-  done < test_file.txt > reconstructed_file.txt
+  done < "$file"
 
   # Display the final output
   cat reconstructed_file.txt
