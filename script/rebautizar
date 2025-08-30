@@ -4,7 +4,6 @@
 
 function buscar_y_reemplazar_símbolo() {
   # echo "$1" ":" "$2" "->" "$3"
- #!/bin/bash
 
 # Create a sample file
 cat << EOF > test_file.txt
@@ -12,8 +11,8 @@ This is line one.
 And this is line two, which has some $ymbols and !.
 EOF
 
-# Loop through the file line by line
-while IFS= read -r line; do
+  # Loop through the file line by line
+  while IFS= read -r line; do
     # Extract the words for this line and put them into an array
     words=($(grep -oP '\w+' <<< "$line"))
 
@@ -44,10 +43,10 @@ while IFS= read -r line; do
 
     echo "$reconstructed_line"
 
-done < test_file.txt > reconstructed_file.txt
+  done < test_file.txt > reconstructed_file.txt
 
-# Display the final output
-cat reconstructed_file.txt
+  # Display the final output
+  cat reconstructed_file.txt
 
 }
 
