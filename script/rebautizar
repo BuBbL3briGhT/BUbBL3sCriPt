@@ -22,8 +22,8 @@ function buscar_y_reemplazar_símbolo() {
 
     # Extract the non-words for this line and put
     # them into an array
-    # Extrae las sin palabras de esta línea y
-    # colócalas en una matriz.
+    # Extrae las palabras no literales de esta
+    # línea y colócalas en una matriz.
     non_words=($(grep -oP '\W+' <<< "$linea"))
 
     # Perform a sample token replacement (e.g.,
