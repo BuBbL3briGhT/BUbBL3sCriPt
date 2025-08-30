@@ -96,6 +96,35 @@ cat << EOF > symbol_map.txt
   name -> nombre
   class -> clase
 
+  else -> demás
+  oo -> y
+  message -> mensaje
+  reduce -> reducir
+  n -> norte
+  constructor -> constructora (feminina)
+  constructor -> constructor (masculino)
+  module -> módula
+  4 -> cuatro
+  sy -> y
+  Ṣÿ -> ÿÿ
+  not -> no
+  tail -> cola
+  or -> o
+  string -> cadena
+  skip -> saltar
+  args -> argumentos
+  5 -> cinco
+  map -> mapa
+  tortuga -> tortuga
+  muf -> manguito
+  keyword -> palabra clave
+  parser -> analizador
+  from -> de
+  assert equal -> afirmar igual
+  6 -> seis
+  exports -> exportaciones
+  8 -> ocho
+
 EOF
 
 
