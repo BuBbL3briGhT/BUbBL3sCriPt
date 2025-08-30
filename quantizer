@@ -66,6 +66,36 @@ cat << EOF > symbol_map.txt
   true -> veradadera (feminina)
   true -> veradadero (masculino)
 
+  peek -> ojeada
+  assert eval to -> afirmar evaluación a
+  get -> conseguir
+  case -> caso
+  pop -> estallido
+  false -> falsa (feminina)
+  false -> falso (masculino)
+  bnd -> bnd
+  key -> llave
+  to -> a
+  of -> de
+  c -> do
+  eval -> evaluar
+  params -> parámetros
+  src -> src
+  puts -> pone
+  0 -> cero
+  undefined -> indefinida (feminina)
+  undefined -> indefinido (masculino)
+  head -> cabeza
+  is -> es
+  expected -> esperada (feminina)
+  expected -> esperado (masculino)
+  root binding -> enlace de raíz
+  is empty -> esta vacía (feminina)
+  is empty -> esta vacío (masculino)
+  and -> y
+  name -> nombre
+  class -> clase
+
 EOF
 
 
