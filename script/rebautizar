@@ -38,7 +38,53 @@ function buscar_y_reemplazar_símbolo() {
     # Reconstruir la linea.
     # Reconstruct the line.
     nueva_linea=""
-    salida
+
+    if [ ["$linea" =~ ^"${palabras[0]}" ]]; then
+      # Line started with word characters
+      # zip "$paralbras" "$sin_paralabras"
+
+      for i in "${!palabras[@]}"; do
+          nueva_linea+="${palabras[i]}"
+          # Append the corresponding non-word token
+          # if it exists
+          if [[ -n "${sin_palabras[i]}" ]]; then
+              nueva_linea+="${sin_palabras[i]}"
+          fi
+      done
+
+      # Manejar el token final que no es una
+      # palabra si existe
+      # Handle the trailing non-word token if it
+      # exists
+      if [[ "${#paralbras[@]}" -lt
+        "${#sin_paralabras[@]}" ]]; then
+          nueva_linea+="${sin_paralabras[-1]}"
+      fi
+
+    else
+      # Line started with non-word characters
+      echo "sin paralabras"
+      for i in "${!sin_palabras[@]}"; do
+          nueva_linea+="${sim_palabras[i]}"
+          # Append the corresponding word token
+          # if it exists
+          if [[ -n "${palabras[i]}" ]]; then
+              nueva_linea+="${palabras[i]}"
+          fi
+      done
+
+      # Manejar el token de palabra final si
+      # existe
+      # Handle the trailing word token if it
+      # exists
+      if [[ "${#sin_paralbras[@]}" -lt
+        "${#paralabras[@]}" ]]; then
+          nueva_linea+="${paralabras[-1]}"
+      fi
+    fi
+
+    echo "$nuevo_linea"
+    # salida
 
 
     # for i in "${!palabras[@]}"; do
