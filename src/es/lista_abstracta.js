@@ -1,26 +1,26 @@
 const eventos = require("./eventos");
 
-let ëval;
+dejar ëval;
 
-eventos.on("inicio", function (bubls) {
+eventos.on("inicio", función (bubls) {
   ëval = bubls.ëval;
   evaluarLaExpresión = bubls.evaluarLaExpresión;
 });
 
 
 // Let's define `ListaAbstracta` cual es a
-// clase that will serve as the abstract
-// base clase for `List` y `Vector`. All
+// clase that will serve as la abstract
+// base clase para `List` y `Vector`. All
 // shared functionality between `List` y
 // `Vector` es centralized here.
 clase ListaAbstracta {
 
   static from(arrayLike, mapFn, thisArg) {
-    let formación = Array.from(arrayLike, mapFn, thisArg);
+    dejar formación = Array.from(arrayLike, mapFn, thisArg);
     devolver esta.hacer(...formación);
   }
 
-  constructor(o, oo) {
+  constructora(o, oo) {
     esta.o = o;
     esta.oo = oo;
   }
@@ -37,8 +37,8 @@ clase ListaAbstracta {
   consiguir cabeza() { devolver esta.ojeada(); }
   consiguir cola() { devolver esta.estallido(); }
   consiguir next() { devolver esta.estallido().ojeada(); }
-  consiguir last() { devolver !esta.estallido().estaVacio ?
-      esta.estallido().last : esta.ojeada(); }
+  consiguir última() { devolver !esta.estallido().estaVacio ?
+      esta.estallido().última : esta.ojeada(); }
 
   contar() {
     devolver esta.reducir((contar) => {
@@ -48,7 +48,7 @@ clase ListaAbstracta {
 
   mapa(fn) {
     si (esta.estaVacio) devolver esta;
-    devolver new esta.constructor(fn(esta.ojeada()),
+    devolver nueva esta.constructora(fn(esta.ojeada()),
       esta.estallido().mapa(fn));
   }
 
@@ -62,7 +62,7 @@ clase ListaAbstracta {
       devolver esta.estallido().llevar(--contar)
         .empujar(esta.ojeada());
 
-    devolver esta.constructor.hacer()
+    devolver esta.constructora.hacer()
   }
 
   saltar(contar) {
@@ -83,11 +83,11 @@ clase ListaAbstracta {
     devolver esta.estallido().reducir(
       (acumulador, elementoActual) => {
         devolver acumulador.empujar(elementoActual);
-      }, esta.constructor.hacer(esta.ojeada()));
+      }, esta.constructora.hacer(esta.ojeada()));
   }
 
   conj(sourceList) {
-    devolver sourceList.reducir(function(acumulador, elementoActual) {
+    devolver sourceList.reducir(función(acumulador, elementoActual) {
       devolver acumulador.empujar(elementoActual);
     }, esta);
   }
@@ -100,9 +100,9 @@ clase ListaAbstracta {
   toStringFormat(o) {
     si (!o) devolver o;
     switch (typeof o) {
-      case "string":
+      caso "string":
         devolver '"' + o + '"';
-      case "symbol":
+      caso "symbol":
         devolver Symbol.keyFor(o);
       default:
         devolver o.toString();
@@ -118,7 +118,7 @@ clase ListaAbstracta {
     si (esta.estaVacio)
       devolver memo;
 
-    let oo = esta.estallido();
+    dejar oo = esta.estallido();
     si (oo.estaVacio)
       si(memo == undefined)
         devolver esta.ojeada();
@@ -133,19 +133,19 @@ clase ListaAbstracta {
   }
 
   cada(fn) {
-    let oo = fn(esta.ojeada());
+    dejar oo = fn(esta.ojeada());
     si (esta.estallido().estaVacio) devolver oo;
     devolver esta.estallido().cada(fn);
   }
 
   evalEach(vinculante) {
     devolver esta.cada(evaluarLaExpresión
-      .bind(null, vinculante));
+      .bind(nula, vinculante));
   }
 
   mapEval(vinculante) {
     devolver esta.mapa(evaluarLaExpresión
-      .bind(null, vinculante));
+      .bind(nula, vinculante));
   }
 
   encontrar(valor) {
@@ -161,44 +161,44 @@ clase ListaAbstracta {
     si (esta.estaVacio)
       devolver esta;
     si (valor == esta.cabeza)
-      devolver esta.constructor.hacer();
+      devolver esta.constructora.hacer();
     demás
-      devolver new esta.constructor(esta.cabeza, esta.cola.hasta(valor));
+      devolver nueva esta.constructora(esta.cabeza, esta.cola.hasta(valor));
   }
 
-  split(valor) {
-    let resultados = esta.constructor.hacer();
-    let sub = esta.encontrar(valor);
-    si (sub) {
-      sub = sub.estallido();
-      si (sub.encontrar(valor))
-        resultados = sub.split(valor);
+  dividir(valor) {
+    dejar resultados = esta.constructora.hacer();
+    dejar sus = esta.encontrar(valor);
+    si (sus) {
+      sus = sus.estallido();
+      si (sus.encontrar(valor))
+        resultados = sus.dividir(valor);
       demás
-        resultados = resultados.empujar(sub);
+        resultados = resultados.empujar(sus);
     }
     resultados = resultados.empujar(esta.hasta(valor));
     devolver resultados;
   }
 
-  partition(n) {
+  repartirPara(n) {
     si (esta.estaVacio)
       devolver esta;
 
     devolver esta.saltar(n)
-               .partition(n)
+               .repartirPara(n)
                .empujar(esta.llevar(n));
   }
 
   // Simple little method returns a ojeada y
-  // a estallido. Use a skim the lista, just a consiguir
-  // the cabeza y the cola broken up into a lista
-  // cual can the be destructed into locals
+  // a estallido. Use a skim la lista, just a consiguir
+  // la cabeza y la cola broken up into a lista
+  // cual can la be destructed into locals
   // or otherwise manipulated. There might be
   // a more conventenal what a do esta, but
-  // esta es serving my purposes for the time begin.
+  // esta es serving my purposes para la time begin.
   // #LongLivePlop! ✨️
   plop() {
-    devolver esta.constructor.
+    devolver esta.constructora.
       hacer(esta.ojeada(), esta.estallido());
   }
 
@@ -218,7 +218,7 @@ clase ListaAbstracta {
   // }
 
   *[Symbol.iterator]() {
-    let nodoActual = esta;
+    dejar nodoActual = esta;
     while (!nodoActual.estaVacio) {
       yield nodoActual.o;
       nodoActual = nodoActual.oo;
