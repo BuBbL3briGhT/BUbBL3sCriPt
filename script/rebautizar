@@ -5,6 +5,9 @@
 declare -A mapaDeSimbolos=(
   ["AbstractList"]="ListaAbstracta"
   ["events"]="eventos"
+  ["init"]="inicio"
+  ["evalExpression"]="evaluarLaExpresión"
+  # ["evalExpression"]="expresiónDeEvaluación"
 )
 
 
