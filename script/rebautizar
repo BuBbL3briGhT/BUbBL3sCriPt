@@ -143,15 +143,17 @@ declare -A mapaDeSimbolos=(
   # 1 base
   # 1 as
   # 1 abstract
-  # 1 _toString
-  # 1 Use
-  # 1 There
-  # 1 Simple
-  # 1 LongLivePlop
-  # 1 Let                                              1 Array
-  # 1 All
-  # 1 Aliases
-  # 1 0
+
+  # ["_toString"]=""
+  # ["Use"]=""
+  # ["There"]=""
+  # ["Simple"]=""
+  # ["LongLivePlop"]=""
+  # ["Let"]=""
+  # ["Array"]=""
+  # ["All"]=""
+  # ["Aliases"]=""
+  # ["0"]=""
 )
 
 
