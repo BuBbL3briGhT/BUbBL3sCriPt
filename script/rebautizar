@@ -42,7 +42,7 @@ function buscar_y_reemplazar_símbolo() {
     for i in "${!palabras[@]}"; do
       for s in "${!mapaDeSimbolos[@]}"; do
         if [[ "${palabras[i]}" == "$s" ]]; then
-          palabras[i]="${mapaDeSimbolos[s]}"
+          palabras[i]="${mapaDeSimbolos[$s]}"
         fi
       done
     done
