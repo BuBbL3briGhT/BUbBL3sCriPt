@@ -2,12 +2,17 @@
 
 # alias eco=echo
 
+declare -A mapaDeSímbolos=(
+  ["AbstractList"]="ListaAbstracta"
+)
+
+
 function buscar_y_reemplazar_símbolo() {
   # echo "$1" ":" "$2" "->" "$3"
 
-    archivo="$1"
-    simbolo="$2"
-  reemplazo="$3"
+    # archivo="$1"
+    # simbolo="$2"
+  # reemplazo="$3"
 
   # echo "$archivo" ":" "$simbolo" "->" "$reemplazo"
 
@@ -32,14 +37,16 @@ function buscar_y_reemplazar_símbolo() {
     # grep -oP '\W+' <<< "$linea"
     # echo "${sin_palabras[*]}"
 
-    # # Buscar y reemplazar token
-    # # Find and replace token.
+    # # Buscar y reemplazar tokens
+    # # Find and replace tokens.
     for i in "${!palabras[@]}"; do
-        if [[ "${palabras[i]}" == \
-                       "$simbolo" ]]; then
-            palabras[i]="$reemplazo"
+      for s in "${!mapaDeSimbolos[@]}"; do
+        if [[ "${palabras[i]}" == "$s"]]; then
+          palabras[i]="${mapaDeSimbolos[s]}"
         fi
+      done
     done
+
     # echo "${palabras[*]}"
 
     # Reconstruir la linea.
@@ -113,6 +120,10 @@ function buscar_y_reemplazar_símbolo() {
 
 }
 
+cat "./src/en/abstract_list.js" | \
+  head -n20 | \
+  buscar_y_reemplazar_símbolo
+
 
 # cat "./src/abstract_list.js" | \
 #   head -n5
@@ -136,12 +147,12 @@ function buscar_y_reemplazar_símbolo() {
 #     "function" \
 #     "función"
 
-cat "./src/abstract_list.js" | \
-  # head -n20 | \
-  buscar_y_reemplazar_símbolo \
-    "" \
-    "AbstractList" \
-    "ListaAbstracta"
+# cat "./src/abstract_list.js" | \
+#   # head -n20 | \
+#   buscar_y_reemplazar_símbolo \
+#     "" \
+#     "AbstractList" \
+#     "ListaAbstracta"
 
 exit
 
