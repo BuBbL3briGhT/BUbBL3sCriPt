@@ -54,9 +54,11 @@ function buscar_y_reemplazar_símbolo() {
     # Reconstruct the line.
     nueva_linea=""
 
-    if [[ "$linea" =~ ^"${palabras[0]}" ]]; then
+    # echo "$linea"
+    if [[ "$linea" =~ ^[a-zA-Z] ]]; then
       # Line started with word characters
       # zip "$paralbras" "$sin_paralabras"
+      # echo "palabras"
 
       for i in "${!palabras[@]}"; do
           nueva_linea+="${palabras[i]}"
