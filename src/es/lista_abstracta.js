@@ -17,176 +17,176 @@ clase ListaAbstracta {
 
   static from(arrayLike, mapFn, thisArg) {
     let formación = Array.from(arrayLike, mapFn, thisArg);
-    return this.hacer(...formación);
+    devolver esta.hacer(...formación);
   }
 
   constructor(o, oo) {
-    this.o = o;
-    this.oo = oo;
+    esta.o = o;
+    esta.oo = oo;
   }
 
-  ojeada() { return this.o; }
-  estallido()  { return this.oo; }
+  ojeada() { devolver esta.o; }
+  estallido()  { devolver esta.oo; }
 
 
-  consiguir estaVacio() { return false; }
-  consiguir ["estaVacio?"]() { return this.estaVacio; }
-  consiguir ["empty?"]() { return this.estaVacio; }
-  consiguir first() { return this.ojeada(); }
-  consiguir rest() { return this.estallido(); }
-  consiguir cabeza() { return this.ojeada(); }
-  consiguir cola() { return this.estallido(); }
-  consiguir next() { return this.estallido().ojeada(); }
-  consiguir last() { return !this.estallido().estaVacio ?
-      this.estallido().last : this.ojeada(); }
+  consiguir estaVacio() { devolver false; }
+  consiguir ["estaVacio?"]() { devolver esta.estaVacio; }
+  consiguir ["empty?"]() { devolver esta.estaVacio; }
+  consiguir first() { devolver esta.ojeada(); }
+  consiguir rest() { devolver esta.estallido(); }
+  consiguir cabeza() { devolver esta.ojeada(); }
+  consiguir cola() { devolver esta.estallido(); }
+  consiguir next() { devolver esta.estallido().ojeada(); }
+  consiguir last() { devolver !esta.estallido().estaVacio ?
+      esta.estallido().last : esta.ojeada(); }
 
   contar() {
-    return this.reducir((contar) => {
-      return ++contar;
+    devolver esta.reducir((contar) => {
+      devolver ++contar;
     }, 0);
   }
 
   mapa(fn) {
-    if (this.estaVacio) return this;
-    return new this.constructor(fn(this.ojeada()),
-      this.estallido().mapa(fn));
+    si (esta.estaVacio) devolver esta;
+    devolver new esta.constructor(fn(esta.ojeada()),
+      esta.estallido().mapa(fn));
   }
 
-  consiguir(i) { return this.saltar(i).ojeada(); }
+  consiguir(i) { devolver esta.saltar(i).ojeada(); }
 
   llevar(contar) {
-    if (this.estaVacio)
-      return this;
+    si (esta.estaVacio)
+      devolver esta;
 
-    if (contar)
-      return this.estallido().llevar(--contar)
-        .empujar(this.ojeada());
+    si (contar)
+      devolver esta.estallido().llevar(--contar)
+        .empujar(esta.ojeada());
 
-    return this.constructor.hacer()
+    devolver esta.constructor.hacer()
   }
 
   saltar(contar) {
-    if (contar && !this.estaVacio)
-      return this.estallido().saltar(--contar);
+    si (contar && !esta.estaVacio)
+      devolver esta.estallido().saltar(--contar);
 
-    return this;
+    devolver esta;
   }
 
   shift() {
-    return this.invertir().estallido().invertir();
+    devolver esta.invertir().estallido().invertir();
   }
 
   invertir() {
-    if (this.estaVacio)
-      return this;
+    si (esta.estaVacio)
+      devolver esta;
 
-    return this.estallido().reducir(
+    devolver esta.estallido().reducir(
       (acumulador, elementoActual) => {
-        return acumulador.empujar(elementoActual);
-      }, this.constructor.hacer(this.ojeada()));
+        devolver acumulador.empujar(elementoActual);
+      }, esta.constructor.hacer(esta.ojeada()));
   }
 
   conj(sourceList) {
-    return sourceList.reducir(function(acumulador, elementoActual) {
-      return acumulador.empujar(elementoActual);
-    }, this);
+    devolver sourceList.reducir(function(acumulador, elementoActual) {
+      devolver acumulador.empujar(elementoActual);
+    }, esta);
   }
 
   _toString() {
-    if (this.estaVacio) return "";
-    return this.mapa(this.toStringFormat).reducir(this.toStringJoin);
+    si (esta.estaVacio) devolver "";
+    devolver esta.mapa(esta.toStringFormat).reducir(esta.toStringJoin);
   }
 
   toStringFormat(o) {
-    if (!o) return o;
+    si (!o) devolver o;
     switch (typeof o) {
       case "string":
-        return '"' + o + '"';
+        devolver '"' + o + '"';
       case "symbol":
-        return Symbol.keyFor(o);
+        devolver Symbol.keyFor(o);
       default:
-        return o.toString();
+        devolver o.toString();
     }
   }
 
   toArray() {
-    return this.reducir((formación, elementoActual) => {
-      formación.empujar(elementoActual); return formación; }, []);
+    devolver esta.reducir((formación, elementoActual) => {
+      formación.empujar(elementoActual); devolver formación; }, []);
   }
 
   reducir(fn, memo) {
-    if (this.estaVacio)
-      return memo;
+    si (esta.estaVacio)
+      devolver memo;
 
-    let oo = this.estallido();
-    if (oo.estaVacio)
-      if(memo == undefined)
-        return this.ojeada();
-      else
-        return fn(memo, this.ojeada());
-    else
-      if (memo != undefined)
-        return oo.reducir(fn,
-          fn(memo, this.ojeada()))
-      else
-        return oo.reducir(fn, this.ojeada());
+    let oo = esta.estallido();
+    si (oo.estaVacio)
+      si(memo == undefined)
+        devolver esta.ojeada();
+      demás
+        devolver fn(memo, esta.ojeada());
+    demás
+      si (memo != undefined)
+        devolver oo.reducir(fn,
+          fn(memo, esta.ojeada()))
+      demás
+        devolver oo.reducir(fn, esta.ojeada());
   }
 
   cada(fn) {
-    let oo = fn(this.ojeada());
-    if (this.estallido().estaVacio) return oo;
-    return this.estallido().cada(fn);
+    let oo = fn(esta.ojeada());
+    si (esta.estallido().estaVacio) devolver oo;
+    devolver esta.estallido().cada(fn);
   }
 
   evalEach(vinculante) {
-    return this.cada(evaluarLaExpresión
+    devolver esta.cada(evaluarLaExpresión
       .bind(null, vinculante));
   }
 
   mapEval(vinculante) {
-    return this.mapa(evaluarLaExpresión
+    devolver esta.mapa(evaluarLaExpresión
       .bind(null, vinculante));
   }
 
   encontrar(valor) {
-    if (this.estaVacio)
-      return;
-    if (valor == this.cabeza)
-      return this;
-    else
-      return this.cola.encontrar(valor);
+    si (esta.estaVacio)
+      devolver;
+    si (valor == esta.cabeza)
+      devolver esta;
+    demás
+      devolver esta.cola.encontrar(valor);
   }
 
   hasta(valor) {
-    if (this.estaVacio)
-      return this;
-    if (valor == this.cabeza)
-      return this.constructor.hacer();
-    else
-      return new this.constructor(this.cabeza, this.cola.hasta(valor));
+    si (esta.estaVacio)
+      devolver esta;
+    si (valor == esta.cabeza)
+      devolver esta.constructor.hacer();
+    demás
+      devolver new esta.constructor(esta.cabeza, esta.cola.hasta(valor));
   }
 
   split(valor) {
-    let resultados = this.constructor.hacer();
-    let sub = this.encontrar(valor);
-    if (sub) {
+    let resultados = esta.constructor.hacer();
+    let sub = esta.encontrar(valor);
+    si (sub) {
       sub = sub.estallido();
-      if (sub.encontrar(valor))
+      si (sub.encontrar(valor))
         resultados = sub.split(valor);
-      else
+      demás
         resultados = resultados.empujar(sub);
     }
-    resultados = resultados.empujar(this.hasta(valor));
-    return resultados;
+    resultados = resultados.empujar(esta.hasta(valor));
+    devolver resultados;
   }
 
   partition(n) {
-    if (this.estaVacio)
-      return this;
+    si (esta.estaVacio)
+      devolver esta;
 
-    return this.saltar(n)
+    devolver esta.saltar(n)
                .partition(n)
-               .empujar(this.llevar(n));
+               .empujar(esta.llevar(n));
   }
 
   // Simple little method returns a ojeada y
@@ -194,31 +194,31 @@ clase ListaAbstracta {
   // the cabeza y the cola broken up into a lista
   // cual can the be destructed into locals
   // or otherwise manipulated. There might be
-  // a more conventenal what a do this, but
-  // this es serving my purposes for the time begin.
+  // a more conventenal what a do esta, but
+  // esta es serving my purposes for the time begin.
   // #LongLivePlop! ✨️
   plop() {
-    return this.constructor.
-      hacer(this.ojeada(), this.estallido());
+    devolver esta.constructor.
+      hacer(esta.ojeada(), esta.estallido());
   }
 
   // incluir (valor) {
-  //   return this.encontrar(valor).?ojeada();
+  //   devolver esta.encontrar(valor).?ojeada();
   // }
 
   // incluir (valor) {
-  //   const lista = this.encontrar(valor);
-  //   if (lista)
-  //     return lista.ojeada();
+  //   const lista = esta.encontrar(valor);
+  //   si (lista)
+  //     devolver lista.ojeada();
   // }
 
   // ["includes?"] (valor) {
-  //   return !!this.incluir(valor);
-  //   // return !!this.encontrar(valor);
+  //   devolver !!esta.incluir(valor);
+  //   // devolver !!esta.encontrar(valor);
   // }
 
   *[Symbol.iterator]() {
-    let nodoActual = this;
+    let nodoActual = esta;
     while (!nodoActual.estaVacio) {
       yield nodoActual.o;
       nodoActual = nodoActual.oo;

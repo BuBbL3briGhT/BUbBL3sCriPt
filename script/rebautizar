@@ -3,41 +3,46 @@
 # alias eco=echo
 
 declare -A mapaDeSimbolos=(
+  ["this"]="esta"
+  # ["this"]="esto"
+  ["return"]="devolver"
+  ["if"]="si"
+
+  # ["a"]="a"
+  # ["o"]="o"
+  # ["oo"]="oo"
+  # ["fn"]="fn"
+
   ["AbstractList"]="ListaAbstracta"
-  ["events"]="eventos"
+
+  ["pop"]="estallido"
+  ["get"]="consiguir"
   ["init"]="inicio"
+  ["peek"]="ojeada"
+  ["find"]="encontrar"
+  ["count"]="contar"
+  ["value"]="valor"
+  ["reduce"]="reducir"
+  ["events"]="eventos"
+  ["isEmpty"]="estaVacio"
+
   ["evalExpression"]="evaluarLaExpresión"
   # ["evalExpression"]="expresiónDeEvaluación"
-  # ["this"]=
-  # ["return"]=
-  # ["if"]=
-  ["value"]="valor"
-  ["peek"]="ojeada"
-  ["pop"]="estallido"
-  ["isEmpty"]="estaVacio"
-  # ["o"]=
-  # ["oo"]=
-  ["get"]="consiguir"
-  # ["fn"]=
-
-  ["count"]="contar"
-  ["reduce"]="reducir"
-  ["find"]="encontrar"
   # ["constructor"]=""
   # ["sub"]=""
   ["result"]="resultados"
   ["push"]="empujar"
   # ["let"]=""
   # ["the"]=""
-  # ["memo"]=""
+  ["memo"]="memo"
+  ["memorandum"]="memorándum"
   ["make"]="hacer"
-  # ["else"]=""
+  ["else"]="demás"
   ["currentElement"]="elementoActual"
   ["list"]="lista"
   ["head"]="cabeza"
   ["currentNode"]="nodoActual"
   ["array"]="formación"
-  # ["a"]=""
   ["tail"]="cola"
   ["skip"]="saltar"
   ["prototype"]="prototipo"
