@@ -1,23 +1,23 @@
-const events = require("./events");
+const eventos = require("./eventos");
 
 let ëval;
 
-events.on("init", function (bubls) {
+eventos.on("inicio", function (bubls) {
   ëval = bubls.ëval;
-  evalExpression = bubls.evalExpression;
+  evaluarLaExpresión = bubls.evaluarLaExpresión;
 });
 
 
-// Let's define `ListaAbstracta` which is a
-// class that will serve as the abstract
-// base class for `List` and `Vector`. All
-// shared functionality between `List` and
-// `Vector` is centralized here.
-class ListaAbstracta {
+// Let's define `ListaAbstracta` cual es a
+// clase that will serve as the abstract
+// base clase for `List` y `Vector`. All
+// shared functionality between `List` y
+// `Vector` es centralized here.
+clase ListaAbstracta {
 
   static from(arrayLike, mapFn, thisArg) {
-    let array = Array.from(arrayLike, mapFn, thisArg);
-    return this.make(...array);
+    let formación = Array.from(arrayLike, mapFn, thisArg);
+    return this.hacer(...formación);
   }
 
   constructor(o, oo) {
@@ -25,76 +25,76 @@ class ListaAbstracta {
     this.oo = oo;
   }
 
-  peek() { return this.o; }
-  pop()  { return this.oo; }
+  ojeada() { return this.o; }
+  estallido()  { return this.oo; }
 
 
-  get isEmpty() { return false; }
-  get ["isEmpty?"]() { return this.isEmpty; }
-  get ["empty?"]() { return this.isEmpty; }
-  get first() { return this.peek(); }
-  get rest() { return this.pop(); }
-  get head() { return this.peek(); }
-  get tail() { return this.pop(); }
-  get next() { return this.pop().peek(); }
-  get last() { return !this.pop().isEmpty ?
-      this.pop().last : this.peek(); }
+  consiguir esta vacio() { return false; }
+  consiguir ["esta vacio?"]() { return this.esta vacio; }
+  consiguir ["empty?"]() { return this.esta vacio; }
+  consiguir first() { return this.ojeada(); }
+  consiguir rest() { return this.estallido(); }
+  consiguir cabeza() { return this.ojeada(); }
+  consiguir cola() { return this.estallido(); }
+  consiguir next() { return this.estallido().ojeada(); }
+  consiguir last() { return !this.estallido().esta vacio ?
+      this.estallido().last : this.ojeada(); }
 
-  count() {
-    return this.reduce((count) => {
-      return ++count;
+  contar() {
+    return this.reducir((contar) => {
+      return ++contar;
     }, 0);
   }
 
-  map(fn) {
-    if (this.isEmpty) return this;
-    return new this.constructor(fn(this.peek()),
-      this.pop().map(fn));
+  mapa(fn) {
+    if (this.esta vacio) return this;
+    return new this.constructor(fn(this.ojeada()),
+      this.estallido().mapa(fn));
   }
 
-  get(i) { return this.skip(i).peek(); }
+  consiguir(i) { return this.saltar(i).ojeada(); }
 
-  take(count) {
-    if (this.isEmpty)
+  llevar(contar) {
+    if (this.esta vacio)
       return this;
 
-    if (count)
-      return this.pop().take(--count)
-        .push(this.peek());
+    if (contar)
+      return this.estallido().llevar(--contar)
+        .empujar(this.ojeada());
 
-    return this.constructor.make()
+    return this.constructor.hacer()
   }
 
-  skip(count) {
-    if (count && !this.isEmpty)
-      return this.pop().skip(--count);
+  saltar(contar) {
+    if (contar && !this.esta vacio)
+      return this.estallido().saltar(--contar);
 
     return this;
   }
 
   shift() {
-    return this.invert().pop().invert();
+    return this.invertir().estallido().invertir();
   }
 
-  invert() {
-    if (this.isEmpty)
+  invertir() {
+    if (this.esta vacio)
       return this;
 
-    return this.pop().reduce(
-      (accumulator, currentElement) => {
-        return accumulator.push(currentElement);
-      }, this.constructor.make(this.peek()));
+    return this.estallido().reducir(
+      (acumulador, elementoActual) => {
+        return acumulador.empujar(elementoActual);
+      }, this.constructor.hacer(this.ojeada()));
   }
 
   conj(sourceList) {
-    return sourceList.reduce(function(accumulator, currentElement) {
-      return accumulator.push(currentElement);
+    return sourceList.reducir(function(acumulador, elementoActual) {
+      return acumulador.empujar(elementoActual);
     }, this);
   }
 
   _toString() {
-    if (this.isEmpty) return "";
-    return this.map(this.toStringFormat).reduce(this.toStringJoin);
+    if (this.esta vacio) return "";
+    return this.mapa(this.toStringFormat).reducir(this.toStringJoin);
   }
 
   toStringFormat(o) {
@@ -110,124 +110,124 @@ class ListaAbstracta {
   }
 
   toArray() {
-    return this.reduce((array, currentElement) => {
-      array.push(currentElement); return array; }, []);
+    return this.reducir((formación, elementoActual) => {
+      formación.empujar(elementoActual); return formación; }, []);
   }
 
-  reduce(fn, memo) {
-    if (this.isEmpty)
+  reducir(fn, memo) {
+    if (this.esta vacio)
       return memo;
 
-    let oo = this.pop();
-    if (oo.isEmpty)
+    let oo = this.estallido();
+    if (oo.esta vacio)
       if(memo == undefined)
-        return this.peek();
+        return this.ojeada();
       else
-        return fn(memo, this.peek());
+        return fn(memo, this.ojeada());
     else
       if (memo != undefined)
-        return oo.reduce(fn,
-          fn(memo, this.peek()))
+        return oo.reducir(fn,
+          fn(memo, this.ojeada()))
       else
-        return oo.reduce(fn, this.peek());
+        return oo.reducir(fn, this.ojeada());
   }
 
-  each(fn) {
-    let oo = fn(this.peek());
-    if (this.pop().isEmpty) return oo;
-    return this.pop().each(fn);
+  cada(fn) {
+    let oo = fn(this.ojeada());
+    if (this.estallido().esta vacio) return oo;
+    return this.estallido().cada(fn);
   }
 
-  evalEach(binding) {
-    return this.each(evalExpression
-      .bind(null, binding));
+  evalEach(vinculante) {
+    return this.cada(evaluarLaExpresión
+      .bind(null, vinculante));
   }
 
-  mapEval(binding) {
-    return this.map(evalExpression
-      .bind(null, binding));
+  mapEval(vinculante) {
+    return this.mapa(evaluarLaExpresión
+      .bind(null, vinculante));
   }
 
-  find(value) {
-    if (this.isEmpty)
+  encontrar(valor) {
+    if (this.esta vacio)
       return;
-    if (value == this.head)
+    if (valor == this.cabeza)
       return this;
     else
-      return this.tail.find(value);
+      return this.cola.encontrar(valor);
   }
 
-  until(value) {
-    if (this.isEmpty)
+  hasta(valor) {
+    if (this.esta vacio)
       return this;
-    if (value == this.head)
-      return this.constructor.make();
+    if (valor == this.cabeza)
+      return this.constructor.hacer();
     else
-      return new this.constructor(this.head, this.tail.until(value));
+      return new this.constructor(this.cabeza, this.cola.hasta(valor));
   }
 
-  split(value) {
-    let result = this.constructor.make();
-    let sub = this.find(value);
+  split(valor) {
+    let resultados = this.constructor.hacer();
+    let sub = this.encontrar(valor);
     if (sub) {
-      sub = sub.pop();
-      if (sub.find(value))
-        result = sub.split(value);
+      sub = sub.estallido();
+      if (sub.encontrar(valor))
+        resultados = sub.split(valor);
       else
-        result = result.push(sub);
+        resultados = resultados.empujar(sub);
     }
-    result = result.push(this.until(value));
-    return result;
+    resultados = resultados.empujar(this.hasta(valor));
+    return resultados;
   }
 
   partition(n) {
-    if (this.isEmpty)
+    if (this.esta vacio)
       return this;
 
-    return this.skip(n)
+    return this.saltar(n)
                .partition(n)
-               .push(this.take(n));
+               .empujar(this.llevar(n));
   }
 
-  // Simple little method returns a peek and
-  // a pop. Use to skim the list, just to get
-  // the head and the tail broken up into a list
-  // which can the be destructed into locals
+  // Simple little method returns a ojeada y
+  // a estallido. Use a skim the lista, just a consiguir
+  // the cabeza y the cola broken up into a lista
+  // cual can the be destructed into locals
   // or otherwise manipulated. There might be
-  // a more conventenal what to do this, but
-  // this is serving my purposes for the time begin.
+  // a more conventenal what a do this, but
+  // this es serving my purposes for the time begin.
   // #LongLivePlop! ✨️
   plop() {
     return this.constructor.
-      make(this.peek(), this.pop());
+      hacer(this.ojeada(), this.estallido());
   }
 
-  // include (value) {
-  //   return this.find(value).?peek();
+  // incluir (valor) {
+  //   return this.encontrar(valor).?ojeada();
   // }
 
-  // include (value) {
-  //   const list = this.find(value);
-  //   if (list)
-  //     return list.peek();
+  // incluir (valor) {
+  //   const lista = this.encontrar(valor);
+  //   if (lista)
+  //     return lista.ojeada();
   // }
 
-  // ["includes?"] (value) {
-  //   return !!this.include(value);
-  //   // return !!this.find(value);
+  // ["includes?"] (valor) {
+  //   return !!this.incluir(valor);
+  //   // return !!this.encontrar(valor);
   // }
 
   *[Symbol.iterator]() {
-    let currentNode = this;
-    while (!currentNode.isEmpty) {
-      yield currentNode.o;
-      currentNode = currentNode.oo;
+    let nodoActual = this;
+    while (!nodoActual.esta vacio) {
+      yield nodoActual.o;
+      nodoActual = nodoActual.oo;
     }
   }
 }
 
 // Aliases
-const prototype = ListaAbstracta.prototype;
-prototype["includes?"] = prototype.find;
+const prototipo = ListaAbstracta.prototipo;
+prototipo["includes?"] = prototipo.encontrar;
 
 module.exports = ListaAbstracta;

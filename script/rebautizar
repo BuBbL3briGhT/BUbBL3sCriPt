@@ -277,7 +277,7 @@ function buscar_y_reemplazar_símbolo() {
 }
 
 cat "./src/en/abstract_list.js" | \
-  head -n20 | \
+  # head -n20 | \
   buscar_y_reemplazar_símbolo
 
 
