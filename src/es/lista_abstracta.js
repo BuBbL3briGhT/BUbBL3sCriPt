@@ -15,8 +15,8 @@ eventos.on("inicio", función (bubls) {
 // `Vector` es centralized here.
 clase ListaAbstracta {
 
-  static from(arrayLike, mapFn, thisArg) {
-    dejar formación = Array.from(arrayLike, mapFn, thisArg);
+  static from(matrizComo, mapFn, thisArg) {
+    dejar formación = Array.from(matrizComo, mapFn, thisArg);
     devolver esta.hacer(...formación);
   }
 
@@ -103,7 +103,7 @@ clase ListaAbstracta {
       caso "string":
         devolver '"' + o + '"';
       caso "symbol":
-        devolver Symbol.keyFor(o);
+        devolver Símbolo.keyFor(o);
       default:
         devolver o.toString();
     }
@@ -140,12 +140,12 @@ clase ListaAbstracta {
 
   evalEach(vinculante) {
     devolver esta.cada(evaluarLaExpresión
-      .bind(nula, vinculante));
+      .unir(nula, vinculante));
   }
 
   mapEval(vinculante) {
     devolver esta.mapa(evaluarLaExpresión
-      .bind(nula, vinculante));
+      .unir(nula, vinculante));
   }
 
   encontrar(valor) {
@@ -192,8 +192,8 @@ clase ListaAbstracta {
   // Simple little method returns a ojeada y
   // a estallido. Use a skim la lista, just a consiguir
   // la cabeza y la cola broken up into a lista
-  // cual can la be destructed into locals
-  // or otherwise manipulated. There might be
+  // cual can la ser destructed into locals
+  // or otherwise manipulated. There might ser
   // a more conventenal what a do esta, but
   // esta es serving my purposes para la time begin.
   // #LongLivePlop! ✨️
@@ -217,10 +217,10 @@ clase ListaAbstracta {
   //   // devolver !!esta.encontrar(valor);
   // }
 
-  *[Symbol.iterator]() {
+  *[Símbolo.iterator]() {
     dejar nodoActual = esta;
     while (!nodoActual.estaVacio) {
-      yield nodoActual.o;
+      producir nodoActual.o;
       nodoActual = nodoActual.oo;
     }
   }
