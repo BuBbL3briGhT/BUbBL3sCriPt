@@ -8,150 +8,150 @@ declare -A mapaDeSimbolos=(
   ["init"]="inicio"
   ["evalExpression"]="evaluarLaExpresión"
   # ["evalExpression"]="expresiónDeEvaluación"
-     81 this
-     59 return
-     20 if
-     18 value
-     18 peek
-     17 pop
-     17 isEmpty
-     12 o
-     11 oo
-     11 get
-     11 fn
-      9 count
-      8 reduce
-      8 find
-      8 constructor
-      7 sub
-      7 result
-      7 push
-      7 let
-      6 the
-      6 memo
-      6 make
-      6 else
-      6 currentElement
-      5 list
-      5 head
-      5 currentNode
-      5 array
-      5 a
-      4 tail
-      4 skip
-      4 prototype
-      4 n
-      4 map
-      4 evalExpression
-      4 binding
-      4 and
-      4 accumulator
-      4 AbstractList
-      3 ëval
-      3 until                                            3 to
-      3 take
-      3 is
-      3 invert
-      3 include
-      3 events
-      3 each
-      3 const
-      3 class
-      3 bubls
-      2 which
-      2 undefined
-      2 toStringFormat
-      2 thisArg
-      2 split
-      2 sourceList
-      2 partition
-      2 null
-      2 new
-      2 mapFn
-      2 last
-      2 into                                             2 includes
-      2 i
-      2 function
-      2 from
-      2 for
-      2 case
-      2 bind
-      2 be
-      2 arrayLike
-      2 Vector
-      2 Symbol
-      2 List
-      1
-      1 yield
-      1 will
-      1 while
-      1 what                                             1 up
-      1 typeof
-      1 toStringJoin
-      1 toString
-      1 toArray
-      1 time
-      1 that
-      1 symbol
-      1 switch
-      1 string
-      1 static
-      1 skim
-      1 shift
-      1 shared
-      1 serving
-      1 serve
-      1 s
-      1 returns
-      1 rest
-      1 require
-      1 purposes                                         1 plop
-      1 otherwise
-      1 or
-      1 on
-      1 next
-      1 my                                               1 more
-      1 module
-      1 might
-      1 method
-      1 mapEval
-      1 manipulated
-      1 locals
-      1 little
-      1 keyFor
-      1 just
-      1 iterator
-      1 init
-      1 here
-      1 functionality
-      1 first
-      1 false
-      1 exports
-      1 evalEach
-      1 empty
-      1 do
-      1 destructed
-      1 define
-      1 default
-      1 conventenal
-      1 conj
-      1 centralized                                      1 can
-      1 but
-      1 broken
-      1 between
-      1 begin
-      1 base
-      1 as
-      1 abstract
-      1 _toString
-      1 Use
-      1 There
-      1 Simple
-      1 LongLivePlop
-      1 Let                                              1 Array
-      1 All
-      1 Aliases
-      1 0
+  # ["this"]=
+  # ["return"]=
+  # ["if"]=
+  ["value"]="valor"
+  ["peek"]="ojeada"
+  ["pop"]="estallido"
+  ["isEmpty"]="esta vacio"
+  # ["o"]=
+  # ["oo"]=
+  ["get"]="consiguir"
+  # ["fn"]=
+  # 9 count
+  # 8 reduce
+  # 8 find
+  # 8 constructor
+  # 7 sub
+  # 7 result
+  # 7 push
+  # 7 let
+  # 6 the
+  # 6 memo
+  # 6 make
+  # 6 else
+  # 6 currentElement
+  # 5 list
+  # 5 head
+  # 5 currentNode
+  # 5 array
+  # 5 a
+  # 4 tail
+  # 4 skip
+  # 4 prototype
+  # 4 n
+  # 4 map
+  # 4 evalExpression
+  # 4 binding
+  # 4 and
+  # 4 accumulator
+  # 4 AbstractList
+  # 3 ëval
+  # 3 until                                            3 to
+  # 3 take
+  # 3 is
+  # 3 invert
+  # 3 include
+  # 3 events
+  # 3 each
+  # 3 const
+  # 3 class
+  # 3 bubls
+  # 2 which
+  # 2 undefined
+  # 2 toStringFormat
+  # 2 thisArg
+  # 2 split
+  # 2 sourceList
+  # 2 partition
+  # 2 null
+  # 2 new
+  # 2 mapFn
+  # 2 last
+  # 2 into                                             2 includes
+  # 2 i
+  # 2 function
+  # 2 from
+  # 2 for
+  # 2 case
+  # 2 bind
+  # 2 be
+  # 2 arrayLike
+  # 2 Vector
+  # 2 Symbol
+  # 2 List
+  # 1
+  # 1 yield
+  # 1 will
+  # 1 while
+  # 1 what                                             1 up
+  # 1 typeof
+  # 1 toStringJoin
+  # 1 toString
+  # 1 toArray
+  # 1 time
+  # 1 that
+  # 1 symbol
+  # 1 switch
+  # 1 string
+  # 1 static
+  # 1 skim
+  # 1 shift
+  # 1 shared
+  # 1 serving
+  # 1 serve
+  # 1 s
+  # 1 returns
+  # 1 rest
+  # 1 require
+  # 1 purposes                                         1 plop
+  # 1 otherwise
+  # 1 or
+  # 1 on
+  # 1 next
+  # 1 my                                               1 more
+  # 1 module
+  # 1 might
+  # 1 method
+  # 1 mapEval
+  # 1 manipulated
+  # 1 locals
+  # 1 little
+  # 1 keyFor
+  # 1 just
+  # 1 iterator
+  # 1 init
+  # 1 here
+  # 1 functionality
+  # 1 first
+  # 1 false
+  # 1 exports
+  # 1 evalEach
+  # 1 empty
+  # 1 do
+  # 1 destructed
+  # 1 define
+  # 1 default
+  # 1 conventenal
+  # 1 conj
+  # 1 centralized                                      1 can
+  # 1 but
+  # 1 broken
+  # 1 between
+  # 1 begin
+  # 1 base
+  # 1 as
+  # 1 abstract
+  # 1 _toString
+  # 1 Use
+  # 1 There
+  # 1 Simple
+  # 1 LongLivePlop
+  # 1 Let                                              1 Array
+  # 1 All
+  # 1 Aliases
+  # 1 0
 )
 
 
