@@ -29,15 +29,15 @@ clase ListaAbstracta {
   estallido()  { return this.oo; }
 
 
-  consiguir esta vacio() { return false; }
-  consiguir ["esta vacio?"]() { return this.esta vacio; }
-  consiguir ["empty?"]() { return this.esta vacio; }
+  consiguir estaVacio() { return false; }
+  consiguir ["estaVacio?"]() { return this.estaVacio; }
+  consiguir ["empty?"]() { return this.estaVacio; }
   consiguir first() { return this.ojeada(); }
   consiguir rest() { return this.estallido(); }
   consiguir cabeza() { return this.ojeada(); }
   consiguir cola() { return this.estallido(); }
   consiguir next() { return this.estallido().ojeada(); }
-  consiguir last() { return !this.estallido().esta vacio ?
+  consiguir last() { return !this.estallido().estaVacio ?
       this.estallido().last : this.ojeada(); }
 
   contar() {
@@ -47,7 +47,7 @@ clase ListaAbstracta {
   }
 
   mapa(fn) {
-    if (this.esta vacio) return this;
+    if (this.estaVacio) return this;
     return new this.constructor(fn(this.ojeada()),
       this.estallido().mapa(fn));
   }
@@ -55,7 +55,7 @@ clase ListaAbstracta {
   consiguir(i) { return this.saltar(i).ojeada(); }
 
   llevar(contar) {
-    if (this.esta vacio)
+    if (this.estaVacio)
       return this;
 
     if (contar)
@@ -66,7 +66,7 @@ clase ListaAbstracta {
   }
 
   saltar(contar) {
-    if (contar && !this.esta vacio)
+    if (contar && !this.estaVacio)
       return this.estallido().saltar(--contar);
 
     return this;
@@ -77,7 +77,7 @@ clase ListaAbstracta {
   }
 
   invertir() {
-    if (this.esta vacio)
+    if (this.estaVacio)
       return this;
 
     return this.estallido().reducir(
@@ -93,7 +93,7 @@ clase ListaAbstracta {
   }
 
   _toString() {
-    if (this.esta vacio) return "";
+    if (this.estaVacio) return "";
     return this.mapa(this.toStringFormat).reducir(this.toStringJoin);
   }
 
@@ -115,11 +115,11 @@ clase ListaAbstracta {
   }
 
   reducir(fn, memo) {
-    if (this.esta vacio)
+    if (this.estaVacio)
       return memo;
 
     let oo = this.estallido();
-    if (oo.esta vacio)
+    if (oo.estaVacio)
       if(memo == undefined)
         return this.ojeada();
       else
@@ -134,7 +134,7 @@ clase ListaAbstracta {
 
   cada(fn) {
     let oo = fn(this.ojeada());
-    if (this.estallido().esta vacio) return oo;
+    if (this.estallido().estaVacio) return oo;
     return this.estallido().cada(fn);
   }
 
@@ -149,7 +149,7 @@ clase ListaAbstracta {
   }
 
   encontrar(valor) {
-    if (this.esta vacio)
+    if (this.estaVacio)
       return;
     if (valor == this.cabeza)
       return this;
@@ -158,7 +158,7 @@ clase ListaAbstracta {
   }
 
   hasta(valor) {
-    if (this.esta vacio)
+    if (this.estaVacio)
       return this;
     if (valor == this.cabeza)
       return this.constructor.hacer();
@@ -181,7 +181,7 @@ clase ListaAbstracta {
   }
 
   partition(n) {
-    if (this.esta vacio)
+    if (this.estaVacio)
       return this;
 
     return this.saltar(n)
@@ -219,7 +219,7 @@ clase ListaAbstracta {
 
   *[Symbol.iterator]() {
     let nodoActual = this;
-    while (!nodoActual.esta vacio) {
+    while (!nodoActual.estaVacio) {
       yield nodoActual.o;
       nodoActual = nodoActual.oo;
     }
