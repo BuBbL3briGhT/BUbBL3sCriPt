@@ -2,7 +2,7 @@
 
 # alias eco=echo
 
-declare -A mapaDeSímbolos=(
+declare -A mapaDeSimbolos=(
   ["AbstractList"]="ListaAbstracta"
 )
 
@@ -41,7 +41,7 @@ function buscar_y_reemplazar_símbolo() {
     # # Find and replace tokens.
     for i in "${!palabras[@]}"; do
       for s in "${!mapaDeSimbolos[@]}"; do
-        if [[ "${palabras[i]}" == "$s"]]; then
+        if [[ "${palabras[i]}" == "$s" ]]; then
           palabras[i]="${mapaDeSimbolos[s]}"
         fi
       done
