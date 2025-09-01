@@ -5,6 +5,8 @@
 declare -A mapaDeSimbolos=(
   # Palabras clave de JavaScript
   ["if"]="si"
+  ["let"]="dejar"
+  ["new"]="nueva" # ["new"]="nuevo"
   ["this"]="esta" # ["this"]="esto"
   ["return"]="devolver"
   ["undefined"]="indefinida" # ["undefined"]="indefinido"
@@ -14,6 +16,7 @@ declare -A mapaDeSimbolos=(
   # ["o"]="o"
   # ["n"]="n"
   # ["s"]="s"
+  # ["0"]="0"
 
   ["oo"]="oo"
   ["fn"]="fn"
@@ -22,11 +25,9 @@ declare -A mapaDeSimbolos=(
   ["pop"]="estallido"
   ["get"]="consiguir"
   ["sub"]="sus"
-  ["let"]="dejar"
   ["the"]="la" # ["the"]="el"
   ["map"]="mapa"
   ["and"]="y"
-  ["new"]="nueva" # ["new"]="nuevo"
   ["init"]="inicio"
   ["peek"]="ojeada"
   ["push"]="empujar"
@@ -156,16 +157,15 @@ declare -A mapaDeSimbolos=(
   ["as"]="como"
   ["abstract"]="abstracta" # ["abstract"]="abstracto"
 
-  # ["_toString"]=""
-  # ["Use"]=""
-  # ["There"]=""
-  # ["Simple"]=""
-  # ["LongLivePlop"]=""
-  # ["Let"]=""
-  # ["Array"]=""
-  # ["All"]=""
-  # ["Aliases"]=""
-  # ["0"]=""
+  ["_toString"]="_encordar"
+  ["Use"]="usar"
+  ["There"]="Allá"
+  ["Simple"]="Sencilla" # ["Simple"]="Sencillo"
+  ["LongLivePlop"]="LargaVidaAlPlop"
+  ["Let"]="Dejar"
+  ["Array"]="Formación"
+  ["All"]="Toda" # ["All"]="Todo"
+  ["Aliases"]="Alias"
 )
 
 
