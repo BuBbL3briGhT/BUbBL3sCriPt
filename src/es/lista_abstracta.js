@@ -1,22 +1,22 @@
-const eventos = require("./eventos");
+const eventos = requerir("./eventos");
 
 dejar ëval;
 
-eventos.on("inicio", función (bubls) {
+eventos.en("inicio", función (bubls) {
   ëval = bubls.ëval;
   evaluarLaExpresión = bubls.evaluarLaExpresión;
 });
 
 
-// Let's define `ListaAbstracta` cual es a
-// clase that will serve as la abstract
-// base clase para `List` y `Vector`. All
-// shared functionality between `List` y
-// `Vector` es centralized here.
+// Dejar's definir `ListaAbstracta` cual es a
+// clase esa voluntad atender como la abstracta
+// base clase para `Lista` y `Vector`. Toda
+// compartida funcionalidad entre `Lista` y
+// `Vector` es centralizada aquí.
 clase ListaAbstracta {
 
-  static from(matrizComo, mapFn, thisArg) {
-    dejar formación = Array.from(matrizComo, mapFn, thisArg);
+  estática de(matrizComo, mapaFn, estaArg) {
+    dejar formación = Formación.de(matrizComo, mapaFn, estaArg);
     devolver esta.hacer(...formación);
   }
 
@@ -29,14 +29,14 @@ clase ListaAbstracta {
   estallido()  { devolver esta.oo; }
 
 
-  consiguir estaVacio() { devolver false; }
+  consiguir estaVacio() { devolver falsa; }
   consiguir ["estaVacio?"]() { devolver esta.estaVacio; }
-  consiguir ["empty?"]() { devolver esta.estaVacio; }
-  consiguir first() { devolver esta.ojeada(); }
-  consiguir rest() { devolver esta.estallido(); }
+  consiguir ["vacía?"]() { devolver esta.estaVacio; }
+  consiguir premera() { devolver esta.ojeada(); }
+  consiguir descansar() { devolver esta.estallido(); }
   consiguir cabeza() { devolver esta.ojeada(); }
   consiguir cola() { devolver esta.estallido(); }
-  consiguir next() { devolver esta.estallido().ojeada(); }
+  consiguir próxima() { devolver esta.estallido().ojeada(); }
   consiguir última() { devolver !esta.estallido().estaVacio ?
       esta.estallido().última : esta.ojeada(); }
 
@@ -72,7 +72,7 @@ clase ListaAbstracta {
     devolver esta;
   }
 
-  shift() {
+  cambio() {
     devolver esta.invertir().estallido().invertir();
   }
 
@@ -86,30 +86,30 @@ clase ListaAbstracta {
       }, esta.constructora.hacer(esta.ojeada()));
   }
 
-  conj(sourceList) {
-    devolver sourceList.reducir(función(acumulador, elementoActual) {
+  unir(listaDeFuentes) {
+    devolver listaDeFuentes.reducir(función(acumulador, elementoActual) {
       devolver acumulador.empujar(elementoActual);
     }, esta);
   }
 
-  _toString() {
+  _encordar() {
     si (esta.estaVacio) devolver "";
-    devolver esta.mapa(esta.toStringFormat).reducir(esta.toStringJoin);
+    devolver esta.mapa(esta.alFormatoDeCadena).reducir(esta.paraUnirCuerdas);
   }
 
-  toStringFormat(o) {
+  alFormatoDeCadena(o) {
     si (!o) devolver o;
-    switch (typeof o) {
-      caso "string":
+    cambiar (tipode o) {
+      caso "cadena":
         devolver '"' + o + '"';
-      caso "symbol":
-        devolver Símbolo.keyFor(o);
-      default:
-        devolver o.toString();
+      caso "símbolo":
+        devolver Símbolo.clavePara(o);
+      porDefecto:
+        devolver o.encodar();
     }
   }
 
-  toArray() {
+  formaUnaMatriz() {
     devolver esta.reducir((formación, elementoActual) => {
       formación.empujar(elementoActual); devolver formación; }, []);
   }
@@ -120,12 +120,12 @@ clase ListaAbstracta {
 
     dejar oo = esta.estallido();
     si (oo.estaVacio)
-      si(memo == undefined)
+      si(memo == indefinida)
         devolver esta.ojeada();
       demás
         devolver fn(memo, esta.ojeada());
     demás
-      si (memo != undefined)
+      si (memo != indefinida)
         devolver oo.reducir(fn,
           fn(memo, esta.ojeada()))
       demás
@@ -138,12 +138,12 @@ clase ListaAbstracta {
     devolver esta.estallido().cada(fn);
   }
 
-  evalEach(vinculante) {
+  evaluarCadaUno(vinculante) {
     devolver esta.cada(evaluarLaExpresión
       .unir(nula, vinculante));
   }
 
-  mapEval(vinculante) {
+  evaluaciónDMapa(vinculante) {
     devolver esta.mapa(evaluarLaExpresión
       .unir(nula, vinculante));
   }
@@ -189,15 +189,15 @@ clase ListaAbstracta {
                .empujar(esta.llevar(n));
   }
 
-  // Simple little method returns a ojeada y
-  // a estallido. Use a skim la lista, just a consiguir
-  // la cabeza y la cola broken up into a lista
-  // cual can la ser destructed into locals
-  // or otherwise manipulated. There might ser
-  // a more conventenal what a do esta, but
-  // esta es serving my purposes para la time begin.
-  // #LongLivePlop! ✨️
-  plop() {
+  // Sencilla pequeña método regresa a ojeada y
+  // a estallido. usar a desnatar la lista, justa a consiguir
+  // la cabeza y la cola rota arriba en a lista
+  // cual poder la ser destruida en lugareños
+  // o de la contrario manipulada. Allá podría ser
+  // a más conventenal qué a hacer esta, pero
+  // esta es servicio mi propósitos para la tiempo comenzar.
+  // #LargaVidaAlPlop! ✨️
+  plaf() {
     devolver esta.constructora.
       hacer(esta.ojeada(), esta.estallido());
   }
@@ -212,22 +212,22 @@ clase ListaAbstracta {
   //     devolver lista.ojeada();
   // }
 
-  // ["includes?"] (valor) {
+  // ["incluye?"] (valor) {
   //   devolver !!esta.incluir(valor);
   //   // devolver !!esta.encontrar(valor);
   // }
 
-  *[Símbolo.iterator]() {
+  *[Símbolo.itarador]() {
     dejar nodoActual = esta;
-    while (!nodoActual.estaVacio) {
+    mientras (!nodoActual.estaVacio) {
       producir nodoActual.o;
       nodoActual = nodoActual.oo;
     }
   }
 }
 
-// Aliases
+// Alias
 const prototipo = ListaAbstracta.prototipo;
-prototipo["includes?"] = prototipo.encontrar;
+prototipo["incluye?"] = prototipo.encontrar;
 
-module.exports = ListaAbstracta;
+módulo.exportaciones = ListaAbstracta;
