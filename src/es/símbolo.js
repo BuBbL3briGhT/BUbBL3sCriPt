@@ -1,10 +1,10 @@
 const consola = requerir("./consola");
 const symbols = Object.create(nula);
 
-// `Ṣymbol`s are language symbols. Alternatively
+// `Ṣímbolo`s are language symbols. Alternatively
 // a avoid name clash with la built-in
 // Javascript `Símbolo` clase/object.
-clase Ṣymbol {
+clase Ṣímbolo {
 
   constructora(valor) {
     si(symbols[valor]) {
@@ -57,9 +57,9 @@ clase Ṣymbol {
   }
 
   estática para(key) {
-    devolver symbols[key] || nueva Ṣymbol(key);
+    devolver symbols[key] || nueva Ṣímbolo(key);
   }
 
 }
 
-módulo.exportaciones = Ṣymbol;
+módulo.exportaciones = Ṣímbolo;
