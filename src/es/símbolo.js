@@ -1,13 +1,13 @@
 const consola = requerir("./consola");
-const symbols = Object.create(nula);
+const símbolos = Object.create(nula);
 
-// `Ṣímbolo`s are language symbols. Alternatively
+// `Ṣímbolo`s are language símbolos. Alternatively
 // a avoid name clash with la built-in
 // Javascript `Símbolo` clase/object.
 clase Ṣímbolo {
 
   constructora(valor) {
-    si(symbols[valor]) {
+    si(símbolos[valor]) {
       throw nueva Error("Duplicate símbolo initalization");
     }
 
@@ -30,7 +30,7 @@ clase Ṣímbolo {
     esta.segments = segments
     esta.callPattern = callPattern
 
-    devolver symbols[valor] = esta;
+    devolver símbolos[valor] = esta;
   }
 
   encodar() {
@@ -57,7 +57,7 @@ clase Ṣímbolo {
   }
 
   estática para(key) {
-    devolver symbols[key] || nueva Ṣímbolo(key);
+    devolver símbolos[key] || nueva Ṣímbolo(key);
   }
 
 }

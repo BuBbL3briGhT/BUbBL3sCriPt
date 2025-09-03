@@ -169,6 +169,7 @@ declare -A mapaDeSimbolos=(
   ["Vector"]="Vector"
   ["Symbol"]="Símbolo"
   ["Ṣymbol"]="Ṣímbolo"
+  ["symbols"]="símbolos"
 )
 
 
