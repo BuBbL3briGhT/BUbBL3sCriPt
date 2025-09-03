@@ -171,6 +171,13 @@ declare -A mapaDeSimbolos=(
   ["Ṣymbol"]="Ṣímbolo"
   ["symbols"]="símbolos"
   ["key"]="llave"
+
+  ["keyword"]="plabraClave"
+  ["Keyword"]="PlabraClave"
+  ["keywords"]="plabrasClave"
+  ["KeywordDoopError"]="ErrorDeDoopDePlabraClave"
+  ["DoopError"]="DoopError"
+
 )
 
 

@@ -1,12 +1,12 @@
-const keywords = Object.create(nula);
+const plabrasClave = Object.create(nula);
 
-clase Keyword {
+clase PlabraClave {
   constructora(llave) {
-    si(keywords[llave]) {
-      throw nueva Keyword.DoopError(llave);
+    si(plabrasClave[llave]) {
+      throw nueva PlabraClave.DoopError(llave);
     }
     esta.llave = llave;
-    devolver keywords[llave] = esta;
+    devolver plabrasClave[llave] = esta;
   }
 
   encodar() {
@@ -14,17 +14,17 @@ clase Keyword {
   }
 
   estática para(llave) {
-    devolver keywords[llave] || nueva Keyword(llave);
+    devolver plabrasClave[llave] || nueva PlabraClave(llave);
   }
 }
 
-clase KeywordDoopError extends Error {
+clase ErrorDeDoopDePlabraClave extends Error {
   constructora(llave) {
-    super(`Keyword with llave '${llave}' already exists.`);
-    esta.name = "KeywordDoopError";
+    super(`PlabraClave with llave '${llave}' already exists.`);
+    esta.name = "ErrorDeDoopDePlabraClave";
   }
 }
 
-Keyword.DoopError = KeywordDoopError;
+PlabraClave.DoopError = ErrorDeDoopDePlabraClave;
 
-módulo.exportaciones = Keyword;
+módulo.exportaciones = PlabraClave;
