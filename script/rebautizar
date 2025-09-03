@@ -286,9 +286,12 @@ function buscar_y_reemplazar_símbolo() {
 
 }
 
-cat "./src/en/abstract_list.js" | \
-  # head -n20 | \
-  buscar_y_reemplazar_símbolo
+# Aquí es donde ocurre la magia.
+cat "$1" | buscar_y_reemplazar_símbolo
+
+# cat "./src/en/abstract_list.js" | \
+#   # head -n20 | \
+#   buscar_y_reemplazar_símbolo
 
 
 # cat "./src/abstract_list.js" | \
