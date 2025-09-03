@@ -177,6 +177,9 @@ declare -A mapaDeSimbolos=(
   ["keywords"]="plabrasClave"
   ["KeywordDoopError"]="ErrorDeDoopDePlabraClave"
   ["DoopError"]="DoopError"
+  ["Object"]="Objeto"
+  ["duplicate"]="duplicada" # ["duplicate"]="duplicado"
+  ["create"]="crear"
 
 )
 

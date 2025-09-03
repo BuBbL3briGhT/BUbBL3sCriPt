@@ -1,4 +1,4 @@
-const plabrasClave = Object.create(nula);
+const plabrasClave = Objeto.crear(nula);
 
 clase PlabraClave {
   constructora(llave) {
