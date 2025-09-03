@@ -170,6 +170,7 @@ declare -A mapaDeSimbolos=(
   ["Symbol"]="Símbolo"
   ["Ṣymbol"]="Ṣímbolo"
   ["symbols"]="símbolos"
+  ["key"]="llave"
 )
 
 

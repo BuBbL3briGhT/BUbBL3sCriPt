@@ -56,8 +56,8 @@ clase Ṣímbolo {
     devolver root;
   }
 
-  estática para(key) {
-    devolver símbolos[key] || nueva Ṣímbolo(key);
+  estática para(llave) {
+    devolver símbolos[llave] || nueva Ṣímbolo(llave);
   }
 
 }
