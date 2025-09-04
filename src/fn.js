@@ -19,8 +19,13 @@ class Fn {
           params = params.pop().peek();
         }
 
-        // const splat = params.find(sAmp);
-        // if (splat) { }
+        // // Handel & expansion.
+        // let splits = params.split(sAmp);
+        // console.log({splits});
+        // if (splits.count() > 1) {
+        //   params = splits.first.conj(splits.rest.head);
+        //   console.log({params});
+        // }
 
         return fn.call(binding,
           ...params.mapEval(binding));
