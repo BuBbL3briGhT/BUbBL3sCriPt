@@ -1,6 +1,5 @@
 const createBinding = require("./create_binding.js");
 const Ṣymbol = require("./symbol");
-const evalParams = require("./eval_params");
 
 const sAmp = Ṣymbol.for("&");
 
