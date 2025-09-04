@@ -36,6 +36,7 @@ class Fn {
         // console.log({params})
         // console.log("peekaboo", ...params)
 
+        params = evalParameterList(binding, params);
         return fn.call(binding, ...params);
     }
 
