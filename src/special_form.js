@@ -17,15 +17,7 @@
 class SpecialForm {
 
   constructor(fn, opts={ evaluateParams: false }) {
-    Object.assign(this, opts);
-    if (opts.evaluateParams) {
-      this.fn = function (params) {
-        return fn.call(this,
-          params.mapEval(this));
-      }
-    } else {
-      this.fn = fn;
-    }
+    this.fn = fn;
   }
 
   call(binding, params) {
@@ -33,14 +25,19 @@ class SpecialForm {
   }
 
   toString() {
-    let label = "specialForm";
-    // console.log(this);
-    if (this.evaluateParams)
-      label += "P";
-    return label + "(" +
-      this.fn.toString() + ")";
+    return this.constructor +
+      "(" + this.fn.toString() + ")";
   }
 
+}
+
+class SpecialFormP extends SpecialForm {
+  constructor(fn) {
+    super(function (params) {
+      return fn.call(this,
+        params.mapEval(this));
+    });
+  }
 }
 
 // Helper creates a Special Form (Function)
@@ -52,8 +49,7 @@ function specialForm(fn) {
 // Helper creates a Special Form (Function)
 // with evaluated params.
 function specialFormP(fn) {
-  return new SpecialForm(fn,
-    { evaluateParams: true });
+  return new SpecialFormP(fn);
 }
 
 module.exports = { SpecialForm, specialForm,
