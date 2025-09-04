@@ -7,11 +7,13 @@ describe("rootBinding", function () {
      it("gets from object", function () {
        let obj = { name: { first: "Kermit" }};
        assert.equal(rootBinding
-         .get(List.make(obj, "name", "first")),
+         .get.call(rootBinding,
+           (List.make(obj, "name", "first"))),
          "Kermit");
-       assert.deepEqual(rootBinding
-         .get(List.make(obj, "name")),
-         { first: "Kermit" });
+       assert.deepEqual(rootBinding.get
+          .call(rootBinding,
+                List.make(obj, "name")),
+           { first: "Kermit" });
      });
    });
 
