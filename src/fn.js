@@ -15,7 +15,7 @@ class Fn {
     switch (fn.constructor) {
       case Function:
         // console.log({fn, params})
-        console.log({params: params.toString()});
+        // console.log({params: params.toString()});
         // if (params.peek() == sAmp)
         //   params = params.pop().peek();
 
@@ -24,17 +24,17 @@ class Fn {
         // console.log({splits: splits.toString()});
         if (splits.count() > 1) {
           // params = splits.first.conj(splits.rest.head);
-          console.log({splits: splits.toString()});
-          console.log({"splits.rest": splits.rest.toString()});
-          console.log({"splits.rest.head": splits.rest.head.toString()});
+          // console.log({splits: splits.toString()});
+          // console.log({"splits.rest": splits.rest.toString()});
+          // console.log({"splits.rest.head": splits.rest.head.toString()});
           params = splits.first.mapEval(binding).conj(splits.pop().peek().peek().eval(binding));
-          console.log({params: params.toString()});
+          // console.log({params: params.toString()});
 
         } else {
           params = params.mapEval(binding)
         }
-        console.log({params})
-        console.log("peekaboo", ...params)
+        // console.log({params})
+        // console.log("peekaboo", ...params)
 
         return fn.call(binding, ...params);
     }
