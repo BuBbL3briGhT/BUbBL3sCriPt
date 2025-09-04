@@ -1,5 +1,6 @@
 const createBinding = require("./create_binding.js");
 const Ṣymbol = require("./symbol");
+const evalParams = require("./eval_params");
 
 const sAmp = Ṣymbol.for("&");
 
@@ -36,7 +37,7 @@ class Fn {
         // console.log({params})
         // console.log("peekaboo", ...params)
 
-        params = evalParameterList(binding, params);
+        params = evalParams(binding, params);
         return fn.call(binding, ...params);
     }
 
