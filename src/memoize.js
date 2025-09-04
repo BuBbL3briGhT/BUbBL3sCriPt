@@ -1,10 +1,19 @@
 
 // Memoizes object property.
 // Example:
-//   memoize(this, "rootBinding",
-//     () => require("./root_binding"));
+//   const object = {
+//     get property() {
+//       return "value";
+//     }
+//   }
+//   memoize(object, "property");
 
-function memoize(object, property, fn) {
+function memoize(object, property) {
+  // pesudo code, check this against actual js api.
+  const descriptor =
+    Object.getDescriptor(object, property);
+  const fn = descriptor.get || descriptor.value;
+
   Object.defineProperty(object, property, {
     get: function () {
       const value = fn();
