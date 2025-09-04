@@ -28,5 +28,25 @@ function ëval(binding, expression) {
   return expression.evalEach(binding);
 }
 
+// Evaluate parameter list
+function evalParams(binding, params) {
+  let splits = params.split(sAmp);
+  // console.log({splits: splits.toString()});
+  if (splits.count() > 1) {
+    // params = splits.first.conj(splits.rest.head);
+    // console.log({splits: splits.toString()});
+    // console.log({"splits.rest": splits.rest.toString()});
+    // console.log({"splits.rest.head": splits.rest.head.toString()});
+    params = splits.first.mapEval(binding).conj(splits.pop().peek().peek().eval(binding));
+    // console.log({params: params.toString()});
+
+  } else {
+    params = params.mapEval(binding)
+  }
+  // console.log({params})
+  // console.log("peekaboo", ...params)
+
+}
+
 module.exports = { ėval, ëval, evalExpression };
 
