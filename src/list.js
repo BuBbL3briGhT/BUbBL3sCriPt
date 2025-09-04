@@ -109,8 +109,8 @@ class List extends AbstractList {
 
   eval(binding) {
     // List evaluation logic.
-    console.log({head: this.head,
-       headValue: this.head.eval(binding) });
+    // console.log({head: this.head,
+    //    headValue: this.head.eval(binding) });
     return Fn.call(binding,
          this.head.eval(binding), this.tail);
 
