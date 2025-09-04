@@ -52,6 +52,11 @@ function ėval(script, opts={}) {
 
 // Evaluates an expression.
 function evalExpression(binding, expression) {
+  // console.log({expression, "expression.eval": expression.eval});
+  // if (expression.eval) {
+  //   return expression.eval(binding);
+  // }
+  // return expression;
   return expression.eval ?
     expression.eval(binding) : expression;
 }

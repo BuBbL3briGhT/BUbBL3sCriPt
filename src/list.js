@@ -95,75 +95,10 @@ class List extends AbstractList {
       b.push(that.peek()));
   }
 
-  // call(binding, params) {
-  //   const value = this.eval(binding);
-
-  //   switch (value.constructor) {
-  //     case Function:
-  //       return value.call(binding,
-  //         ...params.mapEval(binding));
-  //   }
-
-  //   return value.call(binding, params);
-  // }
-
   eval(binding) {
     // List evaluation logic.
-    // console.log({head: this.head,
-    //    headValue: this.head.eval(binding) });
     return Fn.call(binding,
          this.head.eval(binding), this.tail);
-
-    // return Fn.call(binding,
-    //   this.head.eval(binding), this.tail);
-
-    // return this.head.call(binding, this.tail);
-
-    // const headValue = this.head.eval(binding);
-    // // console.log({head: this.head, headValue});
-    // switch (headValue.constructor) {
-    //   case Function:
-    //     return headValue.call(binding,
-    //       ...this.tail.mapEval(binding));
-    // }
-
-    // return headValue.call(binding, this.tail);
-
-    // const headValue = this.head.eval(binding);
-    // switch (this.head.constructor) {
-    //   case Ṣymbol:
-    //     if (this.head.callPattern === 2) {
-    //       return headValue.call(binding,
-    //         ...this.tail.mapEval(binding));
-    //     }
-    // }
-    // return headValue.call(binding, this.tail);
-
-    // return this.head
-    //            .eval(binding)
-    //            .call(binding, this.tail);
-
-
-    // return headValue.eval(tail);
-    // const headValue = head.eval(binding);
-    // return headValue.eval(tail);
-
-    // switch (head.constructor) {
-    //   case Ṣymbol:
-    //     const headValue = head.eval(binding);
-    //     return tail.push(headValue).eval();
-    //   case List:
-    //     const headValue = head.eval(binding);
-    //     return ëvalList(binding, tail.push(headValue));
-    //   case Fn:
-    //     return head.invoke(tail.mapEval(binding));
-    //   case Function:
-    //     return head.call(binding, tail);
-    //   case Macro:
-    //     const expanded = head.expand(tail);
-    //     throw new MacroExpanded(expanded);
-    //   default:
-    //     return undefined;
   }
 
   each(fn) {

@@ -124,6 +124,8 @@ describe("base", function () {
   describe("fn", function () {
     it("makes a function", function () {
       // assertEval("(fn [a] a)");
+      assert.equal(ėval("(fn [a] a)").toString(),
+                   "(fn (a) a)");
       assertEvalTo("((fn [a] a) 1)", 1);
     });
   });

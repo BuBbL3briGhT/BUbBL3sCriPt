@@ -2,7 +2,6 @@ const createBinding = require("./create_binding.js");
 const Ṣymbol = require("./symbol");
 
 class Fn {
-
   constructor(binding, params, body, opts={}) {
     this.binding = binding;
     this.params = params;
@@ -33,7 +32,7 @@ class Fn {
         this.params,
         params.mapEval(binding));
 
-      return this.body.eval(fnBinding);
+      return this.body.evalEach(fnBinding);
     } catch (error) {
       error.stack += this.trace;
       throw error;
