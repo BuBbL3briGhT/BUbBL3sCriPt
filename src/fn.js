@@ -27,15 +27,16 @@ class Fn {
           console.log({splits: splits.toString()});
           console.log({"splits.rest": splits.rest.toString()});
           console.log({"splits.rest.head": splits.rest.head.toString()});
-          params = splits.first.conj(splits.rest.head);
+          params = splits.first.mapEval(binding).conj(splits.pop().peek().peek().eval(binding));
           console.log({params: params.toString()});
+
+        } else {
+          params = params.mapEval(binding)
         }
+        console.log({params})
+        console.log("peekaboo", ...params)
 
-        // console.log({params})
-        // console.log("peekaboo", ...params)
-
-        return fn.call(binding,
-          ...params.mapEval(binding));
+        return fn.call(binding, ...params);
     }
 
     return fn.call(binding, params);
