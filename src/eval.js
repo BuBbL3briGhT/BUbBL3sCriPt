@@ -3,7 +3,7 @@ const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
 
-// const sAmp = Ṣymbol.for("&");
+const sAmp = Ṣymbol.for("&");
 
 let rootBinding;
 
@@ -28,25 +28,19 @@ function ëval(binding, expression) {
   return expression.evalEach(binding);
 }
 
-// Evaluate parameter list
+// Evaluates a parameter list.
 function evalParams(binding, params) {
-  let splits = params.split(sAmp);
-  // console.log({splits: splits.toString()});
+  const splits = params.split(sAmp);
   if (splits.count() > 1) {
-    // params = splits.first.conj(splits.rest.head);
-    // console.log({splits: splits.toString()});
-    // console.log({"splits.rest": splits.rest.toString()});
-    // console.log({"splits.rest.head": splits.rest.head.toString()});
-    params = splits.first.mapEval(binding).conj(splits.pop().peek().peek().eval(binding));
-    // console.log({params: params.toString()});
-
+    params = splits.first.mapEval(binding)
+      .conj(splits.pop().peek().peek()
+            .eval(binding));
   } else {
     params = params.mapEval(binding)
   }
-  // console.log({params})
-  // console.log("peekaboo", ...params)
-
+  return params;
 }
 
-module.exports = { ėval, ëval, evalExpression };
+module.exports = { ėval, ëval, evalExpression,
+  evalParams };
 
