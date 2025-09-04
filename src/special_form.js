@@ -25,8 +25,8 @@ class SpecialForm {
   }
 
   toString() {
-    return this.constructor +
-      "(" + this.fn.toString() + ")";
+    return this.constructor.name +
+      " " + this.fn.toString();
   }
 
 }
