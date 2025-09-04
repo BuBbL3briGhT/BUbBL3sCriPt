@@ -27,6 +27,8 @@ class Fn {
         //   console.log({params});
         // }
 
+        console.log({fn, params})
+
         return fn.call(binding,
           ...params.mapEval(binding));
     }
