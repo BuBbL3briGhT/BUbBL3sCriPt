@@ -1,6 +1,8 @@
 const createBinding = require("./create_binding.js");
 const Ṣymbol = require("./symbol");
 
+const sAmp = Ṣymbol.for("&");
+
 class Fn {
   constructor(binding, params, body, opts={}) {
     this.binding = binding;
@@ -12,6 +14,14 @@ class Fn {
   static call(binding, fn, params) {
     switch (fn.constructor) {
       case Function:
+        console.log({fn, params})
+        if (params.peek() == sAmp) {
+          params = params.pop().peek();
+        }
+
+        // const splat = params.find(sAmp);
+        // if (splat) { }
+
         return fn.call(binding,
           ...params.mapEval(binding));
     }

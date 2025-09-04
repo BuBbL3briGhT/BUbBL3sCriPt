@@ -2,7 +2,7 @@ const List = require("./list");
 const Vector = require("./vector");
 const Ṣymbol = require("./symbol");
 
-let sAmp = Ṣymbol.for("&");
+const sAmp = Ṣymbol.for("&");
 
 // TODO: Utility functions. Move to src/util
 // directory.

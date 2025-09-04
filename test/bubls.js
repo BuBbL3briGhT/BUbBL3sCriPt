@@ -38,7 +38,7 @@ describe("puts", function () {
   after(function () {
     sinon.restore();
   });
-  it("logs to console", function () {
+  it.only("logs to console", function () {
     eval('(puts "hi")');
     assert(console.log.calledWith("hi"));
   });

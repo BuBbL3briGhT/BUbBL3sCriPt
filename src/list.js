@@ -96,7 +96,6 @@ class List extends AbstractList {
   }
 
   eval(binding) {
-    // List evaluation logic.
     return Fn.call(binding,
          this.head.eval(binding), this.tail);
   }
