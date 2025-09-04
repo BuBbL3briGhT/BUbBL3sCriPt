@@ -140,8 +140,12 @@ const rootBinding = {
   }),
 
   unless: specialForm(function([c,f,t]) {
-    return evalExpression(this,
-      evalExpression(this, c) ? t : f);
+    const conditionValue =
+              evalExpression(this, c);
+    if (!conditionValue)
+      return evalExpression(this, f);
+    else if (t)
+      return evalExpression(this, t);
   }),
 
   blert: specialForm(function(msgs) {
