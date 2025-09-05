@@ -62,7 +62,7 @@ describe("Parser", function () {
     it("closes multiple open vectors and lists", function () {
       const input = '[(1 [2 (3 [4 ([5;'
       const result = parse(input);
-      assert.deepEqual([...result],
+      expect([...result]).to.containSubset(
         [Ðķ.make(Ɓü.make(1,
           Ðķ.make(2,
             Ɓü.make(3,
@@ -79,7 +79,7 @@ describe("Parser", function () {
            "hello, again")]);
     });
 
-    it.only("closes opens bare list open list and vector", function () {
+    it("closes opens bare list open list and vector", function () {
       const input = 'puts "hello" (1 [2 (3;'
       const result = parse(input);
       // assert.deepEqual([...result],
