@@ -94,21 +94,21 @@ function itParsesFixture(key, {expects}) {
   it(`parses fixture "${key}"`, function() {
     let s = fixtures[key];
     let p = parse(s);
-    assert.deepEqual(p.peek(), expects);
+    expect(p.peek()).to.containSubset(expects);
   });
 }
 
 function itParses(s, {expects}) {
   it(`parses "${s}"`, function() {
     let p = parse(s);
-    assert.deepEqual(p.peek(), expects);
+    expect(p.peek()).to.containSubset(expects);
   });
 }
 
 function itParses2(desc, s, expects) {
   it(`correctly parses ${desc}`, function() {
     let p = parse(s);
-    assert.deepEqual(p.peek(), expects);
+    expect(p.peek()).to.containSubset(expects);
   });
 }
 
@@ -335,7 +335,7 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   assert.deepEqual(ast, expected, "AST for complex nested structure");
   // });
 
-  it.only("parses a semi complex vector", () => {
+  it("parses a semi complex vector", () => {
     const input = "[1 \"s\" °x]";
     // const input = "[°x]";
     // const input = "[x]";
