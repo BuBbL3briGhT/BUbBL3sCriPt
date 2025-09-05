@@ -19,8 +19,8 @@ describe("eval(script)", function () {
 
   it("evaluates a keyword", function() {
     const p = parse(":keyword");
-    assert.deepEqual([...ëval({}, p)],
-      [Keyword.for("keyword")]);
+    assert.equal(ëval({}, p),
+      Keyword.for("keyword"));
   });
 
   it("runs script top to bottom", function () {
