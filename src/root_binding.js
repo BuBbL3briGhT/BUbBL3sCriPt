@@ -190,39 +190,36 @@ const rootBinding = {
   //   return m;
   // }),
 
-  loop: specialForm(function([x,...xx]) {
-    var binding = Object.create(this),
-      m, recurCalled;
 
-    x = x.invert();
-    while (!x.isEmpty) {
-      let k,v;
-      k = x.peek();
-      x = x.pop();
-      v = x.peek();
-      x = x.pop();
-      binding[k] = ëval(binding, v);
-    }
+  loop: specialForm(function(list) {
+    const [params, cuerpo] = list.plop(),
+          binding = Object.create(this);
 
-    binding.recur = function([a]) {
-      a = a.invert();
-      while (!a.isEmpty) {
-        let k,w;
-        k = a.peek();
-        a = a.pop();
-        w = a.peek();
-        a = a.pop();
-        binding[k] = ëval(binding, w);
-      }
+    var recurCalled,
+          resultado;
+
+    params.toList().partition(2)
+      .each(([llave, valor]) => {
+        binding[llave] =
+         evalExpression(binding, valor);
+      });
+
+
+    binding.recur = function([params]) {
+      params.toList().partition(2)
+        .each(([llave, valor]) => {
+          binding[llave] =
+           evalExpression(binding, valor);
+        });
       recurCalled = true;
     };
 
     do {
       recurCalled = false;
-      m = xx.map(z =>
-        ëval(binding, z)).pop();
+      resultado = cuerpo.evalEach(binding);
     } while(recurCalled);
-    return m;
+
+    return resultado;
   }),
 
   /* Special forms with evaulated input
