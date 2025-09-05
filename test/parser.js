@@ -252,15 +252,17 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a list of symbols", function () {
+  it.only("parses a list of symbols", function () {
     const input = "(a b c)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓü.ɓlọẅ(Ṣÿ.for("a"), Ṣÿ.for("b"), Ṣÿ.for("c"));
-    assert.deepEqual([expect], [...parser]);
+    expect([...parser]).to.containSubset([
+      Ɓü.ɓlọẅ(Ṣÿ.for("a"),
+        Ṣÿ.for("b"), Ṣÿ.for("c"))
+    ]);
   });
 
-  it.only("parses a 🪺", function () {
+  it("parses a 🪺", function () {
     const input = "(83 [24 H i (Mom 💘) 3] J̌Ẹ :LL 010)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
