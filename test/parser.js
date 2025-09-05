@@ -163,7 +163,13 @@ describe("Parser", function () {
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
     const expecting = new Ɓů(Ṣÿ.for("r2d2"));
-    // assert.deepEqual([expecting], [...parser]);
+    assert.deepEqual([expecting], [...parser]);
+  });
+
+  it.only("parses °", function () {
+    const input = "°r2d2";
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
     assert.deepEqual([ /* Bubble */ {
         column: 1,
         file: undefined,
