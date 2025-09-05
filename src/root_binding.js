@@ -193,30 +193,29 @@ const rootBinding = {
 
   loop: specialForm(function(list) {
     const [params, cuerpo] = list.plop(),
-          binding = Object.create(this);
+          cerveza = Object.create(this);
 
     var recurCalled,
           resultado;
 
     params.toList().partition(2)
       .each(([llave, valor]) => {
-        binding[llave] =
-         evalExpression(binding, valor);
+        cerveza[llave] =
+         evalExpression(cerveza, valor);
       });
 
-
-    binding.recur = function([params]) {
+    cerveza.recur = function([params]) {
       params.toList().partition(2)
         .each(([llave, valor]) => {
-          binding[llave] =
-           evalExpression(binding, valor);
+          cerveza[llave] =
+           evalExpression(cerveza, valor);
         });
       recurCalled = true;
     };
 
     do {
       recurCalled = false;
-      resultado = cuerpo.evalEach(binding);
+      resultado = cuerpo.evalEach(cerveza);
     } while(recurCalled);
 
     return resultado;
