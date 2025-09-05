@@ -115,43 +115,14 @@ const rootBinding = {
     }
   }),
 
-  // let: specialForm(function([x,...xx]) {
-  //   let binding = Object.create(this);
-  //   x = x.invert();
-  //   while (!x.isEmpty) {
-  //     let k,w;
-  //     k = x.peek();
-  //     x = x.pop();
-  //     w = x.peek();
-  //     x = x.pop();
-  //     binding[k] = ëval(binding, w);
-  //   }
-  //   return xx.map(z =>
-  //     ëval(binding, z)).pop();
-  // }),
-
-  // let: specialForm(function(list) {
-  //   const [params, body] = list.plop();
-  //   const binding = Object.create(this);
-  //   params.toList().partition(2)
-  //     .each(([llave, valor]) => {
-  //       binding[llave] =
-  //        evalExpression(binding, valor);
-  //     });
-  //   return body.evalEach(binding);
-  // }),
-
   let: specialForm(function(list) {
     const [params, body] = list.plop();
-    const [llaves, valors] = params.toList().unzip();
-    const binding = createBinding(this, llaves,
-      valors.mapEval(binding));
-    // const binding = Object.create(this);
-    // params.toList().partition(2)
-    //   .each(([llave, valor]) => {
-    //     binding[llave] =
-    //      evalExpression(binding, valor);
-    //   });
+    const binding = Object.create(this);
+    params.toList().partition(2)
+      .each(([llave, valor]) => {
+        binding[llave] =
+         evalExpression(binding, valor);
+      });
     return body.evalEach(binding);
   }),
 
