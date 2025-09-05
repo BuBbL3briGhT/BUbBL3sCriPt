@@ -192,11 +192,17 @@ const rootBinding = {
 
 
   loop: specialForm(function(list) {
+    // console.debug("b");
+    // eci.ito("Yoyo!");
+    // consola.registro("Hola!");
     const [params, cuerpo] = list.plop(),
           cerveza = Object.create(this);
+    console.debug(cuerpo);
 
     var recurCalled,
           resultado;
+
+    consola.registro({params});
 
     params.toList().partition(2)
       .each(([llave, valor]) => {
@@ -205,6 +211,7 @@ const rootBinding = {
       });
 
     cerveza.recur = function([params]) {
+      consola.depurar({params});
       params.toList().partition(2)
         .each(([llave, valor]) => {
           cerveza[llave] =
