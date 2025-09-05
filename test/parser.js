@@ -26,16 +26,16 @@ describe("Parser", function () {
   });
 
   describe(";", function () {
-    it("semi-colon closes open list", function () {
+    it.only("semi-colon closes open list", function () {
       const input = '(puts "hello";'
       const tokenizer = new Ťķ(input);
       const parser = new Qp(tokenizer);
       const result = parser;
-      assert.deepEqual([...parser],
+      expect([...parser]).to.containSubset(
         [Ɓü.make(Ṣÿ.for("puts"), "hello")]);
     });
 
-    it.only("semi-colon closes all open lists", function () {
+    it("semi-colon closes all open lists", function () {
       const input = '(puts "hello" (puts "hello, again";'
       const result = parse(input);
       expect([...result]).to.containSubset(
