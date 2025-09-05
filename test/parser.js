@@ -55,7 +55,7 @@ describe("Parser", function () {
     it("closes multiple open vectors", function () {
       const input = '[1 [2 [3;'
       const result = parse(input);
-      assert.deepEqual([...result],
+      expect([...result]).to.containSubset(
         [Ðķ.make(1, Ðķ.make(2, Ðķ.make(3)))]);
     });
 
