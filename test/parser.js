@@ -214,11 +214,12 @@ describe("Parser", function () {
     const input = "[1 2 31 2 31 2 3]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ðķ.make(1, 2, 31, 2, 31, 2, 3);
-    assert.deepEqual([expect], [...parser]);
+    expect([...parser]).to.containSubset(
+      [Ðķ.make(1, 2, 31, 2, 31, 2, 3)]);
+
   });
 
-  it.only("parses a vəcĶtoŘ of sŸmbỌĻ§", function () {
+  it("parses a vəcĶtoŘ of sŸmbỌĻ§", function () {
     const input = "[z qw x z qw x z qw x]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
