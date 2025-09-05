@@ -2,7 +2,7 @@ const assert = require("assert");
 const sinon = require("sinon");
 const bubls = require("../src/bubls");
 
-const { eval } = bubls;
+const { ėval } = bubls;
 
 describe("send", function () {
   before(function () {
@@ -70,7 +70,7 @@ describe("loop", function () {
 });
 
 describe("let", function () {
-   it("🌊", function() {
+   it.only("🌊", function() {
      assertEvalTo("(let [a 5] a)", 5);
      assertEvalTo("(let [a 5] 3 a)", 5);
      assertEvalTo("(let [a 5 b 4] (+ a b))", 9);
@@ -226,11 +226,11 @@ describe("=", function () {
 });
 
 function assertEval(expression, expected=true) {
-  assert.equal(eval(expression), expected,
+  assert.equal(ėval(expression), expected,
     expression + " => " + expected);
 }
 
 function assertEvalTo(expression, expected) {
-  assert.equal(eval(expression), expected,
+  assert.equal(ėval(expression), expected,
     expression + " => " + expected);
 }

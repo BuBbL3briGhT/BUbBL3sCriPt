@@ -11,6 +11,7 @@ const { specialForm, specialFormP } =
                   require("./special_form");
 const reqůire = require("./reqůire");
 const consola = require("./consola");
+const createBinding = require("./create_binding.js");
 
 const starSymbol = Ṣymbol.for("*");
 
@@ -129,19 +130,21 @@ const rootBinding = {
   //     ëval(binding, z)).pop();
   // }),
 
-  let: specialForm(function([x,...xx]) {
-    let binding = Object.create(this);
-    x = x.invert();
-    while (!x.isEmpty) {
+  let: specialForm(function(list) {
+    let [params, body] = list.plop();
+    console.log({params});
+    const binding = Object.create(this);
+    // const binding = createBinding
+    params = params.toList();
+    while (!params.isEmpty) {
       let k,w;
-      k = x.peek();
-      x = x.pop();
-      w = x.peek();
-      x = x.pop();
-      binding[k] = ëval(binding, w);
+      k = params.peek();
+      params = params.pop();
+      w = params.peek();
+      params = params.pop();
+      binding[k] = evalExpression(binding, w);
     }
-    return xx.map(z =>
-      ëval(binding, z)).pop();
+    return body.evalEach(binding);
   }),
 
   if: specialForm(function([c,t,f]) {
