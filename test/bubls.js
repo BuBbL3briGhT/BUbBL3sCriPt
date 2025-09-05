@@ -54,8 +54,8 @@ describe("loop", function () {
   after(function () {
     sinon.restore();
   });
-  it("loops", function () {
-    eval('(loop [a 0] ' +
+  it.only("loops", function () {
+    ėval('(loop [a 0] ' +
             '(puts a) ' +
             '(unless (> a 5) ' +
               '(recur [a (+ a 1)])))');
@@ -70,7 +70,7 @@ describe("loop", function () {
 });
 
 describe("let", function () {
-   it.only("🌊", function() {
+   it("🌊", function() {
      assertEvalTo("(let [a 5] a)", 5);
      assertEvalTo("(let [a 5] 3 a)", 5);
      assertEvalTo("(let [a 5 b 4] (+ a b))", 9);

@@ -155,6 +155,41 @@ const rootBinding = {
     return macro.expand(tail);
   }),
 
+  // loop: specialForm(function([x,...xx]) {
+  //   var binding = Object.create(this),
+  //     m, recurCalled;
+
+  //   x = x.invert();
+  //   while (!x.isEmpty) {
+  //     let k,v;
+  //     k = x.peek();
+  //     x = x.pop();
+  //     v = x.peek();
+  //     x = x.pop();
+  //     binding[k] = ëval(binding, v);
+  //   }
+
+  //   binding.recur = function([a]) {
+  //     a = a.invert();
+  //     while (!a.isEmpty) {
+  //       let k,w;
+  //       k = a.peek();
+  //       a = a.pop();
+  //       w = a.peek();
+  //       a = a.pop();
+  //       binding[k] = ëval(binding, w);
+  //     }
+  //     recurCalled = true;
+  //   };
+
+  //   do {
+  //     recurCalled = false;
+  //     m = xx.map(z =>
+  //       ëval(binding, z)).pop();
+  //   } while(recurCalled);
+  //   return m;
+  // }),
+
   loop: specialForm(function([x,...xx]) {
     var binding = Object.create(this),
       m, recurCalled;
