@@ -130,14 +130,28 @@ const rootBinding = {
   //     ëval(binding, z)).pop();
   // }),
 
+  // let: specialForm(function(list) {
+  //   const [params, body] = list.plop();
+  //   const binding = Object.create(this);
+  //   params.toList().partition(2)
+  //     .each(([llave, valor]) => {
+  //       binding[llave] =
+  //        evalExpression(binding, valor);
+  //     });
+  //   return body.evalEach(binding);
+  // }),
+
   let: specialForm(function(list) {
     const [params, body] = list.plop();
-    const binding = Object.create(this);
-    params.toList().partition(2)
-      .each(([llave, valor]) => {
-        binding[llave] =
-         evalExpression(binding, valor);
-      });
+    const [llaves, valors] = params.toList().unzip();
+    const binding = createBinding(this, llaves,
+      valors.mapEval(binding));
+    // const binding = Object.create(this);
+    // params.toList().partition(2)
+    //   .each(([llave, valor]) => {
+    //     binding[llave] =
+    //      evalExpression(binding, valor);
+    //   });
     return body.evalEach(binding);
   }),
 
