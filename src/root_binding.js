@@ -132,10 +132,7 @@ const rootBinding = {
 
   let: specialForm(function(list) {
     const [params, body] = list.plop();
-    // console.log({params});
     const binding = Object.create(this);
-    // const binding = createBinding
-    // const paramsList = params.toList();
     params.toList().partition(2)
       .each(([llave, valor]) => {
         binding[llave] =
