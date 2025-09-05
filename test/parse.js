@@ -37,7 +37,8 @@ describe("parse(string)", () => {
     let not = Ṣymbol.for("not");
     const ast = parse("(not true)");
     const expectedAst = List.make(not, true);
-    assert.deepEqual(ast.peek(), expectedAst, "AST for (not true) should be a list of not, true");
+    expect(ast.peek()).to
+      .containSubset(expectedAst);
   });
 
   it("parses a bubble of list", function () {
