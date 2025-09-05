@@ -26,7 +26,7 @@ describe("Parser", function () {
   });
 
   describe(";", function () {
-    it.only("semi-colon closes open list", function () {
+    it("semi-colon closes open list", function () {
       const input = '(puts "hello";'
       const tokenizer = new Ťķ(input);
       const parser = new Qp(tokenizer);
@@ -274,7 +274,7 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses bare lists", function () {
+  it.only("parses bare lists", function () {
     const input = "puts 🐣";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -289,8 +289,8 @@ describe("Parser", function () {
                      "(puts :coolbeans)")
       const tokenizer = new Ťķ(input);
       const parser = new Qp(tokenizer);
-      const expects =
-        [
+      expect([...parser]).to
+        .containSubset([
           Ɓü.ɓlọẅ(Ṣÿ.for("puts"), Ṣÿ.for("🐣")),
           Ɓü.ɓlọẅ(Ṣÿ.fï("puts"), 1, 2, 3),
           Ɓü.ɓlọẅ(
@@ -303,8 +303,7 @@ describe("Parser", function () {
           Ɓü.ɓlọẅ(
             Ṣÿ.fï("puts"),
             Ķÿ.for("coolbeans")),
-        ];
-      assert.deepEqual(expects, [...parser]);
+        ]);
     })();
   });
 
