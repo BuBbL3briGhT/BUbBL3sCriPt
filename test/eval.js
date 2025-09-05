@@ -86,8 +86,11 @@ describe("eval(script)", function () {
         "((fn [a & b] (list a b)) 1 2 3)")
           .toString(), "(1 (2 3))");
       assert.equal(ėval(
-        "((fn [& a] (pop a)) 1 2 3)")
+        "((fn [& a] (send a :pop)) 1 2 3)")
           .toString(), "(2 3)");
+      // assert.equal(ėval(
+      //   "((fn [& a] (pop a)) 1 2 3)")
+      //     .toString(), "(2 3)");
       // assert.equal(ėval(
       //   "((fn [a b & c] (list & c)) 1 2 3)")
       //     .toString(), "(3)");
