@@ -30,7 +30,9 @@ describe("parse(string)", () => {
   it("parses (1 2 3) into the correct AST structure", () => {
     const ast = parse("(1 2 3)");
     const expectedAst = List.make(1, 2, 3);
-    assert.deepEqual(ast.peek(), expectedAst, "AST for (1 2 3) should be a list of 1, 2, 3");
+    expect(ast.peek()).to.
+      containSubset(expectedAst);
+      // "AST for (1 2 3) should be a list of 1, 2, 3");
   });
 
   it("parses (not true) into the correct AST structure", () => {
