@@ -163,7 +163,7 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it.only("parses °", function () {
+  it("parses °", function () {
     const input = "°r2d2";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -171,10 +171,9 @@ describe("Parser", function () {
     // assert.deepEqual([expecting], [...parser]);
     expect([...parser]).to.
       containSubset([expecting]);
-
   });
 
-  it.only("parses °", function () {
+  it("parses °", function () {
     const input = "°r2d2";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
