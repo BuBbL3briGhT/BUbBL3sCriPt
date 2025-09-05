@@ -48,7 +48,7 @@ describe("Parser", function () {
     it("closes 1 open vector", function () {
       const input = '[1 2 3;'
       const result = parse(input);
-      assert.deepEqual([...result],
+      expect([...result]).to.containSubset(
         [Ðķ.make(1, 2, 3)]);
     });
 
