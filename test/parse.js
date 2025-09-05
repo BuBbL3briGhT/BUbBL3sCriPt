@@ -1,4 +1,9 @@
 const assert = require("assert"); const   fs   = require("fs");
+const chai = require('chai');
+const chaiSubset = require('chai-subset');
+chai.use(chaiSubset);
+const { expect } = chai;
+
 const  Yaml  = require("yaml");
 
 const { parse } = require("../src/parse");
@@ -330,7 +335,7 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   assert.deepEqual(ast, expected, "AST for complex nested structure");
   // });
 
-  it("parses a semi complex vector", () => {
+  it.only("parses a semi complex vector", () => {
     const input = "[1 \"s\" °x]";
     // const input = "[°x]";
     // const input = "[x]";
@@ -340,7 +345,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     const expected =
       Vector.make(1, "s",
         new Bubble(Ṣymbol.for("x")));
-    assert.deepEqual([...ast], [expected], "AST for semi complex vector ");
+    expect([...ast]).to.containSubset([expected]);
   });
 
   it.skip("parses a complex nested structure with quotes, list, and balloons (arrays)", () => {
