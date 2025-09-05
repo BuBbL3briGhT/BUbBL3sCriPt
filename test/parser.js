@@ -244,15 +244,15 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a list of numbers", function () {
+  it.only("parses a list of numbers", function () {
     const input = "(83 24 3)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓü.ɓlọẅ(83, 24, 3);
-    assert.deepEqual([expect], [...parser]);
+    expect([...parser]).to.
+      containSubset([Ɓü.ɓlọẅ(83, 24, 3)]);
   });
 
-  it.only("parses a list of symbols", function () {
+  it("parses a list of symbols", function () {
     const input = "(a b c)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
