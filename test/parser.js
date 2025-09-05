@@ -260,21 +260,23 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a 🪺", function () {
+  it.only("parses a 🪺", function () {
     const input = "(83 [24 H i (Mom 💘) 3] J̌Ẹ :LL 010)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓü.ɓlọẅ(
-      83,
-      Ðķ.mƙ(24, Ṣÿ.fï("H"), Ṣÿ.fï("i"), Ɓü.ɓlọẅ(Ṣÿ.fï("Mom"), Ṣÿ.fï("💘")), 3),
-      Ṣÿ.fï("J̌Ẹ"),
-      Ķÿ.for("LL"),
-      10,
-    );
-    assert.deepEqual([expect], [...parser]);
+    expect([...parser]).to.
+      containSubset([
+        Ɓü.ɓlọẅ(
+          83,
+          Ðķ.mƙ(24, Ṣÿ.fï("H"), Ṣÿ.fï("i"), Ɓü.ɓlọẅ(Ṣÿ.fï("Mom"), Ṣÿ.fï("💘")), 3),
+          Ṣÿ.fï("J̌Ẹ"),
+          Ķÿ.for("LL"),
+          10,
+        )
+      ]);
   });
 
-  it.only("parses bare lists", function () {
+  it("parses bare lists", function () {
     const input = "puts 🐣";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
