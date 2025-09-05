@@ -20,7 +20,7 @@ describe("rootBinding", function () {
   describe("send", function () {
     it("sends messages to objects", function () {
       const list = List.make(1, Keyword.for("toString"))
-      assert.equal(rootBinding.send(list), "1");
+      assert.equal(rootBinding.send(...list), "1");
     });
 
     it("sends messages to objects", function () {
@@ -36,7 +36,7 @@ describe("rootBinding", function () {
       );
 
       assert(!meatballsCalled);
-      rootBinding.send(list);
+      rootBinding.send(...list);
       assert(meatballsCalled);
     });
   });
