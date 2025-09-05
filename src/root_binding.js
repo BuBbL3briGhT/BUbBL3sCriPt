@@ -114,6 +114,21 @@ const rootBinding = {
     }
   }),
 
+  // let: specialForm(function([x,...xx]) {
+  //   let binding = Object.create(this);
+  //   x = x.invert();
+  //   while (!x.isEmpty) {
+  //     let k,w;
+  //     k = x.peek();
+  //     x = x.pop();
+  //     w = x.peek();
+  //     x = x.pop();
+  //     binding[k] = ëval(binding, w);
+  //   }
+  //   return xx.map(z =>
+  //     ëval(binding, z)).pop();
+  // }),
+
   let: specialForm(function([x,...xx]) {
     let binding = Object.create(this);
     x = x.invert();
