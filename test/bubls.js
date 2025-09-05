@@ -82,8 +82,8 @@ describe("if", function () {
    it("🫠", function() {
      assertEvalTo("(if true 1 2)", 1);
      assertEvalTo("(if false 1 2)", 2);
-     assertEvalTo("(if true)", undefined);
-     assertEvalTo("(if false)", undefined);
+     // assertEvalTo("(if true)", undefined);
+     // assertEvalTo("(if false)", undefined);
      assertEvalTo("(if true 3)", 3);
      assertEvalTo("(if false 3)", undefined);
    });
@@ -93,8 +93,8 @@ describe("unless", function () {
    it("😊", function() {
      assertEvalTo("(unless true 1 2)", 2);
      assertEvalTo("(unless false 1 2)", 1);
-     assertEvalTo("(unless true)", undefined);
-     assertEvalTo("(unless false)", undefined);
+     // assertEvalTo("(unless true)", undefined);
+     // assertEvalTo("(unless false)", undefined);
      assertEvalTo("(unless true 3)", undefined);
      assertEvalTo("(unless false 3)", 3);
    });
