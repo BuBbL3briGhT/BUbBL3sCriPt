@@ -32,7 +32,7 @@
             !vals.isEmpty    ) {
 
       const key = keys.first;
-      const val = vals.first;
+        const val = vals.first;
 
       if (key == sAmp) {
         binding[keys.next] = vals;
