@@ -51,7 +51,7 @@ describe("eval(script)", function () {
     assert(result instanceof Vector);
   });
 
-  it.only("expands a macro", function () {
+  it("expands a macro", function () {
     // Create a special binding we will use for
     // our test.
     const bnd = Object.create(rootBinding);
@@ -107,10 +107,10 @@ describe("eval(script)", function () {
     bnd.puts = null;
     let ast = parse("(muf 🐒 (macro [🐸 🐷 🦎] (list °puts (list °+ 🐸 🐷 🦎)) (list °puts (+ 🐸 🐷 🐷) 🦎)))");
     assert.equal(ast.toString(), "((muf 🐒 (macro [🐸 🐷 🦎] (list °puts (list °+ 🐸 🐷 🦎)) (list °puts (+ 🐸 🐷 🐷) 🦎))))");
-    ast.eval(bnd)
-    let fn = parse("(fn [🪻] (* 6 9) (🐒 1 2 🪻) (+ 3 4))").eval(bnd);
+    ast.evalEach(bnd)
+    let fn = parse("(fn [🪻] (* 6 9) (🐒 1 2 🪻) (+ 3 4))").evalEach(bnd);
     assert.equal(fn.body.toString(), "((* 6 9) (🐒 1 2 🪻) (+ 3 4))");
-    fn.body.eval(bnd);
+    fn.body.evalEach(bnd);
     assert.equal(fn.body.toString(), "((* 6 9) (puts (+ 1 2 🪻)) (puts 5 🪻) (+ 3 4))");
   });
 
