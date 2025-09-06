@@ -191,18 +191,52 @@ const rootBinding = {
   // }),
 
 
+  // loop: specialForm(function(list) {
+  //   // console.debug("b");
+  //   // eci.ito("Yoyo!");
+  //   // consola.registro("Hola!");
+  //   const [params, cuerpo] = list.plop(),
+  //         cerveza = Object.create(this);
+  //   // console.debug(cuerpo);
+
+  //   var recurCalled,
+  //         resultado;
+
+  //   // consola.registro({params});
+
+  //   params.toList().partition(2)
+  //     .each(([llave, valor]) => {
+  //       cerveza[llave] =
+  //        evalExpression(cerveza, valor);
+  //     });
+
+  //   cerveza.recur = function(params) {
+  //     // consola.depurar({params});
+  //     const paramsList = params.toList();
+  //     // consola.depurar({paramsList: paramsList.toString()});
+  //     paramsList.partition(2)
+  //       .each(([llave, valor]) => {
+  //         cerveza[llave] =
+  //          evalExpression(cerveza, valor);
+  //       });
+  //     recurCalled = true;
+  //   };
+
+  //   do {
+  //     recurCalled = false;
+  //     resultado = cuerpo.evalEach(cerveza);
+  //   } while(recurCalled);
+
+  //   return resultado;
+  // }),
+
+
   loop: specialForm(function(list) {
-    // console.debug("b");
-    // eci.ito("Yoyo!");
-    // consola.registro("Hola!");
     const [params, cuerpo] = list.plop(),
           cerveza = Object.create(this);
-    // console.debug(cuerpo);
 
     var recurCalled,
           resultado;
-
-    // consola.registro({params});
 
     params.toList().partition(2)
       .each(([llave, valor]) => {
@@ -211,10 +245,7 @@ const rootBinding = {
       });
 
     cerveza.recur = function(params) {
-      // consola.depurar({params});
-      const paramsList = params.toList();
-      // consola.depurar({paramsList: paramsList.toString()});
-      paramsList.partition(2)
+      params.toList().partition(2)
         .each(([llave, valor]) => {
           cerveza[llave] =
            evalExpression(cerveza, valor);
