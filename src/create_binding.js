@@ -4,6 +4,7 @@
    *   File: src/create_binding.js    *
    *   Date: September, 6th 2025      *
    *   Library: Bubblescript          *
+   *   version: 0.0.🦤.🍌             *
    *   Version: 0.0.16                *
    *   Author(s): BaMbii              *
    *                                  *
