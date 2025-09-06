@@ -52,17 +52,54 @@ describe("eval(script)", function () {
   });
 
   it.only("expands a macro", function () {
-    let bnd = Object.create(rootBinding);
-    let ast = parse("(muf 🐒 (macro [] °(puts \"Monkey\")))");
+    // Create a special binding we will use for
+    // our test.
+    const bnd = Object.create(rootBinding);
 
-    assert.equal(ast.toString(), "((muf 🐒 (macro [] °(puts \"Monkey\"))))");
-    ast.evalEach(bnd)
-    let fn = parse("(fn [] (🐒))").evalEach(bnd);
+
+    // Parse a macro to be used for our test..
+    const ast =
+      parse('(muf 🐒 (macro []   '+
+            '  °(puts "Monkey")))');
+
+    // Call toString() on our parsed macro to
+    // ensure it is as we expect, asserting it
+    // is equal with a comparison.
+    assert.equal(ast.toString(),
+      '((muf 🐒 (macro [] °(puts "Monkey"))))');
+
+    // Evaluate our test macro against or test
+    // binding to store it in the binding t
+    // for use in the remainder of test.
+    ast.evalEach(bnd);
+
+    // Parse and evaulate a function that uses the
+    // macro.
+    const fn = parse("(fn [] (🐒))").evalEach(bnd);
+
+    // Check that the function body looks like we
+    // expect.
     assert.equal(fn.body.toString(), "((🐒))");
+
+    // Simulate a function invokation by
+    // evaulating the body of the function against
+    // our test body which contains the macro.
     fn.body.evalEach(bnd);
-    assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
+
+    // Confirm that the function body is now
+    // changed and now contains the macro's
+    // expanded form.
+    assert.equal(fn.body.toString(),
+      "((puts \"Monkey\"))");
+
+    // Simulate another invokation of the
+    // function.
     fn.body.evalEach(bnd);
-    assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
+
+    // Check the body, once again, confirming this
+    // time it has not changed.
+    assert.equal(fn.body.toString(),
+      "((puts \"Monkey\"))");
   });
 
   it("expands a macro a more complex macro", function () {
