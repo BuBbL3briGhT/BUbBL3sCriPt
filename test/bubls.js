@@ -31,19 +31,23 @@ describe("push", function () {
 });
 
 describe("puts", function () {
+
   before(function () {
-    sinon.replace(console, "log",
-      sinon.fake());
+    sinon.replace(console, "log", sinon.fake());
   });
-  after(function () {
-    sinon.restore();
-  });
+  after(function () { sinon.restore(); });
+
   it("logs to console", function () {
     ėval('(puts "hi")');
     assert(console.log.calledWith("hi"));
   });
-});
 
+  it.only("Acepta múltiples parámetros", () => {
+    ėval("(puts 1 2 3)");
+    assert(console.log.calledWith(1, 2, 3));
+  });
+
+});
 
 
 describe("loop", function () {
