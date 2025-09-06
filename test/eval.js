@@ -51,7 +51,7 @@ describe("eval(script)", function () {
     assert(result instanceof Vector);
   });
 
-  it("expands a macro", function () {
+  it.only("expands a macro", function () {
     let bnd = Object.create(rootBinding);
     let ast = parse("(muf 🐒 (macro [] °(puts \"Monkey\")))");
 

@@ -25,8 +25,8 @@ class Macro {
   // be an over sight, and it maybe be correct as
   // is.
   call(binding, params) {
-    this.expanded ||= this.expand(params);
-    return this.expanded.evalEach(binding);
+    const expanded = this.expand(params);
+    throw new MacroExpanded(expanded);
   }
 
   toString() {
