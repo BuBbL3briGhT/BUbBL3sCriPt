@@ -1,7 +1,7 @@
 
   /* * *  * * *  * *  * *  * * *  * * *
    *                                  *
-   *   File: src/creat_binding.js     *
+   *   File: src/create_binding.js    *
    *   Date: September, 6th 2025      *
    *   Library: Bubblescript          *
    *   Version: 0.0.16                *
