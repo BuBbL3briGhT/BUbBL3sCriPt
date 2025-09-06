@@ -210,9 +210,11 @@ const rootBinding = {
          evalExpression(cerveza, valor);
       });
 
-    cerveza.recur = function([params]) {
-      consola.depurar({params});
-      params.toList().partition(2)
+    cerveza.recur = function(params) {
+      // consola.depurar({params});
+      const paramsList = params.toList();
+      // consola.depurar({paramsList: paramsList.toString()});
+      paramsList.partition(2)
         .each(([llave, valor]) => {
           cerveza[llave] =
            evalExpression(cerveza, valor);

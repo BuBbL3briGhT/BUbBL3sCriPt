@@ -2,6 +2,7 @@ const List = require("./list");
 const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
+const consola = require("./consola");
 
 const sAmp = Ṣymbol.for("&");
 
@@ -20,6 +21,7 @@ function ėval(script, opts={}) {
 
 // Evaluates an expression.
 function evalExpression(binding, expression) {
+  // consola.depurar({binding, expression});
   return expression.eval ?
     expression.eval(binding) : expression;
 }
