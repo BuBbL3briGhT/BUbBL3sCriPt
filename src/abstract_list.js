@@ -1,4 +1,5 @@
 const events = require("./events");
+const consola = require("./consola");
 
 let ëval;
 
@@ -133,12 +134,14 @@ class AbstractList {
   }
 
   each(fn) {
+    consola.depurar("list#each");
     let oo = fn(this.peek());
     if (this.pop().isEmpty) return oo;
     return this.pop().each(fn);
   }
 
   evalEach(binding) {
+    consola.depurar("list#evalEach");
     return this.each(evalExpression
       .bind(null, binding));
   }

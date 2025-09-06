@@ -2,6 +2,7 @@ const AbstractList = require("./abstract_list");
 const events = require("./events");
 const Ṣymbol = require("./symbol");
 const Fn = require("./fn");
+const consola = require("./consola");
 
 let emptyList, MacroExpanded;
 
@@ -103,6 +104,7 @@ class List extends AbstractList {
   each(fn) {
     let result;
     try {
+      consola.depurar({fn});
       result = fn(this.peek());
     } catch (o) {
       if (o instanceof MacroExpanded) {

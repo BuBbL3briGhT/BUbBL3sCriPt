@@ -56,12 +56,12 @@ describe("eval(script)", function () {
     let ast = parse("(muf 🐒 (macro [] °(puts \"Monkey\")))");
 
     assert.equal(ast.toString(), "((muf 🐒 (macro [] °(puts \"Monkey\"))))");
-    ast.eval(bnd)
-    let fn = parse("(fn [] (🐒))").eval(bnd);
+    ast.evalEach(bnd)
+    let fn = parse("(fn [] (🐒))").evalEach(bnd);
     assert.equal(fn.body.toString(), "((🐒))");
-    fn.body.eval(bnd);
+    fn.body.evalEach(bnd);
     assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
-    fn.body.eval(bnd);
+    fn.body.evalEach(bnd);
     assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
   });
 

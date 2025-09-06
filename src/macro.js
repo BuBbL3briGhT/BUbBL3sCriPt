@@ -25,6 +25,7 @@ class Macro {
   // be an over sight, and it maybe be correct as
   // is.
   call(binding, params) {
+    // throw new Error();
     const expanded = this.expand(params);
     throw new MacroExpanded(expanded);
   }
