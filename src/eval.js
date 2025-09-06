@@ -33,6 +33,7 @@ function ëval(binding, expression) {
 // Evaluates a parameter list.
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
+  consola.registro({splits: splits.toString()});
   if (splits.count() > 1) {
     params = splits.first.mapEval(binding)
       .conj(splits.pop().peek().peek()

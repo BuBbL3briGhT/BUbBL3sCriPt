@@ -1,11 +1,20 @@
-const List = require("./list");
-const Vector = require("./vector");
-const Ṣymbol = require("./symbol");
 
-const sAmp = Ṣymbol.for("&");
+  /* * *  * * *  * *  * *  * * *  * * *
+   *                                  *
+   *   File: src/creat_binding.js     *
+   *   Date: September, 6th 2025      *
+   *   Library: Bubblescript          *
+   *   Version: 0.0.16                *
+   *   Author(s): BaMbii              *
+   *                                  *
+   * * *  * * *  * *  * *  * * *  * * */
 
-// TODO: Utility functions. Move to src/util
-// directory.
+     const List = require("./list");
+   const Vector = require("./vector");
+   const Ṣymbol = require("./symbol");
+  const consola = require("./consola");
+
+     const sAmp = Ṣymbol.for("&");
 
 // Applys the keys and the values to the
 // binding based on order and position.
