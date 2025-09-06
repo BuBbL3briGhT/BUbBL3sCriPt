@@ -1,5 +1,6 @@
 const createBinding = require("./create_binding.js");
 const Ṣymbol = require("./symbol");
+const consola = require("./consola");
 
 class Fn {
   constructor(binding, params, body, opts={}) {
