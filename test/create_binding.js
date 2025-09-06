@@ -1,11 +1,13 @@
 const assert = require("assert");
-const createBinding = require("../src/create_binding.js");
+  const createBinding = require("../src/create_binding.js");
 const Ṣymbol = require("../src/symbol.js");
+  const List = require("../src/list.js");
 
 const ṣ = Ṣymbol.for.bind(Ṣymbol);
 
-const falso = false,
-      falsa = falso;
+  const falsie = false,
+         falso = falsie,
+         falsa = falsie;
 
 describe("createBinding", function () {
 
