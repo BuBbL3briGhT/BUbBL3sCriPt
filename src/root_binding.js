@@ -197,12 +197,12 @@ const rootBinding = {
     // consola.registro("Hola!");
     const [params, cuerpo] = list.plop(),
           cerveza = Object.create(this);
-    console.debug(cuerpo);
+    // console.debug(cuerpo);
 
     var recurCalled,
           resultado;
 
-    consola.registro({params});
+    // consola.registro({params});
 
     params.toList().partition(2)
       .each(([llave, valor]) => {

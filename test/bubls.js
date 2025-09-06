@@ -54,7 +54,7 @@ describe("loop", function () {
   after(function () {
     sinon.restore();
   });
-  it.only("loops", function () {
+  it("loops", function () {
     ėval('(loop [a 0] ' +
             '(puts a) ' +
             '(unless (> a 5) ' +
