@@ -35,7 +35,6 @@
       const val = vals.first;
 
       if (key == sAmp) {
-        consola.depurar({keys, vals});
         binding[keys.next] = vals;
         return binding;
       }
