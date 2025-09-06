@@ -26,7 +26,7 @@ describe("send", function () {
 
 describe("push", function () {
   it("pushes", function () {
-    eval("(push [1 2] 3)");
+    ėval("(push [1 2] 3)");
   });
 });
 
@@ -39,7 +39,7 @@ describe("puts", function () {
     sinon.restore();
   });
   it("logs to console", function () {
-    eval('(puts "hi")');
+    ėval('(puts "hi")');
     assert(console.log.calledWith("hi"));
   });
 });
@@ -169,7 +169,7 @@ describe("fn", function () {
 describe("muf", function () {
    it("defines", function () {
      assertEvalTo("a", undefined);
-     eval("(muf a 1)");
+     ėval("(muf a 1)");
      assertEvalTo("a", 1);
    });
 });
