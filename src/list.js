@@ -104,7 +104,6 @@ class List extends AbstractList {
   each(fn) {
     let result;
     try {
-      consola.depurar({fn});
       result = fn(this.peek());
     } catch (o) {
       if (o instanceof MacroExpanded) {
