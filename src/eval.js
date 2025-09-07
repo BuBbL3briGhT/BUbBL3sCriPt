@@ -33,9 +33,13 @@ function ëval(binding, expression) {
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {
-    params = splits.first.mapEval(binding)
-      .conj(splits.pop().peek().peek()
-            .eval(binding));
+    // params = splits.first.mapEval(binding)
+    //   .conj(splits.pop().peek().peek()
+    //         .eval(binding));
+    params =
+      // splits.pop().peek().peek().eval(binding)
+      splits.next.peek().eval(binding)
+        .conj(splits.first.mapEval(binding))
   } else {
     params = params.mapEval(binding)
   }
