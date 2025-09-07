@@ -23,7 +23,8 @@ describe("List", () => {
       const list2 = List.make(4, 5, 6);
 
       const list3 = list.conj(list2);
-      assert.deepEqual(List(1, 2, 3, 4, 5, 6),
+      assert.deepEqual(
+        List.make(1, 2, 3, 4, 5, 6),
         list3);
 
     });
