@@ -9,7 +9,7 @@ const ṣ = Ṣymbol.for.bind(Ṣymbol);
 
 describe("createBinding", function () {
 
-  it.only("crea un enlace", function () {
+  it("crea un enlace", function () {
     const cerveza = Object.create(null);
     const llaves = List.make(ṣ("uno"), ṣ("dos"),
       ṣ("tres"));

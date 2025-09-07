@@ -42,7 +42,7 @@ describe("puts", function () {
     assert(console.log.calledWith("hi"));
   });
 
-  it.only("Acepta múltiples parámetros", () => {
+  it("Acepta múltiples parámetros", () => {
     ėval("(puts 1 2 3)");
     assert(console.log.calledWith(1, 2, 3));
   });

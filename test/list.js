@@ -18,7 +18,7 @@
 describe("List", () => {
 
   describe("#conj(list)", function () {
-    it.only("conjoins list", function () {
+    it("conjoins list", function () {
        const list = List.make(1, 2, 3);
       const list2 = List.make(4, 5, 6);
 
