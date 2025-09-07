@@ -2,7 +2,7 @@
   /* * *  * * *  * *  * *  * * *  * * *
    *                                  *
    *   File: src/abstract_list.js     *
-   *   Date: September, 6th 2025      *
+   *   Date: September, 7th 2025      *
    *   Library: Bubblescript          *
    *   version: 0.0.🦤.🍌             *
    *   Version: 0.0.16                *
@@ -98,17 +98,17 @@ class AbstractList {
       }, this.constructor.make(this.peek()));
   }
 
-  conj(sourceList) {
-    return sourceList.reduce(function(accumulator, currentElement) {
-      return accumulator.push(currentElement);
-    }, this);
-  }
-
   // conj(sourceList) {
   //   return sourceList.reduce(function(accumulator, currentElement) {
   //     return accumulator.push(currentElement);
   //   }, this);
   // }
+
+  conj(sourceList) {
+    return sourceList.reduce(function(accumulator, currentElement) {
+      return accumulator.push(currentElement);
+    }, this);
+  }
 
   _toString() {
     if (this.isEmpty) return "";
