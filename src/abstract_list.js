@@ -107,13 +107,7 @@ class AbstractList {
   conj(list) {
     if (list.isEmpty)
       return this;
-    const head = this.peek();
-    return this.conj(this.pop()).push(head);
-
-    list.push(this.peek());
-    return list.reduce(function(accumulator, currentElement) {
-      return accumulator.push(currentElement);
-    }, this);
+    return this.conj(this.pop()).push(this.peek());
   }
 
   _toString() {
