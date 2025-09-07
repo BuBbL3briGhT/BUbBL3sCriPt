@@ -107,7 +107,8 @@ class AbstractList {
   conj(list) {
     if (list.isEmpty)
       return this;
-    return this.conj(this.pop()).push(this.peek());
+    return this.conj(this.pop())
+      .push(this.peek());
   }
 
   _toString() {
