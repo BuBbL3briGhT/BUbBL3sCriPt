@@ -37,6 +37,9 @@ function evalParams(binding, params) {
     consola.depurar({params: params.toString()});
     params = splits.first.mapEval(binding);
     consola.depurar({params: params.toString()});
+    consola.depurar({sAmp: splits.pop().peek().peek()});
+    consola.depurar({sAmp: splits.pop().peek().peek()});
+    consola.depurar({sAmp: splits.pop().peek().peek().eval(binding)});
     params = params
       .conj(splits.pop().peek().peek()
             .eval(binding));
