@@ -12,21 +12,12 @@ class Fn {
     switch (fn.constructor) {
       case Function:
         const { evalParams } = require("./eval");
-        consola.depurar({ params });
         params = evalParams(binding, params);
-        consola.depurar({ params });
         return fn.call(binding, ...params);
     }
 
     return fn.call(binding, params);
   }
-
-  // invoke(params) {
-  //   let binding = createBinding(this.binding,
-  //     this.params, params);
-
-  //   return this.body.eval(binding);
-  // }
 
   call(binding, params) {
     try {

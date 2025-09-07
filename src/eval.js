@@ -21,7 +21,6 @@ function ėval(script, opts={}) {
 
 // Evaluates an expression.
 function evalExpression(binding, expression) {
-  // consola.depurar({binding, expression});
   return expression.eval ?
     expression.eval(binding) : expression;
 }
@@ -34,16 +33,9 @@ function ëval(binding, expression) {
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {
-    consola.depurar({params: params.toString()});
-    params = splits.first.mapEval(binding);
-    consola.depurar({params: params.toString()});
-    consola.depurar({sAmp: splits.pop().peek().peek()});
-    consola.depurar({sAmp: splits.pop().peek().peek()});
-    consola.depurar({sAmp: splits.pop().peek().peek().eval(binding)});
-    params = params
+    params = splits.first.mapEval(binding)
       .conj(splits.pop().peek().peek()
             .eval(binding));
-    consola.depurar({params: params.toString()});
   } else {
     params = params.mapEval(binding)
   }
