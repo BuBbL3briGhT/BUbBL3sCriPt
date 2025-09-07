@@ -39,7 +39,8 @@
         return binding;
       }
 
-      if(val == sAmp) {
+      if (val == sAmp) {
+        consola.registro({binding, keys, vals});
         applyArguments(binding, keys, vals.next)
         return binding;
       }
@@ -58,6 +59,7 @@
 
       keys = keys.rest;
       vals = vals.rest;
+
     }
   }
 

@@ -4,17 +4,17 @@ const consola = require("./consola");
 
 class Fn {
   constructor(binding, params, body, opts={}) {
-    this.binding = binding;
-    this.params = params;
-    this.body = body;
-    this.name = opts.name;
+    Object.assign(this, { binding, params, body,
+      name: opts.name });
   }
 
   static call(binding, fn, params) {
     switch (fn.constructor) {
       case Function:
         const { evalParams } = require("./eval");
+        consola.depurar({ params });
         params = evalParams(binding, params);
+        consola.depurar({ params });
         return fn.call(binding, ...params);
     }
 
