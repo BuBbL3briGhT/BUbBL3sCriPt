@@ -34,9 +34,13 @@ function ëval(binding, expression) {
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {
-    params = splits.first.mapEval(binding)
+    consola.depurar({params: params.toString()});
+    params = splits.first.mapEval(binding);
+    consola.depurar({params: params.toString()});
+    params = params
       .conj(splits.pop().peek().peek()
             .eval(binding));
+    consola.depurar({params: params.toString()});
   } else {
     params = params.mapEval(binding)
   }
