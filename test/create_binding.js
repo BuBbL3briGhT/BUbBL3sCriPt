@@ -5,9 +5,9 @@ const Ṣymbol = require("../src/symbol.js");
 
 const ṣ = Ṣymbol.for.bind(Ṣymbol);
 
-  const falsie = false,
-         falso = falsie,
-         falsa = falsie;
+  const falsie = 0,
+         falso = 0,
+         falsa = 0;
 
 describe("createBinding", function () {
 
