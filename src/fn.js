@@ -1,6 +1,28 @@
-const createBinding = require("./create_binding.js");
-const Ṣymbol = require("./symbol");
-const consola = require("./consola");
+
+  /* * *  * * *  * *  * *  * * *  * * *
+   *                                  *
+   *   File: src/fn.js                *
+   *   Date: September, 7th 2025      *
+   *   Library: Bubblescript          *
+   *   version: 0.0.🦤.🍌             *
+   *   Version: 0.0.16                *
+   *   Author(s): BaMbii              *
+   *                                  *
+   * * *  * * *  * *  * *  * * *  * * */
+
+  const createBinding =
+                require("./create_binding.js");
+         const Ṣymbol = require("./symbol");
+        const consola = require("./consola");
+         const events = require("./events");
+
+
+  let evalParams;
+
+  events.on("init", function (bubls) {
+    evalParams = require("./eval").evalParams;
+  });
+
 
 class Fn {
   constructor(binding, params, body, opts={}) {
@@ -11,7 +33,6 @@ class Fn {
   static call(binding, fn, params) {
     switch (fn.constructor) {
       case Function:
-        const { evalParams } = require("./eval");
         params = evalParams(binding, params);
         return fn.call(binding, ...params);
     }
