@@ -104,8 +104,8 @@ class AbstractList {
   //   }, this);
   // }
 
-  conj(sourceList) {
-    return sourceList.reduce(function(accumulator, currentElement) {
+  conj(list) {
+    return list.reduce(function(accumulator, currentElement) {
       return accumulator.push(currentElement);
     }, this);
   }
