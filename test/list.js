@@ -1,9 +1,33 @@
-const assert = require("assert");
 
-const List = require("../src/list");
-const Ṣymbol = require("../src/symbol");
+  /* * *  * * *  * *  * *  * * *  * * *
+   *                                  *
+   *   File: test/list.js             *
+   *   Date: September, 7th 2025      *
+   *   Library: Bubblescript          *
+   *   version: 0.0.🦤.🍌             *
+   *   Version: 0.0.16                *
+   *   Author(s): BaMbii              *
+   *                                  *
+   * * *  * * *  * *  * *  * * *  * * */
+
+  const assert = require("assert");
+
+    const List = require("../src/list");
+  const Ṣymbol = require("../src/symbol");
 
 describe("List", () => {
+
+  describe("#conj(list)", function () {
+    it.only("conjoins list", function () {
+       const list = List.make(1, 2, 3);
+      const list2 = List.make(4, 5, 6);
+
+      const list3 = list.conj(list2);
+      assert.deepEqual(List(1, 2, 3, 4, 5, 6),
+        list3);
+
+    });
+  });
 
   describe("#zip(list)", function () {
     it("zips two lists", function () {

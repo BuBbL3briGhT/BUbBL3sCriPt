@@ -1,5 +1,17 @@
-const events = require("./events");
-const consola = require("./consola");
+
+  /* * *  * * *  * *  * *  * * *  * * *
+   *                                  *
+   *   File: src/abstract_list.js     *
+   *   Date: September, 6th 2025      *
+   *   Library: Bubblescript          *
+   *   version: 0.0.🦤.🍌             *
+   *   Version: 0.0.16                *
+   *   Author(s): BaMbii              *
+   *                                  *
+   * * *  * * *  * *  * *  * * *  * * */
+
+   const events = require("./events");
+  const consola = require("./consola");
 
 let ëval;
 
@@ -7,7 +19,6 @@ events.on("init", function (bubls) {
   ëval = bubls.ëval;
   evalExpression = bubls.evalExpression;
 });
-
 
 // Let's define `AbstractList` which is a
 // class that will serve as the abstract
