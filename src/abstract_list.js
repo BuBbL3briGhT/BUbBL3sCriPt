@@ -98,12 +98,7 @@ class AbstractList {
       }, this.constructor.make(this.peek()));
   }
 
-  // conj(sourceList) {
-  //   return sourceList.reduce(function(accumulator, currentElement) {
-  //     return accumulator.push(currentElement);
-  //   }, this);
-  // }
-
+  // Conjunta una lista con esta lista.
   conj(list) {
     if (list.isEmpty)
       return this;
