@@ -93,6 +93,12 @@ class AbstractList {
     }, this);
   }
 
+  // conj(sourceList) {
+  //   return sourceList.reduce(function(accumulator, currentElement) {
+  //     return accumulator.push(currentElement);
+  //   }, this);
+  // }
+
   _toString() {
     if (this.isEmpty) return "";
     return this.map(this.toStringFormat).reduce(this.toStringJoin);
