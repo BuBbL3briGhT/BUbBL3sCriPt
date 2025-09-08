@@ -97,8 +97,10 @@ class List extends AbstractList {
   }
 
   eval(binding) {
-    return Fn.call(binding,
-         this.head.eval(binding), this.tail);
+    const fn = this.head.eval(binding)
+    if (fn == undefined)
+      throw new Error(this.head + " is undefined");
+    return Fn.call(binding, fn, this.tail);
   }
 
   each(fn) {
