@@ -33,6 +33,7 @@ class NoMatchError extends ParsingError {
 class BubbleScriptError extends Error {
   constructor(message) {
     super(message);
+    this.stack = "";
   }
 }
 

@@ -3,6 +3,7 @@ const events = require("./events");
 const Ṣymbol = require("./symbol");
 const Fn = require("./fn");
 const consola = require("./consola");
+const { BubbleScriptError } = require("./errors");
 
 let emptyList, MacroExpanded;
 
@@ -99,7 +100,7 @@ class List extends AbstractList {
   eval(binding) {
     const fn = this.head.eval(binding)
     if (fn == undefined)
-      throw new Error(this.head + " is undefined");
+      throw new BubbleScriptError(this.head + " is undefined");
     return Fn.call(binding, fn, this.tail);
   }
 

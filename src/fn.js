@@ -48,7 +48,7 @@ class Fn {
 
       return this.body.evalEach(fnBinding);
     } catch (error) {
-      error.stack = this.trace + error.stack;
+      error.stack += this.trace;
       throw error;
     }
   }
