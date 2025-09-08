@@ -74,10 +74,9 @@ class AbstractList {
     return this.constructor.make();
   }
 
-  skip(count) {
-    if (count && !this.isEmpty)
-      return this.pop().skip(count-1);
-
+  skip(i) {
+    if (i && !this.isEmpty)
+      return this.pop().skip(i-1);
     return this;
   }
 
