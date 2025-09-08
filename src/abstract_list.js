@@ -33,8 +33,7 @@ class AbstractList {
   }
 
   constructor(o, oo) {
-    this.o = o;
-    this.oo = oo;
+    Object.assign(this, { o, oo });
   }
 
   peek() { return this.o; }
