@@ -55,7 +55,8 @@ class Fn {
 
   get trace () {
     const { name, file, line, column } = this;
-    return ` ${name} at ${file}:${line}:${column}\n`;
+    // return ` ${name} at ${file}:${line}:${column}\n`;
+    return `    at ${name} (${file}:${line}:${column})\n`;
   }
 
   toString() {
