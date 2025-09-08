@@ -104,7 +104,8 @@ class AbstractList {
 
   _toString() {
     if (this.isEmpty) return "";
-    return this.map(this.toStringFormat).reduce(this.toStringJoin);
+    return this.map(this.toStringFormat)
+      .reduce(this.toStringJoin);
   }
 
   toStringFormat(o) {
