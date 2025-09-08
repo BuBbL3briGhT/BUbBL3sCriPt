@@ -129,7 +129,7 @@ class AbstractList {
     if (this.isEmpty)
       return memo;
 
-    let oo = this.pop();
+    const oo = this.pop();
     if (oo.isEmpty)
       if(memo == undefined)
         return this.peek();
@@ -144,7 +144,7 @@ class AbstractList {
   }
 
   each(fn) {
-    let oo = fn(this.peek());
+    const oo = fn(this.peek());
     if (this.pop().isEmpty) return oo;
     return this.pop().each(fn);
   }
