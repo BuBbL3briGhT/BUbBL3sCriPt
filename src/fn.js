@@ -26,8 +26,8 @@
 
 class Fn {
   constructor(binding, params, body, opts={}) {
-    Object.assign(this, { binding, params, body,
-      name: opts.name });
+    Object.assign(this, { binding, params, body });
+    Object.assign(this, opts);
   }
 
   static call(binding, fn, params) {

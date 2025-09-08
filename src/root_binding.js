@@ -40,7 +40,10 @@ const rootBinding = {
     if (key instanceof List) {
       let name = key.peek().toString();
       return this[key.peek().toString()]
-        = new Fn(this, key.pop(), val, { name });
+        = new Fn(this, key.pop(), val, { name,
+          file: key.file,
+          line: key.line,
+          column: key.column });
     } else {
       return this[key.toString()]
         = evalExpression(this, val.peek());
@@ -154,82 +157,6 @@ const rootBinding = {
     const macro = ëval(this, head);
     return macro.expand(tail);
   }),
-
-  // loop: specialForm(function([x,...xx]) {
-  //   var binding = Object.create(this),
-  //     m, recurCalled;
-
-  //   x = x.invert();
-  //   while (!x.isEmpty) {
-  //     let k,v;
-  //     k = x.peek();
-  //     x = x.pop();
-  //     v = x.peek();
-  //     x = x.pop();
-  //     binding[k] = ëval(binding, v);
-  //   }
-
-  //   binding.recur = function([a]) {
-  //     a = a.invert();
-  //     while (!a.isEmpty) {
-  //       let k,w;
-  //       k = a.peek();
-  //       a = a.pop();
-  //       w = a.peek();
-  //       a = a.pop();
-  //       binding[k] = ëval(binding, w);
-  //     }
-  //     recurCalled = true;
-  //   };
-
-  //   do {
-  //     recurCalled = false;
-  //     m = xx.map(z =>
-  //       ëval(binding, z)).pop();
-  //   } while(recurCalled);
-  //   return m;
-  // }),
-
-
-  // loop: specialForm(function(list) {
-  //   // console.debug("b");
-  //   // eci.ito("Yoyo!");
-  //   // consola.registro("Hola!");
-  //   const [params, cuerpo] = list.plop(),
-  //         cerveza = Object.create(this);
-  //   // console.debug(cuerpo);
-
-  //   var recurCalled,
-  //         resultado;
-
-  //   // consola.registro({params});
-
-  //   params.toList().partition(2)
-  //     .each(([llave, valor]) => {
-  //       cerveza[llave] =
-  //        evalExpression(cerveza, valor);
-  //     });
-
-  //   cerveza.recur = function(params) {
-  //     // consola.depurar({params});
-  //     const paramsList = params.toList();
-  //     // consola.depurar({paramsList: paramsList.toString()});
-  //     paramsList.partition(2)
-  //       .each(([llave, valor]) => {
-  //         cerveza[llave] =
-  //          evalExpression(cerveza, valor);
-  //       });
-  //     recurCalled = true;
-  //   };
-
-  //   do {
-  //     recurCalled = false;
-  //     resultado = cuerpo.evalEach(cerveza);
-  //   } while(recurCalled);
-
-  //   return resultado;
-  // }),
-
 
   loop: specialForm(function(list) {
     const [params, cuerpo] = list.plop(),
