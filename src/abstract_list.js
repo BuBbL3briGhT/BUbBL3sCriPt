@@ -71,12 +71,12 @@ class AbstractList {
       return this.pop().take(--count)
         .push(this.peek());
 
-    return this.constructor.make()
+    return this.constructor.make();
   }
 
   skip(count) {
     if (count && !this.isEmpty)
-      return this.pop().skip(--count);
+      return this.pop().skip(count-1);
 
     return this;
   }
