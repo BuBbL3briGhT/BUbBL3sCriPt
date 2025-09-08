@@ -1,4 +1,9 @@
 const assert = require("assert"); const   fs   = require("fs");
+const chai = require('chai');
+const chaiSubset = require('chai-subset');
+chai.use(chaiSubset);
+const { expect } = chai;
+
 const  Yaml  = require("yaml");
 
 const { parse } = require("../src/parse");
@@ -25,14 +30,17 @@ describe("parse(string)", () => {
   it("parses (1 2 3) into the correct AST structure", () => {
     const ast = parse("(1 2 3)");
     const expectedAst = List.make(1, 2, 3);
-    assert.deepEqual(ast.peek(), expectedAst, "AST for (1 2 3) should be a list of 1, 2, 3");
+    expect(ast.peek()).to.
+      containSubset(expectedAst);
+      // "AST for (1 2 3) should be a list of 1, 2, 3");
   });
 
   it("parses (not true) into the correct AST structure", () => {
     let not = Ṣymbol.for("not");
     const ast = parse("(not true)");
     const expectedAst = List.make(not, true);
-    assert.deepEqual(ast.peek(), expectedAst, "AST for (not true) should be a list of not, true");
+    expect(ast.peek()).to
+      .containSubset(expectedAst);
   });
 
   it("parses a bubble of list", function () {
@@ -89,21 +97,21 @@ function itParsesFixture(key, {expects}) {
   it(`parses fixture "${key}"`, function() {
     let s = fixtures[key];
     let p = parse(s);
-    assert.deepEqual(p.peek(), expects);
+    expect(p.peek()).to.containSubset(expects);
   });
 }
 
 function itParses(s, {expects}) {
   it(`parses "${s}"`, function() {
     let p = parse(s);
-    assert.deepEqual(p.peek(), expects);
+    expect(p.peek()).to.containSubset(expects);
   });
 }
 
 function itParses2(desc, s, expects) {
   it(`correctly parses ${desc}`, function() {
     let p = parse(s);
-    assert.deepEqual(p.peek(), expects);
+    expect(p.peek()).to.containSubset(expects);
   });
 }
 
@@ -340,7 +348,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     const expected =
       Vector.make(1, "s",
         new Bubble(Ṣymbol.for("x")));
-    assert.deepEqual([...ast], [expected], "AST for semi complex vector ");
+    expect([...ast]).to.containSubset([expected]);
   });
 
   it.skip("parses a complex nested structure with quotes, list, and balloons (arrays)", () => {

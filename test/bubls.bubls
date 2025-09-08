@@ -1,3 +1,7 @@
+🫧 assert (require "assert")
+
+(puts 1 2 3)
+
 (let [assert (require "assert")]
   (describe "bubls" (fn [])
     (it "runs tests" (fn [])

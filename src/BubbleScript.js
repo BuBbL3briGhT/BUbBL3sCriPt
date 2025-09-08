@@ -16,14 +16,14 @@ const Fn = require("./fn");
 const { Macro } = require("./macro");
 const { tokenize } = require("./tökenize");
 const { Parser, parse } = require("./parse");
-const { ėval, ëval } = require("./eval");
+const { ėval, ëval, evalExpression } = require("./eval");
 const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
 const BubbleScript = {
   List, Vector, Ṣymbol, Keyword, Bubble, Fn,
-  Macro, tokenize, Parser, parse, eval: ėval, ėval,
-  ëval, rootBinding
+  Macro, tokenize, Parser, parse, eval: ėval,
+  ėval, ëval, evalExpression, rootBinding
 }
 
 events.emit("init", BubbleScript);
@@ -45,7 +45,8 @@ events.emit("init", BubbleScript);
 
   function muf(...args) {
     // return ėval(bnd, arry.toList(args).push(_muf));
-    return ëval(bnd, List.from(args).push(_muf));
+    // return ëval(bnd, List.from(args).push(_muf));
+    return List.from(args).push(_muf).eval(bnd);
   }
 
   let _push = Ṣymbol.for('push'),

@@ -19,8 +19,8 @@ describe("eval(script)", function () {
 
   it("evaluates a keyword", function() {
     const p = parse(":keyword");
-    assert.deepEqual([...ëval({}, p)],
-      [Keyword.for("keyword")]);
+    assert.equal(ëval({}, p),
+      Keyword.for("keyword"));
   });
 
   it("runs script top to bottom", function () {
@@ -52,29 +52,89 @@ describe("eval(script)", function () {
   });
 
   it("expands a macro", function () {
-    let bnd = Object.create(rootBinding);
-    let ast = parse("(muf 🐒 (macro [] °(puts \"Monkey\")))");
+    // Create a special binding we will use for
+    // our test.
+    const bnd = Object.create(rootBinding);
 
-    assert.equal(ast.toString(), "((muf 🐒 (macro [] °(puts \"Monkey\"))))");
-    ast.eval(bnd)
-    let fn = parse("(fn [] (🐒))").eval(bnd);
+
+    // Parse a macro to be used for our test..
+    const ast =
+      parse('(muf 🐒 (macro []   '+
+            '  °(puts "Monkey")))');
+
+    // Call toString() on our parsed macro to
+    // ensure it is as we expect, asserting it
+    // is equal with a comparison.
+    assert.equal(ast.toString(),
+      '((muf 🐒 (macro [] °(puts "Monkey"))))');
+
+    // Evaluate our test macro against or test
+    // binding to store it in the binding t
+    // for use in the remainder of test.
+    ast.evalEach(bnd);
+
+    // Parse and evaulate a function that uses the
+    // macro.
+    const fn = parse("(fn [] (🐒))").evalEach(bnd);
+
+    // Check that the function body looks like we
+    // expect.
     assert.equal(fn.body.toString(), "((🐒))");
-    fn.body.eval(bnd);
-    assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
-    fn.body.eval(bnd);
-    assert.equal(fn.body.toString(), "((puts \"Monkey\"))");
+
+    // Simulate a function invokation by
+    // evaulating the body of the function against
+    // our test body which contains the macro.
+    fn.body.evalEach(bnd);
+
+    // Confirm that the function body is now
+    // changed and now contains the macro's
+    // expanded form.
+    assert.equal(fn.body.toString(),
+      "((puts \"Monkey\"))");
+
+    // Simulate another invokation of the
+    // function.
+    fn.body.evalEach(bnd);
+
+    // Check the body, once again, confirming this
+    // time it has not changed.
+    assert.equal(fn.body.toString(),
+      "((puts \"Monkey\"))");
   });
 
   it("expands a macro a more complex macro", function () {
     let bnd = Object.create(rootBinding);
-    bnd.puts = null;
-    let ast = parse("(muf 🐒 (macro [🐸 🐷 🦎] (list °puts (list °+ 🐸 🐷 🦎)) (list °puts (+ 🐸 🐷 🐷) 🦎)))");
-    assert.equal(ast.toString(), "((muf 🐒 (macro [🐸 🐷 🦎] (list °puts (list °+ 🐸 🐷 🦎)) (list °puts (+ 🐸 🐷 🐷) 🦎))))");
-    ast.eval(bnd)
-    let fn = parse("(fn [🪻] (* 6 9) (🐒 1 2 🪻) (+ 3 4))").eval(bnd);
-    assert.equal(fn.body.toString(), "((* 6 9) (🐒 1 2 🪻) (+ 3 4))");
-    fn.body.eval(bnd);
-    assert.equal(fn.body.toString(), "((* 6 9) (puts (+ 1 2 🪻)) (puts 5 🪻) (+ 3 4))");
+
+    // Override puts with noop function.
+    bnd.puts = function () {};
+
+    let ast =
+      parse("(muf 🐒 (macro [🐸 🐷 🦎] "+
+            "  (list °puts             "+
+            "    (list °+ 🐸 🐷 🦎))   "+
+            "  (list °puts             "+
+            "    (+ 🐸 🐷 🐷) 🦎)))    ");
+
+    assert.equal(ast.toString(),
+      "((muf 🐒 (macro [🐸 🐷 🦎] "+
+      "(list °puts (list °+ 🐸 🐷 🦎)) "+
+      "(list °puts (+ 🐸 🐷 🐷) 🦎))))");
+
+    ast.evalEach(bnd);
+
+    let fn =
+      parse("(fn [🪻] (* 6 9) "+
+                "(🐒 1 2 🪻) (+ 3 4))").
+        evalEach(bnd);
+
+    assert.equal(fn.body.toString(),
+      "((* 6 9) (🐒 1 2 🪻) (+ 3 4))");
+
+    fn.body.evalEach(bnd);
+
+    assert.equal(fn.body.toString(),
+      "((* 6 9) (puts (+ 1 2 🪻)) "+
+                "(puts 5 🪻) (+ 3 4))");
   });
 
   describe("function parameters", function () {
@@ -86,8 +146,11 @@ describe("eval(script)", function () {
         "((fn [a & b] (list a b)) 1 2 3)")
           .toString(), "(1 (2 3))");
       assert.equal(ėval(
-        "((fn [& a] (pop a)) 1 2 3)")
+        "((fn [& a] (send a :pop)) 1 2 3)")
           .toString(), "(2 3)");
+      // assert.equal(ėval(
+      //   "((fn [& a] (pop a)) 1 2 3)")
+      //     .toString(), "(2 3)");
       // assert.equal(ėval(
       //   "((fn [a b & c] (list & c)) 1 2 3)")
       //     .toString(), "(3)");

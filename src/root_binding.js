@@ -4,16 +4,17 @@ const ObjectMap = require("./object_map");
 const Fn = require("./fn");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
-const { ëval } = require("./eval");
+const { ëval, evalExpression } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
+const { specialForm, specialFormP } =
+                  require("./special_form");
 const reqůire = require("./reqůire");
-const mkfn = require("./util/mkfn");
- const consola = require("./consola");
+const consola = require("./consola");
+const createBinding = require("./create_binding.js");
 
 const starSymbol = Ṣymbol.for("*");
 
-// consola.registro({starSymbol, consola});
 
 // A man walks into a bar. Bartender says
 // what'll you have? The man says,
@@ -22,14 +23,12 @@ const starSymbol = Ṣymbol.for("*");
 const rootBinding = {
   console, consola,
   // Js require
-  ["reqūire"]: mkfn(o => require(...o)),
-
-  // Bubblescript require
-  // ["reqůire"]: mkfn(o => reqůire(...o)),
-
+  ["reqūire"]: require,
   __dirname: __dirname,
 
-  define: function(args) {
+  /* Special form functions */
+
+  define: specialForm(function(args) {
     let key = args.peek();
     let val = args.pop();
 
@@ -44,11 +43,11 @@ const rootBinding = {
         = new Fn(this, key.pop(), val, { name });
     } else {
       return this[key.toString()]
-        = ëval(this, val.peek());
+        = evalExpression(this, val.peek());
     }
-  },
+  }),
 
-  const: function (list) {
+  const: specialForm(function (list) {
     const key = list.peek();
     const value = list.pop();
     let o;
@@ -96,104 +95,188 @@ const rootBinding = {
         //   = ëval(this, value.peek());
         return this[sKey] = value.eval(this);
     }
-  },
+  }),
 
-  fn: function(args) {
-    return new Fn(this, args.first.toList(), args.rest)
-  },
+  fn: specialForm(function(list) {
+    return new Fn(this, list.first.toList(),
+                        list.rest)
+  }),
 
-  macro: function(args) {
+  macro: specialForm(function(args) {
     return new Macro(this, args.first, args.rest)
-  },
+  }),
 
-  jsfn: function(args) {
+  jsfn: specialForm(function(args) {
     const binding = this;
     const x = args.push(Ṣymbol.for('fn'));
     const fn = ëval(binding, x);
     return function(...args) {
       return fn.invoke(List.from(args));
     }
-  },
+  }),
 
-  let: function([x,...xx]) {
-    let binding = Object.create(this);
-    x = x.invert();
-    while (!x.isEmpty) {
-      let k,w;
-      k = x.peek();
-      x = x.pop();
-      w = x.peek();
-      x = x.pop();
-      binding[k] = ëval(binding, w);
-    }
-    return xx.map(z =>
-      ëval(binding, z)).pop();
-  },
+  let: specialForm(function(list) {
+    const [params, body] = list.plop();
+    const binding = Object.create(this);
+    params.toList().partition(2)
+      .each(([llave, valor]) => {
+        binding[llave] =
+         evalExpression(binding, valor);
+      });
+    return body.evalEach(binding);
+  }),
 
-  if: function([c,t,f]) {
-    return ëval(this,
-      ëval(this, c) ? t : f);
-  },
+  if: specialForm(function([c,t,f]) {
+    // consola.registro({ c, f, t });
+    const conditionValue =
+              evalExpression(this, c);
+    if (conditionValue)
+      return evalExpression(this, t);
+    else if (f)
+      return evalExpression(this, f);
+  }),
 
-  unless: function([c,f,t]) {
-    return ëval(this,
-      ëval(this, c) ? t : f);
-  },
+  unless: specialForm(function([c,f,t]) {
+    const conditionValue =
+              evalExpression(this, c);
+    if (!conditionValue)
+      return evalExpression(this, f);
+    else if (t)
+      return evalExpression(this, t);
+  }),
 
-  blert: function(msgs) {
+  blert: specialForm(function(msgs) {
     alert(this.concat(msgs));
-  },
+  }),
 
-  expandmacro: function(list) {
+  expandmacro: specialForm(function(list) {
     const [head, tail] = list.plop();
     const macro = ëval(this, head);
     return macro.expand(tail);
-  },
+  }),
 
-  loop: function([x,...xx]) {
-    var binding = Object.create(this),
-      m, recurCalled;
+  // loop: specialForm(function([x,...xx]) {
+  //   var binding = Object.create(this),
+  //     m, recurCalled;
 
-    x = x.invert();
-    while (!x.isEmpty) {
-      let k,v;
-      k = x.peek();
-      x = x.pop();
-      v = x.peek();
-      x = x.pop();
-      binding[k] = ëval(binding, v);
-    }
+  //   x = x.invert();
+  //   while (!x.isEmpty) {
+  //     let k,v;
+  //     k = x.peek();
+  //     x = x.pop();
+  //     v = x.peek();
+  //     x = x.pop();
+  //     binding[k] = ëval(binding, v);
+  //   }
 
-    binding.recur = function([a]) {
-      a = a.invert();
-      while (!a.isEmpty) {
-        let k,w;
-        k = a.peek();
-        a = a.pop();
-        w = a.peek();
-        a = a.pop();
-        binding[k] = ëval(binding, w);
-      }
+  //   binding.recur = function([a]) {
+  //     a = a.invert();
+  //     while (!a.isEmpty) {
+  //       let k,w;
+  //       k = a.peek();
+  //       a = a.pop();
+  //       w = a.peek();
+  //       a = a.pop();
+  //       binding[k] = ëval(binding, w);
+  //     }
+  //     recurCalled = true;
+  //   };
+
+  //   do {
+  //     recurCalled = false;
+  //     m = xx.map(z =>
+  //       ëval(binding, z)).pop();
+  //   } while(recurCalled);
+  //   return m;
+  // }),
+
+
+  // loop: specialForm(function(list) {
+  //   // console.debug("b");
+  //   // eci.ito("Yoyo!");
+  //   // consola.registro("Hola!");
+  //   const [params, cuerpo] = list.plop(),
+  //         cerveza = Object.create(this);
+  //   // console.debug(cuerpo);
+
+  //   var recurCalled,
+  //         resultado;
+
+  //   // consola.registro({params});
+
+  //   params.toList().partition(2)
+  //     .each(([llave, valor]) => {
+  //       cerveza[llave] =
+  //        evalExpression(cerveza, valor);
+  //     });
+
+  //   cerveza.recur = function(params) {
+  //     // consola.depurar({params});
+  //     const paramsList = params.toList();
+  //     // consola.depurar({paramsList: paramsList.toString()});
+  //     paramsList.partition(2)
+  //       .each(([llave, valor]) => {
+  //         cerveza[llave] =
+  //          evalExpression(cerveza, valor);
+  //       });
+  //     recurCalled = true;
+  //   };
+
+  //   do {
+  //     recurCalled = false;
+  //     resultado = cuerpo.evalEach(cerveza);
+  //   } while(recurCalled);
+
+  //   return resultado;
+  // }),
+
+
+  loop: specialForm(function(list) {
+    const [params, cuerpo] = list.plop(),
+          cerveza = Object.create(this);
+
+    var recurCalled,
+          resultado;
+
+    params.toList().partition(2)
+      .each(([llave, valor]) => {
+        cerveza[llave] =
+         evalExpression(cerveza, valor);
+      });
+
+    cerveza.recur = function(params) {
+      params.toList().partition(2)
+        .each(([llave, valor]) => {
+          cerveza[llave] =
+           evalExpression(cerveza, valor);
+        });
       recurCalled = true;
     };
 
     do {
       recurCalled = false;
-      m = xx.map(z =>
-        ëval(binding, z)).pop();
+      resultado = cuerpo.evalEach(cerveza);
     } while(recurCalled);
-    return m;
-  },
 
-  list: mkfn(function(args) {
-    return args;
+    return resultado;
   }),
 
-  vector: mkfn(function(args) {
-    return args.toVector();
+  /* Special forms with evaulated input
+   * parameters. */
+
+  eval: specialFormP(function(args) {
+    return args.eval(this);
   }),
 
-  obj: mkfn(function(list) {
+  list: specialFormP(function(params) {
+    return params;
+  }),
+
+  vector: specialFormP(function(list) {
+    return list.toVector();
+  }),
+
+  obj: specialFormP(function(list) {
     return list.partition(2).reduce(
       function(memo, [key, val]) {
         memo[key] = val;
@@ -201,29 +284,61 @@ const rootBinding = {
       }, {});
   }),
 
+  print: specialFormP(function(vals) {
+    return vals.each(function(value) {
+      document.body.append(value);
+    });
+  }),
+
+  get: specialFormP(function(yeahyeahyeahs) {
+    // console.log(yeahyeahyeahs);
+     return yeahyeahyeahs.reduce(
+        (memo,key) => memo && memo[key]);
+  }),
+
+  range: specialFormP(function (yippies) {
+    return new Range(...yippies);
+  }),
+
+  lazy: specialFormP(function (itty) {
+    return new LazyList(...itty);
+  }),
+
+  "+": specialFormP(function(a) {
+    return a.reduce((a,b) => a+b);
+  }),
+
+  "-": specialFormP(function(a) {
+    return a.reduce((a,b) => a-b);
+  }),
+
+  "*": specialFormP(function(a) {
+    return a.reduce((a,b) => a*b);
+  }),
+
+  and: specialFormP(function(a) {
+    return a.reduce((a,b) => a && b);
+  }),
+
+  or: specialFormP(function(_) {
+    return _.reduce((a,b) => a || b);
+  }),
+
+  concat: specialFormP(function(eeks) {
+    return eeks.join('');
+  }),
+
+  "/": specialFormP(function(a) {
+    return a.reduce((a,b) => a/b);
+  }),
+
+  /* Non-Special form functions */
+
   do: function(args) {
     return args.eval(this);
   },
 
-  eval: mkfn(function(args) {
-    return args.eval(this);
-  }),
-
-  // send: mkfn(function([a,b,...c]) {
-  //   if (b.key)
-  //     b = b.key;
-  //   if (c.length > 0) {
-  //     return a[b](...c);
-  //   } else
-  //     return a[b]();
-  // }),
-
-  send: mkfn(function(list) {
-    let receipient, message, params;
-
-    [receipient, list] = list.plop();
-    [message, params] = list.plop();
-
+  send: function(receipient, message, ...params) {
     // console.log("list", list);
     // console.log("receipient", receipient);
     // console.log("params", params);
@@ -231,7 +346,7 @@ const rootBinding = {
     if (message.key) message = message.key;
 
     return receipient[message](...params);
-  }),
+  },
 
   stop: function () {
     // console.error("stopped");
@@ -243,68 +358,28 @@ const rootBinding = {
     process.exit();
   },
 
-  get: mkfn(function(yeahyeahyeahs) {
-    // console.log(yeahyeahyeahs);
-     return yeahyeahyeahs.reduce(
-        (memo,key) => memo && memo[key]);
-  }),
-
-  range: mkfn(function (yippies) {
-    return new Range(...yippies);
-  }),
-
-  lazy: mkfn(function (itty) {
-    return new LazyList(...itty);
-  }),
-
-  export: mkfn(function([ca,nd,y]) {
+  export: function(ca,nd,y) {
     return ca[nd] = y;
-  }),
+  },
 
-  print: mkfn(function(vals) {
-    return vals.each(function(value) {
-      document.body.append(value);
-    });
-  }),
-  "+": mkfn(function(a) {
-    return a.reduce((a,b) => a+b);
-  }),
-  "-": mkfn(function(a) {
-    return a.reduce((a,b) => a-b);
-  }),
-  "*": mkfn(function(a) {
-    return a.reduce((a,b) => a*b);
-  }),
-  "/": mkfn(function(a) {
-    return a.reduce((a,b) => a/b);
-  }),
-  "=": mkfn(function([a, b]) {
+  "=": function(a, b) {
     return a == b;
-  }),
-  not: mkfn(function([y]) {
+  },
+  not: function(y) {
     return !y;
-  }),
-  and: mkfn(function(a) {
-    return a.reduce((a,b) => a && b);
-  }),
-  or: mkfn(function(_) {
-    return _.reduce((a,b) => a || b);
-  }),
-  '>': mkfn(([a,b]) => {
+  },
+  '>': (a,b) => {
     return a > b;
-  }),
-  '<': mkfn(([a,b]) => {
+  },
+  '<': (a,b) => {
     return a < b;
-  }),
-  parse: mkfn(function([s]) {
+  },
+  parse: function(s) {
     return parse(s);
-  }),
-  concat: mkfn(function(eeks) {
-    return eeks.join('');
-  }),
-  "new": mkfn(function([m,n]) {
+  },
+  "new": function(m,n) {
       return new m(...n.toArray());
-  })
+  }
 };
 
 // Aliases
@@ -312,4 +387,4 @@ rootBinding.muf = rootBinding.define;
 rootBinding.def = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
 
-module.exports = { rootBinding, mkfn };
+module.exports = { rootBinding };

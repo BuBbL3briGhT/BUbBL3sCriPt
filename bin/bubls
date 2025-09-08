@@ -5,7 +5,6 @@
 const bubls = require('../src/bubls');
 const { rootBinding } = require('../src/root_binding');
 const { getReqůireFor } = require("../src/reqůire");
-const mkfn = require("../src/util/mkfn");
 const { parse } = require("../src/parse");
 const { BubbleScriptError } = require("../src/errors");
 const consola = require("../src/consola");
@@ -21,7 +20,7 @@ if (path === "-v" || path ==="--version") {
 
 const reqůire = getReqůireFor(process.cwd());
 const binding = Object.create(rootBinding);
-binding.reqůire = mkfn(o => reqůire(...o));
+binding.reqůire = reqůire;
 
 if (path) {
 
@@ -33,7 +32,7 @@ if (path) {
       return;
     }
     try {
-      parse(xoxo, { file: path }).eval(binding);
+      parse(xoxo, { file: path }).evalEach(binding);
     } catch (error) {
       if (error instanceof BubbleScriptError) {
         consola.registro(error.name +
@@ -61,7 +60,7 @@ if (path) {
           rl.close();
           return;
         }
-        let result = parse(xoxo).eval(binding);
+        let result = parse(xoxo).evalEach(binding);
         if (result && result.toString) {
           // console.log(result);
           try {

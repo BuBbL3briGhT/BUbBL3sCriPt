@@ -1,3 +1,4 @@
+const consola = require("./consola");
 const symbols = Object.create(null);
 
 // `Ṣymbol`s are language symbols. Alternatively
@@ -40,15 +41,17 @@ class Ṣymbol {
     return this.value;
   }
 
-  resolveRoot(bnd) {
+  resolveRoot(binding) {
     return this.segments
       .reduce(function(e, f) {
         return e && e[f]
-      }, bnd)
+      }, binding)
   }
 
   eval(binding) {
-    var root = this.resolveRoot(binding)
+    let root = this.resolveRoot(binding)
+    // consola.registro({ root, fn: this.fn,
+    //       rootFn: root[this.fn]});
     if (root) root = root[this.fn];
     return root;
   }

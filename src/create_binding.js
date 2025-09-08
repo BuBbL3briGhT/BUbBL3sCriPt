@@ -1,53 +1,66 @@
-const List = require("./list");
-const Vector = require("./vector");
-const Ṣymbol = require("./symbol");
 
-let sAmp = Ṣymbol.for("&");
+  /* * *  * * *  * *  * *  * * *  * * *
+   *                                  *
+   *   File: src/create_binding.js    *
+   *   Date: September, 6th 2025      *
+   *   Library: Bubblescript          *
+   *   version: 0.0.🦤.🍌             *
+   *   Version: 0.0.16                *
+   *   Author(s): BaMbii              *
+   *                                  *
+   * * *  * * *  * *  * *  * * *  * * */
 
-// TODO: Utility functions. Move to src/util
-// directory.
+     const List = require("./list");
+   const Vector = require("./vector");
+   const Ṣymbol = require("./symbol");
+  const consola = require("./consola");
 
-// Applys the keys and the values to the
-// binding based on order and position.
-// Binding will be modified.
-function applyArguments(binding, keys, vals) {
-  if (keys instanceof Vector)
-    keys = keys.toList();
-  if (vals instanceof Vector)
-    vals = vals.toList();
+     const sAmp = Ṣymbol.for("&");
 
-  // console.log("keys", keys);
-  // console.log("vals", vals);
-  while (!keys.isEmpty && !vals.isEmpty) {
-    let key = keys.first;
-    let val = vals.first;
+  // Applys the keys and the values to the
+  // binding based on order and position.
+  // Binding will be modified.
+  function applyArguments
+        (binding, keys, vals)
+  {
+        if (keys instanceof Vector)
+          keys = keys.toList();
+        if (vals instanceof Vector)
+          vals = vals.toList();
 
-    if (key == sAmp) {
-      binding[keys.next] = vals;
-      return binding;
+    while ( !keys.isEmpty &&
+            !vals.isEmpty    ) {
+
+      const key = keys.first;
+        const val = vals.first;
+
+      if (key == sAmp) {
+        binding[keys.next] = vals;
+        return binding;
+      }
+
+      if (val == sAmp) {
+        applyArguments(binding, keys, vals.next)
+        return binding;
+      }
+
+      switch (key.constructor) {
+        case List:
+        case Vector:
+          applyArguments(binding, key, val);
+          break;
+        case Ṣymbol:
+          binding[key.toString()] = val;
+          break;
+        default:
+          throw Error("Invalid parameter type: " + key.constructor );
+      }
+
+      keys = keys.rest;
+      vals = vals.rest;
+
     }
-
-    if(val == sAmp) {
-      applyArguments(binding, keys, vals.next)
-      return binding;
-    }
-
-    switch (key.constructor) {
-      case List:
-      case Vector:
-        applyArguments(binding, key, val);
-        break;
-      case Ṣymbol:
-        binding[key.toString()] = val;
-        break;
-      default:
-        throw Error("Invalid parameter type: " + key.constructor );
-    }
-
-    keys = keys.rest;
-    vals = vals.rest;
   }
-}
 
 // Creates a binding object for a function or
 // macro.

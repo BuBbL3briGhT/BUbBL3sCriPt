@@ -1,4 +1,5 @@
 
+
 const consola = {
 
   registro(...mensajes) {
@@ -16,7 +17,9 @@ const consola = {
     Error.captureStackTrace(trace, arriba);
     const stackTrace = trace.stack.split("\n");
     console.log(stackTrace[1]);
-  }
+  },
+
+  depurar: console.debug
 
 }
 

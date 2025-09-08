@@ -7,6 +7,10 @@ class Bubble {
     return this.o;
   }
 
+  eval(binding) {
+    return this.pop();
+  }
+
   toString() {
     return "°" + this.o;
   }

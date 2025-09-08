@@ -1,9 +1,23 @@
-const events = require("./events");
+
+  /* * *  * * *  * *  * *  * * *  * * *
+   *                                  *
+   *   File: src/abstract_list.js     *
+   *   Date: September, 7th 2025      *
+   *   Library: Bubblescript          *
+   *   version: 0.0.🦤.🍌             *
+   *   Version: 0.0.16                *
+   *   Author(s): BaMbii              *
+   *                                  *
+   * * *  * * *  * *  * *  * * *  * * */
+
+   const events = require("./events");
+  const consola = require("./consola");
 
 let ëval;
 
 events.on("init", function (bubls) {
   ëval = bubls.ëval;
+  evalExpression = bubls.evalExpression;
 });
 
 // Let's define `AbstractList` which is a
@@ -19,8 +33,7 @@ class AbstractList {
   }
 
   constructor(o, oo) {
-    this.o = o;
-    this.oo = oo;
+    Object.assign(this, {o, oo});
   }
 
   peek() { return this.o; }
@@ -39,9 +52,7 @@ class AbstractList {
       this.pop().last : this.peek(); }
 
   count() {
-    return this.reduce((count) => {
-      return ++count;
-    }, 0);
+    return this.reduce(i => i+1, 0);
   }
 
   map(fn) {
@@ -60,13 +71,12 @@ class AbstractList {
       return this.pop().take(--count)
         .push(this.peek());
 
-    return this.constructor.make()
+    return this.constructor.make();
   }
 
-  skip(count) {
-    if (count && !this.isEmpty)
-      return this.pop().skip(--count);
-
+  skip(i) {
+    if (i && !this.isEmpty)
+      return this.pop().skip(i-1);
     return this;
   }
 
@@ -84,15 +94,18 @@ class AbstractList {
       }, this.constructor.make(this.peek()));
   }
 
-  conj(sourceList) {
-    return sourceList.reduce(function(accumulator, currentElement) {
-      return accumulator.push(currentElement);
-    }, this);
+  // Conjunta una lista con esta lista.
+  conj(lista) {
+    if (lista.isEmpty)
+      return this;
+    return this.conj(lista.pop())
+      .push(lista.peek());
   }
 
   _toString() {
     if (this.isEmpty) return "";
-    return this.map(this.toStringFormat).reduce(this.toStringJoin);
+    return this.map(this.toStringFormat)
+      .reduce(this.toStringJoin);
   }
 
   toStringFormat(o) {
@@ -116,7 +129,7 @@ class AbstractList {
     if (this.isEmpty)
       return memo;
 
-    let oo = this.pop();
+    const oo = this.pop();
     if (oo.isEmpty)
       if(memo == undefined)
         return this.peek();
@@ -131,17 +144,19 @@ class AbstractList {
   }
 
   each(fn) {
-    let oo = fn(this.peek());
+    const oo = fn(this.peek());
     if (this.pop().isEmpty) return oo;
     return this.pop().each(fn);
   }
 
   evalEach(binding) {
-    return this.each(xpr => xpr.eval(binding));
+    return this.each(evalExpression
+      .bind(null, binding));
   }
 
   mapEval(binding) {
-    return this.map(xpr => xpr.eval(binding));
+    return this.map(evalExpression
+      .bind(null, binding));
   }
 
   find(value) {

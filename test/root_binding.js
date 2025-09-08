@@ -7,18 +7,20 @@ describe("rootBinding", function () {
      it("gets from object", function () {
        let obj = { name: { first: "Kermit" }};
        assert.equal(rootBinding
-         .get(List.make(obj, "name", "first")),
+         .get.call(rootBinding,
+           (List.make(obj, "name", "first"))),
          "Kermit");
-       assert.deepEqual(rootBinding
-         .get(List.make(obj, "name")),
-         { first: "Kermit" });
+       assert.deepEqual(rootBinding.get
+          .call(rootBinding,
+                List.make(obj, "name")),
+           { first: "Kermit" });
      });
    });
 
   describe("send", function () {
     it("sends messages to objects", function () {
       const list = List.make(1, Keyword.for("toString"))
-      assert.equal(rootBinding.send(list), "1");
+      assert.equal(rootBinding.send(...list), "1");
     });
 
     it("sends messages to objects", function () {
@@ -34,7 +36,7 @@ describe("rootBinding", function () {
       );
 
       assert(!meatballsCalled);
-      rootBinding.send(list);
+      rootBinding.send(...list);
       assert(meatballsCalled);
     });
   });

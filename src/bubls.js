@@ -9,7 +9,7 @@ BubbleScript.load = function (filePath) {
   return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
 }
 
-// BubbleScript.load("../lib/core.🫧");
+BubbleScript.load("../lib/core.🫧");
 
 function configure(config) {
   let rëqůire = config.require
@@ -17,7 +17,7 @@ function configure(config) {
   let { rootBinding } = BubbleScript;
 
   if (rëqůire)
-    rootBinding.require = mkfn(o => rëqůire(...o));
+    rootBinding.require = rëqůire;
 
   if (dirname)
     BubbleScript.load = function (filePath) {

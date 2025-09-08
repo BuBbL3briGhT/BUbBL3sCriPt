@@ -1,28 +1,61 @@
-const createBinding = require("./create_binding.js");
-const Ṣymbol = require("./symbol");
+
+  /* * *  * * *  * *  * *  * * *  * * *
+   *                                  *
+   *   File: src/fn.js                *
+   *   Date: September, 7th 2025      *
+   *   Library: Bubblescript          *
+   *   version: 0.0.🦤.🍌             *
+   *   Version: 0.0.16                *
+   *   Author(s): BaMbii              *
+   *                                  *
+   * * *  * * *  * *  * *  * * *  * * */
+
+  const createBinding =
+                require("./create_binding.js");
+         const Ṣymbol = require("./symbol");
+        const consola = require("./consola");
+         const events = require("./events");
+
+
+  let evalParams;
+
+  events.on("init", function (bubls) {
+    evalParams = require("./eval").evalParams;
+  });
+
 
 class Fn {
-
   constructor(binding, params, body, opts={}) {
-    this.binding = binding;
-    this.params = params;
-    this.body = body;
-    this.name = opts.name;
+    Object.assign(this, { binding, params, body,
+      name: opts.name });
   }
 
-  // invoke(params) {
-  //   let binding = createBinding(this.binding,
-  //     this.params, params);
+  static call(binding, fn, params) {
+    switch (fn.constructor) {
+      case Function:
+        params = evalParams(binding, params);
+        return fn.call(binding, ...params);
+    }
 
-  //   return this.body.eval(binding);
-  // }
+    return fn.call(binding, params);
+  }
 
   call(binding, params) {
-    const fnBinding = createBinding(this.binding,
-      this.params,
-      params.mapEval(binding));
+    try {
+      const fnBinding = createBinding(this.binding,
+        this.params,
+        params.mapEval(binding));
 
-    return this.body.eval(fnBinding);
+      return this.body.evalEach(fnBinding);
+    } catch (error) {
+      error.stack += this.trace;
+      throw error;
+    }
+  }
+
+  get trace () {
+    const { name, file, line, column } = this;
+    return ` ${name} at ${file}:${line}:${column}`;
   }
 
   toString() {

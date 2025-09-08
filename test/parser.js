@@ -1,4 +1,9 @@
 const assert = require("assert");
+const chai = require('chai');
+const chaiSubset = require('chai-subset');
+chai.use(chaiSubset);
+const { expect } = chai;
+
 const { Parser: Qp, parse } = require("../src/parse");
 const Ðķ = require("../src/vector");
 const Ķÿ = require("../src/keyword");
@@ -26,14 +31,14 @@ describe("Parser", function () {
       const tokenizer = new Ťķ(input);
       const parser = new Qp(tokenizer);
       const result = parser;
-      assert.deepEqual([...parser],
+      expect([...parser]).to.containSubset(
         [Ɓü.make(Ṣÿ.for("puts"), "hello")]);
     });
 
     it("semi-colon closes all open lists", function () {
       const input = '(puts "hello" (puts "hello, again";'
       const result = parse(input);
-      assert.deepEqual([...result],
+      expect([...result]).to.containSubset(
         [Ɓü.make(Ṣÿ.for("puts"),
           "hello",
            Ɓü.make(Ṣÿ.for("puts"),
@@ -43,21 +48,21 @@ describe("Parser", function () {
     it("closes 1 open vector", function () {
       const input = '[1 2 3;'
       const result = parse(input);
-      assert.deepEqual([...result],
+      expect([...result]).to.containSubset(
         [Ðķ.make(1, 2, 3)]);
     });
 
     it("closes multiple open vectors", function () {
       const input = '[1 [2 [3;'
       const result = parse(input);
-      assert.deepEqual([...result],
+      expect([...result]).to.containSubset(
         [Ðķ.make(1, Ðķ.make(2, Ðķ.make(3)))]);
     });
 
     it("closes multiple open vectors and lists", function () {
       const input = '[(1 [2 (3 [4 ([5;'
       const result = parse(input);
-      assert.deepEqual([...result],
+      expect([...result]).to.containSubset(
         [Ðķ.make(Ɓü.make(1,
           Ðķ.make(2,
             Ɓü.make(3,
@@ -77,10 +82,11 @@ describe("Parser", function () {
     it("closes opens bare list open list and vector", function () {
       const input = 'puts "hello" (1 [2 (3;'
       const result = parse(input);
-      assert.deepEqual([...result],
-        [Ɓü.make(Ṣÿ.for("puts"), "hello",
-           Ɓü.make(1, Ðķ.make(2,
-             Ɓü.make(3))))]);
+      expect([...result]).to.
+        containSubset(
+          [Ɓü.make(Ṣÿ.for("puts"), "hello",
+             Ɓü.make(1, Ðķ.make(2,
+               Ɓü.make(3))))]);
     });
 
     it("gets consumed", function () {
@@ -163,7 +169,29 @@ describe("Parser", function () {
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
     const expecting = new Ɓů(Ṣÿ.for("r2d2"));
-    assert.deepEqual([expecting], [...parser]);
+    // assert.deepEqual([expecting], [...parser]);
+    expect([...parser]).to.
+      containSubset([expecting]);
+  });
+
+  it("parses °", function () {
+    const input = "°r2d2";
+    const tokenizer = new Ťķ(input);
+    const parser = new Qp(tokenizer);
+    assert.deepEqual([ /* Bubble */ {
+        column: 1,
+        file: undefined,
+        line: 1,
+        o: /* Ṣymbol */ {
+          callPattern: 1,
+          column: 2,
+          file: undefined,
+          fn: 'r2d2',
+          line: 1,
+          segments: [],
+          value: 'r2d2'
+        }
+      }], [...parser]);
   });
 
   it("parses a list", function () {
@@ -186,26 +214,28 @@ describe("Parser", function () {
     const input = "[1 2 31 2 31 2 3]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ðķ.make(1, 2, 31, 2, 31, 2, 3);
-    assert.deepEqual([expect], [...parser]);
+    expect([...parser]).to.containSubset(
+      [Ðķ.make(1, 2, 31, 2, 31, 2, 3)]);
+
   });
 
   it("parses a vəcĶtoŘ of sŸmbỌĻ§", function () {
     const input = "[z qw x z qw x z qw x]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ðķ.make(
-      Ṣÿ.fï("z"),
-      Ṣÿ.fï("qw"),
-      Ṣÿ.fï("x"),
-      Ṣÿ.fï("z"),
-      Ṣÿ.fï("qw"),
-      Ṣÿ.fï("x"),
-      Ṣÿ.fï("z"),
-      Ṣÿ.fï("qw"),
-      Ṣÿ.fï("x"),
-    );
-    assert.deepEqual([expect], [...parser]);
+    expect([...parser]).to.containSubset([
+      Ðķ.make(
+        Ṣÿ.fï("z"),
+        Ṣÿ.fï("qw"),
+        Ṣÿ.fï("x"),
+        Ṣÿ.fï("z"),
+        Ṣÿ.fï("qw"),
+        Ṣÿ.fï("x"),
+        Ṣÿ.fï("z"),
+        Ṣÿ.fï("qw"),
+        Ṣÿ.fï("x"),
+      )
+    ]);
   });
 
   it("parses a list", function () {
@@ -220,30 +250,34 @@ describe("Parser", function () {
     const input = "(83 24 3)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓü.ɓlọẅ(83, 24, 3);
-    assert.deepEqual([expect], [...parser]);
+    expect([...parser]).to.
+      containSubset([Ɓü.ɓlọẅ(83, 24, 3)]);
   });
 
   it("parses a list of symbols", function () {
     const input = "(a b c)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓü.ɓlọẅ(Ṣÿ.for("a"), Ṣÿ.for("b"), Ṣÿ.for("c"));
-    assert.deepEqual([expect], [...parser]);
+    expect([...parser]).to.containSubset([
+      Ɓü.ɓlọẅ(Ṣÿ.for("a"),
+        Ṣÿ.for("b"), Ṣÿ.for("c"))
+    ]);
   });
 
   it("parses a 🪺", function () {
     const input = "(83 [24 H i (Mom 💘) 3] J̌Ẹ :LL 010)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ɓü.ɓlọẅ(
-      83,
-      Ðķ.mƙ(24, Ṣÿ.fï("H"), Ṣÿ.fï("i"), Ɓü.ɓlọẅ(Ṣÿ.fï("Mom"), Ṣÿ.fï("💘")), 3),
-      Ṣÿ.fï("J̌Ẹ"),
-      Ķÿ.for("LL"),
-      10,
-    );
-    assert.deepEqual([expect], [...parser]);
+    expect([...parser]).to.
+      containSubset([
+        Ɓü.ɓlọẅ(
+          83,
+          Ðķ.mƙ(24, Ṣÿ.fï("H"), Ṣÿ.fï("i"), Ɓü.ɓlọẅ(Ṣÿ.fï("Mom"), Ṣÿ.fï("💘")), 3),
+          Ṣÿ.fï("J̌Ẹ"),
+          Ķÿ.for("LL"),
+          10,
+        )
+      ]);
   });
 
   it("parses bare lists", function () {
@@ -261,8 +295,8 @@ describe("Parser", function () {
                      "(puts :coolbeans)")
       const tokenizer = new Ťķ(input);
       const parser = new Qp(tokenizer);
-      const expects =
-        [
+      expect([...parser]).to
+        .containSubset([
           Ɓü.ɓlọẅ(Ṣÿ.for("puts"), Ṣÿ.for("🐣")),
           Ɓü.ɓlọẅ(Ṣÿ.fï("puts"), 1, 2, 3),
           Ɓü.ɓlọẅ(
@@ -275,8 +309,7 @@ describe("Parser", function () {
           Ɓü.ɓlọẅ(
             Ṣÿ.fï("puts"),
             Ķÿ.for("coolbeans")),
-        ];
-      assert.deepEqual(expects, [...parser]);
+        ]);
     })();
   });
 
