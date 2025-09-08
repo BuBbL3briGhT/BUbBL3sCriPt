@@ -122,6 +122,16 @@ class List extends AbstractList {
     return this.pop().each(fn);
   }
 
+  evalEach(binding) {
+    return this.each(evalExpression
+      .bind(null, binding));
+  }
+
+  mapEval(binding) {
+    return this.map(evalExpression
+      .bind(null, binding));
+  }
+
 }
 
 class EmptyList extends List {

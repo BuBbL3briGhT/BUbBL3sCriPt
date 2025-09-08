@@ -8,9 +8,11 @@
 (consola.registro "Hola")
 
 
-(🫧 (😄) (😊))
+(🫧 (😄)
+        (😊))
 
-🫧 (😊) (no.no)
+🫧 (😊),
+  (no.no)
 
 (😄)
 
