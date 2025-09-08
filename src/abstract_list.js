@@ -95,11 +95,11 @@ class AbstractList {
   }
 
   // Conjunta una lista con esta lista.
-  conj(list) {
-    if (list.isEmpty)
+  conj(lista) {
+    if (lista.isEmpty)
       return this;
-    return this.conj(list.pop())
-      .push(list.peek());
+    return this.conj(lista.pop())
+      .push(lista.peek());
   }
 
   _toString() {
