@@ -52,7 +52,7 @@ class AbstractList {
       this.pop().last : this.peek(); }
 
   count() {
-    return this.reduce(count => ++count, 0);
+    return this.reduce(i => i+1, 0);
   }
 
   map(fn) {
