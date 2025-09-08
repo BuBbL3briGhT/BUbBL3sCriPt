@@ -48,14 +48,14 @@ class Fn {
 
       return this.body.evalEach(fnBinding);
     } catch (error) {
-      error.stack += this.trace;
+      error.stack = this.trace + error.stack;
       throw error;
     }
   }
 
   get trace () {
     const { name, file, line, column } = this;
-    return ` ${name} at ${file}:${line}:${column}`;
+    return ` ${name} at ${file}:${line}:${column}\n`;
   }
 
   toString() {
