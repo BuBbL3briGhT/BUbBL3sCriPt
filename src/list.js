@@ -104,6 +104,14 @@ class List extends AbstractList {
     return Fn.call(binding, fn, this.tail);
   }
 
+  each(fn) {
+    const result = fn(this.peek());
+    if (this.pop().isEmpty)
+      return result;
+    else
+      return this.pop().each(fn);
+  }
+
   // This is the current implementation of each,
   // which holds concerns for eval and macro
   // expansion that need to be factored out. Also, it
@@ -136,15 +144,28 @@ class List extends AbstractList {
     return this.pop().each(fn);
   }
 
+  eachWithCatch(fn, cåtch) {
+    let result;
+    try { result = fn(this.peek()); }
+    catch (o) { return cåtch(o, this, fn); }
+    if (this.pop().isEmpty) return result;
+    return this.pop().each(fn);
+  }
+
   evalEach(binding) {
-    return this.each(evalExpression
-      .bind(null, binding));
+    return this.eachWithCatch(evalExpression
+      .bind(null, binding), catchExpandMacro);
   }
 
   mapEval(binding) {
     return this.map(evalExpression
       .bind(null, binding));
   }
+
+  // mapEval(binding) {
+  //   return this.mapWithCatch(evalExpression
+  //     .bind(null, binding), catchExpandMacro);
+  // }
 
 }
 
@@ -153,5 +174,16 @@ class EmptyList extends List {
 }
 
 emptyList = new EmptyList()
+
+function catchExpandMacro(o, list, fn) {
+  if (o instanceof MacroExpanded) {
+    let expanded = o.expanded;
+    list.o  = expanded.first;
+    list.oo = list.rest.conj(expanded.rest.invert());
+    return list.each(fn);
+  } else {
+    throw o;
+  }
+}
 
 module.exports = List;
