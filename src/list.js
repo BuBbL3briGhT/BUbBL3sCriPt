@@ -104,6 +104,20 @@ class List extends AbstractList {
     return Fn.call(binding, fn, this.tail);
   }
 
+  // This is the current implementation of each,
+  // which holds concerns for eval and macro
+  // expansion that need to be factored out. Also, it
+  // currently mutates the list, which ideally
+  // shouldn't be neccesary as it violates
+  // immutablity. We would lake to be able, and it
+  // should be possible, without letting that
+  // guarntee go. I dont have the full perspective on
+  // why it would matter, it would seem a more
+  // reliable platform if the base of the mountian
+  // didn't shift. i think at this stage its not a
+  // major problem, i would still like prioritizing a
+  // improved solution that cleans some of this
+  // messiness up.
   each(fn) {
     let result;
     try {
