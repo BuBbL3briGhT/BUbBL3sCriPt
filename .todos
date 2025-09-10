@@ -1,5 +1,7 @@
+September:
+  - better stack trace by keeping a representation of the stack.
 August:
-- Get tests to pass
+✅️ Get tests to pass
 - Actually we could just do
   - const [menu [sad happy]] xoxo This should
     work differently depending if xoxo is an
