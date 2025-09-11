@@ -3,7 +3,8 @@ const events = require("./events");
 const Ṣymbol = require("./symbol");
 const Fn = require("./fn");
 const consola = require("./consola");
-const { BubbleScriptError } = require("./errors");
+const { BubbleScriptError, ErrorDeFuncíonIndefinida }
+  = require("./errors");
 
 let emptyList, MacroExpanded;
 
@@ -97,13 +98,14 @@ class List extends AbstractList {
       b.push(that.peek()));
   }
 
-  eval(binding, stack) {
-    const fn = this.head.eval(binding)
+  eval(vínculo, pila) {
+    const fn = this.head.eval(vínculo)
     if (fn == undefined) {
-      const message = this.head + " is undefined";
-      throw new BubbleScriptError(message, stack);
+      const error = ErrorDeFuncíonIndefinida,
+          mensaje = this.head + " is undefined";
+      throw new error(mensaje, pila);
     }
-    return Fn.call(binding, fn, this.tail);
+    return Fn.call(vínculo, fn, this.tail);
   }
 
   evalEach(binding) {
