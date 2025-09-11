@@ -102,7 +102,8 @@ class List extends AbstractList {
     const fn = this.head.eval(vínculo)
     if (fn == undefined) {
       const error = ErrorDeFuncíonIndefinida,
-          mensaje = this.head + " is undefined";
+          mensaje = "La funcíon \"" + this.head
+                  + "\" no está definida.";
       throw new error(mensaje, pila);
     }
     return Fn.call(vínculo, fn, this.tail);
