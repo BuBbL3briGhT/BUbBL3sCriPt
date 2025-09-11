@@ -35,6 +35,15 @@ class BubbleScriptError extends Error {
     super(mensaje);
     this.stack = this.obtenerTrazaDeLaPila(vínculo);
   }
+
+  obtenerTrazaDeLaPila(vínculo) {
+    const pila = vínculo.__pila;
+    const trazaDeLaPila = pila.map((o) => {
+      const { name, file, line, column } = o;
+      return `    en ${name} (${file}:${line}:${column})`;
+    }).join("\n");
+    return trazaDeLaPila;
+  }
 }
 
 class ErrorDeFuncíonIndefinida extends BubbleScriptError {
