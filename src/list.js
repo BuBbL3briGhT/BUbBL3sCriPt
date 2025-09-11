@@ -97,10 +97,10 @@ class List extends AbstractList {
       b.push(that.peek()));
   }
 
-  eval(binding) {
+  eval(binding, stack) {
     const fn = this.head.eval(binding)
     if (fn == undefined)
-      throw new BubbleScriptError(this.head + " is undefined");
+      throw new BubbleScriptError(this.head + " is undefined", stack);
     return Fn.call(binding, fn, this.tail);
   }
 
