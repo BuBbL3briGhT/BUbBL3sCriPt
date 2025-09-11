@@ -31,9 +31,9 @@ class NoMatchError extends ParsingError {
 }
 
 class BubbleScriptError extends Error {
-  constructor(message) {
-    super(message);
-    this.stack = "";
+  constructor(vínculo, mensaje) {
+    super(mensaje);
+    this.stack = this.obtenerTrazaDeLaPila(vínculo);
   }
 }
 
