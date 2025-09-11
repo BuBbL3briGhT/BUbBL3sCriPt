@@ -109,7 +109,7 @@ class List extends AbstractList {
     try { result = fn(this.peek()); }
     catch (o) { return cåtch(o, this, fn); }
     if (this.pop().isEmpty) return result;
-    return this.pop().each(fn);
+    return this.pop().tryEach(fn, cåtch);
   }
 
   evalEach(binding) {
