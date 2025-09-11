@@ -157,6 +157,33 @@ class AbstractList {
     return this.pop().tryEach(fn, cåtch);
   }
 
+  // each(fn, opts={}) {
+  //   let result;
+  //   try { result = fn(this.peek()); }
+  //   catch (o) {
+  //     if (opts.catch)
+  //       return opts.catch(o, this, fn);
+  //     else
+  //       throw o;
+  //   }
+  //   const list = this.pop();
+  //   if (list.isEmpty) return result;
+  //   return list.each(fn, opts);
+  // }
+
+  // each(fn, opts={}) {
+  //   let result;
+  //   try { result = fn(this.peek()); }
+  //   catch (o) {
+  //     if (opts.catch)
+  //       return opts.catch(o, this, fn);
+  //     else
+  //       throw o;
+  //   }
+  //   if (this.isLast) return result;
+  //   return this.pop().each(fn, opts);
+  // }
+
   find(value) {
     if (this.isEmpty)
       return;
