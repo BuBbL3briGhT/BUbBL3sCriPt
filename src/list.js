@@ -104,14 +104,6 @@ class List extends AbstractList {
     return Fn.call(binding, fn, this.tail);
   }
 
-  tryEach(fn, cåtch) {
-    let result;
-    try { result = fn(this.peek()); }
-    catch (o) { return cåtch(o, this, fn); }
-    if (this.pop().isEmpty) return result;
-    return this.pop().tryEach(fn, cåtch);
-  }
-
   evalEach(binding) {
     return this.tryEach(evalExpression
       .bind(null, binding), catchExpandMacro);
