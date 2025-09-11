@@ -99,8 +99,10 @@ class List extends AbstractList {
 
   eval(binding, stack) {
     const fn = this.head.eval(binding)
-    if (fn == undefined)
-      throw new BubbleScriptError(this.head + " is undefined", stack);
+    if (fn == undefined) {
+      const message = this.head + " is undefined";
+      throw new BubbleScriptError(message, stack);
+    }
     return Fn.call(binding, fn, this.tail);
   }
 
