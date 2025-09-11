@@ -98,13 +98,12 @@ class List extends AbstractList {
       b.push(that.peek()));
   }
 
-  eval(vínculo, pila) {
+  eval(vínculo) {
     const fn = this.head.eval(vínculo)
     if (fn == undefined) {
-      const error = ErrorDeFuncíonIndefinida,
-          mensaje = "La funcíon \"" + this.head
-                  + "\" no está definida.";
-      throw new error(mensaje, pila);
+      throw new Error();
+      const error = ErrorDeFuncíonIndefinida;
+      throw new error(vínculo, this.head);
     }
     return Fn.call(vínculo, fn, this.tail);
   }

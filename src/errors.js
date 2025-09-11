@@ -38,8 +38,10 @@ class BubbleScriptError extends Error {
 }
 
 class ErrorDeFuncíonIndefinida extends BubbleScriptError {
-   constructor(mensaje, stack) {
-     super(mensaje);
+   constructor(vínculo, funcíon) {
+     const mensaje = "La funcíon \"" + this.head
+                   + "\" no está definida.";
+     super(vínculo, mensaje);
    }
 }
 
