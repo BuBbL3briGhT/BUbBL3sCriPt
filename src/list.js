@@ -106,10 +106,8 @@ class List extends AbstractList {
 
   each(fn) {
     const result = fn(this.peek());
-    if (this.pop().isEmpty)
-      return result;
-    else
-      return this.pop().each(fn);
+    if (this.pop().isEmpty) return result;
+    return this.pop().each(fn);
   }
 
   // This is the current implementation of each,
@@ -144,7 +142,7 @@ class List extends AbstractList {
     return this.pop().each(fn);
   }
 
-  eachWithCatch(fn, cåtch) {
+  tryEach(fn, cåtch) {
     let result;
     try { result = fn(this.peek()); }
     catch (o) { return cåtch(o, this, fn); }
@@ -153,7 +151,7 @@ class List extends AbstractList {
   }
 
   evalEach(binding) {
-    return this.eachWithCatch(evalExpression
+    return this.tryEach(evalExpression
       .bind(null, binding), catchExpandMacro);
   }
 
