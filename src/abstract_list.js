@@ -144,8 +144,8 @@ class AbstractList {
   }
 
   each(fn) {
-    const oo = fn(this.peek());
-    if (this.pop().isEmpty) return oo;
+    const result = fn(this.peek());
+    if (this.pop().isEmpty) return result;
     return this.pop().each(fn);
   }
 
