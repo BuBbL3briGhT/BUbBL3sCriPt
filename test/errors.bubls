@@ -4,5 +4,14 @@
 describe "Evaluation" (fn []
   it "Raises exception and provides stack \
       trace when encountering an undefinded \
-      funcíon.") (fn []))
+      funcíon.") (fn []
+
+    (🫧 (😄)
+       (😊))
+
+    🫧 (😊),
+      (no.no)
+
+    (😄)
+
 
