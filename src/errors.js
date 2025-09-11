@@ -39,7 +39,7 @@ class BubbleScriptError extends Error {
 
 class ErrorDeFuncíonIndefinida extends BubbleScriptError {
    constructor(mensaje, stack) {
-     super(menjage);
+     super(mensaje);
    }
 }
 
