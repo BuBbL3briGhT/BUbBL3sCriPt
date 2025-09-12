@@ -20,9 +20,16 @@ function ėval(script, opts={}) {
 }
 
 // Evaluates an expression.
-function evalExpression(binding, expression) {
-  return expression.eval ?
-    expression.eval(binding) : expression;
+function evalExpression(expresíon) {
+  const vínculo = this;
+  const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
+  vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
+
+  const resultado =  expresíon.eval ?
+    expresíon.eval(vínculo) : expresíon;
+
+  vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
+  return resultado;
 }
 
 function ëval(binding, expression) {

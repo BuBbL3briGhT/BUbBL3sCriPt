@@ -114,13 +114,8 @@ class List extends AbstractList {
   // }
 
   evalEach(vínculo) {
-    return this.tryEach(function (expresíon) {
-      const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
-      vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
-      const resultado = evalExpression(binding, expresíon);
-      vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
-      return resultado;
-    }, catchExpandMacro);
+    return this.tryEach(evalExpression.bind(vínculo),
+                        catchExpandMacro);
   }
 
   mapEval(binding) {
