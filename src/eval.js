@@ -21,12 +21,13 @@ function ėval(script, opts={}) {
 
 // Evaluates an expression.
 function evalExpression(expresíon) {
-  const vínculo = Object.create(this);
-  const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
-  vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
+  if (expresíon.eval) {
+    const vínculo = Object.create(this);
+    const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
+    vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
 
-  return expresíon.eval ?
-    expresíon.eval(vínculo) : expresíon;
+    return expresíon.eval(vínculo);
+  } else return expresíon;
 }
 
 function ëval(binding, expression) {
