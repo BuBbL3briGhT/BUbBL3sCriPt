@@ -108,9 +108,19 @@ class List extends AbstractList {
     return Fn.call(vínculo, fn, this.tail);
   }
 
-  evalEach(binding) {
-    return this.tryEach(evalExpression
-      .bind(null, binding), catchExpandMacro);
+  // evalEach(binding) {
+  //   return this.tryEach(evalExpression
+  //     .bind(null, binding), catchExpandMacro);
+  // }
+
+  evalEach(vínculo) {
+    return this.tryEach(function (expresíon) {
+      const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
+      vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
+      const resultado = evalExpression(binding, expresíon);
+      vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
+      return resultado;
+    }, catchExpandMacro);
   }
 
   mapEval(binding) {
