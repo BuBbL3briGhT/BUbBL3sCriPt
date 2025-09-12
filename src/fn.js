@@ -40,13 +40,19 @@ class Fn {
     return fn.call(binding, params);
   }
 
-  call(binding, params) {
+  call(vínculo, params) {
     try {
+      const __pila = vínculo.__pila;
+      vínculo.__pila = __pila.push(this);
+
       const fnBinding = createBinding(this.binding,
         this.params,
-        params.mapEval(binding));
+        params.mapEval(vínculo));
 
-      return this.body.evalEach(fnBinding);
+      const resultado = this.body.evalEach(fnBinding);
+
+      vínculo.__pila = __pila;
+      return resultado;
     } catch (error) {
       error.stack += this.trace;
       throw error;
