@@ -22,11 +22,13 @@ function ėval(script, opts={}) {
 // Evaluates an expression.
 function evalExpression(expresíon) {
   if (expresíon.eval) {
-    const vínculo = Object.create(this);
     const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
     vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
 
-    return expresíon.eval(vínculo);
+    const resultado = expresíon.eval(vínculo);
+
+    vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
+    return resultado;
   } else return expresíon;
 }
 
