@@ -31,6 +31,8 @@ class NoMatchError extends ParsingError {
   }
 }
 
+const trazaPlantilla = "    en ${nombre} (${archivo}:${linea}:${columna})";
+
 class BubbleScriptError extends Error {
   constructor(vínculo, mensaje) {
     super(mensaje);
@@ -40,8 +42,7 @@ class BubbleScriptError extends Error {
   obtenerTrazaDeLaPila(vínculo) {
     const pila = vínculo.__pila;
     const trazaDeLaPila = pila.map((o) => {
-      const plantilla = "    en ${nombre} (${archivo}:${linea}:${columna})";
-      return interpolar(plantilla, o);
+      return interpolar(trazaPlantilla, o);
     }).join("\n");
     return trazaDeLaPila;
   }
