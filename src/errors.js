@@ -39,8 +39,8 @@ class BubbleScriptError extends Error {
   obtenerTrazaDeLaPila(vínculo) {
     const pila = vínculo.__pila;
     const trazaDeLaPila = pila.map((o) => {
-      const { name, file, line, column } = o;
-      return `    en ${name} (${file}:${line}:${column})`;
+      const { nombre, archivo, línea, columna } = o;
+      return `    en ${nombre} (${archivo}:${linea}:${columna})`;
     }).join("\n");
     return trazaDeLaPila;
   }
