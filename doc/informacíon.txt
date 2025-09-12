@@ -1,0 +1,46 @@
+
+Thu Sep 11 23:06:20 EDT 2025
+
+Labels: #javascript #strings #interpolation
+
+In JavaScript, string interpolation is commonly achieved using template literals. These allow you to embed expressions within strings using backticks (`) and the ${} syntax. Here's how you can use it, including a custom function for more advanced interpolation:
+
+Basic String Interpolation
+Javascriptconst name = "Alice";
+const age = 25;
+
+const message = `Hello, my name is ${name} and I am ${age} years old.`;
+console.log(message);
+// Output: Hello, my name is Alice and I am 25 years old.
+
+
+Custom Interpolation Function
+You can create a function to handle more complex interpolation scenarios:
+Javascriptfunction interpolate(template, values) {
+  return template.replace(/\${(.*?)}/g, (_, key) => values[key.trim()] || '');
+}
+
+const template = "Hello, ${name}! You have ${messages} new messages.";
+const values = { name: "Bob", messages: 5 };
+
+console.log(interpolate(template, values));
+// Output: Hello, Bob! You have 5 new messages.
+
+
+Tagged Template Literals
+For even more control, you can use tagged template literals, which allow you to process template literals with a custom function:
+Javascriptfunction customTag(strings, ...values) {
+  return strings.reduce((result, str, i) => result + str + (values[i] ? values[i].toUpperCase() : ''), '');
+}
+
+const name = "Charlie";
+const hobby = "cycling";
+
+console.log(customTag`My name is ${name} and I love ${hobby}.`);
+// Output: My name is CHARLIE and I love CYCLING.
+
+
+These methods provide flexibility for both simple and advanced string interpolation needs!
+
+
+Courtesy of Bing Writer, Bing.com (Search: javascript string interpolation function)

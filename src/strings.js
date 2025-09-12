@@ -1,4 +1,5 @@
-function interpolar(plantilla, valores) {
+function interpolar(valores) {
+  const plantilla = this;
   return plantilla.replace(/\${(.*?)}/g,
     (_, llave) => valores[llave.trim()] || '');
 }

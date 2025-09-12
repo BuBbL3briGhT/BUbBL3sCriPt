@@ -32,7 +32,7 @@ class NoMatchError extends ParsingError {
 }
 
 const trazaPlantilla = "    en ${nombre} (${archivo}:${linea}:${columna})";
-const interpolarTrazaPlantilla = interpolar.bind(null, trazaPlantilla);
+const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
 class BubbleScriptError extends Error {
   constructor(vínculo, mensaje) {
