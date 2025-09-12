@@ -25,18 +25,6 @@ function evalExpression(expresíon) {
     const vínculo = this;
     return pilaDeLlamadasEmpujarEval(vínculo,
       expresíon, (v,e) => e.eval(v));
-
-    return ((vínculo) => expresíon.eval(vínculo))
-    (Object.create(vinculo, {
-      __pilaDeLlamadas:
-        vínculo.__pilaDeLlamadas.push(expresíon) });
-
-    return pilaDeLlamadasEmpujarEval(vínculo,
-      { __pilaDeLlamadas:
-        vínculo.__pilaDeLlamadas.push(expresíon) },
-      (vínculo) => expresíon.eval(vínculo));
-
-      expresíon, (v,e) => e.eval(v));
   } else return expresíon;
 }
 
