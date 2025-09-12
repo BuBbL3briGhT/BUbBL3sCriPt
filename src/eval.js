@@ -69,6 +69,8 @@ function evalExpression(expresíon) {
 // #leakyAbstraction #overKill #longFunctionName
 //
 // This comment was tanslated to Española by Google
+// Este comentario fue traducido al español por
+// [Google](https://www.google.com/) (Search: Translate to Española)
 // (https://www.google.com/search?q=translate+to+española)
 function pilaDeLlamadasEmpujarEval(vínculo,
   expresíon, funcíon) {
