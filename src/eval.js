@@ -92,6 +92,10 @@ function evalExpression(expresíon) {
 // Este comentario fue traducido al español por
 // [Google](https://www.google.com/) (Buscar:
 // "Traducir al español")
+//
+// Ce commentaire a été traduit de l'espagnol en
+// français par [Bing](https://www.bing.com/)
+// (Recherche : "Traduire en français")
 function pilaDeLlamadasEmpujarEval(vínculo,
   expresíon, funcíon) {
   const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
