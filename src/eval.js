@@ -22,18 +22,23 @@ function ėval(script, opts={}) {
 // Evaluates an expression.
 function evalExpression(expresíon) {
   if (expresíon.eval) {
-    pushCallStack(vínculo, expresíon, (e,v) => e.eval(v);
-      (vínculo, expresíon) =>
-        expresíon.eval(vínculo));
-    const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
-    vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
-
-    const resultado = expresíon.eval(vínculo);
-
-    vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
-    return resultado;
+    const vínculo = this;
+    return pilaDeLlamadasEmpujarEval(vínculo,
+      expresíon, (v,e) => e.eval(v));
   } else return expresíon;
 }
+
+function pilaDeLlamadasEmpujarEval(vínculo,
+  expresíon, funcíon) {
+  const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
+  vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
+
+  const resultado = funcíon(vínculo, expresíon);
+
+  vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
+  return resultado;
+}
+
 
 function ëval(binding, expression) {
   return expression.evalEach(binding);
