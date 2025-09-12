@@ -22,6 +22,9 @@ function ėval(script, opts={}) {
 // Evaluates an expression.
 function evalExpression(expresíon) {
   if (expresíon.eval) {
+    pushCallStack(vínculo, expresíon, (e,v) => e.eval(v);
+      (vínculo, expresíon) =>
+        expresíon.eval(vínculo));
     const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
     vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
 
