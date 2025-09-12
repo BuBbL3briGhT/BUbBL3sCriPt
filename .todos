@@ -1,5 +1,11 @@
+September:
+  - better stack trace by keeping a representation of
+    the stack. Currently line and column point to
+    definition of function, but the should point to
+    the line of execution within the function
+
 August:
-- Get tests to pass
+✅️ Get tests to pass
 - Actually we could just do
   - const [menu [sad happy]] xoxo This should
     work differently depending if xoxo is an

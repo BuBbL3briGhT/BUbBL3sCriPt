@@ -144,20 +144,45 @@ class AbstractList {
   }
 
   each(fn) {
-    const oo = fn(this.peek());
-    if (this.pop().isEmpty) return oo;
+    const result = fn(this.peek());
+    if (this.pop().isEmpty) return result;
     return this.pop().each(fn);
   }
 
-  evalEach(binding) {
-    return this.each(evalExpression
-      .bind(null, binding));
+  tryEach(fn, cåtch) {
+    let result;
+    try { result = fn(this.peek()); }
+    catch (o) { return cåtch(o, this, fn); }
+    if (this.pop().isEmpty) return result;
+    return this.pop().tryEach(fn, cåtch);
   }
 
-  mapEval(binding) {
-    return this.map(evalExpression
-      .bind(null, binding));
-  }
+  // each(fn, opts={}) {
+  //   let result;
+  //   try { result = fn(this.peek()); }
+  //   catch (o) {
+  //     if (opts.catch)
+  //       return opts.catch(o, this, fn);
+  //     else
+  //       throw o;
+  //   }
+  //   const list = this.pop();
+  //   if (list.isEmpty) return result;
+  //   return list.each(fn, opts);
+  // }
+
+  // each(fn, opts={}) {
+  //   let result;
+  //   try { result = fn(this.peek()); }
+  //   catch (o) {
+  //     if (opts.catch)
+  //       return opts.catch(o, this, fn);
+  //     else
+  //       throw o;
+  //   }
+  //   if (this.isLast) return result;
+  //   return this.pop().each(fn, opts);
+  // }
 
   find(value) {
     if (this.isEmpty)

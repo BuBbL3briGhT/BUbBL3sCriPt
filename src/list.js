@@ -3,6 +3,8 @@ const events = require("./events");
 const Ṣymbol = require("./symbol");
 const Fn = require("./fn");
 const consola = require("./consola");
+const { BubbleScriptError, ErrorDeFuncíonIndefinida }
+  = require("./errors");
 
 let emptyList, MacroExpanded;
 
@@ -96,28 +98,35 @@ class List extends AbstractList {
       b.push(that.peek()));
   }
 
-  eval(binding) {
-    return Fn.call(binding,
-         this.head.eval(binding), this.tail);
+  eval(vínculo) {
+    const fn = this.head.eval(vínculo)
+    if (fn == undefined) {
+      throw new Error();
+      const error = ErrorDeFuncíonIndefinida;
+      throw new error(vínculo, this.head);
+    }
+    return Fn.call(vínculo, fn, this.tail);
   }
 
-  each(fn) {
-    let result;
-    try {
-      result = fn(this.peek());
-    } catch (o) {
-      if (o instanceof MacroExpanded) {
-        let expanded = o.expanded;
-        this.o  = expanded.first;
-        this.oo = this.rest.conj(expanded.rest.invert());
-        return this.each(fn);
-      } else {
-        throw o;
-      }
-    }
-    if (this.pop().isEmpty) return result;
-    return this.pop().each(fn);
+  // evalEach(binding) {
+  //   return this.tryEach(evalExpression
+  //     .bind(null, binding), catchExpandMacro);
+  // }
+
+  evalEach(vínculo) {
+    return this.tryEach(evalExpression.bind(vínculo),
+                        catchExpandMacro);
   }
+
+  mapEval(binding) {
+    return this.map(evalExpression
+      .bind(null, binding));
+  }
+
+  // mapEval(binding) {
+  //   return this.mapWithCatch(evalExpression
+  //     .bind(null, binding), catchExpandMacro);
+  // }
 
 }
 
@@ -126,5 +135,16 @@ class EmptyList extends List {
 }
 
 emptyList = new EmptyList()
+
+function catchExpandMacro(o, list, fn) {
+  if (o instanceof MacroExpanded) {
+    let expanded = o.expanded;
+    list.o  = expanded.first;
+    list.oo = list.rest.conj(expanded.rest.invert());
+    return list.tryEach(fn, catchExpandMacro);
+  } else {
+    throw o;
+  }
+}
 
 module.exports = List;

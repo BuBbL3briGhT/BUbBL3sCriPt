@@ -26,8 +26,8 @@
 
 class Fn {
   constructor(binding, params, body, opts={}) {
-    Object.assign(this, { binding, params, body,
-      name: opts.name });
+    Object.assign(this, { binding, params, body });
+    Object.assign(this, opts);
   }
 
   static call(binding, fn, params) {
@@ -40,13 +40,19 @@ class Fn {
     return fn.call(binding, params);
   }
 
-  call(binding, params) {
+  call(vínculo, params) {
     try {
+      const __pila = vínculo.__pila;
+      vínculo.__pila = __pila.push(this);
+
       const fnBinding = createBinding(this.binding,
         this.params,
-        params.mapEval(binding));
+        params.mapEval(vínculo));
 
-      return this.body.evalEach(fnBinding);
+      const resultado = this.body.evalEach(fnBinding);
+
+      vínculo.__pila = __pila;
+      return resultado;
     } catch (error) {
       error.stack += this.trace;
       throw error;
@@ -55,7 +61,8 @@ class Fn {
 
   get trace () {
     const { name, file, line, column } = this;
-    return ` ${name} at ${file}:${line}:${column}`;
+    // return ` ${name} at ${file}:${line}:${column}\n`;
+    return `    at ${name} (${file}:${line}:${column})\n`;
   }
 
   toString() {

@@ -102,7 +102,7 @@ describe("eval(script)", function () {
       "((puts \"Monkey\"))");
   });
 
-  it("expands a macro a more complex macro", function () {
+  it("expands a more complex macro", function () {
     let bnd = Object.create(rootBinding);
 
     // Override puts with noop function.

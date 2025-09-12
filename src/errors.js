@@ -1,3 +1,4 @@
+const interpolar = require("./strings");
 
 class TokenNoMatchError extends Error {
   name = "NoMatchError";
@@ -30,15 +31,35 @@ class NoMatchError extends ParsingError {
   }
 }
 
+const trazaPlantilla = "    en ${nombre} (${archivo}:${linea}:${columna})";
+const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
+
 class BubbleScriptError extends Error {
-  constructor(message) {
-    super(message);
+  constructor(vínculo, mensaje) {
+    super(mensaje);
+    this.stack = this.obtenerTrazaDeLaPila(vínculo);
   }
+
+  obtenerTrazaDeLaPila(vínculo) {
+    const pila = vínculo.__pila;
+    const trazaDeLaPila = pila
+      .map(interpolarTrazaPlantilla).join("\n");
+    return trazaDeLaPila;
+  }
+}
+
+class ErrorDeFuncíonIndefinida extends BubbleScriptError {
+   constructor(vínculo, funcíon) {
+     const mensaje = "La funcíon \"" + this.head
+                   + "\" no está definida.";
+     super(vínculo, mensaje);
+   }
 }
 
 module.exports = {
   TokenNoMatchError,
   ParsingError,
   NoMatchError,
-  BubbleScriptError
+  BubbleScriptError,
+  ErrorDeFuncíonIndefinida
 };
