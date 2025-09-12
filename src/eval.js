@@ -28,23 +28,24 @@ function evalExpression(expresíon) {
   } else return expresíon;
 }
 
-This right here is a crazy little function that is
-meant to simplify, but probably makes things a bit
-more complex. Leaving it in for now but there is
-probably a much cleaner and simple way to express
-this.  I'm not a huge fan of long function names as
-they are a form of code smell. just serving as a
-representation of an idea and maybe providing a
-notion of clarity.  This function expects a binding
-and an expression, it then replaces the special
-reserved stack property with a new stack that has the
-expresion pushed on top.  it then invokes the
-function passing back the bimding and expression as
-parameters, after storing the returned value, it
-resets the special reserved stack property in the
-binding to the previously value and finally, returns
-the value it recieved from the function call.
-  #leakyAbstraction #overKill #longFunctionName
+// This right here is a crazy little function that is
+// meant to simplify, but probably makes things a bit
+// more complex. Leaving it in for now but there is
+// probably a much cleaner and simple way to express
+// this.  I'm not a huge fan of long function names
+// as they are a form of code smell. just serving as
+// a representation of an idea and maybe providing a
+// notion of clarity.  This function expects a
+// binding and an expression, it then replaces the
+// special reserved stack property with a new stack
+// that has the expresion pushed on top.  it then
+// invokes the function passing back the bimding and
+// expression as parameters, after storing the
+// returned value, it resets the special reserved
+// stack property in the binding to the previously
+// value and finally, returns the value it recieved
+// from the function call.  #leakyAbstraction
+// #overKill #longFunctionName
 
 function pilaDeLlamadasEmpujarEval(vínculo,
   expresíon, funcíon) {
