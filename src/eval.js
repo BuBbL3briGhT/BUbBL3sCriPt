@@ -28,6 +28,27 @@ function evalExpression(expresíon) {
   } else return expresíon;
 }
 
+// C'est une petite fonction étrange qui essaie de
+// simplifier, mais qui risque en fait de compliquer
+// un peu les choses. Je la laisse pour l'instant,
+// mais il existe probablement une façon beaucoup
+// plus claire et simple de le dire. Je ne suis pas
+// trop fan des noms de fonction longs, car ce sont
+// une forme de code peu agréable. En gros, ça sert
+// juste à représenter une idée et peut-être à
+// apporter un peu de clarté. Cette fonction attend
+// un lien et une expression ; ensuite, elle remplace
+// la propriété spéciale réservée de la pile par une
+// nouvelle pile avec l'expression insérée en haut.
+// Puis, elle appelle la fonction en passant le lien
+// et l'expression en tant que paramètres ; après
+// avoir stocké la valeur retournée, elle restaure la
+// propriété spéciale réservée de la pile au lien
+// avec la valeur précédente et, enfin, elle retourne
+// la valeur reçue de l'appel de la fonction.
+// #AbstractionAvecFiltration #TropDActions
+// #NomDeFonctionLong
+//
 // Esta es una pequeña función peculiar que pretende
 // simplificar, pero probablemente complique un poco
 // las cosas. La dejo por ahora, pero probablemente
