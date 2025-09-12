@@ -69,7 +69,7 @@ function evalExpression(expresíon) {
 // #leakyAbstraction #overKill #longFunctionName
 //
 // This comment was tanslated to Española by Google
-// (https://www.google.com/search?q=translate)
+// (https://www.google.com/search?q=translate+to+española)
 function pilaDeLlamadasEmpujarEval(vínculo,
   expresíon, funcíon) {
   const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
