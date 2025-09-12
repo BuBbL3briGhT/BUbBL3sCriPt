@@ -1,6 +1,6 @@
-function interpolate(template, values) {
-  return template.replace(/\${(.*?)}/g,
-    (_, key) => values[key.trim()] || '');
+function interpolar(plantilla, valores) {
+  return plantilla.replace(/\${(.*?)}/g,
+    (_, llave) => valores[llave.trim()] || '');
 }
 
-module.export = { interpolate };
+module.export = { interpolar };

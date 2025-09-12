@@ -1,3 +1,4 @@
+const interpolar = require("./strings");
 
 class TokenNoMatchError extends Error {
   name = "NoMatchError";
@@ -39,8 +40,8 @@ class BubbleScriptError extends Error {
   obtenerTrazaDeLaPila(vínculo) {
     const pila = vínculo.__pila;
     const trazaDeLaPila = pila.map((o) => {
-      const { nombre, archivo, línea, columna } = o;
-      return `    en ${nombre} (${archivo}:${linea}:${columna})`;
+      const plantilla = "    en ${nombre} (${archivo}:${linea}:${columna})";
+      return interpolar(plantilla, o);
     }).join("\n");
     return trazaDeLaPila;
   }
