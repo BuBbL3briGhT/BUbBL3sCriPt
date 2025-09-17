@@ -28,6 +28,7 @@ function evalExpression(expresíon) {
   } else return expresíon;
 }
 
+// function pushEvalCallStack(binding, expression, fn)
 function pilaDeLlamadasEmpujarEval(vínculo,
   expresíon, funcíon) {
   const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
