@@ -1,4 +1,5 @@
 const List = require("./list");
+const Lista = require("./list");
 const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
@@ -30,7 +31,7 @@ function evalExpression(expresíon) {
 
 function pilaDeLlamadasEmpujarEval(vínculo,
   expresíon, funcíon) {
-  const __pilaDeLlamadas = vínculo.__pilaDeLlamadas || List.make();
+  const __pilaDeLlamadas = vínculo.__pilaDeLlamadas || Lista.make();
   vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
 
   const resultado = funcíon(vínculo, expresíon);
