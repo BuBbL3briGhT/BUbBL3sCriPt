@@ -28,7 +28,7 @@ function evalExpression(expresíon) {
       expresíon, function (v,e) {
           consola.registro(e);
           consola.registro({ eval: e.eval });
-          return e.eval.call(v)
+          return e.eval(v)
       });
   } else return expresíon;
 }
