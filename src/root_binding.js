@@ -46,7 +46,7 @@ const rootBinding = {
           column: key.column });
     } else {
       return this[key.toString()]
-        = evalExpression(this, val.peek());
+        = evalExpression.call(this, val.peek());
     }
   }),
 
@@ -124,7 +124,7 @@ const rootBinding = {
     params.toList().partition(2)
       .each(([llave, valor]) => {
         binding[llave] =
-         evalExpression(binding, valor);
+         evalExpression.call(binding, valor);
       });
     return body.evalEach(binding);
   }),
@@ -132,20 +132,20 @@ const rootBinding = {
   if: specialForm(function([c,t,f]) {
     // consola.registro({ c, f, t });
     const conditionValue =
-              evalExpression(this, c);
+              evalExpression.call(this, c);
     if (conditionValue)
-      return evalExpression(this, t);
+      return evalExpression.call(this, t);
     else if (f)
-      return evalExpression(this, f);
+      return evalExpression.call(this, f);
   }),
 
   unless: specialForm(function([c,f,t]) {
     const conditionValue =
-              evalExpression(this, c);
+              evalExpression.call(this, c);
     if (!conditionValue)
-      return evalExpression(this, f);
+      return evalExpression.call(this, f);
     else if (t)
-      return evalExpression(this, t);
+      return evalExpression.call(this, t);
   }),
 
   blert: specialForm(function(msgs) {
@@ -168,14 +168,14 @@ const rootBinding = {
     params.toList().partition(2)
       .each(([llave, valor]) => {
         cerveza[llave] =
-         evalExpression(cerveza, valor);
+         evalExpression.call(cerveza, valor);
       });
 
     cerveza.recur = function(params) {
       params.toList().partition(2)
         .each(([llave, valor]) => {
           cerveza[llave] =
-           evalExpression(cerveza, valor);
+           evalExpression.call(cerveza, valor);
         });
       recurCalled = true;
     };

@@ -25,7 +25,11 @@ function evalExpression(expresíon) {
   if (expresíon.eval) {
     const vínculo = this;
     return pilaDeLlamadasEmpujarEval(vínculo,
-      expresíon, (v,e) => e.eval(v));
+      expresíon, function (v,e) {
+          consola.registro(e);
+          consola.registro({ eval: e.eval });
+          return e.eval.call(v)
+      });
   } else return expresíon;
 }
 
