@@ -1,4 +1,4 @@
-const interpolar = require("./strings");
+const { interpolar } = require("./strings");
 
 class TokenNoMatchError extends Error {
   name = "NoMatchError";

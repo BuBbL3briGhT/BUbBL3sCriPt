@@ -4,4 +4,4 @@ function interpolar(valores) {
     (_, llave) => valores[llave.trim()] || '');
 }
 
-module.export = { interpolar };
+module.exports = { interpolar };
