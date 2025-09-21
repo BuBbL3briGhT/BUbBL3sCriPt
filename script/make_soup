@@ -11,7 +11,8 @@ for i in "${!header_array[@]}"; do
   headers["${header_array[$i]}"]="$i"
 done
 
-declare -A symbol_map
+# declare -A symbol_map
+declare -A mapaDeSimbolos
 
 SOURCE=$1
 TARGET=$2
@@ -23,7 +24,7 @@ TARGET_ORDiNAL=${headers["$TARGET"]}
 while IFS=, read -r -a values_array; do
   key=${values_array["$SOURCE_ORDiNAL"]}
   value=${values_array["$TARGET_ORDiNAL"]}
-  symbol_map[$key]="$value"
+  mapaDeSimbolos[$key]="$value"
 done < <(tail -n +2 "$symbols_translation_file")
 
 
@@ -31,23 +32,12 @@ done < <(tail -n +2 "$symbols_translation_file")
 # echo "${symbol_map[invert]}"
 
 function buscar_y_reemplazar_símbolo() {
-  # echo "$1" ":" "$2" "->" "$3"
-
-    # archivo="$1"
-    # simbolo="$2"
-  # reemplazo="$3"
-
-  # echo "$archivo" ":" "$simbolo" "->" "$reemplazo"
 
   # Loop through the file line by line
   while IFS= read -r linea; do
-    # echo "$linea"
-    # Extrae las palabras de esta línea y
-    # colócalas en una matriz.
     # Extract the words for this line and put them
     # into an array
     palabras=($(grep -oP '\w+' <<< "$linea"))
-    # echo "${palabras[*]}"
 
     # # Extrae las palabras no literales de esta
     # # línea y colócalas en una matriz.
@@ -124,20 +114,6 @@ function buscar_y_reemplazar_símbolo() {
     # salida
 
 
-    # for i in "${!palabras[@]}"; do
-    #     nueva_linea+="${palabras[i]}"
-    #     # Append the corresponding non-word token
-    #     # if it exists
-    #     if [[ -n "${sin_palabras[i]}" ]]; then
-    #         nueva_linea+="${sin_palabras[i]}"
-    #     fi
-    # done
-
-    # Handle the trailing non-word token if it exists
-    # if [[ "${#words[@]}" -lt "${#non_words[@]}" ]]; then
-    #     reconstructed_line+="${non_words[-1]}"
-    # fi
-
     # echo "$reconstructed_line"
 
   # done < "$archivo"
@@ -145,7 +121,10 @@ function buscar_y_reemplazar_símbolo() {
 
 }
 
-cat "./src/en/abstract_list.js" | \
-  # head -n20 | \
-  buscar_y_reemplazar_símbolo
+# cat "./src/en/abstract_list.js" | \
+#   # head -n20 | \
+#   buscar_y_reemplazar_símbolo
+
+cat "$FiLE" | buscar_y_reemplazar_símbolo
+
 
