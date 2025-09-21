@@ -1,1 +1,13 @@
-echo "🍲"
+
+declare -A headers
+
+symbols_translation_file="symbols-en,es,fr.csv"
+
+IFS=, read -r -a header_array < $symbols_translation_file
+
+for i in "${!header_array[@]}"; do
+  echo "${header_array[$i]}" "$i"
+done
+
+
+
