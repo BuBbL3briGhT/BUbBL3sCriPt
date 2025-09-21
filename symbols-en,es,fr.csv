@@ -46,79 +46,92 @@ memorandum,memorándum,mémo
 Bubblescript,Bubblescript
 Evaluate,
 Evaluates,
-List,
-Lista,Lista
-My
-Need
-We
-__callStack
-__callstack
-__pilaDeLlamadas
-a
-an
-and
-binding
-both
-bubls
-callStackPushEval
-clean
-conj
-consola
-const                                               1 correct
-count
-current
-different
-e                                                   2 else
-eval                                                2 evalEach
-evalExpression
-evalParams
-events
-exports
-expression                                          7 expresíon
-first                                               2 fn
-for                                                 8 function
-funcíon                                             1 have
-here                                                2 if
-include                                             1 init
-is                                                  1 it
-let                                                 3 list
-make                                                3 mapEval
-module                                              1 next
-not
-on
-opts
-parameter
-params
-parse
-pass
-peek
-pilaDeLlamadasEmpujarEval
-pop
-prove
-push
-registro
-require
-result
-resultado
-return
-rootBinding
-sAmp
-script
-second
-split
-splits
-suite
-suspicion
-symbol
-test
-that
-the
-then
-this
-to
-up
-v
-version                                             1 versions
-vínculo                                             1 with
-ëval                                                2 ėval
-Ṣymbol
+List,Lista
+My,Mi
+Need,
+We,
+__callStack,
+__callstack,
+__pilaDeLlamadas,
+a,
+an,
+and,
+binding,
+both,
+bubls,
+callStackPushEval,
+clean,
+conj,
+consola,
+const,
+correct,
+count,
+current,
+different,
+e,
+else,
+eval,
+evalEach,
+evalExpression,
+evalParams,
+events,
+exports,
+expression,expresíon
+first,
+fn,
+for,
+#function,funcíon
+have,
+here,
+if,
+include,
+init,
+is,
+it,
+let,
+list,
+make,
+mapEval,
+module,
+next,
+not,
+on,
+opts,
+parameter,
+params,
+parse,
+pass,
+peek,
+pilaDeLlamadasEmpujarEval,
+pop,
+prove,
+push,
+registro,
+require,
+result,
+resultado,
+return,
+rootBinding,
+sAmp,
+script,
+second,
+split,
+splits,
+suite,
+suspicion,
+symbol,
+test,
+that,
+the,
+then,
+this,
+to,
+up,
+v,
+version,
+versions,
+vínculo,
+with,
+ëval,
+ėval,
+Ṣymbol,
