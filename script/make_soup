@@ -1,4 +1,6 @@
 
+# script/make_soup en es file
+
 declare -A headers
 
 symbols_translation_file="symbols-en,es,fr.csv"
@@ -6,9 +8,29 @@ symbols_translation_file="symbols-en,es,fr.csv"
 IFS=, read -r -a header_array < $symbols_translation_file
 
 for i in "${!header_array[@]}"; do
-  # echo "${header_array[$i]}" "$i"
   headers["${header_array[$i]}"]="$i"
 done
 
+declare -A symbol_map
 
+SOURCE=$1
+TARGET=$2
+FiLE=$3
 
+row_num=1
+tail -n +2 "$symbols_translation_file" | while IFS=, read -r -a values_array; do
+    # Declare an associative array for the current row
+    declare -A "row_${row_num}"
+
+    # Populate the row's associative array using header names as keys
+    for i in "${!values_array[@]}"; do
+        key="${header_array[$i]}"
+        value="${values_array[$i]}"
+        declare -n current_row="row_${row_num}" # Create nameref
+        current_row["$key"]="$value"
+    done
+
+    # Add the name of the current row's associative array to the data_rows array
+    data_rows+=("row_${row_num}")
+    ((row_num++))
+done
