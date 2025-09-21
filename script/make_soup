@@ -20,27 +20,12 @@ FiLE=$3
 SOURCE_ORDiNAL=${headers["$SOURCE"]}
 TARGET_ORDiNAL=${headers["$TARGET"]}
 
- # tail -n +2 "$symbols_translation_file" | while IFS=, read -r -a values_array; do
-#   key=${values_array["$SOURCE_ORDiNAL"]}
-#   value=${values_array["$TARGET_ORDiNAL"]}
-#   symbol_map[$key]="$value"
-#   # echo $key
-#   # echo $value
-#   echo "${symbol_map[$key]}"
-#   echo "symbol_map[$key]"
-#   echo "${symbol_map[is]}"
-# done
-
 while IFS=, read -r -a values_array; do
   key=${values_array["$SOURCE_ORDiNAL"]}
   value=${values_array["$TARGET_ORDiNAL"]}
   symbol_map[$key]="$value"
-  # echo $key
-  # echo $value
-
-  # echo "symbol_map[$key]"
-  # echo "${symbol_map[is]}"
 done < <(tail -n +2 "$symbols_translation_file")
 
 
-echo "${symbol_map[is]}"
+# echo "${symbol_map[is]}"
+echo "${symbol_map[invert]}"
