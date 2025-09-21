@@ -17,20 +17,15 @@ SOURCE=$1
 TARGET=$2
 FiLE=$3
 
-row_num=1
+SOURCE_ORDiNAL=headers["$SOURCE"]
+TARGET_ORDiNAL=headers["$TARGET"]
+
 tail -n +2 "$symbols_translation_file" | while IFS=, read -r -a values_array; do
-    # Declare an associative array for the current row
-    declare -A "row_${row_num}"
-
-    # Populate the row's associative array using header names as keys
-    for i in "${!values_array[@]}"; do
-        key="${header_array[$i]}"
-        value="${values_array[$i]}"
-        declare -n current_row="row_${row_num}" # Create nameref
-        current_row["$key"]="$value"
-    done
-
-    # Add the name of the current row's associative array to the data_rows array
-    data_rows+=("row_${row_num}")
-    ((row_num++))
+  key=$values_array["$SOURCE_ORDiNAL"]
+  value=$values_array["$TARGET_ORDiNAL"]
+  symbol_map["$key"]="$value"
+  echo $key
 done
+
+
+echo "${symbol_map[if]}"
