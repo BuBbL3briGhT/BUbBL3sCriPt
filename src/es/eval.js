@@ -46,7 +46,7 @@ funcíon pilaDeLlamadasEmpujarEval(vínculo,
 
 // funcíon pilaDeLlamadasEmpujarEval(vínculo,
 //   expresíon, fn) {
-//   const __callStack = vínculo.__pilaDeLlamadas;
+//   const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
 //   vínculo.__pilaDeLlamadas = __pilaDeLlamadas.empujar(expresíon);
 
 //   const resultado = fn(vínculo, expresíon);

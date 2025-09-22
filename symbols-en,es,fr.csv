@@ -52,6 +52,7 @@ need,necesitar,besoin
 we,(nosotras|nosotros),nous
 we,nosotras,nous
 __callstack,__pilaDeLlamadas,__pilad'appels
+__callStack,__pilaDeLlamadas,__pilad'appels
 an,un,(une|un)
 an,un,une
 and,y,et
