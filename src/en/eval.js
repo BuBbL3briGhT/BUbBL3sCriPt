@@ -1,9 +1,9 @@
 const List = require("./list");
-const Lista = require("./list");
+const List = require("./list");
 const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
-const consola = require("./consola");
+const console = require("./console");
 
 const sAmp = Ṣymbol.for("&");
 
@@ -21,27 +21,27 @@ function ėval(script, opts={}) {
 }
 
 // Evaluates an expression.
-function evalExpression(expresíon) {
-  if (expresíon.eval) {
-    const vínculo = this;
-    return pilaDeLlamadasEmpujarEval(vínculo,
-      expresíon, function (v,e) {
-          consola.registro(e);
-          consola.registro({ eval: e.eval });
+function evalExpression(expression) {
+  if (expression.eval) {
+    const binding = this;
+    return callStackPushEval(binding,
+      expression, function (v,e) {
+          console.log(e);
+          console.log({ eval: e.eval });
           return e.eval(v)
       });
-  } else return expresíon;
+  } else return expression;
 }
 
-function pilaDeLlamadasEmpujarEval(vínculo,
-  expresíon, funcíon) {
-  const __pilaDeLlamadas = vínculo.__pilaDeLlamadas || Lista.make();
-  vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
+function callStackPushEval(binding,
+  expression, funcíon) {
+  const __callstack = binding.__callstack || List.make();
+  binding.__callstack = __callstack.push(expression);
 
-  const resultado = funcíon(vínculo, expresíon);
+  const result = funcíon(binding, expression);
 
-  vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
-  return resultado;
+  binding.__callstack = __callstack;
+  return result;
 }
 
 // function callStackPushEval(binding,
@@ -59,7 +59,7 @@ function ëval(binding, expression) {
   return expression.evalEach(binding);
 }
 
-// Evaluates a parameter list.
+// Evaluates to parameter list.
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {
@@ -67,7 +67,7 @@ function evalParams(binding, params) {
     // pass with the current test suite. My
     // suspicion is that the second version is
     // correct, and the first version is not. Need
-    // to include a test to prove it, then clean
+    // to include to test to prove it, then clean
     // this up.
     // params = splits.first.mapEval(binding)
     //   .conj(splits.pop().peek().peek()

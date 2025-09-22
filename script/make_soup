@@ -25,7 +25,7 @@ while IFS=, read -r -a values_array; do
   key=${values_array["$SOURCE_ORDiNAL"]}
   value=${values_array["$TARGET_ORDiNAL"]}
   mapaDeSimbolos[$key]="$value"
-done < <(tail -n +2 "$symbols_translation_file")
+done < <(tail -n +2 "$symbols_translation_file" | grep -v "^#" )
 
 
 # echo "${symbol_map[is]}"

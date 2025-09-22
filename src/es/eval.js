@@ -1,87 +1,87 @@
-const List = require("./list");
-const Lista = require("./list");
-const Ṣymbol = require("./symbol");
-const { parse } = require("./parse");
-const events = require("./events");
-const consola = require("./consola");
+const Lista = requerir("./lista");
+const Lista = requerir("./lista");
+const Ṣímbolo = requerir("./símbolo");
+const { analizar } = requerir("./analizar");
+const eventos = requerir("./eventos");
+const consola = requerir("./consola");
 
-const sAmp = Ṣymbol.for("&");
+const sAmp = Ṣímbolo.para("&");
 
-let rootBinding;
+deja vinculaciónRaíz;
 
-events.on("init", function (bubls) {
-  rootBinding = bubls.rootBinding;
+eventos.en("iniciar", function (bubls) {
+  vinculaciónRaíz = bubls.vinculaciónRaíz;
 });
 
 
 // Evaluate Bubblescript
-function ėval(script, opts={}) {
-  return parse(script, opts).
-    evalEach(rootBinding);
+function ėval(guion, opciones={}) {
+  regresar analizar(guion, opciones).
+    evalúaCudaUno(vinculaciónRaíz);
 }
 
-// Evaluates an expression.
-function evalExpression(expresíon) {
-  if (expresíon.eval) {
-    const vínculo = this;
-    return pilaDeLlamadasEmpujarEval(vínculo,
+// Evaluates un expresíon.
+function evaluarExpresión(expresíon) {
+  si (expresíon.eval) {
+    const vínculo = esto;
+    regresar pilaDeLlamadasEmpujarEval(vínculo,
       expresíon, function (v,e) {
           consola.registro(e);
           consola.registro({ eval: e.eval });
-          return e.eval(v)
+          regresar e.eval(v)
       });
-  } else return expresíon;
+  } else regresar expresíon;
 }
 
 function pilaDeLlamadasEmpujarEval(vínculo,
   expresíon, funcíon) {
-  const __pilaDeLlamadas = vínculo.__pilaDeLlamadas || Lista.make();
-  vínculo.__pilaDeLlamadas = __pilaDeLlamadas.push(expresíon);
+  const __pilaDeLlamadas = vínculo.__pilaDeLlamadas || Lista.hacer();
+  vínculo.__pilaDeLlamadas = __pilaDeLlamadas.empujar(expresíon);
 
   const resultado = funcíon(vínculo, expresíon);
 
   vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
-  return resultado;
+  regresar resultado;
 }
 
-// function callStackPushEval(binding,
-//   expression, fn) {
-//   const __callStack = binding.__callstack;
-//   binding.__callstack = __callstack.push(expression);
+// function pilaDeLlamadasEmpujarEval(vínculo,
+//   expresíon, fn) {
+//   const __callStack = vínculo.__pilaDeLlamadas;
+//   vínculo.__pilaDeLlamadas = __pilaDeLlamadas.empujar(expresíon);
 
-//   const result = fn(binding, expression);
+//   const resultado = fn(vínculo, expresíon);
 
-//   binding.__callstack = __callstack;
-//   return result;
+//   vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
+//   regresar resultado;
 // }
 
-function ëval(binding, expression) {
-  return expression.evalEach(binding);
+function ëval(vínculo, expresíon) {
+  regresar expresíon.evalúaCudaUno(vínculo);
 }
 
-// Evaluates a parameter list.
-function evalParams(binding, params) {
-  const splits = params.split(sAmp);
-  if (splits.count() > 1) {
-    // We have to different versions here, both
-    // pass with the current test suite. My
-    // suspicion is that the second version is
-    // correct, and the first version is not. Need
-    // to include a test to prove it, then clean
-    // this up.
-    // params = splits.first.mapEval(binding)
-    //   .conj(splits.pop().peek().peek()
-    //         .eval(binding));
-    params =
-      // splits.pop().peek().peek().eval(binding)
-      splits.next.peek().eval(binding)
-        .conj(splits.first.mapEval(binding))
+// Evaluates a parámetro lista.
+function parámetrosDeEvaluación(vínculo, parámetros) {
+  const divisiones = parámetros.dividir(sAmp);
+  si (divisiones.contar() > 1) {
+    // We tener a diferente versiones aquí, ambas
+    // pasa con la actual prueba suite. My
+    // sospecha es eso la segunda versión es
+    // correcta, y la primera versión es no. Need
+    // a incluir a prueba a probar eso, entonces limpia
+    // esto arriba.
+    // parámetros = divisiones.primera.evaluaciónDelMapa(vínculo)
+    //   .unir(divisiones.revienta().espiar().espiar()
+    //         .eval(vínculo));
+    parámetros =
+      // divisiones.revienta().espiar().espiar().eval(vínculo)
+      divisiones.siguiente.espiar().eval(vínculo)
+        .unir(divisiones.primera.evaluaciónDelMapa(vínculo))
   } else {
-    params = params.mapEval(binding)
+    parámetros = parámetros.evaluaciónDelMapa(vínculo)
   }
-  return params;
+  regresar parámetros;
 }
 
-module.exports = { ėval, ëval, evalExpression,
-  evalParams };
+módulo.exportaciones = { ėval, ëval, evaluarExpresión,
+  parámetrosDeEvaluación };
 
