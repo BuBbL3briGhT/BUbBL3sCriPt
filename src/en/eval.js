@@ -44,17 +44,6 @@ function callStackPushEval(binding,
   return result;
 }
 
-// function callStackPushEval(binding,
-//   expression, fn) {
-//   const __callStack = binding.__callstack;
-//   binding.__callstack = __callstack.push(expression);
-
-//   const result = fn(binding, expression);
-
-//   binding.__callstack = __callstack;
-//   return result;
-// }
-
 function ëval(binding, expression) {
   return expression.evalEach(binding);
 }
@@ -63,17 +52,7 @@ function ëval(binding, expression) {
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {
-    // We have to different versions here, both
-    // pass with the current test suite. My
-    // suspicion is that the second version is
-    // correct, and the first version is not. Need
-    // to include to test to prove it, then clean
-    // this up.
-    // params = splits.first.mapEval(binding)
-    //   .conj(splits.pop().peek().peek()
-    //         .eval(binding));
     params =
-      // splits.pop().peek().peek().eval(binding)
       splits.next.peek().eval(binding)
         .conj(splits.first.mapEval(binding))
   } else {
