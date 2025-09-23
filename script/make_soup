@@ -3,7 +3,7 @@
 
 declare -A headers
 
-symbols_translation_file="symbols-en,es,fr.csv"
+symbols_translation_file="datos/simbolos.csv"
 
 IFS=, read -r -a header_array < $symbols_translation_file
 
