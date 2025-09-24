@@ -32,7 +32,8 @@ class NoMatchError extends ParsingError {
   }
 }
 
-const trazaPlantilla = "    en ${nombre} (${archivo}:${linea}:${columna})";
+// const trazaPlantilla = "    en ${nombre} (${archivo}:${linea}:${columna})";
+const trazaPlantilla = "    en ${name} (${file}:${line}:${column})";
 const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
 class BubbleScriptError extends Error {
@@ -42,8 +43,9 @@ class BubbleScriptError extends Error {
   }
 
   obtenerTrazaDeLaPila(vínculo) {
-    const pila = vínculo.__pila;
-    consola.registro({ pila });
+    // const pila = vínculo.__pila;
+    const pila = vínculo.__pilaDeLlamadas;
+    // consola.registro({ pila });
     const trazaDeLaPila = pila
       .map(interpolarTrazaPlantilla).join("\n");
     return trazaDeLaPila;
