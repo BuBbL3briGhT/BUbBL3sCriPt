@@ -119,8 +119,7 @@ class List extends AbstractList {
   }
 
   mapEval(binding) {
-    return this.map(evalExpression
-      .bind(null, binding));
+    return this.map(evalExpression.bind(binding));
   }
 
   // mapEval(binding) {

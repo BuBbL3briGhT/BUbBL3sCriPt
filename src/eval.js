@@ -47,21 +47,13 @@ function ëval(binding, expression) {
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {
-    // We have to different versions here, both
-    // pass with the current test suite. My
-    // suspicion is that the second version is
-    // correct, and the first version is not. Need
-    // to include a test to prove it, then clean
-    // this up.
-    // params = splits.first.mapEval(binding)
-    //   .conj(splits.pop().peek().peek()
-    //         .eval(binding));
     params =
       // splits.pop().peek().peek().eval(binding)
       splits.next.peek().eval(binding)
         .conj(splits.first.mapEval(binding))
   } else {
-    params = params.mapEval(binding)
+    // consola.registro({binding});
+    params = params.mapEval(binding);
   }
   return params;
 }
