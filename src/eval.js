@@ -29,7 +29,7 @@ function evalExpression(expresíon) {
     vínculo.__pilaDeLlamadas =
       __pilaDeLlamadas.push(expresíon);
 
-    // consola.registro(expresíon);
+    // consola.registro({expresíon});
     // consola.registro({ eval: expresíon.eval });
 
     const resultado = expresíon.eval(vínculo);

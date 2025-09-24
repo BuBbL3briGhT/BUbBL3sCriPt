@@ -45,7 +45,7 @@ class BubbleScriptError extends Error {
   obtenerTrazaDeLaPila(vínculo) {
     // const pila = vínculo.__pila;
     const pila = vínculo.__pilaDeLlamadas;
-    // consola.registro({ pila });
+    consola.registro({ pila: pila.toString() });
     const trazaDeLaPila = pila
       .map(interpolarTrazaPlantilla).join("\n");
     return trazaDeLaPila;
