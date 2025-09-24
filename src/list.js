@@ -99,8 +99,9 @@ class List extends AbstractList {
   }
 
   eval(vínculo) {
+    consola.registro({ vq: JSON.stringify(vínculo.__pilaDeLlamadas) });
     const fn = this.head.eval(vínculo);
-    // consola.registro({vínculo});
+
     if (fn == undefined) {
       // throw new Error();
       const error = ErrorDeFuncíonIndefinida;
@@ -110,11 +111,17 @@ class List extends AbstractList {
     const __pilaDeLlamadas =
       vínculo.__pilaDeLlamadas || List.make();
     const { file, line, column } = this;
+
     vínculo.__pilaDeLlamadas =
-      __pilaDeLlamadas.push({fn: this.head,
+      __pilaDeLlamadas.push({fn: this.head.toString(),
         file, line, column});
 
+    consola.registro({ vc: vínculo.__pilaDeLlamadas.count() });
+    consola.registro({ vc: JSON.stringify(vínculo.__pilaDeLlamadas) });
+
     const resultado = Fn.call(vínculo, fn, this.tail);
+
+    consola.registro(1);
 
     vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
     return resultado;

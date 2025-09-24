@@ -41,9 +41,12 @@ class Fn {
   }
 
   call(vínculo, params) {
+    consola.registro({fncall: vínculo.__pilaDeLlamadas});
     const fnBinding = createBinding(this.binding,
       this.params,
       params.mapEval(vínculo));
+
+    consola.registro({fncall: fnBinding.__pilaDeLlamadas});
 
     return this.body.evalEach(fnBinding);
     // try {
