@@ -238,6 +238,12 @@ class AbstractList {
       make(this.peek(), this.pop());
   }
 
+
+  join(delimiter="") {
+    return this.reduce((memo,i) =>
+      memo + delimiter + i);
+  }
+
   // include (value) {
   //   return this.find(value).?peek();
   // }

@@ -1,4 +1,5 @@
 const { interpolar } = require("./strings");
+const consola = require("./consola");
 
 class TokenNoMatchError extends Error {
   name = "NoMatchError";
@@ -42,6 +43,7 @@ class BubbleScriptError extends Error {
 
   obtenerTrazaDeLaPila(vínculo) {
     const pila = vínculo.__pila;
+    consola.registro({ pila });
     const trazaDeLaPila = pila
       .map(interpolarTrazaPlantilla).join("\n");
     return trazaDeLaPila;
