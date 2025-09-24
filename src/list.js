@@ -99,7 +99,10 @@ class List extends AbstractList {
   }
 
   eval(vínculo) {
-    const fn = this.head.eval(vínculo)
+    // TODO: PilaDeLlamadas logic probably needs to
+    // be moved to here, which should fix erronious
+    // logic currently in place.
+    const fn = this.head.eval(vínculo);
     if (fn == undefined) {
       // throw new Error();
       const error = ErrorDeFuncíonIndefinida;
