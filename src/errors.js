@@ -33,7 +33,7 @@ class NoMatchError extends ParsingError {
 }
 
 // const trazaPlantilla = "    en ${nombre} (${archivo}:${linea}:${columna})";
-const trazaPlantilla = "    en ${name} (${file}:${line}:${column})";
+const trazaPlantilla = "    en ${fn} (${file}:${line}:${column})";
 const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
 class BubbleScriptError extends Error {

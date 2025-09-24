@@ -99,16 +99,25 @@ class List extends AbstractList {
   }
 
   eval(vínculo) {
-    // TODO: PilaDeLlamadas logic probably needs to
-    // be moved to here, which should fix erronious
-    // logic currently in place.
     const fn = this.head.eval(vínculo);
+    // consola.registro({vínculo});
     if (fn == undefined) {
       // throw new Error();
       const error = ErrorDeFuncíonIndefinida;
       throw new error(vínculo, this.head);
     }
-    return Fn.call(vínculo, fn, this.tail);
+
+    const __pilaDeLlamadas =
+      vínculo.__pilaDeLlamadas || List.make();
+    const { file, line, column } = this;
+    vínculo.__pilaDeLlamadas =
+      __pilaDeLlamadas.push({fn: this.head,
+        file, line, column});
+
+    const resultado = Fn.call(vínculo, fn, this.tail);
+
+    vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
+    return resultado;
   }
 
   // evalEach(binding) {

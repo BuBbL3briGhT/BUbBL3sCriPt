@@ -24,23 +24,25 @@ function ėval(script, opts={}) {
 function evalExpression(expresíon) {
   if (expresíon.eval) {
     const vínculo = this;
-    const __pilaDeLlamadas =
-      vínculo.__pilaDeLlamadas || Lista.make();
-    // consola.registro({ __pilaDeLlamadas: __pilaDeLlamadas.toString() });
-    vínculo.__pilaDeLlamadas =
-      __pilaDeLlamadas.push(expresíon);
-    consola.registro({ pilaDeLlamadas:
-      vínculo.__pilaDeLlamadas.toString() });
+    // const __pilaDeLlamadas =
+    //   vínculo.__pilaDeLlamadas || Lista.make();
+    // // consola.registro({ __pilaDeLlamadas: __pilaDeLlamadas.toString() });
+    // vínculo.__pilaDeLlamadas =
+    //   __pilaDeLlamadas.push(expresíon);
+    // consola.registro({ pilaDeLlamadas:
+    //   vínculo.__pilaDeLlamadas.toString() });
 
-    // consola.registro({expresíon});
-    // consola.registro({ eval: expresíon.eval });
+    // // consola.registro({expresíon});
+    // // consola.registro({ eval: expresíon.eval });
 
-    console.trace();
-    const resultado = expresíon.eval(vínculo);
-    consola.registro({resultado});
+    // console.trace();
+    // const resultado = expresíon.eval(vínculo);
+    // consola.registro({resultado});
 
-    vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
-    return resultado;
+    // vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
+    // return resultado;
+
+    return expresíon.eval(vínculo);
   } else return expresíon;
 }
 

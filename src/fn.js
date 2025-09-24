@@ -41,18 +41,23 @@ class Fn {
   }
 
   call(vínculo, params) {
+    const fnBinding = createBinding(this.binding,
+      this.params,
+      params.mapEval(vínculo));
+
+    return this.body.evalEach(fnBinding);
     // try {
-      const __pila = vínculo.__pila || List.make();
-      vínculo.__pila = __pila.push(this);
+      // const __pila = vínculo.__pila || List.make();
+      // vínculo.__pila = __pila.push(this);
 
-      const fnBinding = createBinding(this.binding,
-        this.params,
-        params.mapEval(vínculo));
+      // const fnBinding = createBinding(this.binding,
+      //   this.params,
+      //   params.mapEval(vínculo));
 
-      const resultado = this.body.evalEach(fnBinding);
+      // const resultado = this.body.evalEach(fnBinding);
 
-      vínculo.__pila = __pila;
-      return resultado;
+      // vínculo.__pila = __pila;
+      // return resultado;
     // } catch (error) {
     //   error.stack += this.trace;
     //   throw error;
