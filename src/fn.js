@@ -41,7 +41,7 @@ class Fn {
   }
 
   call(vínculo, params) {
-    try {
+    // try {
       const __pila = vínculo.__pila || List.make();
       vínculo.__pila = __pila.push(this);
 
@@ -53,17 +53,17 @@ class Fn {
 
       vínculo.__pila = __pila;
       return resultado;
-    } catch (error) {
-      error.stack += this.trace;
-      throw error;
-    }
+    // } catch (error) {
+    //   error.stack += this.trace;
+    //   throw error;
+    // }
   }
 
-  get trace () {
-    const { name, file, line, column } = this;
-    // return ` ${name} at ${file}:${line}:${column}\n`;
-    return `    at ${name} (${file}:${line}:${column})\n`;
-  }
+  // get trace () {
+  //   const { name, file, line, column } = this;
+  //   // return ` ${name} at ${file}:${line}:${column}\n`;
+  //   return `    at ${name} (${file}:${line}:${column})\n`;
+  // }
 
   toString() {
     return this.body.push(this.params)
