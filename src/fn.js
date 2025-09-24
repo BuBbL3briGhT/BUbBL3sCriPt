@@ -16,11 +16,11 @@
         const consola = require("./consola");
          const events = require("./events");
 
-
-  let evalParams;
+  let evalParams, List;
 
   events.on("init", function (bubls) {
     evalParams = require("./eval").evalParams;
+    List = bubls.List;
   });
 
 
@@ -42,7 +42,7 @@ class Fn {
 
   call(vínculo, params) {
     try {
-      const __pila = vínculo.__pila;
+      const __pila = vínculo.__pila || List.make();
       vínculo.__pila = __pila.push(this);
 
       const fnBinding = createBinding(this.binding,

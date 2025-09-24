@@ -101,7 +101,7 @@ class List extends AbstractList {
   eval(vínculo) {
     const fn = this.head.eval(vínculo)
     if (fn == undefined) {
-      throw new Error();
+      // throw new Error();
       const error = ErrorDeFuncíonIndefinida;
       throw new error(vínculo, this.head);
     }
@@ -110,7 +110,7 @@ class List extends AbstractList {
 
   // evalEach(binding) {
   //   return this.tryEach(evalExpression
-  //     .bind(null, binding), catchExpandMacro);
+  //     .bind(binding), catchExpandMacro);
   // }
 
   evalEach(vínculo) {
