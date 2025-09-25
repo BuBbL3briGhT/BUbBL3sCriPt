@@ -3,4 +3,29 @@
 Right now chasing down issues with getting a decent
 stack traces printing for errors.
 
+This isn't so much a big, s it is a fair implementation that we are just having issues worth how it needs to be designed. i think we tried to take a short cut but speeding the attack gave into the binding and that seems to be the primary source of the confusion. it sends the best place to record the stack calls is at the eval funcrion for list., how've there was an strange thing happening which now seems to be resolve to the fact that the function has is own binding object, so when we invoke a function it has a different binding then the binding object which is passed to the call function of the fnobject. That binding is only used to resolve the parameters, so throw is an issue if we are trying to use the binding to collect the stack layer. Also we werw having an ussue even earlier which was resolved to the fact we were trying to collect the stack in the evalExpression method, but the is a call inside of the list eval to resolve the head, which uses the binding so that xreated an extena anomolus stack call.
+
+Anyway, need to give it so thouggt as to the correct way to track the stack. i was trying to avoid passing it aroynd as an extra parameter but thinking about it that is probably the inly cprrect way, other than have an evaloator object or something, which would probably serve basically the same purpose, or having a global value, but that would almost certianly limit execuation to a si gle treaf context, no potential for parralelusn anything with out redesign the implementation of the language.
+
+i think at this point there is enough evidenece to confim we need to pass the stack as an extra parameter, suffice voodoo black magic to some how tuck it away in another cpntext which almost certian to bring design trade offs and and the potential for bugs for no good reason, simply obsxuraty and needlessly handycaping the code which should be exposed to it if it is a concern. it's true that the stack is implied, as the calls for the functions are reflected already in the program memory srructure, only we can't get access to it without popping it, this isfair for proformace, however that isnt an impRative, perhaps with some reflection feature in js, there could be away of achoeving it, or someother work around, i think for now, the most flexable appraoch will bw keeping a stack parameter explict that we pass arpund where it is needed, and the can be removed if it uzrfulness ever no longer needed, or interms of an optimized execution or something, i think simply it is where we need to start and to worl from.
+
+Apologizes that a lot if these commits have simply
+been commentless woeking commits, bit just been
+working thrpugh this and we some different
+distractions, ans now the code has sorta divereged
+between multi vetbal languages, not neccesarily,
+neccesary, but anyway, just grinding on this to try
+to vet a suffecent support and direction for these la
+gague feature which we should have, as otherqise
+there is not a lot of claroty in how bubblescript is
+expected to operate. it mostly for convienxe, but i
+think it is expected and neccesary for the language
+practicality. Current focused primary on errors
+resulting calling an undefined fun tion, umdpubtedly
+there are error types which we will need to add
+support for, but starting with one, and going from
+there will give us the best understanding of what we
+are truly dealing with so that we can arrove
+hopefully at the best solution.
+
 
