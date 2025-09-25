@@ -87,7 +87,7 @@ class AbstractList {
   select(...properties) {
     return this.map(o => properties.reduce(
       (memo, key) => {
-        memo[key] = this.peek()[key];
+        memo[key] = o[key];
         return memo;
       }, {}));
   }
