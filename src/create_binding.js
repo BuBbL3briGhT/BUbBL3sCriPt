@@ -65,7 +65,9 @@
 // Creates a binding object for a function or
 // macro.
 function createBinding(proto, keys, values) {
-  let binding = Object.create(proto);
+  consola.registro({createBindingiProto: proto.__pilaDeLlamadas});
+  const binding = Object.create(proto);
+  consola.registro({createBinding: binding.__pilaDeLlamadas});
   applyArguments(binding, keys, values);
   return binding;
 }
