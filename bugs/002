@@ -28,4 +28,44 @@ there will give us the best understanding of what we
 are truly dealing with so that we can arrove
 hopefully at the best solution.
 
+---
 
+After some thought,  im pretty sure the simplest way
+to handel it is probably entirley from the List#eval
+method, i think i may be able to be entirely handel
+there in the exception handel with a catch statement,
+and just being mind full to offset and collect the
+containing function name before printing the line.
+Really we are just summarizing the larger
+bubblescript stach trace kind of, with some
+annoatation from collected internal values, but not
+just summarizing, but brunging into focus and showing
+the relevent aspects of the stack trace for the
+client code.
+
+
+If we wanted to capture the stack trace it code be
+possible to some how take a memory shot of tge
+application, then unwind the stack with an exception,
+then return to the application saved point, but i
+wouldn't know if that is possible, or how to do that
+in js, however in theory it makes sense, just
+question is how to do it, and if the suppott is
+there, tracking the pila/stack provides the most
+flexibility, and is straight forward and simple
+enough, simplifies the code greatly compared with the
+faulty binding variable attempt, eitherway, it is an
+extra diaganostic aspect/concern which can be skipped
+for profarmance or purity reasons if we are to rely
+on catching up the stack to construct the trace only
+on errors, which is fine for the primary need, and
+like i said, can probably summed up soley in
+List#eval, although the logic would be spread out
+over each step up, and would need to work together to
+get the right output. That's the just of it. I can
+just do it, but i wanted to talk about just so the
+context of the goals and desires can be highlighted,
+as itmay providesome helpfuldesign insight that might
+otherwise get over looked if we are just work in or
+translating directly into code without any extra
+treatment or discussion.
