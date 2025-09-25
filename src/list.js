@@ -139,20 +139,20 @@ class List extends AbstractList {
       // vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
       // return resultado;
     } catch (error) {
-      // switch (error.constructor){
-      //   case ErrorDeFuncíonIndefinida:
-      //     if (error.__memo) {
-      //       const memo = error.__memo;
-      //       error.stack += "\n" + interpolarTrazaPlantilla({
-      //         fn: this.head,
-      //         file: memo.file,
-      //         line: memo.line,
-      //         column: memo.column
-      //       });
-      //     }
-      //     const { file, line, column } = this;
-      //     error.__memo = { file, line, column }
-      // }
+      switch (error.constructor){
+        case ErrorDeFuncíonIndefinida:
+          if (error.__memo) {
+            const memo = error.__memo;
+            error.stack += "\n" + interpolarTrazaPlantilla({
+              fn: this.head,
+              file: memo.file,
+              line: memo.line,
+              column: memo.column
+            });
+          }
+          const { file, line, column } = this;
+          error.__memo = { file, line, column }
+      }
       throw error;
     }
   }
