@@ -1,6 +1,6 @@
 {
   "name": "bubblescript",
-  "version": "0.0.16",
+  "version": "0.1.6",
   "scripts": {
     "test": "mocha ./test/*.js ./test/**/*.js"
   },
