@@ -48,8 +48,7 @@ function ėval(script, opts={}, binding=rootBinding) {
 // Evaluates an expression.
 function evalExpression(expresíon, pila) {
   if (expresíon.eval) {
-    const vínculo = this;
-    return expresíon.eval(vínculo, pila);
+    return expresíon.eval(this, pila);
   } else return expresíon;
 }
 
