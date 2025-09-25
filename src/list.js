@@ -5,12 +5,16 @@ const Fn = require("./fn");
 const consola = require("./consola");
 const { BubbleScriptError, ErrorDeFuncíonIndefinida }
   = require("./errors");
+const { interpolar } = require("./strings");
 
 let emptyList, MacroExpanded;
 
 events.on("init", function (bubls) {
   MacroExpanded = require("./macro").MacroExpanded;
 });
+
+const trazaPlantilla = "    en ${fn} (${file}:${line}:${column})";
+const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
 // `List` extends `AbstractList` and is
 // the primary object in Bubblescript and
@@ -103,10 +107,19 @@ class List extends AbstractList {
       // consola.registro({ vq: JSON.stringify(vínculo.__pilaDeLlamadas) });
       const fn = this.head.eval(vínculo);
 
+      // if (fn == undefined) {
+      //   // throw new Error();
+      //   const error = ErrorDeFuncíonIndefinida;
+      //   throw  new error(vínculo, this.head, pila);
+      // }
       if (fn == undefined) {
         // throw new Error();
-        const error = ErrorDeFuncíonIndefinida;
-        throw new error(vínculo, this.head, pila);
+        const _Error = ErrorDeFuncíonIndefinida;
+        const error = new _Error(vínculo, this.head, pila);
+        const { file, line, column } = this;
+        // error.__memo = { fn: this.head, file, line, column }
+        error.__memo = { file, line, column };
+        throw error;
       }
 
       // const __pilaDeLlamadas =
@@ -132,8 +145,15 @@ class List extends AbstractList {
     } catch (error) {
       switch (error.constructor){
         case ErrorDeFuncíonIndefinida:
-          error.
-          error.stack += this.trace;
+          const memo = error.__memo;
+          error.stack += "\n" + interpolarTrazaPlantilla({
+            fn: this.head,
+            file: memo.file,
+            line: memo.line,
+            column: memo.column
+          });
+          const { file, line, column } = this;
+          error.__memo = { file, line, column }
           throw error;
       }
     }
