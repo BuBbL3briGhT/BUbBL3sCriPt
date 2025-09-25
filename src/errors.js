@@ -44,10 +44,19 @@ class BubbleScriptError extends Error {
 
   obtenerTrazaDeLaPila(pila) {
     // consola.registro({ pila: pila.toString() });
-    consola.registro(pila.select("fn"));
-    consola.registro(pila.select("file", "line", "column"));
-    const trazaDeLaPila = pila
-      .map(interpolarTrazaPlantilla).join("\n");
+    const fns = pila.select("fn")
+    const codepoints = pila.select("file", "line", "column")
+
+    const trazaDeLaPila =
+      codepoints.zip(fns.pop()).partition(2)
+        .map(([point,fn]) => { return {
+          fn: fn?.fn, file: point.file,
+          line: point.line, column: point.column }})
+        .map(interpolarTrazaPlantilla).join("\n");
+
+    // const trazaDeLaPila = pila
+    //   .map(interpolarTrazaPlantilla).join("\n");
+
     return trazaDeLaPila;
   }
 }
