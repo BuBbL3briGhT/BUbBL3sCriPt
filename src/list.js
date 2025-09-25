@@ -113,10 +113,9 @@ class List extends AbstractList {
       //   throw  new error(vínculo, this.head, pila);
       // }
       if (fn == undefined) {
-        throw new Error();
-        const _Error = ErrorDeFuncíonIndefinida;
-        const error = new _Error(vínculo, this.head, pila);
-        throw error;
+        // throw new Error();
+        const error = ErrorDeFuncíonIndefinida;
+        throw new error(vínculo, this.head, pila);
       }
 
       // const __pilaDeLlamadas =
