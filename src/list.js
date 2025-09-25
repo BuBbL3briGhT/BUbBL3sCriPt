@@ -122,12 +122,12 @@ class List extends AbstractList {
         case ErrorDeFuncíonIndefinida:
           if (error.__memo) {
             const memo = error.__memo;
-            error.stack += "\n" + interpolarTrazaPlantilla({
+            error.stack += interpolarTrazaPlantilla({
               fn: this.head,
               file: memo.file,
               line: memo.line,
               column: memo.column
-            });
+            }) + "\n";
           }
           const { file, line, column } = this;
           error.__memo = { file, line, column }

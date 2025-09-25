@@ -34,7 +34,7 @@ function ėval(script, opts={}, binding=rootBinding) {
       case ErrorDeFuncíonIndefinida:
         if (error.__memo) {
           const memo = error.__memo;
-          error.stack += "\n" + interpolarTrazaPlantilla({
+          error.stack += interpolarTrazaPlantilla({
             file: memo.file,
             line: memo.line,
             column: memo.column

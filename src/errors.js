@@ -39,7 +39,8 @@ const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 class BubbleScriptError extends Error {
   constructor(vínculo, mensaje, pila) {
     super(mensaje);
-    this.stack = this.obtenerTrazaDeLaPila(pila);
+    // this.stack = this.obtenerTrazaDeLaPila(pila);
+    this.stack = "";
   }
 
   obtenerTrazaDeLaPila(pila) {
