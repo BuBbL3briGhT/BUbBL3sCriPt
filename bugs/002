@@ -145,3 +145,45 @@ that, should be straight forward, there's other
 issue, but im going to stop explaining and justgo
 straight to code as i think ee have info information
 for the general purpose.
+
+---
+
+That worked out well. Was able to get ride of the first line from the try catch collection simply by not
+saving the memo up front, and waiting until the catch block, and using a conditional therw., output now looks like this.
+
+bubblescript 🍀 bin/bubls miaplicación.🫧
+Hola
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+{ pila: '([object Object] [object Object])' }
+Error: La funcíon "no.no" no está definida.
+    en 😊 (miaplicación.🫧:12:4)
+    en 😄 (miaplicación.🫧:17:1)
+    en 😊 (miaplicación.🫧:15:3)
+    en 😄 (miaplicación.🫧:12:4)
+
+Now the lines from the try/catch collect look good
+(the second group) look good, because the have the
+right containing function association, and we are not
+missing the first line, which id the line of the
+actual error, as we are currently in the pila param
+version, however, we are misding the last line, which
+should be simple to get, but this is because we have
+exhausted the List#eval calls, wejust need another
+handeler further up.
+
+I think talking about the problem and solution aling
+with the code like this is helpful, because it helps
+identify what is known and unknown and helps clearify
+itent. A lot of tese details get lost when working in
+the straight code, leading the project to kind of
+lose its identity and then just die, or become a
+dumping ground for horrible things if there is
+so.eother reason that the project must continue.
+Seems we can pitter pat, leapfrong, add some code
+make some notes. This is what commit messages are
+for, but also, doing it this way keeps it in the code
+base, either way, i din think it is as useful with
+out the commit log, whereever is fine. 🎲
