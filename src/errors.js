@@ -52,7 +52,8 @@ class BubbleScriptError extends Error {
         .map(([point,fn]) => { return {
           fn: fn?.fn, file: point.file,
           line: point.line, column: point.column }})
-        .map(interpolarTrazaPlantilla).join("\n");
+        .map(interpolarTrazaPlantilla).join("\n")
+        .replace(/en  \(/g, 'en (');
 
     // const trazaDeLaPila = pila
     //   .map(interpolarTrazaPlantilla).join("\n");
