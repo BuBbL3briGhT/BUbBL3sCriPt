@@ -43,7 +43,9 @@ class BubbleScriptError extends Error {
   }
 
   obtenerTrazaDeLaPila(pila) {
-    consola.registro({ pila: pila.toString() });
+    // consola.registro({ pila: pila.toString() });
+    consola.registro(pila.select("fn"));
+    consola.registro(pila.select("file", "line", "column"));
     const trazaDeLaPila = pila
       .map(interpolarTrazaPlantilla).join("\n");
     return trazaDeLaPila;

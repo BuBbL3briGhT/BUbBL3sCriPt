@@ -84,6 +84,14 @@ class AbstractList {
     return this.invert().pop().invert();
   }
 
+  select(...properties) {
+    return this.map(o => properties.reduce(
+      (memo, key) => {
+        memo[key] = this.peek()[key];
+        return memo;
+      }, {}));
+  }
+
   invert() {
     if (this.isEmpty)
       return this;
