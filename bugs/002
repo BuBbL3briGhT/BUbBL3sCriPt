@@ -87,4 +87,33 @@ Error: La funcíon "no.no" no está definida.
     en 😄 (miaplicación.🫧:17:1)
 
 
-Isn't showing the line number of the error, and as i alluded to earlier, the en function are off, this is how the i formation is collected, but for display, we need to offset that the funxtion we are in, which is the one that was called is with the line from the function, npt the line it was called on. I think that is consistant with the Node stack trace, and i think makes the most since, no matter what, the way it is presented would at least need to change, because it is saying the the call to the function in in thefunctuon right now, amd that in not correct, however this is an incedental detail because this is just raw outputfrom iteration, and we've been fovusing on other design details, but just making tge note here for claroty of ultimate intentions.
+Isn't showing the line number of the error, and as i
+alluded to earlier, the en function are off, this is
+how the i formation is collected, but for display, we
+need to offset that the funxtion we are in, which is
+the one that was called is with the line from the
+function, npt the line it was called on. I think that
+is consistant with the Node stack trace, and i think
+makes the most since, no matter what, the way it is
+presented would at least need to change, because it
+is saying the the call to the function in in
+thefunctuon right now, amd that in not correct,
+however this is an incedental detail because this is
+just raw outputfrom iteration, and we've been
+fovusing on other design details, but just making tge
+note here for claroty of ultimate intentions.
+
+---
+
+As hopefully a final note, we started collecting the
+stack from within the Fn#call method, which was a
+fine place to start from as it was a guess, still
+guessing, but as mentioned, it seems List#eval is the
+right place to do this from, and is currently where
+pila is incepting from. Think it through,Fn#call
+could potentaily work, but we were running into
+issue, so it might not, i think List#eval is the
+right place, well see. Also tracing pila as a
+paramter was useful, just to see what all yhr
+methods/function which are involved with the
+evaluation call chain.
