@@ -19,7 +19,6 @@ events.on("init", function (bubls) {
   rootBinding = bubls.rootBinding;
 });
 
-
 // // Evaluate Bubblescript
 // function ėval(script, opts={}) {
 //   return parse(script, opts).
@@ -50,24 +49,6 @@ function ėval(script, opts={}, binding=rootBinding) {
 function evalExpression(expresíon, pila) {
   if (expresíon.eval) {
     const vínculo = this;
-    // const __pilaDeLlamadas =
-    //   vínculo.__pilaDeLlamadas || Lista.make();
-    // // consola.registro({ __pilaDeLlamadas: __pilaDeLlamadas.toString() });
-    // vínculo.__pilaDeLlamadas =
-    //   __pilaDeLlamadas.push(expresíon);
-    // consola.registro({ pilaDeLlamadas:
-    //   vínculo.__pilaDeLlamadas.toString() });
-
-    // // consola.registro({expresíon});
-    // // consola.registro({ eval: expresíon.eval });
-
-    // console.trace();
-    // const resultado = expresíon.eval(vínculo);
-    // consola.registro({resultado});
-
-    // vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
-    // return resultado;
-
     return expresíon.eval(vínculo, pila);
   } else return expresíon;
 }
