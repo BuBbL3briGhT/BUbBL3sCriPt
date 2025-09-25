@@ -250,3 +250,37 @@ I've left a lot of code lying around in comment
 simply for easy access when in development, to be
 cleaned up/deleted as neccesary. Now to focus on the
 patameter version.
+
+---
+
+Did some clean up, just deleting the cruft.
+
+Also move the stack push to the top of List#eval, now
+the ouputs are almost a match. Just need to ofset the
+functions with the call, also give somethought to why
+this is so, because maybe there is a way to get it
+where the would match, my feeling is where we
+orginally were in Fn#call, but tgat invokes evalEach,
+and then we are back in Lisr#eval, any way, we run
+into otger issues there. The functions do have a
+named stored with them, we are referencing called
+name, which might not matcg the saved name, any way,
+this is probably better, just noting. We ought to be
+able to pull off the data manipulation easy enough
+anyway, so we will just have head on through see what
+we find.
+
+bubblescript 🍀 bin/bubls miaplicación.🫧
+Hola
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+{ pila: '([object Object] [object Object] [object Object])' }
+Error: La funcíon "no.no" no está definida.
+    en no.no (miaplicación.🫧:15:3)
+    en 😊 (miaplicación.🫧:12:4)
+    en 😄 (miaplicación.🫧:17:1)
+    en 😊 (miaplicación.🫧:15:3)
+    en 😄 (miaplicación.🫧:12:4)
+    en (miaplicación.🫧:17:1)
