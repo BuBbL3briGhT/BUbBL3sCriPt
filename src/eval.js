@@ -4,6 +4,12 @@ const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
 const consola = require("./consola");
+const { ErrorDeFuncíonIndefinida }
+  = require("./errors");
+const { interpolar } = require("./strings");
+
+const trazaPlantilla = "    en (${file}:${line}:${column})";
+const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
 const sAmp = Ṣymbol.for("&");
 
@@ -22,7 +28,22 @@ events.on("init", function (bubls) {
 
 // // Evaluate Bubblescript
 function ėval(script, opts={}, binding=rootBinding) {
-  return parse(script, opts).evalEach(binding);
+  try {
+    return parse(script, opts).evalEach(binding);
+  } catch (error) {
+    switch (error.constructor){
+      case ErrorDeFuncíonIndefinida:
+        if (error.__memo) {
+          const memo = error.__memo;
+          error.stack += "\n" + interpolarTrazaPlantilla({
+            file: memo.file,
+            line: memo.line,
+            column: memo.column
+          });
+        }
+    }
+    throw error;
+  }
 }
 
 // Evaluates an expression.

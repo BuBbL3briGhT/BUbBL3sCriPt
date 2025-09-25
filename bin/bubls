@@ -34,8 +34,7 @@ if (path) {
       return;
     }
     try {
-      // parse(xoxo, { file: path }).evalEach(binding);
-      ėval(xoxo, { file: path }, binding)
+      ėval(xoxo, { file: path }, binding);
     } catch (error) {
       if (error instanceof BubbleScriptError) {
         consola.registro(error.name +
