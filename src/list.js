@@ -104,40 +104,19 @@ class List extends AbstractList {
 
   eval(vínculo, pila=List.make()) {
     try {
-      // consola.registro({ vq: JSON.stringify(vínculo.__pilaDeLlamadas) });
       const fn = this.head.eval(vínculo);
-
-      // if (fn == undefined) {
-      //   // throw new Error();
-      //   const error = ErrorDeFuncíonIndefinida;
-      //   throw  new error(vínculo, this.head, pila);
-      // }
       if (fn == undefined) {
-        // throw new Error();
         const Error = ErrorDeFuncíonIndefinida;
         throw new Error(vínculo, this.head, pila);
       }
 
-      // const __pilaDeLlamadas =
-      //   vínculo.__pilaDeLlamadas || List.make();
       const { file, line, column } = this;
 
-      // vínculo.__pilaDeLlamadas =
-      //   __pilaDeLlamadas.push({fn: this.head.toString(),
-      //     file, line, column});
-      // const _pila = pila;
       pila = pila.push({fn: this.head.toString(),
           file, line, column});
 
-      // consola.registro({ vc: vínculo.__pilaDeLlamadas.count() });
-      // consola.registro({ vc: JSON.stringify(vínculo.__pilaDeLlamadas) });
-
       return Fn.call(vínculo, fn, this.tail, pila);
 
-      // consola.registro(1);
-
-      // vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
-      // return resultado;
     } catch (error) {
       switch (error.constructor){
         case ErrorDeFuncíonIndefinida:
@@ -157,11 +136,6 @@ class List extends AbstractList {
     }
   }
 
-  // evalEach(binding) {
-  //   return this.tryEach(evalExpression
-  //     .bind(binding), catchExpandMacro);
-  // }
-
   evalEach(vínculo, pila) {
     return this.tryEach(evalExpression.bind(vínculo),
                         catchExpandMacro, pila);
@@ -170,11 +144,6 @@ class List extends AbstractList {
   mapEval(binding) {
     return this.map(evalExpression.bind(binding));
   }
-
-  // mapEval(binding) {
-  //   return this.mapWithCatch(evalExpression
-  //     .bind(null, binding), catchExpandMacro);
-  // }
 
 }
 
