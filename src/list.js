@@ -116,9 +116,6 @@ class List extends AbstractList {
         // throw new Error();
         const _Error = ErrorDeFuncíonIndefinida;
         const error = new _Error(vínculo, this.head, pila);
-        const { file, line, column } = this;
-        // error.__memo = { fn: this.head, file, line, column }
-        error.__memo = { file, line, column };
         throw error;
       }
 
@@ -145,13 +142,15 @@ class List extends AbstractList {
     } catch (error) {
       switch (error.constructor){
         case ErrorDeFuncíonIndefinida:
-          const memo = error.__memo;
-          error.stack += "\n" + interpolarTrazaPlantilla({
-            fn: this.head,
-            file: memo.file,
-            line: memo.line,
-            column: memo.column
-          });
+          if (error.__memo) {
+            const memo = error.__memo;
+            error.stack += "\n" + interpolarTrazaPlantilla({
+              fn: this.head,
+              file: memo.file,
+              line: memo.line,
+              column: memo.column
+            });
+          }
           const { file, line, column } = this;
           error.__memo = { file, line, column }
           throw error;
