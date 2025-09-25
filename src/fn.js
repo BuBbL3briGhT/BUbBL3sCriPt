@@ -41,34 +41,11 @@ class Fn {
   }
 
   call(vínculo, params, pila) {
-    // consola.registro({fncall: vínculo.__pilaDeLlamadas});
-
     const fnBinding = createBinding(this.binding,
       this.params,
       params.mapEval(vínculo));
 
-    // const praise = Object.create(vínculo);
-    // // consola.registro({vínculot: vínculo.__pilaDeLlamadas});
-    // consola.registro({praise: praise.__pilaDeLlamadas});
-    // consola.registro({fncallw2: fnBinding.__pilaDeLlamadas});
-
     return this.body.evalEach(fnBinding, pila);
-    // try {
-      // const __pila = vínculo.__pila || List.make();
-      // vínculo.__pila = __pila.push(this);
-
-      // const fnBinding = createBinding(this.binding,
-      //   this.params,
-      //   params.mapEval(vínculo));
-
-      // const resultado = this.body.evalEach(fnBinding);
-
-      // vínculo.__pila = __pila;
-      // return resultado;
-    // } catch (error) {
-    //   error.stack += this.trace;
-    //   throw error;
-    // }
   }
 
   // get trace () {
