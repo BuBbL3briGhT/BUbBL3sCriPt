@@ -104,16 +104,16 @@ class List extends AbstractList {
 
   eval(vínculo, pila=List.make()) {
     try {
+      const { file, line, column } = this;
+      pila = pila.push({fn: this.head.toString(),
+          file, line, column});
+
       const fn = this.head.eval(vínculo);
+
       if (fn == undefined) {
         const Error = ErrorDeFuncíonIndefinida;
         throw new Error(vínculo, this.head, pila);
       }
-
-      const { file, line, column } = this;
-
-      pila = pila.push({fn: this.head.toString(),
-          file, line, column});
 
       return Fn.call(vínculo, fn, this.tail, pila);
 
@@ -131,6 +131,7 @@ class List extends AbstractList {
           }
           const { file, line, column } = this;
           error.__memo = { file, line, column }
+          break;
       }
       throw error;
     }
