@@ -7,12 +7,12 @@
 
 (consola.registro "Hola")
 
-
 (🫧 (😄)
    (😊))
 
 🫧 (😊),
-  (no.no)
+  # (no.no.no)
+  (puts "hello")
 
 (😄)
 
