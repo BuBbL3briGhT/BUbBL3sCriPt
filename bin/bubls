@@ -7,6 +7,7 @@ const bubls = require('../src/bubls');
 const { rootBinding } = require('../src/root_binding');
 const { getReqůireFor } = require("../src/reqůire");
 const { parse } = require("../src/parse");
+const { ėval } = require("../src/eval");
 const { BubbleScriptError } = require("../src/errors");
 const consola = require("../src/consola");
 
@@ -33,7 +34,8 @@ if (path) {
       return;
     }
     try {
-      parse(xoxo, { file: path }).evalEach(binding);
+      // parse(xoxo, { file: path }).evalEach(binding);
+      ėval(xoxo, { file: path }, binding)
     } catch (error) {
       if (error instanceof BubbleScriptError) {
         consola.registro(error.name +

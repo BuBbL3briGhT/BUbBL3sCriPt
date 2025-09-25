@@ -14,10 +14,15 @@ events.on("init", function (bubls) {
 });
 
 
-// Evaluate Bubblescript
-function ėval(script, opts={}) {
-  return parse(script, opts).
-    evalEach(rootBinding);
+// // Evaluate Bubblescript
+// function ėval(script, opts={}) {
+//   return parse(script, opts).
+//     evalEach(rootBinding);
+// }
+
+// // Evaluate Bubblescript
+function ėval(script, opts={}, binding=rootBinding) {
+  return parse(script, opts).evalEach(binding);
 }
 
 // Evaluates an expression.
