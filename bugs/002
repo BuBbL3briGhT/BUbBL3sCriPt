@@ -227,3 +227,26 @@ Error
 Anyway, we might need to add something, we wouldn't
 want to the be a raw handeler at the very top,
 anyway, this is just fyi.
+
+
+---
+
+Ok, that hamdels the full trace catchure using try catch.
+
+bubblescript 🍀 bin/bubls miaplicación.🫧             Hola
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+{ pila: '([object Object] [object Object])' }
+Error: La funcíon "no.no" no está definida.
+    en 😊 (miaplicación.🫧:12:4)                          en 😄 (miaplicación.🫧:17:1)
+    en 😊 (miaplicación.🫧:15:3)
+    en 😄 (miaplicación.🫧:12:4)
+    en (miaplicación.🫧:17:1)
+
+
+I've left a lot of code lying around in comment
+simply for easy access when in development, to be
+cleaned up/deleted as neccesary. Now to focus on the
+patameter version.
