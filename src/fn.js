@@ -4,7 +4,7 @@
    *   File: src/fn.js                *
    *   Date: September, 7th 2025      *
    *   Library: Bubblescript          *
-   *   version: 0.0.🦤.🍌             *
+   *   version: 0.🦤.🍌.🥄            *
    *   Version: 0.1.6                 *
    *   Author(s): BaMbii              *
    *                                  *
