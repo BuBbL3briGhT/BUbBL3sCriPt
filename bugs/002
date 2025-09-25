@@ -117,3 +117,31 @@ right place, well see. Also tracing pila as a
 paramter was useful, just to see what all yhr
 methods/function which are involved with the
 evaluation call chain.
+
+---
+
+ok, now we got output that looks like this.
+
+bubblescript 🍀 bin/bubls miaplicación.🫧
+Hola
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+{ pila: '([object Object] [object Object])' }
+Error: La funcíon "no.no" no está definida.
+    en 😊 (miaplicación.🫧:12:4)
+    en 😄 (miaplicación.🫧:17:1)
+    en no.no (miaplicación.🫧:15:3)
+    en 😊 (miaplicación.🫧:15:3)
+    en 😄 (miaplicación.🫧:12:4)
+
+i've hacked in the try/cacth method while leaving in
+the pile/stack parameterores approach as well, so
+that is why there is duplcate ouyput. The line with
+en no.no is erroniois and shouldn't be printed, so we
+need a way to ndicate to skip that, i have an idea on
+that, should be straight forward, there's other
+issue, but im going to stop explaining and justgo
+straight to code as i think ee have info information
+for the general purpose.
