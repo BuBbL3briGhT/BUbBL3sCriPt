@@ -37,14 +37,14 @@ const trazaPlantilla = "    en ${fn} (${file}:${line}:${column})";
 const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
 class BubbleScriptError extends Error {
-  constructor(vínculo, mensaje) {
+  constructor(vínculo, mensaje, pila) {
     super(mensaje);
-    this.stack = this.obtenerTrazaDeLaPila(vínculo);
+    this.stack = this.obtenerTrazaDeLaPila(pila);
   }
 
-  obtenerTrazaDeLaPila(vínculo) {
+  obtenerTrazaDeLaPila(pila) {
     // const pila = vínculo.__pila;
-    const pila = vínculo.__pilaDeLlamadas;
+    // const pila = vínculo.__pilaDeLlamadas;
     consola.registro({ pila: pila.toString() });
     const trazaDeLaPila = pila
       .map(interpolarTrazaPlantilla).join("\n");
@@ -53,10 +53,10 @@ class BubbleScriptError extends Error {
 }
 
 class ErrorDeFuncíonIndefinida extends BubbleScriptError {
-   constructor(vínculo, funcíon) {
+   constructor(vínculo, funcíon, pila) {
      const mensaje = "La funcíon \"" + funcíon
                    + "\" no está definida.";
-     super(vínculo, mensaje);
+     super(vínculo, mensaje, pila);
    }
 }
 

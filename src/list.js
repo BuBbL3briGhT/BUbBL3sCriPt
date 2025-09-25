@@ -98,33 +98,36 @@ class List extends AbstractList {
       b.push(that.peek()));
   }
 
-  eval(vínculo) {
-    consola.registro({ vq: JSON.stringify(vínculo.__pilaDeLlamadas) });
+  eval(vínculo, pila=List.make()) {
+    // consola.registro({ vq: JSON.stringify(vínculo.__pilaDeLlamadas) });
     const fn = this.head.eval(vínculo);
 
     if (fn == undefined) {
       // throw new Error();
       const error = ErrorDeFuncíonIndefinida;
-      throw new error(vínculo, this.head);
+      throw new error(vínculo, this.head, pila);
     }
 
-    const __pilaDeLlamadas =
-      vínculo.__pilaDeLlamadas || List.make();
+    // const __pilaDeLlamadas =
+    //   vínculo.__pilaDeLlamadas || List.make();
     const { file, line, column } = this;
 
-    vínculo.__pilaDeLlamadas =
-      __pilaDeLlamadas.push({fn: this.head.toString(),
+    // vínculo.__pilaDeLlamadas =
+    //   __pilaDeLlamadas.push({fn: this.head.toString(),
+    //     file, line, column});
+    // const _pila = pila;
+    pila = pila.push({fn: this.head.toString(),
         file, line, column});
 
-    consola.registro({ vc: vínculo.__pilaDeLlamadas.count() });
-    consola.registro({ vc: JSON.stringify(vínculo.__pilaDeLlamadas) });
+    // consola.registro({ vc: vínculo.__pilaDeLlamadas.count() });
+    // consola.registro({ vc: JSON.stringify(vínculo.__pilaDeLlamadas) });
 
-    const resultado = Fn.call(vínculo, fn, this.tail);
+    return Fn.call(vínculo, fn, this.tail, pila);
 
-    consola.registro(1);
+    // consola.registro(1);
 
-    vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
-    return resultado;
+    // vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
+    // return resultado;
   }
 
   // evalEach(binding) {
@@ -132,9 +135,9 @@ class List extends AbstractList {
   //     .bind(binding), catchExpandMacro);
   // }
 
-  evalEach(vínculo) {
+  evalEach(vínculo, pila) {
     return this.tryEach(evalExpression.bind(vínculo),
-                        catchExpandMacro);
+                        catchExpandMacro, pila);
   }
 
   mapEval(binding) {

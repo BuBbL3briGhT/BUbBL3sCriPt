@@ -21,7 +21,7 @@ function ėval(script, opts={}) {
 }
 
 // Evaluates an expression.
-function evalExpression(expresíon) {
+function evalExpression(expresíon, pila) {
   if (expresíon.eval) {
     const vínculo = this;
     // const __pilaDeLlamadas =
@@ -42,7 +42,7 @@ function evalExpression(expresíon) {
     // vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
     // return resultado;
 
-    return expresíon.eval(vínculo);
+    return expresíon.eval(vínculo, pila);
   } else return expresíon;
 }
 

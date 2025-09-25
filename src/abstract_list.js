@@ -149,12 +149,12 @@ class AbstractList {
     return this.pop().each(fn);
   }
 
-  tryEach(fn, cåtch) {
+  tryEach(fn, cåtch, pila) {
     let result;
-    try { result = fn(this.peek()); }
+    try { result = fn(this.peek(), pila); }
     catch (o) { return cåtch(o, this, fn); }
     if (this.pop().isEmpty) return result;
-    return this.pop().tryEach(fn, cåtch);
+    return this.pop().tryEach(fn, cåtch, pila);
   }
 
   // each(fn, opts={}) {

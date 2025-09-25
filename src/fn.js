@@ -30,29 +30,29 @@ class Fn {
     Object.assign(this, opts);
   }
 
-  static call(binding, fn, params) {
+  static call(binding, fn, params, pila) {
     switch (fn.constructor) {
       case Function:
         params = evalParams(binding, params);
         return fn.call(binding, ...params);
     }
 
-    return fn.call(binding, params);
+    return fn.call(binding, params, pila);
   }
 
-  call(vínculo, params) {
-    consola.registro({fncall: vínculo.__pilaDeLlamadas});
+  call(vínculo, params, pila) {
+    // consola.registro({fncall: vínculo.__pilaDeLlamadas});
 
     const fnBinding = createBinding(this.binding,
       this.params,
       params.mapEval(vínculo));
 
-    const praise = Object.create(vínculo);
-    // consola.registro({vínculot: vínculo.__pilaDeLlamadas});
-    consola.registro({praise: praise.__pilaDeLlamadas});
-    consola.registro({fncallw2: fnBinding.__pilaDeLlamadas});
+    // const praise = Object.create(vínculo);
+    // // consola.registro({vínculot: vínculo.__pilaDeLlamadas});
+    // consola.registro({praise: praise.__pilaDeLlamadas});
+    // consola.registro({fncallw2: fnBinding.__pilaDeLlamadas});
 
-    return this.body.evalEach(fnBinding);
+    return this.body.evalEach(fnBinding, pila);
     // try {
       // const __pila = vínculo.__pila || List.make();
       // vínculo.__pila = __pila.push(this);
