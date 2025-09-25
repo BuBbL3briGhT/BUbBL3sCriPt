@@ -1,4 +1,8 @@
 September:
+  - Test for AbstractList#select
+  - More documentation
+  - Work on require and modules
+  - Code review with Jules
   - better stack trace by keeping a representation of
     the stack. Currently line and column point to
     definition of function, but the should point to
