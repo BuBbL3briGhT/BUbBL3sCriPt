@@ -187,3 +187,43 @@ make some notes. This is what commit messages are
 for, but also, doing it this way keeps it in the code
 base, either way, i din think it is as useful with
 out the commit log, whereever is fine. 🎲
+
+---
+
+Ok, changed the handeler just to get a look at the
+call stack, and see where we can plug in to get the
+last line.
+
+
+Bubblescript 🍀 bin/bubls miaplicación.🫧
+Hola
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+Error
+    at List.eval (/data/data/com.termux/files/home/bubblescript/src/list.js:116:15)
+    at Object.evalExpression (/data/data/com.termux/files/home/bubblescript/src/eval.js:45:22)
+    at List.tryEach (/data/data/com.termux/files/home/bubblescript/src/abstract_list.js:154:20)
+    at List.evalEach (/data/data/com.termux/files/home/bubblescript/src/list.js:167:17)
+    at Fn.call (/data/data/com.termux/files/home/bubblescript/src/fn.js:55:22)
+    at Fn.call (/data/data/com.termux/files/home/bubblescript/src/fn.js:40:15)
+    at List.eval (/data/data/com.termux/files/home/bubblescript/src/list.js:136:17)
+    at Object.evalExpression (/data/data/com.termux/files/home/bubblescript/src/eval.js:45:22)
+    at List.tryEach (/data/data/com.termux/files/home/bubblescript/src/abstract_list.js:154:20)
+    at List.evalEach (/data/data/com.termux/files/home/bubblescript/src/list.js:167:17)
+    at Fn.call (/data/data/com.termux/files/home/bubblescript/src/fn.js:55:22)
+    at Fn.call (/data/data/com.termux/files/home/bubblescript/src/fn.js:40:15)
+    at List.eval (/data/data/com.termux/files/home/bubblescript/src/list.js:136:17)
+    at Object.evalExpression (/data/data/com.termux/files/home/bubblescript/src/eval.js:45:22)
+    at LazyList.tryEach (/data/data/com.termux/files/home/bubblescript/src/abstract_list.js:154:20)
+    at LazyList.tryEach (/data/data/com.termux/files/home/bubblescript/src/abstract_list.js:157:23)
+    at LazyList.tryEach (/data/data/com.termux/files/home/bubblescript/src/abstract_list.js:157:23)
+    at LazyList.tryEach (/data/data/com.termux/files/home/bubblescript/src/abstract_list.js:157:23)
+    at LazyList.evalEach (/data/data/com.termux/files/home/bubblescript/src/list.js:167:17)
+    at /data/data/com.termux/files/home/bubblescript/bin/bubls:36:35
+    at FSReqCallback.readFileAfterClose [as oncomplete] (node:internal/fs/read/context:68:3)
+
+Anyway, we might need to add something, we wouldn't
+want to the be a raw handeler at the very top,
+anyway, this is just fyi.
