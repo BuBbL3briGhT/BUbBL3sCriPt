@@ -69,3 +69,22 @@ as itmay providesome helpfuldesign insight that might
 otherwise get over looked if we are just work in or
 translating directly into code without any extra
 treatment or discussion.
+
+
+---
+
+Also, just of quick note, the current stack trace, which looks like this:
+
+bubblescript 🍀 bin/bubls miaplicación.🫧
+Hola
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+{ createBindingiProto: undefined }
+{ createBinding: undefined }
+{ pila: '([object Object] [object Object])' }
+Error: La funcíon "no.no" no está definida.
+    en 😊 (miaplicación.🫧:12:4)
+    en 😄 (miaplicación.🫧:17:1)
+
+
+Isn't showing the line number of the error, and as i alluded to earlier, the en function are off, this is how the i formation is collected, but for display, we need to offset that the funxtion we are in, which is the one that was called is with the line from the function, npt the line it was called on. I think that is consistant with the Node stack trace, and i think makes the most since, no matter what, the way it is presented would at least need to change, because it is saying the the call to the function in in thefunctuon right now, amd that in not correct, however this is an incedental detail because this is just raw outputfrom iteration, and we've been fovusing on other design details, but just making tge note here for claroty of ultimate intentions.
