@@ -16,9 +16,13 @@
 
 (😄)
 
-(no)
+# (no)
 
-const no { no: (fn [] (consola.log "Hola Cola") }
+# const no { no: (fn [] (consola.log "Hola Cola")) }
+# const no (obj [:no (fn [] (consola.log "Hola Cola"))])
+#🫧 no (obj [:no (fn [] (consola.log "Hola Cola"))])
+#🫧 no (obj :no (fn [] (puts "Hola Cola")))
+🫧 no (obj "no" (fn [] (puts "Hola Cola")))
 
 (no.no)
 
