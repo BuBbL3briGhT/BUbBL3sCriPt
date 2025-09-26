@@ -33,8 +33,8 @@
 
 (🫧 (++ n) (+ n 1))
 
-/* puts ++ */
-/* puts (toString ++) */
+#/* puts ++ */
+#/* puts (toString ++) */
 
 puts (++ 5)
 
