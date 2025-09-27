@@ -10,6 +10,8 @@ files=$(git ls-tree --full-tree --name-only -r HEAD $durs)
 # Filter file list by orginal text
 files=$(echo "$files" | grep "$1")
 
+echo $files
+
 # # for file in "${files[@]}"; do
 # for file in $files; do
 #   echo "Renaming: $file"
