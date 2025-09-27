@@ -14,6 +14,7 @@
 # portion symbol, for example list ->
 # bubbleButt|bubble_butt. For this, it seems context
 # is required.
+#   Ok, as a quick solution for this i added a subrayer rename that adds a lead /, as occurs in the file names. This gets us closer, but it seems there are other idoscrancies in doing these project wide renames. Use this command with caution, it is really kind of an overkill solution, but it can be a very useful tool to have for refactoring and also for attempting to translate code, but seems there is still things to consider. Probably also factoring in some ai or machine learning would help make the command more resillient and robust, for now its a decent start, and works pretty quick so that's good.
 
 
 function camelizar() {
