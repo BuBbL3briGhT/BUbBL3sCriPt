@@ -1,7 +1,7 @@
 const ListaAbstractia = require("./lista_abstractia");
 const events = require("./events");
 const Ṣymbol = require("./symbol");
-const Fn = require("./fn");
+const Funk = require("./funk");
 const consola = require("./consola");
 const { BubbleScriptError, ErrorDeFuncíonIndefinida }
   = require("./errors");
@@ -13,7 +13,7 @@ events.on("init", function (bubls) {
   MacroExpanded = require("./macro").MacroExpanded;
 });
 
-const trazaPlantilla = "    en ${fn} (${file}:${line}:${column})";
+const trazaPlantilla = "    en ${funk} (${file}:${line}:${column})";
 const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
 // `Bubble` extends `ListaAbstractia` and is
@@ -64,10 +64,10 @@ class Bubble extends ListaAbstractia {
   //     Vektar.emptyVector);
   // }
 
-  map(fn) {
+  map(funk) {
     if (this.isEmpty) return Bubble.emptyList;
-    return new Bubble(fn(this.peek()),
-        this.pop().map(fn));
+    return new Bubble(funk(this.peek()),
+        this.pop().map(funk));
   }
 
   toList() {
@@ -105,17 +105,17 @@ class Bubble extends ListaAbstractia {
   eval(vínculo, pila=Bubble.blow()) {
     try {
       const { file, line, column } = this;
-      pila = pila.push({fn: this.head.toString(),
+      pila = pila.push({funk: this.head.toString(),
           file, line, column});
 
-      const fn = this.head.eval(vínculo);
+      const funk = this.head.eval(vínculo);
 
-      if (fn == undefined) {
+      if (funk == undefined) {
         const Error = ErrorDeFuncíonIndefinida;
         throw new Error(vínculo, this.head, pila);
       }
 
-      return Fn.call(vínculo, fn, this.tail, pila);
+      return Funk.call(vínculo, funk, this.tail, pila);
 
     } catch (error) {
       switch (error.constructor){
@@ -123,7 +123,7 @@ class Bubble extends ListaAbstractia {
           if (error.__memo) {
             const memo = error.__memo;
             error.stack += interpolarTrazaPlantilla({
-              fn: this.head,
+              funk: this.head,
               file: memo.file,
               line: memo.line,
               column: memo.column
@@ -154,12 +154,12 @@ class EmptyList extends Bubble {
 
 emptyList = new EmptyList()
 
-function catchExpandMacro(o, bubble, fn) {
+function catchExpandMacro(o, bubble, funk) {
   if (o instanceof MacroExpanded) {
     let expanded = o.expanded;
     bubble.o  = expanded.first;
     bubble.oo = bubble.rest.conj(expanded.rest.invert());
-    return bubble.tryEach(fn, catchExpandMacro);
+    return bubble.tryEach(funk, catchExpandMacro);
   } else {
     throw o;
   }

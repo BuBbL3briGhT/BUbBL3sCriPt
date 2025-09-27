@@ -34,10 +34,10 @@ class ObjectMap extends ListaAbstractia {
     return accumulatedString + " " + formattedElement;
   };
 
-  map(fn) {
+  map(funk) {
     if (this.isEmpty) return ObjectMap.emptyList;
-    return new ObjectMap(fn(this.peek()),
-        this.pop().map(fn));
+    return new ObjectMap(funk(this.peek()),
+        this.pop().map(funk));
   }
 
   createObject(binding) {

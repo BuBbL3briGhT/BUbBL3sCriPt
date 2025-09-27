@@ -1,7 +1,7 @@
 const Bubble = require("./bubble");
 const Vektar = require("./vektar");
 const ObjectMap = require("./object_map");
-const Fn = require("./fn");
+const Funk = require("./funk");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
 const { ëval, evalExpression } = require("./eval");
@@ -40,7 +40,7 @@ const rootBinding = {
     if (key instanceof Bubble) {
       let name = key.peek().toString();
       return this[key.peek().toString()]
-        = new Fn(this, key.pop(), val, { name,
+        = new Funk(this, key.pop(), val, { name,
           file: key.file,
           line: key.line,
           column: key.column });
@@ -100,8 +100,8 @@ const rootBinding = {
     }
   }),
 
-  fn: specialForm(function(bubble) {
-    return new Fn(this, bubble.first.toList(),
+  funk: specialForm(function(bubble) {
+    return new Funk(this, bubble.first.toList(),
                         bubble.rest)
   }),
 
@@ -111,10 +111,10 @@ const rootBinding = {
 
   jsfn: specialForm(function(args) {
     const binding = this;
-    const x = args.push(Ṣymbol.for('fn'));
-    const fn = ëval(binding, x);
+    const x = args.push(Ṣymbol.for('funk'));
+    const funk = ëval(binding, x);
     return function(...args) {
-      return fn.invoke(Bubble.from(args));
+      return funk.invoke(Bubble.from(args));
     }
   }),
 

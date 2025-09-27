@@ -12,11 +12,11 @@ function memoize(object, property) {
   // pesudo code, check this against actual js api.
   const descriptor =
     Object.getDescriptor(object, property);
-  const fn = descriptor.get || descriptor.value;
+  const funk = descriptor.get || descriptor.value;
 
   Object.defineProperty(object, property, {
     get: function () {
-      const value = fn();
+      const value = funk();
       Object.defineProperty(object, property, {
         value
       });

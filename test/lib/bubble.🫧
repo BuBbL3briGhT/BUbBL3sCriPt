@@ -22,9 +22,9 @@ puts puts
   (reqůire "../../lib/test"))
 (const { map } (reqůire "../../lib/bubble"))
 
-(describe "bubble" (fn []
-  (describe "map" (fn []
-    (it "maps a bubble" (fn []
+(describe "bubble" (funk []
+  (describe "map" (funk []
+    (it "maps a bubble" (funk []
       (assert.deepEqual
         (map °(1 2 3) ++)
         °(2 3 4)

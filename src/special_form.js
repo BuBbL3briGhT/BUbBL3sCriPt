@@ -16,25 +16,25 @@
 // value defaults to false.
 class SpecialForm {
 
-  constructor(fn, opts={ evaluateParams: false }) {
-    this.fn = fn;
+  constructor(funk, opts={ evaluateParams: false }) {
+    this.funk = funk;
   }
 
   call(binding, params) {
-    return this.fn.call(binding, params);
+    return this.funk.call(binding, params);
   }
 
   toString() {
     return this.constructor.name +
-      " " + this.fn.toString();
+      " " + this.funk.toString();
   }
 
 }
 
 class SpecialFormP extends SpecialForm {
-  constructor(fn) {
+  constructor(funk) {
     super(function (params) {
-      return fn.call(this,
+      return funk.call(this,
         params.mapEval(this));
     });
   }
@@ -42,14 +42,14 @@ class SpecialFormP extends SpecialForm {
 
 // Helper creates a Special Form (Function)
 // without evaluated params.
-function specialForm(fn) {
-  return new SpecialForm(fn);
+function specialForm(funk) {
+  return new SpecialForm(funk);
 }
 
 // Helper creates a Special Form (Function)
 // with evaluated params.
-function specialFormP(fn) {
-  return new SpecialFormP(fn);
+function specialFormP(funk) {
+  return new SpecialFormP(funk);
 }
 
 module.exports = { SpecialForm, specialForm,

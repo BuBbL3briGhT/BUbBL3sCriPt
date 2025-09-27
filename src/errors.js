@@ -33,7 +33,7 @@ class NoMatchError extends ParsingError {
 }
 
 // const trazaPlantilla = "    en ${nombre} (${archivo}:${linea}:${columna})";
-const trazaPlantilla = "    en ${fn} (${file}:${line}:${column})";
+const trazaPlantilla = "    en ${funk} (${file}:${line}:${column})";
 const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
 class BubbleScriptError extends Error {
@@ -45,13 +45,13 @@ class BubbleScriptError extends Error {
 
   obtenerTrazaDeLaPila(pila) {
     // consola.registro({ pila: pila.toString() });
-    const fns = pila.select("fn")
+    const fns = pila.select("funk")
     const codepoints = pila.select("file", "line", "column")
 
     const trazaDeLaPila =
       codepoints.zip(fns.pop()).partition(2)
-        .map(([point,fn]) => { return {
-          fn: fn?.fn, file: point.file,
+        .map(([point,funk]) => { return {
+          funk: funk?.funk, file: point.file,
           line: point.line, column: point.column }})
         .map(interpolarTrazaPlantilla).join("\n")
         .replace(/en  \(/g, 'en (');

@@ -12,7 +12,7 @@ const Vektar = require("./vektar");
 const Ṣymbol = require("./symbol");
 const Keyword = require("./keyword");
 const Booble = require("./booble");
-const Fn = require("./fn");
+const Funk = require("./funk");
 const { Macro } = require("./macro");
 const { tokenize } = require("./tökenize");
 const { Parser, parse } = require("./parse");
@@ -21,7 +21,7 @@ const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
 const BubbleScript = {
-  Bubble, Vektar, Ṣymbol, Keyword, Booble, Fn,
+  Bubble, Vektar, Ṣymbol, Keyword, Booble, Funk,
   Macro, tokenize, Parser, parse, eval: ėval,
   ėval, ëval, evalExpression, rootBinding
 }
@@ -50,7 +50,7 @@ events.emit("init", BubbleScript);
   }
 
   let _push = Ṣymbol.for('push'),
-       fn = Ṣymbol.for('fn'),
+       funk = Ṣymbol.for('funk'),
        a = Ṣymbol.for('a'),
        b = Ṣymbol.for('b'),
        send = Ṣymbol.for('send'),
@@ -65,20 +65,20 @@ events.emit("init", BubbleScript);
       msg = Ṣymbol.for('msg'),
       consoleLog = Ṣymbol.for('console.log');
 
-  // muf push (fn [a b] (send a °push b))
-  muf(_push, bubble(fn, vektar(a, b),
+  // muf push (funk [a b] (send a °push b))
+  muf(_push, bubble(funk, vektar(a, b),
        bubble(send, a, quote(_push), b)));
 
   // (muf (puts msg) (console.log msg))
-  // (muf puts (fn [msg] (console.log msg)))
-  muf(puts, bubble(fn, vektar(msg),
+  // (muf puts (funk [msg] (console.log msg)))
+  muf(puts, bubble(funk, vektar(msg),
     bubble(consoleLog, msg)));
 
   // (muf mufn (macro [name & z]
-  //     (bubble °muf name (push z °fn))))
+  //     (bubble °muf name (push z °funk))))
   muf(mufn, bubble(macro, vektar(name,amp,z),
       bubble(_list,quote(_muf), name,
-         bubble(_push, z, quote(fn)))));
+         bubble(_push, z, quote(funk)))));
 
 })();
 

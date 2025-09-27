@@ -198,8 +198,8 @@ describe("Bubble", () => {
     });
   });
 
-  describe("#map(fn)", () => {
-    it("maps through fn", ()=>{
+  describe("#map(funk)", () => {
+    it("maps through funk", ()=>{
       var bubble = Bubble.blow();
 
       let add7 = (o) => { return o + 7 };
@@ -238,7 +238,7 @@ describe("Bubble", () => {
     });
   });
 
-  describe("#reduce(fn)", () => {
+  describe("#reduce(funk)", () => {
     it("reduces the bubble", () => {
       var bubble = Bubble.blow(),
           result;

@@ -13,20 +13,20 @@ class Ṣymbol {
 
     this.value = value;
 
-    var fn, segments,
+    var funk, segments,
       callPattern = 1;
 
     if (value !== "/")
-      [value, fn] = value.split('/')
+      [value, funk] = value.split('/')
     segments = value.split('.')
 
-    if (segments.length == 1 && !fn)
-      fn = segments.pop()
+    if (segments.length == 1 && !funk)
+      funk = segments.pop()
 
-    if (!fn)
-      [fn, callPattern] = [segments.pop(), 2]
+    if (!funk)
+      [funk, callPattern] = [segments.pop(), 2]
 
-    this.fn = fn
+    this.funk = funk
     this.segments = segments
     this.callPattern = callPattern
 
@@ -50,9 +50,9 @@ class Ṣymbol {
 
   eval(binding) {
     let root = this.resolveRoot(binding)
-    // consola.registro({ root, fn: this.fn,
-    //       rootFn: root[this.fn]});
-    if (root) root = root[this.fn];
+    // consola.registro({ root, funk: this.funk,
+    //       rootFn: root[this.funk]});
+    if (root) root = root[this.funk];
     return root;
   }
 

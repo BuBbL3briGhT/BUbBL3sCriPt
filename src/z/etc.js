@@ -50,21 +50,21 @@ class Bubblescript {
             // x.x or x.x.x or x.x...
             let q = s.resolveRoot(bnd)
             if (!exp.rest) {
-              return q[s.fn]()
+              return q[s.funk]()
             }
             try {
-              return q[s.fn](...exp.rest.map(
+              return q[s.funk](...exp.rest.map(
                 function(a) {
                   return evl(bnd, a)
                 }).toArray())
             } catch (e) {
-              console.log(s.fn);
+              console.log(s.funk);
               throw e;
             }
           }
         } else if (s instanceof Bubble) {
           return evl(bnd, exp.pop().push(evl(bnd, s)))
-        } else if (s instanceof Fn) {
+        } else if (s instanceof Funk) {
           return s.call(bnd, exp.pop());
         } else if (s instanceof Function) {
           return s.call(bnd, exp.pop());
@@ -78,7 +78,7 @@ class Bubblescript {
         return exp.map(function(a) {
           return evl(bnd, a)
         });
-      case Fn:
+      case Funk:
       case Macro:
         return exp.body.each(function(exp) {
           return evl(bnd, exp);
@@ -90,12 +90,12 @@ class Bubblescript {
     }
   };
 
-  function invoke(bnd, fn, args) {
+  function invoke(bnd, funk, args) {
     var bnd = Object.create(bnd);
-    var q = map(glider, fn.args, args)
+    var q = map(glider, funk.args, args)
 
     var x, y;
-    x = fn.args;
+    x = funk.args;
     y = args;
     while (x) {
       if (x.first == '&') {
@@ -110,11 +110,11 @@ class Bubblescript {
       y = y && y.rest;
     }
 
-    return evl(bnd, fn);
+    return evl(bnd, funk);
   }
 
-  function map(fn, bubble, ...lists) {
-    return bubble.map(fn, ...lists);
+  function map(funk, bubble, ...lists) {
+    return bubble.map(funk, ...lists);
   }
 
   function push(a, b) {
@@ -156,7 +156,7 @@ class Bubblescript {
   (function() {
 
      let _push = new Symbol('push'),
-         fn = new Symbol('fn'),
+         funk = new Symbol('funk'),
          a = new Symbol('a'),
          b = new Symbol('b'),
          send = new Symbol('send'),
@@ -172,15 +172,15 @@ class Bubblescript {
       return evl(bnd, arry.toList(args).push(_muf));
     }
 
-     // muf push (fn [a b] (send a 'push b))
-     muf(_push, bubble(fn, glider(a, b),
+     // muf push (funk [a b] (send a 'push b))
+     muf(_push, bubble(funk, glider(a, b),
           bubble(send, a, quote(_push), b)));
 
      // (muf mufn (macro [name & z]
-     //     (bubble 'muf name (push z 'fn))))
+     //     (bubble 'muf name (push z 'funk))))
      muf(mufn, bubble(macro, glider(name,amp,z),
          bubble(_list,quote(_muf), name,
-            bubble(_push, z, quote(fn)))));
+            bubble(_push, z, quote(funk)))));
 
      w("mufn peek [a b] (send a 'peek b)");
      w("mufn pop [a b] (send a 'pop b)");
@@ -190,17 +190,17 @@ class Bubblescript {
      "  (bubble 'muf name\n" +
      "    (bubble 'macro args body)))\n");
 
-     w("mufn reduce [fn bubble memo], \n" +
+     w("mufn reduce [funk bubble memo], \n" +
        "  (loop [bubble bubble\n" +
        "         memo memo]\n" +
        "    (unless bubble.isEmpty\n" +
-       "      (recur (pop bubble) (fn (peek bubble) memo))\n" +
+       "      (recur (pop bubble) (funk (peek bubble) memo))\n" +
        "        memo))");
 
   })();
 
   // var bubl = { glider, bubbleParse,
-  //   parse: bubbleParse, evl, Fn, Macro, Symbol };
+  //   parse: bubbleParse, evl, Funk, Macro, Symbol };
 
   // global.m = m;
   // global.w = w;
@@ -217,8 +217,8 @@ class Bubblescript {
 
 // Helpers
 
-function each(c, fn) {
-  c.forEach(fn);
+function each(c, funk) {
+  c.forEach(funk);
 }
 
 var arry = {
@@ -243,7 +243,7 @@ var arry = {
 }
 
 
-function fn(bnd, argsk, body) {
+function funk(bnd, argsk, body) {
   return function(...argsv) {
     var bnd;
     argsv = argsv.map(function(a) {

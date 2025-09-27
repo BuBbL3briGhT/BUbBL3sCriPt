@@ -163,10 +163,10 @@ describe("not", function () {
   });
 });
 
-describe("fn", function () {
+describe("funk", function () {
   it("makes a function", function () {
-    assertEvalTo("((fn [a] a) 1)", 1);
-    assertEvalTo("((fn [[a]] a) [1])", 1);
+    assertEvalTo("((funk [a] a) 1)", 1);
+    assertEvalTo("((funk [[a]] a) [1])", 1);
   });
 });
 

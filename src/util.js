@@ -24,9 +24,9 @@ class Util {
     // const rootBinding = Object.create({});
     const rootBinding = new Base();
     const functions = Util.getStaticMethods(Base);
-    for (const fn of functions) {
-      rootBinding[fn] = Util.makeFunction(
-        Base[fn], _eval);
+    for (const funk of functions) {
+      rootBinding[funk] = Util.makeFunction(
+        Base[funk], _eval);
     }
     return rootBinding;
   }
@@ -72,10 +72,10 @@ class Util {
   // Bubblescript ကို Javascript သို့
   // ခေါ်ဝေါ်ခြင်းအတွက် interop function တစ်ခုကို
   // ဖန်တီးပြီး ပြန်ပေးသည်။
-  static makeFunction(fn, _eval) {
+  static makeFunction(funk, _eval) {
     return (params) => {
       // console.debug("makeFunction params", params);
-      return fn.call(this,
+      return funk.call(this,
         ...params.map(p => _eval(this, p)))
     }
   }

@@ -55,10 +55,10 @@ class ListaAbstractia {
     return this.reduce(i => i+1, 0);
   }
 
-  map(fn) {
+  map(funk) {
     if (this.isEmpty) return this;
-    return new this.constructor(fn(this.peek()),
-      this.pop().map(fn));
+    return new this.constructor(funk(this.peek()),
+      this.pop().map(funk));
   }
 
   get(i) { return this.skip(i).peek(); }
@@ -133,7 +133,7 @@ class ListaAbstractia {
       array.push(currentElement); return array; }, []);
   }
 
-  reduce(fn, memo) {
+  reduce(funk, memo) {
     if (this.isEmpty)
       return memo;
 
@@ -142,54 +142,54 @@ class ListaAbstractia {
       if(memo == undefined)
         return this.peek();
       else
-        return fn(memo, this.peek());
+        return funk(memo, this.peek());
     else
       if (memo != undefined)
-        return oo.reduce(fn,
-          fn(memo, this.peek()))
+        return oo.reduce(funk,
+          funk(memo, this.peek()))
       else
-        return oo.reduce(fn, this.peek());
+        return oo.reduce(funk, this.peek());
   }
 
-  each(fn) {
-    const result = fn(this.peek());
+  each(funk) {
+    const result = funk(this.peek());
     if (this.pop().isEmpty) return result;
-    return this.pop().each(fn);
+    return this.pop().each(funk);
   }
 
-  tryEach(fn, cåtch, pila) {
+  tryEach(funk, cåtch, pila) {
     let result;
-    try { result = fn(this.peek(), pila); }
-    catch (o) { return cåtch(o, this, fn); }
+    try { result = funk(this.peek(), pila); }
+    catch (o) { return cåtch(o, this, funk); }
     if (this.pop().isEmpty) return result;
-    return this.pop().tryEach(fn, cåtch, pila);
+    return this.pop().tryEach(funk, cåtch, pila);
   }
 
-  // each(fn, opts={}) {
+  // each(funk, opts={}) {
   //   let result;
-  //   try { result = fn(this.peek()); }
+  //   try { result = funk(this.peek()); }
   //   catch (o) {
   //     if (opts.catch)
-  //       return opts.catch(o, this, fn);
+  //       return opts.catch(o, this, funk);
   //     else
   //       throw o;
   //   }
   //   const bubble = this.pop();
   //   if (bubble.isEmpty) return result;
-  //   return bubble.each(fn, opts);
+  //   return bubble.each(funk, opts);
   // }
 
-  // each(fn, opts={}) {
+  // each(funk, opts={}) {
   //   let result;
-  //   try { result = fn(this.peek()); }
+  //   try { result = funk(this.peek()); }
   //   catch (o) {
   //     if (opts.catch)
-  //       return opts.catch(o, this, fn);
+  //       return opts.catch(o, this, funk);
   //     else
   //       throw o;
   //   }
   //   if (this.isLast) return result;
-  //   return this.pop().each(fn, opts);
+  //   return this.pop().each(funk, opts);
   // }
 
   find(value) {

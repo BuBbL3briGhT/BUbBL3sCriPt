@@ -121,12 +121,12 @@ describe("base", function () {
      });
   });
 
-  describe("fn", function () {
+  describe("funk", function () {
     it("makes a function", function () {
-      // assertEval("(fn [a] a)");
-      assert.equal(ėval("(fn [a] a)").toString(),
-                   "(fn (a) a)");
-      assertEvalTo("((fn [a] a) 1)", 1);
+      // assertEval("(funk [a] a)");
+      assert.equal(ėval("(funk [a] a)").toString(),
+                   "(funk (a) a)");
+      assertEvalTo("((funk [a] a) 1)", 1);
     });
   });
 
