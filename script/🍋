@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 # File name symbol renamer
-# script/🍄 original nuevo [dirs]
+# script/🍋 original nuevo [dirs]
 
 durs=$(echo $@ | cut -d' ' -f3-)
 
