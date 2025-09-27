@@ -11,134 +11,6 @@
 
 # rename original nuevo [dir]
 
-# sed "s/\(\W\)List\(\W\)/\1Yoyo\2/g"
-
-# sed -e "s/(\W)$1(\W)/\1$2\2/g"
-# sed -e "s/(\W)$1(\W)/\1$2/g"
-# sed -i -e "s/(\W)$1(\W)/\1$2\2/g"
-# sed -e "s/(\W)$1(\W)/\1$2\2/g"
-# sed "s/\(\W\)List\(\W\)/\1Yoyo\2/g"
-#
-sed -e "s/\(\W\)$1\(\W\)/\1$2\2/g" \
-    -e "s/^$1\(\W\)/$2\1/g" \
-    -e "s/\(\W\)$1$/\1$2/g" \
-    -e "s/^$1$/$2/g" \
-#
-# git grep -l $1 | xargs sed -i -e "s/(\W)$1(\W)/\1$2\2/g"
-exit
-
-function buscar_y_reemplazar_símbolo() {
-  # echo "$1" ":" "$2" "->" "$3"
-
-    # archivo="$1"
-    simbolo="$1"
-  reemplazo="$2"
-
-  # echo "$archivo" ":" "$simbolo" "->" "$reemplazo"
-
-  # Loop through the file line by line
-  while IFS= read -r linea; do
-    # Extrae las palabras de esta línea y
-    # colócalas en una matriz.
-    # Extract the words for this line and put them
-    # into an array
-    palabras=($(grep -oP '\w+' <<< "$linea"))
-    # echo "${palabras[*]}"
-
-    # # Extrae las palabras no literales de esta
-    # # línea y colócalas en una matriz.
-    # # Extract the non-words for this line and put
-    # # them into an array
-    # sin_palabras=($(grep -oP '\W+' <<< "$linea"))
-    # sin_palabras=($(grep -oP '\W+' <<< "$linea"))
-    # https://stackoverflow.com/a/32931403/30654127
-    mapfile -t sin_palabras < <(grep -oP '\W+' <<< "$linea")
-    # grep -oP '\W+' <<< "$linea"
-    # echo "${sin_palabras[*]}"
-
-    # # Buscar y reemplazar tokens
-    # # Find and replace tokens.
-    for i in "${!palabras[@]}"; do
-      if [[ "${palabras[i]}" == "$simbolo" ]]; then
-        palabras[i]="$reemplazo"
-      fi
-    done
-
-    # echo "${palabras[*]}"
-
-    # Reconstruir la linea.
-    # Reconstruct the line.
-    nueva_linea=""
-
-    # echo "$linea"
-    if [[ "$linea" =~ ^[a-zA-Z] ]]; then
-      # Line started with word characters
-      # zip "$paralbras" "$sin_paralabras"
-      # echo "palabras"
-
-      for i in "${!palabras[@]}"; do
-          nueva_linea+="${palabras[i]}"
-          # Append the corresponding non-word token
-          # if it exists
-          if [[ -n "${sin_palabras[i]}" ]]; then
-              nueva_linea+="${sin_palabras[i]}"
-          fi
-      done
-
-      # Manejar el token final que no es una
-      # palabra si existe
-      # Handle the trailing non-word token if it
-      # exists
-      if [[ "${#palabras[@]}" -lt "${#sin_palabras[@]}" ]]; then
-          nueva_linea+="${sin_palabras[-1]}"
-      fi
-
-    else
-      # Line started with non-word characters
-      # echo "sin palabras"
-      for i in "${!sin_palabras[@]}"; do
-          nueva_linea+="${sin_palabras[i]}"
-          # Append the corresponding word token
-          # if it exists
-          if [[ -n "${palabras[i]}" ]]; then
-              nueva_linea+="${palabras[i]}"
-          fi
-      done
-
-      # Manejar el token de palabra final si
-      # existe
-      # Handle the trailing word token if it
-      # exists
-      if [[ "${#sin_palabras[@]}" -lt "${#palabras[@]}" ]]; then
-          nueva_linea+="${palabras[-1]}"
-      fi
-    fi
-
-    echo "$nueva_linea"
-    # salida
-
-
-    # for i in "${!palabras[@]}"; do
-    #     nueva_linea+="${palabras[i]}"
-    #     # Append the corresponding non-word token
-    #     # if it exists
-    #     if [[ -n "${sin_palabras[i]}" ]]; then
-    #         nueva_linea+="${sin_palabras[i]}"
-    #     fi
-    # done
-
-    # Handle the trailing non-word token if it exists
-    # if [[ "${#words[@]}" -lt "${#non_words[@]}" ]]; then
-    #     reconstructed_line+="${non_words[-1]}"
-    # fi
-
-    # echo "$reconstructed_line"
-
-  # done < "$archivo"
-  done
-
-}
-
 function camelizar() {
   echo $1 | sed -E 's/_([a-z])/\U\1/g' | sed -E 's/^(.)/\L\1/'
 }
@@ -152,13 +24,11 @@ function subrayar() {
 }
 
 function rebautizar() {
-  # git grep -l $1 | xargs sed -i -e "s/$1/$2/g"
-
-  # git grep -l $1 | xargs sed -i -e "s/(\W)$1(\W)/\1$2\2/g"
-
-  # git grep -l $1 | cat "$1" | \
-  #   buscar_y_reemplazar_símbolo "$2" "$3"
-
+  git grep -l $1 | xargs \
+    sed -i -e "s/\(\W\)$1\(\W\)/\1$2\2/g" \
+           -e "s/^$1\(\W\)/$2\1/g" \
+           -e "s/\(\W\)$1$/\1$2/g" \
+           -e "s/^$1$/$2/g" \
 
   # File renaming.
   files=$(git ls-tree --full-tree --name-only -r HEAD)
