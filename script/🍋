@@ -41,7 +41,7 @@ for file in $files; do
 
   # Ensure the move to directory exists
   _dir=$(dirname $new_path)
-  echo _dir "$_dir"
+  # echo _dir "$_dir"
   if [ ! -d "$_dir" ]; then
     echo "Create directory: $_dir"
     echo mkdir -p "$_dir"
