@@ -34,7 +34,7 @@ class Bubblescript {
     switch (exp && exp.constructor) {
       case Symbol:
         return exp.resolve(bnd)
-      case BubbleButt: {
+      case Bubble: {
         let s = exp.peek()
         if (s instanceof Symbol) {
           debug('->', exp.toString());
@@ -62,7 +62,7 @@ class Bubblescript {
               throw e;
             }
           }
-        } else if (s instanceof BubbleButt) {
+        } else if (s instanceof Bubble) {
           return evl(bnd, exp.pop().push(evl(bnd, s)))
         } else if (s instanceof Fn) {
           return s.call(bnd, exp.pop());
@@ -113,15 +113,15 @@ class Bubblescript {
     return evl(bnd, fn);
   }
 
-  function map(fn, bubbleButt, ...lists) {
-    return bubbleButt.map(fn, ...lists);
+  function map(fn, bubble, ...lists) {
+    return bubble.map(fn, ...lists);
   }
 
   function push(a, b) {
     return a.push(b);
   }
 
-  function bubbleButt(...args) {
+  function bubble(...args) {
     return arry.toList(args);
   }
 
@@ -165,7 +165,7 @@ class Bubblescript {
          name = new Symbol('name'),
          amp = new Symbol('&'),
          z = new Symbol('z'),
-        _list = new Symbol('bubbleButt'),
+        _list = new Symbol('bubble'),
         _muf = new Symbol('muf');
 
     function muf(...args) {
@@ -173,28 +173,28 @@ class Bubblescript {
     }
 
      // muf push (fn [a b] (send a 'push b))
-     muf(_push, bubbleButt(fn, glider(a, b),
-          bubbleButt(send, a, quote(_push), b)));
+     muf(_push, bubble(fn, glider(a, b),
+          bubble(send, a, quote(_push), b)));
 
      // (muf mufn (macro [name & z]
-     //     (bubbleButt 'muf name (push z 'fn))))
-     muf(mufn, bubbleButt(macro, glider(name,amp,z),
-         bubbleButt(_list,quote(_muf), name,
-            bubbleButt(_push, z, quote(fn)))));
+     //     (bubble 'muf name (push z 'fn))))
+     muf(mufn, bubble(macro, glider(name,amp,z),
+         bubble(_list,quote(_muf), name,
+            bubble(_push, z, quote(fn)))));
 
      w("mufn peek [a b] (send a 'peek b)");
      w("mufn pop [a b] (send a 'pop b)");
      w("mufn puts [msg] (console.log msg)");
 
      w("muf mufmacro (macro [name args body]\n" +
-     "  (bubbleButt 'muf name\n" +
-     "    (bubbleButt 'macro args body)))\n");
+     "  (bubble 'muf name\n" +
+     "    (bubble 'macro args body)))\n");
 
-     w("mufn reduce [fn bubbleButt memo], \n" +
-       "  (loop [bubbleButt bubbleButt\n" +
+     w("mufn reduce [fn bubble memo], \n" +
+       "  (loop [bubble bubble\n" +
        "         memo memo]\n" +
-       "    (unless bubbleButt.isEmpty\n" +
-       "      (recur (pop bubbleButt) (fn (peek bubbleButt) memo))\n" +
+       "    (unless bubble.isEmpty\n" +
+       "      (recur (pop bubble) (fn (peek bubble) memo))\n" +
        "        memo))");
 
   })();
@@ -209,7 +209,7 @@ class Bubblescript {
   // global.bubbleSCRiPT = bubbleSCRiPT;
 
   // bubl.Symbol = Symbol;
-  // bubl.BubbleButt = BubbleButt;
+  // bubl.Bubble = Bubble;
   // bubl.Glider = Glider;
 
 }
@@ -226,11 +226,11 @@ var arry = {
     return a[a.length - 1];
   },
   toList: function(a) {
-    var bubbleButt = new BubbleButt(a.pop());
+    var bubble = new Bubble(a.pop());
     while (a.length > 0) {
-      bubbleButt = bubbleButt.push(a.pop());
+      bubble = bubble.push(a.pop());
     }
-    return bubbleButt;
+    return bubble;
   },
 
   toGlider: function(a) {

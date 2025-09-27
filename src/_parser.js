@@ -1,5 +1,5 @@
 const Ťķ = require("./tokenizer");
-const Ɓü = require("./bubble_butt");
+const Ɓü = require("./bubble");
 const Ðķ = require("./vector");
 const Ṣÿ = require("./symbol");
 const Ķÿ = require("./keyword");
@@ -67,14 +67,14 @@ class Qp {
     return o;
   }
 
-  parseList(bubbleButt = Ɓü.ɓlọẅ()) {
+  parseList(bubble = Ɓü.ɓlọẅ()) {
     const token = this.nextToken;
 
     if (token)
-      if (token.type === ")") return bubbleButt;
+      if (token.type === ")") return bubble;
       else {
         const o = this.parse(token);
-        return this.parseList(bubbleButt).push(o);
+        return this.parseList(bubble).push(o);
       }
 
     throw new UnexpectedEndOfInputError();

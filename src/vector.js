@@ -1,10 +1,10 @@
 const ListaAbstractia = require("./lista_abstractia");
 const events = require("./events");
 
-let emptyVector, BubbleButt;
+let emptyVector, Bubble;
 
 events.on("init", function (bubls) {
-  BubbleButt = bubls.BubbleButt;
+  Bubble = bubls.Bubble;
 });
 
 class Vector extends ListaAbstractia {
@@ -35,9 +35,9 @@ class Vector extends ListaAbstractia {
   };
 
   toList() {
-    return this.reduce((bubbleButt, o) => {
-      return bubbleButt.push(o); },
-      BubbleButt.emptyList);
+    return this.reduce((bubble, o) => {
+      return bubble.push(o); },
+      Bubble.emptyList);
   }
 
 }
