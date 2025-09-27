@@ -31,10 +31,10 @@ function subrayar() {
 
 durs=$(echo $@ | cut -d' ' -f3-)
 
-script/🍉 "\/$(subrayar $1)" "\/$(subrayar $2)" $durs
+script/🍓 "$(subrayar $1)" "$(subrayar $2)" $durs
 script/🍉 "$(camelizar $1)" "$(camelizar $2)" $durs
 script/🍉 "$(pascalizar $1)" "$(pascalizar $2)" $durs
-# script/🍉 "$(subrayar $1)" "$(subrayar $2)" $durs
+script/🍉 "$(subrayar $1)" "$(subrayar $2)" $durs
 
 script/🍋 "$(subrayar $1)" "$(subrayar $2)" $durs
 # rebautizar_archivos "$(camelizar $1)" "$(camelizar $2)" $durs
