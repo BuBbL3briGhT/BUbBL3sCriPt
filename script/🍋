@@ -40,7 +40,7 @@ for file in $files; do
 
   echo new_path $new_path
 
-  # get dir
+  # Ensure the move to directory exists
   _dir=$(dirname $new_path)
   echo _dir "$_dir"
   if [ ! -d "$_dir" ]; then
