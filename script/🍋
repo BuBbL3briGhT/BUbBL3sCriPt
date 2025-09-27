@@ -8,9 +8,13 @@ durs=$(echo $@ | cut -d' ' -f3-)
 # File renaming.
 files=$(git ls-tree --full-tree --name-only -r HEAD $durs)
 # Filter file list by orginal text
-files=$(echo "$files" | grep "$1")
+# files=$(echo "$files" | grep "^$1\W$1")
+files=$(echo "$files" | \
+          grep -e "\W$1\W" -e "^$1\W" \
+               -e "\W$1$"  -e "^$1$")
 
-echo $files
+
+echo "$files"
 
 # # for file in "${files[@]}"; do
 # for file in $files; do
