@@ -3,6 +3,9 @@
 # File name symbol renamer
 # script/🍋 original nuevo [dirs]
 
+# TODO: Add checking to make sure files aren't overwritten. Would be nice to check this up front, and abort if there are any name conflicts detected, cobsidering this command can rename mire than file
+# TODO: Does not currently work with emoji, need to figure oyt how to pricess the unicode, which i think is being returned raw for ls-tree, this may also remive the need to strip the escaped ""
+
 durs=$(echo $@ | cut -d' ' -f3-)
 
 # File renaming.
