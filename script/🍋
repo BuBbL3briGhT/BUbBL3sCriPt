@@ -28,9 +28,13 @@ for file in $files; do
         -e "s/^$1$/$2/g")
 
   echo "$new_path"
+
   # get dir
   directory_path=$(dirname "$new_path")
-  echo mkdir -p "$directory_path"
+  if [ ! -d "$directory_path" ]; then
+    echo mkdir -p "$directory_path"
+  fi
+
   # rename old to new
   echo mv "$file" "$new_path"
 done
