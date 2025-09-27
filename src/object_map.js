@@ -1,8 +1,8 @@
-const AbstractList = require("./abstract_list");
+const ListaAbstracta = require("./lista_abstracta");
 
 let emptyObjectMap;
 
-class ObjectMap extends AbstractList {
+class ObjectMap extends ListaAbstracta {
 
   static get emptyList() { return emptyObjectMap; }
 
