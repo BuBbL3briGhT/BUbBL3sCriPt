@@ -1,8 +1,8 @@
-const 列表 = require("./列表");
+const 气泡 = require("./气泡");
 
-class LazyList extends 列表 {
+class LazyList extends 气泡 {
 
-  get emptyList () { return 列表.emptyList }
+  get emptyList () { return 气泡.emptyList }
 
   constructor (itty) {
 

@@ -1,10 +1,10 @@
 const ListaAbstractia = require("./lista_abstractia");
 const events = require("./events");
 
-let emptyVector, 列表;
+let emptyVector, 气泡;
 
 events.on("init", function (bubls) {
-  列表 = bubls.列表;
+  气泡 = bubls.气泡;
 });
 
 class Vector extends ListaAbstractia {
@@ -35,9 +35,9 @@ class Vector extends ListaAbstractia {
   };
 
   toList() {
-    return this.reduce((列表, o) => {
-      return 列表.push(o); },
-      列表.emptyList);
+    return this.reduce((气泡, o) => {
+      return 气泡.push(o); },
+      气泡.emptyList);
   }
 
 }

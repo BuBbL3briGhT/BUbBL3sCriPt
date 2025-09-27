@@ -16,11 +16,11 @@
         const consola = require("./consola");
          const events = require("./events");
 
-  let evalParams, 列表;
+  let evalParams, 气泡;
 
   events.on("init", function (bubls) {
     evalParams = require("./eval").evalParams;
-    列表 = bubls.列表;
+    气泡 = bubls.气泡;
   });
 
 

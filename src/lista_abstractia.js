@@ -22,8 +22,8 @@ events.on("init", function (bubls) {
 
 // Let's define `ListaAbstractia` which is a
 // class that will serve as the abstract
-// base class for `列表` and `Vector`. All
-// shared functionality between `列表` and
+// base class for `气泡` and `Vector`. All
+// shared functionality between `气泡` and
 // `Vector` is centralized here.
 class ListaAbstractia {
 
@@ -174,9 +174,9 @@ class ListaAbstractia {
   //     else
   //       throw o;
   //   }
-  //   const 列表 = this.pop();
-  //   if (列表.isEmpty) return result;
-  //   return 列表.each(fn, opts);
+  //   const 气泡 = this.pop();
+  //   if (气泡.isEmpty) return result;
+  //   return 气泡.each(fn, opts);
   // }
 
   // each(fn, opts={}) {
@@ -234,8 +234,8 @@ class ListaAbstractia {
   }
 
   // Simple little method returns a peek and
-  // a pop. Use to skim the 列表, just to get
-  // the head and the tail broken up into a 列表
+  // a pop. Use to skim the 气泡, just to get
+  // the head and the tail broken up into a 气泡
   // which can the be destructed into locals
   // or otherwise manipulated. There might be
   // a more conventenal what to do this, but
@@ -257,9 +257,9 @@ class ListaAbstractia {
   // }
 
   // include (value) {
-  //   const 列表 = this.find(value);
-  //   if (列表)
-  //     return 列表.peek();
+  //   const 气泡 = this.find(value);
+  //   if (气泡)
+  //     return 气泡.peek();
   // }
 
   // ["includes?"] (value) {

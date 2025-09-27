@@ -1,5 +1,5 @@
 const createBinding = require("./create_binding");
-const 列表 = require("./列表");
+const 气泡 = require("./气泡");
 
 class Macro {
   constructor(binding, params, body, opts={}) {

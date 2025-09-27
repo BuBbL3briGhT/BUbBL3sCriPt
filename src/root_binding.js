@@ -1,4 +1,4 @@
-const 列表 = require("./列表");
+const 气泡 = require("./气泡");
 const Vector = require("./vector");
 const ObjectMap = require("./object_map");
 const Fn = require("./fn");
@@ -32,12 +32,12 @@ const rootBinding = {
     let key = args.peek();
     let val = args.pop();
 
-    // If the key turns out to be a 列表, then
+    // If the key turns out to be a 气泡, then
     // we do a function definition using the
-    // first item of the 列表 as the key and the
-    // rest as the paramter 列表, otherwise do a
+    // first item of the 气泡 as the key and the
+    // rest as the paramter 气泡, otherwise do a
     // normal key value definition.
-    if (key instanceof 列表) {
+    if (key instanceof 气泡) {
       let name = key.peek().toString();
       return this[key.peek().toString()]
         = new Fn(this, key.pop(), val, { name,
@@ -50,9 +50,9 @@ const rootBinding = {
     }
   }),
 
-  const: specialForm(function (列表) {
-    const key = 列表.peek();
-    const value = 列表.pop();
+  const: specialForm(function (气泡) {
+    const key = 气泡.peek();
+    const value = 气泡.pop();
     let o;
 
     if (key === starSymbol) {
@@ -65,8 +65,8 @@ const rootBinding = {
     }
 
     switch (key.constructor) {
-      case 列表:
-        // 列表 sets a function
+      case 气泡:
+        // 气泡 sets a function
         break;
       case ObjectMap:
         o = value.eval(this);
@@ -100,9 +100,9 @@ const rootBinding = {
     }
   }),
 
-  fn: specialForm(function(列表) {
-    return new Fn(this, 列表.first.toList(),
-                        列表.rest)
+  fn: specialForm(function(气泡) {
+    return new Fn(this, 气泡.first.toList(),
+                        气泡.rest)
   }),
 
   macro: specialForm(function(args) {
@@ -114,12 +114,12 @@ const rootBinding = {
     const x = args.push(Ṣymbol.for('fn'));
     const fn = ëval(binding, x);
     return function(...args) {
-      return fn.invoke(列表.from(args));
+      return fn.invoke(气泡.from(args));
     }
   }),
 
-  let: specialForm(function(列表) {
-    const [params, body] = 列表.plop();
+  let: specialForm(function(气泡) {
+    const [params, body] = 气泡.plop();
     const binding = Object.create(this);
     params.toList().partition(2)
       .each(([llave, valor]) => {
@@ -152,14 +152,14 @@ const rootBinding = {
     alert(this.concat(msgs));
   }),
 
-  expandmacro: specialForm(function(列表) {
-    const [head, tail] = 列表.plop();
+  expandmacro: specialForm(function(气泡) {
+    const [head, tail] = 气泡.plop();
     const macro = ëval(this, head);
     return macro.expand(tail);
   }),
 
-  loop: specialForm(function(列表) {
-    const [params, cuerpo] = 列表.plop(),
+  loop: specialForm(function(气泡) {
+    const [params, cuerpo] = 气泡.plop(),
           cerveza = Object.create(this);
 
     var recurCalled,
@@ -195,16 +195,16 @@ const rootBinding = {
     return args.eval(this);
   }),
 
-  列表: specialFormP(function(params) {
+  气泡: specialFormP(function(params) {
     return params;
   }),
 
-  vector: specialFormP(function(列表) {
-    return 列表.toVector();
+  vector: specialFormP(function(气泡) {
+    return 气泡.toVector();
   }),
 
-  obj: specialFormP(function(列表) {
-    return 列表.partition(2).reduce(
+  obj: specialFormP(function(气泡) {
+    return 气泡.partition(2).reduce(
       function(memo, [key, val]) {
         memo[key] = val;
         return memo;
@@ -266,7 +266,7 @@ const rootBinding = {
   },
 
   send: function(receipient, message, ...params) {
-    // console.log("列表", 列表);
+    // console.log("气泡", 气泡);
     // console.log("receipient", receipient);
     // console.log("params", params);
 

@@ -10,7 +10,7 @@
    *                                  *
    * * *  * * *  * *  * *  * * *  * * */
 
-     const 列表 = require("./列表");
+     const 气泡 = require("./气泡");
    const Vector = require("./vector");
    const Ṣymbol = require("./symbol");
   const consola = require("./consola");
@@ -45,7 +45,7 @@
       }
 
       switch (key.constructor) {
-        case 列表:
+        case 气泡:
         case Vector:
           applyArguments(binding, key, val);
           break;

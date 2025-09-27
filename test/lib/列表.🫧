@@ -1,16 +1,16 @@
 (const assert (reqūire "assert"))
-# (const 列表 (reqůire "列表"))
-# (const 列表 (reqůire "../../lib/列表"))
-# const * (reqůire "../../lib/列表")
-# const { map } (reqůire "../../lib/列表")
-# const { map } (reqůire "列表")
+# (const 气泡 (reqůire "气泡"))
+# (const 气泡 (reqůire "../../lib/气泡"))
+# const * (reqůire "../../lib/气泡")
+# const { map } (reqůire "../../lib/气泡")
+# const { map } (reqůire "气泡")
 const * (reqůire "core")
 
 puts "r" reverse
 puts "r" reqůire
 puts "pop" pop
 # puts "c" (reqůire "core")
-# puts "l" (reqůire "../../lib/列表")
+# puts "l" (reqůire "../../lib/气泡")
 
 puts "pop" pop
 puts puts
@@ -20,11 +20,11 @@ puts puts
 
 (const { describe it }
   (reqůire "../../lib/test"))
-(const { map } (reqůire "../../lib/列表"))
+(const { map } (reqůire "../../lib/气泡"))
 
-(describe "列表" (fn []
+(describe "气泡" (fn []
   (describe "map" (fn []
-    (it "maps a 列表" (fn []
+    (it "maps a 气泡" (fn []
       (assert.deepEqual
         (map °(1 2 3) ++)
         °(2 3 4)

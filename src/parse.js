@@ -1,6 +1,6 @@
 const Ðķ = require("./vector");
 const Ķÿ = require("./keyword");
-const Ɓü = require("./列表");
+const Ɓü = require("./气泡");
 const Ɓů = require("./booble");
 const Ṣÿ = require("./symbol");
 const ObjectMap = require("./object_map");
@@ -144,17 +144,17 @@ class Parser {
     return o;
   }
 
-  parseList(列表 = Ɓü.ɓlọẅ()) {
+  parseList(气泡 = Ɓü.ɓlọẅ()) {
     const token = this.nextTokenSkipNewLines;
 
     if (token)
       switch (token.type) {
         case ")":
         case ";":
-          return 列表;
+          return 气泡;
         default:
           const o = this.parse(token);
-          return this.parseList(列表).push(o);
+          return this.parseList(气泡).push(o);
       }
 
     throw new UnexpectedEndOfInputError();

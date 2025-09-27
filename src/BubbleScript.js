@@ -7,7 +7,7 @@
        *  */
 
 const ListaAbstractia = require("./lista_abstractia");
-const 列表 = require("./列表");
+const 气泡 = require("./气泡");
 const Vector = require("./vector");
 const Ṣymbol = require("./symbol");
 const Keyword = require("./keyword");
@@ -21,7 +21,7 @@ const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
 const BubbleScript = {
-  列表, Vector, Ṣymbol, Keyword, Booble, Fn,
+  气泡, Vector, Ṣymbol, Keyword, Booble, Fn,
   Macro, tokenize, Parser, parse, eval: ėval,
   ėval, ëval, evalExpression, rootBinding
 }
@@ -31,8 +31,8 @@ events.emit("init", BubbleScript);
 (function() {
   let bnd = rootBinding;
 
-  function 列表(...args) {
-    return 列表.from(args);
+  function 气泡(...args) {
+    return 气泡.from(args);
   }
 
   function vector(...args) {
@@ -45,8 +45,8 @@ events.emit("init", BubbleScript);
 
   function muf(...args) {
     // return ėval(bnd, arry.toList(args).push(_muf));
-    // return ëval(bnd, 列表.from(args).push(_muf));
-    return 列表.from(args).push(_muf).eval(bnd);
+    // return ëval(bnd, 气泡.from(args).push(_muf));
+    return 气泡.from(args).push(_muf).eval(bnd);
   }
 
   let _push = Ṣymbol.for('push'),
@@ -59,26 +59,26 @@ events.emit("init", BubbleScript);
        name = Ṣymbol.for('name'),
        amp = Ṣymbol.for('&'),
        z = Ṣymbol.for('z'),
-      _list = Ṣymbol.for('列表'),
+      _list = Ṣymbol.for('气泡'),
       _muf = Ṣymbol.for('muf'),
       puts = Ṣymbol.for('puts'),
       msg = Ṣymbol.for('msg'),
       consoleLog = Ṣymbol.for('console.log');
 
   // muf push (fn [a b] (send a °push b))
-  muf(_push, 列表(fn, vector(a, b),
-       列表(send, a, quote(_push), b)));
+  muf(_push, 气泡(fn, vector(a, b),
+       气泡(send, a, quote(_push), b)));
 
   // (muf (puts msg) (console.log msg))
   // (muf puts (fn [msg] (console.log msg)))
-  muf(puts, 列表(fn, vector(msg),
-    列表(consoleLog, msg)));
+  muf(puts, 气泡(fn, vector(msg),
+    气泡(consoleLog, msg)));
 
   // (muf mufn (macro [name & z]
-  //     (列表 °muf name (push z °fn))))
-  muf(mufn, 列表(macro, vector(name,amp,z),
-      列表(_list,quote(_muf), name,
-         列表(_push, z, quote(fn)))));
+  //     (气泡 °muf name (push z °fn))))
+  muf(mufn, 气泡(macro, vector(name,amp,z),
+      气泡(_list,quote(_muf), name,
+         气泡(_push, z, quote(fn)))));
 
 })();
 

@@ -1,7 +1,7 @@
 const assert = require("assert");
   const createBinding = require("../src/create_binding.js");
 const Ṣymbol = require("../src/symbol.js");
-  const 列表 = require("../src/列表.js");
+  const 气泡 = require("../src/气泡.js");
 
 const ṣ = Ṣymbol.for.bind(Ṣymbol);
 
@@ -11,9 +11,9 @@ describe("createBinding", function () {
 
   it("crea un enlace", function () {
     const cerveza = Object.create(null);
-    const llaves = 列表.make(ṣ("uno"), ṣ("dos"),
+    const llaves = 气泡.make(ṣ("uno"), ṣ("dos"),
       ṣ("tres"));
-    const valors = 列表.make(1, 2, 3);
+    const valors = 气泡.make(1, 2, 3);
     (function (cerveza) {
       assert.equal(cerveza[ṣ("uno")],  1);
       assert.equal(cerveza[ṣ("dos")],  2);

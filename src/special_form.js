@@ -3,14 +3,14 @@
 
 // Special form functions are used primarily in
 // the root binding. They receive parameters as
-// a 列表 and do not preform expansion. The
+// a 气泡 and do not preform expansion. The
 // constructor takes a function which will be
-// passed the params as a 列表. During
+// passed the params as a 气泡. During
 // evaluation, the function will be bound to the
 // binding, therefore the current binding can be
 // accessed with this. The second constructor
 // parameter is an options map. If the key for
-// evaluateParams is set to true, the 列表 will
+// evaluateParams is set to true, the 气泡 will
 // be evaluated against the binding before being
 // passed to the special form function. This
 // value defaults to false.
