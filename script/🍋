@@ -30,7 +30,7 @@ for file in $files; do
   echo "$new_path"
   # get dir
   directory_path=$(dirname "$new_path")
-  echo mkdir -p "$directory_name"
+  echo mkdir -p "$directory_path"
   # rename old to new
   echo mv "$file" "$new_path"
 done
