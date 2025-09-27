@@ -6,7 +6,7 @@
      *        *    +   *
        *  */
 
-const ListaAbstracta = require("./lista_abstracta");
+const ListaAbstractia = require("./lista_abstractia");
 const BubbleButt = require("./bubble_butt");
 const Vector = require("./vector");
 const Ṣymbol = require("./symbol");

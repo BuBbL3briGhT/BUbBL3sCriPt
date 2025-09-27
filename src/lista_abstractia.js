@@ -1,7 +1,7 @@
 
   /* * *  * * *  * *  * *  * * *  * * *
    *                                  *
-   *   File: src/lista_abstracta.js     *
+   *   File: src/lista_abstractia.js     *
    *   Date: September 25th, 2025     *
    *   Library: Bubblescript          *
    *   version: 0.🦤.🍌.🥄            *
@@ -20,12 +20,12 @@ events.on("init", function (bubls) {
   evalExpression = bubls.evalExpression;
 });
 
-// Let's define `ListaAbstracta` which is a
+// Let's define `ListaAbstractia` which is a
 // class that will serve as the abstract
 // base class for `BubbleButt` and `Vector`. All
 // shared functionality between `BubbleButt` and
 // `Vector` is centralized here.
-class ListaAbstracta {
+class ListaAbstractia {
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
@@ -277,7 +277,7 @@ class ListaAbstracta {
 }
 
 // Aliases
-const prototype = ListaAbstracta.prototype;
+const prototype = ListaAbstractia.prototype;
 prototype["includes?"] = prototype.find;
 
-module.exports = ListaAbstracta;
+module.exports = ListaAbstractia;

@@ -1,4 +1,4 @@
-const ListaAbstracta = require("./lista_abstracta");
+const ListaAbstractia = require("./lista_abstractia");
 const events = require("./events");
 const Ṣymbol = require("./symbol");
 const Fn = require("./fn");
@@ -16,11 +16,11 @@ events.on("init", function (bubls) {
 const trazaPlantilla = "    en ${fn} (${file}:${line}:${column})";
 const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
-// `BubbleButt` extends `ListaAbstracta` and is
+// `BubbleButt` extends `ListaAbstractia` and is
 // the primary object in Bubblescript and
 // is the programatic representation of a
 // bubbleButt. e.g. `(1 2 3)`
-class BubbleButt extends ListaAbstracta {
+class BubbleButt extends ListaAbstractia {
 
   // `BubbleButt.emptyList` provides an instance
   // of `EmptyList`, which terminates all

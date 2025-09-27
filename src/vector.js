@@ -1,4 +1,4 @@
-const ListaAbstracta = require("./lista_abstracta");
+const ListaAbstractia = require("./lista_abstractia");
 const events = require("./events");
 
 let emptyVector, BubbleButt;
@@ -7,7 +7,7 @@ events.on("init", function (bubls) {
   BubbleButt = bubls.BubbleButt;
 });
 
-class Vector extends ListaAbstracta {
+class Vector extends ListaAbstractia {
 
   static get emptyVector() { return emptyVector; }
 
