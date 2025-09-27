@@ -16,18 +16,18 @@ describe("Vector", () => {
 
   describe("isEmpty", function () {
     it("should return true for an empty vector", function () {
-      let vector = Vector.make();
+      let vector = Vector.blow();
       assert.equal(vector.isEmpty, true);
     });
     it("should return false for a none empty vector", function () {
-      let vector = Vector.make(1);
+      let vector = Vector.blow(1);
       assert.equal(vector.isEmpty, false);
     });
   });
 
   describe("toString", function () {
     it("returns the expected string representation", function () {
-      let vector = Vector.make(1, 2, 3);
+      let vector = Vector.blow(1, 2, 3);
       assert.equal(vector.toString(), "[1 2 3]");
     });
   });
@@ -47,10 +47,10 @@ describe("Vector", () => {
     });
   });
 
-  describe("make(o...)", () => {
+  describe("blow(o...)", () => {
     it("makes a vector", () => {
-      assert.equal(Vector.make(), Vector.emptyVector);
-      let vector = Vector.make(1, 2, 3);
+      assert.equal(Vector.blow(), Vector.emptyVector);
+      let vector = Vector.blow(1, 2, 3);
       assert.equal(vector.get(0), 3);
       assert.equal(vector.get(1), 2);
       assert.equal(vector.get(2), 1);
@@ -59,14 +59,14 @@ describe("Vector", () => {
 
   describe("count(o)", function () {
     it("counts", function () {
-      let vector = Vector.make(1, 2, 3);
+      let vector = Vector.blow(1, 2, 3);
       assert.equal(vector.count(), 3);
     });
   });
 
   describe("get(o, index)", () => {
     it("gets value of o at index", () => {
-      let vector = Vector.make(6,7,8);
+      let vector = Vector.blow(6,7,8);
       assert.equal(vector.get(0), 8);
       assert.equal(vector.get(1), 7);
       assert.equal(vector.get(2), 6);
@@ -75,11 +75,11 @@ describe("Vector", () => {
 
   describe("invert", () => {
     it("inverts vectors", () => {
-      var vector = Vector.make();
+      var vector = Vector.blow();
       vector = vector.invert();
       assert.equal(vector, Vector.emptyVector);
 
-      vector = Vector.make(1);
+      vector = Vector.blow(1);
       vector = vector.invert();
       assert.equal(vector.peek(), 1);
       assert.equal(vector.skip(1), Vector.emptyVector);
@@ -90,7 +90,7 @@ describe("Vector", () => {
       vector = vector.invert();
       assert.equal(vector.peek(), 1);
 
-      let oo = Vector.make(1,2,3);
+      let oo = Vector.blow(1,2,3);
       assert.equal(oo.toString(), "[1 2 3]");
 
       let xo = oo.invert();
@@ -100,14 +100,14 @@ describe("Vector", () => {
 
   describe("map(vector, fn)", () => {
     it("maps vector through fn", ()=>{
-      var vector = Vector.make();
+      var vector = Vector.blow();
 
       let add7 = (vector) => { return vector + 7 };
 
       result = vector.map(add7);
       assert.equal(result, Vector.emptyVector);
 
-      vector = Vector.make(1);
+      vector = Vector.blow(1);
       vector = vector.map(add7);
       assert.equal(vector.get(), 8);
 
@@ -126,7 +126,7 @@ describe("Vector", () => {
 
   describe("push(vector)", () => {
     it("pushes vector ontvector the vector.", () => {
-      var vector = Vector.make();
+      var vector = Vector.blow();
 
       vector = vector.push(1);
       assert.equal(vector.get(), 1)
@@ -141,7 +141,7 @@ describe("Vector", () => {
 
   describe("reduce", () => {
     it("reduces the vector", () => {
-      var vector = Vector.make(),
+      var vector = Vector.blow(),
           result;
 
       let add = (a,b) => { return b + a };
@@ -164,7 +164,7 @@ describe("Vector", () => {
       result = vector.reduce(add)
       assert.equal(result, 6)
 
-      vector = Vector.make("a");
+      vector = Vector.blow("a");
       result = vector.reduce(add);
       assert.equal(result, "a");
 
@@ -180,7 +180,7 @@ describe("Vector", () => {
 
   describe("vector.skip(count)", () => {
     it("skips", () => {
-      let vector = Vector.make(6,7,8);
+      let vector = Vector.blow(6,7,8);
       assert.equal(vector.skip().peek(), 8);
       assert.equal(vector.skip(0).peek(), 8);
       assert.equal(vector.skip(1).peek(), 7);
@@ -190,13 +190,13 @@ describe("Vector", () => {
 
   describe("toString(vector)", () => {
     it("formats vector as a string.", () => {
-      var vector = Vector.make(),
+      var vector = Vector.blow(),
         result;
 
       result = vector.toString();
       assert.equal(result, "[]");
 
-      vector = Vector.make(1);
+      vector = Vector.blow(1);
       result = vector.toString();
       assert.equal(result, "[1]");
 
@@ -216,7 +216,7 @@ describe("Vector", () => {
       result = vector.toString();
       assert.equal(result, "[1 2 3 \"string\" symbol]");
 
-      let oo = Vector.make(3,2,1);
+      let oo = Vector.blow(3,2,1);
       assert.equal(oo.toString(), "[3 2 1]");
 
       vector = vector.pop().pop().push(oo);
@@ -227,7 +227,7 @@ describe("Vector", () => {
   describe("split", function () {
     it("should split a vector", function () {
       let sAmp = Ṣymbol.for("&");
-      let vector = Vector.make(1, 2, sAmp, 3);
+      let vector = Vector.blow(1, 2, sAmp, 3);
       assert.equal(vector.split(Ṣymbol.for("&")).toString(),
         "[[1 2] [3]]");
     });
@@ -255,7 +255,7 @@ describe("Vector", () => {
     });
 
     it("should yield the single element for a single-element vector", () => {
-      const vector = Vector.make(1); // Creates vector: 1 -> emptyVector
+      const vector = Vector.blow(1); // Creates vector: 1 -> emptyVector
       const expected = [1];
 
       const resultsForOf = [];
@@ -269,10 +269,10 @@ describe("Vector", () => {
     });
 
     it("should yield all elements in a multi-element vector in order", () => {
-      const vector = Vector.make(1, 2, 3); // Creates vector: 1 -> 2 -> 3 -> emptyVector
-                                           // Note: Vector.make actually creates it as 3 -> 2 -> 1 -> emptyVector
-                                           // The tests for make() show: make(1,2,3) -> vector.get(0)=3, vector.get(1)=2, vector.get(2)=1
-                                           // Svector the yielded order should be 3, 2, 1 for make(1,2,3)
+      const vector = Vector.blow(1, 2, 3); // Creates vector: 1 -> 2 -> 3 -> emptyVector
+                                           // Note: Vector.blow actually creates it as 3 -> 2 -> 1 -> emptyVector
+                                           // The tests for blow() show: blow(1,2,3) -> vector.get(0)=3, vector.get(1)=2, vector.get(2)=1
+                                           // Svector the yielded order should be 3, 2, 1 for blow(1,2,3)
       const expected = [3, 2, 1];
 
       const resultsForOf = [];
@@ -286,7 +286,7 @@ describe("Vector", () => {
     });
 
     it("should correctly yield null and undefined values if they are part of the vector", () => {
-      const vector = Vector.make(1, undefined, 3, null, 5); // Expected order: 5, null, 3, undefined, 1
+      const vector = Vector.blow(1, undefined, 3, null, 5); // Expected order: 5, null, 3, undefined, 1
       const expected = [5, null, 3, undefined, 1];
 
       const results = [...vector];
@@ -294,7 +294,7 @@ describe("Vector", () => {
     });
 
     it("should not modify the original vector during iteration", () => {
-      const vector = Vector.make("a", "b", "c"); // c -> b -> a
+      const vector = Vector.blow("a", "b", "c"); // c -> b -> a
       const expectedItems = ["c", "b", "a"];
       const expectedToString = '["a" "b" "c"]'; // Based on typical toString for such a vector structure
 
@@ -311,7 +311,7 @@ describe("Vector", () => {
     });
 
     it("should allow multiple iterations independently", () => {
-      const vector = Vector.make("x", "y"); // y -> x
+      const vector = Vector.blow("x", "y"); // y -> x
       const expected = ["y", "x"];
 
       const iterator1 = vector[Symbol.iterator]();

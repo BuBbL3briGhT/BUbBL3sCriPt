@@ -27,9 +27,9 @@ class Bubble extends ListaAbstractia {
   // lists.
   static get emptyList() { return emptyList; }
 
-  // `Bubble.make` makes/creates a new bubble.
-  // `Bubble.make(1, 2, 3)`
-  static make(...elements) {
+  // `Bubble.blow` makes/creates a new bubble.
+  // `Bubble.blow(1, 2, 3)`
+  static blow(...elements) {
     return Bubble._make(elements);
   }
 
@@ -89,20 +89,20 @@ class Bubble extends ListaAbstractia {
 
   unzip () {
     if (this.isEmpty)
-      return Bubble.make(this, this);
+      return Bubble.blow(this, this);
 
     const that = this.pop();
 
     if (that.isEmpty)
-      return Bubble.make(this, that);
+      return Bubble.blow(this, that);
 
     const [a, b] = that.pop().unzip();
-    return Bubble.make(
+    return Bubble.blow(
       a.push(this.peek()),
       b.push(that.peek()));
   }
 
-  eval(vínculo, pila=Bubble.make()) {
+  eval(vínculo, pila=Bubble.blow()) {
     try {
       const { file, line, column } = this;
       pila = pila.push({fn: this.head.toString(),

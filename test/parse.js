@@ -29,7 +29,7 @@ describe("parse(string)", () => {
 
   it("parses (1 2 3) into the correct AST structure", () => {
     const ast = parse("(1 2 3)");
-    const expectedAst = Bubble.make(1, 2, 3);
+    const expectedAst = Bubble.blow(1, 2, 3);
     expect(ast.peek()).to.
       containSubset(expectedAst);
       // "AST for (1 2 3) should be a bubble of 1, 2, 3");
@@ -38,7 +38,7 @@ describe("parse(string)", () => {
   it("parses (not true) into the correct AST structure", () => {
     let not = Ṣymbol.for("not");
     const ast = parse("(not true)");
-    const expectedAst = Bubble.make(not, true);
+    const expectedAst = Bubble.blow(not, true);
     expect(ast.peek()).to
       .containSubset(expectedAst);
   });
@@ -52,11 +52,11 @@ describe("parse(string)", () => {
   itParses(":keyword",
     {expects: keyword});
   itParses("(1 2 3)",
-    {expects: Bubble.make(1, 2, 3)});
+    {expects: Bubble.blow(1, 2, 3)});
   itParses("(a b c)",
-    {expects: Bubble.make(a, b, c)});
+    {expects: Bubble.blow(a, b, c)});
   itParses("(a 3 b 2 c 1)",
-    {expects: Bubble.make(a, 3, b, 2, c, 1)});
+    {expects: Bubble.blow(a, 3, b, 2, c, 1)});
 
   itParses2("a nested booble", "(1 (2))",
      Bubble.from([1, Bubble.from([2])]));
@@ -274,29 +274,29 @@ describe("Parser Structure and Edge Case Tests", () => {
     // The outer vector is the result of parse(). peek() gives the first element.
     // So, parse("1 2 (a b)") returns a vector containing 1, then 2, then vector (a b)
     // Expected structure: 1 -> 2 -> (a -> b -> air) -> air
-    // Vector.make(c, b, a) creates a -> b -> c -> air
+    // Vector.blow(c, b, a) creates a -> b -> c -> air
     const ast = parse("1 2 (a b)");
-    const expected = Vector.make( // This is the outer vector of expressions
+    const expected = Vector.blow( // This is the outer vector of expressions
         Bubble.from([Ṣymbol.for("a"), Ṣymbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
         2,
         1
     );
     // parse("1 2 (a b)") results in vector (1 2 (a b))
-    // Vector.make( (b a), 2, 1) -> 1 -> 2 -> (a b)
+    // Vector.blow( (b a), 2, 1) -> 1 -> 2 -> (a b)
     assert.deepEqual(ast, expected, "AST for multiple top-level expressions");
   });
 
   it("parses a single atom symbol correctly", () => {
     const ast = parse("atom").toList();
     // parse("atom") returns a vector containing one symbol: (atom)
-    const expected = Bubble.make(Ṣymbol.for("atom"));
+    const expected = Bubble.blow(Ṣymbol.for("atom"));
     assert.deepEqual(ast, expected, "AST for single atom symbol");
   });
 
   it("parses a single atom number correctly", () => {
     const ast = parse("123").toList();
     // parse("123") returns a vector containing one number: (123)
-    const expected = Bubble.make(123);
+    const expected = Bubble.blow(123);
     assert.deepEqual(ast, expected, "AST for single atom number");
   });
 
@@ -321,9 +321,9 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   // So ast.peek() is the Quoted(...) object.
 
   //   const ast = parse(input);
-  //   const expected = Bubble.make( // Outer vector from parse()
+  //   const expected = Bubble.blow( // Outer vector from parse()
   //     new Quoted(
-  //       Vector.make( // vector (a ...)
+  //       Vector.blow( // vector (a ...)
   //         Bubble.from([ // vector [1 "s" 'x] -- assuming balloons are parsed as vectors
   //           new Quoted(Ṣymbol.for("x")),
   //           "s",
@@ -346,7 +346,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     const ast = parse(input);
     // console.log(ast);
     const expected =
-      Vector.make(1, "s",
+      Vector.blow(1, "s",
         new Booble(Ṣymbol.for("x")));
     expect([...ast]).to.containSubset([expected]);
   });
@@ -373,14 +373,14 @@ describe("Parser Structure and Edge Case Tests", () => {
 
     const ast = parse(input);
     console.log(ast);
-    const expected = Bubble.make( // Outer vector from parse()
+    const expected = Bubble.blow( // Outer vector from parse()
       new Booble(
-        Bubble.make(
+        Bubble.blow(
           Ṣymbol.for("a"),
-          Bubble.make(
+          Bubble.blow(
             Ṣymbol.for("b"),
             Keyword.for("c"),
-            Vector.make(// vector [1 "s" °x] -- assuming balloons are parsed as vectors
+            Vector.blow(// vector [1 "s" °x] -- assuming balloons are parsed as vectors
               1,
               "s",
               new Booble(Ṣymbol.for("x"))
@@ -396,10 +396,10 @@ describe("Parser Structure and Edge Case Tests", () => {
     const input = "(define x '(1 [2 :key]))";
     // AST: Vector(Ṣymbol(define), Ṣymbol(x), Quoted(Vector(1, Vector(2, Keyword(key)))))
     const ast = parse(input);
-    const expected = Vector.make( // outer vector from parse
-      Vector.make( // vector (define ...)
+    const expected = Vector.blow( // outer vector from parse
+      Vector.blow( // vector (define ...)
         new Quoted(
-          Vector.make( // vector (1 ...)
+          Vector.blow( // vector (1 ...)
             Bubble.from([ // vector [2 :key]
               Keyword.for("key"),
               2,

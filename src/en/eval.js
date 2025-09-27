@@ -35,7 +35,7 @@ function evalExpression(expression) {
 
 function callStackPushEval(binding,
   expression, funcíon) {
-  const __callstack = binding.__callstack || Bubble.make();
+  const __callstack = binding.__callstack || Bubble.blow();
   binding.__callstack = __callstack.push(expression);
 
   const result = funcíon(binding, expression);

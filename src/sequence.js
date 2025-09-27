@@ -23,7 +23,7 @@ class MapSequence extends Sequence {
     if (next.done) return next;
 
     return {
-      value: this.fn.invoke(Bubble.make(next.value)),
+      value: this.fn.invoke(Bubble.blow(next.value)),
       done: false
     };
   }

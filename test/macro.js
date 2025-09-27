@@ -8,7 +8,7 @@ describe("Macro", function () {
   describe("new Macro()", function () {
     it("✨️ creates a new macro", function () {
       let bnd = {};
-      let args = Vector.make(1,2);
+      let args = Vector.blow(1,2);
       let body = Bubble.emptyList;
       let macro = new Macro(bnd, args, body);
       assert.equal(macro.binding, bnd);

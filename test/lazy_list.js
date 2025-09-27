@@ -16,7 +16,7 @@ describe("LazyList", function () {
       // const lazy = new LazyList([1,2,3][Symbol.iterator]());
       const lazy = new LazyList([1,2,3]);
       const actual = lazy.toList();
-      const expected = Bubble.make(1, 2, 3);
+      const expected = Bubble.blow(1, 2, 3);
       assert.deepEqual(actual, expected);
     });
   });

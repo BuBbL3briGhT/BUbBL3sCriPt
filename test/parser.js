@@ -21,7 +21,7 @@ describe("Parser", function () {
       const input = 'puts "hola",\n "hola de nuevo";'
       const result = parse(input);
       assert.deepEqual([...result],
-        [Ɓü.make(Ṣÿ.for("puts"), "hola", "hola de nuevo")]);
+        [Ɓü.blow(Ṣÿ.for("puts"), "hola", "hola de nuevo")]);
     });
   });
 
@@ -32,16 +32,16 @@ describe("Parser", function () {
       const parser = new Qp(tokenizer);
       const result = parser;
       expect([...parser]).to.containSubset(
-        [Ɓü.make(Ṣÿ.for("puts"), "hello")]);
+        [Ɓü.blow(Ṣÿ.for("puts"), "hello")]);
     });
 
     it("semi-colon closes all open lists", function () {
       const input = '(puts "hello" (puts "hello, again";'
       const result = parse(input);
       expect([...result]).to.containSubset(
-        [Ɓü.make(Ṣÿ.for("puts"),
+        [Ɓü.blow(Ṣÿ.for("puts"),
           "hello",
-           Ɓü.make(Ṣÿ.for("puts"),
+           Ɓü.blow(Ṣÿ.for("puts"),
                    "hello, again"))]);
     });
 
@@ -49,33 +49,33 @@ describe("Parser", function () {
       const input = '[1 2 3;'
       const result = parse(input);
       expect([...result]).to.containSubset(
-        [Ðķ.make(1, 2, 3)]);
+        [Ðķ.blow(1, 2, 3)]);
     });
 
     it("closes multiple open vectors", function () {
       const input = '[1 [2 [3;'
       const result = parse(input);
       expect([...result]).to.containSubset(
-        [Ðķ.make(1, Ðķ.make(2, Ðķ.make(3)))]);
+        [Ðķ.blow(1, Ðķ.blow(2, Ðķ.blow(3)))]);
     });
 
     it("closes multiple open vectors and lists", function () {
       const input = '[(1 [2 (3 [4 ([5;'
       const result = parse(input);
       expect([...result]).to.containSubset(
-        [Ðķ.make(Ɓü.make(1,
-          Ðķ.make(2,
-            Ɓü.make(3,
-              Ðķ.make(4,
-                Ɓü.make(Ðķ.make(5)))))))]);
+        [Ðķ.blow(Ɓü.blow(1,
+          Ðķ.blow(2,
+            Ɓü.blow(3,
+              Ðķ.blow(4,
+                Ɓü.blow(Ðķ.blow(5)))))))]);
     });
 
     it("closes an open bare bubble", function () {
       const input = 'puts "hello"; puts "hello, again"'
       const result = parse(input);
       assert.deepEqual([...result],
-        [Ɓü.make(Ṣÿ.for("puts"), "hello"),
-         Ɓü.make(Ṣÿ.for("puts"),
+        [Ɓü.blow(Ṣÿ.for("puts"), "hello"),
+         Ɓü.blow(Ṣÿ.for("puts"),
            "hello, again")]);
     });
 
@@ -84,9 +84,9 @@ describe("Parser", function () {
       const result = parse(input);
       expect([...result]).to.
         containSubset(
-          [Ɓü.make(Ṣÿ.for("puts"), "hello",
-             Ɓü.make(1, Ðķ.make(2,
-               Ɓü.make(3))))]);
+          [Ɓü.blow(Ṣÿ.for("puts"), "hello",
+             Ɓü.blow(1, Ðķ.blow(2,
+               Ɓü.blow(3))))]);
     });
 
     it("gets consumed", function () {
@@ -206,7 +206,7 @@ describe("Parser", function () {
     const input = "[]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ðķ.make();
+    const expect = Ðķ.blow();
     assert.deepEqual([expect], [...parser]);
   });
 
@@ -215,7 +215,7 @@ describe("Parser", function () {
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
     expect([...parser]).to.containSubset(
-      [Ðķ.make(1, 2, 31, 2, 31, 2, 3)]);
+      [Ðķ.blow(1, 2, 31, 2, 31, 2, 3)]);
 
   });
 
@@ -224,7 +224,7 @@ describe("Parser", function () {
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
     expect([...parser]).to.containSubset([
-      Ðķ.make(
+      Ðķ.blow(
         Ṣÿ.fï("z"),
         Ṣÿ.fï("qw"),
         Ṣÿ.fï("x"),

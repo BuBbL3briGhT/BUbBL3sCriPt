@@ -8,9 +8,9 @@ const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");
 
-        if (!Ɓü.ɓlọẅ) { Ɓü.ɓlọẅ = Ɓü.make; }
+        if (!Ɓü.ɓlọẅ) { Ɓü.ɓlọẅ = Ɓü.blow; }
         if (!Ṣÿ.fï) { Ṣÿ.fï = Ṣÿ.for; }
-        if (!Ðķ.mƙ) { Ðķ.mƙ = Ðķ.make; }
+        if (!Ðķ.mƙ) { Ðķ.mƙ = Ðķ.blow; }
 
 const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
   TOK_KEYWORD, TOK_TRUE, TOK_FALSE, TOK_NEWLiNE,
@@ -80,7 +80,7 @@ class Qp {
     throw new UnexpectedEndOfInputError();
   }
 
-  parseÐķ(ðķ = Ðķ.make()) {
+  parseÐķ(ðķ = Ðķ.blow()) {
     const token = this.nextToken;
 
     if (token)

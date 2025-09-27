@@ -12,7 +12,7 @@ class LazyList extends Bubble {
         // if it is call the iterator method to get the iterator.
         itty = itty[Symbol.iterator]();
 
-        // One final check to make sure we got an iterator back from the iterator method.
+        // One final check to blow sure we got an iterator back from the iterator method.
         if (!itty.next)
           throw Error("Iterator method returned an object that is not an iterator: " + { itty });
 

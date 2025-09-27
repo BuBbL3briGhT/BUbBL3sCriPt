@@ -11,7 +11,7 @@ class Vector extends ListaAbstractia {
 
   static get emptyVector() { return emptyVector; }
 
-  static make(...elements) {
+  static blow(...elements) {
     var head = emptyVector;
     for (let o of elements)
       head = new this(o, head);

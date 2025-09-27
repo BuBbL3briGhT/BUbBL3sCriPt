@@ -29,7 +29,7 @@ class ListaAbstractia {
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
-    return this.make(...array);
+    return this.blow(...array);
   }
 
   constructor(o, oo) {
@@ -71,7 +71,7 @@ class ListaAbstractia {
       return this.pop().take(--count)
         .push(this.peek());
 
-    return this.constructor.make();
+    return this.constructor.blow();
   }
 
   skip(i) {
@@ -99,7 +99,7 @@ class ListaAbstractia {
     return this.pop().reduce(
       (accumulator, currentElement) => {
         return accumulator.push(currentElement);
-      }, this.constructor.make(this.peek()));
+      }, this.constructor.blow(this.peek()));
   }
 
   // Conjunta una lista con esta lista.
@@ -205,13 +205,13 @@ class ListaAbstractia {
     if (this.isEmpty)
       return this;
     if (value == this.head)
-      return this.constructor.make();
+      return this.constructor.blow();
     else
       return new this.constructor(this.head, this.tail.until(value));
   }
 
   split(value) {
-    let result = this.constructor.make();
+    let result = this.constructor.blow();
     let sub = this.find(value);
     if (sub) {
       sub = sub.pop();
@@ -243,7 +243,7 @@ class ListaAbstractia {
   // #LongLivePlop! ✨️
   plop() {
     return this.constructor.
-      make(this.peek(), this.pop());
+      blow(this.peek(), this.pop());
   }
 
 

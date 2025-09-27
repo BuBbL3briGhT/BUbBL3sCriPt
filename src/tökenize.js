@@ -228,7 +228,7 @@ class NumberMatcher {
 }
 
 // Symbol Delimiters
-const symDelims = Bubble.make(' ', '\n', '\r',
+const symDelims = Bubble.blow(' ', '\n', '\r',
     ')', ']', '}', ',', ';');
 
 // SymbolMatcher: Matches ^<symbol> from
@@ -278,7 +278,7 @@ class SymbolMatcher {
 }
 
 class Char {
-  static newlineChars = Bubble.make("\n", "\r");
+  static newlineChars = Bubble.blow("\n", "\r");
 
   static isNum(char) {
     switch (char) {

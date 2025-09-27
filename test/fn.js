@@ -8,7 +8,7 @@ describe("Fn", function () {
     it("returns function as a string", function ()  {
       let a = Ṣymbol.for("a");
       let b= Ṣymbol.for("b");
-      let fn = new Fn({}, Bubble.make(a, b), Bubble.make(a));
+      let fn = new Fn({}, Bubble.blow(a, b), Bubble.blow(a));
       assert.equal(fn.toString(), "(fn (a b) a)");
     });
   });

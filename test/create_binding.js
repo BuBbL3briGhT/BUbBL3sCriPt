@@ -11,9 +11,9 @@ describe("createBinding", function () {
 
   it("crea un enlace", function () {
     const cerveza = Object.create(null);
-    const llaves = Bubble.make(ṣ("uno"), ṣ("dos"),
+    const llaves = Bubble.blow(ṣ("uno"), ṣ("dos"),
       ṣ("tres"));
-    const valors = Bubble.make(1, 2, 3);
+    const valors = Bubble.blow(1, 2, 3);
     (function (cerveza) {
       assert.equal(cerveza[ṣ("uno")],  1);
       assert.equal(cerveza[ṣ("dos")],  2);

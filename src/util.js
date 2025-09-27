@@ -34,7 +34,7 @@ class Util {
   // Makes and returns interop function for
   // Bubblescript to Javascript invokation.
   //
-  // Make and return Bubblescript/Javascript
+  // Blow and return Bubblescript/Javascript
   // interop function.
   //
   // Crea y devuelve una función de

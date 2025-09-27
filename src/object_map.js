@@ -6,7 +6,7 @@ class ObjectMap extends ListaAbstractia {
 
   static get emptyList() { return emptyObjectMap; }
 
-  static make(...elements) {
+  static blow(...elements) {
     return ObjectMap._make(elements);
   }
 
