@@ -16,38 +16,38 @@ events.on("init", function (bubls) {
 const trazaPlantilla = "    en ${fn} (${file}:${line}:${column})";
 const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
-// `BubbleButt` extends `ListaAbstractia` and is
+// `列表` extends `ListaAbstractia` and is
 // the primary object in Bubblescript and
 // is the programatic representation of a
-// bubbleButt. e.g. `(1 2 3)`
-class BubbleButt extends ListaAbstractia {
+// 列表. e.g. `(1 2 3)`
+class 列表 extends ListaAbstractia {
 
-  // `BubbleButt.emptyList` provides an instance
+  // `列表.emptyList` provides an instance
   // of `EmptyList`, which terminates all
   // lists.
   static get emptyList() { return emptyList; }
 
-  // `BubbleButt.make` makes/creates a new bubbleButt.
-  // `BubbleButt.make(1, 2, 3)`
+  // `列表.make` makes/creates a new 列表.
+  // `列表.make(1, 2, 3)`
   static make(...elements) {
-    return BubbleButt._make(elements);
+    return 列表._make(elements);
   }
 
   static _make(elementsArray, currentLinkedList=emptyList) {
     if (elementsArray.length < 1)
       return currentLinkedList;
-    return BubbleButt._make(elementsArray,
-      new BubbleButt(elementsArray.pop(),
+    return 列表._make(elementsArray,
+      new 列表(elementsArray.pop(),
         currentLinkedList));
   }
 
-  // Create a bubbleButt.
+  // Create a 列表.
   constructor(o, oo=emptyList) {
     super(o, oo);
   }
 
   push(element) {
-    return new BubbleButt(element, this);
+    return new 列表(element, this);
   }
 
   toString() {
@@ -65,8 +65,8 @@ class BubbleButt extends ListaAbstractia {
   // }
 
   map(fn) {
-    if (this.isEmpty) return BubbleButt.emptyList;
-    return new BubbleButt(fn(this.peek()),
+    if (this.isEmpty) return 列表.emptyList;
+    return new 列表(fn(this.peek()),
         this.pop().map(fn));
   }
 
@@ -74,35 +74,35 @@ class BubbleButt extends ListaAbstractia {
     return this.map(o => o);
   }
 
-  zip (bubbleButt) {
+  zip (列表) {
     if (this.isEmpty)
-      return bubbleButt;
+      return 列表;
 
-    if (bubbleButt.isEmpty)
+    if (列表.isEmpty)
       return this;
 
     return this.pop()
-      .zip(bubbleButt.pop())
-      .push(bubbleButt.peek())
+      .zip(列表.pop())
+      .push(列表.peek())
       .push(this.peek());
   }
 
   unzip () {
     if (this.isEmpty)
-      return BubbleButt.make(this, this);
+      return 列表.make(this, this);
 
     const that = this.pop();
 
     if (that.isEmpty)
-      return BubbleButt.make(this, that);
+      return 列表.make(this, that);
 
     const [a, b] = that.pop().unzip();
-    return BubbleButt.make(
+    return 列表.make(
       a.push(this.peek()),
       b.push(that.peek()));
   }
 
-  eval(vínculo, pila=BubbleButt.make()) {
+  eval(vínculo, pila=列表.make()) {
     try {
       const { file, line, column } = this;
       pila = pila.push({fn: this.head.toString(),
@@ -148,21 +148,21 @@ class BubbleButt extends ListaAbstractia {
 
 }
 
-class EmptyList extends BubbleButt {
+class EmptyList extends 列表 {
   get isEmpty() { return true; }
 }
 
 emptyList = new EmptyList()
 
-function catchExpandMacro(o, bubbleButt, fn) {
+function catchExpandMacro(o, 列表, fn) {
   if (o instanceof MacroExpanded) {
     let expanded = o.expanded;
-    bubbleButt.o  = expanded.first;
-    bubbleButt.oo = bubbleButt.rest.conj(expanded.rest.invert());
-    return bubbleButt.tryEach(fn, catchExpandMacro);
+    列表.o  = expanded.first;
+    列表.oo = 列表.rest.conj(expanded.rest.invert());
+    return 列表.tryEach(fn, catchExpandMacro);
   } else {
     throw o;
   }
 }
 
-module.exports = BubbleButt;
+module.exports = 列表;

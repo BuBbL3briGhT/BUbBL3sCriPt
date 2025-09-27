@@ -1,13 +1,13 @@
 const assert = require("assert");
 const sinon = require("sinon");
 
-// const BubbleButt = require("../src/bubble_butt");
+// const 列表 = require("../src/列表");
 // const Vector = require("../src/vector");
 // const rootBinding = require("../src/root_binding");
 
 // const { ėval } = require("../src/eval");
 
-const { BubbleButt, Vector, rootBinding,
+const { 列表, Vector, rootBinding,
   ėval, ëval, parse, Keyword } =
   require("../src/BubbleScript");
 
@@ -110,15 +110,15 @@ describe("eval(script)", function () {
 
     let ast =
       parse("(muf 🐒 (macro [🐸 🐷 🦎] "+
-            "  (bubbleButt °puts             "+
-            "    (bubbleButt °+ 🐸 🐷 🦎))   "+
-            "  (bubbleButt °puts             "+
+            "  (列表 °puts             "+
+            "    (列表 °+ 🐸 🐷 🦎))   "+
+            "  (列表 °puts             "+
             "    (+ 🐸 🐷 🐷) 🦎)))    ");
 
     assert.equal(ast.toString(),
       "((muf 🐒 (macro [🐸 🐷 🦎] "+
-      "(bubbleButt °puts (bubbleButt °+ 🐸 🐷 🦎)) "+
-      "(bubbleButt °puts (+ 🐸 🐷 🐷) 🦎))))");
+      "(列表 °puts (列表 °+ 🐸 🐷 🦎)) "+
+      "(列表 °puts (+ 🐸 🐷 🐷) 🦎))))");
 
     ast.evalEach(bnd);
 
@@ -140,10 +140,10 @@ describe("eval(script)", function () {
   describe("function parameters", function () {
     it("splats", function () {
       assert.equal(ėval(
-        "((fn [a b c] (bubbleButt b c a)) 1 2 3)")
+        "((fn [a b c] (列表 b c a)) 1 2 3)")
           .toString(), "(2 3 1)");
       assert.equal(ėval(
-        "((fn [a & b] (bubbleButt a b)) 1 2 3)")
+        "((fn [a & b] (列表 a b)) 1 2 3)")
           .toString(), "(1 (2 3))");
       assert.equal(ėval(
         "((fn [& a] (send a :pop)) 1 2 3)")
@@ -152,15 +152,15 @@ describe("eval(script)", function () {
       //   "((fn [& a] (pop a)) 1 2 3)")
       //     .toString(), "(2 3)");
       // assert.equal(ėval(
-      //   "((fn [a b & c] (bubbleButt & c)) 1 2 3)")
+      //   "((fn [a b & c] (列表 & c)) 1 2 3)")
       //     .toString(), "(3)");
     });
     it("destructures", function () {
       assert.equal(ėval(
-        "((fn [a b] (bubbleButt a b b)) 1 [2 3])")
+        "((fn [a b] (列表 a b b)) 1 [2 3])")
           .toString(), "(1 [2 3] [2 3])");
       assert.equal(ėval(
-        "((fn [a [b c]] (bubbleButt a b c)) 1 [2 3])")
+        "((fn [a [b c]] (列表 a b c)) 1 [2 3])")
           .toString(), "(1 2 3)");
     });
     it("splats for outbound functions");
@@ -179,7 +179,7 @@ describe("eval(script)", function () {
       //     .toString(), "(3)");
     it("splats for inbound functions");
       // assert.equal(ėval(
-      //   "((fn [a b & c] (bubbleButt & c)) 1 2 3)")
+      //   "((fn [a b & c] (列表 & c)) 1 2 3)")
       //     .toString(), "(3)");
   });
 });

@@ -1,5 +1,5 @@
 const createBinding = require("./create_binding");
-const BubbleButt = require("./bubble_butt");
+const 列表 = require("./列表");
 
 class Macro {
   constructor(binding, params, body, opts={}) {

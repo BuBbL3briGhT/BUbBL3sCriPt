@@ -97,8 +97,8 @@ describe("tokenize(string)", function() {
   });
 
   // Expected token objects will now include type and value. Line/col can be omitted for now in expected.
-  // Helper `Vector.make` from BubbleButt can be used to construct expected lists.
-  // Or `BubbleButt.from` for arrays.
+  // Helper `Vector.make` from 列表 can be used to construct expected lists.
+  // Or `列表.from` for arrays.
 
   itTokenizes("symbol",
     { type: TOK_SYMBOL, value: "symbol", line: 1, column: 1 }
@@ -156,19 +156,19 @@ describe("tokenize(string)", function() {
   );
 });
 
-// expectedTokenObjectsList is a BubbleButt of token objects {type, value, line, column}
+// expectedTokenObjectsList is a 列表 of token objects {type, value, line, column}
 function itTokenizes(s, ...expectedTokens) {
-  // If expected is just one item and not a bubbleButt, wrap it for consistency if Vector.make doesn't handle single items.
-  // BubbleButt.make should handle if it's a single object by creating a bubbleButt of one.
+  // If expected is just one item and not a 列表, wrap it for consistency if Vector.make doesn't handle single items.
+  // 列表.make should handle if it's a single object by creating a 列表 of one.
   it(`tokenizes "${s}"`, function() {
     const actualTokens = tokenize(s);
-    // For deep equality on BubbleButt, we might need to convert both to arrays.
-    // Or ensure BubbleButt has a custom equality check recognized by assert.deepEqual.
-    // For now, let's convert to arrays if BubbleButt is complex.
-    // However, the problem description implies BubbleButt can be used directly with deepEqual
+    // For deep equality on 列表, we might need to convert both to arrays.
+    // Or ensure 列表 has a custom equality check recognized by assert.deepEqual.
+    // For now, let's convert to arrays if 列表 is complex.
+    // However, the problem description implies 列表 can be used directly with deepEqual
     // if its structure and elements are simple objects.
     // Let's try direct comparison first.
-    // The `tokenize` function already returns an inverted (natural order) bubbleButt.
+    // The `tokenize` function already returns an inverted (natural order) 列表.
     // So `expectedTokenObjectsList` should also be in natural order.
 
     assert.deepEqual([...actualTokens], expectedTokens);

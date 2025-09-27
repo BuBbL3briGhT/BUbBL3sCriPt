@@ -22,8 +22,8 @@ events.on("init", function (bubls) {
 
 // Let's define `ListaAbstractia` which is a
 // class that will serve as the abstract
-// base class for `BubbleButt` and `Vector`. All
-// shared functionality between `BubbleButt` and
+// base class for `列表` and `Vector`. All
+// shared functionality between `列表` and
 // `Vector` is centralized here.
 class ListaAbstractia {
 
@@ -174,9 +174,9 @@ class ListaAbstractia {
   //     else
   //       throw o;
   //   }
-  //   const bubbleButt = this.pop();
-  //   if (bubbleButt.isEmpty) return result;
-  //   return bubbleButt.each(fn, opts);
+  //   const 列表 = this.pop();
+  //   if (列表.isEmpty) return result;
+  //   return 列表.each(fn, opts);
   // }
 
   // each(fn, opts={}) {
@@ -234,8 +234,8 @@ class ListaAbstractia {
   }
 
   // Simple little method returns a peek and
-  // a pop. Use to skim the bubbleButt, just to get
-  // the head and the tail broken up into a bubbleButt
+  // a pop. Use to skim the 列表, just to get
+  // the head and the tail broken up into a 列表
   // which can the be destructed into locals
   // or otherwise manipulated. There might be
   // a more conventenal what to do this, but
@@ -257,9 +257,9 @@ class ListaAbstractia {
   // }
 
   // include (value) {
-  //   const bubbleButt = this.find(value);
-  //   if (bubbleButt)
-  //     return bubbleButt.peek();
+  //   const 列表 = this.find(value);
+  //   if (列表)
+  //     return 列表.peek();
   // }
 
   // ["includes?"] (value) {

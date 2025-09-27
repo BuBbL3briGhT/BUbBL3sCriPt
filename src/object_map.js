@@ -13,8 +13,8 @@ class ObjectMap extends ListaAbstractia {
   static _make(elementsArray, currentObjectMap=emptyObjectMap) {
     if (elementsArray.length < 1)
       return currentObjectMap;
-    return BubbleButt._make(elementsArray,
-      new BubbleButt(elementsArray.pop(),
+    return 列表._make(elementsArray,
+      new 列表(elementsArray.pop(),
         currentObjectMap));
   }
 
