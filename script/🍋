@@ -29,7 +29,7 @@ files=$(echo "$files" | \
 
 # for file in "${files[@]}"; do
 for file in $files; do
-  # echo "Renaming: $file"
+  echo "Renaming: $file"
   # get new path
   # new_path=$(echo "$file" | sed "s/$1/$2/g")
   new_path=$(echo "$file" | \
@@ -43,10 +43,10 @@ for file in $files; do
   # get dir
   _dir=$(dirname $new_path)
   echo _dir "$_dir"
-  # if [ ! -d "$directory_path" ]; then
-  #   echo mkdir -p "$directory_path"
-  # fi
+  if [ ! -d "$_dir" ]; then
+    echo mkdir -p "$_dir"
+  fi
 
   # rename old to new
-  # echo mv "$file" "$new_path"
+  echo mv "$file" "$new_path"
 done
