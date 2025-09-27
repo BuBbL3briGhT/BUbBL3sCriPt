@@ -9,6 +9,11 @@
 # TODO: Address warning and errors being printed.
 # TODO: sed desnt seem to work on files with ö in the
 # name. Maybe update? Work around if neccesary...
+# TODO: Can't decern wheter to use camel case or
+# underscore when going from single to multiple
+# portion symbol, for example list ->
+# bubbleButt|bubble_butt. For this, it seems context
+# is required.
 
 
 function camelizar() {
