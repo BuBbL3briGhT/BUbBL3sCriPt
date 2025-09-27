@@ -49,5 +49,5 @@ for file in $files; do
 
   echo "Renaming: $file => $new_path"
   # rename old to new
-  echo mv "$file" "$new_path"
+  mv "$file" "$new_path"
 done
