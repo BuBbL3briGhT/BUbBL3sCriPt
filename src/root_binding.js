@@ -1,4 +1,4 @@
-const List = require("./list");
+const BubbleButt = require("./bubble_butt");
 const Vector = require("./vector");
 const ObjectMap = require("./object_map");
 const Fn = require("./fn");
@@ -32,12 +32,12 @@ const rootBinding = {
     let key = args.peek();
     let val = args.pop();
 
-    // If the key turns out to be a list, then
+    // If the key turns out to be a bubbleButt, then
     // we do a function definition using the
-    // first item of the list as the key and the
-    // rest as the paramter list, otherwise do a
+    // first item of the bubbleButt as the key and the
+    // rest as the paramter bubbleButt, otherwise do a
     // normal key value definition.
-    if (key instanceof List) {
+    if (key instanceof BubbleButt) {
       let name = key.peek().toString();
       return this[key.peek().toString()]
         = new Fn(this, key.pop(), val, { name,
@@ -50,9 +50,9 @@ const rootBinding = {
     }
   }),
 
-  const: specialForm(function (list) {
-    const key = list.peek();
-    const value = list.pop();
+  const: specialForm(function (bubbleButt) {
+    const key = bubbleButt.peek();
+    const value = bubbleButt.pop();
     let o;
 
     if (key === starSymbol) {
@@ -65,8 +65,8 @@ const rootBinding = {
     }
 
     switch (key.constructor) {
-      case List:
-        // List sets a function
+      case BubbleButt:
+        // BubbleButt sets a function
         break;
       case ObjectMap:
         o = value.eval(this);
@@ -100,9 +100,9 @@ const rootBinding = {
     }
   }),
 
-  fn: specialForm(function(list) {
-    return new Fn(this, list.first.toList(),
-                        list.rest)
+  fn: specialForm(function(bubbleButt) {
+    return new Fn(this, bubbleButt.first.toList(),
+                        bubbleButt.rest)
   }),
 
   macro: specialForm(function(args) {
@@ -114,12 +114,12 @@ const rootBinding = {
     const x = args.push(Ṣymbol.for('fn'));
     const fn = ëval(binding, x);
     return function(...args) {
-      return fn.invoke(List.from(args));
+      return fn.invoke(BubbleButt.from(args));
     }
   }),
 
-  let: specialForm(function(list) {
-    const [params, body] = list.plop();
+  let: specialForm(function(bubbleButt) {
+    const [params, body] = bubbleButt.plop();
     const binding = Object.create(this);
     params.toList().partition(2)
       .each(([llave, valor]) => {
@@ -152,14 +152,14 @@ const rootBinding = {
     alert(this.concat(msgs));
   }),
 
-  expandmacro: specialForm(function(list) {
-    const [head, tail] = list.plop();
+  expandmacro: specialForm(function(bubbleButt) {
+    const [head, tail] = bubbleButt.plop();
     const macro = ëval(this, head);
     return macro.expand(tail);
   }),
 
-  loop: specialForm(function(list) {
-    const [params, cuerpo] = list.plop(),
+  loop: specialForm(function(bubbleButt) {
+    const [params, cuerpo] = bubbleButt.plop(),
           cerveza = Object.create(this);
 
     var recurCalled,
@@ -195,16 +195,16 @@ const rootBinding = {
     return args.eval(this);
   }),
 
-  list: specialFormP(function(params) {
+  bubbleButt: specialFormP(function(params) {
     return params;
   }),
 
-  vector: specialFormP(function(list) {
-    return list.toVector();
+  vector: specialFormP(function(bubbleButt) {
+    return bubbleButt.toVector();
   }),
 
-  obj: specialFormP(function(list) {
-    return list.partition(2).reduce(
+  obj: specialFormP(function(bubbleButt) {
+    return bubbleButt.partition(2).reduce(
       function(memo, [key, val]) {
         memo[key] = val;
         return memo;
@@ -266,7 +266,7 @@ const rootBinding = {
   },
 
   send: function(receipient, message, ...params) {
-    // console.log("list", list);
+    // console.log("bubbleButt", bubbleButt);
     // console.log("receipient", receipient);
     // console.log("params", params);
 

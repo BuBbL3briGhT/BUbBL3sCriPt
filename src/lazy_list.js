@@ -1,8 +1,8 @@
-const List = require("./list");
+const BubbleButt = require("./bubble_butt");
 
-class LazyList extends List {
+class LazyList extends BubbleButt {
 
-  get emptyList () { return List.emptyList }
+  get emptyList () { return BubbleButt.emptyList }
 
   constructor (itty) {
 

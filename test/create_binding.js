@@ -1,7 +1,7 @@
 const assert = require("assert");
   const createBinding = require("../src/create_binding.js");
 const Ṣymbol = require("../src/symbol.js");
-  const List = require("../src/list.js");
+  const BubbleButt = require("../src/bubble_butt.js");
 
 const ṣ = Ṣymbol.for.bind(Ṣymbol);
 
@@ -11,9 +11,9 @@ describe("createBinding", function () {
 
   it("crea un enlace", function () {
     const cerveza = Object.create(null);
-    const llaves = List.make(ṣ("uno"), ṣ("dos"),
+    const llaves = BubbleButt.make(ṣ("uno"), ṣ("dos"),
       ṣ("tres"));
-    const valors = List.make(1, 2, 3);
+    const valors = BubbleButt.make(1, 2, 3);
     (function (cerveza) {
       assert.equal(cerveza[ṣ("uno")],  1);
       assert.equal(cerveza[ṣ("dos")],  2);

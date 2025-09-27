@@ -1,5 +1,5 @@
-const List = require("./list");
-const List = require("./list");
+const BubbleButt = require("./bubble_butt");
+const BubbleButt = require("./bubble_butt");
 const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
@@ -35,7 +35,7 @@ function evalExpression(expression) {
 
 function callStackPushEval(binding,
   expression, funcíon) {
-  const __callstack = binding.__callstack || List.make();
+  const __callstack = binding.__callstack || BubbleButt.make();
   binding.__callstack = __callstack.push(expression);
 
   const result = funcíon(binding, expression);
@@ -48,7 +48,7 @@ function ëval(binding, expression) {
   return expression.evalEach(binding);
 }
 
-// Evaluates to parameter list.
+// Evaluates to parameter bubbleButt.
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {

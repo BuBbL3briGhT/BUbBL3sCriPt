@@ -1,6 +1,6 @@
 const Ðķ = require("./vector");
 const Ķÿ = require("./keyword");
-const Ɓü = require("./list");
+const Ɓü = require("./bubble_butt");
 const Ɓů = require("./bubble");
 const Ṣÿ = require("./symbol");
 const ObjectMap = require("./object_map");
@@ -144,17 +144,17 @@ class Parser {
     return o;
   }
 
-  parseList(list = Ɓü.ɓlọẅ()) {
+  parseList(bubbleButt = Ɓü.ɓlọẅ()) {
     const token = this.nextTokenSkipNewLines;
 
     if (token)
       switch (token.type) {
         case ")":
         case ";":
-          return list;
+          return bubbleButt;
         default:
           const o = this.parse(token);
-          return this.parseList(list).push(o);
+          return this.parseList(bubbleButt).push(o);
       }
 
     throw new UnexpectedEndOfInputError();

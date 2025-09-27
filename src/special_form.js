@@ -3,14 +3,14 @@
 
 // Special form functions are used primarily in
 // the root binding. They receive parameters as
-// a list and do not preform expansion. The
+// a bubbleButt and do not preform expansion. The
 // constructor takes a function which will be
-// passed the params as a list. During
+// passed the params as a bubbleButt. During
 // evaluation, the function will be bound to the
 // binding, therefore the current binding can be
 // accessed with this. The second constructor
 // parameter is an options map. If the key for
-// evaluateParams is set to true, the list will
+// evaluateParams is set to true, the bubbleButt will
 // be evaluated against the binding before being
 // passed to the special form function. This
 // value defaults to false.

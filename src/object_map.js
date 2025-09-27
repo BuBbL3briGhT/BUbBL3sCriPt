@@ -13,8 +13,8 @@ class ObjectMap extends AbstractList {
   static _make(elementsArray, currentObjectMap=emptyObjectMap) {
     if (elementsArray.length < 1)
       return currentObjectMap;
-    return List._make(elementsArray,
-      new List(elementsArray.pop(),
+    return BubbleButt._make(elementsArray,
+      new BubbleButt(elementsArray.pop(),
         currentObjectMap));
   }
 

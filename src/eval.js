@@ -1,5 +1,5 @@
-const List = require("./list");
-const Lista = require("./list");
+const BubbleButt = require("./bubble_butt");
+const Lista = require("./bubble_butt");
 const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
@@ -56,7 +56,7 @@ function ëval(binding, expression) {
   return expression.evalEach(binding);
 }
 
-// Evaluates a parameter list.
+// Evaluates a parameter bubbleButt.
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {

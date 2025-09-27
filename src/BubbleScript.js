@@ -7,7 +7,7 @@
        *  */
 
 const AbstractList = require("./abstract_list");
-const List = require("./list");
+const BubbleButt = require("./bubble_butt");
 const Vector = require("./vector");
 const Ṣymbol = require("./symbol");
 const Keyword = require("./keyword");
@@ -21,7 +21,7 @@ const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
 const BubbleScript = {
-  List, Vector, Ṣymbol, Keyword, Bubble, Fn,
+  BubbleButt, Vector, Ṣymbol, Keyword, Bubble, Fn,
   Macro, tokenize, Parser, parse, eval: ėval,
   ėval, ëval, evalExpression, rootBinding
 }
@@ -31,8 +31,8 @@ events.emit("init", BubbleScript);
 (function() {
   let bnd = rootBinding;
 
-  function list(...args) {
-    return List.from(args);
+  function bubbleButt(...args) {
+    return BubbleButt.from(args);
   }
 
   function vector(...args) {
@@ -45,8 +45,8 @@ events.emit("init", BubbleScript);
 
   function muf(...args) {
     // return ėval(bnd, arry.toList(args).push(_muf));
-    // return ëval(bnd, List.from(args).push(_muf));
-    return List.from(args).push(_muf).eval(bnd);
+    // return ëval(bnd, BubbleButt.from(args).push(_muf));
+    return BubbleButt.from(args).push(_muf).eval(bnd);
   }
 
   let _push = Ṣymbol.for('push'),
@@ -59,26 +59,26 @@ events.emit("init", BubbleScript);
        name = Ṣymbol.for('name'),
        amp = Ṣymbol.for('&'),
        z = Ṣymbol.for('z'),
-      _list = Ṣymbol.for('list'),
+      _list = Ṣymbol.for('bubbleButt'),
       _muf = Ṣymbol.for('muf'),
       puts = Ṣymbol.for('puts'),
       msg = Ṣymbol.for('msg'),
       consoleLog = Ṣymbol.for('console.log');
 
   // muf push (fn [a b] (send a °push b))
-  muf(_push, list(fn, vector(a, b),
-       list(send, a, quote(_push), b)));
+  muf(_push, bubbleButt(fn, vector(a, b),
+       bubbleButt(send, a, quote(_push), b)));
 
   // (muf (puts msg) (console.log msg))
   // (muf puts (fn [msg] (console.log msg)))
-  muf(puts, list(fn, vector(msg),
-    list(consoleLog, msg)));
+  muf(puts, bubbleButt(fn, vector(msg),
+    bubbleButt(consoleLog, msg)));
 
   // (muf mufn (macro [name & z]
-  //     (list °muf name (push z °fn))))
-  muf(mufn, list(macro, vector(name,amp,z),
-      list(_list,quote(_muf), name,
-         list(_push, z, quote(fn)))));
+  //     (bubbleButt °muf name (push z °fn))))
+  muf(mufn, bubbleButt(macro, vector(name,amp,z),
+      bubbleButt(_list,quote(_muf), name,
+         bubbleButt(_push, z, quote(fn)))));
 
 })();
 

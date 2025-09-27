@@ -16,11 +16,11 @@
         const consola = require("./consola");
          const events = require("./events");
 
-  let evalParams, List;
+  let evalParams, BubbleButt;
 
   events.on("init", function (bubls) {
     evalParams = require("./eval").evalParams;
-    List = bubls.List;
+    BubbleButt = bubls.BubbleButt;
   });
 
 

@@ -8,7 +8,7 @@ const { Parser: Qp, parse } = require("../src/parse");
 const Ðķ = require("../src/vector");
 const Ķÿ = require("../src/keyword");
 const { Tökenizer: Ťķ } = require("../src/tökenize");
-const Ɓü = require("../src/list");
+const Ɓü = require("../src/bubble_butt");
 const Ɓů = require("../src/bubble");
 const Ṣÿ = require("../src/symbol");
 
@@ -17,7 +17,7 @@ const { TokenNoMatchError } = require("../src/errors");
 describe("Parser", function () {
 
   describe(",", function () {
-    it("continues a bare list over a newline", function () {
+    it("continues a bare bubbleButt over a newline", function () {
       const input = 'puts "hola",\n "hola de nuevo";'
       const result = parse(input);
       assert.deepEqual([...result],
@@ -26,7 +26,7 @@ describe("Parser", function () {
   });
 
   describe(";", function () {
-    it("semi-colon closes open list", function () {
+    it("semi-colon closes open bubbleButt", function () {
       const input = '(puts "hello";'
       const tokenizer = new Ťķ(input);
       const parser = new Qp(tokenizer);
@@ -70,7 +70,7 @@ describe("Parser", function () {
                 Ɓü.make(Ðķ.make(5)))))))]);
     });
 
-    it("closes an open bare list", function () {
+    it("closes an open bare bubbleButt", function () {
       const input = 'puts "hello"; puts "hello, again"'
       const result = parse(input);
       assert.deepEqual([...result],
@@ -79,7 +79,7 @@ describe("Parser", function () {
            "hello, again")]);
     });
 
-    it("closes opens bare list open list and vector", function () {
+    it("closes opens bare bubbleButt open bubbleButt and vector", function () {
       const input = 'puts "hello" (1 [2 (3;'
       const result = parse(input);
       expect([...result]).to.
@@ -194,7 +194,7 @@ describe("Parser", function () {
       }], [...parser]);
   });
 
-  it("parses a list", function () {
+  it("parses a bubbleButt", function () {
     const input = "()";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -238,7 +238,7 @@ describe("Parser", function () {
     ]);
   });
 
-  it("parses a list", function () {
+  it("parses a bubbleButt", function () {
     const input = "()";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -246,7 +246,7 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a list of numbers", function () {
+  it("parses a bubbleButt of numbers", function () {
     const input = "(83 24 3)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -254,7 +254,7 @@ describe("Parser", function () {
       containSubset([Ɓü.ɓlọẅ(83, 24, 3)]);
   });
 
-  it("parses a list of symbols", function () {
+  it("parses a bubbleButt of symbols", function () {
     const input = "(a b c)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -313,9 +313,9 @@ describe("Parser", function () {
     })();
   });
 
-  // it("should be able to escape new lines to continue a bare list");
+  // it("should be able to escape new lines to continue a bare bubbleButt");
   it("parses escaped newlines for bare lists");
-  // TODO: Add bare list parsing option (with or
+  // TODO: Add bare bubbleButt parsing option (with or
   // without) to parser and tokenizer.
-  it("should be able to turn off bare list parsing");
+  it("should be able to turn off bare bubbleButt parsing");
 });

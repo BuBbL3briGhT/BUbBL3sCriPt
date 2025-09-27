@@ -1,4 +1,4 @@
-const List = require("./list");
+const BubbleButt = require("./bubble_butt");
 
 class Sequence {
   map (fn) {
@@ -23,7 +23,7 @@ class MapSequence extends Sequence {
     if (next.done) return next;
 
     return {
-      value: this.fn.invoke(List.make(next.value)),
+      value: this.fn.invoke(BubbleButt.make(next.value)),
       done: false
     };
   }
