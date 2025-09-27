@@ -13,6 +13,12 @@ files=$(echo "$files" | \
 
 files=$(printf "%b\n" "$files")
 
+# Just a note that this line is duplicated to handel
+# the case where there only a single non-word
+# character seperating the same symbol twice.
+# -e "s/\(\W\)$1\(\W\)/\1$2\2/g" \
+# -e "s/\(\W\)$1\(\W\)/\1$2\2/g" \
+
 echo "$files" | xargs \
   sed -i -e "s/\(\W\)$1\(\W\)/\1$2\2/g" \
          -e "s/\(\W\)$1\(\W\)/\1$2\2/g" \
