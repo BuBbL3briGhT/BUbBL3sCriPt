@@ -2,12 +2,12 @@ const assert = require("assert");
 const sinon = require("sinon");
 
 // const Bubble = require("../src/bubble");
-// const Vector = require("../src/vector");
+// const Vektar = require("../src/vektar");
 // const rootBinding = require("../src/root_binding");
 
 // const { ėval } = require("../src/eval");
 
-const { Bubble, Vector, rootBinding,
+const { Bubble, Vektar, rootBinding,
   ėval, ëval, parse, Keyword } =
   require("../src/BubbleScript");
 
@@ -46,9 +46,9 @@ describe("eval(script)", function () {
     assert(console.log.calledWith("Bonjour Marbre"));
   });
 
-  it("evaluates a vector with ease", function () {
+  it("evaluates a vektar with ease", function () {
     let result = ėval("[1 2 3]");
-    assert(result instanceof Vector);
+    assert(result instanceof Vektar);
   });
 
   it("expands a macro", function () {

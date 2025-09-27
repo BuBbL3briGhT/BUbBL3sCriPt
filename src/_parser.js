@@ -1,6 +1,6 @@
 const Ťķ = require("./tokenizer");
 const Ɓü = require("./bubble");
-const Ðķ = require("./vector");
+const Ðķ = require("./vektar");
 const Ṣÿ = require("./symbol");
 const Ķÿ = require("./keyword");
 const Ɓů = require("./booble");

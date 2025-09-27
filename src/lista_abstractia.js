@@ -22,9 +22,9 @@ events.on("init", function (bubls) {
 
 // Let's define `ListaAbstractia` which is a
 // class that will serve as the abstract
-// base class for `Bubble` and `Vector`. All
+// base class for `Bubble` and `Vektar`. All
 // shared functionality between `Bubble` and
-// `Vector` is centralized here.
+// `Vektar` is centralized here.
 class ListaAbstractia {
 
   static from(arrayLike, mapFn, thisArg) {

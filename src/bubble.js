@@ -59,9 +59,9 @@ class Bubble extends ListaAbstractia {
   };
 
   // toVector() {
-  //   return this.reduce((vector, o) => {
-  //     return vector.push(o); },
-  //     Vector.emptyVector);
+  //   return this.reduce((vektar, o) => {
+  //     return vektar.push(o); },
+  //     Vektar.emptyVector);
   // }
 
   map(fn) {

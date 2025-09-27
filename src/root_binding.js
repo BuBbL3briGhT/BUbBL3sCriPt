@@ -1,5 +1,5 @@
 const Bubble = require("./bubble");
-const Vector = require("./vector");
+const Vektar = require("./vektar");
 const ObjectMap = require("./object_map");
 const Fn = require("./fn");
 const Ṣymbol = require("./symbol");
@@ -75,8 +75,8 @@ const rootBinding = {
           this[_k] = o[_k];
         }
         break;
-      case Vector:
-        // Vector destructures
+      case Vektar:
+        // Vektar destructures
         o = value.eval(this);
         // console.log("value", value);
         // console.log("o", o);
@@ -199,7 +199,7 @@ const rootBinding = {
     return params;
   }),
 
-  vector: specialFormP(function(bubble) {
+  vektar: specialFormP(function(bubble) {
     return bubble.toVector();
   }),
 

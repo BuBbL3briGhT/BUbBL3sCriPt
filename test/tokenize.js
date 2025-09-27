@@ -2,7 +2,7 @@ const assert = require("assert");
 const LazyList = require("../src/lazy_list");
 
 const { tokenize, tokenTypes } = require("../src/tökenize");
-const Vector = require("../src/vector");
+const Vektar = require("../src/vektar");
 
 const { TOK_STRiNG, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,
@@ -97,7 +97,7 @@ describe("tokenize(string)", function() {
   });
 
   // Expected token objects will now include type and value. Line/col can be omitted for now in expected.
-  // Helper `Vector.blow` from Bubble can be used to construct expected lists.
+  // Helper `Vektar.blow` from Bubble can be used to construct expected lists.
   // Or `Bubble.from` for arrays.
 
   itTokenizes("symbol",
@@ -158,7 +158,7 @@ describe("tokenize(string)", function() {
 
 // expectedTokenObjectsList is a Bubble of token objects {type, value, line, column}
 function itTokenizes(s, ...expectedTokens) {
-  // If expected is just one item and not a bubble, wrap it for consistency if Vector.blow doesn't handle single items.
+  // If expected is just one item and not a bubble, wrap it for consistency if Vektar.blow doesn't handle single items.
   // Bubble.blow should handle if it's a single object by creating a bubble of one.
   it(`tokenizes "${s}"`, function() {
     const actualTokens = tokenize(s);

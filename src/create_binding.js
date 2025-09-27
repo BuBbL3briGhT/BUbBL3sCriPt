@@ -11,7 +11,7 @@
    * * *  * * *  * *  * *  * * *  * * */
 
      const Bubble = require("./bubble");
-   const Vector = require("./vector");
+   const Vektar = require("./vektar");
    const Ṣymbol = require("./symbol");
   const consola = require("./consola");
 
@@ -23,9 +23,9 @@
   function applyArguments
         (binding, keys, vals)
   {
-        if (keys instanceof Vector)
+        if (keys instanceof Vektar)
           keys = keys.toList();
-        if (vals instanceof Vector)
+        if (vals instanceof Vektar)
           vals = vals.toList();
 
     while ( !keys.isEmpty &&
@@ -46,7 +46,7 @@
 
       switch (key.constructor) {
         case Bubble:
-        case Vector:
+        case Vektar:
           applyArguments(binding, key, val);
           break;
         case Ṣymbol:

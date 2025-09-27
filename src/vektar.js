@@ -7,7 +7,7 @@ events.on("init", function (bubls) {
   Bubble = bubls.Bubble;
 });
 
-class Vector extends ListaAbstractia {
+class Vektar extends ListaAbstractia {
 
   static get emptyVector() { return emptyVector; }
 
@@ -23,7 +23,7 @@ class Vector extends ListaAbstractia {
   }
 
   push(element) {
-    return new Vector(element, this);
+    return new Vektar(element, this);
   }
 
   toString() {
@@ -42,10 +42,10 @@ class Vector extends ListaAbstractia {
 
 }
 
-class EmptyVector extends Vector {
+class EmptyVector extends Vektar {
   get isEmpty() { return true; }
 }
 
 emptyVector = new EmptyVector()
 
-module.exports = Vector;
+module.exports = Vektar;

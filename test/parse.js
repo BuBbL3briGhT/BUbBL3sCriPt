@@ -8,7 +8,7 @@ const  Yaml  = require("yaml");
 
 const { parse } = require("../src/parse");
 const Bubble = require("../src/bubble");
-const Vector = require("../src/vector");
+const Vektar = require("../src/vektar");
 const Keyword = require("../src/keyword");
 const Ṣymbol = require("../src/symbol");
 const Booble = require("../src/booble");
@@ -153,7 +153,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws NoMatchError for incomplete booble vector (EOF)", () => {
+  it.skip("throws NoMatchError for incomplete booble vektar (EOF)", () => {
     const input = "(1 2"; // Parsed as ) 2 1 ( by pArSe logic
                        // Error occurs when matching final '(', context is ')'
     assert.throws(() => parse(input), (error) => {
@@ -166,7 +166,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws NoMatchError for incomplete balloon vector (EOF)", () => {
+  it.skip("throws NoMatchError for incomplete balloon vektar (EOF)", () => {
     const input = "[1 2"; // Parsed as ] 2 1 [
     assert.throws(() => parse(input), (error) => {
       assert.equal(error.name, "NoMatchError");
@@ -215,7 +215,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws ParsingError for quote with no preceding item in a vector", () => {
+  it.skip("throws ParsingError for quote with no preceding item in a vektar", () => {
     const input = "(')"; // Tokens: ')', ''', '('
     assert.throws(() => parse(input), (error) => {
       assert.equal(error.name, "ParsingError");
@@ -234,7 +234,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws NoMatchError for unclosed vector with items then EOF", () => {
+  it.skip("throws NoMatchError for unclosed vektar with items then EOF", () => {
     const input = "(a b"; // Tokens: ')', 'b', 'a', '(' -- error expecting '(' got EOF
     assert.throws(() => parse(input), (error) => {
       assert.equal(error.name, "NoMatchError");
@@ -246,7 +246,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws NoMatchError for vector with only a mismatched closer", () => {
+  it.skip("throws NoMatchError for vektar with only a mismatched closer", () => {
     const input = "(]"; // Tokens: ']', '(' -- error expecting ')' got ']'
     assert.throws(() => parse(input), (error) => {
       assert.equal(error.name, "NoMatchError");
@@ -260,7 +260,7 @@ describe("Parser Error Handling", () => {
 
 describe("Parser Structure and Edge Case Tests", () => {
   it.skip("parses empty string to undefined (or specific empty representation)", () => {
-    // tokenize("") returns no tokens (Vector.air / undefined for tokens vector)
+    // tokenize("") returns no tokens (Vektar.air / undefined for tokens vektar)
     // parseTokens(undefined) returns undefined.
     assert.strictEqual(parse(""), undefined, "Parsing an empty string should result in undefined");
   });
@@ -269,33 +269,33 @@ describe("Parser Structure and Edge Case Tests", () => {
     assert.strictEqual(parse("  \n#comment\t\n   "), undefined, "Parsing whitespace/comment only string should be undefined");
   });
 
-  it.skip("parses multiple top-level expressions into a single vector", () => {
-    // parse("1 2 (a b)") should result in a vector: (1 2 (a b))
-    // The outer vector is the result of parse(). peek() gives the first element.
-    // So, parse("1 2 (a b)") returns a vector containing 1, then 2, then vector (a b)
+  it.skip("parses multiple top-level expressions into a single vektar", () => {
+    // parse("1 2 (a b)") should result in a vektar: (1 2 (a b))
+    // The outer vektar is the result of parse(). peek() gives the first element.
+    // So, parse("1 2 (a b)") returns a vektar containing 1, then 2, then vektar (a b)
     // Expected structure: 1 -> 2 -> (a -> b -> air) -> air
-    // Vector.blow(c, b, a) creates a -> b -> c -> air
+    // Vektar.blow(c, b, a) creates a -> b -> c -> air
     const ast = parse("1 2 (a b)");
-    const expected = Vector.blow( // This is the outer vector of expressions
+    const expected = Vektar.blow( // This is the outer vektar of expressions
         Bubble.from([Ṣymbol.for("a"), Ṣymbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
         2,
         1
     );
-    // parse("1 2 (a b)") results in vector (1 2 (a b))
-    // Vector.blow( (b a), 2, 1) -> 1 -> 2 -> (a b)
+    // parse("1 2 (a b)") results in vektar (1 2 (a b))
+    // Vektar.blow( (b a), 2, 1) -> 1 -> 2 -> (a b)
     assert.deepEqual(ast, expected, "AST for multiple top-level expressions");
   });
 
   it("parses a single atom symbol correctly", () => {
     const ast = parse("atom").toList();
-    // parse("atom") returns a vector containing one symbol: (atom)
+    // parse("atom") returns a vektar containing one symbol: (atom)
     const expected = Bubble.blow(Ṣymbol.for("atom"));
     assert.deepEqual(ast, expected, "AST for single atom symbol");
   });
 
   it("parses a single atom number correctly", () => {
     const ast = parse("123").toList();
-    // parse("123") returns a vector containing one number: (123)
+    // parse("123") returns a vektar containing one number: (123)
     const expected = Bubble.blow(123);
     assert.deepEqual(ast, expected, "AST for single atom number");
   });
@@ -304,12 +304,12 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   const input = "'(a (b :c [1 \"s\" 'x]))";
   //   // Expected AST structure:
   //   // Quoted(
-  //   //   Vector(
+  //   //   Vektar(
   //   //     Ṣymbol(a),
-  //   //     Vector(
+  //   //     Vektar(
   //   //       Ṣymbol(b),
   //   //       Keyword(c),
-  //   //       Vector( // Balloon becomes a vector
+  //   //       Vektar( // Balloon becomes a vektar
   //   //         1,
   //   //         "s",
   //   //         Quoted(Ṣymbol(x))
@@ -317,14 +317,14 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   //     )
   //   //   )
   //   // )
-  //   // parse returns a vector containing one item: the Quoted expression.
+  //   // parse returns a vektar containing one item: the Quoted expression.
   //   // So ast.peek() is the Quoted(...) object.
 
   //   const ast = parse(input);
-  //   const expected = Bubble.blow( // Outer vector from parse()
+  //   const expected = Bubble.blow( // Outer vektar from parse()
   //     new Quoted(
-  //       Vector.blow( // vector (a ...)
-  //         Bubble.from([ // vector [1 "s" 'x] -- assuming balloons are parsed as vectors
+  //       Vektar.blow( // vektar (a ...)
+  //         Bubble.from([ // vektar [1 "s" 'x] -- assuming balloons are parsed as vectors
   //           new Quoted(Ṣymbol.for("x")),
   //           "s",
   //           1
@@ -338,7 +338,7 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   assert.deepEqual(ast, expected, "AST for complex nested structure");
   // });
 
-  it("parses a semi complex vector", () => {
+  it("parses a semi complex vektar", () => {
     const input = "[1 \"s\" °x]";
     // const input = "[°x]";
     // const input = "[x]";
@@ -346,7 +346,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     const ast = parse(input);
     // console.log(ast);
     const expected =
-      Vector.blow(1, "s",
+      Vektar.blow(1, "s",
         new Booble(Ṣymbol.for("x")));
     expect([...ast]).to.containSubset([expected]);
   });
@@ -355,12 +355,12 @@ describe("Parser Structure and Edge Case Tests", () => {
     const input = "°(a (b :c [1 \"s\" °x]))";
     // Expected AST structure:
     // Booble(
-    //   Vector(
+    //   Vektar(
     //     Ṣymbol(a),
-    //     Vector(
+    //     Vektar(
     //       Ṣymbol(b),
     //       Keyword(c),
-    //       Vector( // Balloon becomes a vector
+    //       Vektar( // Balloon becomes a vektar
     //         1,
     //         "s",
     //         Quoted(Ṣymbol(x))
@@ -368,19 +368,19 @@ describe("Parser Structure and Edge Case Tests", () => {
     //     )
     //   )
     // )
-    // parse returns a vector containing one item: the Quoted expression.
+    // parse returns a vektar containing one item: the Quoted expression.
     // So ast.peek() is the Quoted(...) object.
 
     const ast = parse(input);
     console.log(ast);
-    const expected = Bubble.blow( // Outer vector from parse()
+    const expected = Bubble.blow( // Outer vektar from parse()
       new Booble(
         Bubble.blow(
           Ṣymbol.for("a"),
           Bubble.blow(
             Ṣymbol.for("b"),
             Keyword.for("c"),
-            Vector.blow(// vector [1 "s" °x] -- assuming balloons are parsed as vectors
+            Vektar.blow(// vektar [1 "s" °x] -- assuming balloons are parsed as vectors
               1,
               "s",
               new Booble(Ṣymbol.for("x"))
@@ -394,13 +394,13 @@ describe("Parser Structure and Edge Case Tests", () => {
 
   it.skip("parses another complex structure: (define x '(1 [2 keyword]))", () => {
     const input = "(define x '(1 [2 :key]))";
-    // AST: Vector(Ṣymbol(define), Ṣymbol(x), Quoted(Vector(1, Vector(2, Keyword(key)))))
+    // AST: Vektar(Ṣymbol(define), Ṣymbol(x), Quoted(Vektar(1, Vektar(2, Keyword(key)))))
     const ast = parse(input);
-    const expected = Vector.blow( // outer vector from parse
-      Vector.blow( // vector (define ...)
+    const expected = Vektar.blow( // outer vektar from parse
+      Vektar.blow( // vektar (define ...)
         new Quoted(
-          Vector.blow( // vector (1 ...)
-            Bubble.from([ // vector [2 :key]
+          Vektar.blow( // vektar (1 ...)
+            Bubble.from([ // vektar [2 :key]
               Keyword.for("key"),
               2,
             ]),

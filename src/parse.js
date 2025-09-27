@@ -1,4 +1,4 @@
-const Ðķ = require("./vector");
+const Ðķ = require("./vektar");
 const Ķÿ = require("./keyword");
 const Ɓü = require("./bubble");
 const Ɓů = require("./booble");

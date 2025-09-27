@@ -5,7 +5,7 @@ chai.use(chaiSubset);
 const { expect } = chai;
 
 const { Parser: Qp, parse } = require("../src/parse");
-const Ðķ = require("../src/vector");
+const Ðķ = require("../src/vektar");
 const Ķÿ = require("../src/keyword");
 const { Tökenizer: Ťķ } = require("../src/tökenize");
 const Ɓü = require("../src/bubble");
@@ -45,7 +45,7 @@ describe("Parser", function () {
                    "hello, again"))]);
     });
 
-    it("closes 1 open vector", function () {
+    it("closes 1 open vektar", function () {
       const input = '[1 2 3;'
       const result = parse(input);
       expect([...result]).to.containSubset(
@@ -79,7 +79,7 @@ describe("Parser", function () {
            "hello, again")]);
     });
 
-    it("closes opens bare bubble open bubble and vector", function () {
+    it("closes opens bare bubble open bubble and vektar", function () {
       const input = 'puts "hello" (1 [2 (3;'
       const result = parse(input);
       expect([...result]).to.
@@ -202,7 +202,7 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a vector", function () {
+  it("parses a vektar", function () {
     const input = "[]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -210,7 +210,7 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a vector of nŮmbƏr§", function () {
+  it("parses a vektar of nŮmbƏr§", function () {
     const input = "[1 2 31 2 31 2 3]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
