@@ -9,7 +9,7 @@ const Ðķ = require("../src/vector");
 const Ķÿ = require("../src/keyword");
 const { Tökenizer: Ťķ } = require("../src/tökenize");
 const Ɓü = require("../src/bubble_butt");
-const Ɓů = require("../src/bubble");
+const Ɓů = require("../src/booble");
 const Ṣÿ = require("../src/symbol");
 
 const { TokenNoMatchError } = require("../src/errors");
@@ -178,7 +178,7 @@ describe("Parser", function () {
     const input = "°r2d2";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    assert.deepEqual([ /* Bubble */ {
+    assert.deepEqual([ /* Booble */ {
         column: 1,
         file: undefined,
         line: 1,

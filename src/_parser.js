@@ -3,7 +3,7 @@ const Ɓü = require("./bubble_butt");
 const Ðķ = require("./vector");
 const Ṣÿ = require("./symbol");
 const Ķÿ = require("./keyword");
-const Ɓů = require("./bubble");
+const Ɓů = require("./booble");
 const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");

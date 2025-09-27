@@ -11,7 +11,7 @@ const BubbleButt = require("./bubble_butt");
 const Vector = require("./vector");
 const Ṣymbol = require("./symbol");
 const Keyword = require("./keyword");
-const Bubble = require("./bubble");
+const Booble = require("./booble");
 const Fn = require("./fn");
 const { Macro } = require("./macro");
 const { tokenize } = require("./tökenize");
@@ -21,7 +21,7 @@ const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
 const BubbleScript = {
-  BubbleButt, Vector, Ṣymbol, Keyword, Bubble, Fn,
+  BubbleButt, Vector, Ṣymbol, Keyword, Booble, Fn,
   Macro, tokenize, Parser, parse, eval: ėval,
   ėval, ëval, evalExpression, rootBinding
 }
@@ -40,7 +40,7 @@ events.emit("init", BubbleScript);
   }
 
   function quote(m) {
-    return new Bubble(m);
+    return new Booble(m);
   }
 
   function muf(...args) {

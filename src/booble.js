@@ -1,4 +1,4 @@
-class Bubble {
+class Booble {
   constructor(o) {
     this.o = o;
   }
@@ -20,4 +20,4 @@ class Bubble {
   }
 }
 
-module.exports = Bubble;
+module.exports = Booble;
