@@ -2,7 +2,7 @@
 
 # Symbol Renamer
 #
-#    $ script/🍉 original nuevo [durs]
+#    $ script/🍉 inicial nuevo [durs]
 
 durs=$(echo $@ | cut -d' ' -f3-)
 
