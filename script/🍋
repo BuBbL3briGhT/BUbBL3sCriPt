@@ -19,14 +19,6 @@ files=$(echo "$files" | \
 files=$(echo "$files" | \
         sed -E 's/^["'\''"]|["'\''"]$//g')
 
-# files=($files)
-# echo $files
-# for file in "${files[@]}"; do
-#   echo $file
-#   _dir=$(dirname $file)
-#   echo _dir "$_dir"
-# done
-
 # for file in "${files[@]}"; do
 for file in $files; do
   # get new path
