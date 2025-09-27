@@ -70,6 +70,7 @@ function rebautizar_archivos() {
 
 durs=$(echo $@ | cut -d' ' -f3-)
 
+rebautizar "$(subrayar \"\\/$1\")" "$(subrayar \"\\/$2\")" $durs
 rebautizar "$(camelizar $1)" "$(camelizar $2)" $durs
 rebautizar "$(pascalizar $1)" "$(pascalizar $2)" $durs
 rebautizar "$(subrayar $1)" "$(subrayar $2)" $durs
