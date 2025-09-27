@@ -1,5 +1,9 @@
 #! /usr/bin/env bash
 
+
+echo $(echo $@ | cut -d' ' -f3-)
+exit
+
 # TODO: Dry run option
 # TODO implement limit to xirectory
 # TODO: Check for issues, files that already exist, warn
