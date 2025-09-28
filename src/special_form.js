@@ -48,8 +48,8 @@ function specialForm(funk) {
 
 // Helper creates a Special Form (Function)
 // with evaluated params.
-function specialFormP(funk) {
-  return new SpecialFormP(funk);
+function specialFormP(funkatron) {
+  return new SpecialFormP(funkatron);
 }
 
 module.exports = { SpecialForm, specialForm,

@@ -132,6 +132,13 @@ class Bubble extends ListaAbstractia {
           const { file, line, column } = this;
           error.__memo = { file, line, column }
           break;
+        default:
+          (function () {
+            const { head, file, line, column } = this;
+            error.stack += "\n" + interpolarTrazaPlantilla({
+              funk: head, file, line, column
+            });
+          }).call(this);
       }
       throw error;
     }
