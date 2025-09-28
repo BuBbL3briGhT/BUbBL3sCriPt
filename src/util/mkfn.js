@@ -1,4 +1,4 @@
-const SpecialForm = require("../special_form");
+const { SpecialForm } = require("../special_form");
 
 // Makes a Bubblescript function from a
 // Javascript function.
