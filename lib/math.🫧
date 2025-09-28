@@ -1,0 +1,7 @@
+🫧 (abs value)
+  (if (< value 0)
+     (- 0 value)
+     value;
+
+module.exports { abs }
+
