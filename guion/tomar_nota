@@ -2,3 +2,8 @@
 alias fecha=date
 
 RUTA_DE_FECHA="$(fecha +%Y)/$(fecha +%m)/$(fecha +%d)"
+
+mkdir -p RUTA_DE_FECHA
+
+# Generate file name based on the current time.
+FILE_NAME="$(date $NBX_FILE_NAME_FORMAT).txt"
