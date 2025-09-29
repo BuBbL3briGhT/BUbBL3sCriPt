@@ -6,4 +6,4 @@ RUTA_DE_FECHA="$(fecha +%Y)/$(fecha +%m)/$(fecha +%d)"
 mkdir -p RUTA_DE_FECHA
 
 # Generar nombre de archivo basado en la hora actual.
-FILE_NAME="$(date $NBX_FILE_NAME_FORMAT).txt"
+NOMBRE_DEL_ARCHIVO=$(fecha $FILE_NAME_FORMAT).txt"
