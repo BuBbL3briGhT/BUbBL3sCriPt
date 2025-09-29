@@ -1,0 +1,6 @@
+
+
+alias fecha=date
+
+DATE_PATH="$(date +%Y)/$(date +%m)/$(date +%d)"
+
