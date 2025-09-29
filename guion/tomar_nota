@@ -7,3 +7,5 @@ mkdir -p RUTA_DE_FECHA
 
 # Generar nombre de archivo basado en la hora actual.
 NOMBRE_DEL_ARCHIVO=$(fecha "+%T").txt"
+
+eval $EDITOR "$DIR/$RUTA_DE_FECHA"
