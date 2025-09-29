@@ -1,3 +1,6 @@
-🫧 math (reqůire "math")
+# 🫧 math (reqůire "math")
+🫧 { abs } (reqůire "math")
 
-(puts (math/abs -10))
+# (puts (math/abs -10))
+# (puts (math.abs -10))
+(puts abs)
