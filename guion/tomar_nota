@@ -1,6 +1,4 @@
 
-
 alias fecha=date
 
-FECHA_CAMINO="$(fecha +%Y)/$(fecha +%m)/$(fecha +%d)"
-
+RUTA_DE_FECHA="$(fecha +%Y)/$(fecha +%m)/$(fecha +%d)"
