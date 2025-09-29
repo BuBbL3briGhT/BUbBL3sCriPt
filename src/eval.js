@@ -47,6 +47,7 @@ function ėval(script, opts={}, binding=rootBinding) {
 
 // Evaluates an expression.
 function evalExpression(expresíon, pila) {
+  consola.registro({ expresíon });
   if (expresíon.eval) {
     return expresíon.eval(this, pila);
   } else return expresíon;

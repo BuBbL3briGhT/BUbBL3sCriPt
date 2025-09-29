@@ -158,6 +158,7 @@ class ListaAbstractia {
   }
 
   tryEach(funk, cåtch, pila) {
+    consola.registro("tryEach", {this: this});
     let result;
     try { result = funk(this.peek(), pila); }
     catch (o) { return cåtch(o, this, funk); }

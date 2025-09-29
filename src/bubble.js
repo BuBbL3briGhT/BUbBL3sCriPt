@@ -115,6 +115,7 @@ class Bubble extends ListaAbstractia {
         throw new Error(vínculo, this.head, pila);
       }
 
+       consola. registro (funk);
       return Funk.call(vínculo, funk, this.tail, pila);
 
     } catch (error) {
@@ -145,6 +146,7 @@ class Bubble extends ListaAbstractia {
   }
 
   evalEach(vínculo, pila) {
+    consola.registro("evalEach", {this: this});
     return this.tryEach(evalExpression.bind(vínculo),
                         catchExpandMacro, pila);
   }
