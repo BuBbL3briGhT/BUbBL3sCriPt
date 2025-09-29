@@ -2,5 +2,5 @@
 
 alias fecha=date
 
-DATE_PATH="$(date +%Y)/$(date +%m)/$(date +%d)"
+FECHA_CAMINO="$(fecha +%Y)/$(fecha +%m)/$(fecha +%d)"
 
