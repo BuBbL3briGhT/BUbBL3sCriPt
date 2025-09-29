@@ -3,9 +3,10 @@ alias fecha=date
 
 RUTA_DE_FECHA="$(fecha +%Y)/$(fecha +%m)/$(fecha +%d)"
 
-mkdir -p RUTA_DE_FECHA
+$DIRECTORIO_DE_NOTAS="notas/$RUTA_DE_FECHA
+mkdir -p $DIRECTORIO_DE_NOTAS
 
 # Generar nombre de archivo basado en la hora actual.
 NOMBRE_DEL_ARCHIVO=$(fecha "+%T").txt"
 
-eval $EDITOR "$DIR/$RUTA_DE_FECHA"
+eval $EDITOR "$RUTA_DE_FECHA/NOMBRE_DEL_ARCHIVO"
