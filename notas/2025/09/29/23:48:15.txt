@@ -1,0 +1,84 @@
+ so it's hard to take a quick note. Where can I
+ bubble script? And this is do I ever keep notes now?
+ Or we can and recognize with the voice. And
+ basically what I wanna do is when you're improved.
+ Testing testing hasn't been everything, don't we
+ need to be? However, I'm constant years and focusing
+ on something that's new and old. Hmm, I always come
+ back around the sea. I'm just kind of as a basis in
+ terms of some understanding as a lower level system.
+ But to me it's just gonna interesting. I don't
+ really know it that well. I kind of forget it. And.
+ Java's not seen or Thomas gripp's not see how UN
+ bubble script is. What is? It's kind of cool to
+ derivative of other things and ideas. Kind of match
+ together, but ultimately it works the way it does
+ and I'm really happy with the progress. However, I'm
+ just feeling like I kind of wanna dabble somewhere
+ else for a minute and see what I can get done.
+ Because I think we have a lot of really good core
+ basis for the sip system. In general, the
+ application has kind of grown and matured cause I'm
+ just growing like an unreally thing. I'm, it's being
+ cool down and make better.  So I'm happy with the
+ progress however, like I said, lower the last couple
+ weeks. I'm just composing on different things and
+ let's see the project might bring a bit of bit
+ scattered. It's just kind of what it is and to get
+ them to get. We couldn't really test. Testing would
+ have been an distraction and this is not about. You
+ know, an evolution of testing? Yes, perhaps, but
+ it's really about getting the functionality in
+ place. Runs the functionality existing. And we're
+ happy with the code. We can kind of finalize things
+ and make sure they're tested before. I'm not forging
+ ahead because when we change things. Everything
+ breaks and the new functionality doesn't necessarily
+ work all that well.  Silly been used some material
+ theoretically present. But we have a good grasp on
+ it and I think my father comes around and play with
+ this and I Don't think I can take their course, but
+ in The Wanted Touch base with the sea stuff, we had
+ pretty good Deep tie in it, allow back and there's a
+ lot of potential there. I'm probably gonna start
+ with the link list structure. It's nice about see if
+ we can work with the structure.  Like structure,
+ right structures and functions and kind of seeing
+ all that works together, there's not many classes
+ and see, so it's kind of kind of forces to kind of
+ focus more on the functions, and we can see how
+ different it turns out from the Javascript, we'll
+ get into iterators. I don't really Miss you know how
+ this imagining there's pretty standard and good ways
+ of doing it. It's nice as we'll be working very
+ close to what the computer's working with the pets
+ and it's you know, and we'll get into data types and
+ all that. Stuff, I'm sure to make that I work
+ there's other programming languages that we can
+ choose and work with. But I feel like those would be
+ a next step in the meantime.  Now we just kind of
+ want to get a sea implementation going, it's really
+ more of a pork from like we have working with the
+ child scripts and we'll come around and make bubble
+ script more bubbly, what it needs to be to be bubble
+ script, to actually be something that serves the
+ purpose. Why you might use it instead of something
+ else, I think we already kind of have a niche in
+ terms of that that you might use bubble script,
+ because it has the different parentheses, you might
+ appreciate that it's Ruby ask in the sense that you
+ don't have to necessarily have the parentheses, you
+ can close the friends with the;, some of that stuff
+ was just kind of like, well, honestly, a lot of that
+ was there from the beginning. Like these are kind of
+ puppies I had about using Javascript things.  Josh
+ could probably won't with that when I pick one at
+ basically, he's a sea style language but also when
+ you translate it, you start using this, you have the
+ other problem so you know, I was going to try of my
+ fit and I'm becoming easy meeting him. You know kind
+ of just right. These are the things that's going to
+ take time to get to that point where we know what it
+ is. And in the meantime, I'm like I said. I'm gonna
+ be focused on the sea and this is really just a
+ test. Winter
