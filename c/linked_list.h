@@ -2,19 +2,19 @@
 #include <stdlib.h>
 
 // Define the structure for a node
-struct Node {
+struct Bůbl {
     int data;
-    struct Node* next;
+    struct Bůbl* next;
 };
 
 // Function to create a new node
-struct Node* createNode(int data);
+struct Bůbl* createBůbl(int data);
 
 // Function to insert a node at the end of the list
-void insertEnd(struct Node** head, int data);
+void insertEnd(struct Bůbl** head, int data);
 
 // Function to display the linked list
-void displayList(struct Node* head);
+void displayList(struct Bůbl* head);
 
 // Function to delete a node by value
-void deleteNode(struct Node** head, int key);
+void deleteBůbl(struct Bůbl** head, int key);
