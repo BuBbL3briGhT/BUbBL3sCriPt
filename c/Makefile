@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -g
 TARGET = app
 
 # Source files
-SRCS = main.c linked_list.c
+SRCS = main.c bůbl.c
 
 # Object files (derived from source files)
 OBJS = $(SRCS:.c=.o)

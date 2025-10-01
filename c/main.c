@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "linked_list.h"
+#include "bůbl.h"
 
 /* int main() { */
 /*   printf("¡Hola, GuionDeBurbuja!\n"); */
