@@ -7,7 +7,7 @@ struct Bůbl {
   struct Bůbl* oo;
 };
 
-// Function to blow a new node
+// Function to blow a new Bůbl
 struct Bůbl* blowBůbl(int o) {
 
     struct Bůbl* newBůbl =
@@ -20,57 +20,14 @@ struct Bůbl* blowBůbl(int o) {
 
 }
 
-struct Bůbl* pushBůbl(struct Bůbl* head, int o) {
+struct Bůbl* pushBůbl(struct Bůbl* tip, int o) {
   struct Bůbl* newBůbl = blowBůbl(o);
-  newBůbl->oo = head;
-  return newBůbl;
+                   newBůbl->oo = tip;
+                      return newBůbl;
 }
 
-struct Bůbl* popBůbl(struct Bůbl* head) {
-  struct Bůbl* resultado = head->oo;
-                         free(head);
-                   return resultado;
-}
-
-// Function to display the linked list
-void displayList(struct Bůbl* head) {
-    if (head == NULL) {
-        printf("The list is empty.\n");
-        return;
-    }
-    struct Bůbl* temp = head;
-    while (temp != NULL) {
-        printf("%d -> ", temp->o);
-        temp = temp->oo;
-    }
-    printf("NULL\n");
-}
-
-// Function to delete a node by value
-void deleteBůbl(struct Bůbl** head, int key) {
-    struct Bůbl* temp = *head;
-    struct Bůbl* prev = NULL;
-
-    // If the head node itself holds the key
-    if (temp != NULL && temp->o == key) {
-        *head = temp->oo;
-        free(temp);
-        return;
-    }
-
-    // Search for the key
-    while (temp != NULL && temp->o != key) {
-        prev = temp;
-        temp = temp->oo;
-    }
-
-    // If the key was not found
-    if (temp == NULL) {
-        printf("Key not found in the list.\n");
-        return;
-    }
-
-    // Unlink the node and free memory
-    prev->oo = temp->oo;
-    free(temp);
+       struct Bůbl* popBůbl(struct Bůbl* tip) {
+    struct Bůbl* resultado = tip->oo;
+                           free(tip);
+                    return resultado;
 }
