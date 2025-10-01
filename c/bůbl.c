@@ -32,20 +32,6 @@ struct Bůbl* popBůbl(struct Bůbl* head) {
                    return resultado;
 }
 
-// Function to insert a node at the end of the list
-void insertEnd(struct Bůbl** head, int o) {
-    struct Bůbl* newBůbl = blowBůbl(o);
-    if (*head == NULL) {
-        *head = newBůbl;
-        return;
-    }
-    struct Bůbl* temp = *head;
-    while (temp->oo != NULL) {
-        temp = temp->oo;
-    }
-    temp->oo = newBůbl;
-}
-
 // Function to display the linked list
 void displayList(struct Bůbl* head) {
     if (head == NULL) {
