@@ -7,8 +7,8 @@ struct Bůbl {
   struct Bůbl* oo;
 };
 
-// Function to create a new node
-struct Bůbl* createBůbl(int o) {
+// Function to blow a new node
+struct Bůbl* blowBůbl(int o) {
 
     struct Bůbl* newBůbl =
       (struct Bůbl*)malloc(sizeof(struct Bůbl));
@@ -20,9 +20,15 @@ struct Bůbl* createBůbl(int o) {
 
 }
 
+struct Bůbl* pushBůbl(struct Bůbl* head, int o) {
+  struct Bůbl* newBůbl = blowBůbl(o);
+  newBůbl->oo = head;
+  return newBůbl;
+}
+
 // Function to insert a node at the end of the list
 void insertEnd(struct Bůbl** head, int o) {
-    struct Bůbl* newBůbl = createBůbl(o);
+    struct Bůbl* newBůbl = blowBůbl(o);
     if (*head == NULL) {
         *head = newBůbl;
         return;

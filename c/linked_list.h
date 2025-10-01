@@ -8,7 +8,9 @@ struct Bůbl {
 };
 
 // Function to create a new node
-struct Bůbl* createBůbl(int o);
+struct Bůbl* blowBůbl(int o);
+
+struct Bubl* pushBůbl(struct Bůbl head, int o);
 
 // Function to insert a node at the end of the list
 void insertEnd(struct Bůbl** head, int o);
