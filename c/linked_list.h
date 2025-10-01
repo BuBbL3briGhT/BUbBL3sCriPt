@@ -3,15 +3,15 @@
 
 // Define the structure for a node
 struct Bůbl {
-    int data;
-    struct Bůbl* next;
+    int o;
+    struct Bůbl* oo;
 };
 
 // Function to create a new node
-struct Bůbl* createBůbl(int data);
+struct Bůbl* createBůbl(int o);
 
 // Function to insert a node at the end of the list
-void insertEnd(struct Bůbl** head, int data);
+void insertEnd(struct Bůbl** head, int o);
 
 // Function to display the linked list
 void displayList(struct Bůbl* head);

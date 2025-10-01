@@ -3,35 +3,35 @@
 
 // Define the structure for a
 struct Bůbl {
-           int data;
-  struct Bůbl* next;
+           int o;
+  struct Bůbl* oo;
 };
 
 // Function to create a new node
-struct Bůbl* createBůbl(int data) {
+struct Bůbl* createBůbl(int o) {
 
     struct Bůbl* newBůbl =
       (struct Bůbl*)malloc(sizeof(struct Bůbl));
 
-    newBůbl->data = data;
-    newBůbl->next = NULL;
+    newBůbl->o = o;
+    newBůbl->oo = NULL;
 
     return newBůbl;
 
 }
 
 // Function to insert a node at the end of the list
-void insertEnd(struct Bůbl** head, int data) {
-    struct Bůbl* newBůbl = createBůbl(data);
+void insertEnd(struct Bůbl** head, int o) {
+    struct Bůbl* newBůbl = createBůbl(o);
     if (*head == NULL) {
         *head = newBůbl;
         return;
     }
     struct Bůbl* temp = *head;
-    while (temp->next != NULL) {
-        temp = temp->next;
+    while (temp->oo != NULL) {
+        temp = temp->oo;
     }
-    temp->next = newBůbl;
+    temp->oo = newBůbl;
 }
 
 // Function to display the linked list
@@ -42,8 +42,8 @@ void displayList(struct Bůbl* head) {
     }
     struct Bůbl* temp = head;
     while (temp != NULL) {
-        printf("%d -> ", temp->data);
-        temp = temp->next;
+        printf("%d -> ", temp->o);
+        temp = temp->oo;
     }
     printf("NULL\n");
 }
@@ -54,16 +54,16 @@ void deleteBůbl(struct Bůbl** head, int key) {
     struct Bůbl* prev = NULL;
 
     // If the head node itself holds the key
-    if (temp != NULL && temp->data == key) {
-        *head = temp->next;
+    if (temp != NULL && temp->o == key) {
+        *head = temp->oo;
         free(temp);
         return;
     }
 
     // Search for the key
-    while (temp != NULL && temp->data != key) {
+    while (temp != NULL && temp->o != key) {
         prev = temp;
-        temp = temp->next;
+        temp = temp->oo;
     }
 
     // If the key was not found
@@ -73,6 +73,6 @@ void deleteBůbl(struct Bůbl** head, int key) {
     }
 
     // Unlink the node and free memory
-    prev->next = temp->next;
+    prev->oo = temp->oo;
     free(temp);
 }
