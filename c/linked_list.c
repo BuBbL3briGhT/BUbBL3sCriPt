@@ -1,19 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Define the structure for a node
-struct Node {
-    int data;
-    struct Node* next;
+// Define the structure for a
+struct Bůbl {
+           int data;
+  struct Bůbl* next;
 };
 
 // Function to create a new node
-struct Node* createNode(int data) {
-    struct Node* newNode =
-      (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = data;
-    newNode->next = NULL;
-    return newNode;
+struct Bůbl* createBůbl(int data) {
+
+    struct Bůbl* newBůbl =
+      (struct Bůbl*)malloc(sizeof(struct Bůbl));
+
+    newBůbl->data = data;
+    newBůbl->next = NULL;
+
+    return newBůbl;
+
 }
 
 // Function to insert a node at the end of the list
