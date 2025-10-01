@@ -7,22 +7,17 @@
 /* } */
 
 int main() {
-    struct Bůbl* head = NULL;
+    struct Bůbl* tip = NULL;
 
-    // Insert nodes
-    insertEnd(&head, 10);
-    insertEnd(&head, 20);
-    insertEnd(&head, 30);
 
-    printf("Linked List: ");
-    displayList(head);
+    tip = push(*tip, 1);
+    tip = push(*tip, 2);
+    tip = push(*tip, 3);
 
-    // Delete a node
-    printf("Deleting 20...\n");
-    deleteBůbl(&head, 20);
-
-    printf("Updated Linked List: ");
-    displayList(head);
+    while (tip != NULL) {
+      printf("%d\n", tip->o);
+      tip = tip->oo;
+    }
 
     return 0;
 }

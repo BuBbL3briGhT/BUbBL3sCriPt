@@ -8,7 +8,7 @@ struct Bůbl {
 };
 
 // Function to blow a new Bůbl
-struct Bůbl* blowBůbl(int o) {
+struct Bůbl* blow(int o) {
 
     struct Bůbl* newBůbl =
       (struct Bůbl*)malloc(sizeof(struct Bůbl));
@@ -20,13 +20,13 @@ struct Bůbl* blowBůbl(int o) {
 
 }
 
-struct Bůbl* pushBůbl(struct Bůbl* tip, int o) {
-  struct Bůbl* newBůbl = blowBůbl(o);
+struct Bůbl* push(struct Bůbl* tip, int o) {
+  struct Bůbl* newBůbl = blow(o);
                    newBůbl->oo = tip;
                       return newBůbl;
 }
 
-       struct Bůbl* popBůbl(struct Bůbl* tip) {
+       struct Bůbl* pop(struct Bůbl* tip) {
     struct Bůbl* resultado = tip->oo;
                            free(tip);
                     return resultado;
