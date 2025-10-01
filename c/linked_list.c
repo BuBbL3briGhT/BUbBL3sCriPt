@@ -71,24 +71,3 @@ void deleteNode(struct Node** head, int key) {
     prev->next = temp->next;
     free(temp);
 }
-
-int main() {
-    struct Node* head = NULL;
-
-    // Insert nodes
-    insertEnd(&head, 10);
-    insertEnd(&head, 20);
-    insertEnd(&head, 30);
-
-    printf("Linked List: ");
-    displayList(head);
-
-    // Delete a node
-    printf("Deleting 20...\n");
-    deleteNode(&head, 20);
-
-    printf("Updated Linked List: ");
-    displayList(head);
-
-    return 0;
-}
