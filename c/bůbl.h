@@ -12,6 +12,8 @@ struct Bůbl* blowBůbl(int o);
 
 struct Bubl* pushBůbl(struct Bůbl head, int o);
 
+struct Bubl* popBůbl(struct Bůbl head);
+
 // Function to insert a node at the end of the list
 void insertEnd(struct Bůbl** head, int o);
 
