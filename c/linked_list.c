@@ -21,26 +21,26 @@ struct Bůbl* createBůbl(int data) {
 }
 
 // Function to insert a node at the end of the list
-void insertEnd(struct Node** head, int data) {
-    struct Node* newNode = createNode(data);
+void insertEnd(struct Bůbl** head, int data) {
+    struct Bůbl* newBůbl = createBůbl(data);
     if (*head == NULL) {
-        *head = newNode;
+        *head = newBůbl;
         return;
     }
-    struct Node* temp = *head;
+    struct Bůbl* temp = *head;
     while (temp->next != NULL) {
         temp = temp->next;
     }
-    temp->next = newNode;
+    temp->next = newBůbl;
 }
 
 // Function to display the linked list
-void displayList(struct Node* head) {
+void displayList(struct Bůbl* head) {
     if (head == NULL) {
         printf("The list is empty.\n");
         return;
     }
-    struct Node* temp = head;
+    struct Bůbl* temp = head;
     while (temp != NULL) {
         printf("%d -> ", temp->data);
         temp = temp->next;
@@ -49,9 +49,9 @@ void displayList(struct Node* head) {
 }
 
 // Function to delete a node by value
-void deleteNode(struct Node** head, int key) {
-    struct Node* temp = *head;
-    struct Node* prev = NULL;
+void deleteBůbl(struct Bůbl** head, int key) {
+    struct Bůbl* temp = *head;
+    struct Bůbl* prev = NULL;
 
     // If the head node itself holds the key
     if (temp != NULL && temp->data == key) {

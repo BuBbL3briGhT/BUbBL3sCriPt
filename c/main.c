@@ -7,7 +7,7 @@
 /* } */
 
 int main() {
-    struct Node* head = NULL;
+    struct Bůbl* head = NULL;
 
     // Insert nodes
     insertEnd(&head, 10);
@@ -19,7 +19,7 @@ int main() {
 
     // Delete a node
     printf("Deleting 20...\n");
-    deleteNode(&head, 20);
+    deleteBůbl(&head, 20);
 
     printf("Updated Linked List: ");
     displayList(head);
