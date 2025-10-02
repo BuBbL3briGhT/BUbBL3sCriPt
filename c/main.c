@@ -9,10 +9,9 @@
 int main() {
     struct Bůbl* tip = NULL;
 
-
-    tip = push(*tip, 1);
-    tip = push(*tip, 2);
-    tip = push(*tip, 3);
+    tip = push(tip, 1);
+    tip = push(tip, 2);
+    tip = push(tip, 3);
 
     while (tip != NULL) {
       printf("%d\n", tip->o);
