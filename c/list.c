@@ -21,7 +21,7 @@ int peek(struct List* list) {
 }
 
 struct List* pop(struct List* list) {
-  struct List* _list = list.next;
+  struct List* _list = list->next;
   free(list);
   return _list;
 }
