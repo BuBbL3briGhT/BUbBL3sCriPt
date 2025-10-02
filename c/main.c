@@ -1,22 +1,25 @@
 #include <stdio.h>
-#include "bůbl.h"
+#include "list.h"
 
-/* int main() { */
-/*   printf("¡Hola, GuionDeBurbuja!\n"); */
-/*   return 0; */
-/* } */
+void printList(struct List*);
 
 int main() {
-    struct Bůbl* tip = NULL;
+    struct List* list = NULL;
 
-    tip = push(tip, 1);
-    tip = push(tip, 2);
-    tip = push(tip, 3);
+    list = push(list, 1);
+    list = push(list, 2);
+    list = push(list, 3);
 
-    while (tip != NULL) {
-      printf("%d\n", tip->o);
-      tip = tip->oo;
-    }
+    printList(list);
+    printList(list);
 
     return 0;
 }
+
+void printList(struct List* list) {
+  while (list != NULL) {
+    printf("%d\n", peek(list));
+    list = pop(list);;
+  }
+}
+
