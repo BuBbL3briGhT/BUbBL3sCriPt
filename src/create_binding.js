@@ -1,0 +1,73 @@
+
+  /* * *  * * *  * *  * *  * * *  * * *
+   *                                  *
+   *   File: src/create_binding.js    *
+   *   Date: September 25th, 2025     *
+   *   Library: Bubblescript          *
+   *   version: 0.🦤.🍌.🥄            *
+   *   Version: 0.1.6                 *
+   *   Author(s): BaMbii              *
+   *                                  *
+   * * *  * * *  * *  * *  * * *  * * */
+
+     const 气泡 = require("./气泡");
+   const Vector = require("./vector");
+   const Ṣymbol = require("./symbol");
+  const consola = require("./consola");
+
+     const sAmp = Ṣymbol.for("&");
+
+  // Applys the keys and the values to the
+  // binding based on order and position.
+  // Binding will be modified.
+  function applyArguments
+        (binding, keys, vals)
+  {
+        if (keys instanceof Vector)
+          keys = keys.toList();
+        if (vals instanceof Vector)
+          vals = vals.toList();
+
+    while ( !keys.isEmpty &&
+            !vals.isEmpty    ) {
+
+      const key = keys.first;
+        const val = vals.first;
+
+      if (key == sAmp) {
+        binding[keys.next] = vals;
+        return binding;
+      }
+
+      if (val == sAmp) {
+        applyArguments(binding, keys, vals.next)
+        return binding;
+      }
+
+      switch (key.constructor) {
+        case 气泡:
+        case Vector:
+          applyArguments(binding, key, val);
+          break;
+        case Ṣymbol:
+          binding[key.toString()] = val;
+          break;
+        default:
+          throw Error("Invalid parameter type: " + key.constructor );
+      }
+
+      keys = keys.rest;
+      vals = vals.rest;
+
+    }
+  }
+
+// Creates a binding object for a function or
+// macro.
+function createBinding(proto, keys, values) {
+  const binding = Object.create(proto);
+  applyArguments(binding, keys, values);
+  return binding;
+}
+
+module.exports = createBinding;

@@ -1,0 +1,23 @@
+As a developer working on the Bubblescript project i
+would like a simple command that can smartly rename a
+symbol project wide.
+
+For example:
+
+    $ <command> <symbol> <newSymbol>
+
+This command would perform the neccesary textual and
+data manipulation to rename <symbol> to <newSymbol>,
+affecting only the approriate directories, such as
+src, lib and test. Perhaps it would be a good idea to
+expect the directories to affect as trailing values
+to the command. Work on this has already been started
+in script/rebautizar and script/🍄. Just as a final
+note, this should not rely on gsub which, which would
+affect substring within symbols, and it should also
+take into consideration file names and proper casing
+conventions.
+
+so...
+
+    $ <command> <symbol> <newSymbol> src test lib ...

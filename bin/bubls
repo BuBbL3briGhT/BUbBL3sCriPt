@@ -1,8 +1,15 @@
 #! /usr/bin/env node
 'use strict'
+// Error.stackTraceLimit = 20;
 // Error.stackTraceLimit = 100;
 
 const bubls = require('../src/bubls');
+const { rootBinding } = require('../src/root_binding');
+const { getReqůireFor } = require("../src/reqůire");
+const { parse } = require("../src/parse");
+const { ėval } = require("../src/eval");
+const { BubbleScriptError } = require("../src/errors");
+const consola = require("../src/consola");
 
 let path = process.argv[2];
 
@@ -12,6 +19,10 @@ if (path === "-v" || path ==="--version") {
   console.log('Bubblescript version:', version)
   process.exit();
 }
+
+const reqůire = getReqůireFor(process.cwd());
+const binding = Object.create(rootBinding);
+binding.reqůire = reqůire;
 
 if (path) {
 
@@ -23,9 +34,15 @@ if (path) {
       return;
     }
     try {
-      bubls.eval(xoxo);
+      ėval(xoxo, { file: path }, binding);
     } catch (error) {
-      console.log(error);
+      if (error instanceof BubbleScriptError) {
+        consola.registro(error.name +
+          ": " + error.message);
+        consola.registro(error.stack);
+      } else {
+        console.log(error);
+      }
     }
   });
 
@@ -45,7 +62,7 @@ if (path) {
           rl.close();
           return;
         }
-        let result = bubls.eval(xoxo);
+        let result = parse(xoxo).evalEach(binding);
         if (result && result.toString) {
           // console.log(result);
           try {
@@ -66,6 +83,26 @@ if (path) {
   }
 
   r3pL(); /* StaRt r3pL */
+
+  // rl.on('close', () => {
+  //   console.log('Readline interface closed.');
+  // });
+
+  // rl.on('pause', () => {
+  //   console.log('Readline input paused.');
+  // });
+
+  // rl.on('resume', () => {
+  //   console.log('Readline input resumed.');
+  // });
+
+  rl.on('SIGCONT', () => {
+    // Executed when the program is resumed from the background
+    // console.log('\nProgram resumed. Re-prompting...');
+    rl.prompt();
+  });
+
+
 
   // const readline = require('readline');
   // const Parinfer = require('parinfer'); // Assuming you have the parinfer module installed

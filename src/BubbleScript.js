@@ -6,33 +6,33 @@
      *        *    +   *
        *  */
 
-const AbstractList = require("./o/abstract_list");
-const List = require("./o/list");
-const Vector = require("./o/vector");
-const Ṣymbol = require("./o/symbol");
-const Keyword = require("./o/keyword");
-const Bubble = require("./o/bubble");
-const Fn = require("./o/fn");
-const { Macro } = require("./o/macro");
-const tokenize = require("./f/tokenize");
-const parse = require("./f/parse");
-const { ėval, ëval } = require("./f/eval");
-const { rootBinding } = require("./o/root_binding");
+const ListaAbstractia = require("./lista_abstractia");
+const 气泡 = require("./气泡");
+const Vector = require("./vector");
+const Ṣymbol = require("./symbol");
+const Keyword = require("./keyword");
+const Booble = require("./booble");
+const Fn = require("./fn");
+const { Macro } = require("./macro");
+const { tokenize } = require("./tökenize");
+const { Parser, parse } = require("./parse");
+const { ėval, ëval, evalExpression } = require("./eval");
+const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
 const BubbleScript = {
-  List, Vector, Ṣymbol, Keyword, Bubble, Fn,
-  Macro, tokenize, parse, eval: ėval, ėval,
-  ëval, rootBinding
+  气泡, Vector, Ṣymbol, Keyword, Booble, Fn,
+  Macro, tokenize, Parser, parse, eval: ėval,
+  ėval, ëval, evalExpression, rootBinding
 }
 
-events.emit("configure", BubbleScript);
+events.emit("init", BubbleScript);
 
 (function() {
   let bnd = rootBinding;
 
-  function list(...args) {
-    return List.from(args);
+  function 气泡(...args) {
+    return 气泡.from(args);
   }
 
   function vector(...args) {
@@ -40,12 +40,13 @@ events.emit("configure", BubbleScript);
   }
 
   function quote(m) {
-    return new Bubble(m);
+    return new Booble(m);
   }
 
   function muf(...args) {
     // return ėval(bnd, arry.toList(args).push(_muf));
-    return ëval(bnd, List.from(args).push(_muf));
+    // return ëval(bnd, 气泡.from(args).push(_muf));
+    return 气泡.from(args).push(_muf).eval(bnd);
   }
 
   let _push = Ṣymbol.for('push'),
@@ -58,26 +59,26 @@ events.emit("configure", BubbleScript);
        name = Ṣymbol.for('name'),
        amp = Ṣymbol.for('&'),
        z = Ṣymbol.for('z'),
-      _list = Ṣymbol.for('list'),
+      _list = Ṣymbol.for('气泡'),
       _muf = Ṣymbol.for('muf'),
       puts = Ṣymbol.for('puts'),
       msg = Ṣymbol.for('msg'),
       consoleLog = Ṣymbol.for('console.log');
 
   // muf push (fn [a b] (send a °push b))
-  muf(_push, list(fn, vector(a, b),
-       list(send, a, quote(_push), b)));
+  muf(_push, 气泡(fn, vector(a, b),
+       气泡(send, a, quote(_push), b)));
 
   // (muf (puts msg) (console.log msg))
   // (muf puts (fn [msg] (console.log msg)))
-  muf(puts, list(fn, vector(msg),
-    list(consoleLog, msg)));
+  muf(puts, 气泡(fn, vector(msg),
+    气泡(consoleLog, msg)));
 
   // (muf mufn (macro [name & z]
-  //     (list °muf name (push z °fn))))
-  muf(mufn, list(macro, vector(name,amp,z),
-      list(_list,quote(_muf), name,
-         list(_push, z, quote(fn)))));
+  //     (气泡 °muf name (push z °fn))))
+  muf(mufn, 气泡(macro, vector(name,amp,z),
+      气泡(_list,quote(_muf), name,
+         气泡(_push, z, quote(fn)))));
 
 })();
 

@@ -1,0 +1,41 @@
+#! /usr/bin/env bash
+
+# Does a project wide symbol rename.
+# script/🍄 original nuevo [dirs]
+
+# TODO: Dry run option
+# TODO: Check for issues, files that already exist,
+# warn
+# TODO: Address warning and errors being printed.
+# TODO: sed desnt seem to work on files with ö in the
+# name. Maybe update? Work around if neccesary...
+# TODO: Can't decern wheter to use camel case or
+# underscore when going from single to multiple
+# portion symbol, for example list ->
+# bubbleButt|bubble_butt. For this, it seems context
+# is required.
+#   Ok, as a quick solution for this i added a subrayer rename that adds a lead /, as occurs in the file names. This gets us closer, but it seems there are other idoscrancies in doing these project wide renames. Use this command with caution, it is really kind of an overkill solution, but it can be a very useful tool to have for refactoring and also for attempting to translate code, but seems there is still things to consider. Probably also factoring in some ai or machine learning would help make the command more resillient and robust, for now its a decent start, and works pretty quick so that's good.
+
+
+function camelizar() {
+  echo $1 | sed -E 's/_([a-z])/\U\1/g' | sed -E 's/^(.)/\L\1/'
+}
+
+function pascalizar() {
+  echo $1 | sed -E 's/_([a-z])/\U\1/g' | sed -E 's/^(.)/\U\1/'
+}
+
+function subrayar() {
+  echo $1 | sed -E 's/([A-Z])/_\L\1/g' | sed -E 's/^_//'
+}
+
+durs=$(echo $@ | cut -d' ' -f3-)
+
+script/🍓 "$(subrayar $1)" "$(subrayar $2)" $durs
+script/🍉 "$(camelizar $1)" "$(camelizar $2)" $durs
+script/🍉 "$(pascalizar $1)" "$(pascalizar $2)" $durs
+script/🍉 "$(subrayar $1)" "$(subrayar $2)" $durs
+
+script/🍋 "$(subrayar $1)" "$(subrayar $2)" $durs
+# rebautizar_archivos "$(camelizar $1)" "$(camelizar $2)" $durs
+# rebautizar_archivos "$(pascalizar $1)" "$(pascalizar $2)" $durs

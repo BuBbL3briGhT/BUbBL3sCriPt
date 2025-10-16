@@ -1,4 +1,0 @@
-(let [assert (require "assert")]
-  (describe "bubls" (fn [])
-    (it "runs tests" (fn [])
-      (assert.equal 1 (- 3 2)))))

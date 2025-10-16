@@ -1,23 +1,11 @@
-(🫧 (push a b)
-  (send a :push b))
-
 (🫧 (puts & msg)
  (console.log & msg))
 
 (🫧 (poot & msg)
  (console.log & msg))
 
-(🫧 (peek list)
-  (send list :peek))
-
-(🫧 (pop list)
-  (send list :pop))
-
-(🫧 (shift list)
-  (send list :shift))
-
-(🫧 (invert list)
-  (send list :invert))
-
-(🫧 (reverse list)
-  (send list :invert))
+if module (module.exports {
+  pop puts each reverse reverseCowgirl
+  empty? invert shift peek poot push slap
+  stick pluck && PARTY!!!! #spank
+};

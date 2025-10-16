@@ -1,0 +1,9 @@
+(🫧 (describe title fn)
+  (puts '  ' title)
+  (fn))
+
+(🫧 (it title fn)
+  (fn)
+  (puts '    -' title))
+
+(module.exports { describe it })

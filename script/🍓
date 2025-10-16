@@ -1,0 +1,29 @@
+#! /usr/bin/env bash
+
+# Special Symbol Renamer script/🍉 to pickup file paths and
+# rename as underscore paths prior to running smybol
+# renamer that would rename paths using a differnt
+# casing formula. Primarily useful right now for
+# rename a single section simbol to multisection,
+# inthe case where section count match, or reducing
+# section count the normal symbol renamer should work
+# fine on it's own. This is kind of a work around for
+# this specfic case for the time being or until a
+# better solution is available. Called by script/🍄
+#
+#    $ script/🍓 inicial nuevo [durs]
+
+durs=$(echo $@ | cut -d' ' -f3-)
+
+files=$(git grep -l $1 $durs)
+
+files=$(echo "$files" | \
+        sed -E 's/^["'\''"]|["'\''"]$//g')
+
+files=$(printf "%b\n" "$files")
+
+echo "$files" | xargs \
+  sed -i -e "s/\/$1\(\W\)/\/$2\1/g" \
+         -e "s/\/$1\(\W\)/\/$2\1/g"
+
+
