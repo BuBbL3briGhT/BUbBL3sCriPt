@@ -34,7 +34,7 @@ class Bubblescript {
     switch (exp && exp.constructor) {
       case Symbol:
         return exp.resolve(bnd)
-      case 气泡: {
+      case Bubble: {
         let s = exp.peek()
         if (s instanceof Symbol) {
           debug('->', exp.toString());
@@ -50,21 +50,21 @@ class Bubblescript {
             // x.x or x.x.x or x.x...
             let q = s.resolveRoot(bnd)
             if (!exp.rest) {
-              return q[s.fn]()
+              return q[s.funk]()
             }
             try {
-              return q[s.fn](...exp.rest.map(
+              return q[s.funk](...exp.rest.map(
                 function(a) {
                   return evl(bnd, a)
                 }).toArray())
             } catch (e) {
-              console.log(s.fn);
+              console.log(s.funk);
               throw e;
             }
           }
-        } else if (s instanceof 气泡) {
+        } else if (s instanceof Bubble) {
           return evl(bnd, exp.pop().push(evl(bnd, s)))
-        } else if (s instanceof Fn) {
+        } else if (s instanceof Funk) {
           return s.call(bnd, exp.pop());
         } else if (s instanceof Function) {
           return s.call(bnd, exp.pop());
@@ -78,7 +78,7 @@ class Bubblescript {
         return exp.map(function(a) {
           return evl(bnd, a)
         });
-      case Fn:
+      case Funk:
       case Macro:
         return exp.body.each(function(exp) {
           return evl(bnd, exp);
@@ -90,12 +90,12 @@ class Bubblescript {
     }
   };
 
-  function invoke(bnd, fn, args) {
+  function invoke(bnd, funk, args) {
     var bnd = Object.create(bnd);
-    var q = map(glider, fn.args, args)
+    var q = map(glider, funk.args, args)
 
     var x, y;
-    x = fn.args;
+    x = funk.args;
     y = args;
     while (x) {
       if (x.first == '&') {
@@ -110,18 +110,18 @@ class Bubblescript {
       y = y && y.rest;
     }
 
-    return evl(bnd, fn);
+    return evl(bnd, funk);
   }
 
-  function map(fn, 气泡, ...lists) {
-    return 气泡.map(fn, ...lists);
+  function map(funk, bubble, ...lists) {
+    return bubble.map(funk, ...lists);
   }
 
   function push(a, b) {
     return a.push(b);
   }
 
-  function 气泡(...args) {
+  function bubble(...args) {
     return arry.toList(args);
   }
 
@@ -156,7 +156,7 @@ class Bubblescript {
   (function() {
 
      let _push = new Symbol('push'),
-         fn = new Symbol('fn'),
+         funk = new Symbol('funk'),
          a = new Symbol('a'),
          b = new Symbol('b'),
          send = new Symbol('send'),
@@ -165,42 +165,42 @@ class Bubblescript {
          name = new Symbol('name'),
          amp = new Symbol('&'),
          z = new Symbol('z'),
-        _list = new Symbol('气泡'),
+        _list = new Symbol('bubble'),
         _muf = new Symbol('muf');
 
     function muf(...args) {
       return evl(bnd, arry.toList(args).push(_muf));
     }
 
-     // muf push (fn [a b] (send a 'push b))
-     muf(_push, 气泡(fn, glider(a, b),
-          气泡(send, a, quote(_push), b)));
+     // muf push (funk [a b] (send a 'push b))
+     muf(_push, bubble(funk, glider(a, b),
+          bubble(send, a, quote(_push), b)));
 
      // (muf mufn (macro [name & z]
-     //     (气泡 'muf name (push z 'fn))))
-     muf(mufn, 气泡(macro, glider(name,amp,z),
-         气泡(_list,quote(_muf), name,
-            气泡(_push, z, quote(fn)))));
+     //     (bubble 'muf name (push z 'funk))))
+     muf(mufn, bubble(macro, glider(name,amp,z),
+         bubble(_list,quote(_muf), name,
+            bubble(_push, z, quote(funk)))));
 
      w("mufn peek [a b] (send a 'peek b)");
      w("mufn pop [a b] (send a 'pop b)");
      w("mufn puts [msg] (console.log msg)");
 
      w("muf mufmacro (macro [name args body]\n" +
-     "  (气泡 'muf name\n" +
-     "    (气泡 'macro args body)))\n");
+     "  (bubble 'muf name\n" +
+     "    (bubble 'macro args body)))\n");
 
-     w("mufn reduce [fn 气泡 memo], \n" +
-       "  (loop [气泡 气泡\n" +
+     w("mufn reduce [funk bubble memo], \n" +
+       "  (loop [bubble bubble\n" +
        "         memo memo]\n" +
-       "    (unless 气泡.isEmpty\n" +
-       "      (recur (pop 气泡) (fn (peek 气泡) memo))\n" +
+       "    (unless bubble.isEmpty\n" +
+       "      (recur (pop bubble) (funk (peek bubble) memo))\n" +
        "        memo))");
 
   })();
 
   // var bubl = { glider, bubbleParse,
-  //   parse: bubbleParse, evl, Fn, Macro, Symbol };
+  //   parse: bubbleParse, evl, Funk, Macro, Symbol };
 
   // global.m = m;
   // global.w = w;
@@ -209,7 +209,7 @@ class Bubblescript {
   // global.bubbleSCRiPT = bubbleSCRiPT;
 
   // bubl.Symbol = Symbol;
-  // bubl.气泡 = 气泡;
+  // bubl.Bubble = Bubble;
   // bubl.Glider = Glider;
 
 }
@@ -217,8 +217,8 @@ class Bubblescript {
 
 // Helpers
 
-function each(c, fn) {
-  c.forEach(fn);
+function each(c, funk) {
+  c.forEach(funk);
 }
 
 var arry = {
@@ -226,11 +226,11 @@ var arry = {
     return a[a.length - 1];
   },
   toList: function(a) {
-    var 气泡 = new 气泡(a.pop());
+    var bubble = new Bubble(a.pop());
     while (a.length > 0) {
-      气泡 = 气泡.push(a.pop());
+      bubble = bubble.push(a.pop());
     }
-    return 气泡;
+    return bubble;
   },
 
   toGlider: function(a) {
@@ -243,7 +243,7 @@ var arry = {
 }
 
 
-function fn(bnd, argsk, body) {
+function funk(bnd, argsk, body) {
   return function(...argsv) {
     var bnd;
     argsv = argsv.map(function(a) {

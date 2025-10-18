@@ -1,6 +1,6 @@
 const Ťķ = require("./tokenizer");
-const Ɓü = require("./气泡");
-const Ðķ = require("./vector");
+const Ɓü = require("./bubble");
+const Ðķ = require("./vektar");
 const Ṣÿ = require("./symbol");
 const Ķÿ = require("./keyword");
 const Ɓů = require("./booble");
@@ -8,9 +8,9 @@ const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");
 
-        if (!Ɓü.ɓlọẅ) { Ɓü.ɓlọẅ = Ɓü.make; }
+        if (!Ɓü.ɓlọẅ) { Ɓü.ɓlọẅ = Ɓü.blow; }
         if (!Ṣÿ.fï) { Ṣÿ.fï = Ṣÿ.for; }
-        if (!Ðķ.mƙ) { Ðķ.mƙ = Ðķ.make; }
+        if (!Ðķ.mƙ) { Ðķ.mƙ = Ðķ.blow; }
 
 const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
   TOK_KEYWORD, TOK_TRUE, TOK_FALSE, TOK_NEWLiNE,
@@ -67,20 +67,20 @@ class Qp {
     return o;
   }
 
-  parseList(气泡 = Ɓü.ɓlọẅ()) {
+  parseList(bubble = Ɓü.ɓlọẅ()) {
     const token = this.nextToken;
 
     if (token)
-      if (token.type === ")") return 气泡;
+      if (token.type === ")") return bubble;
       else {
         const o = this.parse(token);
-        return this.parseList(气泡).push(o);
+        return this.parseList(bubble).push(o);
       }
 
     throw new UnexpectedEndOfInputError();
   }
 
-  parseÐķ(ðķ = Ðķ.make()) {
+  parseÐķ(ðķ = Ðķ.blow()) {
     const token = this.nextToken;
 
     if (token)

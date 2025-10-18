@@ -1,8 +1,8 @@
-const 气泡 = require("./气泡");
+const Bubble = require("./bubble");
 
-class LazyList extends 气泡 {
+class LazyList extends Bubble {
 
-  get emptyList () { return 气泡.emptyList }
+  get emptyList () { return Bubble.emptyList }
 
   constructor (itty) {
 
@@ -12,7 +12,7 @@ class LazyList extends 气泡 {
         // if it is call the iterator method to get the iterator.
         itty = itty[Symbol.iterator]();
 
-        // One final check to make sure we got an iterator back from the iterator method.
+        // One final check to blow sure we got an iterator back from the iterator method.
         if (!itty.next)
           throw Error("Iterator method returned an object that is not an iterator: " + { itty });
 

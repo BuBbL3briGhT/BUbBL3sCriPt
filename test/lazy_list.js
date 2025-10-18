@@ -1,9 +1,9 @@
 const assert = require("assert");
 const LazyList = require("../src/lazy_list.js");
-const 气泡 = require("../src/气泡.js");
+const Bubble = require("../src/bubble.js");
 
 describe("LazyList", function () {
-  it("is a lazzzy 气泡", function () {
+  it("is a lazzzy bubble", function () {
     const expects = [1, 2, 3];
     const itty = expects[Symbol.iterator]();
     const lazy = new LazyList(itty);
@@ -12,20 +12,20 @@ describe("LazyList", function () {
 
 
   describe("#toList", function () {
-    it("renders the lazy 气泡 as a 气泡", function () {
+    it("renders the lazy bubble as a bubble", function () {
       // const lazy = new LazyList([1,2,3][Symbol.iterator]());
       const lazy = new LazyList([1,2,3]);
       const actual = lazy.toList();
-      const expected = 气泡.make(1, 2, 3);
+      const expected = Bubble.blow(1, 2, 3);
       assert.deepEqual(actual, expected);
     });
   });
 });
 
-// for(const o of 气泡) {
+// for(const o of bubble) {
 // }
 // const itty = [1, 2, 3];
-// const 气泡 = new LazyList([1, 2, 3]);
+// const bubble = new LazyList([1, 2, 3]);
 // assert.deepEqual([...lazy
-// for(const o of 气泡) {
+// for(const o of bubble) {
 // }

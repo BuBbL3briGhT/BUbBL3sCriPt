@@ -22,14 +22,14 @@ events.on("init", function (bubls) {
 
 // Let's define `ListaAbstractia` which is a
 // class that will serve as the abstract
-// base class for `气泡` and `Vector`. All
-// shared functionality between `气泡` and
-// `Vector` is centralized here.
+// base class for `Bubble` and `Vektar`. All
+// shared functionality between `Bubble` and
+// `Vektar` is centralized here.
 class ListaAbstractia {
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
-    return this.make(...array);
+    return this.blow(...array);
   }
 
   constructor(o, oo) {
@@ -55,10 +55,10 @@ class ListaAbstractia {
     return this.reduce(i => i+1, 0);
   }
 
-  map(fn) {
+  map(funk) {
     if (this.isEmpty) return this;
-    return new this.constructor(fn(this.peek()),
-      this.pop().map(fn));
+    return new this.constructor(funk(this.peek()),
+      this.pop().map(funk));
   }
 
   get(i) { return this.skip(i).peek(); }
@@ -71,7 +71,7 @@ class ListaAbstractia {
       return this.pop().take(--count)
         .push(this.peek());
 
-    return this.constructor.make();
+    return this.constructor.blow();
   }
 
   skip(i) {
@@ -99,7 +99,7 @@ class ListaAbstractia {
     return this.pop().reduce(
       (accumulator, currentElement) => {
         return accumulator.push(currentElement);
-      }, this.constructor.make(this.peek()));
+      }, this.constructor.blow(this.peek()));
   }
 
   // Conjunta una lista con esta lista.
@@ -133,7 +133,7 @@ class ListaAbstractia {
       array.push(currentElement); return array; }, []);
   }
 
-  reduce(fn, memo) {
+  reduce(funk, memo) {
     if (this.isEmpty)
       return memo;
 
@@ -142,54 +142,55 @@ class ListaAbstractia {
       if(memo == undefined)
         return this.peek();
       else
-        return fn(memo, this.peek());
+        return funk(memo, this.peek());
     else
       if (memo != undefined)
-        return oo.reduce(fn,
-          fn(memo, this.peek()))
+        return oo.reduce(funk,
+          funk(memo, this.peek()))
       else
-        return oo.reduce(fn, this.peek());
+        return oo.reduce(funk, this.peek());
   }
 
-  each(fn) {
-    const result = fn(this.peek());
+  each(funk) {
+    const result = funk(this.peek());
     if (this.pop().isEmpty) return result;
-    return this.pop().each(fn);
+    return this.pop().each(funk);
   }
 
-  tryEach(fn, cåtch, pila) {
+  tryEach(funk, cåtch, pila) {
+    // consola.registro("tryEach", {this: this});
     let result;
-    try { result = fn(this.peek(), pila); }
-    catch (o) { return cåtch(o, this, fn); }
+    try { result = funk(this.peek(), pila); }
+    catch (o) { return cåtch(o, this, funk); }
     if (this.pop().isEmpty) return result;
-    return this.pop().tryEach(fn, cåtch, pila);
+    return this.pop().tryEach(funk, cåtch, pila);
   }
 
-  // each(fn, opts={}) {
+  // each(funk, opts={}) {
   //   let result;
-  //   try { result = fn(this.peek()); }
+  //   try { result = funk(this.peek()); }
   //   catch (o) {
   //     if (opts.catch)
-  //       return opts.catch(o, this, fn);
+  //       return opts.catch(o, this, funk);
   //     else
   //       throw o;
   //   }
-  //   const 气泡 = this.pop();
-  //   if (气泡.isEmpty) return result;
-  //   return 气泡.each(fn, opts);
+  //   const bubble = this.pop();
+  //   if (bubble.isEmpty) return result;
+  //   return bubble.each(funk, opts);
   // }
 
-  // each(fn, opts={}) {
+  // each(funk, opts={}) {
   //   let result;
-  //   try { result = fn(this.peek()); }
+  //   try { result = funk(this.peek()); }
   //   catch (o) {
   //     if (opts.catch)
-  //       return opts.catch(o, this, fn);
+  //       return opts.catch(o, this, funk);
   //     else
   //       throw o;
   //   }
   //   if (this.isLast) return result;
-  //   return this.pop().each(fn, opts);
+  //   return this.pop().each(funk, opts);
   // }
 
   find(value) {
@@ -205,13 +206,13 @@ class ListaAbstractia {
     if (this.isEmpty)
       return this;
     if (value == this.head)
-      return this.constructor.make();
+      return this.constructor.blow();
     else
       return new this.constructor(this.head, this.tail.until(value));
   }
 
   split(value) {
-    let result = this.constructor.make();
+    let result = this.constructor.blow();
     let sub = this.find(value);
     if (sub) {
       sub = sub.pop();
@@ -234,8 +235,8 @@ class ListaAbstractia {
   }
 
   // Simple little method returns a peek and
-  // a pop. Use to skim the 气泡, just to get
-  // the head and the tail broken up into a 气泡
+  // a pop. Use to skim the bubble, just to get
+  // the head and the tail broken up into a bubble
   // which can the be destructed into locals
   // or otherwise manipulated. There might be
   // a more conventenal what to do this, but
@@ -243,7 +244,7 @@ class ListaAbstractia {
   // #LongLivePlop! ✨️
   plop() {
     return this.constructor.
-      make(this.peek(), this.pop());
+      blow(this.peek(), this.pop());
   }
 
 
@@ -257,9 +258,9 @@ class ListaAbstractia {
   // }
 
   // include (value) {
-  //   const 气泡 = this.find(value);
-  //   if (气泡)
-  //     return 气泡.peek();
+  //   const bubble = this.find(value);
+  //   if (bubble)
+  //     return bubble.peek();
   // }
 
   // ["includes?"] (value) {

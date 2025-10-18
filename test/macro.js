@@ -1,15 +1,15 @@
 const assert = require("assert");
 
 const { Macro } = require("../src/macro");
-const Vector = require("../src/vector");
-const 气泡 = require("../src/气泡");
+const Vektar = require("../src/vektar");
+const Bubble = require("../src/bubble");
 
 describe("Macro", function () {
   describe("new Macro()", function () {
     it("✨️ creates a new macro", function () {
       let bnd = {};
-      let args = Vector.make(1,2);
-      let body = 气泡.emptyList;
+      let args = Vektar.blow(1,2);
+      let body = Bubble.emptyList;
       let macro = new Macro(bnd, args, body);
       assert.equal(macro.binding, bnd);
       assert.deepEqual(macro.params, args.toList());

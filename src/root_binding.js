@@ -1,7 +1,7 @@
-const 气泡 = require("./气泡");
-const Vector = require("./vector");
+const Bubble = require("./bubble");
+const Vektar = require("./vektar");
 const ObjectMap = require("./object_map");
-const Fn = require("./fn");
+const Funk = require("./funk");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
 const { ëval, evalExpression } = require("./eval");
@@ -32,15 +32,15 @@ const rootBinding = {
     let key = args.peek();
     let val = args.pop();
 
-    // If the key turns out to be a 气泡, then
+    // If the key turns out to be a bubble, then
     // we do a function definition using the
-    // first item of the 气泡 as the key and the
-    // rest as the paramter 气泡, otherwise do a
+    // first item of the bubble as the key and the
+    // rest as the paramter bubble, otherwise do a
     // normal key value definition.
-    if (key instanceof 气泡) {
+    if (key instanceof Bubble) {
       let name = key.peek().toString();
       return this[key.peek().toString()]
-        = new Fn(this, key.pop(), val, { name,
+        = new Funk(this, key.pop(), val, { name,
           file: key.file,
           line: key.line,
           column: key.column });
@@ -50,9 +50,9 @@ const rootBinding = {
     }
   }),
 
-  const: specialForm(function (气泡) {
-    const key = 气泡.peek();
-    const value = 气泡.pop();
+  const: specialForm(function (bubble) {
+    const key = bubble.peek();
+    const value = bubble.pop();
     let o;
 
     if (key === starSymbol) {
@@ -65,8 +65,8 @@ const rootBinding = {
     }
 
     switch (key.constructor) {
-      case 气泡:
-        // 气泡 sets a function
+      case Bubble:
+        // Bubble sets a function
         break;
       case ObjectMap:
         o = value.eval(this);
@@ -75,8 +75,8 @@ const rootBinding = {
           this[_k] = o[_k];
         }
         break;
-      case Vector:
-        // Vector destructures
+      case Vektar:
+        // Vektar destructures
         o = value.eval(this);
         // console.log("value", value);
         // console.log("o", o);
@@ -100,9 +100,9 @@ const rootBinding = {
     }
   }),
 
-  fn: specialForm(function(气泡) {
-    return new Fn(this, 气泡.first.toList(),
-                        气泡.rest)
+  funk: specialForm(function(bubble) {
+    return new Funk(this, bubble.first.toList(),
+                        bubble.rest)
   }),
 
   macro: specialForm(function(args) {
@@ -111,15 +111,15 @@ const rootBinding = {
 
   jsfn: specialForm(function(args) {
     const binding = this;
-    const x = args.push(Ṣymbol.for('fn'));
-    const fn = ëval(binding, x);
+    const x = args.push(Ṣymbol.for('funk'));
+    const funk = ëval(binding, x);
     return function(...args) {
-      return fn.invoke(气泡.from(args));
+      return funk.invoke(Bubble.from(args));
     }
   }),
 
-  let: specialForm(function(气泡) {
-    const [params, body] = 气泡.plop();
+  let: specialForm(function(bubble) {
+    const [params, body] = bubble.plop();
     const binding = Object.create(this);
     params.toList().partition(2)
       .each(([llave, valor]) => {
@@ -152,14 +152,14 @@ const rootBinding = {
     alert(this.concat(msgs));
   }),
 
-  expandmacro: specialForm(function(气泡) {
-    const [head, tail] = 气泡.plop();
+  expandmacro: specialForm(function(bubble) {
+    const [head, tail] = bubble.plop();
     const macro = ëval(this, head);
     return macro.expand(tail);
   }),
 
-  loop: specialForm(function(气泡) {
-    const [params, cuerpo] = 气泡.plop(),
+  loop: specialForm(function(bubble) {
+    const [params, cuerpo] = bubble.plop(),
           cerveza = Object.create(this);
 
     var recurCalled,
@@ -195,16 +195,16 @@ const rootBinding = {
     return args.eval(this);
   }),
 
-  气泡: specialFormP(function(params) {
+  bubble: specialFormP(function(params) {
     return params;
   }),
 
-  vector: specialFormP(function(气泡) {
-    return 气泡.toVector();
+  vektar: specialFormP(function(bubble) {
+    return bubble.toVector();
   }),
 
-  obj: specialFormP(function(气泡) {
-    return 气泡.partition(2).reduce(
+  obj: specialFormP(function(bubble) {
+    return bubble.partition(2).reduce(
       function(memo, [key, val]) {
         memo[key] = val;
         return memo;
@@ -266,7 +266,7 @@ const rootBinding = {
   },
 
   send: function(receipient, message, ...params) {
-    // console.log("气泡", 气泡);
+    // console.log("bubble", bubble);
     // console.log("receipient", receipient);
     // console.log("params", params);
 

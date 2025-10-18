@@ -1,4 +1,4 @@
-const SpecialForm = require("../special_form");
+const { SpecialForm } = require("../special_form");
 
 // Makes a Bubblescript function from a
 // Javascript function.
@@ -22,8 +22,8 @@ const SpecialForm = require("../special_form");
 //     return q.call(this, params.mapEval(this));
 //   }
 // }
-function mkfn(fn) {
-  return new SpecialForm(fn,
+function mkfn(funk) {
+  return new SpecialForm(funk,
     { evaluateParams: true });
 }
 

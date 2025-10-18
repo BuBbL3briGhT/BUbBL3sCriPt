@@ -1,0 +1,12 @@
+As a developer of BubbleScript, it is super cool that
+we now have a tool to easily rename symbols project
+wide. (script/🍄) This is already super handy.
+
+Can make is so when a rename is done a not about the
+rename is auto added to the Changelog file.
+
+It could be useful if there was a command for doing
+this, adding things there. Anyway, that might be
+overly formal. Git already kinda serve the purpose ,
+but anyway, it would be helpful to track the symbol
+renames in the change log.

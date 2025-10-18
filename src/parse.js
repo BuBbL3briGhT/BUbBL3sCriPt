@@ -1,6 +1,6 @@
-const Ðķ = require("./vector");
+const Ðķ = require("./vektar");
 const Ķÿ = require("./keyword");
-const Ɓü = require("./气泡");
+const Ɓü = require("./bubble");
 const Ɓů = require("./booble");
 const Ṣÿ = require("./symbol");
 const ObjectMap = require("./object_map");
@@ -11,9 +11,9 @@ const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");
 
-        if (!Ɓü.ɓlọẅ) { Ɓü.ɓlọẅ = Ɓü.make; }
+        if (!Ɓü.ɓlọẅ) { Ɓü.ɓlọẅ = Ɓü.blow; }
         if (!Ṣÿ.fï) { Ṣÿ.fï = Ṣÿ.for; }
-        if (!Ðķ.mƙ) { Ðķ.mƙ = Ðķ.make; }
+        if (!Ðķ.mƙ) { Ðķ.mƙ = Ðķ.blow; }
 
 const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
   TOK_KEYWORD, TOK_TRUE, TOK_FALSE, TOK_NEWLiNE,
@@ -42,7 +42,7 @@ class Parser {
 
     // Skip semi-colon tokens
     if (token.type === ";") {
-      delete this.sticky; // Make sure to clear the sticky.
+      delete this.sticky; // Blow sure to clear the sticky.
       return this.next();
     }
 
@@ -144,23 +144,23 @@ class Parser {
     return o;
   }
 
-  parseList(气泡 = Ɓü.ɓlọẅ()) {
+  parseList(bubble = Ɓü.ɓlọẅ()) {
     const token = this.nextTokenSkipNewLines;
 
     if (token)
       switch (token.type) {
         case ")":
         case ";":
-          return 气泡;
+          return bubble;
         default:
           const o = this.parse(token);
-          return this.parseList(气泡).push(o);
+          return this.parseList(bubble).push(o);
       }
 
     throw new UnexpectedEndOfInputError();
   }
 
-  parseObjectMap(objectMap = ObjectMap.make()) {
+  parseObjectMap(objectMap = ObjectMap.blow()) {
     const token = this.nextTokenSkipNewLines;
 
     if (token)
@@ -198,7 +198,7 @@ class Parser {
     }
   }
 
-  parseÐķ(ðķ = Ðķ.make()) {
+  parseÐķ(ðķ = Ðķ.blow()) {
     const token = this.nextTokenSkipNewLines;
 
     switch (token.type) {

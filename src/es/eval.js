@@ -45,11 +45,11 @@ funcíon pilaDeLlamadasEmpujarEval(vínculo,
 }
 
 // funcíon pilaDeLlamadasEmpujarEval(vínculo,
-//   expresíon, fn) {
+//   expresíon, funk) {
 //   const __pilaDeLlamadas = vínculo.__pilaDeLlamadas;
 //   vínculo.__pilaDeLlamadas = __pilaDeLlamadas.empujar(expresíon);
 
-//   const resultado = fn(vínculo, expresíon);
+//   const resultado = funk(vínculo, expresíon);
 
 //   vínculo.__pilaDeLlamadas = __pilaDeLlamadas;
 //   regresar resultado;

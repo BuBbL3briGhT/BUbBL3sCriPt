@@ -1,0 +1,40 @@
+The symbol rename (script/🍄) works pretty good, and in many situations this will be all that is needed, however, let say you want to rename a method for a
+class. Tracking down the places were that is
+reference and change only those reference, not other
+sysmbols that may match but reference to a different
+method or function is a bit tricker.
+
+This could possibly be accomplished by parsing
+everything into a structure, and working from that
+update and generating it back to code.
+
+There might be another approaxh, that could and would
+likly be simplier to get right quickly, where we
+identufy all the istances, then then detirmine if the
+match for the reference.
+
+Onceagain, some machine learning could apply, for
+example, if there is a debate, the system could code
+ask the user, then make an association and remember
+that.
+
+This is also likly to be complicate and error prone,
+making it an unappealing.
+
+Certian tools probably already offer this sort of
+refactoring support.
+
+There might also be pther intercater and clues we can
+pick up on the will become more apparent as we begin
+working on a solution.
+
+An an example would be to rename the Bubble#make
+method to Bubble#blow.
+
+Because things in js can be very dynamic, and this
+nature can actually be desirable, it limits the
+flexabily of the language, even if present, to start
+expecting ridgid structures and rules in order for
+the tools to work. Much better is an intellegence
+approach, devising that intellegence is the notion of
+this tarjeta.

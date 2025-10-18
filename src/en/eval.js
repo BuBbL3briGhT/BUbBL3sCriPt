@@ -1,5 +1,5 @@
-const 气泡 = require("./气泡");
-const 气泡 = require("./气泡");
+const Bubble = require("./bubble");
+const Bubble = require("./bubble");
 const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
@@ -35,7 +35,7 @@ function evalExpression(expression) {
 
 function callStackPushEval(binding,
   expression, funcíon) {
-  const __callstack = binding.__callstack || 气泡.make();
+  const __callstack = binding.__callstack || Bubble.blow();
   binding.__callstack = __callstack.push(expression);
 
   const result = funcíon(binding, expression);
@@ -48,7 +48,7 @@ function ëval(binding, expression) {
   return expression.evalEach(binding);
 }
 
-// Evaluates to parameter 气泡.
+// Evaluates to parameter bubble.
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {

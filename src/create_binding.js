@@ -10,8 +10,8 @@
    *                                  *
    * * *  * * *  * *  * *  * * *  * * */
 
-     const 气泡 = require("./气泡");
-   const Vector = require("./vector");
+     const Bubble = require("./bubble");
+   const Vektar = require("./vektar");
    const Ṣymbol = require("./symbol");
   const consola = require("./consola");
 
@@ -23,9 +23,9 @@
   function applyArguments
         (binding, keys, vals)
   {
-        if (keys instanceof Vector)
+        if (keys instanceof Vektar)
           keys = keys.toList();
-        if (vals instanceof Vector)
+        if (vals instanceof Vektar)
           vals = vals.toList();
 
     while ( !keys.isEmpty &&
@@ -45,8 +45,8 @@
       }
 
       switch (key.constructor) {
-        case 气泡:
-        case Vector:
+        case Bubble:
+        case Vektar:
           applyArguments(binding, key, val);
           break;
         case Ṣymbol:

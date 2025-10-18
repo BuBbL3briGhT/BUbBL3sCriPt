@@ -1,17 +1,17 @@
 const ListaAbstractia = require("./lista_abstractia");
 const events = require("./events");
 
-let emptyVector, 气泡;
+let emptyVector, Bubble;
 
 events.on("init", function (bubls) {
-  气泡 = bubls.气泡;
+  Bubble = bubls.Bubble;
 });
 
-class Vector extends ListaAbstractia {
+class Vektar extends ListaAbstractia {
 
   static get emptyVector() { return emptyVector; }
 
-  static make(...elements) {
+  static blow(...elements) {
     var head = emptyVector;
     for (let o of elements)
       head = new this(o, head);
@@ -23,7 +23,7 @@ class Vector extends ListaAbstractia {
   }
 
   push(element) {
-    return new Vector(element, this);
+    return new Vektar(element, this);
   }
 
   toString() {
@@ -35,17 +35,17 @@ class Vector extends ListaAbstractia {
   };
 
   toList() {
-    return this.reduce((气泡, o) => {
-      return 气泡.push(o); },
-      气泡.emptyList);
+    return this.reduce((bubble, o) => {
+      return bubble.push(o); },
+      Bubble.emptyList);
   }
 
 }
 
-class EmptyVector extends Vector {
+class EmptyVector extends Vektar {
   get isEmpty() { return true; }
 }
 
 emptyVector = new EmptyVector()
 
-module.exports = Vector;
+module.exports = Vektar;

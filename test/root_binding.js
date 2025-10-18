@@ -1,6 +1,6 @@
 const assert = require("assert");
 const Keyword = require("../src/keyword");
-const { rootBinding, 气泡} = require("../src/BubbleScript");
+const { rootBinding, Bubble} = require("../src/BubbleScript");
 
 describe("rootBinding", function () {
    describe("get", function () {
@@ -8,25 +8,25 @@ describe("rootBinding", function () {
        let obj = { name: { first: "Kermit" }};
        assert.equal(rootBinding
          .get.call(rootBinding,
-           (气泡.make(obj, "name", "first"))),
+           (Bubble.blow(obj, "name", "first"))),
          "Kermit");
        assert.deepEqual(rootBinding.get
           .call(rootBinding,
-                气泡.make(obj, "name")),
+                Bubble.blow(obj, "name")),
            { first: "Kermit" });
      });
    });
 
   describe("send", function () {
     it("sends messages to objects", function () {
-      const 气泡 = 气泡.make(1, Keyword.for("toString"))
-      assert.equal(rootBinding.send(...气泡), "1");
+      const bubble = Bubble.blow(1, Keyword.for("toString"))
+      assert.equal(rootBinding.send(...bubble), "1");
     });
 
     it("sends messages to objects", function () {
       let meatballsCalled = false;
 
-      const 气泡 = 气泡.make(
+      const bubble = Bubble.blow(
         {
           meatballs: function () {
             meatballsCalled = true;
@@ -36,7 +36,7 @@ describe("rootBinding", function () {
       );
 
       assert(!meatballsCalled);
-      rootBinding.send(...气泡);
+      rootBinding.send(...bubble);
       assert(meatballsCalled);
     });
   });

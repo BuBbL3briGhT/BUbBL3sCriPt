@@ -22,7 +22,8 @@
 # const no (obj [:no (fn [] (consola.log "Hola Cola"))])
 #🫧 no (obj [:no (fn [] (consola.log "Hola Cola"))])
 #🫧 no (obj :no (fn [] (puts "Hola Cola")))
-🫧 no (obj "no" (fn [] (puts "Hola Cola")))
+🫧 no (obj "no" (funk [] (puts "Hola Cola")))
+# 🫧 no (obj "no" (funk (puts $1)))
 
 (no.no)
 

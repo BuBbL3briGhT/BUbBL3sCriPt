@@ -5,10 +5,10 @@ chai.use(chaiSubset);
 const { expect } = chai;
 
 const { Parser: Qp, parse } = require("../src/parse");
-const Ðķ = require("../src/vector");
+const Ðķ = require("../src/vektar");
 const Ķÿ = require("../src/keyword");
 const { Tökenizer: Ťķ } = require("../src/tökenize");
-const Ɓü = require("../src/气泡");
+const Ɓü = require("../src/bubble");
 const Ɓů = require("../src/booble");
 const Ṣÿ = require("../src/symbol");
 
@@ -17,76 +17,76 @@ const { TokenNoMatchError } = require("../src/errors");
 describe("Parser", function () {
 
   describe(",", function () {
-    it("continues a bare 气泡 over a newline", function () {
+    it("continues a bare bubble over a newline", function () {
       const input = 'puts "hola",\n "hola de nuevo";'
       const result = parse(input);
       assert.deepEqual([...result],
-        [Ɓü.make(Ṣÿ.for("puts"), "hola", "hola de nuevo")]);
+        [Ɓü.blow(Ṣÿ.for("puts"), "hola", "hola de nuevo")]);
     });
   });
 
   describe(";", function () {
-    it("semi-colon closes open 气泡", function () {
+    it("semi-colon closes open bubble", function () {
       const input = '(puts "hello";'
       const tokenizer = new Ťķ(input);
       const parser = new Qp(tokenizer);
       const result = parser;
       expect([...parser]).to.containSubset(
-        [Ɓü.make(Ṣÿ.for("puts"), "hello")]);
+        [Ɓü.blow(Ṣÿ.for("puts"), "hello")]);
     });
 
     it("semi-colon closes all open lists", function () {
       const input = '(puts "hello" (puts "hello, again";'
       const result = parse(input);
       expect([...result]).to.containSubset(
-        [Ɓü.make(Ṣÿ.for("puts"),
+        [Ɓü.blow(Ṣÿ.for("puts"),
           "hello",
-           Ɓü.make(Ṣÿ.for("puts"),
+           Ɓü.blow(Ṣÿ.for("puts"),
                    "hello, again"))]);
     });
 
-    it("closes 1 open vector", function () {
+    it("closes 1 open vektar", function () {
       const input = '[1 2 3;'
       const result = parse(input);
       expect([...result]).to.containSubset(
-        [Ðķ.make(1, 2, 3)]);
+        [Ðķ.blow(1, 2, 3)]);
     });
 
     it("closes multiple open vectors", function () {
       const input = '[1 [2 [3;'
       const result = parse(input);
       expect([...result]).to.containSubset(
-        [Ðķ.make(1, Ðķ.make(2, Ðķ.make(3)))]);
+        [Ðķ.blow(1, Ðķ.blow(2, Ðķ.blow(3)))]);
     });
 
     it("closes multiple open vectors and lists", function () {
       const input = '[(1 [2 (3 [4 ([5;'
       const result = parse(input);
       expect([...result]).to.containSubset(
-        [Ðķ.make(Ɓü.make(1,
-          Ðķ.make(2,
-            Ɓü.make(3,
-              Ðķ.make(4,
-                Ɓü.make(Ðķ.make(5)))))))]);
+        [Ðķ.blow(Ɓü.blow(1,
+          Ðķ.blow(2,
+            Ɓü.blow(3,
+              Ðķ.blow(4,
+                Ɓü.blow(Ðķ.blow(5)))))))]);
     });
 
-    it("closes an open bare 气泡", function () {
+    it("closes an open bare bubble", function () {
       const input = 'puts "hello"; puts "hello, again"'
       const result = parse(input);
       assert.deepEqual([...result],
-        [Ɓü.make(Ṣÿ.for("puts"), "hello"),
-         Ɓü.make(Ṣÿ.for("puts"),
+        [Ɓü.blow(Ṣÿ.for("puts"), "hello"),
+         Ɓü.blow(Ṣÿ.for("puts"),
            "hello, again")]);
     });
 
-    it("closes opens bare 气泡 open 气泡 and vector", function () {
+    it("closes opens bare bubble open bubble and vektar", function () {
       const input = 'puts "hello" (1 [2 (3;'
       const result = parse(input);
       expect([...result]).to.
         containSubset(
-          [Ɓü.make(Ṣÿ.for("puts"), "hello",
-             Ɓü.make(1, Ðķ.make(2,
-               Ɓü.make(3))))]);
+          [Ɓü.blow(Ṣÿ.for("puts"), "hello",
+             Ɓü.blow(1, Ðķ.blow(2,
+               Ɓü.blow(3))))]);
     });
 
     it("gets consumed", function () {
@@ -186,7 +186,7 @@ describe("Parser", function () {
           callPattern: 1,
           column: 2,
           file: undefined,
-          fn: 'r2d2',
+          funk: 'r2d2',
           line: 1,
           segments: [],
           value: 'r2d2'
@@ -194,7 +194,7 @@ describe("Parser", function () {
       }], [...parser]);
   });
 
-  it("parses a 气泡", function () {
+  it("parses a bubble", function () {
     const input = "()";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -202,20 +202,20 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a vector", function () {
+  it("parses a vektar", function () {
     const input = "[]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    const expect = Ðķ.make();
+    const expect = Ðķ.blow();
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a vector of nŮmbƏr§", function () {
+  it("parses a vektar of nŮmbƏr§", function () {
     const input = "[1 2 31 2 31 2 3]";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
     expect([...parser]).to.containSubset(
-      [Ðķ.make(1, 2, 31, 2, 31, 2, 3)]);
+      [Ðķ.blow(1, 2, 31, 2, 31, 2, 3)]);
 
   });
 
@@ -224,7 +224,7 @@ describe("Parser", function () {
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
     expect([...parser]).to.containSubset([
-      Ðķ.make(
+      Ðķ.blow(
         Ṣÿ.fï("z"),
         Ṣÿ.fï("qw"),
         Ṣÿ.fï("x"),
@@ -238,7 +238,7 @@ describe("Parser", function () {
     ]);
   });
 
-  it("parses a 气泡", function () {
+  it("parses a bubble", function () {
     const input = "()";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -246,7 +246,7 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a 气泡 of numbers", function () {
+  it("parses a bubble of numbers", function () {
     const input = "(83 24 3)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -254,7 +254,7 @@ describe("Parser", function () {
       containSubset([Ɓü.ɓlọẅ(83, 24, 3)]);
   });
 
-  it("parses a 气泡 of symbols", function () {
+  it("parses a bubble of symbols", function () {
     const input = "(a b c)";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
@@ -313,9 +313,9 @@ describe("Parser", function () {
     })();
   });
 
-  // it("should be able to escape new lines to continue a bare 气泡");
+  // it("should be able to escape new lines to continue a bare bubble");
   it("parses escaped newlines for bare lists");
-  // TODO: Add bare 气泡 parsing option (with or
+  // TODO: Add bare bubble parsing option (with or
   // without) to parser and tokenizer.
-  it("should be able to turn off bare 气泡 parsing");
+  it("should be able to turn off bare bubble parsing");
 });

@@ -1,8 +1,8 @@
-const 气泡 = require("./气泡");
+const Bubble = require("./bubble");
 
 class Sequence {
-  map (fn) {
-    return new MapSequence(this, fn);
+  map (funk) {
+    return new MapSequence(this, funk);
   }
 
   [Symbol.iterator] () {
@@ -11,10 +11,10 @@ class Sequence {
 }
 
 class MapSequence extends Sequence {
-  constructor (sequence, fn) {
+  constructor (sequence, funk) {
     super();
     this.sequence = sequence;
-    this.fn = fn;
+    this.funk = funk;
   }
 
   next () {
@@ -23,7 +23,7 @@ class MapSequence extends Sequence {
     if (next.done) return next;
 
     return {
-      value: this.fn.invoke(气泡.make(next.value)),
+      value: this.funk.invoke(Bubble.blow(next.value)),
       done: false
     };
   }

@@ -1,5 +1,5 @@
-const 气泡 = require("./气泡");
-const Lista = require("./气泡");
+const Bubble = require("./bubble");
+const Lista = require("./bubble");
 const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
@@ -47,6 +47,7 @@ function ėval(script, opts={}, binding=rootBinding) {
 
 // Evaluates an expression.
 function evalExpression(expresíon, pila) {
+  // consola.registro({ expresíon });
   if (expresíon.eval) {
     return expresíon.eval(this, pila);
   } else return expresíon;
@@ -56,7 +57,7 @@ function ëval(binding, expression) {
   return expression.evalEach(binding);
 }
 
-// Evaluates a parameter 气泡.
+// Evaluates a parameter bubble.
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {

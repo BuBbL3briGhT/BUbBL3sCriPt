@@ -6,15 +6,15 @@ class ObjectMap extends ListaAbstractia {
 
   static get emptyList() { return emptyObjectMap; }
 
-  static make(...elements) {
+  static blow(...elements) {
     return ObjectMap._make(elements);
   }
 
   static _make(elementsArray, currentObjectMap=emptyObjectMap) {
     if (elementsArray.length < 1)
       return currentObjectMap;
-    return 气泡._make(elementsArray,
-      new 气泡(elementsArray.pop(),
+    return Bubble._make(elementsArray,
+      new Bubble(elementsArray.pop(),
         currentObjectMap));
   }
 
@@ -34,10 +34,10 @@ class ObjectMap extends ListaAbstractia {
     return accumulatedString + " " + formattedElement;
   };
 
-  map(fn) {
+  map(funk) {
     if (this.isEmpty) return ObjectMap.emptyList;
-    return new ObjectMap(fn(this.peek()),
-        this.pop().map(fn));
+    return new ObjectMap(funk(this.peek()),
+        this.pop().map(funk));
   }
 
   createObject(binding) {

@@ -20,8 +20,8 @@ describe("Util", function () {
 
   describe("makeRootBinding", function() {
     it("Makes a root binding", function () {
-      function assertFunction(fn) {
-        assert.equal(typeof fn, 'function');
+      function assertFunction(funk) {
+        assert.equal(typeof funk, 'function');
       }
       const Base = require("../src/base.js");
       const { eval: _eval } = require("../src/BubbleScript");
@@ -29,9 +29,9 @@ describe("Util", function () {
         Util.makeRootBinding(Base, _eval._eval);
 
       const functions = Util.getStaticMethods(Base);
-      for (const fn of functions) {
-        assert(rootBinding[fn]);
-        assertFunction(rootBinding[fn]);
+      for (const funk of functions) {
+        assert(rootBinding[funk]);
+        assertFunction(rootBinding[funk]);
       }
 
       assert(rootBinding["not"]);
@@ -44,9 +44,9 @@ describe("Util", function () {
     it.skip("Makes a Bubblescript/Javascript interop function.", function () {
       const eval = require("../src/eval.js");
       const _fn = (_) => _; // Simple pass thru function for test.
-      const fn = Util.
+      const funk = Util.
         makeFunction(_fn, eval.eVaL);
-      assert.deepEqual(fn(1, 2, 3),
+      assert.deepEqual(funk(1, 2, 3),
         [1, 2, 3]);
     });
   });
