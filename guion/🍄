@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 # Does a project wide symbol rename.
-# script/🍄 original nuevo [dirs]
+# guion/🍄 original nuevo [dirs]
 
 # TODO: Dry run option
 # TODO: Check for issues, files that already exist,
@@ -31,11 +31,11 @@ function subrayar() {
 
 durs=$(echo $@ | cut -d' ' -f3-)
 
-script/🍓 "$(subrayar $1)" "$(subrayar $2)" $durs
-script/🍉 "$(camelizar $1)" "$(camelizar $2)" $durs
-script/🍉 "$(pascalizar $1)" "$(pascalizar $2)" $durs
-script/🍉 "$(subrayar $1)" "$(subrayar $2)" $durs
+guion/🍓 "$(subrayar $1)" "$(subrayar $2)" $durs
+guion/🍉 "$(camelizar $1)" "$(camelizar $2)" $durs
+guion/🍉 "$(pascalizar $1)" "$(pascalizar $2)" $durs
+guion/🍉 "$(subrayar $1)" "$(subrayar $2)" $durs
 
-script/🍋 "$(subrayar $1)" "$(subrayar $2)" $durs
+guion/🍋 "$(subrayar $1)" "$(subrayar $2)" $durs
 # rebautizar_archivos "$(camelizar $1)" "$(camelizar $2)" $durs
 # rebautizar_archivos "$(pascalizar $1)" "$(pascalizar $2)" $durs
