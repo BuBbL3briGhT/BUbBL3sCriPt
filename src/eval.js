@@ -1,5 +1,4 @@
 const Lista = require("./lista");
-const Lista = require("./lista");
 const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
