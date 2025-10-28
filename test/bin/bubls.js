@@ -3,8 +3,8 @@ const assert = require('assert');
 const { expect } = require('chai');
 
 describe('bin/bubls', () => {
-  it('run a script', (done) => {
-    exec('bin/bubls script/hello_world', (error, stdout, stderr) => {
+  it('run a guion', (done) => {
+    exec('bin/bubls guion/hello_world', (error, stdout, stderr) => {
       expect(error).to.be.null;
       expect(stdout.trim()).to.equal('Hello, world!');
       expect(stderr).to.be.empty;
