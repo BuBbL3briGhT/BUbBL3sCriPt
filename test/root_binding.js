@@ -1,6 +1,6 @@
 const assert = require("assert");
 const Keyword = require("../src/keyword");
-const { rootBinding, Bubble} = require("../src/BubbleScript");
+const { rootBinding, Lista} = require("../src/BubbleScript");
 
 describe("rootBinding", function () {
    describe("get", function () {
@@ -8,25 +8,25 @@ describe("rootBinding", function () {
        let obj = { name: { first: "Kermit" }};
        assert.equal(rootBinding
          .get.call(rootBinding,
-           (Bubble.blow(obj, "name", "first"))),
+           (Lista.blow(obj, "name", "first"))),
          "Kermit");
        assert.deepEqual(rootBinding.get
           .call(rootBinding,
-                Bubble.blow(obj, "name")),
+                Lista.blow(obj, "name")),
            { first: "Kermit" });
      });
    });
 
   describe("send", function () {
     it("sends messages to objects", function () {
-      const bubble = Bubble.blow(1, Keyword.for("toString"))
-      assert.equal(rootBinding.send(...bubble), "1");
+      const lista = Lista.blow(1, Keyword.for("toString"))
+      assert.equal(rootBinding.send(...lista), "1");
     });
 
     it("sends messages to objects", function () {
       let meatballsCalled = false;
 
-      const bubble = Bubble.blow(
+      const lista = Lista.blow(
         {
           meatballs: function () {
             meatballsCalled = true;
@@ -36,7 +36,7 @@ describe("rootBinding", function () {
       );
 
       assert(!meatballsCalled);
-      rootBinding.send(...bubble);
+      rootBinding.send(...lista);
       assert(meatballsCalled);
     });
   });

@@ -1,5 +1,5 @@
 const LazyList = require("./lazy_list");
-const Bubble = require("./bubble");
+const Lista = require("./lista");
 const TOK_NUMBER   = 'N',
       TOK_SYMBOL   = 'Y',
       TOK_KEYWORD  = 'K',
@@ -9,7 +9,7 @@ const TOK_NUMBER   = 'N',
       TOK_NEWLiNE  = 'L';
 
 
-// Bubblescript string tokenizer using bubble as
+// Bubblescript string tokenizer using lista as
 // input.
 class Tökenizer {
 
@@ -190,7 +190,7 @@ class Tökenizer {
 }
 
 
-// Matches number at head of bubble.
+// Matches number at head of lista.
 class NumberMatcher {
 
   constructor (tortuga) {
@@ -228,7 +228,7 @@ class NumberMatcher {
 }
 
 // Symbol Delimiters
-const symDelims = Bubble.blow(' ', '\n', '\r',
+const symDelims = Lista.blow(' ', '\n', '\r',
     ')', ']', '}', ',', ';');
 
 // SymbolMatcher: Matches ^<symbol> from
@@ -241,7 +241,7 @@ class SymbolMatcher {
 
   get match() {
     if (this.tortuga["isEmpty?"])
-      // Cannot match a symbol on an empty bubble.
+      // Cannot match a symbol on an empty lista.
       throw Error("Tortuga is empty.");
 
     let char = this.tortuga.peek();
@@ -278,7 +278,7 @@ class SymbolMatcher {
 }
 
 class Char {
-  static newlineChars = Bubble.blow("\n", "\r");
+  static newlineChars = Lista.blow("\n", "\r");
 
   static isNum(char) {
     switch (char) {

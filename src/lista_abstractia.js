@@ -22,8 +22,8 @@ events.on("init", function (bubls) {
 
 // Let's define `ListaAbstractia` which is a
 // class that will serve as the abstract
-// base class for `Bubble` and `Vektar`. All
-// shared functionality between `Bubble` and
+// base class for `Lista` and `Vektar`. All
+// shared functionality between `Lista` and
 // `Vektar` is centralized here.
 class ListaAbstractia {
 
@@ -175,9 +175,9 @@ class ListaAbstractia {
   //     else
   //       throw o;
   //   }
-  //   const bubble = this.pop();
-  //   if (bubble.isEmpty) return result;
-  //   return bubble.each(funk, opts);
+  //   const lista = this.pop();
+  //   if (lista.isEmpty) return result;
+  //   return lista.each(funk, opts);
   // }
 
   // each(funk, opts={}) {
@@ -235,8 +235,8 @@ class ListaAbstractia {
   }
 
   // Simple little method returns a peek and
-  // a pop. Use to skim the bubble, just to get
-  // the head and the tail broken up into a bubble
+  // a pop. Use to skim the lista, just to get
+  // the head and the tail broken up into a lista
   // which can the be destructed into locals
   // or otherwise manipulated. There might be
   // a more conventenal what to do this, but
@@ -258,9 +258,9 @@ class ListaAbstractia {
   // }
 
   // include (value) {
-  //   const bubble = this.find(value);
-  //   if (bubble)
-  //     return bubble.peek();
+  //   const lista = this.find(value);
+  //   if (lista)
+  //     return lista.peek();
   // }
 
   // ["includes?"] (value) {

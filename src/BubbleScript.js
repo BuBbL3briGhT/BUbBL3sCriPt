@@ -7,7 +7,7 @@
        *  */
 
 const ListaAbstractia = require("./lista_abstractia");
-const Bubble = require("./bubble");
+const Lista = require("./lista");
 const Vektar = require("./vektar");
 const Ṣymbol = require("./symbol");
 const Keyword = require("./keyword");
@@ -21,7 +21,7 @@ const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
 const BubbleScript = {
-  Bubble, Vektar, Ṣymbol, Keyword, Booble, Funk,
+  Lista, Vektar, Ṣymbol, Keyword, Booble, Funk,
   Macro, tokenize, Parser, parse, eval: ėval,
   ėval, ëval, evalExpression, rootBinding
 }
@@ -31,8 +31,8 @@ events.emit("init", BubbleScript);
 (function() {
   let bnd = rootBinding;
 
-  function bubble(...args) {
-    return Bubble.from(args);
+  function lista(...args) {
+    return Lista.from(args);
   }
 
   function vektar(...args) {
@@ -45,8 +45,8 @@ events.emit("init", BubbleScript);
 
   function muf(...args) {
     // return ėval(bnd, arry.toList(args).push(_muf));
-    // return ëval(bnd, Bubble.from(args).push(_muf));
-    return Bubble.from(args).push(_muf).eval(bnd);
+    // return ëval(bnd, Lista.from(args).push(_muf));
+    return Lista.from(args).push(_muf).eval(bnd);
   }
 
   let _push = Ṣymbol.for('push'),
@@ -59,26 +59,26 @@ events.emit("init", BubbleScript);
        name = Ṣymbol.for('name'),
        amp = Ṣymbol.for('&'),
        z = Ṣymbol.for('z'),
-      _list = Ṣymbol.for('bubble'),
+      _list = Ṣymbol.for('lista'),
       _muf = Ṣymbol.for('muf'),
       puts = Ṣymbol.for('puts'),
       msg = Ṣymbol.for('msg'),
       consoleLog = Ṣymbol.for('console.log');
 
   // muf push (funk [a b] (send a °push b))
-  muf(_push, bubble(funk, vektar(a, b),
-       bubble(send, a, quote(_push), b)));
+  muf(_push, lista(funk, vektar(a, b),
+       lista(send, a, quote(_push), b)));
 
   // (muf (puts msg) (console.log msg))
   // (muf puts (funk [msg] (console.log msg)))
-  muf(puts, bubble(funk, vektar(msg),
-    bubble(consoleLog, msg)));
+  muf(puts, lista(funk, vektar(msg),
+    lista(consoleLog, msg)));
 
   // (muf mufn (macro [name & z]
-  //     (bubble °muf name (push z °funk))))
-  muf(mufn, bubble(macro, vektar(name,amp,z),
-      bubble(_list,quote(_muf), name,
-         bubble(_push, z, quote(funk)))));
+  //     (lista °muf name (push z °funk))))
+  muf(mufn, lista(macro, vektar(name,amp,z),
+      lista(_list,quote(_muf), name,
+         lista(_push, z, quote(funk)))));
 
 })();
 

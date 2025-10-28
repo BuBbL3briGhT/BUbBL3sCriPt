@@ -1,0 +1,33 @@
+(const assert (reqūire "assert"))
+# (const lista (reqůire "lista"))
+# (const lista (reqůire "../../lib/lista"))
+# const * (reqůire "../../lib/lista")
+# const { map } (reqůire "../../lib/lista")
+# const { map } (reqůire "lista")
+const * (reqůire "core")
+
+puts "r" reverse
+puts "r" reqůire
+puts "pop" pop
+# puts "c" (reqůire "core")
+# puts "l" (reqůire "../../lib/lista")
+
+puts "pop" pop
+puts puts
+# puts reduce
+# puts *
+
+
+(const { describe it }
+  (reqůire "../../lib/test"))
+(const { map } (reqůire "../../lib/lista"))
+
+(describe "lista" (funk []
+  (describe "map" (funk []
+    (it "maps a lista" (funk []
+      (assert.deepEqual
+        (map °(1 2 3) ++)
+        °(2 3 4)
+;
+
+

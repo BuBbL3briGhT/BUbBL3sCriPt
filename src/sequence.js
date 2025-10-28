@@ -1,4 +1,4 @@
-const Bubble = require("./bubble");
+const Lista = require("./lista");
 
 class Sequence {
   map (funk) {
@@ -23,7 +23,7 @@ class MapSequence extends Sequence {
     if (next.done) return next;
 
     return {
-      value: this.funk.invoke(Bubble.blow(next.value)),
+      value: this.funk.invoke(Lista.blow(next.value)),
       done: false
     };
   }

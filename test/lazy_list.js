@@ -1,9 +1,9 @@
 const assert = require("assert");
 const LazyList = require("../src/lazy_list.js");
-const Bubble = require("../src/bubble.js");
+const Lista = require("../src/lista.js");
 
 describe("LazyList", function () {
-  it("is a lazzzy bubble", function () {
+  it("is a lazzzy lista", function () {
     const expects = [1, 2, 3];
     const itty = expects[Symbol.iterator]();
     const lazy = new LazyList(itty);
@@ -12,20 +12,20 @@ describe("LazyList", function () {
 
 
   describe("#toList", function () {
-    it("renders the lazy bubble as a bubble", function () {
+    it("renders the lazy lista as a lista", function () {
       // const lazy = new LazyList([1,2,3][Symbol.iterator]());
       const lazy = new LazyList([1,2,3]);
       const actual = lazy.toList();
-      const expected = Bubble.blow(1, 2, 3);
+      const expected = Lista.blow(1, 2, 3);
       assert.deepEqual(actual, expected);
     });
   });
 });
 
-// for(const o of bubble) {
+// for(const o of lista) {
 // }
 // const itty = [1, 2, 3];
-// const bubble = new LazyList([1, 2, 3]);
+// const lista = new LazyList([1, 2, 3]);
 // assert.deepEqual([...lazy
-// for(const o of bubble) {
+// for(const o of lista) {
 // }
