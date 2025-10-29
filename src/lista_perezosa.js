@@ -1,6 +1,6 @@
 const Lista = require("./lista");
 
-class LazyList extends Lista {
+class ListaPerezosa extends Lista {
 
   get emptyList () { return Lista.emptyList }
 
@@ -38,7 +38,7 @@ class LazyList extends Lista {
 
   get oo() {
     if ( !this.isEmpty )
-      this.set({ oo: new LazyList(this.itty) });
+      this.set({ oo: new ListaPerezosa(this.itty) });
 
     return this.oo;
   }
@@ -61,4 +61,4 @@ class LazyList extends Lista {
 
 }
 
-module.exports = LazyList;
+module.exports = ListaPerezosa;

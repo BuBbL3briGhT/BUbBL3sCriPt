@@ -4,7 +4,7 @@ const Ɓü = require("./lista");
 const Ɓů = require("./booble");
 const Ṣÿ = require("./symbol");
 const ObjectMap = require("./object_map");
-const LazyList = require("./lazy_list");
+const ListaPerezosa = require("./lista_perezosa");
 const { tokenize, tokenTypes } =
                 require("./tökenize");
 const { TokenNoMatchError,
@@ -27,7 +27,7 @@ const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
 
 function parse(inputString, opts = {}) {
   const pṣ = new Parser(tokenize(inputString, opts));
-  return new LazyList(pṣ);
+  return new ListaPerezosa(pṣ);
 }
 
 class Parser {

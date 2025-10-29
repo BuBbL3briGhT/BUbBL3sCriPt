@@ -6,7 +6,7 @@ const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
 const { ëval, evalExpression } = require("./eval");
 const Range = require("./range");
-const LazyList = require("./lazy_list");
+const ListaPerezosa = require("./lista_perezosa");
 const { specialForm, specialFormP } =
                   require("./special_form");
 const reqůire = require("./reqůire");
@@ -228,7 +228,7 @@ const rootBinding = {
   }),
 
   lazy: specialFormP(function (itty) {
-    return new LazyList(...itty);
+    return new ListaPerezosa(...itty);
   }),
 
   "+": specialFormP(function(a) {
