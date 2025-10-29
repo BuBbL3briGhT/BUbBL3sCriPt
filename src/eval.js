@@ -4,12 +4,12 @@ const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
 const consola = require("./consola");
-const { ErrorDeFuncíonIndefinida }
+const { UndefinedFunctionError }
   = require("./errors");
-const { interpolar } = require("./strings");
+const { interpolate } = require("./strings");
 
-const trazaPlantilla = "    en (${file}:${line}:${column})";
-const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
+const traceTemplate = "    en (${file}:${line}:${column})";
+const interpolateTrace = interpolate.bind(traceTemplate);
 
 const sAmp = Ṣymbol.for("&");
 
@@ -19,22 +19,23 @@ events.on("init", function (bubls) {
   rootBinding = bubls.rootBinding;
 });
 
-// // Evaluate Bubblescript
-// function ėval(script, opts={}) {
-//   return parse(script, opts).
-//     evalEach(rootBinding);
-// }
-
-// // Evaluate Bubblescript
+/**
+ * @function ėval
+ * @description Evaluates a string of Bubblescript code.
+ * @param {string} script - The code to evaluate.
+ * @param {Object} [opts={}] - Options for the parser.
+ * @param {Object} [binding=rootBinding] - The binding to evaluate the code in.
+ * @returns {*} The result of the last expression in the script.
+ */
 function ėval(script, opts={}, binding=rootBinding) {
   try {
     return parse(script, opts).evalEach(binding);
   } catch (error) {
     switch (error.constructor){
-      case ErrorDeFuncíonIndefinida:
+      case UndefinedFunctionError:
         if (error.__memo) {
           const memo = error.__memo;
-          error.stack += interpolarTrazaPlantilla({
+          error.stack += interpolateTrace({
             file: memo.file,
             line: memo.line,
             column: memo.column
@@ -45,19 +46,30 @@ function ėval(script, opts={}, binding=rootBinding) {
   }
 }
 
-// Evaluates an expression.
-function evalExpression(expresíon, pila) {
-  // consola.registro({ expresíon });
-  if (expresíon.eval) {
-    return expresíon.eval(this, pila);
-  } else return expresíon;
+/**
+ * @function evalExpression
+ * @description Evaluates a single expression.
+ * @param {*} expression - The expression to evaluate.
+ * @param {Array} [stack=[]] - The evaluation stack.
+ * @returns {*} The result of the expression.
+ */
+function evalExpression(expression, stack) {
+  if (expression.eval) {
+    return expression.eval(this, stack);
+  } else return expression;
 }
 
 function ëval(binding, expression) {
   return expression.evalEach(binding);
 }
 
-// Evaluates a parameter bubble.
+/**
+ * @function evalParams
+ * @description Evaluates a bubble of parameters.
+ * @param {Object} binding - The binding to evaluate the parameters in.
+ * @param {Bubble} params - The bubble of parameters to evaluate.
+ * @returns {Bubble} The evaluated parameters.
+ */
 function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {

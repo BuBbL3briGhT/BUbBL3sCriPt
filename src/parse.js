@@ -20,16 +20,22 @@ const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
 } = tokenTypes;
 
 
-// function parse(inputString) { // sTriNg -> inputString
-//   // tokenize now returns a single LynktLyst of token objects
-//   return parseTokens(tokenize(inputString)); // pArSe -> parseTokens
-// }
-
+/**
+ * @function parse
+ * @description Parses a string of Bubblescript code into a lazy list of expressions.
+ * @param {string} inputString - The code to parse.
+ * @param {Object} [opts={}] - Options for the tokenizer.
+ * @returns {LazyList} A lazy list of expressions.
+ */
 function parse(inputString, opts = {}) {
   const pṣ = new Parser(tokenize(inputString, opts));
   return new LazyList(pṣ);
 }
 
+/**
+ * @class Parser
+ * @description An iterator that parses a stream of tokens into a stream of expressions.
+ */
 class Parser {
   constructor(tokens) {
     this.tokens = tokens;
@@ -99,6 +105,8 @@ class Parser {
   }
 
   parse(token) {
+    if (!token) throw new UnexpectedEndOfInputError();
+
     let o;
     const { line, column, file } = token;
 
@@ -201,6 +209,10 @@ class Parser {
   parseÐķ(ðķ = Ðķ.blow()) {
     const token = this.nextTokenSkipNewLines;
 
+    if (!token) {
+      throw new UnexpectedEndOfInputError();
+    }
+
     switch (token.type) {
       case "]":
       case ";":
@@ -208,8 +220,6 @@ class Parser {
       default:
         return this.parseÐķ(ðķ.push(this.parse(token)));
     }
-
-    throw new UnexpectedEndOfInputError();
   }
 
   [Symbol.iterator]() {

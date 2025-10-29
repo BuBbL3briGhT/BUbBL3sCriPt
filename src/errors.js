@@ -1,4 +1,4 @@
-const { interpolar } = require("./strings");
+const { interpolate } = require("./strings");
 const consola = require("./consola");
 
 class TokenNoMatchError extends Error {
@@ -32,43 +32,51 @@ class NoMatchError extends ParsingError {
   }
 }
 
-// const trazaPlantilla = "    en ${nombre} (${archivo}:${linea}:${columna})";
-const trazaPlantilla = "    en ${funk} (${file}:${line}:${column})";
-const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
+const traceTemplate = "    en ${func} (${file}:${line}:${column})";
+const interpolateTrace = interpolate.bind(traceTemplate);
 
 class BubbleScriptError extends Error {
-  constructor(vínculo, mensaje, pila) {
-    super(mensaje);
-    // this.stack = this.obtenerTrazaDeLaPila(pila);
+  constructor(binding, message, stack) {
+    super(message);
+    // this.stack = this.getStackTrace(stack);
     this.stack = "";
   }
 
-  obtenerTrazaDeLaPila(pila) {
-    // consola.registro({ pila: pila.toString() });
-    const fns = pila.select("funk")
-    const codepoints = pila.select("file", "line", "column")
+  getStackTrace(stack) {
+    const funcs = stack.select("funk");
+    const codepoints = stack.select("file", "line", "column");
 
-    const trazaDeLaPila =
-      codepoints.zip(fns.pop()).partition(2)
-        .map(([point,funk]) => { return {
-          funk: funk?.funk, file: point.file,
+    const stackTrace =
+      codepoints.zip(funcs.pop()).partition(2)
+        .map(([point,func]) => { return {
+          func: func?.funk, file: point.file,
           line: point.line, column: point.column }})
-        .map(interpolarTrazaPlantilla).join("\n")
+        .map(interpolateTrace).join("\n")
         .replace(/en  \(/g, 'en (');
 
-    // const trazaDeLaPila = pila
-    //   .map(interpolarTrazaPlantilla).join("\n");
-
-    return trazaDeLaPila;
+    return stackTrace;
   }
 }
 
-class ErrorDeFuncíonIndefinida extends BubbleScriptError {
-   constructor(vínculo, funcíon, pila) {
-     const mensaje = "La funcíon \"" + funcíon
-                   + "\" no está definida.";
-     super(vínculo, mensaje, pila);
-   }
+const fs = require('fs');
+const path = require('path');
+const locales = {
+  en: JSON.parse(fs.readFileSync(path.join(__dirname, '../locales/en.json'), 'utf8'))
+};
+
+class UndefinedFunctionError extends BubbleScriptError {
+  constructor(binding, func, stack) {
+    const message = locales.en.undefinedFunction.replace('{func}', func);
+    super(binding, message, stack);
+  }
+}
+
+
+class UnexpectedEndOfInputError extends ParsingError {
+  constructor() {
+    super("Unexpected end of input");
+    this.name = "UnexpectedEndOfInputError";
+  }
 }
 
 module.exports = {
@@ -76,5 +84,6 @@ module.exports = {
   ParsingError,
   NoMatchError,
   BubbleScriptError,
-  ErrorDeFuncíonIndefinida
+  UndefinedFunctionError,
+  UnexpectedEndOfInputError
 };

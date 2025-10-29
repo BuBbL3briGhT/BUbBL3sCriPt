@@ -118,34 +118,51 @@ const rootBinding = {
     }
   }),
 
+  /**
+   * @specialForm let
+   * @description Creates a new lexical scope and binds variables to values.
+   * @param {Bubble} bubble - A bubble containing the bindings and the body.
+   * @returns {*} The result of the last expression in the body.
+   */
   let: specialForm(function(bubble) {
     const [params, body] = bubble.plop();
     const binding = Object.create(this);
     params.toList().partition(2)
-      .each(([llave, valor]) => {
-        binding[llave] =
-         evalExpression.call(binding, valor);
+      .each(([key, value]) => {
+        binding[key] =
+         evalExpression.call(binding, value);
       });
     return body.evalEach(binding);
   }),
 
-  if: specialForm(function([c,t,f]) {
-    // consola.registro({ c, f, t });
+  /**
+   * @specialForm if
+   * @description Evaluates a condition and executes one of two branches.
+   * @param {Bubble} bubble - A bubble containing the condition, the then-branch, and the optional else-branch.
+   * @returns {*} The result of the executed branch.
+   */
+  if: specialForm(function([condition, thenBranch, elseBranch]) {
     const conditionValue =
-              evalExpression.call(this, c);
+              evalExpression.call(this, condition);
     if (conditionValue)
-      return evalExpression.call(this, t);
-    else if (f)
-      return evalExpression.call(this, f);
+      return evalExpression.call(this, thenBranch);
+    else if (elseBranch)
+      return evalExpression.call(this, elseBranch);
   }),
 
-  unless: specialForm(function([c,f,t]) {
+  /**
+   * @specialForm unless
+   * @description Evaluates a condition and executes one of two branches, inverting the condition.
+   * @param {Bubble} bubble - A bubble containing the condition, the else-branch, and the optional then-branch.
+   * @returns {*} The result of the executed branch.
+   */
+  unless: specialForm(function([condition, elseBranch, thenBranch]) {
     const conditionValue =
-              evalExpression.call(this, c);
+              evalExpression.call(this, condition);
     if (!conditionValue)
-      return evalExpression.call(this, f);
-    else if (t)
-      return evalExpression.call(this, t);
+      return evalExpression.call(this, elseBranch);
+    else if (thenBranch)
+      return evalExpression.call(this, thenBranch);
   }),
 
   blert: specialForm(function(msgs) {
@@ -158,34 +175,40 @@ const rootBinding = {
     return macro.expand(tail);
   }),
 
+  /**
+   * @specialForm loop
+   * @description Creates a loop with a set of bindings that can be updated with `recur`.
+   * @param {Bubble} bubble - A bubble containing the initial bindings and the loop body.
+   * @returns {*} The result of the last expression in the loop body.
+   */
   loop: specialForm(function(bubble) {
-    const [params, cuerpo] = bubble.plop(),
-          cerveza = Object.create(this);
+    const [params, body] = bubble.plop(),
+          scope = Object.create(this);
 
     var recurCalled,
-          resultado;
+          result;
 
     params.toList().partition(2)
-      .each(([llave, valor]) => {
-        cerveza[llave] =
-         evalExpression.call(cerveza, valor);
+      .each(([key, value]) => {
+        scope[key] =
+         evalExpression.call(scope, value);
       });
 
-    cerveza.recur = function(params) {
+    scope.recur = function(params) {
       params.toList().partition(2)
-        .each(([llave, valor]) => {
-          cerveza[llave] =
-           evalExpression.call(cerveza, valor);
+        .each(([key, value]) => {
+          scope[key] =
+           evalExpression.call(scope, value);
         });
       recurCalled = true;
     };
 
     do {
       recurCalled = false;
-      resultado = cuerpo.evalEach(cerveza);
+      result = body.evalEach(scope);
     } while(recurCalled);
 
-    return resultado;
+    return result;
   }),
 
   /* Special forms with evaulated input
@@ -217,46 +240,51 @@ const rootBinding = {
     });
   }),
 
-  get: specialFormP(function(yeahyeahyeahs) {
-    // console.log(yeahyeahyeahs);
-     return yeahyeahyeahs.reduce(
+  /**
+   * @specialForm get
+   * @description Accesses a value in a nested object or array.
+   * @param {Bubble} bubble - A bubble containing the object and the keys to access.
+   * @returns {*} The value at the specified path, or undefined if not found.
+   */
+  get: specialFormP(function(args) {
+    return args.reduce(
         (memo,key) => memo && memo[key]);
   }),
 
-  range: specialFormP(function (yippies) {
-    return new Range(...yippies);
+  range: specialFormP(function (args) {
+    return new Range(...args);
   }),
 
-  lazy: specialFormP(function (itty) {
-    return new LazyList(...itty);
+  lazy: specialFormP(function (args) {
+    return new LazyList(...args);
   }),
 
-  "+": specialFormP(function(a) {
-    return a.reduce((a,b) => a+b);
+  "+": specialFormP(function(args) {
+    return args.reduce((a,b) => a+b);
   }),
 
-  "-": specialFormP(function(a) {
-    return a.reduce((a,b) => a-b);
+  "-": specialFormP(function(args) {
+    return args.reduce((a,b) => a-b);
   }),
 
-  "*": specialFormP(function(a) {
-    return a.reduce((a,b) => a*b);
+  "*": specialFormP(function(args) {
+    return args.reduce((a,b) => a*b);
   }),
 
-  and: specialFormP(function(a) {
-    return a.reduce((a,b) => a && b);
+  and: specialFormP(function(args) {
+    return args.reduce((a,b) => a && b);
   }),
 
-  or: specialFormP(function(_) {
-    return _.reduce((a,b) => a || b);
+  or: specialFormP(function(args) {
+    return args.reduce((a,b) => a || b);
   }),
 
-  concat: specialFormP(function(eeks) {
-    return eeks.join('');
+  concat: specialFormP(function(args) {
+    return args.join('');
   }),
 
-  "/": specialFormP(function(a) {
-    return a.reduce((a,b) => a/b);
+  "/": specialFormP(function(args) {
+    return args.reduce((a,b) => a/b);
   }),
 
   /* Non-Special form functions */
@@ -265,35 +293,45 @@ const rootBinding = {
     return args.eval(this);
   },
 
-  send: function(receipient, message, ...params) {
-    // console.log("bubble", bubble);
-    // console.log("receipient", receipient);
-    // console.log("params", params);
-
+  /**
+   * @function send
+   * @description Invokes a method on an object.
+   * @param {Object} recipient - The object to invoke the method on.
+   * @param {string|Symbol} message - The name of the method to invoke.
+   * @param {...*} params - The arguments to pass to the method.
+   * @returns {*} The result of the method invocation.
+   */
+  send: function(recipient, message, ...params) {
     if (message.key) message = message.key;
 
-    return receipient[message](...params);
+    return recipient[message](...params);
   },
 
+  /**
+   * @function stop
+   * @description Exits the process.
+   */
   stop: function () {
-    // console.error("stopped");
-    // const obj = {};
-    // Error.captureStackTrace(obj, this.stop);
-    // console.log(obj.stack);
-    // console.log(this);
-    // console.log(this.__proto__);
     process.exit();
   },
 
-  export: function(ca,nd,y) {
-    return ca[nd] = y;
+  /**
+   * @function export
+   * @description Exports a value to an object.
+   * @param {Object} target - The object to export to.
+   * @param {string|Symbol} name - The name of the export.
+   * @param {*} value - The value to export.
+   * @returns {*} The exported value.
+   */
+  export: function(target, name, value) {
+    return target[name] = value;
   },
 
   "=": function(a, b) {
     return a == b;
   },
-  not: function(y) {
-    return !y;
+  not: function(value) {
+    return !value;
   },
   '>': (a,b) => {
     return a > b;
@@ -304,8 +342,8 @@ const rootBinding = {
   parse: function(s) {
     return parse(s);
   },
-  "new": function(m,n) {
-      return new m(...n.toArray());
+  "new": function(constructor, args) {
+      return new constructor(...args.toArray());
   }
 };
 

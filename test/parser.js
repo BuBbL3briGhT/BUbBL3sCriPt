@@ -12,7 +12,8 @@ const Ɓü = require("../src/bubble");
 const Ɓů = require("../src/booble");
 const Ṣÿ = require("../src/symbol");
 
-const { TokenNoMatchError } = require("../src/errors");
+const { TokenNoMatchError,
+        UnexpectedEndOfInputError } = require("../src/errors");
 
 describe("Parser", function () {
 
@@ -318,4 +319,56 @@ describe("Parser", function () {
   // TODO: Add bare bubble parsing option (with or
   // without) to parser and tokenizer.
   it("should be able to turn off bare bubble parsing");
+});
+
+describe("Parser Error Handling", function () {
+  it("throws NoMatchError for mismatched closing delimiter in booble", function () {
+    const input = "°(1 2 3]";
+    expect(() => [...parse(input)]).to.throw(TokenNoMatchError);
+  });
+
+  it("throws NoMatchError for mismatched closing delimiter in balloon", function () {
+    const input = "[1 2 3)";
+    expect(() => [...parse(input)]).to.throw(TokenNoMatchError);
+  });
+
+  it("throws UnexpectedEndOfInputError for incomplete booble vektar (EOF)", function () {
+    const input = "°(1 2 3";
+    expect(() => [...parse(input)]).to.throw(UnexpectedEndOfInputError);
+  });
+
+  it("throws UnexpectedEndOfInputError for incomplete balloon vektar (EOF)", function () {
+    const input = "[1 2 3";
+    expect(() => [...parse(input)]).to.throw(UnexpectedEndOfInputError);
+  });
+
+  it("throws UnexpectedEndOfInputError when item expected in booble, but EOF", function () {
+    const input = "°(";
+    expect(() => [...parse(input)]).to.throw(UnexpectedEndOfInputError);
+  });
+
+  it("throws NoMatchError for unexpected token where item is expected in booble", function () {
+    const input = "°(]";
+    expect(() => [...parse(input)]).to.throw(TokenNoMatchError);
+  });
+
+  it("throws UnexpectedEndOfInputError for quote at EOF", function () {
+    const input = "°";
+    expect(() => [...parse(input)]).to.throw(UnexpectedEndOfInputError);
+  });
+
+  it("throws TokenNoMatchError for quote with no preceding item in a vektar", function () {
+    const input = "[°]";
+    expect(() => [...parse(input)]).to.throw(TokenNoMatchError);
+  });
+
+  it("throws UnexpectedEndOfInputError for unclosed vektar with items then EOF", function () {
+    const input = "[1 2 3";
+    expect(() => [...parse(input)]).to.throw(UnexpectedEndOfInputError);
+  });
+
+  it("throws NoMatchError for vektar with only a mismatched closer", function () {
+    const input = "[)";
+    expect(() => [...parse(input)]).to.throw(TokenNoMatchError);
+  });
 });

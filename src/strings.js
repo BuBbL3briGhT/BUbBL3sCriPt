@@ -1,7 +1,7 @@
-function interpolar(valores) {
-  const plantilla = this;
-  return plantilla.replace(/\${(.*?)}/g,
-    (_, llave) => valores[llave.trim()] || '');
+function interpolate(values) {
+  const template = this;
+  return template.replace(/\${(.*?)}/g,
+    (_, key) => values[key.trim()] || '');
 }
 
-module.exports = { interpolar };
+module.exports = { interpolate };

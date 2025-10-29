@@ -1,11 +1,11 @@
-const ListaAbstractia = require("./lista_abstractia");
+const AbstractList = require("./lista_abstractia");
 const events = require("./events");
 const Ṣymbol = require("./symbol");
 const Funk = require("./funk");
 const consola = require("./consola");
-const { BubbleScriptError, ErrorDeFuncíonIndefinida }
+const { BubbleScriptError, UndefinedFunctionError }
   = require("./errors");
-const { interpolar } = require("./strings");
+const { interpolate } = require("./strings");
 
 let emptyList, MacroExpanded;
 
@@ -13,22 +13,35 @@ events.on("init", function (bubls) {
   MacroExpanded = require("./macro").MacroExpanded;
 });
 
-const trazaPlantilla = "    en ${funk} (${file}:${line}:${column})";
-const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
+const traceTemplate = "    en ${func} (${file}:${line}:${column})";
+const interpolateTrace = interpolate.bind(traceTemplate);
 
-// `Bubble` extends `ListaAbstractia` and is
-// the primary object in Bubblescript and
-// is the programatic representation of a
-// bubble. e.g. `(1 2 3)`
-class Bubble extends ListaAbstractia {
+/**
+ * @class Bubble
+ * @extends AbstractList
+ * @description The primary data structure in Bubblescript, representing a Lisp-like list.
+ * @example
+ * const bubble = Bubble.blow(1, 2, 3);
+ * // => (1 2 3)
+ */
+class Bubble extends AbstractList {
 
-  // `Bubble.emptyList` provides an instance
-  // of `EmptyList`, which terminates all
-  // lists.
+  /**
+   * @static
+   * @property {EmptyList} emptyList - An instance of `EmptyList`, which terminates all lists.
+   */
   static get emptyList() { return emptyList; }
 
-  // `Bubble.blow` makes/creates a new bubble.
-  // `Bubble.blow(1, 2, 3)`
+  /**
+   * @static
+   * @method blow
+   * @description Creates a new bubble.
+   * @param {...*} elements - The elements to add to the bubble.
+   * @returns {Bubble} The new bubble.
+   * @example
+   * const bubble = Bubble.blow(1, 2, 3);
+   * // => (1 2 3)
+   */
   static blow(...elements) {
     return Bubble._make(elements);
   }
@@ -64,10 +77,10 @@ class Bubble extends ListaAbstractia {
   //     Vektar.emptyVector);
   // }
 
-  map(funk) {
+  map(func) {
     if (this.isEmpty) return Bubble.emptyList;
-    return new Bubble(funk(this.peek()),
-        this.pop().map(funk));
+    return new Bubble(func(this.peek()),
+        this.pop().map(func));
   }
 
   toList() {
@@ -102,29 +115,36 @@ class Bubble extends ListaAbstractia {
       b.push(that.peek()));
   }
 
-  eval(vínculo, pila=Bubble.blow()) {
+  /**
+   * @method eval
+   * @description Evaluates the bubble as a function call.
+   * @param {Object} binding - The binding to evaluate the bubble in.
+   * @param {Bubble} [stack=Bubble.blow()] - The evaluation stack.
+   * @returns {*} The result of the function call.
+   */
+  eval(binding, stack=Bubble.blow()) {
     try {
       const { file, line, column } = this;
-      pila = pila.push({funk: this.head.toString(),
+      stack = stack.push({func: this.head.toString(),
           file, line, column});
 
-      const funk = this.head.eval(vínculo);
+      const func = this.head.eval(binding);
 
-      if (funk == undefined) {
-        const Error = ErrorDeFuncíonIndefinida;
-        throw new Error(vínculo, this.head, pila);
+      if (func == undefined) {
+        const Error = UndefinedFunctionError;
+        throw new Error(binding, this.head, stack);
       }
 
-       // consola. registro (funk);
-      return Funk.call(vínculo, funk, this.tail, pila);
+       // consola. registro (func);
+      return Funk.call(binding, func, this.tail, stack);
 
     } catch (error) {
       switch (error.constructor){
-        case ErrorDeFuncíonIndefinida:
+        case UndefinedFunctionError:
           if (error.__memo) {
             const memo = error.__memo;
-            error.stack += interpolarTrazaPlantilla({
-              funk: this.head,
+            error.stack += interpolateTrace({
+              func: this.head,
               file: memo.file,
               line: memo.line,
               column: memo.column
@@ -136,8 +156,8 @@ class Bubble extends ListaAbstractia {
         default:
           (function () {
             const { head, file, line, column } = this;
-            error.stack += "\n" + interpolarTrazaPlantilla({
-              funk: head, file, line, column
+            error.stack += "\n" + interpolateTrace({
+              func: head, file, line, column
             });
           }).call(this);
       }
@@ -145,10 +165,17 @@ class Bubble extends ListaAbstractia {
     }
   }
 
-  evalEach(vínculo, pila) {
+  /**
+   * @method evalEach
+   * @description Evaluates each element of the bubble and returns the result of the last evaluation.
+   * @param {Object} binding - The binding to evaluate the elements in.
+   * @param {Bubble} [stack=Bubble.blow()] - The evaluation stack.
+   * @returns {*} The result of the last evaluation.
+   */
+  evalEach(binding, stack) {
     // consola.registro("evalEach", {this: this});
-    return this.tryEach(evalExpression.bind(vínculo),
-                        catchExpandMacro, pila);
+    return this.tryEach(evalExpression.bind(binding),
+                        catchExpandMacro, stack);
   }
 
   mapEval(binding) {
