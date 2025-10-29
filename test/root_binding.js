@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Keyword = require("../src/keyword");
+const PalabraClave = require("../src/palabra_clave");
 const { rootBinding, Lista} = require("../src/BubbleScript");
 
 describe("rootBinding", function () {
@@ -19,7 +19,7 @@ describe("rootBinding", function () {
 
   describe("send", function () {
     it("sends messages to objects", function () {
-      const lista = Lista.blow(1, Keyword.for("toString"))
+      const lista = Lista.blow(1, PalabraClave.for("toString"))
       assert.equal(rootBinding.send(...lista), "1");
     });
 
@@ -32,7 +32,7 @@ describe("rootBinding", function () {
             meatballsCalled = true;
           }
         },
-        Keyword.for("meatballs")
+        PalabraClave.for("meatballs")
       );
 
       assert(!meatballsCalled);

@@ -1,5 +1,5 @@
 const Ðķ = require("./vektar");
-const Ķÿ = require("./keyword");
+const Ķÿ = require("./palabra_clave");
 const Ɓü = require("./lista");
 const Ɓů = require("./booble");
 const Ṣÿ = require("./symbol");

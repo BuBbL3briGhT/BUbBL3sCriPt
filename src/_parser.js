@@ -2,7 +2,7 @@ const Ťķ = require("./tokenizer");
 const Ɓü = require("./lista");
 const Ðķ = require("./vektar");
 const Ṣÿ = require("./symbol");
-const Ķÿ = require("./keyword");
+const Ķÿ = require("./palabra_clave");
 const Ɓů = require("./booble");
 const { TokenNoMatchError,
         UnexpectedEndOfInputError }

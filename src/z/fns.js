@@ -20,7 +20,7 @@ export function type(value) {
   }
 
   // If it's a function whose source code starts with the
-  // "class" keyword
+  // "class" palabraClave
   if (baseType === "function" &&
       Function.prototype.toString
       .call(value).startsWith("class")) {

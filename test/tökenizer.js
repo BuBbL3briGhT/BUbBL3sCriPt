@@ -201,16 +201,16 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
-  it("tokenizes a keyword", function () {
-    const tokenizer = new Tokenizer(":keyword");
+  it("tokenizes a palabraClave", function () {
+    const tokenizer = new Tokenizer(":palabraClave");
     assert.deepEqual([
-      { type: 'K', value: "keyword",
+      { type: 'K', value: "palabraClave",
         line: 1, column: 1 }
     ], [...tokenizer]);
   });
 
   it("tokenizes everything", function () {
-    let tokenizer = new Tokenizer('"string" symbol :keyword 777 12.333');
+    let tokenizer = new Tokenizer('"string" symbol :palabraClave 777 12.333');
     assert.deepEqual([
       { type: 'S', value: 'string',
         line: 1, column: 1
@@ -218,7 +218,7 @@ describe("Tokenizer", function () {
         type: 'Y', value: 'symbol',
         line: 1, column: 10
       }, {
-        type: 'K', value: 'keyword',
+        type: 'K', value: 'palabraClave',
         line: 1, column: 17
       }, {
         type: 'N', value: 777,

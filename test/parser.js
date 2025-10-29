@@ -6,7 +6,7 @@ const { expect } = chai;
 
 const { Parser: Qp, parse } = require("../src/parse");
 const Ðķ = require("../src/vektar");
-const Ķÿ = require("../src/keyword");
+const Ķÿ = require("../src/palabra_clave");
 const { Tökenizer: Ťķ } = require("../src/tökenize");
 const Ɓü = require("../src/lista");
 const Ɓů = require("../src/booble");
@@ -156,7 +156,7 @@ describe("Parser", function () {
     assert.deepEqual([expect], [...parser]);
   });
 
-  it("parses a keyword", function () {
+  it("parses a palabraClave", function () {
     const input = ":🥚";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);

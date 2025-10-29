@@ -103,8 +103,8 @@ describe("tokenize(string)", function() {
   itTokenizes("symbol",
     { type: TOK_SYMBOL, value: "symbol", line: 1, column: 1 }
   );
-  itTokenizes(":keyword",
-    { type: TOK_KEYWORD, value: "keyword", line: 1, column: 1 }
+  itTokenizes(":palabraClave",
+    { type: TOK_KEYWORD, value: "palabraClave", line: 1, column: 1 }
   );
   itTokenizes("(a b c)",
     { type: '(', value: '(', line: 1, column: 1 },

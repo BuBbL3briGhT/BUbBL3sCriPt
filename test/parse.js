@@ -9,7 +9,7 @@ const  Yaml  = require("yaml");
 const { parse } = require("../src/parse");
 const Lista = require("../src/lista");
 const Vektar = require("../src/vektar");
-const Keyword = require("../src/keyword");
+const PalabraClave = require("../src/palabra_clave");
 const Ṣymbol = require("../src/symbol");
 const Booble = require("../src/booble");
 
@@ -20,7 +20,7 @@ const symbol = Ṣymbol.for("symbol"),
       b = Ṣymbol.for("b"),
       c = Ṣymbol.for("c");
 
-const keyword = Keyword.for("keyword");
+const palabraClave = PalabraClave.for("palabraClave");
 
 let data = fs.readFileSync("test/fixtures/parser.yml", 'utf8');
 let fixtures = Yaml.parse(data);
@@ -49,8 +49,8 @@ describe("parse(string)", () => {
   });
 
   itParses("symbol", {expects: symbol});
-  itParses(":keyword",
-    {expects: keyword});
+  itParses(":palabraClave",
+    {expects: palabraClave});
   itParses("(1 2 3)",
     {expects: Lista.blow(1, 2, 3)});
   itParses("(a b c)",
@@ -78,17 +78,17 @@ describe("parse(string)", () => {
               Ṣymbol.for("x")]),
             Ṣymbol.for("x")])])}); // Changed Booble.from to Lista.from
 
-  // it('should match a single keyword as a booble', function() {
-  //   assertParse(":keyword",
-  //     Booble.blow(Keyword.for("keyword")));
+  // it('should match a single palabraClave as a booble', function() {
+  //   assertParse(":palabraClave",
+  //     Booble.blow(PalabraClave.for("palabraClave")));
   //   // assertParse(":kEyWoRd",
-  //     // Booble.blow(Keyword.for("kEyWoRd")));
+  //     // Booble.blow(PalabraClave.for("kEyWoRd")));
   //   // assertParse(":maRbLes",
-  //     // Booble.blow(Keyword.for("maRbLes")));
+  //     // Booble.blow(PalabraClave.for("maRbLes")));
   //   // assertParse(":good :bAD\n:ULgY",
-  //     // Booble.blow(Keyword.for("good"),
-  //     //   Keyword.for("bAD")),
-  //     // Booble.blow(Keyword.for("ULgY")));
+  //     // Booble.blow(PalabraClave.for("good"),
+  //     //   PalabraClave.for("bAD")),
+  //     // Booble.blow(PalabraClave.for("ULgY")));
   // });
 
 });
@@ -308,7 +308,7 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   //     Ṣymbol(a),
   //   //     Vektar(
   //   //       Ṣymbol(b),
-  //   //       Keyword(c),
+  //   //       PalabraClave(c),
   //   //       Vektar( // Balloon becomes a vektar
   //   //         1,
   //   //         "s",
@@ -329,7 +329,7 @@ describe("Parser Structure and Edge Case Tests", () => {
   //           "s",
   //           1
   //         ]),
-  //         Keyword.for("c"),
+  //         PalabraClave.for("c"),
   //         Ṣymbol.for("b")
   //       ),
   //       Ṣymbol.for("a")
@@ -359,7 +359,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     //     Ṣymbol(a),
     //     Vektar(
     //       Ṣymbol(b),
-    //       Keyword(c),
+    //       PalabraClave(c),
     //       Vektar( // Balloon becomes a vektar
     //         1,
     //         "s",
@@ -379,7 +379,7 @@ describe("Parser Structure and Edge Case Tests", () => {
           Ṣymbol.for("a"),
           Lista.blow(
             Ṣymbol.for("b"),
-            Keyword.for("c"),
+            PalabraClave.for("c"),
             Vektar.blow(// vektar [1 "s" °x] -- assuming balloons are parsed as vectors
               1,
               "s",
@@ -392,16 +392,16 @@ describe("Parser Structure and Edge Case Tests", () => {
     assert.deepEqual(ast, expected, "AST for complex nested structure");
   });
 
-  it.skip("parses another complex structure: (define x '(1 [2 keyword]))", () => {
+  it.skip("parses another complex structure: (define x '(1 [2 palabraClave]))", () => {
     const input = "(define x '(1 [2 :key]))";
-    // AST: Vektar(Ṣymbol(define), Ṣymbol(x), Quoted(Vektar(1, Vektar(2, Keyword(key)))))
+    // AST: Vektar(Ṣymbol(define), Ṣymbol(x), Quoted(Vektar(1, Vektar(2, PalabraClave(key)))))
     const ast = parse(input);
     const expected = Vektar.blow( // outer vektar from parse
       Vektar.blow( // vektar (define ...)
         new Quoted(
           Vektar.blow( // vektar (1 ...)
             Lista.from([ // vektar [2 :key]
-              Keyword.for("key"),
+              PalabraClave.for("key"),
               2,
             ]),
             1

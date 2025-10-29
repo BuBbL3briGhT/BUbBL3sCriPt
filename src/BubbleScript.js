@@ -10,7 +10,7 @@ const ListaAbstractia = require("./lista_abstractia");
 const Lista = require("./lista");
 const Vektar = require("./vektar");
 const Ṣymbol = require("./symbol");
-const Keyword = require("./keyword");
+const PalabraClave = require("./palabra_clave");
 const Booble = require("./booble");
 const Funk = require("./funk");
 const { Macro } = require("./macro");
@@ -21,7 +21,7 @@ const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
 const BubbleScript = {
-  Lista, Vektar, Ṣymbol, Keyword, Booble, Funk,
+  Lista, Vektar, Ṣymbol, PalabraClave, Booble, Funk,
   Macro, tokenize, Parser, parse, eval: ėval,
   ėval, ëval, evalExpression, rootBinding
 }

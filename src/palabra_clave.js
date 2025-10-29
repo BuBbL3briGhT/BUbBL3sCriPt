@@ -1,9 +1,9 @@
 const keywords = Object.create(null);
 
-class Keyword {
+class PalabraClave {
   constructor(key) {
     if(keywords[key]) {
-      throw new Keyword.DoopError(key);
+      throw new PalabraClave.DoopError(key);
     }
     this.key = key;
     return keywords[key] = this;
@@ -14,17 +14,17 @@ class Keyword {
   }
 
   static for(key) {
-    return keywords[key] || new Keyword(key);
+    return keywords[key] || new PalabraClave(key);
   }
 }
 
 class KeywordDoopError extends Error {
   constructor(key) {
-    super(`Keyword with key '${key}' already exists.`);
+    super(`PalabraClave with key '${key}' already exists.`);
     this.name = "KeywordDoopError";
   }
 }
 
-Keyword.DoopError = KeywordDoopError;
+PalabraClave.DoopError = KeywordDoopError;
 
-module.exports = Keyword;
+module.exports = PalabraClave;

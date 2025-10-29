@@ -8,7 +8,7 @@ const sinon = require("sinon");
 // const { ėval } = require("../src/eval");
 
 const { Lista, Vektar, rootBinding,
-  ėval, ëval, parse, Keyword } =
+  ėval, ëval, parse, PalabraClave } =
   require("../src/BubbleScript");
 
 describe("eval(script)", function () {
@@ -17,10 +17,10 @@ describe("eval(script)", function () {
     sinon.restore();
   });
 
-  it("evaluates a keyword", function() {
-    const p = parse(":keyword");
+  it("evaluates a palabraClave", function() {
+    const p = parse(":palabraClave");
     assert.equal(ëval({}, p),
-      Keyword.for("keyword"));
+      PalabraClave.for("palabraClave"));
   });
 
   it("runs script top to bottom", function () {
