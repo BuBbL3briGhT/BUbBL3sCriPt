@@ -126,10 +126,10 @@ describe("Tokenizer", function () {
         line: 1, column: 17
       }, {
         type: 'N', value: 777,
-        line: 1, column: 26
+        line: 1, column: 31
       }, {
         type: 'N', value: 12.333,
-        line: 1, column: 30
+        line: 1, column: 35
       }
     ], [...tokenizer]);
   });
