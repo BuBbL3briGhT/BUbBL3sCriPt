@@ -3,7 +3,7 @@ const Ɓü = require("./lista");
 const Ðķ = require("./vektar");
 const Ṣÿ = require("./symbol");
 const Ķÿ = require("./palabra_clave");
-const Ɓů = require("./booble");
+const Ɓů = require("./burbuja");
 const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");

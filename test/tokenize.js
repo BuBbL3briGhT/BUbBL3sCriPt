@@ -141,11 +141,11 @@ describe("tokenize(string)", function() {
     { type: ')', value: ')', line: 1, column: 14 }
   );
 
-  // Original: itTokenizes2("nested booble", "(1 (2))", "(N(N))", [,1,,2,,]);
+  // Original: itTokenizes2("nested burbuja", "(1 (2))", "(N(N))", [,1,,2,,]);
   // Types: '(', NUM, '(', NUM, ')', ')'
   // Values: '(', 1, '(', 2, ')', ')'
   // + Dropping the descriptor here because it is getting sent to tokenize and causing the test to fail.
-  // itTokenizes("nested booble: (1 (2))", // Changed description
+  // itTokenizes("nested burbuja: (1 (2))", // Changed description
   itTokenizes("(1 (2))", // Changed description
     { type: '(', value: '(', line: 1, column: 1 },
     { type: TOK_NUMBER, value: 1, line: 1, column: 2 },

@@ -11,7 +11,7 @@ const Lista = require("./lista");
 const Vektar = require("./vektar");
 const Ṣymbol = require("./symbol");
 const PalabraClave = require("./palabra_clave");
-const Booble = require("./booble");
+const Burbuja = require("./burbuja");
 const Funk = require("./funk");
 const { Macro } = require("./macro");
 const { tokenize } = require("./tökenize");
@@ -21,7 +21,7 @@ const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
 const BubbleScript = {
-  Lista, Vektar, Ṣymbol, PalabraClave, Booble, Funk,
+  Lista, Vektar, Ṣymbol, PalabraClave, Burbuja, Funk,
   Macro, tokenize, Parser, parse, eval: ėval,
   ėval, ëval, evalExpression, rootBinding
 }
@@ -40,7 +40,7 @@ events.emit("init", BubbleScript);
   }
 
   function quote(m) {
-    return new Booble(m);
+    return new Burbuja(m);
   }
 
   function muf(...args) {

@@ -9,7 +9,7 @@ const Ðķ = require("../src/vektar");
 const Ķÿ = require("../src/palabra_clave");
 const { Tökenizer: Ťķ } = require("../src/tökenize");
 const Ɓü = require("../src/lista");
-const Ɓů = require("../src/booble");
+const Ɓů = require("../src/burbuja");
 const Ṣÿ = require("../src/symbol");
 
 const { TokenNoMatchError } = require("../src/errors");
@@ -178,7 +178,7 @@ describe("Parser", function () {
     const input = "°r2d2";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    assert.deepEqual([ /* Booble */ {
+    assert.deepEqual([ /* Burbuja */ {
         column: 1,
         file: undefined,
         line: 1,
