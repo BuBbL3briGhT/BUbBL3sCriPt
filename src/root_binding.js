@@ -28,77 +28,77 @@ const rootBinding = {
 
   /* Special form functions */
 
-  define: specialForm(function(args) {
-    let key = args.peek();
-    let val = args.pop();
+  // define: specialForm(function(args) {
+  //   let key = args.peek();
+  //   let val = args.pop();
 
-    // If the key turns out to be a bubble, then
-    // we do a function definition using the
-    // first item of the bubble as the key and the
-    // rest as the paramter bubble, otherwise do a
-    // normal key value definition.
-    if (key instanceof Bubble) {
-      let name = key.peek().toString();
-      return this[key.peek().toString()]
-        = new Funk(this, key.pop(), val, { name,
-          file: key.file,
-          line: key.line,
-          column: key.column });
-    } else {
-      return this[key.toString()]
-        = evalExpression.call(this, val.peek());
-    }
-  }),
+  //   // If the key turns out to be a bubble, then
+  //   // we do a function definition using the
+  //   // first item of the bubble as the key and the
+  //   // rest as the paramter bubble, otherwise do a
+  //   // normal key value definition.
+  //   if (key instanceof Bubble) {
+  //     let name = key.peek().toString();
+  //     return this[key.peek().toString()]
+  //       = new Funk(this, key.pop(), val, { name,
+  //         file: key.file,
+  //         line: key.line,
+  //         column: key.column });
+  //   } else {
+  //     return this[key.toString()]
+  //       = evalExpression.call(this, val.peek());
+  //   }
+  // }),
 
-  const: specialForm(function (bubble) {
-    const key   = bubble.peek();
-    const value = bubble.pop();
-    let o;
+  // const: specialForm(function (bubble) {
+  //   const key   = bubble.peek();
+  //   const value = bubble.pop();
+  //   let o;
 
-    if (key === starSymbol) {
-      o = value.eval(this);
+  //   if (key === starSymbol) {
+  //     o = value.eval(this);
 
-      for (const k in o) {
-        this[k] = o[k];
-      }
-      return;
-    }
+  //     for (const k in o) {
+  //       this[k] = o[k];
+  //     }
+  //     return;
+  //   }
 
-    switch (key.constructor) {
-      case Bubble:
-        // Bubble sets a function
-        break;
-      case ObjectMap:
-        o = value.eval(this);
-        for (const k of key) {
-          const _k = k.toString();
-          this[_k] = o[_k];
-        }
-        break;
-      case Vektar:
-        // Vektar destructures
-        o = value.eval(this);
-        // console.log("value", value);
-        // console.log("o", o);
-        for (const k of key) {
-          const sKey = k.toString();
-          if (Object.hasOwn(this, sKey))
-            throw new Error("const " + sKey + " already set");
+  //   switch (key.constructor) {
+  //     case Bubble:
+  //       // Bubble sets a function
+  //       break;
+  //     case ObjectMap:
+  //       o = value.eval(this);
+  //       for (const k of key) {
+  //         const _k = k.toString();
+  //         this[_k] = o[_k];
+  //       }
+  //       break;
+  //     case Vektar:
+  //       // Vektar destructures
+  //       o = value.eval(this);
+  //       // console.log("value", value);
+  //       // console.log("o", o);
+  //       for (const k of key) {
+  //         const sKey = k.toString();
+  //         if (Object.hasOwn(this, sKey))
+  //           throw new Error("const " + sKey + " already set");
 
-          this[sKey] = o[sKey];
-          // console.log(sKey);
-        }
-        break;
-      default:
-        // Symbol sets
-        const sKey = key.toString();
-        if (Object.hasOwn(this, sKey))
-          throw new Error("const " + sKey + " already set");
-        // return this[sKey]
-        //   = ëval(this, value.peek());
-        return this[sKey] = value.eval(this);
-    }
-  }),
+  //         this[sKey] = o[sKey];
+  //         // console.log(sKey);
+  //       }
+  //       break;
+  //     default:
+  //       // Symbol sets
+  //       const sKey = key.toString();
+  //       if (Object.hasOwn(this, sKey))
+  //         throw new Error("const " + sKey + " already set");
+  //       // return this[sKey]
+  //       //   = ëval(this, value.peek());
+  //       return this[sKey] = value.eval(this);
+  //   }
+  // }),
 
   define: specialForm(function(bubble) {
     const   key = bubble.peek();
