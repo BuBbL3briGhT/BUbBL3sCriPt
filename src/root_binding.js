@@ -51,7 +51,7 @@ const rootBinding = {
   }),
 
   const: specialForm(function (bubble) {
-    const key = bubble.peek();
+    const key   = bubble.peek();
     const value = bubble.pop();
     let o;
 
@@ -98,6 +98,13 @@ const rootBinding = {
         //   = ëval(this, value.peek());
         return this[sKey] = value.eval(this);
     }
+  }),
+
+  define: specialForm(function(bubble) {
+    const   key = bubble.peek();
+    const value = bubble.pop();
+
+    throw new NotImplementedError();
   }),
 
   funk: specialForm(function(bubble) {

@@ -3,6 +3,9 @@ const Keyword = require("../src/keyword");
 const { rootBinding, Bubble} = require("../src/BubbleScript");
 
 describe("rootBinding", function () {
+
+   describe("define");
+
    describe("get", function () {
      it("gets from object", function () {
        let obj = { name: { first: "Kermit" }};

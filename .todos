@@ -1,4 +1,5 @@
 September:
+  - Combine const and define. Define should imply const
   - Test for AbstractList#select
   - More documentation
   - Work on require and modules

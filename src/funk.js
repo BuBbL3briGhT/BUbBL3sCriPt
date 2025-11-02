@@ -37,6 +37,7 @@ class Funk {
         return funk.call(binding, ...params);
     }
 
+    console.log({funk});
     return funk.call(binding, params, pila);
   }
 
