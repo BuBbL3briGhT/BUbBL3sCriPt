@@ -1,13 +1,16 @@
 const assert = require("assert");
-const Keyword = require("../src/keyword");
-const { rootBinding, Bubble} = require("../src/BubbleScript");
+const { ėval } = require("../src/eval");
+const { rootBinding, Bubble } =
+  require("../src/BubbleScript");
 
 
 describe("define", function () {
   it.only("sets a constant", function () {
+    // const vínculo = Object.create(rootBinding);
     const vínculo = {};
-    eval(vinculo, "define 🍎 \"apple\"");
-    conole.log(vínculo);
+    conole.log({vínculo});
+    ėval("define 🍎 \"apple\"", {}, vínculo);
+    conole.log({vínculo});
   });
 });
 
