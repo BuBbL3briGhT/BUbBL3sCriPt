@@ -6,11 +6,18 @@ describe("rootBinding", function () {
 
    describe("define", function () {
      it.only("sets a constant", function () {
-       rootBinding.define.call(rootBinding,
-         Symbol
-
+       const vínculo = {};
+       eval(vinculo, "define 🍎 \"apple\"");
+       conole.log(vínculo);
      });
    });
+
+   // describe("define", function () {
+   //   it.only("sets a constant", function () {
+   //     rootBinding.define.call(rootBinding,
+   //       Symbol
+   //   });
+   // });
 
    describe("get", function () {
      it("gets from object", function () {
