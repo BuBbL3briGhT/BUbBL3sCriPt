@@ -4,7 +4,13 @@ const { rootBinding, Bubble} = require("../src/BubbleScript");
 
 describe("rootBinding", function () {
 
-   describe("define");
+   describe("define", function () {
+     it.only("sets a constant", function () {
+       rootBinding.define.call(rootBinding,
+         Symbol
+
+     });
+   });
 
    describe("get", function () {
      it("gets from object", function () {
