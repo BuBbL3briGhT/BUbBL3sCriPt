@@ -11,9 +11,9 @@ describe("define", function () {
   it.only("sets a constant", function () {
     // const vínculo = Object.create(rootBinding);
     const vínculo = {};
-    conole.log({vínculo});
+    console.log({vínculo});
     ėval("define 🍎 \"apple\"", {}, vínculo);
-    conole.log({vínculo});
+    console.log({vínculo});
   });
 });
 
