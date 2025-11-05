@@ -100,7 +100,7 @@ const rootBinding = {
   //   }
   // }),
 
-  define: specialForm(function(bubble) {
+  definir: specialForm(function(bubble) {
     const   key = bubble.peek();
     const value = bubble.pop();
 
