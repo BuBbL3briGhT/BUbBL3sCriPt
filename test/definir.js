@@ -1,7 +1,10 @@
 const assert = require("assert");
 const { ėval } = require("../src/eval");
-const { rootBinding, Bubble } =
-  require("../src/BubbleScript");
+// const { rootBinding, Bubble } =
+//   require("../src/BubbleScript");
+
+const rootBinding = require("../src/root_binding");
+const Bubble = require("../src/bubble");
 
 
 describe("define", function () {
