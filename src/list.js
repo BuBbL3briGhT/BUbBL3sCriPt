@@ -116,56 +116,6 @@ class List extends AbstractList {
   }
 
   /**
-   * @method eval
-   * @description Evaluates the list as a function call.
-   * @param {Object} binding - The binding to evaluate the list in.
-   * @param {List} [stack=List.blow()] - The evaluation stack.
-   * @returns {*} The result of the function call.
-   */
-  eval(binding, stack=List.blow()) {
-    try {
-      const { file, line, column } = this;
-      stack = stack.push({func: this.head.toString(),
-          file, line, column});
-
-      const func = this.head.eval(binding);
-
-      if (func == undefined) {
-        const Error = UndefinedFunctionError;
-        throw new Error(binding, this.head, stack);
-      }
-
-       // consola. registro (func);
-      return Funk.call(binding, func, this.tail, stack);
-
-    } catch (error) {
-      switch (error.constructor){
-        case UndefinedFunctionError:
-          if (error.__memo) {
-            const memo = error.__memo;
-            error.stack += interpolateTrace({
-              func: this.head,
-              file: memo.file,
-              line: memo.line,
-              column: memo.column
-            }) + "\n";
-          }
-          const { file, line, column } = this;
-          error.__memo = { file, line, column }
-          break;
-        default:
-          (function () {
-            const { head, file, line, column } = this;
-            error.stack += "\n" + interpolateTrace({
-              func: head, file, line, column
-            });
-          }).call(this);
-      }
-      throw error;
-    }
-  }
-
-  /**
    * @method evalEach
    * @description Evaluates each element of the list and returns the result of the last evaluation.
    * @param {Object} binding - The binding to evaluate the elements in.
