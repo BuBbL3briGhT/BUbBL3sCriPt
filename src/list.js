@@ -128,10 +128,6 @@ class List extends AbstractList {
                         catchExpandMacro, stack);
   }
 
-  mapEval(binding) {
-    return this.map(evalExpression.bind(binding));
-  }
-
 }
 
 class EmptyList extends List {

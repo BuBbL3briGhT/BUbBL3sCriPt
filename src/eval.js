@@ -135,6 +135,11 @@ evalList(list, binding, stack=List.blow()) {
   }
 }
 
+mapEvalList(list, binding) {
+  return list.map(evalExpression.bind(binding));
+}
+
+
 
 module.exports = { ėval, ëval, evalExpression,
   evalParams, evalList };
