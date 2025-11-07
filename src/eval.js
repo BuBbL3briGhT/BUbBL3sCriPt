@@ -91,21 +91,21 @@ function evalParams(binding, params) {
  * @param {List} [stack=List.blow()] - The evaluation stack.
  * @returns {*} The result of the function call.
  */
-evalList(binding, stack=List.blow()) {
+evalList(list, binding, stack=List.blow()) {
   try {
     const { file, line, column } = this;
-    stack = stack.push({func: this.head.toString(),
+    stack = stack.push({func: list.head.toString(),
         file, line, column});
 
-    const func = this.head.eval(binding);
+    const func = evalList(list.head, binding);
 
     if (func == undefined) {
       const Error = UndefinedFunctionError;
-      throw new Error(binding, this.head, stack);
+      throw new Error(binding, list.head, stack);
     }
 
      // consola. registro (func);
-    return Funk.call(binding, func, this.tail, stack);
+    return Funk.call(binding, func, list.tail, stack);
 
   } catch (error) {
     switch (error.constructor){
@@ -113,22 +113,22 @@ evalList(binding, stack=List.blow()) {
         if (error.__memo) {
           const memo = error.__memo;
           error.stack += interpolateTrace({
-            func: this.head,
+            func: list.head,
             file: memo.file,
             line: memo.line,
             column: memo.column
           }) + "\n";
         }
-        const { file, line, column } = this;
+        const { file, line, column } = list;
         error.__memo = { file, line, column }
         break;
       default:
         (function () {
-          const { head, file, line, column } = this;
+          const { head, file, line, column } = list;
           error.stack += "\n" + interpolateTrace({
             func: head, file, line, column
           });
-        }).call(this);
+        }).call(list);
     }
     throw error;
   }
