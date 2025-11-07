@@ -9,7 +9,7 @@ const Ðķ = require("../src/vektar");
 const Ķÿ = require("../src/keyword");
 const { Tökenizer: Ťķ } = require("../src/tökenize");
 const Ɓü = require("../src/list");
-const Ɓů = require("../src/booble");
+const Ɓů = require("../src/bubble");
 const Ṣÿ = require("../src/symbol");
 
 const { TokenNoMatchError,
@@ -179,7 +179,7 @@ describe("Parser", function () {
     const input = "°r2d2";
     const tokenizer = new Ťķ(input);
     const parser = new Qp(tokenizer);
-    assert.deepEqual([ /* Booble */ {
+    assert.deepEqual([ /* Bubble */ {
         column: 1,
         file: undefined,
         line: 1,
@@ -322,7 +322,7 @@ describe("Parser", function () {
 });
 
 describe("Parser Error Handling", function () {
-  it("throws NoMatchError for mismatched closing delimiter in booble", function () {
+  it("throws NoMatchError for mismatched closing delimiter in bubble", function () {
     const input = "°(1 2 3]";
     expect(() => [...parse(input)]).to.throw(TokenNoMatchError);
   });
@@ -332,7 +332,7 @@ describe("Parser Error Handling", function () {
     expect(() => [...parse(input)]).to.throw(TokenNoMatchError);
   });
 
-  it("throws UnexpectedEndOfInputError for incomplete booble vektar (EOF)", function () {
+  it("throws UnexpectedEndOfInputError for incomplete bubble vektar (EOF)", function () {
     const input = "°(1 2 3";
     expect(() => [...parse(input)]).to.throw(UnexpectedEndOfInputError);
   });
@@ -342,12 +342,12 @@ describe("Parser Error Handling", function () {
     expect(() => [...parse(input)]).to.throw(UnexpectedEndOfInputError);
   });
 
-  it("throws UnexpectedEndOfInputError when item expected in booble, but EOF", function () {
+  it("throws UnexpectedEndOfInputError when item expected in bubble, but EOF", function () {
     const input = "°(";
     expect(() => [...parse(input)]).to.throw(UnexpectedEndOfInputError);
   });
 
-  it("throws NoMatchError for unexpected token where item is expected in booble", function () {
+  it("throws NoMatchError for unexpected token where item is expected in bubble", function () {
     const input = "°(]";
     expect(() => [...parse(input)]).to.throw(TokenNoMatchError);
   });

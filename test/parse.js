@@ -11,7 +11,7 @@ const List = require("../src/list");
 const Vektar = require("../src/vektar");
 const Keyword = require("../src/keyword");
 const Ṣymbol = require("../src/symbol");
-const Booble = require("../src/booble");
+const Bubble = require("../src/bubble");
 
 const { type } = require("../src/z/fns"); // Assuming fns is a valid module
 
@@ -43,9 +43,9 @@ describe("parse(string)", () => {
       .containSubset(expectedAst);
   });
 
-  it("parses a booble of list", function () {
+  it("parses a bubble of list", function () {
     let m = parse("°(a b c)")
-    assert(m.peek() instanceof Booble);
+    assert(m.peek() instanceof Bubble);
   });
 
   itParses("symbol", {expects: symbol});
@@ -58,7 +58,7 @@ describe("parse(string)", () => {
   itParses("(a 3 b 2 c 1)",
     {expects: List.blow(a, 3, b, 2, c, 1)});
 
-  itParses2("a nested booble", "(1 (2))",
+  itParses2("a nested bubble", "(1 (2))",
      List.from([1, List.from([2])]));
 
 
@@ -76,19 +76,19 @@ describe("parse(string)", () => {
               Ṣymbol.for("x"), 0]),
             List.from([Ṣymbol.for("-"),
               Ṣymbol.for("x")]),
-            Ṣymbol.for("x")])])}); // Changed Booble.from to List.from
+            Ṣymbol.for("x")])])}); // Changed Bubble.from to List.from
 
-  // it('should match a single keyword as a booble', function() {
+  // it('should match a single keyword as a bubble', function() {
   //   assertParse(":keyword",
-  //     Booble.blow(Keyword.for("keyword")));
+  //     Bubble.blow(Keyword.for("keyword")));
   //   // assertParse(":kEyWoRd",
-  //     // Booble.blow(Keyword.for("kEyWoRd")));
+  //     // Bubble.blow(Keyword.for("kEyWoRd")));
   //   // assertParse(":maRbLes",
-  //     // Booble.blow(Keyword.for("maRbLes")));
+  //     // Bubble.blow(Keyword.for("maRbLes")));
   //   // assertParse(":good :bAD\n:ULgY",
-  //     // Booble.blow(Keyword.for("good"),
+  //     // Bubble.blow(Keyword.for("good"),
   //     //   Keyword.for("bAD")),
-  //     // Booble.blow(Keyword.for("ULgY")));
+  //     // Bubble.blow(Keyword.for("ULgY")));
   // });
 
 });
@@ -120,8 +120,8 @@ assertParse = function(inputString, expectedAst) { // stRinG -> inputString, eXp
   assert.deepEqual(resultAst.peek(), expectedAst); // assert.equal -> assert.deepEqual
 };
 
-assertBubble = function(booble) {
-  assert(type(booble) === 'Booble');
+assertBubble = function(bubble) {
+  assert(type(bubble) === 'Bubble');
 };
 
 assertListEqual = function(actual, expected) {
@@ -129,7 +129,7 @@ assertListEqual = function(actual, expected) {
 };
 
 describe("Parser Error Handling", () => {
-  it.skip("throws NoMatchError for mismatched closing delimiter in booble", () => {
+  it.skip("throws NoMatchError for mismatched closing delimiter in bubble", () => {
     const input = "(1 2]";
     assert.throws(() => parse(input), (error) => {
       // console.log(error);
@@ -153,7 +153,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws NoMatchError for incomplete booble vektar (EOF)", () => {
+  it.skip("throws NoMatchError for incomplete bubble vektar (EOF)", () => {
     const input = "(1 2"; // Parsed as ) 2 1 ( by pArSe logic
                        // Error occurs when matching final '(', context is ')'
     assert.throws(() => parse(input), (error) => {
@@ -178,7 +178,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws NoMatchError when item expected in booble, but EOF", () => {
+  it.skip("throws NoMatchError when item expected in bubble, but EOF", () => {
     const input = "("; // Parsed as ) (
     assert.throws(() => parse(input), (error) => {
       assert.equal(error.name, "NoMatchError");
@@ -190,7 +190,7 @@ describe("Parser Error Handling", () => {
     });
   });
 
-  it.skip("throws NoMatchError for unexpected token where item is expected in booble", () => {
+  it.skip("throws NoMatchError for unexpected token where item is expected in bubble", () => {
     const input = "(1 . 2)"; // Tokenizer produces '(', 1, '.', 2, ')'
                            // Parser (reversed) sees ')', 2, '.', 1, '('
                            // match_item for '.' will fail
@@ -220,7 +220,7 @@ describe("Parser Error Handling", () => {
     assert.throws(() => parse(input), (error) => {
       assert.equal(error.name, "ParsingError");
       // pArSe attempts to handle ' after processing ')'.
-      // At this point, trEe is (Booble containing the result of match_bubble).
+      // At this point, trEe is (Bubble containing the result of match_bubble).
       // No, pArSe sees ')', calls match_bubble. match_bubble sees '''. Calls match_item.
       // match_item for ' is not defined, should be handled by pArSe.
       // Let's trace pArSe: currentTokenObject.type is ')'. Calls match_bubble.
@@ -347,14 +347,14 @@ describe("Parser Structure and Edge Case Tests", () => {
     // console.log(ast);
     const expected =
       Vektar.blow(1, "s",
-        new Booble(Ṣymbol.for("x")));
+        new Bubble(Ṣymbol.for("x")));
     expect([...ast]).to.containSubset([expected]);
   });
 
   it.skip("parses a complex nested structure with quotes, list, and balloons (arrays)", () => {
     const input = "°(a (b :c [1 \"s\" °x]))";
     // Expected AST structure:
-    // Booble(
+    // Bubble(
     //   Vektar(
     //     Ṣymbol(a),
     //     Vektar(
@@ -374,7 +374,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     const ast = parse(input);
     console.log(ast);
     const expected = List.blow( // Outer vektar from parse()
-      new Booble(
+      new Bubble(
         List.blow(
           Ṣymbol.for("a"),
           List.blow(
@@ -383,7 +383,7 @@ describe("Parser Structure and Edge Case Tests", () => {
             Vektar.blow(// vektar [1 "s" °x] -- assuming balloons are parsed as vectors
               1,
               "s",
-              new Booble(Ṣymbol.for("x"))
+              new Bubble(Ṣymbol.for("x"))
             ),
           )
         )
