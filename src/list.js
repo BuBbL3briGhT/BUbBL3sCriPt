@@ -7,11 +7,7 @@ const { BubbleScriptError, UndefinedFunctionError }
   = require("./errors");
 const { interpolate } = require("./strings");
 
-let emptyList, MacroExpanded;
-
-events.on("init", function (bubls) {
-  MacroExpanded = require("./macro").MacroExpanded;
-});
+let emptyList;
 
 const traceTemplate = "    en ${func} (${file}:${line}:${column})";
 const interpolateTrace = interpolate.bind(traceTemplate);
@@ -115,36 +111,12 @@ class List extends AbstractList {
       b.push(that.peek()));
   }
 
-  /**
-   * @method evalEach
-   * @description Evaluates each element of the list and returns the result of the last evaluation.
-   * @param {Object} binding - The binding to evaluate the elements in.
-   * @param {List} [stack=List.blow()] - The evaluation stack.
-   * @returns {*} The result of the last evaluation.
-   */
-  evalEach(binding, stack) {
-    // consola.registro("evalEach", {this: this});
-    return this.tryEach(evalExpression.bind(binding),
-                        catchExpandMacro, stack);
-  }
-
 }
 
 class EmptyList extends List {
   get isEmpty() { return true; }
 }
 
-emptyList = new EmptyList()
-
-function catchExpandMacro(o, list, funk) {
-  if (o instanceof MacroExpanded) {
-    let expanded = o.expanded;
-    list.o  = expanded.first;
-    list.oo = list.rest.conj(expanded.rest.invert());
-    return list.tryEach(funk, catchExpandMacro);
-  } else {
-    throw o;
-  }
-}
+emptyList = new EmptyList();
 
 module.exports = List;

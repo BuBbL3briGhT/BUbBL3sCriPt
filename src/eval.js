@@ -13,9 +13,10 @@ const interpolateTrace = interpolate.bind(traceTemplate);
 
 const sAmp = Ṣymbol.for("&");
 
-let rootBinding;
+let rootBinding, MacroExpanded;
 
 events.on("init", function (bubls) {
+  MacroExpanded = require("./macro").MacroExpanded;
   rootBinding = bubls.rootBinding;
 });
 
@@ -135,12 +136,35 @@ evalList(list, binding, stack=List.blow()) {
   }
 }
 
+/**
+ * @method evalEach
+ * @description Evaluates each element of the list and returns the result of the last evaluation.
+ * @param {List} list - A list to evalEach over.
+ * @param {Object} binding - The binding to evaluate the elements in.
+ * @param {List} [stack=List.blow()] - The evaluation stack.
+ * @returns {*} The result of the last evaluation.
+ */
+evalEach(list, binding, stack) {
+  // consola.registro("evalEach", {list: list});
+  return list.tryEach(evalExpression.bind(binding),
+                      catchExpandMacro, stack);
+}
+
 mapEvalList(list, binding) {
   return list.map(evalExpression.bind(binding));
 }
 
-
+function catchExpandMacro(o, list, funk) {
+  if (o instanceof MacroExpanded) {
+    let expanded = o.expanded;
+    list.o  = expanded.first;
+    list.oo = list.rest.conj(expanded.rest.invert());
+    return list.tryEach(funk, catchExpandMacro);
+  } else {
+    throw o;
+  }
+}
 
 module.exports = { ėval, ëval, evalExpression,
-  evalParams, evalList };
+  evalParams, evalList, evalEach, mapEvalList };
 
