@@ -24,7 +24,7 @@ const sAmp = Ṣymbol.for("&");
  */
 function ėval(binding, script, opts={}) {
   try {
-    return ëval(binding, parse(script, opts));
+    return evalEach(binding, parse(script, opts));
   } catch (error) {
     switch (error.constructor){
       case UndefinedFunctionError:
@@ -39,10 +39,6 @@ function ėval(binding, script, opts={}) {
     }
     throw error;
   }
-}
-
-function ëval(binding, expression) {
-  return evalEach(binding, expression);
 }
 
 /**
@@ -159,6 +155,6 @@ function catchExpandMacro(o, list, funk) {
   }
 }
 
-module.exports = { ėval, ëval, evalExpression,
-  evalParams, evalList, evalEach, mapEvalList };
+module.exports = { ėval, evalExpression, evalParams,
+  evalList, evalEach, mapEvalList };
 
