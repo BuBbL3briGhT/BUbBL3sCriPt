@@ -3,6 +3,7 @@ November:
     functional paradigm, shoul resolve circular
     dependency. bubble -> eval -> bubble.
        eval -> bubble.
+       bubble.eval -> evalBubble
 September:
   - Combine const and define. Define should imply const
   - Test for AbstractList#select
