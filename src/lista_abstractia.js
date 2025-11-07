@@ -13,13 +13,6 @@
    const events = require("./events");
   const consola = require("./consola");
 
-let ëval;
-
-events.on("init", function (bubls) {
-  ëval = bubls.ëval;
-  evalExpression = bubls.evalExpression;
-});
-
 // Let's define `ListaAbstractia` which is a
 // class that will serve as the abstract
 // base class for `List` and `Vektar`. All
