@@ -1,3 +1,8 @@
+November:
+  - Factor eval stuff out of bubble/list. Use
+    functional paradigm, shoul resolve circular
+    dependency. bubble -> eval -> bubble.
+       eval -> bubble.
 September:
   - Combine const and define. Define should imply const
   - Test for AbstractList#select

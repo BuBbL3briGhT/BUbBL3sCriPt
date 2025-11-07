@@ -6,7 +6,6 @@ const { ėval } = require("../src/eval");
 const rootBinding = require("../src/root_binding");
 const Bubble = require("../src/bubble");
 
-
 describe("define", function () {
   it.only("sets a constant", function () {
     // const vínculo = Object.create(rootBinding);
