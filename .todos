@@ -1,4 +1,7 @@
 November:
+  - rootBinding, or whatever binding should be passed
+    to eval as parameter, remove dependency on
+    binding in eval. (which is circular)
   - Factor eval stuff out of bubble/list. Use
     functional paradigm, shoul resolve circular
     dependency. bubble -> eval -> bubble.
