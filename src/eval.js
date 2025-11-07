@@ -87,6 +87,7 @@ function evalParams(binding, params) {
 /**
  * @method evalList
  * @description Evaluates the list as a function call.
+ * @param {List} list - The list to evaluate.
  * @param {Object} binding - The binding to evaluate the list in.
  * @param {List} [stack=List.blow()] - The evaluation stack.
  * @returns {*} The result of the function call.
@@ -136,5 +137,5 @@ evalList(list, binding, stack=List.blow()) {
 
 
 module.exports = { ėval, ëval, evalExpression,
-  evalParams };
+  evalParams, evalList };
 
