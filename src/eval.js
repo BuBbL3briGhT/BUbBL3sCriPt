@@ -10,15 +10,15 @@ const { interpolate } = require("./strings");
 
 const traceTemplate = "    en (${file}:${line}:${column})";
 const interpolateTrace = interpolate.bind(traceTemplate);
+const { MacroExpanded } = require("./macro");
 
 const sAmp = Ṣymbol.for("&");
 
-let rootBinding, MacroExpanded;
+let rootBinding;
 
-events.on("init", function (bubls) {
-  MacroExpanded = require("./macro").MacroExpanded;
-  rootBinding = bubls.rootBinding;
-});
+// events.on("init", function (bubls) {
+//   rootBinding = bubls.rootBinding;
+// });
 
 /**
  * @function ėval
