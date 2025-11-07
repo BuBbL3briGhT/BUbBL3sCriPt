@@ -1,4 +1,4 @@
-const Bubble = require("./bubble");
+const List = require("./list");
 const Vektar = require("./vektar");
 const ObjectMap = require("./object_map");
 const Funk = require("./funk");
@@ -32,12 +32,12 @@ const rootBinding = {
   //   let key = args.peek();
   //   let val = args.pop();
 
-  //   // If the key turns out to be a bubble, then
+  //   // If the key turns out to be a list, then
   //   // we do a function definition using the
-  //   // first item of the bubble as the key and the
-  //   // rest as the paramter bubble, otherwise do a
+  //   // first item of the list as the key and the
+  //   // rest as the paramter list, otherwise do a
   //   // normal key value definition.
-  //   if (key instanceof Bubble) {
+  //   if (key instanceof List) {
   //     let name = key.peek().toString();
   //     return this[key.peek().toString()]
   //       = new Funk(this, key.pop(), val, { name,
@@ -50,9 +50,9 @@ const rootBinding = {
   //   }
   // }),
 
-  // const: specialForm(function (bubble) {
-  //   const key   = bubble.peek();
-  //   const value = bubble.pop();
+  // const: specialForm(function (list) {
+  //   const key   = list.peek();
+  //   const value = list.pop();
   //   let o;
 
   //   if (key === starSymbol) {
@@ -65,8 +65,8 @@ const rootBinding = {
   //   }
 
   //   switch (key.constructor) {
-  //     case Bubble:
-  //       // Bubble sets a function
+  //     case List:
+  //       // List sets a function
   //       break;
   //     case ObjectMap:
   //       o = value.eval(this);
@@ -100,16 +100,16 @@ const rootBinding = {
   //   }
   // }),
 
-  definir: specialForm(function(bubble) {
-    const   key = bubble.peek();
-    const value = bubble.pop();
+  definir: specialForm(function(list) {
+    const   key = list.peek();
+    const value = list.pop();
 
     throw new NotImplementedError();
   }),
 
-  funk: specialForm(function(bubble) {
-    return new Funk(this, bubble.first.toList(),
-                        bubble.rest)
+  funk: specialForm(function(list) {
+    return new Funk(this, list.first.toList(),
+                        list.rest)
   }),
 
   macro: specialForm(function(args) {
@@ -121,18 +121,18 @@ const rootBinding = {
     const x = args.push(Ṣymbol.for('funk'));
     const funk = ëval(binding, x);
     return function(...args) {
-      return funk.invoke(Bubble.from(args));
+      return funk.invoke(List.from(args));
     }
   }),
 
   /**
    * @specialForm let
    * @description Creates a new lexical scope and binds variables to values.
-   * @param {Bubble} bubble - A bubble containing the bindings and the body.
+   * @param {List} list - A list containing the bindings and the body.
    * @returns {*} The result of the last expression in the body.
    */
-  let: specialForm(function(bubble) {
-    const [params, body] = bubble.plop();
+  let: specialForm(function(list) {
+    const [params, body] = list.plop();
     const binding = Object.create(this);
     params.toList().partition(2)
       .each(([key, value]) => {
@@ -145,7 +145,7 @@ const rootBinding = {
   /**
    * @specialForm if
    * @description Evaluates a condition and executes one of two branches.
-   * @param {Bubble} bubble - A bubble containing the condition, the then-branch, and the optional else-branch.
+   * @param {List} list - A list containing the condition, the then-branch, and the optional else-branch.
    * @returns {*} The result of the executed branch.
    */
   if: specialForm(function([condition, thenBranch, elseBranch]) {
@@ -160,7 +160,7 @@ const rootBinding = {
   /**
    * @specialForm unless
    * @description Evaluates a condition and executes one of two branches, inverting the condition.
-   * @param {Bubble} bubble - A bubble containing the condition, the else-branch, and the optional then-branch.
+   * @param {List} list - A list containing the condition, the else-branch, and the optional then-branch.
    * @returns {*} The result of the executed branch.
    */
   unless: specialForm(function([condition, elseBranch, thenBranch]) {
@@ -176,8 +176,8 @@ const rootBinding = {
     alert(this.concat(msgs));
   }),
 
-  expandmacro: specialForm(function(bubble) {
-    const [head, tail] = bubble.plop();
+  expandmacro: specialForm(function(list) {
+    const [head, tail] = list.plop();
     const macro = ëval(this, head);
     return macro.expand(tail);
   }),
@@ -185,11 +185,11 @@ const rootBinding = {
   /**
    * @specialForm loop
    * @description Creates a loop with a set of bindings that can be updated with `recur`.
-   * @param {Bubble} bubble - A bubble containing the initial bindings and the loop body.
+   * @param {List} list - A list containing the initial bindings and the loop body.
    * @returns {*} The result of the last expression in the loop body.
    */
-  loop: specialForm(function(bubble) {
-    const [params, body] = bubble.plop(),
+  loop: specialForm(function(list) {
+    const [params, body] = list.plop(),
           scope = Object.create(this);
 
     var recurCalled,
@@ -225,16 +225,16 @@ const rootBinding = {
     return args.eval(this);
   }),
 
-  bubble: specialFormP(function(params) {
+  list: specialFormP(function(params) {
     return params;
   }),
 
-  vektar: specialFormP(function(bubble) {
-    return bubble.toVector();
+  vektar: specialFormP(function(list) {
+    return list.toVector();
   }),
 
-  obj: specialFormP(function(bubble) {
-    return bubble.partition(2).reduce(
+  obj: specialFormP(function(list) {
+    return list.partition(2).reduce(
       function(memo, [key, val]) {
         memo[key] = val;
         return memo;
@@ -250,7 +250,7 @@ const rootBinding = {
   /**
    * @specialForm get
    * @description Accesses a value in a nested object or array.
-   * @param {Bubble} bubble - A bubble containing the object and the keys to access.
+   * @param {List} list - A list containing the object and the keys to access.
    * @returns {*} The value at the specified path, or undefined if not found.
    */
   get: specialFormP(function(args) {

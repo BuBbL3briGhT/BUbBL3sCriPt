@@ -1,13 +1,13 @@
 const assert = require("assert");
 const sinon = require("sinon");
 
-// const Bubble = require("../src/bubble");
+// const List = require("../src/list");
 // const Vektar = require("../src/vektar");
 // const rootBinding = require("../src/root_binding");
 
 // const { ėval } = require("../src/eval");
 
-const { Bubble, Vektar, rootBinding,
+const { List, Vektar, rootBinding,
   ėval, ëval, parse, Keyword } =
   require("../src/BubbleScript");
 
@@ -110,15 +110,15 @@ describe("eval(script)", function () {
 
     let ast =
       parse("(muf 🐒 (macro [🐸 🐷 🦎] "+
-            "  (bubble °puts             "+
-            "    (bubble °+ 🐸 🐷 🦎))   "+
-            "  (bubble °puts             "+
+            "  (list °puts             "+
+            "    (list °+ 🐸 🐷 🦎))   "+
+            "  (list °puts             "+
             "    (+ 🐸 🐷 🐷) 🦎)))    ");
 
     assert.equal(ast.toString(),
       "((muf 🐒 (macro [🐸 🐷 🦎] "+
-      "(bubble °puts (bubble °+ 🐸 🐷 🦎)) "+
-      "(bubble °puts (+ 🐸 🐷 🐷) 🦎))))");
+      "(list °puts (list °+ 🐸 🐷 🦎)) "+
+      "(list °puts (+ 🐸 🐷 🐷) 🦎))))");
 
     ast.evalEach(bnd);
 
@@ -140,10 +140,10 @@ describe("eval(script)", function () {
   describe("function parameters", function () {
     it("splats", function () {
       assert.equal(ėval(
-        "((funk [a b c] (bubble b c a)) 1 2 3)")
+        "((funk [a b c] (list b c a)) 1 2 3)")
           .toString(), "(2 3 1)");
       assert.equal(ėval(
-        "((funk [a & b] (bubble a b)) 1 2 3)")
+        "((funk [a & b] (list a b)) 1 2 3)")
           .toString(), "(1 (2 3))");
       assert.equal(ėval(
         "((funk [& a] (send a :pop)) 1 2 3)")
@@ -152,15 +152,15 @@ describe("eval(script)", function () {
       //   "((funk [& a] (pop a)) 1 2 3)")
       //     .toString(), "(2 3)");
       // assert.equal(ėval(
-      //   "((funk [a b & c] (bubble & c)) 1 2 3)")
+      //   "((funk [a b & c] (list & c)) 1 2 3)")
       //     .toString(), "(3)");
     });
     it("destructures", function () {
       assert.equal(ėval(
-        "((funk [a b] (bubble a b b)) 1 [2 3])")
+        "((funk [a b] (list a b b)) 1 [2 3])")
           .toString(), "(1 [2 3] [2 3])");
       assert.equal(ėval(
-        "((funk [a [b c]] (bubble a b c)) 1 [2 3])")
+        "((funk [a [b c]] (list a b c)) 1 [2 3])")
           .toString(), "(1 2 3)");
     });
     it("splats for outbound functions");
@@ -179,7 +179,7 @@ describe("eval(script)", function () {
       //     .toString(), "(3)");
     it("splats for inbound functions");
       // assert.equal(ėval(
-      //   "((funk [a b & c] (bubble & c)) 1 2 3)")
+      //   "((funk [a b & c] (list & c)) 1 2 3)")
       //     .toString(), "(3)");
   });
 });

@@ -1,5 +1,5 @@
-const Bubble = require("./bubble");
-const Lista = require("./bubble");
+const List = require("./list");
+const Lista = require("./list");
 const Ṣymbol = require("./symbol");
 const { parse } = require("./parse");
 const events = require("./events");
@@ -65,10 +65,10 @@ function ëval(binding, expression) {
 
 /**
  * @function evalParams
- * @description Evaluates a bubble of parameters.
+ * @description Evaluates a list of parameters.
  * @param {Object} binding - The binding to evaluate the parameters in.
- * @param {Bubble} params - The bubble of parameters to evaluate.
- * @returns {Bubble} The evaluated parameters.
+ * @param {List} params - The list of parameters to evaluate.
+ * @returns {List} The evaluated parameters.
  */
 function evalParams(binding, params) {
   const splits = params.split(sAmp);

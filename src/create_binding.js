@@ -10,7 +10,7 @@
    *                                  *
    * * *  * * *  * *  * *  * * *  * * */
 
-     const Bubble = require("./bubble");
+     const List = require("./list");
    const Vektar = require("./vektar");
    const Ṣymbol = require("./symbol");
   const consola = require("./consola");
@@ -45,7 +45,7 @@
       }
 
       switch (key.constructor) {
-        case Bubble:
+        case List:
         case Vektar:
           applyArguments(binding, key, val);
           break;

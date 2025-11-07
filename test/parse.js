@@ -7,7 +7,7 @@ const { expect } = chai;
 const  Yaml  = require("yaml");
 
 const { parse } = require("../src/parse");
-const Bubble = require("../src/bubble");
+const List = require("../src/list");
 const Vektar = require("../src/vektar");
 const Keyword = require("../src/keyword");
 const Ṣymbol = require("../src/symbol");
@@ -29,21 +29,21 @@ describe("parse(string)", () => {
 
   it("parses (1 2 3) into the correct AST structure", () => {
     const ast = parse("(1 2 3)");
-    const expectedAst = Bubble.blow(1, 2, 3);
+    const expectedAst = List.blow(1, 2, 3);
     expect(ast.peek()).to.
       containSubset(expectedAst);
-      // "AST for (1 2 3) should be a bubble of 1, 2, 3");
+      // "AST for (1 2 3) should be a list of 1, 2, 3");
   });
 
   it("parses (not true) into the correct AST structure", () => {
     let not = Ṣymbol.for("not");
     const ast = parse("(not true)");
-    const expectedAst = Bubble.blow(not, true);
+    const expectedAst = List.blow(not, true);
     expect(ast.peek()).to
       .containSubset(expectedAst);
   });
 
-  it("parses a booble of bubble", function () {
+  it("parses a booble of list", function () {
     let m = parse("°(a b c)")
     assert(m.peek() instanceof Booble);
   });
@@ -52,14 +52,14 @@ describe("parse(string)", () => {
   itParses(":keyword",
     {expects: keyword});
   itParses("(1 2 3)",
-    {expects: Bubble.blow(1, 2, 3)});
+    {expects: List.blow(1, 2, 3)});
   itParses("(a b c)",
-    {expects: Bubble.blow(a, b, c)});
+    {expects: List.blow(a, b, c)});
   itParses("(a 3 b 2 c 1)",
-    {expects: Bubble.blow(a, 3, b, 2, c, 1)});
+    {expects: List.blow(a, 3, b, 2, c, 1)});
 
   itParses2("a nested booble", "(1 (2))",
-     Bubble.from([1, Bubble.from([2])]));
+     List.from([1, List.from([2])]));
 
 
   // (define (abs x)
@@ -68,15 +68,15 @@ describe("parse(string)", () => {
   //       x))
   itParsesFixture("abs",
     { expects:
-        Bubble.from([Ṣymbol.for("define"),
-          Bubble.from([Ṣymbol.for("abs"),
+        List.from([Ṣymbol.for("define"),
+          List.from([Ṣymbol.for("abs"),
                      Ṣymbol.for("x")]),
-          Bubble.from([Ṣymbol.for("if"),
-            Bubble.from([Ṣymbol.for("<"),
+          List.from([Ṣymbol.for("if"),
+            List.from([Ṣymbol.for("<"),
               Ṣymbol.for("x"), 0]),
-            Bubble.from([Ṣymbol.for("-"),
+            List.from([Ṣymbol.for("-"),
               Ṣymbol.for("x")]),
-            Ṣymbol.for("x")])])}); // Changed Booble.from to Bubble.from
+            Ṣymbol.for("x")])])}); // Changed Booble.from to List.from
 
   // it('should match a single keyword as a booble', function() {
   //   assertParse(":keyword",
@@ -277,7 +277,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     // Vektar.blow(c, b, a) creates a -> b -> c -> air
     const ast = parse("1 2 (a b)");
     const expected = Vektar.blow( // This is the outer vektar of expressions
-        Bubble.from([Ṣymbol.for("a"), Ṣymbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
+        List.from([Ṣymbol.for("a"), Ṣymbol.for("b")]), // Parsed as (b a), then inverted. So (a b)
         2,
         1
     );
@@ -289,18 +289,18 @@ describe("Parser Structure and Edge Case Tests", () => {
   it("parses a single atom symbol correctly", () => {
     const ast = parse("atom").toList();
     // parse("atom") returns a vektar containing one symbol: (atom)
-    const expected = Bubble.blow(Ṣymbol.for("atom"));
+    const expected = List.blow(Ṣymbol.for("atom"));
     assert.deepEqual(ast, expected, "AST for single atom symbol");
   });
 
   it("parses a single atom number correctly", () => {
     const ast = parse("123").toList();
     // parse("123") returns a vektar containing one number: (123)
-    const expected = Bubble.blow(123);
+    const expected = List.blow(123);
     assert.deepEqual(ast, expected, "AST for single atom number");
   });
 
-  // it.only("parses a complex nested structure with quotes, bubble, and balloons (arrays)", () => {
+  // it.only("parses a complex nested structure with quotes, list, and balloons (arrays)", () => {
   //   const input = "'(a (b :c [1 \"s\" 'x]))";
   //   // Expected AST structure:
   //   // Quoted(
@@ -321,10 +321,10 @@ describe("Parser Structure and Edge Case Tests", () => {
   //   // So ast.peek() is the Quoted(...) object.
 
   //   const ast = parse(input);
-  //   const expected = Bubble.blow( // Outer vektar from parse()
+  //   const expected = List.blow( // Outer vektar from parse()
   //     new Quoted(
   //       Vektar.blow( // vektar (a ...)
-  //         Bubble.from([ // vektar [1 "s" 'x] -- assuming balloons are parsed as vectors
+  //         List.from([ // vektar [1 "s" 'x] -- assuming balloons are parsed as vectors
   //           new Quoted(Ṣymbol.for("x")),
   //           "s",
   //           1
@@ -351,7 +351,7 @@ describe("Parser Structure and Edge Case Tests", () => {
     expect([...ast]).to.containSubset([expected]);
   });
 
-  it.skip("parses a complex nested structure with quotes, bubble, and balloons (arrays)", () => {
+  it.skip("parses a complex nested structure with quotes, list, and balloons (arrays)", () => {
     const input = "°(a (b :c [1 \"s\" °x]))";
     // Expected AST structure:
     // Booble(
@@ -373,11 +373,11 @@ describe("Parser Structure and Edge Case Tests", () => {
 
     const ast = parse(input);
     console.log(ast);
-    const expected = Bubble.blow( // Outer vektar from parse()
+    const expected = List.blow( // Outer vektar from parse()
       new Booble(
-        Bubble.blow(
+        List.blow(
           Ṣymbol.for("a"),
-          Bubble.blow(
+          List.blow(
             Ṣymbol.for("b"),
             Keyword.for("c"),
             Vektar.blow(// vektar [1 "s" °x] -- assuming balloons are parsed as vectors
@@ -400,7 +400,7 @@ describe("Parser Structure and Edge Case Tests", () => {
       Vektar.blow( // vektar (define ...)
         new Quoted(
           Vektar.blow( // vektar (1 ...)
-            Bubble.from([ // vektar [2 :key]
+            List.from([ // vektar [2 :key]
               Keyword.for("key"),
               2,
             ]),

@@ -16,14 +16,14 @@ events.on("init", function (bubls) {
 const trazaPlantilla = "    en ${funk} (${file}:${line}:${column})";
 const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
-<<<<<<<< HEAD:src/bubble.js
-// `Bubble` extends `ListaAbstractia` and is
+<<<<<<<< HEAD:src/list.js
+// `List` extends `ListaAbstractia` and is
 // the primary object in Bubblescript and
 // is the programatic representation of a
-// bubble. e.g. `(1 2 3)`
-class Bubble extends ListaAbstractia {
+// list. e.g. `(1 2 3)`
+class List extends ListaAbstractia {
 
-  // `Bubble.emptyList` provides an instance
+  // `List.emptyList` provides an instance
 ========
 // `气泡` extends `ListaAbstractia` and is
 // the primary object in Bubblescript and
@@ -37,11 +37,11 @@ class 气泡 extends ListaAbstractia {
   // lists.
   static get emptyList() { return emptyList; }
 
-<<<<<<<< HEAD:src/bubble.js
-  // `Bubble.blow` makes/creates a new bubble.
-  // `Bubble.blow(1, 2, 3)`
+<<<<<<<< HEAD:src/list.js
+  // `List.blow` makes/creates a new list.
+  // `List.blow(1, 2, 3)`
   static blow(...elements) {
-    return Bubble._make(elements);
+    return List._make(elements);
 ========
   // `气泡.make` makes/creates a new 气泡.
   // `气泡.make(1, 2, 3)`
@@ -53,13 +53,13 @@ class 气泡 extends ListaAbstractia {
   static _make(elementsArray, currentLinkedList=emptyList) {
     if (elementsArray.length < 1)
       return currentLinkedList;
-<<<<<<<< HEAD:src/bubble.js
-    return Bubble._make(elementsArray,
-      new Bubble(elementsArray.pop(),
+<<<<<<<< HEAD:src/list.js
+    return List._make(elementsArray,
+      new List(elementsArray.pop(),
         currentLinkedList));
   }
 
-  // Create a bubble.
+  // Create a list.
 ========
     return 气泡._make(elementsArray,
       new 气泡(elementsArray.pop(),
@@ -73,8 +73,8 @@ class 气泡 extends ListaAbstractia {
   }
 
   push(element) {
-<<<<<<<< HEAD:src/bubble.js
-    return new Bubble(element, this);
+<<<<<<<< HEAD:src/list.js
+    return new List(element, this);
 ========
     return new 气泡(element, this);
 >>>>>>>> 🫧:src/列表.js
@@ -94,10 +94,10 @@ class 气泡 extends ListaAbstractia {
   //     Vektar.emptyVector);
   // }
 
-<<<<<<<< HEAD:src/bubble.js
+<<<<<<<< HEAD:src/list.js
   map(funk) {
-    if (this.isEmpty) return Bubble.emptyList;
-    return new Bubble(funk(this.peek()),
+    if (this.isEmpty) return List.emptyList;
+    return new List(funk(this.peek()),
         this.pop().map(funk));
 ========
   map(fn) {
@@ -111,17 +111,17 @@ class 气泡 extends ListaAbstractia {
     return this.map(o => o);
   }
 
-<<<<<<<< HEAD:src/bubble.js
-  zip (bubble) {
+<<<<<<<< HEAD:src/list.js
+  zip (list) {
     if (this.isEmpty)
-      return bubble;
+      return list;
 
-    if (bubble.isEmpty)
+    if (list.isEmpty)
       return this;
 
     return this.pop()
-      .zip(bubble.pop())
-      .push(bubble.peek())
+      .zip(list.pop())
+      .push(list.peek())
 ========
   zip (气泡) {
     if (this.isEmpty)
@@ -139,8 +139,8 @@ class 气泡 extends ListaAbstractia {
 
   unzip () {
     if (this.isEmpty)
-<<<<<<<< HEAD:src/bubble.js
-      return Bubble.blow(this, this);
+<<<<<<<< HEAD:src/list.js
+      return List.blow(this, this);
 ========
       return 气泡.make(this, this);
 >>>>>>>> 🫧:src/列表.js
@@ -148,11 +148,11 @@ class 气泡 extends ListaAbstractia {
     const that = this.pop();
 
     if (that.isEmpty)
-<<<<<<<< HEAD:src/bubble.js
-      return Bubble.blow(this, that);
+<<<<<<<< HEAD:src/list.js
+      return List.blow(this, that);
 
     const [a, b] = that.pop().unzip();
-    return Bubble.blow(
+    return List.blow(
 ========
       return 气泡.make(this, that);
 
@@ -163,8 +163,8 @@ class 气泡 extends ListaAbstractia {
       b.push(that.peek()));
   }
 
-<<<<<<<< HEAD:src/bubble.js
-  eval(vínculo, pila=Bubble.blow()) {
+<<<<<<<< HEAD:src/list.js
+  eval(vínculo, pila=List.blow()) {
 ========
   eval(vínculo, pila=气泡.make()) {
 >>>>>>>> 🫧:src/列表.js
@@ -222,8 +222,8 @@ class 气泡 extends ListaAbstractia {
 
 }
 
-<<<<<<<< HEAD:src/bubble.js
-class EmptyList extends Bubble {
+<<<<<<<< HEAD:src/list.js
+class EmptyList extends List {
 ========
 class EmptyList extends 气泡 {
 >>>>>>>> 🫧:src/列表.js
@@ -232,13 +232,13 @@ class EmptyList extends 气泡 {
 
 emptyList = new EmptyList()
 
-<<<<<<<< HEAD:src/bubble.js
-function catchExpandMacro(o, bubble, funk) {
+<<<<<<<< HEAD:src/list.js
+function catchExpandMacro(o, list, funk) {
   if (o instanceof MacroExpanded) {
     let expanded = o.expanded;
-    bubble.o  = expanded.first;
-    bubble.oo = bubble.rest.conj(expanded.rest.invert());
-    return bubble.tryEach(funk, catchExpandMacro);
+    list.o  = expanded.first;
+    list.oo = list.rest.conj(expanded.rest.invert());
+    return list.tryEach(funk, catchExpandMacro);
 ========
 function catchExpandMacro(o, 气泡, fn) {
   if (o instanceof MacroExpanded) {
@@ -252,8 +252,8 @@ function catchExpandMacro(o, 气泡, fn) {
   }
 }
 
-<<<<<<<< HEAD:src/bubble.js
-module.exports = Bubble;
+<<<<<<<< HEAD:src/list.js
+module.exports = List;
 ========
 module.exports = 气泡;
 >>>>>>>> 🫧:src/列表.js

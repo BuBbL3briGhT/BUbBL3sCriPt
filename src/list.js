@@ -17,14 +17,14 @@ const traceTemplate = "    en ${func} (${file}:${line}:${column})";
 const interpolateTrace = interpolate.bind(traceTemplate);
 
 /**
- * @class Bubble
+ * @class List
  * @extends AbstractList
  * @description The primary data structure in Bubblescript, representing a Lisp-like list.
  * @example
- * const bubble = Bubble.blow(1, 2, 3);
+ * const list = List.blow(1, 2, 3);
  * // => (1 2 3)
  */
-class Bubble extends AbstractList {
+class List extends AbstractList {
 
   /**
    * @static
@@ -35,32 +35,32 @@ class Bubble extends AbstractList {
   /**
    * @static
    * @method blow
-   * @description Creates a new bubble.
-   * @param {...*} elements - The elements to add to the bubble.
-   * @returns {Bubble} The new bubble.
+   * @description Creates a new list.
+   * @param {...*} elements - The elements to add to the list.
+   * @returns {List} The new list.
    * @example
-   * const bubble = Bubble.blow(1, 2, 3);
+   * const list = List.blow(1, 2, 3);
    * // => (1 2 3)
    */
   static blow(...elements) {
-    return Bubble._make(elements);
+    return List._make(elements);
   }
 
   static _make(elementsArray, currentLinkedList=emptyList) {
     if (elementsArray.length < 1)
       return currentLinkedList;
-    return Bubble._make(elementsArray,
-      new Bubble(elementsArray.pop(),
+    return List._make(elementsArray,
+      new List(elementsArray.pop(),
         currentLinkedList));
   }
 
-  // Create a bubble.
+  // Create a list.
   constructor(o, oo=emptyList) {
     super(o, oo);
   }
 
   push(element) {
-    return new Bubble(element, this);
+    return new List(element, this);
   }
 
   toString() {
@@ -78,8 +78,8 @@ class Bubble extends AbstractList {
   // }
 
   map(func) {
-    if (this.isEmpty) return Bubble.emptyList;
-    return new Bubble(func(this.peek()),
+    if (this.isEmpty) return List.emptyList;
+    return new List(func(this.peek()),
         this.pop().map(func));
   }
 
@@ -87,42 +87,42 @@ class Bubble extends AbstractList {
     return this.map(o => o);
   }
 
-  zip (bubble) {
+  zip (list) {
     if (this.isEmpty)
-      return bubble;
+      return list;
 
-    if (bubble.isEmpty)
+    if (list.isEmpty)
       return this;
 
     return this.pop()
-      .zip(bubble.pop())
-      .push(bubble.peek())
+      .zip(list.pop())
+      .push(list.peek())
       .push(this.peek());
   }
 
   unzip () {
     if (this.isEmpty)
-      return Bubble.blow(this, this);
+      return List.blow(this, this);
 
     const that = this.pop();
 
     if (that.isEmpty)
-      return Bubble.blow(this, that);
+      return List.blow(this, that);
 
     const [a, b] = that.pop().unzip();
-    return Bubble.blow(
+    return List.blow(
       a.push(this.peek()),
       b.push(that.peek()));
   }
 
   /**
    * @method eval
-   * @description Evaluates the bubble as a function call.
-   * @param {Object} binding - The binding to evaluate the bubble in.
-   * @param {Bubble} [stack=Bubble.blow()] - The evaluation stack.
+   * @description Evaluates the list as a function call.
+   * @param {Object} binding - The binding to evaluate the list in.
+   * @param {List} [stack=List.blow()] - The evaluation stack.
    * @returns {*} The result of the function call.
    */
-  eval(binding, stack=Bubble.blow()) {
+  eval(binding, stack=List.blow()) {
     try {
       const { file, line, column } = this;
       stack = stack.push({func: this.head.toString(),
@@ -167,9 +167,9 @@ class Bubble extends AbstractList {
 
   /**
    * @method evalEach
-   * @description Evaluates each element of the bubble and returns the result of the last evaluation.
+   * @description Evaluates each element of the list and returns the result of the last evaluation.
    * @param {Object} binding - The binding to evaluate the elements in.
-   * @param {Bubble} [stack=Bubble.blow()] - The evaluation stack.
+   * @param {List} [stack=List.blow()] - The evaluation stack.
    * @returns {*} The result of the last evaluation.
    */
   evalEach(binding, stack) {
@@ -184,21 +184,21 @@ class Bubble extends AbstractList {
 
 }
 
-class EmptyList extends Bubble {
+class EmptyList extends List {
   get isEmpty() { return true; }
 }
 
 emptyList = new EmptyList()
 
-function catchExpandMacro(o, bubble, funk) {
+function catchExpandMacro(o, list, funk) {
   if (o instanceof MacroExpanded) {
     let expanded = o.expanded;
-    bubble.o  = expanded.first;
-    bubble.oo = bubble.rest.conj(expanded.rest.invert());
-    return bubble.tryEach(funk, catchExpandMacro);
+    list.o  = expanded.first;
+    list.oo = list.rest.conj(expanded.rest.invert());
+    return list.tryEach(funk, catchExpandMacro);
   } else {
     throw o;
   }
 }
 
-module.exports = Bubble;
+module.exports = List;

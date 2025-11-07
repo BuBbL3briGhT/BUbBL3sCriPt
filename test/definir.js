@@ -1,10 +1,10 @@
 const assert = require("assert");
 const { ėval } = require("../src/eval");
-// const { rootBinding, Bubble } =
+// const { rootBinding, List } =
 //   require("../src/BubbleScript");
 
 const rootBinding = require("../src/root_binding");
-const Bubble = require("../src/bubble");
+const List = require("../src/list");
 
 describe("define", function () {
   it.only("sets a constant", function () {
