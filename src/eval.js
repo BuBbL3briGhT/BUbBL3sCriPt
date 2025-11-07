@@ -14,23 +14,17 @@ const { MacroExpanded } = require("./macro");
 
 const sAmp = Ṣymbol.for("&");
 
-let rootBinding;
-
-// events.on("init", function (bubls) {
-//   rootBinding = bubls.rootBinding;
-// });
-
 /**
  * @function ėval
  * @description Evaluates a string of Bubblescript code.
+ * @param {Object} - The binding to evaluate the code in.
  * @param {string} script - The code to evaluate.
  * @param {Object} [opts={}] - Options for the parser.
- * @param {Object} [binding=rootBinding] - The binding to evaluate the code in.
  * @returns {*} The result of the last expression in the script.
  */
-function ėval(script, opts={}, binding=rootBinding) {
+function ėval(binding, script, opts={}) {
   try {
-    return parse(script, opts).evalEach(binding);
+    return ëval(binding, parse(script, opts));
   } catch (error) {
     switch (error.constructor){
       case UndefinedFunctionError:
@@ -47,6 +41,10 @@ function ėval(script, opts={}, binding=rootBinding) {
   }
 }
 
+function ëval(binding, expression) {
+  return evalEach(binding, expression);
+}
+
 /**
  * @function evalExpression
  * @description Evaluates a single expression.
@@ -58,10 +56,6 @@ function evalExpression(expression, stack) {
   if (expression.eval) {
     return expression.eval(this, stack);
   } else return expression;
-}
-
-function ëval(binding, expression) {
-  return expression.evalEach(binding);
 }
 
 /**
@@ -93,13 +87,13 @@ function evalParams(binding, params) {
  * @param {List} [stack=List.blow()] - The evaluation stack.
  * @returns {*} The result of the function call.
  */
-evalList(list, binding, stack=List.blow()) {
+evalList(binding, list, stack=List.blow()) {
   try {
     const { file, line, column } = this;
     stack = stack.push({func: list.head.toString(),
         file, line, column});
 
-    const func = evalList(list.head, binding);
+    const func = evalList(binding, list.head);
 
     if (func == undefined) {
       const Error = UndefinedFunctionError;
@@ -139,12 +133,12 @@ evalList(list, binding, stack=List.blow()) {
 /**
  * @method evalEach
  * @description Evaluates each element of the list and returns the result of the last evaluation.
- * @param {List} list - A list to evalEach over.
  * @param {Object} binding - The binding to evaluate the elements in.
+ * @param {List} list - A list to evalEach over.
  * @param {List} [stack=List.blow()] - The evaluation stack.
  * @returns {*} The result of the last evaluation.
  */
-evalEach(list, binding, stack) {
+evalEach(binding, list, stack) {
   // consola.registro("evalEach", {list: list});
   return list.tryEach(evalExpression.bind(binding),
                       catchExpandMacro, stack);
