@@ -1,4 +1,19 @@
 November:
+  - Ok, looks like we might need to move the list
+    evaulation logic back to list. The tricky part
+    has to do i think with accessing one of the eval
+    functions, which is not available when list is
+    loading. The solution should be to provide this
+    function to the method when it is called, ratger
+    than trying to use a require (which creates a
+    cirvular dependency) or relying on init or some
+    other approach such as memoization to loaded it
+    dynamically at theclass or module level. I'm
+    going to take a break, but wanted to get this
+    intention recorded to come ba k to it when i can.
+    So, in short, pass the required eval function is
+    as a param to the List eval method, and tgat
+    should work out nicely.
   - src/bubls and src/BubbleScript can be consolodate
     into single file. Stick with BubbleScript name
     for clarity. bubls can be the name for command.
