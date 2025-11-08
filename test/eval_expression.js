@@ -1,6 +1,7 @@
 const assert = require("assert");
 const { evalExpression } = require("../src/eval");
 const Ṣymbol = require("../src/symbol");
+const Bubble = require("../src/bubble");
 // const { rootBinding } = require("../src/rootBinding");
 
 describe("evalExpression", function () {
@@ -14,5 +15,11 @@ describe("evalExpression", function () {
     const symbol = Ṣymbol.for("a");
     const result = evalExpression(binding, symbol);
     assert.equal(result, "Apple");
+  });
+
+  it("evaluates a Bubble", function () {
+    const bubble = new Bubble(2);
+    const result = evalExpression(null, bubble);
+    assert.equal(result, 2);
   });
 });
