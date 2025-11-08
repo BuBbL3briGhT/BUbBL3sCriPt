@@ -155,7 +155,7 @@ function evalList(binding, list, stack=List.blow()) {
   }
 }
 
-function mapEval(list, binding) {
+function mapEval(binding, list) {
   return list.map(evalExpression.bind(null, binding));
 }
 

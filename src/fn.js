@@ -37,7 +37,6 @@ class Fn {
         return fn.call(binding, ...params);
     }
 
-    console.log({fn});
     return fn.call(binding, params, pila);
   }
 
