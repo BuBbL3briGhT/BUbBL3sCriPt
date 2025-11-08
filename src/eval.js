@@ -189,7 +189,7 @@ function mapEval(binding, list) {
  * @function catchExpandMacro
  * @description Catch-handeler for macro expansion.
  * @param {Object} o - Control object that was thrown.
- * @param {List} list -
+ * @param {List} list - The list being processed.
  * @param {Fn} fn - A function to continue applying
  * to each item in list.
  * @returns {*} The result of calling tryEach on the
