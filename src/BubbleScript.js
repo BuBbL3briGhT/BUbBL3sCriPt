@@ -24,8 +24,8 @@ const ēval = ėval.bind(rootBinding);
 
 const BubbleScript = {
   List, Vektar, Ṣymbol, Keyword, Bubble, Funk, Macro,
-  tokenize, Parser, parse, eval: ēval, ėval, evalEach,
-  evalExpression, rootBinding
+  tokenize, Parser, parse, eval: ēval, ēval, ėval,
+  evalEach, evalExpression, rootBinding
 }
 
 events.emit("init", BubbleScript);

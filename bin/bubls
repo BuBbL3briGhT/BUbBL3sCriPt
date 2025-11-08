@@ -34,7 +34,7 @@ if (path) {
       return;
     }
     try {
-      ėval(xoxo, { file: path }, binding);
+      ėval(binding, xoxo, { file: path });
     } catch (error) {
       if (error instanceof BubbleScriptError) {
         consola.registro(error.name +
