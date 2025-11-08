@@ -5,15 +5,20 @@
                                           const List = require("../src/list");
 
   describe("definir", function () {
-    it.only("sets a value", function () {
+    it("sets a value", function () {
 
       const vínculo = Object.create(rootBinding);
 
-        ėval(vínculo, "definir 🍎 \"apple\"");
+        assert.equal(ėval(vínculo, "🍎"), undefined);
 
-      const result = ėval(vínculo, "🍎");
+      ėval(vínculo, "definir 🍎 \"apple\"");
 
-        assert.equal(result, "apple");
+        const result = ėval(vínculo, "🍎");
+
+      assert.equal(result, "apple");
 
     });
+
+    it("defines a constant");
+    it("does not set a new vaule if on is already set for that key at the current context (binding)");
   });
