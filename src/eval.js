@@ -179,13 +179,10 @@ function evalList(binding, list, stack=List.blow()) {
  * @param {Object} binding - The binding to evaluate
  * the list in.
  * @param {List} list - The list to evaluate.
- * @param {List} [stack=List.blow()] - The evaluation
- * stack.
  * @returns {*} The mapped list of evauluations.
  */
-function mapEval(binding, list, stack) {
-  return list.map(evalExpression.bind(null, binding,
-    stack));
+function mapEval(binding, list) {
+  return list.map(evalExpression.bind(null, binding));
 }
 
 /**
