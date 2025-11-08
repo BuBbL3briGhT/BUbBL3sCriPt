@@ -67,11 +67,19 @@ function evalExpression(binding, expression, stack) {
   switch (expression.constructor) {
     case List:
       return evalList(binding, expression, stack);
+    case Ṣymbol:
+      return evalSymbol(binding, expression);
+    case Bubble:
+      return expression.pop();
     default:
-      if (expression.eval) {
-        return expression.eval(binding, stack);
-      } else return expression;
+      return expression;
   }
+}
+
+function evalSymbol(binding, symbol) {
+  let root = symbol.resolveRoot(binding)
+  if (root) root = root[symbol.fn];
+  return root;
 }
 
 /**

@@ -48,12 +48,6 @@ class Ṣymbol {
       }, binding)
   }
 
-  eval(binding) {
-    let root = this.resolveRoot(binding)
-    if (root) root = root[this.fn];
-    return root;
-  }
-
   static for(key) {
     return symbols[key] || new Ṣymbol(key);
   }
