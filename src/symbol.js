@@ -50,8 +50,6 @@ class Ṣymbol {
 
   eval(binding) {
     let root = this.resolveRoot(binding)
-    // consola.registro({ root, funk: this.funk,
-    //       rootFn: root[this.funk]});
     if (root) root = root[this.funk];
     return root;
   }

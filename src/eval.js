@@ -129,7 +129,6 @@ evalList(binding, list, stack=List.blow()) {
       throw new Error(binding, list.head, stack);
     }
 
-     // consola. registro (func);
     return Funk.call(binding, func, list.tail, stack);
 
   } catch (error) {
