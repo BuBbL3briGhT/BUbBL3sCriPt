@@ -1,8 +1,8 @@
 const List = require("./list");
 
 class Sequence {
-  map (funk) {
-    return new MapSequence(this, funk);
+  map (fn) {
+    return new MapSequence(this, fn);
   }
 
   [Symbol.iterator] () {
@@ -11,10 +11,10 @@ class Sequence {
 }
 
 class MapSequence extends Sequence {
-  constructor (sequence, funk) {
+  constructor (sequence, fn) {
     super();
     this.sequence = sequence;
-    this.funk = funk;
+    this.fn = fn;
   }
 
   next () {
@@ -23,7 +23,7 @@ class MapSequence extends Sequence {
     if (next.done) return next;
 
     return {
-      value: this.funk.invoke(List.blow(next.value)),
+      value: this.fn.invoke(List.blow(next.value)),
       done: false
     };
   }

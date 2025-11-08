@@ -22,8 +22,8 @@ const { SpecialForm } = require("../special_form");
 //     return q.call(this, params.mapEval(this));
 //   }
 // }
-function mkfn(funk) {
-  return new SpecialForm(funk,
+function mkfn(fn) {
+  return new SpecialForm(fn,
     { evaluateParams: true });
 }
 

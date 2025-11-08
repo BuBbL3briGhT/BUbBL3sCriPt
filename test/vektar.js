@@ -98,8 +98,8 @@ describe("Vektar", () => {
     });
   });
 
-  describe("map(vektar, funk)", () => {
-    it("maps vektar through funk", ()=>{
+  describe("map(vektar, fn)", () => {
+    it("maps vektar through fn", ()=>{
       var vektar = Vektar.blow();
 
       let add7 = (vektar) => { return vektar + 7 };

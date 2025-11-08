@@ -34,10 +34,10 @@ class ObjectMap extends AbstractList {
     return accumulatedString + " " + formattedElement;
   };
 
-  map(funk) {
+  map(fn) {
     if (this.isEmpty) return ObjectMap.emptyList;
-    return new ObjectMap(funk(this.peek()),
-        this.pop().map(funk));
+    return new ObjectMap(fn(this.peek()),
+        this.pop().map(fn));
   }
 
   createObject(binding) {

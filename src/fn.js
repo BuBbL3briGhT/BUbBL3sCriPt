@@ -1,7 +1,7 @@
 
   /* * *  * * *  * *  * *  * * *  * * *
    *                                  *
-   *   File: src/funk.js                *
+   *   File: src/fn.js                *
    *   Date: September 25th, 2025     *
    *   Library: Bubblescript          *
    *   version: 0.🦤.🍌.🥄            *
@@ -24,21 +24,21 @@
   });
 
 
-class Funk {
+class Fn {
   constructor(binding, params, body, opts={}) {
     Object.assign(this, { binding, params, body });
     Object.assign(this, opts);
   }
 
-  static call(binding, funk, params, pila) {
-    switch (funk.constructor) {
+  static call(binding, fn, params, pila) {
+    switch (fn.constructor) {
       case Function:
         params = evalParams(binding, params);
-        return funk.call(binding, ...params);
+        return fn.call(binding, ...params);
     }
 
-    console.log({funk});
-    return funk.call(binding, params, pila);
+    console.log({fn});
+    return fn.call(binding, params, pila);
   }
 
   call(vínculo, params, pila) {
@@ -57,10 +57,10 @@ class Funk {
 
   toString() {
     return this.body.push(this.params)
-      .push(Ṣymbol.for("funk"))
+      .push(Ṣymbol.for("fn"))
       .toString()
   }
 
 }
 
-module.exports = Funk;
+module.exports = Fn;

@@ -1,7 +1,7 @@
 const AbstractList = require("./abstract_list");
 const events = require("./events");
 const Ṣymbol = require("./symbol");
-const Funk = require("./funk");
+const Fn = require("./fn");
 const consola = require("./consola");
 const { BubbleScriptError, UndefinedFunctionError }
   = require("./errors");

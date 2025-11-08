@@ -198,8 +198,8 @@ describe("List", () => {
     });
   });
 
-  describe("#map(funk)", () => {
-    it("maps through funk", ()=>{
+  describe("#map(fn)", () => {
+    it("maps through fn", ()=>{
       var list = List.blow();
 
       let add7 = (o) => { return o + 7 };
@@ -238,7 +238,7 @@ describe("List", () => {
     });
   });
 
-  describe("#reduce(funk)", () => {
+  describe("#reduce(fn)", () => {
     it("reduces the list", () => {
       var list = List.blow(),
           result;

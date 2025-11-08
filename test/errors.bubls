@@ -1,10 +1,10 @@
 🫧 assert (require "assert")
 🫧 { describe, test } (require "test")
 
-describe "Evaluation" (funk []
+describe "Evaluation" (fn []
   (it "Raises exception and provides stack \
        trace when encountering an undefinded \
-       funcíon." (funk []
+       funcíon." (fn []
 
     (🫧 (😄)
        (😊))

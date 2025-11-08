@@ -43,13 +43,13 @@ class BubbleScriptError extends Error {
   }
 
   getStackTrace(stack) {
-    const funcs = stack.select("funk");
+    const funcs = stack.select("fn");
     const codepoints = stack.select("file", "line", "column");
 
     const stackTrace =
       codepoints.zip(funcs.pop()).partition(2)
         .map(([point,func]) => { return {
-          func: func?.funk, file: point.file,
+          func: func?.fn, file: point.file,
           line: point.line, column: point.column }})
         .map(interpolateTrace).join("\n")
         .replace(/en  \(/g, 'en (');

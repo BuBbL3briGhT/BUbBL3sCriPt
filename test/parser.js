@@ -187,7 +187,7 @@ describe("Parser", function () {
           callPattern: 1,
           column: 2,
           file: undefined,
-          funk: 'r2d2',
+          fn: 'r2d2',
           line: 1,
           segments: [],
           value: 'r2d2'

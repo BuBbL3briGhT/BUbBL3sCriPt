@@ -129,7 +129,7 @@ evalList(binding, list, stack=List.blow()) {
       throw new Error(binding, list.head, stack);
     }
 
-    return Funk.call(binding, func, list.tail, stack);
+    return Fn.call(binding, func, list.tail, stack);
 
   } catch (error) {
     switch (error.constructor){
@@ -162,12 +162,12 @@ mapEvalList(list, binding) {
   return list.map(evalExpression.bind(null, binding));
 }
 
-function catchExpandMacro(o, list, funk) {
+function catchExpandMacro(o, list, fn) {
   if (o instanceof MacroExpanded) {
     let expanded = o.expanded;
     list.o  = expanded.first;
     list.oo = list.rest.conj(expanded.rest.invert());
-    return list.tryEach(funk, catchExpandMacro);
+    return list.tryEach(fn, catchExpandMacro);
   } else {
     throw o;
   }

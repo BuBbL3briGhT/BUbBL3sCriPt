@@ -1,7 +1,7 @@
 const List = require("./list");
 const Vektar = require("./vektar");
 const ObjectMap = require("./object_map");
-const Funk = require("./funk");
+const Fn = require("./fn");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
 const { ëval, evalExpression } = require("./eval");
@@ -40,7 +40,7 @@ const rootBinding = {
   //   if (key instanceof List) {
   //     let name = key.peek().toString();
   //     return this[key.peek().toString()]
-  //       = new Funk(this, key.pop(), val, { name,
+  //       = new Fn(this, key.pop(), val, { name,
   //         file: key.file,
   //         line: key.line,
   //         column: key.column });
@@ -107,8 +107,8 @@ const rootBinding = {
     throw new NotImplementedError();
   }),
 
-  funk: specialForm(function(list) {
-    return new Funk(this, list.first.toList(),
+  fn: specialForm(function(list) {
+    return new Fn(this, list.first.toList(),
                         list.rest)
   }),
 
@@ -118,10 +118,10 @@ const rootBinding = {
 
   jsfn: specialForm(function(args) {
     const binding = this;
-    const x = args.push(Ṣymbol.for('funk'));
-    const funk = ëval(binding, x);
+    const x = args.push(Ṣymbol.for('fn'));
+    const fn = ëval(binding, x);
     return function(...args) {
-      return funk.invoke(List.from(args));
+      return fn.invoke(List.from(args));
     }
   }),
 

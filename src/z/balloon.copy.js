@@ -73,10 +73,10 @@ class Balloon {
     }).join() + "]";
   }
 
-  map(funk, ...aux) {
+  map(fn, ...aux) {
     var tail = null;
 
-    var result = new Balloon(funk(this.first,
+    var result = new Balloon(fn(this.first,
       ...aux.map(function(q) {
         return q ? q.first : q
       })));
@@ -100,35 +100,35 @@ class Balloon {
       return a;
     }
 
-    return into(result, this.rest.map(funk,
+    return into(result, this.rest.map(fn,
       ...aux.map(function(q) {
         return q.rest
       })));
   }
 
-  mapp(funk, ...aux) {
+  mapp(fn, ...aux) {
     var tail = null;
 
-    var result = new Balloon(funk(this.first,
+    var result = new Balloon(fn(this.first,
       ...aux.map(function(q) {
         return q ? q.first : q
       })));
 
     return this.rest.map(function(...args) {
-      return new Balloon(funk(...args), result);
+      return new Balloon(fn(...args), result);
     }, ...aux.map(function(q) {
       return q.rest
     }));
 
   }
 
-  reduce(funk, memo) {
+  reduce(fn, memo) {
     if (this.tail)
-      memo = this.tail.reduce(funk, memo);
-    return funk(memo, this.head);
+      memo = this.tail.reduce(fn, memo);
+    return fn(memo, this.head);
   }
 
-  reduce(funk, memo) {
+  reduce(fn, memo) {
     var a, b, c = this;
     if (memo == undefined) {
       a = this.head;
@@ -138,12 +138,12 @@ class Balloon {
       } else {
         b = c.head;
         c = c.tail;
-        memo = funk(a, b);
+        memo = fn(a, b);
         if (!c)
           return memo;
       }
     }
-    return c.push(memo).reduce(funk);
+    return c.push(memo).reduce(fn);
   }
 
   reverse() {
@@ -153,10 +153,10 @@ class Balloon {
       return memo.push(i);
     }, glider);
   }
-  each(funk) {
+  each(fn) {
     if (this.tail)
-      this.tail.each(funk);
-    funk(this.head);
+      this.tail.each(fn);
+    fn(this.head);
   }
 
   *[global.Symbol.iterator]() {

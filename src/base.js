@@ -10,7 +10,7 @@
 // All static functions in this class will
 // are included in the root bound object.
 
-const { Funk } = require("./BubbleScript");
+const { Fn } = require("./BubbleScript");
 
 class Base {
 
@@ -42,9 +42,9 @@ class Base {
     return !y;
   }
 
-  static funk(caret, stic) {
+  static fn(caret, stic) {
     let binding = this;
-    return new Funk(binding, caret, stic);
+    return new Fn(binding, caret, stic);
   }
 
   static and(...a) {

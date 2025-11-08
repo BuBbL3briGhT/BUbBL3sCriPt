@@ -48,10 +48,10 @@ class AbstractList {
     return this.reduce(i => i+1, 0);
   }
 
-  map(funk) {
+  map(fn) {
     if (this.isEmpty) return this;
-    return new this.constructor(funk(this.peek()),
-      this.pop().map(funk));
+    return new this.constructor(fn(this.peek()),
+      this.pop().map(fn));
   }
 
   get(i) { return this.skip(i).peek(); }
@@ -126,7 +126,7 @@ class AbstractList {
       array.push(currentElement); return array; }, []);
   }
 
-  reduce(funk, memo) {
+  reduce(fn, memo) {
     if (this.isEmpty)
       return memo;
 
@@ -135,55 +135,55 @@ class AbstractList {
       if(memo == undefined)
         return this.peek();
       else
-        return funk(memo, this.peek());
+        return fn(memo, this.peek());
     else
       if (memo != undefined)
-        return oo.reduce(funk,
-          funk(memo, this.peek()))
+        return oo.reduce(fn,
+          fn(memo, this.peek()))
       else
-        return oo.reduce(funk, this.peek());
+        return oo.reduce(fn, this.peek());
   }
 
-  each(funk) {
-    const result = funk(this.peek());
+  each(fn) {
+    const result = fn(this.peek());
     if (this.pop().isEmpty) return result;
-    return this.pop().each(funk);
+    return this.pop().each(fn);
   }
 
-  tryEach(funk, cåtch, pila) {
+  tryEach(fn, cåtch, pila) {
     // consola.registro("tryEach", {this: this});
     let result;
-    try { result = funk(this.peek(), pila); }
-    catch (o) { return cåtch(o, this, funk); }
+    try { result = fn(this.peek(), pila); }
+    catch (o) { return cåtch(o, this, fn); }
     if (this.pop().isEmpty) return result;
-    return this.pop().tryEach(funk, cåtch, pila);
+    return this.pop().tryEach(fn, cåtch, pila);
   }
 
-  // each(funk, opts={}) {
+  // each(fn, opts={}) {
   //   let result;
-  //   try { result = funk(this.peek()); }
+  //   try { result = fn(this.peek()); }
   //   catch (o) {
   //     if (opts.catch)
-  //       return opts.catch(o, this, funk);
+  //       return opts.catch(o, this, fn);
   //     else
   //       throw o;
   //   }
   //   const list = this.pop();
   //   if (list.isEmpty) return result;
-  //   return list.each(funk, opts);
+  //   return list.each(fn, opts);
   // }
 
-  // each(funk, opts={}) {
+  // each(fn, opts={}) {
   //   let result;
-  //   try { result = funk(this.peek()); }
+  //   try { result = fn(this.peek()); }
   //   catch (o) {
   //     if (opts.catch)
-  //       return opts.catch(o, this, funk);
+  //       return opts.catch(o, this, fn);
   //     else
   //       throw o;
   //   }
   //   if (this.isLast) return result;
-  //   return this.pop().each(funk, opts);
+  //   return this.pop().each(fn, opts);
   // }
 
   find(value) {

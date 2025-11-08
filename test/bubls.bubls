@@ -3,6 +3,6 @@
 (puts 1 2 3)
 
 (let [assert (require "assert")]
-  (describe "bubls" (funk [])
-    (it "runs tests" (funk [])
+  (describe "bubls" (fn [])
+    (it "runs tests" (fn [])
       (assert.equal 1 (- 3 2)))))

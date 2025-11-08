@@ -21,10 +21,10 @@ class Balloon extends LynktLyst {
     return new Balloon(o,oo);
   }
 
-  static map(o, funk) {
+  static map(o, fn) {
     if (o)
-      return new Balloon(funk(o.o),
-        map(o.oo, funk));
+      return new Balloon(fn(o.o),
+        map(o.oo, fn));
   }
 
   static toString(o) {

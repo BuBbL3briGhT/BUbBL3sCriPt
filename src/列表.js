@@ -1,7 +1,7 @@
 const AbstractList = require("./abstract_list");
 const events = require("./events");
 const Ṣymbol = require("./symbol");
-const Funk = require("./funk");
+const Fn = require("./fn");
 const consola = require("./consola");
 const { BubbleScriptError, ErrorDeFuncíonIndefinida }
   = require("./errors");
@@ -13,7 +13,7 @@ events.on("init", function (bubls) {
   MacroExpanded = require("./macro").MacroExpanded;
 });
 
-const trazaPlantilla = "    en ${funk} (${file}:${line}:${column})";
+const trazaPlantilla = "    en ${fn} (${file}:${line}:${column})";
 const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
 <<<<<<<< HEAD:src/list.js
@@ -95,10 +95,10 @@ class 气泡 extends AbstractList {
   // }
 
 <<<<<<<< HEAD:src/list.js
-  map(funk) {
+  map(fn) {
     if (this.isEmpty) return List.emptyList;
-    return new List(funk(this.peek()),
-        this.pop().map(funk));
+    return new List(fn(this.peek()),
+        this.pop().map(fn));
 ========
   map(fn) {
     if (this.isEmpty) return 气泡.emptyList;
@@ -170,18 +170,18 @@ class 气泡 extends AbstractList {
 >>>>>>>> 🫧:src/列表.js
     try {
       const { file, line, column } = this;
-      pila = pila.push({funk: this.head.toString(),
+      pila = pila.push({fn: this.head.toString(),
           file, line, column});
 
-      const funk = this.head.eval(vínculo);
+      const fn = this.head.eval(vínculo);
 
-      if (funk == undefined) {
+      if (fn == undefined) {
         const Error = ErrorDeFuncíonIndefinida;
         throw new Error(vínculo, this.head, pila);
       }
 
-       // consola. registro (funk);
-      return Funk.call(vínculo, funk, this.tail, pila);
+       // consola. registro (fn);
+      return Fn.call(vínculo, fn, this.tail, pila);
 
     } catch (error) {
       switch (error.constructor){
@@ -189,7 +189,7 @@ class 气泡 extends AbstractList {
           if (error.__memo) {
             const memo = error.__memo;
             error.stack += interpolarTrazaPlantilla({
-              funk: this.head,
+              fn: this.head,
               file: memo.file,
               line: memo.line,
               column: memo.column
@@ -202,7 +202,7 @@ class 气泡 extends AbstractList {
           (function () {
             const { head, file, line, column } = this;
             error.stack += "\n" + interpolarTrazaPlantilla({
-              funk: head, file, line, column
+              fn: head, file, line, column
             });
           }).call(this);
       }
@@ -233,12 +233,12 @@ class EmptyList extends 气泡 {
 emptyList = new EmptyList()
 
 <<<<<<<< HEAD:src/list.js
-function catchExpandMacro(o, list, funk) {
+function catchExpandMacro(o, list, fn) {
   if (o instanceof MacroExpanded) {
     let expanded = o.expanded;
     list.o  = expanded.first;
     list.oo = list.rest.conj(expanded.rest.invert());
-    return list.tryEach(funk, catchExpandMacro);
+    return list.tryEach(fn, catchExpandMacro);
 ========
 function catchExpandMacro(o, 气泡, fn) {
   if (o instanceof MacroExpanded) {

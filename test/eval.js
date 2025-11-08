@@ -25,12 +25,12 @@ describe("eval(script)", function () {
 
   it("runs script top to bottom", function () {
     sinon.replace(console, "log", sinon.fake())
-    // ėval("(muf puts (funk [a] (console.log a))) " +
+    // ėval("(muf puts (fn [a] (console.log a))) " +
     //      "(puts 1) (puts 2) (puts 3)");
-    ėval("(muf puts (funk [a] (console.log a)))\n" +
+    ėval("(muf puts (fn [a] (console.log a)))\n" +
          "(puts 1)\n(puts 2)\n(puts 3)");
     // ėval("(puts 1)\n(puts 2)\n(puts 3)");
-    // ėval("(puts 3)\n(puts 2)\n(puts 1)\n(muf puts (funk [a] (console.log a)))"); // fyi: Pass with this under reverse execution.
+    // ėval("(puts 3)\n(puts 2)\n(puts 1)\n(muf puts (fn [a] (console.log a)))"); // fyi: Pass with this under reverse execution.
     assert(console.log.calledWith(1));
     assert(console.log.calledWith(2));
     assert(console.log.calledWith(3));
@@ -75,30 +75,30 @@ describe("eval(script)", function () {
 
     // Parse and evaulate a function that uses the
     // macro.
-    const funk = parse("(funk [] (🐒))").evalEach(bnd);
+    const fn = parse("(fn [] (🐒))").evalEach(bnd);
 
     // Check that the function body looks like we
     // expect.
-    assert.equal(funk.body.toString(), "((🐒))");
+    assert.equal(fn.body.toString(), "((🐒))");
 
     // Simulate a function invokation by
     // evaulating the body of the function against
     // our test body which contains the macro.
-    funk.body.evalEach(bnd);
+    fn.body.evalEach(bnd);
 
     // Confirm that the function body is now
     // changed and now contains the macro's
     // expanded form.
-    assert.equal(funk.body.toString(),
+    assert.equal(fn.body.toString(),
       "((puts \"Monkey\"))");
 
     // Simulate another invokation of the
     // function.
-    funk.body.evalEach(bnd);
+    fn.body.evalEach(bnd);
 
     // Check the body, once again, confirming this
     // time it has not changed.
-    assert.equal(funk.body.toString(),
+    assert.equal(fn.body.toString(),
       "((puts \"Monkey\"))");
   });
 
@@ -122,17 +122,17 @@ describe("eval(script)", function () {
 
     ast.evalEach(bnd);
 
-    let funk =
-      parse("(funk [🪻] (* 6 9) "+
+    let fn =
+      parse("(fn [🪻] (* 6 9) "+
                 "(🐒 1 2 🪻) (+ 3 4))").
         evalEach(bnd);
 
-    assert.equal(funk.body.toString(),
+    assert.equal(fn.body.toString(),
       "((* 6 9) (🐒 1 2 🪻) (+ 3 4))");
 
-    funk.body.evalEach(bnd);
+    fn.body.evalEach(bnd);
 
-    assert.equal(funk.body.toString(),
+    assert.equal(fn.body.toString(),
       "((* 6 9) (puts (+ 1 2 🪻)) "+
                 "(puts 5 🪻) (+ 3 4))");
   });
@@ -140,27 +140,27 @@ describe("eval(script)", function () {
   describe("function parameters", function () {
     it("splats", function () {
       assert.equal(ėval(
-        "((funk [a b c] (list b c a)) 1 2 3)")
+        "((fn [a b c] (list b c a)) 1 2 3)")
           .toString(), "(2 3 1)");
       assert.equal(ėval(
-        "((funk [a & b] (list a b)) 1 2 3)")
+        "((fn [a & b] (list a b)) 1 2 3)")
           .toString(), "(1 (2 3))");
       assert.equal(ėval(
-        "((funk [& a] (send a :pop)) 1 2 3)")
+        "((fn [& a] (send a :pop)) 1 2 3)")
           .toString(), "(2 3)");
       // assert.equal(ėval(
-      //   "((funk [& a] (pop a)) 1 2 3)")
+      //   "((fn [& a] (pop a)) 1 2 3)")
       //     .toString(), "(2 3)");
       // assert.equal(ėval(
-      //   "((funk [a b & c] (list & c)) 1 2 3)")
+      //   "((fn [a b & c] (list & c)) 1 2 3)")
       //     .toString(), "(3)");
     });
     it("destructures", function () {
       assert.equal(ėval(
-        "((funk [a b] (list a b b)) 1 [2 3])")
+        "((fn [a b] (list a b b)) 1 [2 3])")
           .toString(), "(1 [2 3] [2 3])");
       assert.equal(ėval(
-        "((funk [a [b c]] (list a b c)) 1 [2 3])")
+        "((fn [a [b c]] (list a b c)) 1 [2 3])")
           .toString(), "(1 2 3)");
     });
     it("splats for outbound functions");
@@ -175,11 +175,11 @@ describe("eval(script)", function () {
     // classify in order to blow the system
     // that much more robust.
       // assert.equal(ėval(
-      //   "((funk [a b & c] (console.log & c)) 1 2 3)")
+      //   "((fn [a b & c] (console.log & c)) 1 2 3)")
       //     .toString(), "(3)");
     it("splats for inbound functions");
       // assert.equal(ėval(
-      //   "((funk [a b & c] (list & c)) 1 2 3)")
+      //   "((fn [a b & c] (list & c)) 1 2 3)")
       //     .toString(), "(3)");
   });
 });
