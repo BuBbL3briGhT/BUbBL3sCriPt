@@ -6,7 +6,6 @@
 const bubls = require('../src/bubls');
 const { rootBinding } = require('../src/root_binding');
 const { getReqůireFor } = require("../src/reqůire");
-const { parse } = require("../src/parse");
 const { ėval } = require("../src/eval");
 const { BubbleScriptError } = require("../src/errors");
 const consola = require("../src/consola");
@@ -62,7 +61,7 @@ if (path) {
           rl.close();
           return;
         }
-        let result = parse(xoxo).evalEach(binding);
+        let result = ėval(binding, xoxo);
         if (result && result.toString) {
           // console.log(result);
           try {
