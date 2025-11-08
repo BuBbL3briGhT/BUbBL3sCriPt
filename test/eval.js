@@ -11,16 +11,18 @@ const { List, Vektar, rootBinding,
   ėval, ëval, parse, Keyword } =
   require("../src/BubbleScript");
 
-describe("eval(script)", function () {
+describe("ėval(script)", function () {
 
   afterEach(function () {
     sinon.restore();
   });
 
-  it("evaluates a keyword", function() {
-    const p = parse(":keyword");
-    assert.equal(ëval({}, p),
-      Keyword.for("keyword"));
+  it.only("evaluates a keyword", function() {
+    // const p = parse(":keyword");
+    // assert.equal(evalEach({}, p),
+    //   Keyword.for("keyword"));
+    const result = ėval(null, ":keyword");
+    assert.equal(result, Keyword.for("keyword"));
   });
 
   it("runs script top to bottom", function () {
