@@ -49,7 +49,7 @@ function ėval(binding, script, opts={}) {
  * @param {List} [stack=List.blow()] - The evaluation stack.
  * @returns {*} The result of the last evaluation.
  */
-evalEach(binding, list, stack) {
+function evalEach(binding, list, stack) {
   const _evalExpression = evalExpression.bind(null,
     binding);
   return list.tryEach(_evalExpression,
@@ -111,7 +111,7 @@ function evalParams(binding, params) {
  * @param {List} [stack=List.blow()] - The evaluation stack.
  * @returns {*} The result of the function call.
  */
-evalList(binding, list, stack=List.blow()) {
+function evalList(binding, list, stack=List.blow()) {
   try {
     const { file, line, column } = list;
     stack = stack.push({func: list.head.toString(),
@@ -153,7 +153,7 @@ evalList(binding, list, stack=List.blow()) {
   }
 }
 
-mapEvalList(list, binding) {
+function mapEvalList(list, binding) {
   return list.map(evalExpression.bind(null, binding));
 }
 
