@@ -54,6 +54,19 @@ evalEach(binding, list, stack) {
                       catchExpandMacro, stack);
 }
 
+// /**
+//  * @function evalExpression
+//  * @description Evaluates a single expression.
+//  * @param {*} expression - The expression to evaluate.
+//  * @param {Array} [stack=[]] - The evaluation stack.
+//  * @returns {*} The result of the expression.
+//  */
+// function evalExpression(expression, stack) {
+//   if (expression.eval) {
+//     return expression.eval(this, stack);
+//   } else return expression;
+// }
+
 /**
  * @function evalExpression
  * @description Evaluates a single expression.

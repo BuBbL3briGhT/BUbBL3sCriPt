@@ -110,7 +110,6 @@ class List extends AbstractList {
       a.push(this.peek()),
       b.push(that.peek()));
   }
-
 }
 
 class EmptyList extends List {
