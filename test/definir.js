@@ -5,7 +5,7 @@
                                           const List = require("../src/list");
 
   describe("definir", function () {
-    it.only("sets a constant", function () {
+    it.only("sets a value", function () {
 
       const vínculo = Object.create(rootBinding);
 

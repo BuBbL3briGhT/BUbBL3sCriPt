@@ -4,7 +4,7 @@ const ObjectMap = require("./object_map");
 const Fn = require("./fn");
 const Ṣymbol = require("./symbol");
 const { Macro }= require("./macro");
-const { ëval, evalExpression } = require("./eval");
+const { ëval, evalEach, evalExpression } = require("./eval");
 const Range = require("./range");
 const LazyList = require("./lazy_list");
 const { specialForm, specialFormP } =
@@ -101,10 +101,18 @@ const rootBinding = {
   // }),
 
   definir: specialForm(function(list) {
+
     const   key = list.peek();
     const value = list.pop();
 
-    throw new NotImplementedError();
+    const sKey = key.toString();
+
+    // if (Object.hasOwn(this, sKey))
+    //   throw new Error("const " + sKey +
+    //     " already set");
+
+    return this[sKey] = evalEach(this, value);
+
   }),
 
   fn: specialForm(function(list) {
