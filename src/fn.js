@@ -16,10 +16,11 @@
         const consola = require("./consola");
          const events = require("./events");
 
-  let evalParams, List;
+  // let evalParams, List;
+  let List;
 
   events.on("init", function (bubls) {
-    evalParams = require("./eval").evalParams;
+    // evalParams = require("./eval").evalParams;
     List = bubls.List;
   });
 
@@ -30,7 +31,7 @@ class Fn {
     Object.assign(this, opts);
   }
 
-  static call(binding, fn, params, pila) {
+  static call(binding, fn, params, pila, evalParams) {
     switch (fn.constructor) {
       case Function:
         params = evalParams(binding, params);

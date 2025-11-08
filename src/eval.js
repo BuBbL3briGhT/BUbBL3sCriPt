@@ -123,7 +123,7 @@ function evalList(binding, list, stack=List.blow()) {
       throw new Error(binding, list.head, stack);
     }
 
-    return Fn.call(binding, fn, list.tail, stack);
+    return Fn.call(binding, fn, list.tail, stack, evalParams);
 
   } catch (error) {
     switch (error.constructor){

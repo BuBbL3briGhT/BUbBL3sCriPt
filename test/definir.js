@@ -9,9 +9,14 @@ const List = require("../src/list");
 describe("definir", function () {
   it.only("sets a constant", function () {
     // const vínculo = Object.create(rootBinding);
-    const vínculo = {};
+    const vínculo = {
+      define: function() {
+        console.log("Hola Mama!");
+      }
+    };
     console.log({vínculo});
-    ėval(vinculo, "define 🍎 \"apple\"");
+    const result =
+      ėval(vínculo, "define 🍎 \"apple\"");
     console.log({vínculo});
   });
 });
