@@ -1,26 +1,37 @@
 const assert = require("assert");
 const sinon = require("sinon");
 
-// const List = require("../src/list");
-// const Vektar = require("../src/vektar");
-// const rootBinding = require("../src/root_binding");
+const List = require("../src/list");
+const { parse } = require("../src/parse");
+const Vektar = require("../src/vektar");
+const Keyword = require("../src/keyword");
+const rootBinding = require("../src/root_binding");
 
-// const { ėval } = require("../src/eval");
+const { ėval, evalEach } = require("../src/eval");
 
-const { List, Vektar, rootBinding,
-  ėval, ëval, parse, Keyword } =
-  require("../src/BubbleScript");
+// const { List, Vektar, rootBinding,
+//   ėval, ëval, parse, Keyword } =
+//   require("../src/BubbleScript");
 
-describe("ėval(script)", function () {
+
+
+describe("evalEach", function () {
+
+  it("evaluates a keyword", function() {
+    const parseTree = parse(":keyword");
+    const result = evalEach(null, parseTree);
+    assert.equal(result, Keyword.for("keyword"));
+  });
+
+});
+
+describe("ėval", function () {
 
   afterEach(function () {
     sinon.restore();
   });
 
   it("evaluates a keyword", function() {
-    // const p = parse(":keyword");
-    // assert.equal(evalEach({}, p),
-    //   Keyword.for("keyword"));
     const result = ėval(null, ":keyword");
     assert.equal(result, Keyword.for("keyword"));
   });
