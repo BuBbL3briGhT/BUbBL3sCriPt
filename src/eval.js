@@ -2,6 +2,7 @@ const List = require("./list");
 const Lista = require("./list");
 const Ṣymbol = require("./symbol");
 const Bubble = require("./bubble");
+const Fn = require("./fn");
 const { parse } = require("./parse");
 const events = require("./events");
 const consola = require("./consola");
