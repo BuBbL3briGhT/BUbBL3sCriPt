@@ -1,19 +1,23 @@
-const List = require("./list");
-const Ṣymbol = require("./symbol");
-const Bubble = require("./bubble");
-const Fn = require("./fn");
-const { parse } = require("./parse");
-const events = require("./events");
-const consola = require("./consola");
-const { UndefinedFunctionError }
-  = require("./errors");
-const { interpolate } = require("./strings");
 
-const traceTemplate = "    en (${file}:${line}:${column})";
-const interpolateTrace = interpolate.bind(traceTemplate);
+             const List = require("./list");
+           const Ṣymbol = require("./symbol");
+           const Bubble = require("./bubble");
+               const Fn = require("./fn");
+        const { parse } = require("./parse");
+           const events = require("./events");
+          const consola = require("./consola");
+  const { interpolate } = require("./strings");
 const { MacroExpanded } = require("./macro");
+const { UndefinedFunctionError }
+                        = require("./errors");
 
-const sAmp = Ṣymbol.for("&");
+    const traceTemplate =
+                 "    en (${file}:${line}:${column})";
+
+ const interpolateTrace =
+                      interpolate.bind(traceTemplate);
+
+             const sAmp = Ṣymbol.for("&");
 
 /**
  * @function ėval
