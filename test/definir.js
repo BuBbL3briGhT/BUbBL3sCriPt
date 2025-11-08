@@ -1,7 +1,7 @@
 
                                         const assert = require("assert");
                                       const { ėval } = require("../src/eval");
-                                   const rootBinding = require("../src/root_binding");
+                               const { rootBinding } = require("../src/root_binding");
                                           const List = require("../src/list");
 
   describe("definir", function () {
