@@ -1,4 +1,14 @@
 November:
+  - src/bubls and src/BubbleScript can be consolodate
+    into single file. Stick with BubbleScript name
+    for clarity. bubls can be the name for command.
+      - I think the reason for having these seperated
+        orginally was to support tge web, not having
+        any file system dependencies in BubbleScript,
+        and src/bubls creates the library that can be
+        used in node and by the command line
+        interpreter, so maybe it is good to have
+        seprate. Will ponder it some.
   - rootBinding, or whatever binding should be passed
     to eval as parameter, remove dependency on
     binding in eval. (which is circular)
