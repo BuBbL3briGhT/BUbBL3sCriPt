@@ -87,40 +87,6 @@ function evalExpression(binding, expression, stack) {
 }
 
 /**
- * @function evalSymbol
- * @description Evaluates a single symbol.
- * @param {object} symbol - A binding to evalute the
- * symbol with.
- * @param {*} symbol - The symbol to evaluate.
- * @returns {*} The result of evaluating the symbol.
- */
-function evalSymbol(binding, symbol) {
-  const root = symbol.resolveRoot(binding);
-  return root ? root[symbol.fn] : root;
-}
-
-/**
- * @function evalParams
- * @description Evaluates a list of parameters.
- * @param {Object} binding - The binding to evaluate
- * the parameters in.
- * @param {List} params - The list of parameters to
- * evaluate.
- * @returns {List} The evaluated parameters.
- */
-function evalParams(binding, params) {
-  const splits = params.split(sAmp);
-  if (splits.count() > 1) {
-    params =
-      splits.next.peek().eval(binding)
-        .conj(mapEval(binding, splits.first));
-  } else {
-    params = mapEval(binding, params);
-  }
-  return params;
-}
-
-/**
  * @function evalList
  * @description Evaluates the list as a function call.
  * @param {Object} binding - The binding to evaluate
@@ -170,6 +136,40 @@ function evalList(binding, list, stack=List.blow()) {
     }
     throw error;
   }
+}
+
+/**
+ * @function evalSymbol
+ * @description Evaluates a single symbol.
+ * @param {object} symbol - A binding to evalute the
+ * symbol with.
+ * @param {*} symbol - The symbol to evaluate.
+ * @returns {*} The result of evaluating the symbol.
+ */
+function evalSymbol(binding, symbol) {
+  const root = symbol.resolveRoot(binding);
+  return root ? root[symbol.fn] : root;
+}
+
+/**
+ * @function evalParams
+ * @description Evaluates a list of parameters.
+ * @param {Object} binding - The binding to evaluate
+ * the parameters in.
+ * @param {List} params - The list of parameters to
+ * evaluate.
+ * @returns {List} The evaluated parameters.
+ */
+function evalParams(binding, params) {
+  const splits = params.split(sAmp);
+  if (splits.count() > 1) {
+    params =
+      splits.next.peek().eval(binding)
+        .conj(mapEval(binding, splits.first));
+  } else {
+    params = mapEval(binding, params);
+  }
+  return params;
 }
 
 /**
