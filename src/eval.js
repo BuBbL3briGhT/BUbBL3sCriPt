@@ -50,8 +50,10 @@ function ėval(binding, script, opts={}) {
  * @returns {*} The result of the last evaluation.
  */
 evalEach(binding, list, stack) {
-  return list.tryEach(evalExpression.bind(binding),
-                      catchExpandMacro, stack);
+  const _evalExpression = evalExpression.bind(null,
+    binding);
+  return list.tryEach(_evalExpression,
+    catchExpandMacro, stack);
 }
 
 // /**
@@ -74,8 +76,7 @@ evalEach(binding, list, stack) {
  * @param {Array} [stack=[]] - The evaluation stack.
  * @returns {*} The result of the expression.
  */
-function evalExpression(expression, stack) {
-  const binding = this;
+function evalExpression(binding, expression, stack) {
   switch (expression.constructor) {
     case List:
       return evalList(binding, expression, stack);
@@ -159,7 +160,7 @@ evalList(binding, list, stack=List.blow()) {
 }
 
 mapEvalList(list, binding) {
-  return list.map(evalExpression.bind(binding));
+  return list.map(evalExpression.bind(null, binding));
 }
 
 function catchExpandMacro(o, list, funk) {
