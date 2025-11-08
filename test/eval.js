@@ -17,7 +17,7 @@ describe("ėval(script)", function () {
     sinon.restore();
   });
 
-  it.only("evaluates a keyword", function() {
+  it("evaluates a keyword", function() {
     // const p = parse(":keyword");
     // assert.equal(evalEach({}, p),
     //   Keyword.for("keyword"));
