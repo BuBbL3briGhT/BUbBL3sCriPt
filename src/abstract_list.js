@@ -1,7 +1,7 @@
 
   /* * *  * * *  * *  * *  * * *  * * *
    *                                  *
-   *   File: src/abstract_list.js  *
+   *   File: src/abstract_list.js     *
    *   Date: September 25th, 2025     *
    *   Library: Bubblescript          *
    *   version: 0.🦤.🍌.🥄            *

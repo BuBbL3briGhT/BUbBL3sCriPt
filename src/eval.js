@@ -1,4 +1,15 @@
 
+  /* * *  * * *  * *  * *  * * *  * * *  * *  * *
+   *                                            *
+   *        File: src/eval.js                   *
+   *        Date: November 8th, 2025            *
+   *        Library: Bubblescript               *
+   *        version: 0.🦤.🍌.🥄                 *
+   *        Version: 0.1.6                      *
+   *        Author(s): BaMbii                   *
+   *                                            *
+   * * *  * * *  * *  * *  * * *  * * *  * *  * */
+
              const List = require("./list");
            const Ṣymbol = require("./symbol");
            const Bubble = require("./bubble");
