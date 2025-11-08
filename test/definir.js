@@ -6,12 +6,12 @@ const { ėval } = require("../src/eval");
 const rootBinding = require("../src/root_binding");
 const List = require("../src/list");
 
-describe("define", function () {
+describe("definir", function () {
   it.only("sets a constant", function () {
     // const vínculo = Object.create(rootBinding);
     const vínculo = {};
     console.log({vínculo});
-    ėval("define 🍎 \"apple\"", {}, vínculo);
+    ėval(vinculo, "define 🍎 \"apple\"");
     console.log({vínculo});
   });
 });
