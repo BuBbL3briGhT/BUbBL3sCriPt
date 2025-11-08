@@ -122,14 +122,14 @@ evalList(binding, list, stack=List.blow()) {
     stack = stack.push({func: list.head.toString(),
         file, line, column});
 
-    const func = evalExpression(binding, list.head);
+    const fn = evalExpression(binding, list.head);
 
-    if (func == undefined) {
+    if (fn == undefined) {
       const Error = UndefinedFunctionError;
       throw new Error(binding, list.head, stack);
     }
 
-    return Fn.call(binding, func, list.tail, stack);
+    return Fn.call(binding, fn, list.tail, stack);
 
   } catch (error) {
     switch (error.constructor){
