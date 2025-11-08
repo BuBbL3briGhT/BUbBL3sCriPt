@@ -17,18 +17,18 @@ class Ṣymbol {
       callPattern = 1;
 
     if (value !== "/")
-      [value, funk] = value.split('/')
-    segments = value.split('.')
+      [value, funk] = value.split('/');
+    segments = value.split('.');
 
     if (segments.length == 1 && !funk)
-      funk = segments.pop()
+      funk = segments.pop();
 
     if (!funk)
-      [funk, callPattern] = [segments.pop(), 2]
+      [funk, callPattern] = [segments.pop(), 2];
 
-    this.funk = funk
-    this.segments = segments
-    this.callPattern = callPattern
+    this.funk = funk;
+    this.segments = segments;
+    this.callPattern = callPattern;
 
     return symbols[value] = this;
   }

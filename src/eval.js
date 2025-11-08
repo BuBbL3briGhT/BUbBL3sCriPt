@@ -98,11 +98,11 @@ function evalParams(binding, params) {
  */
 evalList(binding, list, stack=List.blow()) {
   try {
-    const { file, line, column } = this;
+    const { file, line, column } = list;
     stack = stack.push({func: list.head.toString(),
         file, line, column});
 
-    const func = evalList(binding, list.head);
+    const func = evalExpression(binding, list.head);
 
     if (func == undefined) {
       const Error = UndefinedFunctionError;
