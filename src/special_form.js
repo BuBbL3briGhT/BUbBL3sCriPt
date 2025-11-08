@@ -1,3 +1,4 @@
+const { mapEval } = require("./eval");
 
 // Special Form Function
 
@@ -35,7 +36,7 @@ class SpecialFormP extends SpecialForm {
   constructor(fn) {
     super(function (params) {
       return fn.call(this,
-        params.mapEval(this));
+        mapEval(this, params));
     });
   }
 }

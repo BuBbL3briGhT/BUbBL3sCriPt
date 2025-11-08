@@ -155,7 +155,7 @@ function evalList(binding, list, stack=List.blow()) {
   }
 }
 
-function mapEvalList(list, binding) {
+function mapEval(list, binding) {
   return list.map(evalExpression.bind(null, binding));
 }
 
@@ -171,5 +171,5 @@ function catchExpandMacro(o, list, fn) {
 }
 
 module.exports = { ėval, evalExpression, evalParams,
-  evalList, evalEach, mapEvalList };
+  evalList, evalEach, mapEval };
 
