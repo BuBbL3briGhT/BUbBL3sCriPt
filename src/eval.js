@@ -75,9 +75,15 @@ evalEach(binding, list, stack) {
  * @returns {*} The result of the expression.
  */
 function evalExpression(expression, stack) {
-  if (expression.eval) {
-    return expression.eval(this, stack);
-  } else return expression;
+  const binding = this;
+  switch (expression.constructor) {
+    case List:
+      return evalList(binding, expression, stack);
+    default:
+      if (expression.eval) {
+        return expression.eval(binding, stack);
+      } else return expression;
+  }
 }
 
 /**
