@@ -42,6 +42,19 @@ function ėval(binding, script, opts={}) {
 }
 
 /**
+ * @method evalEach
+ * @description Evaluates each element of the list and returns the result of the last evaluation.
+ * @param {Object} binding - The binding to evaluate the elements in.
+ * @param {List} list - A list to evalEach over.
+ * @param {List} [stack=List.blow()] - The evaluation stack.
+ * @returns {*} The result of the last evaluation.
+ */
+evalEach(binding, list, stack) {
+  return list.tryEach(evalExpression.bind(binding),
+                      catchExpandMacro, stack);
+}
+
+/**
  * @function evalExpression
  * @description Evaluates a single expression.
  * @param {*} expression - The expression to evaluate.
@@ -124,20 +137,6 @@ evalList(binding, list, stack=List.blow()) {
     }
     throw error;
   }
-}
-
-/**
- * @method evalEach
- * @description Evaluates each element of the list and returns the result of the last evaluation.
- * @param {Object} binding - The binding to evaluate the elements in.
- * @param {List} list - A list to evalEach over.
- * @param {List} [stack=List.blow()] - The evaluation stack.
- * @returns {*} The result of the last evaluation.
- */
-evalEach(binding, list, stack) {
-  // consola.registro("evalEach", {list: list});
-  return list.tryEach(evalExpression.bind(binding),
-                      catchExpandMacro, stack);
 }
 
 mapEvalList(list, binding) {
