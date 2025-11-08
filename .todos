@@ -1,4 +1,13 @@
 November:
+  - After giving it some thought, i think it is best
+    to try and keep all the evaluation logic
+    centralize to the eval module. This will make it
+    avaliable in one place and allow for it to be
+    easily swapped out if need be, versus having it
+    spread out all across the different modules and
+    class. This might make it easier to implement as
+    well, but i feel centralizating the logic is the
+    primary advantage and motivator in the decision.
   - Ok, looks like we might need to move the list
     evaulation logic back to list. The tricky part
     has to do i think with accessing one of the eval
