@@ -20,10 +20,12 @@ const { ėval, ëval, evalExpression } = require("./eval");
 const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
+const ēval = ėval.bind(rootBinding);
+
 const BubbleScript = {
-  List, Vektar, Ṣymbol, Keyword, Bubble, Funk,
-  Macro, tokenize, Parser, parse, eval: ėval,
-  ėval, ëval, evalExpression, rootBinding
+  List, Vektar, Ṣymbol, Keyword, Bubble, Funk, Macro,
+  tokenize, Parser, parse, eval: ēval, ėval,
+  evalExpression, rootBinding
 }
 
 events.emit("init", BubbleScript);
