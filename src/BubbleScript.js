@@ -6,7 +6,7 @@
      *        *    +   *
        *  */
 
-const ListaAbstractia = require("./lista_abstractia");
+const AbstractList = require("./abstract_list");
 const List = require("./list");
 const Vektar = require("./vektar");
 const Ṣymbol = require("./symbol");

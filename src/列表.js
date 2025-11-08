@@ -1,4 +1,4 @@
-const ListaAbstractia = require("./lista_abstractia");
+const AbstractList = require("./abstract_list");
 const events = require("./events");
 const Ṣymbol = require("./symbol");
 const Funk = require("./funk");
@@ -17,19 +17,19 @@ const trazaPlantilla = "    en ${funk} (${file}:${line}:${column})";
 const interpolarTrazaPlantilla = interpolar.bind(trazaPlantilla);
 
 <<<<<<<< HEAD:src/list.js
-// `List` extends `ListaAbstractia` and is
+// `List` extends `AbstractList` and is
 // the primary object in Bubblescript and
 // is the programatic representation of a
 // list. e.g. `(1 2 3)`
-class List extends ListaAbstractia {
+class List extends AbstractList {
 
   // `List.emptyList` provides an instance
 ========
-// `气泡` extends `ListaAbstractia` and is
+// `气泡` extends `AbstractList` and is
 // the primary object in Bubblescript and
 // is the programatic representation of a
 // 气泡. e.g. `(1 2 3)`
-class 气泡 extends ListaAbstractia {
+class 气泡 extends AbstractList {
 
   // `气泡.emptyList` provides an instance
 >>>>>>>> 🫧:src/列表.js

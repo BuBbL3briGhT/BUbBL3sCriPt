@@ -1,4 +1,4 @@
-const ListaAbstractia = require("./lista_abstractia");
+const AbstractList = require("./abstract_list");
 const events = require("./events");
 
 let emptyVector, List;
@@ -7,7 +7,7 @@ events.on("init", function (bubls) {
   List = bubls.List;
 });
 
-class Vektar extends ListaAbstractia {
+class Vektar extends AbstractList {
 
   static get emptyVector() { return emptyVector; }
 

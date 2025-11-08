@@ -1,4 +1,4 @@
-const AbstractList = require("./lista_abstractia");
+const AbstractList = require("./abstract_list");
 const events = require("./events");
 const Ṣymbol = require("./symbol");
 const Funk = require("./funk");
