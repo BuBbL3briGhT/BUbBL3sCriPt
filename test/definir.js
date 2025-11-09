@@ -29,8 +29,7 @@
 
          ėval(vínculo, "definir 🍎 \"apple\"");
 
-      });
-      // }, Error);
+      }, Error);
 
     });
   });

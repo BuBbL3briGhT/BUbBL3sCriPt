@@ -109,9 +109,9 @@ const rootBinding = {
 
     const sKey = key.toString();
 
-    // if (Object.hasOwn(this, sKey))
-    //   throw new Error("const " + sKey +
-    //     " already set");
+    if (Object.hasOwn(this, sKey))
+      throw new Error("const " + sKey +
+        " already set");
 
     return this[sKey] = evalEach(this, value);
 
