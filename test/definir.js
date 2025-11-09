@@ -19,6 +19,18 @@
 
     });
 
-    it("defines a constant");
-    it("does not set a new vaule if on is already set for that key at the current context (binding)");
+    it("doesn't define a value if it was already define (value is constant)", function () {
+
+      const vínculo = Object.create(rootBinding);
+
+        ėval(vínculo, "definir 🍎 \"apple\"");
+
+      assert.throws(function () {
+
+         ėval(vínculo, "definir 🍎 \"apple\"");
+
+      });
+      // }, Error);
+
+    });
   });
