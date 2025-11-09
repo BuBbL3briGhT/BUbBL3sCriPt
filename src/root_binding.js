@@ -1,19 +1,21 @@
-const List = require("./list");
-const Vektar = require("./vektar");
-const ObjectMap = require("./object_map");
-const Fn = require("./fn");
-const Ṣymbol = require("./symbol");
-const { Macro }= require("./macro");
-const { ëval, evalEach, evalExpression } = require("./eval");
-const Range = require("./range");
-const LazyList = require("./lazy_list");
-const { specialForm, specialFormP } =
-                  require("./special_form");
-const reqůire = require("./reqůire");
-const consola = require("./consola");
-const createBinding = require("./create_binding.js");
 
-const starSymbol = Ṣymbol.for("*");
+                 const List = require("./list");
+               const Vektar = require("./vektar");
+            const ObjectMap = require("./object_map");
+                   const Fn = require("./fn");
+               const Ṣymbol = require("./symbol");
+            const { Macro } = require("./macro");
+            const { ëval, evalEach, evalExpression }
+                            = require("./eval");
+                const Range = require("./range");
+             const LazyList = require("./lazy_list");
+          const { specialForm, specialFormP }
+                            = require("./special_form");
+              const reqůire = require("./reqůire");
+              const consola = require("./consola");
+        const createBinding = require("./create_binding.js");
+
+           const starSymbol = Ṣymbol.for("*");
 
 
 // A man walks into a bar. Bartender says
