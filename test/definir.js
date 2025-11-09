@@ -5,9 +5,8 @@
                                           const List = require("../src/list");
 
   describe("definir", function () {
-  // describe("define", function () {
+
     it("establece un valor", function () {
-    // it("sets a value", function () {
 
       const vínculo = Object.create(rootBinding);
 
@@ -22,7 +21,6 @@
     });
 
     it("no define un valor si ya estaba definido (el valor es constante)", function () {
-    // it("doesn't define a value if it was already define (value is constant)", function () {
 
       const vínculo = Object.create(rootBinding);
 
