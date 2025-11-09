@@ -4,8 +4,10 @@
                                const { rootBinding } = require("../src/root_binding");
                                           const List = require("../src/list");
 
+  // Describe define.
   describe("definir", function () {
 
+    // It sets a value.
     it("establece un valor", function () {
 
       const vínculo = Object.create(rootBinding);
@@ -20,7 +22,10 @@
 
     });
 
-    it("no define un valor si ya estaba definido (el valor es constante)", function () {
+    // It doesn't define a value if it was already
+    // defined (value is constant).
+    it("no define un valor si ya estaba definido "+
+       "(el valor es constante)", function () {
 
       const vínculo = Object.create(rootBinding);
 
