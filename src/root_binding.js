@@ -1,4 +1,15 @@
 
+  /* * *  * * *  * *  * *  * * *  * * *  * *  * *
+   *                                            *
+   *        File: src/root_binding.js           *
+   *        Date: November 10th, 2025           *
+   *        Library: Bubblescript               *
+   *        version: 0.🦤.🍌.🥄                 *
+   *        Version: 0.1.6                      *
+   *        Author(s): BaMbii                   *
+   *                                            *
+   * * *  * * *  * *  * *  * * *  * * *  * *  * */
+
                  const List = require("./list");
                const Vektar = require("./vektar");
             const ObjectMap = require("./object_map");
@@ -29,6 +40,21 @@ const rootBinding = {
   __dirname: __dirname,
 
   /* Special form functions */
+
+  definir: specialForm(function(list) {
+
+    const   key = list.peek();
+    const value = list.pop();
+
+    const sKey = key.toString();
+
+    if (Object.hasOwn(this, sKey))
+      throw new Error("const " + sKey +
+        " already set");
+
+    return this[sKey] = evalEach(this, value);
+
+  }),
 
   // define: specialForm(function(args) {
   //   let key = args.peek();
@@ -101,21 +127,6 @@ const rootBinding = {
   //       return this[sKey] = value.eval(this);
   //   }
   // }),
-
-  definir: specialForm(function(list) {
-
-    const   key = list.peek();
-    const value = list.pop();
-
-    const sKey = key.toString();
-
-    if (Object.hasOwn(this, sKey))
-      throw new Error("const " + sKey +
-        " already set");
-
-    return this[sKey] = evalEach(this, value);
-
-  }),
 
   fn: specialForm(function(list) {
     return new Fn(this, list.first.toList(),
