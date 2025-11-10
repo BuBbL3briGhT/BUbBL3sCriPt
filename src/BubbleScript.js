@@ -2,7 +2,7 @@
     /*      +
       *  🫧 Ɓůɓɓļɛ§çŕịpŧ.js  *
      *         +     *           *
-    *   ✨️  A Lisp for JavaScript. *
+    *   ✨️  It's Łïṣ̌p for J̣̌ąvåŞćṛịpŧ. *
      *        *    +   *
        *  */
 
@@ -20,13 +20,14 @@ const { ėval, evalEach, evalExpression } = require("./eval");
 const { rootBinding } = require("./root_binding");
 const events = require("./events");
 
-const ēval = ėval.bind(rootBinding);
 
 const BubbleScript = {
   List, Vektar, Ṣymbol, Keyword, Bubble, Fn, Macro,
-  tokenize, Parser, parse, eval: ēval, ēval, ėval,
-  evalEach, evalExpression, rootBinding
+  tokenize, Parser, parse, ėval, evalEach,
+  evalExpression, rootBinding
 }
+
+BubbleScript.eval = ėval.bind(null, rootBinding);
 
 events.emit("init", BubbleScript);
 
