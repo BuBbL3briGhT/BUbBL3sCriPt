@@ -1,4 +1,13 @@
 November:
+  - Annonomus functions: ((fn param param2 ...) <function body>)
+    Example:
+      ((fn message) (puts message))
+    fn takes list of params, it is a special form or
+    macro so they are not evaualte. Returns a macro
+    that will return the actual function. I like this
+    format better then what we currently have and
+    feel it is more in line with how we have set up
+    definir to do function definitions.
   - After giving it some thought, i think it is best
     to try and keep all the evaluation logic
     centralize to the eval module. This will make it
