@@ -53,9 +53,9 @@
 
          assert.equal(vínculo["🐟"].constructor, Fn);
 
-         ėval(vínculo, "(🐟)");
+       ėval(vínculo, "(🐟)");
 
-       assert.ok(vínculo["💜"].called, "💜 should have been called");
+         assert.ok(vínculo["💜"].called, "💜 should have been called");
 
     });
 
