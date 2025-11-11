@@ -1,5 +1,6 @@
 
                                         const assert = require("assert");
+                                         const sinon = require("sinon");
                                       const { ėval } = require("../src/eval");
                                const { rootBinding } = require("../src/root_binding");
                                           const List = require("../src/list");
@@ -38,4 +39,24 @@
       }, Error);
 
     });
+
+    it.only("creates and sets a function when psssed "+
+       " a list as tge first parameter, and uses "+
+       "the remainder of the list as the body.", function () {
+
+      const vínculo = Object.create(rootBinding);
+
+         vínculo.myFake = sinon.fake();
+
+       // ėval(vínculo, "definir (print message) "+
+       //                  "(fake message)");
+
+         // ėval(vínculo, "(print \"Hi!\")");
+         ėval(vínculo, "(myFake)");
+
+       assert.ok(vínculo.myFake.called, "vínculo.myFake should have been called");
+
+    });
+
+
   });
