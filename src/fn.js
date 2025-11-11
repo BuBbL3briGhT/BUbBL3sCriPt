@@ -10,11 +10,10 @@
    *                                  *
    * * *  * * *  * *  * *  * * *  * * */
 
-  const createBinding =
-                require("./create_binding.js");
-         const Ṣymbol = require("./symbol");
-        const consola = require("./consola");
-         const events = require("./events");
+            const createBinding = require("./create_binding.js");
+                   const Ṣymbol = require("./symbol");
+                  const consola = require("./consola");
+                   const events = require("./events");
 
 class Fn {
   constructor(binding, params, body, opts={}) {
