@@ -16,15 +16,6 @@
         const consola = require("./consola");
          const events = require("./events");
 
-  // let evalParams, List;
-  let List;
-
-  events.on("init", function (bubls) {
-    // evalParams = require("./eval").evalParams;
-    List = bubls.List;
-  });
-
-
 class Fn {
   constructor(binding, params, body, opts={}) {
     Object.assign(this, { binding, params, body });
