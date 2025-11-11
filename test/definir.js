@@ -60,7 +60,10 @@
     });
 
 
-
+    it.skip("extracts all key values from an ObjectMap in the current binding with *", function () {
+      const vínculo = Object.create(rootBinding);
+      // TODO: Implement test.
+    });
 
 
 
