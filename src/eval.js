@@ -215,6 +215,9 @@ function catchExpandMacro(o, list, fn) {
   }
 }
 
-module.exports = { ėval, evalExpression, evalParams,
-  evalList, evalEach, mapEval };
+Object.assign(ėval ,{
+  ėval, evalExpression, evalParams, evalList,
+  evalEach, mapEval
+});
 
+module.exports = ėval;
