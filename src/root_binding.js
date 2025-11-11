@@ -28,6 +28,11 @@
 
            const starSymbol = Ṣymbol.for("*");
 
+function ensureKeyNotDefined(binding, key) {
+  if (Object.hasOwn(binding, key))
+    throw new Error("const " + key +
+      " already set");
+}
 
 // A man walks into a bar. Bartender says
 // what'll you have? The man says,
@@ -46,13 +51,26 @@ const rootBinding = {
     const   key = list.peek();
     const value = list.pop();
 
-    const sKey = key.toString();
+    // If the key turns out to be a list, then
+    // we do a function definition using the
+    // first item of the list as the key and the
+    // rest as the paramter list, otherwise do a
+    // normal key value definition.
+    if (key instanceof List) {
+      const sKey = key.peek().toString();
+      ensureKeyNotDefined(this, sKey);
+      return this[sKey]
+        = new Fn(this, key.pop(), value, {
+          name: sKey,
+          file: key.file,
+          line: key.line,
+          column: key.column });
+    } else {
+      const sKey = key.toString();
+      ensureKeyNotDefined(this, sKey);
+      return this[sKey] = evalEach(this, value);
+    }
 
-    if (Object.hasOwn(this, sKey))
-      throw new Error("const " + sKey +
-        " already set");
-
-    return this[sKey] = evalEach(this, value);
 
   }),
 

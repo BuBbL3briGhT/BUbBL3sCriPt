@@ -40,7 +40,7 @@
 
     });
 
-    it.only("creates and sets a function when psassed "+
+    it("creates and sets a function when psassed "+
        " a list as the first parameter, and uses "+
        "the remainder of the list as the body.", function () {
 
