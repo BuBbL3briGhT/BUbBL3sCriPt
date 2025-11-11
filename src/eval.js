@@ -118,7 +118,7 @@ function evalList(binding, list, stack=List.blow()) {
       throw new Error(binding, list.head, stack);
     }
 
-    return Fn.call(binding, fn, list.tail, stack, evalParams, evalEach, mapEval);
+    return Fn.call(binding, fn, list.tail, stack, ėval);
 
   } catch (error) {
     switch (error.constructor){

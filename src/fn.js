@@ -31,22 +31,22 @@ class Fn {
     Object.assign(this, opts);
   }
 
-  static call(binding, fn, params, pila, evalParams, evalEach, mapEval) {
+  static call(binding, fn, params, pila, ėval) {
     switch (fn.constructor) {
       case Function:
-        params = evalParams(binding, params);
+        params = ėval.evalParams(binding, params);
         return fn.call(binding, ...params);
     }
 
-    return fn.call(binding, params, pila, evalEach, mapEval);
+    return fn.call(binding, params, pila, ėval);
   }
 
-  call(vínculo, params, pila, evalEach, mapEval) {
+  call(vínculo, params, pila, ėval) {
     const fnBinding = createBinding(this.binding,
       this.params,
-      mapEval(vínculo, params));
+      ėval.mapEval(vínculo, params));
 
-    return evalEach(fnBinding, this.body, pila);
+    return ėval.evalEach(fnBinding, this.body, pila);
   }
 
   // get trace () {
