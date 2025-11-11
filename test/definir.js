@@ -48,10 +48,9 @@
 
          vínculo["💜"] = sinon.fake();
 
-       ėval(vínculo, "definir (🐟 🍌) "+
-                        "(💜 🍌)");
+       ėval(vínculo, "definir (🐟) (💜)");
 
-         ėval(vínculo, "(🐟 \"Hi!\")");
+         ėval(vínculo, "(🐟)");
 
        assert.ok(vínculo["💜"].called, "💜 should have been called");
 
