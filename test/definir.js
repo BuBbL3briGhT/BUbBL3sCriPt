@@ -4,6 +4,7 @@
                                       const { ėval } = require("../src/eval");
                                const { rootBinding } = require("../src/root_binding");
                                           const List = require("../src/list");
+                                            const Fn = require("../src/fn");
 
   // Describe define.
   describe("definir", function () {
@@ -50,11 +51,17 @@
 
        ėval(vínculo, "definir (🐟) (💜)");
 
+         assert.equal(vínculo["🐟"].constructor, Fn);
+
          ėval(vínculo, "(🐟)");
 
        assert.ok(vínculo["💜"].called, "💜 should have been called");
 
     });
+
+
+
+
 
 
   });

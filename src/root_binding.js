@@ -71,7 +71,6 @@ const rootBinding = {
       return this[sKey] = evalEach(this, value);
     }
 
-
   }),
 
   // define: specialForm(function(args) {
