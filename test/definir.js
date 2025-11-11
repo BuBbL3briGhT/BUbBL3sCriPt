@@ -40,21 +40,20 @@
 
     });
 
-    it.only("creates and sets a function when psssed "+
-       " a list as tge first parameter, and uses "+
+    it.only("creates and sets a function when psassed "+
+       " a list as the first parameter, and uses "+
        "the remainder of the list as the body.", function () {
 
       const vínculo = Object.create(rootBinding);
 
-         vínculo.myFake = sinon.fake();
+         vínculo["💜"] = sinon.fake();
 
-       // ėval(vínculo, "definir (print message) "+
-       //                  "(fake message)");
+       ėval(vínculo, "definir (🐟 🍌) "+
+                        "(💜 🍌)");
 
-         // ėval(vínculo, "(print \"Hi!\")");
-         ėval(vínculo, "(myFake)");
+         ėval(vínculo, "(🐟 \"Hi!\")");
 
-       assert.ok(vínculo.myFake.called, "vínculo.myFake should have been called");
+       assert.ok(vínculo["💜"].called, "💜 should have been called");
 
     });
 
