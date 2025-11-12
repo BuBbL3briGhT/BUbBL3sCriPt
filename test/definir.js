@@ -6,6 +6,8 @@
                                           const List = require("../src/list");
                                             const Fn = require("../src/fn");
 
+                                          const zulu = it;
+
   // Describe define.
   describe("definir", function () {
 
@@ -41,9 +43,15 @@
 
     });
 
-    it("creates and sets a function when psassed "+
-       " a list as the first parameter, and uses "+
-       "the remainder of the list as the body.", function () {
+    // It creates and sets a function when passed a
+    // list as the first parameter, and uses the
+    // remainder of the list as the body.
+    zulu("Idala futhi isetha umsebenzi lapho "+
+         "idlulisa uhlu njengepharamitha yokuqala, "+
+         "futhi isebenzisa ingxenye esele yohlu "+
+         "njengomzimba."
+         , function () {
+
 
       const vínculo = Object.create(rootBinding);
 
