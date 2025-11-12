@@ -12,8 +12,16 @@
                                      const describir = describe; // Española
                                          const chaza = describe; // Española
 
-                                       const afirmar = assert; // Española
-                                        const qinisa = assert; // Zulu
+                                       const afirmar = Object.create(assert); // Española
+                                        const qinisa = Object.create(assert); // Zulu
+
+                               qinisa.ngokulinganayo = qinisa.equal; // Zulu
+                                    qinisa.kulungile = qinisa.ok; // Zulu
+
+                                       afirmar.igual = afirmar.equal; // Española
+                                          afirmar.OK = afirmar.ok; // Español
+                                     afirmar.muyBien = afirmar.ok; // Española
+                                      afirmar.lanza  = afirmar.throws; // Española
 
   // Describe define.
   describir("definir", function () {
@@ -23,13 +31,13 @@
 
       const vínculo = Object.create(rootBinding);
 
-        afirmar.equal(ėval(vínculo, "🍎"), undefined);
+        afirmar.igual(ėval(vínculo, "🍎"), undefined);
 
       ėval(vínculo, "definir 🍎 \"manzana\"");
 
         const resultado = ėval(vínculo, "🍎");
 
-      afirmar.equal(resultado, "manzana");
+      afirmar.igual(resultado, "manzana");
 
     });
 
@@ -42,7 +50,7 @@
 
         ėval(vínculo, "definir 🍎 \"manzana\"");
 
-      afirmar.throws(function () {
+      afirmar.lanza(function () {
 
          ėval(vínculo, "definir 🍎 \"manzana\"");
 
@@ -66,11 +74,12 @@
 
        ėval(vínculo, "definir (🐟) (💜)");
 
-         qinisa.equal(vínculo["🐟"].constructor, Fn);
+         qinisa.ngokulinganayo(vínculo["🐟"].constructor, Fn);
 
        ėval(vínculo, "(🐟)");
 
-         qinisa.ok(vínculo["💜"].called, "💜 should have been called");
+         qinisa.kulungile(vínculo["💜"].called,
+           "💜 bekufanele ngabe ngibizwe.");
 
     });
 
