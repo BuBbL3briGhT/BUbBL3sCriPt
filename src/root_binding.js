@@ -145,13 +145,25 @@ const rootBinding = {
   //   }
   // }),
 
-  fn: specialForm(function(list) {
-    return new Fn(this, list.first.toList(),
-                        list.rest)
+  // fn: specialForm(function(list) {
+  //   return new Fn(this, list.first.toList(),
+  //                       list.rest)
+  // }),
+
+  fn: specialForm(function(params) {
+    return specialForm(function(body) {
+      return new Fn(this, params, body);
+    })
   }),
 
-  macro: specialForm(function(args) {
-    return new Macro(this, args.first, args.rest)
+  // macro: specialForm(function(args) {
+  //   return new Macro(this, args.first, args.rest)
+  // }),
+
+  macro: specialForm(function(params) {
+    return specialForm(function (body) {
+      return new Macro(this, params, body)
+    });
   }),
 
   jsfn: specialForm(function(args) {
