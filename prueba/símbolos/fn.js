@@ -1,12 +1,10 @@
 
 
-const Objeto = require("../../fuente/apoya/objeto");
-const consola = require("../../fuente/apoya/consola");
+const Objeto = require("../../fuente/apoyo/objeto");
+const afirmar = require("../../fuente/apoyo/afirmar");
+const consola = require("../../fuente/apoyo/consola");
 
-consola.registro(Objeto);
-consola.registro(Objeto.crear);
 
-// const afirmar = require("../fuente/apoyo/afirmar");
 //       const * = require("../fuente/apoyo/mocha");
 
 
