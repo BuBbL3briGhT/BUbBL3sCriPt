@@ -1,12 +1,10 @@
 
 
-const Objeto = require("../../fuente/apoyo/objeto");
+ const Objeto = require("../../fuente/apoyo/objeto");
 const afirmar = require("../../fuente/apoyo/afirmar");
 const consola = require("../../fuente/apoyo/consola");
-
-
-//       const * = require("../fuente/apoyo/mocha");
-
+const {ella, describir }
+              = require("../../fuente/apoyo/moca");
 
 // describir("fn", function () {
 //   // creates an annonymous function.
