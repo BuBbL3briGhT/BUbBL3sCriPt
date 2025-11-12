@@ -12,16 +12,23 @@
                                      const describir = describe; // Española
                                          const chaza = describe; // Española
 
-                                       const afirmar = Object.create(assert); // Española
-                                        const qinisa = Object.create(assert); // Zulu
+                                       const Objeto = Object.create(Object); // Española
+                                         const Into = Object.create(Object); // Zulu
+
+                                          Into.dala = Into.create; // Zulu
+                                       Objeto.crear = Objeto.create;
+
+                                       const afirmar = Objeto.crear(assert); // Española
+                                        const qinisa = Into.dala(assert); // Zulu
 
                                qinisa.ngokulinganayo = qinisa.equal; // Zulu
                                     qinisa.kulungile = qinisa.ok; // Zulu
+                                    qinisa.ukuphonsa = qinisa.throws; // Zulu
 
                                        afirmar.igual = afirmar.equal; // Española
                                           afirmar.OK = afirmar.ok; // Español
                                      afirmar.muyBien = afirmar.ok; // Española
-                                      afirmar.lanza  = afirmar.throws; // Española
+                                       afirmar.lanza = afirmar.throws; // Española
 
   // Describe define.
   describir("definir", function () {
@@ -29,7 +36,7 @@
     // It sets a value.
     ella("establece un valor", function () {
 
-      const vínculo = Object.create(rootBinding);
+      const vínculo = Objeto.crear(rootBinding);
 
         afirmar.igual(ėval(vínculo, "🍎"), undefined);
 
@@ -46,7 +53,7 @@
     ella("no define un valor si ya estaba definido "+
        "(el valor es constante)", function () {
 
-      const vínculo = Object.create(rootBinding);
+      const vínculo = Objeto.crear(rootBinding);
 
         ėval(vínculo, "definir 🍎 \"manzana\"");
 
@@ -68,7 +75,7 @@
          , function () {
 
 
-      const vínculo = Object.create(rootBinding);
+      const vínculo = Into.dala(rootBinding);
 
          vínculo["💜"] = sinon.fake();
 
