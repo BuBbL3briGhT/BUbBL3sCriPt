@@ -5,7 +5,9 @@ const consola = require("../../fuente/apoyo/consola");
 const { ella, describir }
               = require("../../fuente/apoyo/moca");
 
-const uniónDeRaiz = require("../../src/root_binding");
+const ėval = require("../../src/eval");
+const Fn = require("../../src/fn");
+const { rootBinding: uniónDeRaiz } = require("../../src/root_binding");
 
 // consola.registro({describir});
 describir("fn", function () {
@@ -14,6 +16,6 @@ describir("fn", function () {
     const enlace = Objeto.crear(uniónDeRaiz);
     const resultado = ėval(enlace,
       "(fn uno dos tres) (llámame tres dos uno)");
-    afirma.igual(resultado.constructor, Fn);
+    afirmar.igual(resultado.constructor, Fn);
   });
 });
