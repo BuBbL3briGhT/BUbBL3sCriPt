@@ -7,13 +7,13 @@ const { ella, describir }
 
 const uniónDeRaiz = require("../../src/root_binding");
 
-consola.registro({describir});
+// consola.registro({describir});
 describir("fn", function () {
-  // // It creates an annonymous function.
-  // ella("crea una función anónima", function () {
-  //   const enlace = Objeto.crear(uniónDeRaiz);
-  //   const resultado = ėval(enlace,
-  //     "(fn uno dos tres) (llámame tres dos uno)");
-  //   afirma.igual(resultado.constructor, Fn);
-  // });
+  // It creates an annonymous function.
+  ella("crea una función anónima", function () {
+    const enlace = Objeto.crear(uniónDeRaiz);
+    const resultado = ėval(enlace,
+      "(fn uno dos tres) (llámame tres dos uno)");
+    afirma.igual(resultado.constructor, Fn);
+  });
 });
