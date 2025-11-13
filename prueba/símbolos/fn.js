@@ -9,9 +9,9 @@ const ėval = require("../../src/eval");
 const List = require("../../src/list");
 const Ṣymbol = require("../../src/symbol");
 const Fn = require("../../src/fn");
-const { rootBinding: uniónDeRaiz } = require("../../src/root_binding");
+// const { rootBinding: uniónDeRaiz } = require("../../src/root_binding");
 
-// const { uniónDeRaiz } = require("../../fuente/unión_de_raiz");
+const { uniónDeRaiz } = require("../../fuente/unión_de_raiz");
 // const ėval = require("../../fuente/eval");
 // const Fn = require("../../fuente/fn");
 
