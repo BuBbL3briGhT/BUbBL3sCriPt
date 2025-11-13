@@ -33,11 +33,11 @@ describir("fn", function () {
       ]
     )
     // afirmar.igualdadProfunda(
-    //   [...resultado.body],
-    //   [ Ṣymbol.for("llámame"),
-    //     Ṣymbol.for("tres"),
-    //     Ṣymbol.for("dos"),
-    //     Ṣymbol.for("uno") ]
+    //   [...resultado.body.map((o) => o.toString())],
+    //   [ "llámame", "tres", "dos", "uno" ]
     // );
+    afirmar.igual(
+      resultado.body.toString(),
+      "((llámame tres dos uno))");
   });
 });
