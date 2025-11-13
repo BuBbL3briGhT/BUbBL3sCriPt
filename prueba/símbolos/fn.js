@@ -2,15 +2,18 @@
  const Objeto = require("../../fuente/apoyo/objeto");
 const afirmar = require("../../fuente/apoyo/afirmar");
 const consola = require("../../fuente/apoyo/consola");
-const {ella, describir }
+const { ella, describir }
               = require("../../fuente/apoyo/moca");
 
-// describir("fn", function () {
-//   // creates an annonymous function.
-//   ella("crea una función anónima", function () {
-//     const enlace = Objeto.crear(UniónDeRaiz);
-//     const resultado = ėval(enlace,
-//       "(fn uno dos tres) (llámame tres dos uno)");
-//     afirma.igual(resultado.constructor, Fn);
-//   });
-// });
+const uniónDeRaiz = require("../../src/root_binding");
+
+// consola.registro({describir});
+describir("fn", function () {
+  // // It creates an annonymous function.
+  // ella("crea una función anónima", function () {
+  //   const enlace = Objeto.crear(uniónDeRaiz);
+  //   const resultado = ėval(enlace,
+  //     "(fn uno dos tres) (llámame tres dos uno)");
+  //   afirma.igual(resultado.constructor, Fn);
+  // });
+});

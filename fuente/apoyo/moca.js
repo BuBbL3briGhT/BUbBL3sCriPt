@@ -5,8 +5,8 @@
 
         const Moca = Objeto.crear(Mocha);
 
-         const ella = Objeto.crear(Mocha.it);
-    const describir = Objeto.crear(Mocha.describe);
+         const ella = Objeto.crear(Moca.it);
+    const describir = Objeto.crear(Moca.describe);
 
     ella.saltar = Mocha.it.skip;
       ella.sola = Mocha.it.only;
@@ -20,18 +20,4 @@
 
       module.exports = Moca;
 
-
-
-
-consola.registro(mocha);
-      // const Objeto = require("./objeto");
-
-     // const afirmar = Objeto.crear(assert);
-
-      //  afirmar.igual = afirmar.equal;
-      //     afirmar.OK = afirmar.ok;
-     // afirmar.muyBien = afirmar.ok;
-      //  afirmar.lanza = afirmar.throws;
-
-      // module.exports = afirmar;
 
