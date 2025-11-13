@@ -6,6 +6,8 @@ const { ella, describir }
               = require("../../fuente/apoyo/moca");
 
 const ėval = require("../../src/eval");
+const List = require("../../src/list");
+const Ṣymbol = require("../../src/symbol");
 const Fn = require("../../src/fn");
 const { rootBinding: uniónDeRaiz } = require("../../src/root_binding");
 
@@ -21,5 +23,21 @@ describir("fn", function () {
     const resultado = ėval(enlace,
       "(fn uno dos tres) (llámame tres dos uno)");
     afirmar.igual(resultado.constructor, Fn);
+
+    afirmar.igualdadProfunda(
+      [...resultado.params],
+      [
+        Ṣymbol.for("uno"),
+        Ṣymbol.for("dos"),
+        Ṣymbol.for("tres")
+      ]
+    )
+    // afirmar.igualdadProfunda(
+    //   [...resultado.body],
+    //   [ Ṣymbol.for("llámame"),
+    //     Ṣymbol.for("tres"),
+    //     Ṣymbol.for("dos"),
+    //     Ṣymbol.for("uno") ]
+    // );
   });
 });
