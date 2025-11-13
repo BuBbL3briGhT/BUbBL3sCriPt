@@ -31,18 +31,5 @@ describir("fn", function () {
       resultado.body.toString(),
       "((llámame tres dos uno))");
 
-    // afirmar.igualdadProfunda(
-    //   [...resultado.params],
-    //   [
-    //     Ṣymbol.for("uno"),
-    //     Ṣymbol.for("dos"),
-    //     Ṣymbol.for("tres")
-    //   ]
-    // )
-    // // afirmar.igualdadProfunda(
-    // //   [...resultado.body.map((o) => o.toString())],
-    // //   [ "llámame", "tres", "dos", "uno" ]
-    // // );
-
   });
 });
