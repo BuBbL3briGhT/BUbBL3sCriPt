@@ -9,6 +9,10 @@ const ėval = require("../../src/eval");
 const Fn = require("../../src/fn");
 const { rootBinding: uniónDeRaiz } = require("../../src/root_binding");
 
+// const { uniónDeRaiz } = require("../../fuente/unión_de_raiz");
+// const ėval = require("../../fuente/eval");
+// const Fn = require("../../fuente/fn");
+
 // consola.registro({describir});
 describir("fn", function () {
   // It creates an annonymous function.
