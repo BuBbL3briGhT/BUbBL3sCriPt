@@ -10,21 +10,21 @@
    *                                            *
    * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
-                 const List = require("./list");
-               const Vektar = require("./vektar");
-            const ObjectMap = require("./object_map");
-                   const Fn = require("./fn");
-               const Ṣymbol = require("./symbol");
-            const { Macro } = require("./macro");
+                 const List = require("../src/list");
+               const Vektar = require("../src/vektar");
+            const ObjectMap = require("../src/object_map");
+                   const Fn = require("../src/fn");
+               const Ṣymbol = require("../src/symbol");
+            const { Macro } = require("../src/macro");
             const { ëval, evalEach, evalExpression }
-                            = require("./eval");
-                const Range = require("./range");
-             const LazyList = require("./lazy_list");
+                            = require("../src/eval");
+                const Range = require("../src/range");
+             const LazyList = require("../src/lazy_list");
           const { specialForm, specialFormP }
-                            = require("./special_form");
-              const reqůire = require("./reqůire");
-              const consola = require("./consola");
-        const createBinding = require("./create_binding.js");
+                            = require("../src/special_form");
+              const reqůire = require("../src/reqůire");
+              const consola = require("../src/consola");
+        const createBinding = require("../src/create_binding.js");
 
            const starSymbol = Ṣymbol.for("*");
 
