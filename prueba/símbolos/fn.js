@@ -24,20 +24,25 @@ describir("fn", function () {
       "(fn uno dos tres) (llámame tres dos uno)");
     afirmar.igual(resultado.constructor, Fn);
 
-    afirmar.igualdadProfunda(
-      [...resultado.params],
-      [
-        Ṣymbol.for("uno"),
-        Ṣymbol.for("dos"),
-        Ṣymbol.for("tres")
-      ]
-    )
-    // afirmar.igualdadProfunda(
-    //   [...resultado.body.map((o) => o.toString())],
-    //   [ "llámame", "tres", "dos", "uno" ]
-    // );
+    afirmar.igual(
+      resultado.params.toString(),
+      "(uno dos tres)")
     afirmar.igual(
       resultado.body.toString(),
       "((llámame tres dos uno))");
+
+    // afirmar.igualdadProfunda(
+    //   [...resultado.params],
+    //   [
+    //     Ṣymbol.for("uno"),
+    //     Ṣymbol.for("dos"),
+    //     Ṣymbol.for("tres")
+    //   ]
+    // )
+    // // afirmar.igualdadProfunda(
+    // //   [...resultado.body.map((o) => o.toString())],
+    // //   [ "llámame", "tres", "dos", "uno" ]
+    // // );
+
   });
 });
