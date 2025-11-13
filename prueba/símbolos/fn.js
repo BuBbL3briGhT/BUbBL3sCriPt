@@ -7,7 +7,7 @@ const { ella, describir }
 
 const uniónDeRaiz = require("../../src/root_binding");
 
-// consola.registro({describir});
+consola.registro({describir});
 describir("fn", function () {
   // // It creates an annonymous function.
   // ella("crea una función anónima", function () {
