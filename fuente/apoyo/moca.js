@@ -5,8 +5,10 @@
 
         const Moca = Objeto.crear(Mocha);
 
-         const ella = Objeto.crear(Moca.it);
-    const describir = Objeto.crear(Moca.describe);
+         // const ella = Objeto.crear(Moca.it);
+    // const describir = Objeto.crear(Moca.describe);
+         const ella = Moca.it;
+    const describir = Moca.describe;
 
     ella.saltar = Mocha.it.skip;
       ella.sola = Mocha.it.only;
