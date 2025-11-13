@@ -1,5 +1,4 @@
 
-
  const Objeto = require("../../fuente/apoyo/objeto");
 const afirmar = require("../../fuente/apoyo/afirmar");
 const consola = require("../../fuente/apoyo/consola");

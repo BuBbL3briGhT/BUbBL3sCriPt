@@ -5,16 +5,18 @@
 
         const Moca = Objeto.crear(Mocha);
 
-         Moca.ella = Objeto.crear(Mocha.it);
-    Moca.describir = Objeto.crear(Mocha.describe);
+         const ella = Objeto.crear(Mocha.it);
+    const describir = Objeto.crear(Mocha.describe);
 
-    Moca.ella.saltar = Mocha.it.skip;
-      Moca.ella.sola = Mocha.it.only;
-      Moca.ella.solo = Mocha.it.only;
+    ella.saltar = Mocha.it.skip;
+      ella.sola = Mocha.it.only;
+      ella.solo = Mocha.it.only;
 
-    Moca.describir.saltar = Mocha.describe.skip;
-      Moca.describir.sola = Mocha.describe.only;
-      Moca.describir.solo = Mocha.describe.only;
+    describir.saltar = Mocha.describe.skip;
+      describir.sola = Mocha.describe.only;
+      describir.solo = Mocha.describe.only;
+
+    Objeto.asignar(Moca, { ella, describir });
 
       module.exports = Moca;
 
