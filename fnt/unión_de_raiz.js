@@ -1,18 +1,18 @@
 
   /* * *  * * *  * *  * *  * * *  * * *  * *  * *
    *                                            *
-   *        File: src/unión_de_raiz.js          *
-   *        Date: November 13th, 2025           *
-   *        Library: Bubblescript               *
-   *        version: 0.🦤.🍌.🥄                 *
-   *        Version: 0.1.6                      *
-   *        Author(s): BaMbii                   *
+   *           Archivo: fnt/unión_de_raiz.js    *
+   *          Date: 13 de Noviembre de 2025     *
+   *         Biblioteca: BubbleScript (ES)      *
+   *        versión: 0.🦤.🍌.🥄                 *
+   *       Versión: 0.1.6                       *
+   *      Autor(a/e)(s): BaM🩰bii               *
    *                                            *
    * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
-                 const List = require("./lista");
-                   const Fn = require("./fn");
-              const Ṣymbolo = require("./symbolo");
+                 const List = exigir("./lista");
+                   const Fn = exigir("./fn");
+              const Ṣymbolo = exigir("./symbolo");
 
                const Vektar = require("../src/vektar");
             const ObjectMap = require("../src/object_map");
