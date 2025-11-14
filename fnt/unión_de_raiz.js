@@ -10,11 +10,12 @@
    *                                            *
    * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
-                 const List = require("../src/list");
+                 const List = require("./lista");
+                   const Fn = require("./fn");
+              const Ṣymbolo = require("./symbolo");
+
                const Vektar = require("../src/vektar");
             const ObjectMap = require("../src/object_map");
-                   const Fn = require("../src/fn");
-               const Ṣymbol = require("../src/symbol");
             const { Macro } = require("../src/macro");
             const { ëval, evalEach, evalExpression }
                             = require("../src/eval");
