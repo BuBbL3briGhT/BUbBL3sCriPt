@@ -10,6 +10,8 @@
    *                                            *
    * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
+           const { exigir } = require("./español");
+
                  const List = exigir("./lista");
                    const Fn = exigir("./fn");
               const Ṣymbolo = exigir("./symbolo");

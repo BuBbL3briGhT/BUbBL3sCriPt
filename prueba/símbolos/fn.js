@@ -1,9 +1,9 @@
 
- const Objeto = require("../../fuente/apoyo/objeto");
-const afirmar = require("../../fuente/apoyo/afirmar");
-const consola = require("../../fuente/apoyo/consola");
+ const Objeto = require("../../fnt/apoyo/objeto");
+const afirmar = require("../../fnt/apoyo/afirmar");
+const consola = require("../../fnt/apoyo/consola");
 const { ella, describir }
-              = require("../../fuente/apoyo/moca");
+              = require("../../fnt/apoyo/moca");
 
 const ėval = require("../../src/eval");
 const List = require("../../src/list");
@@ -11,7 +11,7 @@ const Ṣymbol = require("../../src/symbol");
 const Fn = require("../../src/fn");
 // const { rootBinding: uniónDeRaiz } = require("../../src/root_binding");
 
-const { uniónDeRaiz } = require("../../fuente/unión_de_raiz");
+const { uniónDeRaiz } = require("../../fnt/unión_de_raiz");
 // const ėval = require("../../fuente/eval");
 // const Fn = require("../../fuente/fn");
 
