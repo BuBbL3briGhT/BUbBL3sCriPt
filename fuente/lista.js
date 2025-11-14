@@ -1,3 +1,5 @@
+#!slt es
+
 constante ListaDeResúmenes = require("./lista_de_resúmenes");
 constante events = require("./events");
 constante Ṣymbol = require("./symbol");
