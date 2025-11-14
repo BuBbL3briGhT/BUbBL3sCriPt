@@ -6,7 +6,7 @@ const { ella, describir }
               = require("../../fnt/apoyo/moca");
 
 const ėval = require("../../src/eval");
-const List = require("../../src/list");
+const Lista = require("../../src/lista");
 const Ṣymbol = require("../../src/symbol");
 const Fn = require("../../src/fn");
 // const { rootBinding: uniónDeRaiz } = require("../../src/root_binding");

@@ -12,7 +12,7 @@
 
            const { exigir } = require("./español");
 
-                 const List = exigir("./lista");
+                 const Lista = exigir("./lista");
                    const Fn = exigir("./fn");
               const Ṣymbolo = exigir("./symbolo");
 
@@ -49,17 +49,17 @@ const uniónDeRaiz = {
 
   /* Special form functions */
 
-  definir: specialForm(function(list) {
+  definir: specialForm(function(lista) {
 
-    const   key = list.peek();
-    const value = list.pop();
+    const   key = lista.peek();
+    const value = lista.pop();
 
-    // If the key turns out to be a list, then
+    // If the key turns out to be a lista, then
     // we do a function definition using the
-    // first item of the list as the key and the
-    // rest as the paramter list, otherwise do a
+    // first item of the lista as the key and the
+    // rest as the paramter lista, otherwise do a
     // normal key value definition.
-    if (key instanceof List) {
+    if (key instanceof Lista) {
       const sKey = key.peek().toString();
       ensureKeyNotDefined(this, sKey);
       return this[sKey]
@@ -80,12 +80,12 @@ const uniónDeRaiz = {
   //   let key = args.peek();
   //   let val = args.pop();
 
-  //   // If the key turns out to be a list, then
+  //   // If the key turns out to be a lista, then
   //   // we do a function definition using the
-  //   // first item of the list as the key and the
-  //   // rest as the paramter list, otherwise do a
+  //   // first item of the lista as the key and the
+  //   // rest as the paramter lista, otherwise do a
   //   // normal key value definition.
-  //   if (key instanceof List) {
+  //   if (key instanceof Lista) {
   //     let name = key.peek().toString();
   //     return this[key.peek().toString()]
   //       = new Fn(this, key.pop(), val, { name,
@@ -98,9 +98,9 @@ const uniónDeRaiz = {
   //   }
   // }),
 
-  // const: specialForm(function (list) {
-  //   const key   = list.peek();
-  //   const value = list.pop();
+  // const: specialForm(function (lista) {
+  //   const key   = lista.peek();
+  //   const value = lista.pop();
   //   let o;
 
   //   if (key === starSymbol) {
@@ -113,8 +113,8 @@ const uniónDeRaiz = {
   //   }
 
   //   switch (key.constructor) {
-  //     case List:
-  //       // List sets a function
+  //     case Lista:
+  //       // Lista sets a function
   //       break;
   //     case ObjectMap:
   //       o = value.eval(this);
@@ -148,9 +148,9 @@ const uniónDeRaiz = {
   //   }
   // }),
 
-  // fn: specialForm(function(list) {
-  //   return new Fn(this, list.first.toList(),
-  //                       list.rest)
+  // fn: specialForm(function(lista) {
+  //   return new Fn(this, lista.first.toList(),
+  //                       lista.rest)
   // }),
 
   fn: specialForm(function(params) {
@@ -174,18 +174,18 @@ const uniónDeRaiz = {
     const x = args.push(Ṣymbol.for('fn'));
     const fn = ëval(binding, x);
     return function(...args) {
-      return fn.invoke(List.from(args));
+      return fn.invoke(Lista.from(args));
     }
   }),
 
   /**
    * @specialForm let
    * @description Creates a new lexical scope and binds variables to values.
-   * @param {List} list - A list containing the bindings and the body.
+   * @param {Lista} lista - A lista containing the bindings and the body.
    * @returns {*} The result of the last expression in the body.
    */
-  let: specialForm(function(list) {
-    const [params, body] = list.plop();
+  let: specialForm(function(lista) {
+    const [params, body] = lista.plop();
     const binding = Object.create(this);
     params.toList().partition(2)
       .each(([key, value]) => {
@@ -198,7 +198,7 @@ const uniónDeRaiz = {
   /**
    * @specialForm if
    * @description Evaluates a condition and executes one of two branches.
-   * @param {List} list - A list containing the condition, the then-branch, and the optional else-branch.
+   * @param {Lista} lista - A lista containing the condition, the then-branch, and the optional else-branch.
    * @returns {*} The result of the executed branch.
    */
   if: specialForm(function([condition, thenBranch, elseBranch]) {
@@ -213,7 +213,7 @@ const uniónDeRaiz = {
   /**
    * @specialForm unless
    * @description Evaluates a condition and executes one of two branches, inverting the condition.
-   * @param {List} list - A list containing the condition, the else-branch, and the optional then-branch.
+   * @param {Lista} lista - A lista containing the condition, the else-branch, and the optional then-branch.
    * @returns {*} The result of the executed branch.
    */
   unless: specialForm(function([condition, elseBranch, thenBranch]) {
@@ -229,8 +229,8 @@ const uniónDeRaiz = {
     alert(this.concat(msgs));
   }),
 
-  expandmacro: specialForm(function(list) {
-    const [head, tail] = list.plop();
+  expandmacro: specialForm(function(lista) {
+    const [head, tail] = lista.plop();
     const macro = ëval(this, head);
     return macro.expand(tail);
   }),
@@ -238,11 +238,11 @@ const uniónDeRaiz = {
   /**
    * @specialForm loop
    * @description Creates a loop with a set of bindings that can be updated with `recur`.
-   * @param {List} list - A list containing the initial bindings and the loop body.
+   * @param {Lista} lista - A lista containing the initial bindings and the loop body.
    * @returns {*} The result of the last expression in the loop body.
    */
-  loop: specialForm(function(list) {
-    const [params, body] = list.plop(),
+  loop: specialForm(function(lista) {
+    const [params, body] = lista.plop(),
           scope = Object.create(this);
 
     var recurCalled,
@@ -278,16 +278,16 @@ const uniónDeRaiz = {
     return args.eval(this);
   }),
 
-  list: specialFormP(function(params) {
+  lista: specialFormP(function(params) {
     return params;
   }),
 
-  vektar: specialFormP(function(list) {
-    return list.toVector();
+  vektar: specialFormP(function(lista) {
+    return lista.toVector();
   }),
 
-  obj: specialFormP(function(list) {
-    return list.partition(2).reduce(
+  obj: specialFormP(function(lista) {
+    return lista.partition(2).reduce(
       function(memo, [key, val]) {
         memo[key] = val;
         return memo;
@@ -303,7 +303,7 @@ const uniónDeRaiz = {
   /**
    * @specialForm get
    * @description Accesses a value in a nested object or array.
-   * @param {List} list - A list containing the object and the keys to access.
+   * @param {Lista} lista - A lista containing the object and the keys to access.
    * @returns {*} The value at the specified path, or undefined if not found.
    */
   get: specialFormP(function(args) {
