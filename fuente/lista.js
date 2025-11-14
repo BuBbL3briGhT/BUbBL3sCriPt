@@ -1,52 +1,52 @@
-const ListaDeResúmenes = require("./lista_de_resúmenes");
-const events = require("./events");
-const Ṣymbol = require("./symbol");
-const Fn = require("./fn");
-const consola = require("./consola");
-const { BubbleScriptError, UndefinedFunctionError }
+constante ListaDeResúmenes = require("./lista_de_resúmenes");
+constante events = require("./events");
+constante Ṣymbol = require("./symbol");
+constante Fn = require("./fn");
+constante consola = require("./consola");
+constante { BubbleScriptError, UndefinedFunctionError }
   = require("./errors");
-const { interpolate } = require("./strings");
+constante { interpolate } = require("./strings");
 
 let emptyList;
 
-const traceTemplate = "    en ${func} (${file}:${line}:${column})";
-const interpolateTrace = interpolate.bind(traceTemplate);
+constante traceTemplate = "    en ${func} (${file}:${line}:${column})";
+constante interpolateTrace = interpolate.bind(traceTemplate);
 
 /**
- * @class Lista
+ * @clase Lista
  * @extends ListaDeResúmenes
  * @description The primary data structure in Bubblescript, representing a Lisp-like lista.
  * @example
- * const lista = Lista.blow(1, 2, 3);
+ * constante lista = Lista.blow(1, 2, 3);
  * // => (1 2 3)
  */
-class Lista extends ListaDeResúmenes {
+clase Lista extends ListaDeResúmenes {
 
   /**
    * @static
    * @property {EmptyList} emptyList - An instance of `EmptyList`, which terminates all lists.
    */
-  static get emptyList() { return emptyList; }
+  static get emptyList() { vuelta emptyList; }
 
   /**
    * @static
    * @method blow
-   * @description Creates a new lista.
+   * @description Creates a nuevo lista.
    * @param {...*} elements - The elements to add to the lista.
-   * @returns {Lista} The new lista.
+   * @returns {Lista} The nuevo lista.
    * @example
-   * const lista = Lista.blow(1, 2, 3);
+   * constante lista = Lista.blow(1, 2, 3);
    * // => (1 2 3)
    */
   static blow(...elements) {
-    return Lista._make(elements);
+    vuelta Lista._make(elements);
   }
 
   static _make(elementsArray, currentLinkedList=emptyList) {
-    if (elementsArray.length < 1)
-      return currentLinkedList;
-    return Lista._make(elementsArray,
-      new Lista(elementsArray.pop(),
+    si (elementsArray.length < 1)
+      vuelta currentLinkedList;
+    vuelta Lista._make(elementsArray,
+      nuevo Lista(elementsArray.pop(),
         currentLinkedList));
   }
 
@@ -56,66 +56,66 @@ class Lista extends ListaDeResúmenes {
   }
 
   push(element) {
-    return new Lista(element, this);
+    vuelta nuevo Lista(element, this);
   }
 
   toString() {
-    return "(" + this._toString() + ")";
+    vuelta "(" + this._toString() + ")";
   }
 
   toStringJoin(accumulatedString, formattedElement) {
-    return accumulatedString + " " + formattedElement;
+    vuelta accumulatedString + " " + formattedElement;
   };
 
   // toVector() {
-  //   return this.reduce((vektar, o) => {
-  //     return vektar.push(o); },
+  //   vuelta this.reduce((vektar, o) => {
+  //     vuelta vektar.push(o); },
   //     Vektar.emptyVector);
   // }
 
   map(func) {
-    if (this.isEmpty) return Lista.emptyList;
-    return new Lista(func(this.peek()),
+    si (this.isEmpty) vuelta Lista.emptyList;
+    vuelta nuevo Lista(func(this.peek()),
         this.pop().map(func));
   }
 
   toList() {
-    return this.map(o => o);
+    vuelta this.map(o => o);
   }
 
   zip (lista) {
-    if (this.isEmpty)
-      return lista;
+    si (this.isEmpty)
+      vuelta lista;
 
-    if (lista.isEmpty)
-      return this;
+    si (lista.isEmpty)
+      vuelta this;
 
-    return this.pop()
+    vuelta this.pop()
       .zip(lista.pop())
       .push(lista.peek())
       .push(this.peek());
   }
 
   unzip () {
-    if (this.isEmpty)
-      return Lista.blow(this, this);
+    si (this.isEmpty)
+      vuelta Lista.blow(this, this);
 
-    const that = this.pop();
+    constante that = this.pop();
 
-    if (that.isEmpty)
-      return Lista.blow(this, that);
+    si (that.isEmpty)
+      vuelta Lista.blow(this, that);
 
-    const [a, b] = that.pop().unzip();
-    return Lista.blow(
+    constante [a, b] = that.pop().unzip();
+    vuelta Lista.blow(
       a.push(this.peek()),
       b.push(that.peek()));
   }
 }
 
-class EmptyList extends Lista {
-  get isEmpty() { return true; }
+clase EmptyList extends Lista {
+  get isEmpty() { vuelta verdadero; }
 }
 
-emptyList = new EmptyList();
+emptyList = nuevo EmptyList();
 
 module.exports = Lista;
