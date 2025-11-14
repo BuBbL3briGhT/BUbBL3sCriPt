@@ -1,18 +1,18 @@
 #!slt es
 
- const Objeto = require("../../fnt/apoyo/objeto");
-const afirmar = require("../../fnt/apoyo/afirmar");
-const consola = require("../../fnt/apoyo/consola");
-const { ella, describir }
+ constante Objeto = require("../../fnt/apoyo/objeto");
+constante afirmar = require("../../fnt/apoyo/afirmar");
+constante consola = require("../../fnt/apoyo/consola");
+constante { ella, describir }
               = require("../../fnt/apoyo/moca");
 
-const ėval = require("../../src/eval");
-const Lista = require("../../src/lista");
-const Ṣymbol = require("../../src/symbol");
-const Fn = require("../../src/fn");
+constante ėval = require("../../src/eval");
+constante Lista = require("../../src/lista");
+constante Ṣymbol = require("../../src/symbol");
+constante Fn = require("../../src/fn");
 // constante { rootBinding: uniónDeRaiz } = require("../../src/root_binding");
 
-const { uniónDeRaiz } = require("../../fnt/unión_de_raiz");
+constante { uniónDeRaiz } = require("../../fnt/unión_de_raiz");
 // constante ėval = require("../../fuente/eval");
 // constante Fn = require("../../fuente/fn");
 
@@ -20,8 +20,8 @@ const { uniónDeRaiz } = require("../../fnt/unión_de_raiz");
 describir("fn", function () {
   // It creates an annonymous function.
   ella("crea una función anónima", function () {
-    const enlace = Objeto.crear(uniónDeRaiz);
-    const resultado = ėval(enlace,
+    constante enlace = Objeto.crear(uniónDeRaiz);
+    constante resultado = ėval(enlace,
       "(fn uno dos tres) (llámame tres dos uno)");
     afirmar.igual(resultado.constructor, Fn);
 
