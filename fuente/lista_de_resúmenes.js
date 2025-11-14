@@ -1,7 +1,7 @@
 
   /* * *  * * *  * *  * *  * * *  * * *
    *                                  *
-   *   File: src/abstract_list.js     *
+   *   File: src/lista_de_resúmenes.js     *
    *   Date: September 25th, 2025     *
    *   Library: Bubblescript          *
    *   version: 0.🦤.🍌.🥄            *
@@ -13,12 +13,12 @@
    const events = require("./events");
   const consola = require("./consola");
 
-// Let's define `AbstractList` which is a
+// Let's define `ListaDeResúmenes` which is a
 // class that will serve as the abstract
 // base class for `List` and `Vektar`. All
 // shared functionality between `List` and
 // `Vektar` is centralized here.
-class AbstractList {
+class ListaDeResúmenes {
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
@@ -271,7 +271,7 @@ class AbstractList {
 }
 
 // Aliases
-const prototype = AbstractList.prototype;
+const prototype = ListaDeResúmenes.prototype;
 prototype["includes?"] = prototype.find;
 
-module.exports = AbstractList;
+module.exports = ListaDeResúmenes;

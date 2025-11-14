@@ -1,4 +1,4 @@
-const AbstractList = require("./abstract_list");
+const ListaDeResúmenes = require("./lista_de_resúmenes");
 const events = require("./events");
 const Ṣymbol = require("./symbol");
 const Fn = require("./fn");
@@ -14,13 +14,13 @@ const interpolateTrace = interpolate.bind(traceTemplate);
 
 /**
  * @class Lista
- * @extends AbstractList
+ * @extends ListaDeResúmenes
  * @description The primary data structure in Bubblescript, representing a Lisp-like lista.
  * @example
  * const lista = Lista.blow(1, 2, 3);
  * // => (1 2 3)
  */
-class Lista extends AbstractList {
+class Lista extends ListaDeResúmenes {
 
   /**
    * @static
