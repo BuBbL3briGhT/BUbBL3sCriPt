@@ -1,0 +1,29 @@
+ource and target directories
+SRC_DIR := src
+TARGET_DIR := output
+
+# Define the command to apply to each file
+# Replace 'your_command' with the actual command you want to run
+# Use $< for the input file and $@ for the output file
+COMMAND := your_command $< > $@
+
+# Get a list of all source files
+# Adjust the pattern if your files have a different extension (e.g., *.txt)
+SRCS := $(wildcard $(SRC_DIR)/*)
+
+# Create a list of target files by replacing the source directory with the target directory
+# and potentially changing the file extension if your command outputs a different type
+TARGETS := $(patsubst $(SRC_DIR)/%,$(TARGET_DIR)/%,$(SRCS))
+
+.PHONY: all clean
+
+all: $(TARGET_DIR) $(TARGETS)
+
+$(TARGET_DIR):
+	mkdir -p $(TARGET_DIR)
+
+$(TARGET_DIR)/%: $(SRC_DIR)/%
+	$(COMMAND)
+
+clean:
+	rm -rf $(TARGET_DIR)

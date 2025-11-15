@@ -1,0 +1,53 @@
+A simple Makefile can be created to process all files in a source directory with a specific command and save the output to a target directory.
+# Define source and target directories
+SRC_DIR := src
+TARGET_DIR := output
+
+# Define the command to apply to each file
+# Replace 'your_command' with the actual command you want to run
+# Use $< for the input file and $@ for the output file
+COMMAND := your_command $< > $@
+
+# Get a list of all source files
+# Adjust the pattern if your files have a different extension (e.g., *.txt)
+SRCS := $(wildcard $(SRC_DIR)/*)
+
+# Create a list of target files by replacing the source directory with the target directory
+# and potentially changing the file extension if your command outputs a different type
+TARGETS := $(patsubst $(SRC_DIR)/%,$(TARGET_DIR)/%,$(SRCS))
+
+.PHONY: all clean
+
+all: $(TARGET_DIR) $(TARGETS)
+
+$(TARGET_DIR):
+	mkdir -p $(TARGET_DIR)
+
+$(TARGET_DIR)/%: $(SRC_DIR)/%
+	$(COMMAND)
+
+clean:
+	rm -rf $(TARGET_DIR)
+
+Explanation:
+
+• SRC_DIR and TARGET_DIR: These variables define the directories for your source files and the processed output.
+• COMMAND: This variable holds the command to be executed for each file.
+	• your_command: Replace this with the actual command you need to run (e.g., pandoc, sed, grep).
+	• $&lt;: This is an automatic variable in Make that represents the first prerequisite (the input file).
+	• $@: This is an automatic variable that represents the target (the output file).
+	• &gt;: This redirects the output of your_command to the target file.
+
+• SRCS: This uses wildcard to find all files in the SRC_DIR. Adjust the pattern (*) if you need to filter by file extension.
+• TARGETS: This uses patsubst to generate the corresponding output file paths in the TARGET_DIR.
+• .PHONY: all clean: This declares all and clean as phony targets, meaning they are not actual files.
+• all: $(TARGET_DIR) $(TARGETS): This is the default target. When you run make, it will first ensure the TARGET_DIR exists, then build all the individual TARGETS.
+• $(TARGET_DIR):: This rule creates the TARGET_DIR if it doesn't exist. The -p flag with mkdir ensures that parent directories are created as needed and no error is thrown if the directory already exists.
+• $(TARGET_DIR)/%: $(SRC_DIR)/%: This is a pattern rule. It tells Make how to create any file in TARGET_DIR by using a corresponding file in SRC_DIR. The command $(COMMAND) is then executed to process the input file and save the output.
+• clean:: This target removes the TARGET_DIR and its contents, cleaning up the build artifacts. You can run this with make clean.
+
+AI responses may include mistakes.
+
+https://www.google.com/search?q=create+a+make+file+for+a+build+task+to+run+every+file+through+a+command+a+save+output+to+target+directory%2C+simple
+
+
