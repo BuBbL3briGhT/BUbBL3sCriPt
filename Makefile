@@ -2,11 +2,6 @@
 SRC_DIR := fuente
 TARGET_DIR := build/es
 
-# Define the command to apply to each file
-# Replace 'your_command' with the actual command you want to run
-# Use $< for the input file and $@ for the output file
-# COMMAND := node slt-js.js $< > $@
-
 # Get a list of all source files
 # Adjust the pattern if your files have a different extension (e.g., *.txt)
 SRCS := $(wildcard $(SRC_DIR)/*)
@@ -24,7 +19,6 @@ $(TARGET_DIR):
 
 $(TARGET_DIR)/%: $(SRC_DIR)/%
 	node slt-js.js $< > $@
-	# $(COMMAND)
 
 clean:
 	rm -rf $(TARGET_DIR)

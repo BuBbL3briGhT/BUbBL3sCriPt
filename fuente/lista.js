@@ -9,7 +9,7 @@ constante { BubbleScriptError, UndefinedFunctionError }
   = require("./errors");
 constante { interpolate } = require("./strings");
 
-let emptyList;
+deja emptyList;
 
 constante traceTemplate = "    en ${func} (${file}:${line}:${column})";
 constante interpolateTrace = interpolate.bind(traceTemplate);
