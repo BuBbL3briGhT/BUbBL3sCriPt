@@ -1,0 +1,163 @@
+¡Hola! No worries — I can draft an RFC-style document for this without needing external research, because what you’re proposing is essentially a language-tagging mechanism for source files that would allow interpreters or compilers to localize keywords (e.g., vuelta → return).
+
+Below is a clean, realistic IETF-style RFC draft describing such a mechanism.
+If you want this as a PDF or a properly typeset IETF format document, I can generate that too.
+
+
+---
+
+Internet-Draft: Source Language Tag (SLT) for Localized Programming Keywords
+
+Intended status: Experimental
+Expires: 14 May 2026
+
+Abstract
+
+This document specifies the Source Language Tag (SLT), a metadata declaration that allows programming languages to indicate the natural language used for localized identifiers and keywords within a source file. The SLT enables tools, transpilers, and interpreters to support multilingual keyword sets (e.g., allowing Spanish equivalents such as vuelta instead of return in JavaScript).
+
+
+---
+
+1. Introduction
+
+Programming languages today standardize on English keywords. While identifiers may use Unicode, the structural keywords (return, while, function, etc.) remain fixed. This limits accessibility for new programmers and for contexts in which native-language readability is preferred.
+
+The Source Language Tag (SLT) introduces a mechanism, embedded at the top of a source file, allowing the selection of a natural-language keyword set. Implementations MAY translate these localized keywords to canonical language keywords as a preprocessing step.
+
+
+---
+
+2. The SLT Declaration
+
+The SLT is a single line placed at the beginning of a source file. Its syntax is:
+
+#!slt <language-tag> [;<options>]
+
+Where:
+
+<language-tag> is a BCP-47 language code (e.g., es, es-MX, en-GB).
+
+<options> is an optional semicolon-separated list of implementation-defined parameters.
+
+
+Example for JavaScript with Spanish keyword localization:
+
+#!slt es
+
+Example with dialect specification:
+
+#!slt es-MX
+
+Interpretation of SLT lines MUST occur before any tokenization of the code.
+
+
+---
+
+3. Application to JavaScript (Example)
+
+When an SLT declaration is used with JavaScript, localized keywords MAY be enabled. This is implementation-dependent but recommended behaviors include:
+
+3.1 Canonicalization
+
+Tools MAY translate localized keywords into canonical ECMAScript keywords before execution.
+
+Example:
+
+#!slt es
+
+función hola() {
+    vuelta 42;
+}
+
+Canonically becomes:
+
+function hola() {
+    return 42;
+}
+
+3.2 Error Handling
+
+If the SLT specifies a language for which no keyword set is available, the interpreter SHOULD:
+
+Emit a warning, and
+
+Fall back to canonical keywords.
+
+
+
+---
+
+4. Keyword Localization Tables
+
+Localization tables map natural-language keywords to canonical ones.
+
+Example (Spanish → JavaScript):
+
+Localized	Canonical
+
+función	function
+vuelta	return
+mientras	while
+si	if
+sino	else
+constante	const
+deja	let
+
+
+Implementations MAY choose different terminology but SHOULD provide documentation.
+
+
+---
+
+5. Security Considerations
+
+Localization may introduce:
+
+Ambiguity between localized identifiers and keywords.
+
+Phishing or obfuscation risks, particularly where visually similar Unicode characters exist.
+
+Reduced portability across environments without SLT support.
+
+
+Implementations SHOULD provide strict mode options to mitigate these concerns.
+
+
+---
+
+6. IANA Considerations
+
+This document requests no new IANA actions. SLT relies on pre-existing BCP-47 language tags.
+
+
+---
+
+7. Implementation Guidance
+
+IDE extensions SHOULD provide syntax highlighting per SLT.
+
+Transpilers SHOULD preserve Unicode normalization (NFC/NFKC).
+
+Tools SHOULD expose command-line flags to override the SLT.
+
+Build systems SHOULD treat SLT presence as a file-level property.
+
+
+
+---
+
+8. Conclusion
+
+SLT provides a minimal, nonintrusive way to annotate source files with a natural-language preference for keyword localization. It expands accessibility while maintaining compatibility with canonical language semantics.
+
+
+---
+
+If you'd like, I can also:
+
+📄 Generate this RFC as a nicely formatted PDF
+📂 Create a reference implementation in JavaScript
+🔧 Draft keyword tables for Spanish, French, Italian, or any language
+💻 Build a demo transpiler (slt-js) that converts localized JS → standard JS
+
+Just tell me what you want next!
