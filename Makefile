@@ -1,11 +1,11 @@
-ource and target directories
-SRC_DIR := src
-TARGET_DIR := output
+# Define source and target directories
+SRC_DIR := fuente
+TARGET_DIR := build/es
 
 # Define the command to apply to each file
 # Replace 'your_command' with the actual command you want to run
 # Use $< for the input file and $@ for the output file
-COMMAND := your_command $< > $@
+# COMMAND := node slt-js.js $< > $@
 
 # Get a list of all source files
 # Adjust the pattern if your files have a different extension (e.g., *.txt)
@@ -23,7 +23,8 @@ $(TARGET_DIR):
 	mkdir -p $(TARGET_DIR)
 
 $(TARGET_DIR)/%: $(SRC_DIR)/%
-	$(COMMAND)
+	node slt-js.js $< > $@
+	# $(COMMAND)
 
 clean:
 	rm -rf $(TARGET_DIR)
