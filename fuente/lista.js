@@ -33,7 +33,7 @@ clase Lista extends ListaDeResúmenes {
   /**
    * @static
    * @method blow
-   * @description Creates a nuevo lista.
+   * @description Crea una nuevo lista.
    * @param {...*} elements - The elements to add to the lista.
    * @returns {Lista} The nuevo lista.
    * @example
