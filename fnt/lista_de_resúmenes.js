@@ -1,17 +1,17 @@
 
-  /* * *  * * *  * *  * *  * * *  * * *
-   *                                  *
-   *   File: src/lista_de_resúmenes.js     *
-   *   Date: September 25th, 2025     *
-   *   Library: Bubblescript          *
-   *   version: 0.🦤.🍌.🥄            *
-   *   Version: 0.1.6                 *
-   *   Author(s): BaMbii              *
-   *                                  *
-   * * *  * * *  * *  * *  * * *  * * */
+  /* * *  * * *  * *  * *  * * *  * * *  * * *
+   *                                         *
+   *     File: src/lista_de_resúmenes.js     *
+   *     Date: September 25th, 2025          *
+   *     Library: Bubblescript               *
+   *     version: 0.🦤.🍌.🥄                 *
+   *     Version: 0.1.6                      *
+   *     Author(s): BaMbii                   *
+   *                                         *
+   * * *  * * *  * *  * *  * * *  * * *  * * */
 
-   const events = require("./events");
-  const consola = require("./consola");
+             const eventos = requerir("./eventos");
+             const consola = requerir("./consola");
 
 // Let's define `ListaDeResúmenes` which is a
 // class that will serve as the abstract
