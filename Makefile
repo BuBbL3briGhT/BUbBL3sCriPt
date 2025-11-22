@@ -1,5 +1,5 @@
 # Define source and target directories
-SRC_DIR := fuente
+SRC_DIR := fnt
 TARGET_DIR := build/es
 
 # Get a list of all source files
