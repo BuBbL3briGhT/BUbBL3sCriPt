@@ -1,18 +1,18 @@
 #!slt es
 
-constante ListaDeResúmenes = require("./lista_de_resúmenes");
-constante events = require("./events");
-constante Ṣymbol = require("./symbol");
-constante Fn = require("./fn");
-constante consola = require("./consola");
-constante { BubbleScriptError, UndefinedFunctionError }
-  = require("./errors");
-constante { interpolate } = require("./strings");
+const ListaDeResúmenes = exigir("./lista_de_resúmenes");
+const events = exigir("./events");
+const Ṣymbol = exigir("./symbol");
+const Fn = exigir("./fn");
+const consola = exigir("./consola");
+const { BubbleScriptError, UndefinedFunctionError }
+  = exigir("./errors");
+const { interpolate } = exigir("./strings");
 
 deja emptyList;
 
-constante traceTemplate = "    en ${func} (${file}:${line}:${column})";
-constante interpolateTrace = interpolate.bind(traceTemplate);
+const traceTemplate = "    en ${func} (${file}:${line}:${column})";
+const interpolateTrace = interpolate.bind(traceTemplate);
 
 /**
  * @clase Lista
