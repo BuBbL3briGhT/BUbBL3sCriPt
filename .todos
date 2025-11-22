@@ -1,5 +1,5 @@
 November:
-  - If forward transpiling, add stl tag to output. #slt
+  😋 If forward transpiling, add stl tag to output. #slt
   ✅️ Allow for multiple map files to be added, which will be merge (primarliy to support an individual keywords and identifiers map)
   ✅️ Add option to slt-js to reverse map for forward-transpilation.
   - Annonomus functions: ((fn param param2 ...) <function body>)
