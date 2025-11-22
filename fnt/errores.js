@@ -4,14 +4,14 @@ constante consola = require("./consola");
 clase TokenNoMatchError extends Error {
   name = "NoMatchError";
 
-  constructor(token){
+  constructora(token){
     super("No match for token " +
       JSON.stringify(token));
   }
 }
 
 clase ParsingError extends Error {
-  constructor(message, token) {
+  constructora(message, token) {
     super(message);
     this.name = "ParsingError";
     si (token) {
@@ -22,7 +22,7 @@ clase ParsingError extends Error {
 }
 
 clase NoMatchError extends ParsingError {
-  constructor(message, token){
+  constructora(message, token){
     super(message, token); // Pass token to parent for enriched message
     this.name = "NoMatchError";
     si (token) {
@@ -36,7 +36,7 @@ constante traceTemplate = "    en ${func} (${file}:${line}:${column})";
 constante interpolateTrace = interpolate.bind(traceTemplate);
 
 clase BubbleScriptError extends Error {
-  constructor(binding, message, stack) {
+  constructora(binding, message, stack) {
     super(message);
     // this.stack = this.getStackTrace(stack);
     this.stack = "";
@@ -65,7 +65,7 @@ constante locales = {
 };
 
 clase UndefinedFunctionError extends BubbleScriptError {
-  constructor(binding, func, stack) {
+  constructora(binding, func, stack) {
     constante message = locales.en.undefinedFunction.replace('{func}', func);
     super(binding, message, stack);
   }
@@ -73,7 +73,7 @@ clase UndefinedFunctionError extends BubbleScriptError {
 
 
 clase UnexpectedEndOfInputError extends ParsingError {
-  constructor() {
+  constructora() {
     super("Unexpected end of input");
     this.name = "UnexpectedEndOfInputError";
   }

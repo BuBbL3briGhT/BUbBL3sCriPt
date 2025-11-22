@@ -272,6 +272,7 @@ async function main() {
   let inputFile = null;
   let outFile = null;
   let mapFile = null;
+  let imapFile = null;
   let reverse = false;
 
   for (let i = 0; i < argv.length; i++) {
@@ -280,6 +281,7 @@ async function main() {
     if (a === "-h" || a === "--help") printUsageAndExit(0);
     if (a === "-o" || a === "--out") { outFile = argv[++i]; continue; }
     if (a === "--map") { mapFile = argv[++i]; continue; }
+    if (a === "--imap") { imapFile = argv[++i]; continue; }
     if (a === "--reverse") { reverse = true; continue; }
     if (!inputFile) inputFile = a;
     else printUsageAndExit(1);
@@ -306,6 +308,12 @@ async function main() {
     else process.stdout.write(src);
     return;
   }
+
+  if (imapFile) {
+    const imapping = loadMapForLang(lang, imapFile);
+    Object.assign(mapping, imapping);
+  }
+
 
   if (reverse) {
     mapping = Object.fromEntries(
