@@ -3,11 +3,14 @@ SRC_DIR := fnt
 TARGET_DIR := build/es
 
 # Get a list of all source files
-# Adjust the pattern if your files have a different extension (e.g., *.txt)
+# Adjust the pattern if your files have a different
+# extension (e.g., *.txt)
 SRCS := $(wildcard $(SRC_DIR)/*)
 
-# Create a list of target files by replacing the source directory with the target directory
-# and potentially changing the file extension if your command outputs a different type
+# Create a list of target files by replacing the
+# source directory with the target directory
+# and potentially changing the file extension if your
+# command outputs a different type
 TARGETS := $(patsubst $(SRC_DIR)/%,$(TARGET_DIR)/%,$(SRCS))
 
 .PHONY: all clean
