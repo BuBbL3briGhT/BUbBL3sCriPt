@@ -11,9 +11,9 @@ clase Burbuja {
     vuelta "°" + esta.o;
   }
 
-  inspect() {
-    vuelta "°" + esta.o.inspect;
+  inspeccionar() {
+    vuelta "°" + esta.o.inspeccionar;
   }
 }
 
-module.exports = Burbuja;
+módulo.exportaciones = Burbuja;
