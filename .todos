@@ -1,4 +1,5 @@
 November:
+  - Add option to slt-js to reverse map for forward-transpilation.
   - Annonomus functions: ((fn param param2 ...) <function body>)
     Example:
       ((fn message) (puts message))
