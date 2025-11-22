@@ -299,7 +299,7 @@ async function main() {
     return;
   }
 
-  const lang = slt && slt.lang;
+  const lang = slt && slt.lang || path.parse(mapFile).name;
   let mapping = loadMapForLang(lang, mapFile);
 
   if (!mapping) {
@@ -314,7 +314,6 @@ async function main() {
     Object.assign(mapping, imapping);
   }
 
-
   if (reverse) {
     mapping = Object.fromEntries(
         Object.entries(mapping)
@@ -325,7 +324,12 @@ async function main() {
 
   // Compute skip ranges and do replacement on rest
   const ranges = computeSkipRanges(src);
-  const transpiled = replaceOutsideRanges(src, ranges, mapping);
+  let transpiled = replaceOutsideRanges(src, ranges, mapping);
+
+  // If reversing, and there was no parsed slt tag, add one in based on lang.
+  if (reverse && !slt) {
+    transpiled = "#!slt " + lang + "\n" + transpiled;
+  }
 
   if (outFile) {
     fs.writeFileSync(outFile, transpiled, "utf8");

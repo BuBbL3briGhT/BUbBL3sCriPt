@@ -1,3 +1,4 @@
+#!slt es
 clase Burbuja {
   constructora(o) {
     esta.o = o;
