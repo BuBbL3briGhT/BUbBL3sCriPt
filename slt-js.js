@@ -308,7 +308,6 @@ async function main() {
   }
 
   if (reverse) {
-    console.log("reverse map");
     mapping = Object.fromEntries(
         Object.entries(mapping)
           .map(([key, value]) => [value, key])
