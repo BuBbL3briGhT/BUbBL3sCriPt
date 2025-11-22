@@ -8,6 +8,7 @@
  *   node slt-js.js input.js         # prints transpiled result to stdout
  *   node slt-js.js --list-langs
  *   node slt-js.js input.js --map map.json
+ *   node slt-js.js input.js --map map.json --reverse
  *
  * Notes:
  * - This is a reference tool (not a full production parser).
@@ -252,6 +253,7 @@ Options:
   -o, --out <file>       write output to file (otherwise stdout)
   --map <map.json>       load keyword map JSON (localized -> canonical)
   --list-langs           list built-in languages
+  --reverse              reverses mapping for forward transpilation
   -h, --help             show this help
 `);
   process.exit(code);
@@ -270,6 +272,7 @@ async function main() {
   let inputFile = null;
   let outFile = null;
   let mapFile = null;
+  let reverse = false;
 
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -277,6 +280,7 @@ async function main() {
     if (a === "-h" || a === "--help") printUsageAndExit(0);
     if (a === "-o" || a === "--out") { outFile = argv[++i]; continue; }
     if (a === "--map") { mapFile = argv[++i]; continue; }
+    if (a === "--reverse") { reverse = true; continue; }
     if (!inputFile) inputFile = a;
     else printUsageAndExit(1);
   }
@@ -286,21 +290,30 @@ async function main() {
   const src = fs.readFileSync(inputFile, "utf8");
   const firstLine = src.split(/\r?\n/, 1)[0] || "";
   const slt = parseSltLine(firstLine);
-  if (!slt) {
+  if (!slt && !reverse) {
     // No SLT header -> just copy through
     if (outFile) fs.writeFileSync(outFile, src, "utf8");
     else process.stdout.write(src);
     return;
   }
 
-  const lang = slt.lang;
-  const mapping = loadMapForLang(lang, mapFile);
+  const lang = slt && slt.lang;
+  let mapping = loadMapForLang(lang, mapFile);
 
   if (!mapping) {
     console.error(`Warning: no keyword map for language "${lang}". Falling back to no-op.`);
     if (outFile) fs.writeFileSync(outFile, src, "utf8");
     else process.stdout.write(src);
     return;
+  }
+
+  if (reverse) {
+    console.log("reverse map");
+    mapping = Object.fromEntries(
+        Object.entries(mapping)
+          .map(([key, value]) => [value, key])
+          .reverse() // Reverse the mapped array, incase of duplicate values, the first version will be used.
+    );
   }
 
   // Compute skip ranges and do replacement on rest

@@ -1,0 +1,39 @@
+To invert a JavaScript object, effectively swapping its keys and values, the Object.entries(), Array.prototype.map(), and Object.fromEntries() methods can be utilized. This process creates a new object with the values of the original object becoming the keys of the new object, and the keys of the original object becoming the values of the new object.
+Here is an example:
+const originalObject = {
+  name: "Alice",
+  age: 30,
+  city: "New York"
+};
+
+const invertedObject = Object.fromEntries(
+  Object.entries(originalObject).map(([key, value]) => [value, key])
+);
+
+console.log(invertedObject);
+// Expected output: { Alice: "name", 30: "age", "New York": "city" }
+
+Explanation:
+
+• Object.entries(originalObject): This converts the originalObject into an array of key-value pairs. For example, { name: "Alice", age: 30 } becomes [["name", "Alice"], ["age", 30]].
+• .map(([key, value]) =&gt; [value, key]): This iterates over each key-value pair in the array. For each pair, it uses array destructuring ([key, value]) to access the key and value, and then returns a new array with the value and key swapped ([value, key]). So, [["name", "Alice"], ["age", 30]] becomes [["Alice", "name"], [30, "age"]].
+• Object.fromEntries(...): This converts the array of swapped key-value pairs back into a new JavaScript object. For example, [["Alice", "name"], [30, "age"]] becomes { Alice: "name", 30: "age" }.
+
+Important Consideration:
+This method works best when the values in the original object are unique. If the original object contains duplicate values, only the last key associated with that value will be present in the inverted object, as object keys must be unique. For example:
+const duplicateValueObject = {
+  a: 1,
+  b: 2,
+  c: 1
+};
+
+const invertedDuplicateObject = Object.fromEntries(
+  Object.entries(duplicateValueObject).map(([key, value]) => [value, key])
+);
+
+console.log(invertedDuplicateObject);
+// Expected output: { '1': 'c', '2': 'b' } - 'a' is lost because 'c' overwrites it.
+
+AI responses may include mistakes.
+
+
