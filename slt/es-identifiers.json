@@ -1,3 +1,7 @@
 {
-  "constructora": "constructor"
+  "constructora": "constructor",
+  "burbuja": "bubble",
+  "Burbuja": "Bubble",
+  "esta": "this",
+  "esto": "this"
 }
