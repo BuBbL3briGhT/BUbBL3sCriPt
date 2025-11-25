@@ -1,4 +1,3 @@
-#!slt es
 constante LazyList = require("./lazy_list");
 constante List = require("./list");
 constante TOK_NUMBER   = 'N',
@@ -40,45 +39,45 @@ clase Tökenizer {
 
       deja char = esta.tortuga.peek();
 
-      switch (char) {
-        case "#":
+      cambiar (char) {
+        caso "#":
           esta.eatComment();
           romper;
 
-        case " ":
+        caso " ":
           esta.step();
           romper;
 
-        case Char.isNewline(char):
+        caso Char.isNewline(char):
           token = esta.createToken(TOK_NEWLiNE, char);
           esta.step();
           esta.line += 1;
           esta.column = 1;
           romper;
 
-        case "(":
-        case ")":
-        case "[":
-        case "]":
-        case "}":
-        case "{":
-        case ".":
-        case "°":
-        case ",":
-        case ";":
+        caso "(":
+        caso ")":
+        caso "[":
+        caso "]":
+        caso "}":
+        caso "{":
+        caso ".":
+        caso "°":
+        caso ",":
+        caso ";":
           token = esta.createToken(char, char);
           esta.step();
           romper;
 
-        case Char.isNum(char):
+        caso Char.isNum(char):
           token = esta.tokenizeNumber();
           romper;
 
-        case '"':
+        caso '"':
           token = esta.tokenizeString();
           romper;
 
-        case ':':
+        caso ':':
           token = esta.tokenizeKeyword();
           romper;
 
@@ -141,12 +140,12 @@ clase Tökenizer {
     // this.tortuga = this.tortuga.skip(value.length);
 
     deja token;
-    switch (value) {
-      case "true":
+    cambiar (value) {
+      caso "true":
         token = esta.createToken(TOK_TRUE, verdadero);
         esta.column += 4;
         romper;
-      case "false":
+      caso "false":
         token = esta.createToken(TOK_FALSE, falso);
         esta.column += 5;
         romper;
@@ -282,17 +281,17 @@ clase Char {
   static newlineChars = List.blow("\n", "\r");
 
   static isNum(char) {
-    switch (char) {
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-      case '0':
+    cambiar (char) {
+      caso '1':
+      caso '2':
+      caso '3':
+      caso '4':
+      caso '5':
+      caso '6':
+      caso '7':
+      caso '8':
+      caso '9':
+      caso '0':
         vuelta char;
     }
   }

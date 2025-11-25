@@ -1,4 +1,3 @@
-#!slt es
 
 // Memoizes object property.
 // Example:
