@@ -44,12 +44,12 @@
         vuelta binding;
       }
 
-      switch (key.constructora) {
-        case List:
-        case Vektar:
+      cambiar (key.constructora) {
+        caso List:
+        caso Vektar:
           applyArguments(binding, key, val);
           romper;
-        case Ṣymbol:
+        caso Ṣymbol:
           binding[key.toString()] = val;
           romper;
         default:

@@ -21,5 +21,7 @@
   "exportar": "export",
   "nulo": "null",
   "verdadero": "true",
-  "falso": "false"
+  "falso": "false",
+  "caso": "case",
+  "cambiar": "switch"
 }
