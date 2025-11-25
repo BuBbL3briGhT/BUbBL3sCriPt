@@ -64,14 +64,18 @@ function parseSltLine(firstLine) {
 }
 
 /**
- * Compute ranges (start..end) to skip during replacement:
+ * Compute ranges (start..end) to skip during
+ * replacement:
  * - single-line comments: //...
  * - multi-line comments: /* ... * /
  * - strings: '...', "..."
  * - template literals: `...${...}...`
  *
- * NOTE: This is a best-effort scanner. It handles escapes and nested template expressions to a point.
- * Regex literals are *not* robustly detected and may be treated as code; that can cause edge-case issues.
+ * NOTE: This is a best-effort scanner. It handles
+ * escapes and nested template expressions to a
+ * point.  Regex literals are *not* robustly detected
+ * and may be treated as code; that can cause
+ * edge-case issues.
  */
 function computeSkipRanges(src) {
   const ranges = [];

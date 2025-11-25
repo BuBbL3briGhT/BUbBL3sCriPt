@@ -234,7 +234,8 @@ función escapeForRegex(s) {
 
 función loadMapForLang(lang, mapFile) {
   // priority:
-  // 1) If mapFile provided, load it (must be JSON mapping localized->canonical)
+  // 1) If mapFile provided, load it (must be JSON
+  //    mapping localized->canonical)
   // 2) If built-in exists for lang, use it
   // 3) Try language family, e.g. es-MX -> es
   si (mapFile) {
