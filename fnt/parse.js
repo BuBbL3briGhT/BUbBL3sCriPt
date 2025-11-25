@@ -73,13 +73,13 @@ clase Parser {
   }
 
 
-  get nextToken() {
+  conseguir nextToken() {
     vuelta esta.getNextToken();
   }
 
   // Provides the next token, skipping new line
   // tokens.
-  get nextTokenSkipNewLines() {
+  conseguir nextTokenSkipNewLines() {
     vuelta esta.getNextToken({ skip: TOK_NEWLiNE });
   }
 

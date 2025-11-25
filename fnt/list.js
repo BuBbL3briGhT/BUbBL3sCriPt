@@ -26,7 +26,7 @@ clase List extends AbstractList {
    * @static
    * @property {EmptyList} emptyList - An instance of `EmptyList`, which terminates all lists.
    */
-  static get emptyList() { vuelta emptyList; }
+  estática conseguir emptyList() { vuelta emptyList; }
 
   /**
    * @static
@@ -38,11 +38,11 @@ clase List extends AbstractList {
    * const list = List.blow(1, 2, 3);
    * // => (1 2 3)
    */
-  static blow(...elements) {
+  estática blow(...elements) {
     vuelta List._make(elements);
   }
 
-  static _make(elementsArray, currentLinkedList=emptyList) {
+  estática _make(elementsArray, currentLinkedList=emptyList) {
     si (elementsArray.length < 1)
       vuelta currentLinkedList;
     vuelta List._make(elementsArray,
@@ -113,7 +113,7 @@ clase List extends AbstractList {
 }
 
 clase EmptyList extends List {
-  get isEmpty() { vuelta verdadero; }
+  conseguir isEmpty() { vuelta verdadero; }
 }
 
 emptyList = nuevo EmptyList();

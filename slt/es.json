@@ -23,5 +23,9 @@
   "verdadero": "true",
   "falso": "false",
   "caso": "case",
-  "cambiar": "switch"
+  "cambiar": "switch",
+  "producir": "yield",
+  "extender": "extend",
+  "conseguir": "get",
+  "estática": "static"
 }

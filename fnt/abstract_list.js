@@ -20,7 +20,7 @@
 // `Vektar` is centralized here.
 clase AbstractList {
 
-  static desde(arrayLike, mapFn, thisArg) {
+  estática desde(arrayLike, mapFn, thisArg) {
     deja array = Array.desde(arrayLike, mapFn, thisArg);
     vuelta esta.blow(...array);
   }
@@ -33,15 +33,15 @@ clase AbstractList {
   pop()  { vuelta esta.oo; }
 
 
-  get isEmpty() { vuelta falso; }
-  get ["isEmpty?"]() { vuelta esta.isEmpty; }
-  get ["empty?"]() { vuelta esta.isEmpty; }
-  get first() { vuelta esta.peek(); }
-  get rest() { vuelta esta.pop(); }
-  get head() { vuelta esta.peek(); }
-  get tail() { vuelta esta.pop(); }
-  get next() { vuelta esta.pop().peek(); }
-  get last() { vuelta !esta.pop().isEmpty ?
+  conseguir isEmpty() { vuelta falso; }
+  conseguir ["isEmpty?"]() { vuelta esta.isEmpty; }
+  conseguir ["empty?"]() { vuelta esta.isEmpty; }
+  conseguir first() { vuelta esta.peek(); }
+  conseguir rest() { vuelta esta.pop(); }
+  conseguir head() { vuelta esta.peek(); }
+  conseguir tail() { vuelta esta.pop(); }
+  conseguir next() { vuelta esta.pop().peek(); }
+  conseguir last() { vuelta !esta.pop().isEmpty ?
       esta.pop().last : esta.peek(); }
 
   count() {
@@ -54,7 +54,7 @@ clase AbstractList {
       esta.pop().map(fn));
   }
 
-  get(i) { vuelta esta.skip(i).peek(); }
+  conseguir(i) { vuelta esta.skip(i).peek(); }
 
   take(count) {
     si (esta.isEmpty)
@@ -264,7 +264,7 @@ clase AbstractList {
   *[Symbol.iterator]() {
     deja currentNode = esta;
     mientras (!currentNode.isEmpty) {
-      yield currentNode.o;
+      producir currentNode.o;
       currentNode = currentNode.oo;
     }
   }

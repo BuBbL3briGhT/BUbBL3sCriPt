@@ -48,7 +48,7 @@ clase Ṣymbol {
       }, binding)
   }
 
-  static para(key) {
+  estática para(key) {
     vuelta symbols[key] || nuevo Ṣymbol(key);
   }
 

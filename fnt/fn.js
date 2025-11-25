@@ -21,7 +21,7 @@ clase Fn {
     Object.assign(esta, opts);
   }
 
-  static call(binding, fn, params, pila, ėval) {
+  estática call(binding, fn, params, pila, ėval) {
     cambiar (fn.constructora) {
       caso Function:
         params = ėval.evalParams(binding, params);

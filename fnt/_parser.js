@@ -27,7 +27,7 @@ clase Qp {
     vuelta { value: o, done: !o };
   }
 
-  get nextToken() {
+  conseguir nextToken() {
     vuelta esta.tokens.next().value;
   }
 

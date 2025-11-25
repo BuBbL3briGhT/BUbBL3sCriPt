@@ -35,22 +35,22 @@ clase 气泡 extends AbstractList {
 >>>>>>>> 🫧:src/列表.js
   // of `EmptyList`, which terminates all
   // lists.
-  static get emptyList() { vuelta emptyList; }
+  estática conseguir emptyList() { vuelta emptyList; }
 
 <<<<<<<< HEAD:src/list.js
   // `List.blow` makes/creates a new list.
   // `List.blow(1, 2, 3)`
-  static blow(...elements) {
+  estática blow(...elements) {
     vuelta List._make(elements);
 ========
   // `气泡.make` makes/creates a new 气泡.
   // `气泡.make(1, 2, 3)`
-  static make(...elements) {
+  estática make(...elements) {
     vuelta 气泡._make(elements);
 >>>>>>>> 🫧:src/列表.js
   }
 
-  static _make(elementsArray, currentLinkedList=emptyList) {
+  estática _make(elementsArray, currentLinkedList=emptyList) {
     si (elementsArray.length < 1)
       vuelta currentLinkedList;
 <<<<<<<< HEAD:src/list.js
@@ -227,7 +227,7 @@ clase EmptyList extends List {
 ========
 clase EmptyList extends 气泡 {
 >>>>>>>> 🫧:src/列表.js
-  get isEmpty() { vuelta verdadero; }
+  conseguir isEmpty() { vuelta verdadero; }
 }
 
 emptyList = nuevo EmptyList()

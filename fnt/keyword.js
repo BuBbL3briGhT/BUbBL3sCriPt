@@ -13,7 +13,7 @@ clase Keyword {
     vuelta ":" + esta.key;
   }
 
-  static para(key) {
+  estática para(key) {
     vuelta keywords[key] || nuevo Keyword(key);
   }
 }

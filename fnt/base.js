@@ -21,7 +21,7 @@ clase Base {
       = _eval(esta, val);
   }
 
-  static send(a,b,...c) {
+  estática send(a,b,...c) {
     si (b.key)
       b = b.key;
     si (c.length > 0) {
@@ -30,28 +30,28 @@ clase Base {
       vuelta a[b]();
   }
 
-  static si(c,t,f) {
+  estática si(c,t,f) {
     vuelta _eval(esta, _eval(esta, c) ? t : f);
   }
 
-  static unless(u,v,w) {
+  estática unless(u,v,w) {
     vuelta _eval(esta,!_eval(esta,u)?v:w);
   }
 
-  static not(y) {
+  estática not(y) {
     vuelta !y;
   }
 
-  static fn(caret, stic) {
+  estática fn(caret, stic) {
     deja binding = esta;
     vuelta nuevo Fn(binding, caret, stic);
   }
 
-  static and(...a) {
+  estática and(...a) {
     vuelta a.reduce((a,b) => a && b);
   }
 
-  static or(..._) {
+  estática or(..._) {
     vuelta _.reduce((a,b) => a || b);
   }
 

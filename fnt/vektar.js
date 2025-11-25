@@ -9,9 +9,9 @@ events.on("init", función (bubls) {
 
 clase Vektar extends AbstractList {
 
-  static get emptyVector() { vuelta emptyVector; }
+  estática conseguir emptyVector() { vuelta emptyVector; }
 
-  static blow(...elements) {
+  estática blow(...elements) {
     var head = emptyVector;
     para (deja o of elements)
       head = nuevo esta(o, head);
@@ -43,7 +43,7 @@ clase Vektar extends AbstractList {
 }
 
 clase EmptyVector extends Vektar {
-  get isEmpty() { vuelta verdadero; }
+  conseguir isEmpty() { vuelta verdadero; }
 }
 
 emptyVector = nuevo EmptyVector()

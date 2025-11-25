@@ -30,7 +30,7 @@ clase Tökenizer {
       vuelta { done: verdadero };
   }
 
-  get nextToken () {
+  conseguir nextToken () {
     deja token;
 
     mientras (verdadero) {
@@ -197,7 +197,7 @@ clase NumberMatcher {
     esta.tortuga = tortuga;
   }
 
-  get match() {
+  conseguir match() {
     deja value = esta.matchWholeNumber();
 
     si ( esta.tortuga.peek() === "." ) {
@@ -239,7 +239,7 @@ clase SymbolMatcher {
     esta.tortuga = tortuga;
   }
 
-  get match() {
+  conseguir match() {
     si (esta.tortuga["isEmpty?"])
       // Cannot match a symbol on an empty list.
       throw Error("Tortuga is empty.");
@@ -278,9 +278,9 @@ clase SymbolMatcher {
 }
 
 clase Char {
-  static newlineChars = List.blow("\n", "\r");
+  estática newlineChars = List.blow("\n", "\r");
 
-  static isNum(char) {
+  estática isNum(char) {
     cambiar (char) {
       caso '1':
       caso '2':
@@ -296,7 +296,7 @@ clase Char {
     }
   }
 
-  static isNewline(char) {
+  estática isNewline(char) {
     vuelta esta.newlineChars.find(char) && char;
   }
 }

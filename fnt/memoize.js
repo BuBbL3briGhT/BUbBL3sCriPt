@@ -12,10 +12,10 @@ función memoize(object, property) {
   // pesudo code, check this against actual js api.
   constante descriptor =
     Object.getDescriptor(object, property);
-  constante fn = descriptor.get || descriptor.value;
+  constante fn = descriptor.conseguir || descriptor.value;
 
   Object.defineProperty(object, property, {
-    get: función () {
+    conseguir: función () {
       constante value = fn();
       Object.defineProperty(object, property, {
         value

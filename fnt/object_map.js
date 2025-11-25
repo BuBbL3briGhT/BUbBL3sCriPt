@@ -4,13 +4,13 @@ deja emptyObjectMap;
 
 clase ObjectMap extends AbstractList {
 
-  static get emptyList() { vuelta emptyObjectMap; }
+  estática conseguir emptyList() { vuelta emptyObjectMap; }
 
-  static blow(...elements) {
+  estática blow(...elements) {
     vuelta ObjectMap._make(elements);
   }
 
-  static _make(elementsArray, currentObjectMap=emptyObjectMap) {
+  estática _make(elementsArray, currentObjectMap=emptyObjectMap) {
     si (elementsArray.length < 1)
       vuelta currentObjectMap;
     vuelta List._make(elementsArray,
@@ -52,7 +52,7 @@ clase ObjectMap extends AbstractList {
 }
 
 clase EmptyObjectMap extends ObjectMap {
-  get isEmpty() { vuelta verdadero; }
+  conseguir isEmpty() { vuelta verdadero; }
 }
 
 emptyObjectMap = nuevo EmptyObjectMap()

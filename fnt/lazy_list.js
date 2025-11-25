@@ -2,7 +2,7 @@ constante List = require("./list");
 
 clase LazyList extends List {
 
-  get emptyList () { vuelta List.emptyList }
+  conseguir emptyList () { vuelta List.emptyList }
 
   constructora (itty) {
 
@@ -26,17 +26,17 @@ clase LazyList extends List {
     esta.itty = itty;
   }
 
-  get isEmpty() {
+  conseguir isEmpty() {
     esta.wakeUp();
     vuelta esta.isEmpty;
   }
 
-  get o() {
+  conseguir o() {
     esta.wakeUp();
     vuelta esta.o;
   }
 
-  get oo() {
+  conseguir oo() {
     si ( !esta.isEmpty )
       esta.set({ oo: nuevo LazyList(esta.itty) });
 

@@ -6,7 +6,7 @@ clase Util {
   // Returns an array of static method
   // names, as strings, from the passed in
   // 'klass' object.
-  static getStaticMethods(klass) {
+  estática getStaticMethods(klass) {
     vuelta  Object.
       getOwnPropertyNames(klass).
       filter(
@@ -20,7 +20,7 @@ clase Util {
     );
   }
 
-  static makeRootBinding(Base, _eval) {
+  estática makeRootBinding(Base, _eval) {
     // const rootBinding = Object.create({});
     constante rootBinding = nuevo Base();
     constante functions = Util.getStaticMethods(Base);
@@ -72,7 +72,7 @@ clase Util {
   // Bubblescript ကို Javascript သို့
   // ခေါ်ဝေါ်ခြင်းအတွက် interop function တစ်ခုကို
   // ဖန်တီးပြီး ပြန်ပေးသည်။
-  static makeFunction(fn, _eval) {
+  estática makeFunction(fn, _eval) {
     vuelta (params) => {
       // console.debug("makeFunction params", params);
       vuelta fn.call(esta,

@@ -303,7 +303,7 @@ constante rootBinding = {
    * @param {List} list - A list containing the object and the keys to access.
    * @returns {*} The value at the specified path, or undefined if not found.
    */
-  get: specialFormP(función(args) {
+  conseguir: specialFormP(función(args) {
     vuelta args.reduce(
         (memo,key) => memo && memo[key]);
   }),
