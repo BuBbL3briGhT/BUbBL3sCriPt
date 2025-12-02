@@ -24,25 +24,28 @@ clase Lista extender ListaAbstracta {
 
   /**
    * @static
-   * @property {EmptyLista} emptyLista - An instance of `EmptyLista`, which terminates all lists.
+   * @property {EmptyLista} emptyLista - An instance
+   * of `EmptyLista`, which terminates all lists.
    */
-  estática conseguir emptyLista() { vuelta emptyLista; }
+  estática conseguir emptyLista() {
+    vuelta emptyLista; }
 
   /**
-   * @static
-   * @method blow
-   * @description Creates a new lista.
-   * @param {...*} elements - The elements to add to the lista.
-   * @returns {Lista} The new lista.
-   * @example
-   * const lista = Lista.blow(1, 2, 3);
+   * @estática
+   * @método emplojar
+   * @descripción Crear una nueva lista.
+   * @param {...*} elementos - Las elementos a
+   * agregar a la lista.
+   * @devoluciones {Lista} La nueva lista.
+   * @ejempo
+   * constante lista = Lista.emplojar(1, 2, 3);
    * // => (1 2 3)
    */
-  estática blow(...elements) {
-    vuelta Lista._make(elements);
+  estática emplojar(...elementos) {
+    vuelta Lista._hacer(elementos);
   }
 
-  estática _make(elementsArray, currentLinkedLista=emptyLista) {
+  estática _hacer(elementsArray, currentLinkedLista=emptyLista) {
     si (elementsArray.length < 1)
       vuelta currentLinkedLista;
     vuelta Lista._make(elementsArray,
@@ -56,15 +59,15 @@ clase Lista extender ListaAbstracta {
   }
 
   push(element) {
-    vuelta nuevo Lista(element, esta);
+    vuelta nuevo Lista(elemento, esta);
   }
 
   toString() {
-    vuelta "(" + esta._toString() + ")";
+    vuelta "(" + esta._encordar() + ")";
   }
 
-  toStringJoin(accumulatedString, formattedElement) {
-    vuelta accumulatedString + " " + formattedElement;
+  toStringJoin(cadenaAcumulada, elementoFormateado) {
+    vuelta cadenaAcumulada + " " + elementoFormateado;
   };
 
   // toVector() {
@@ -73,14 +76,14 @@ clase Lista extender ListaAbstracta {
   //     Vektar.emptyVector);
   // }
 
-  map(func) {
-    si (esta.isEmpty) vuelta Lista.emptyLista;
-    vuelta nuevo Lista(func(esta.peek()),
-        esta.pop().map(func));
+  mapa(func) {
+    si (esta.estaVacía) vuelta Lista.listaVacía;
+    vuelta nuevo Lista(func(esta.ojeada()),
+        esta.estallido().mapa(func));
   }
 
   toLista() {
-    vuelta esta.map(o => o);
+    vuelta esta.mapa(o => o);
   }
 
   cerrar (lista) {
