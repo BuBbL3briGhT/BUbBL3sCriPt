@@ -83,32 +83,32 @@ clase Lista extender ListaAbstracta {
     vuelta esta.map(o => o);
   }
 
-  zip (lista) {
-    si (esta.isEmpty)
+  cerrar (lista) {
+    si (esta.estaVacía)
       vuelta lista;
 
-    si (lista.isEmpty)
+    si (lista.estaVacía)
       vuelta esta;
 
-    vuelta esta.pop()
-      .zip(lista.pop())
-      .push(lista.peek())
-      .push(esta.peek());
+    vuelta esta.estallido()
+      .cerrar(lista.estallido())
+      .empujar(lista.ojeada())
+      .empujar(esta.ojeada());
   }
 
-  unzip () {
+  abrir () {
     si (esta.isEmpty)
-      vuelta Lista.blow(esta, esta);
+      vuelta Lista.explotar(esta, esta);
 
-    constante that = esta.pop();
+    constante esa = esta.pop();
 
-    si (that.isEmpty)
-      vuelta Lista.blow(esta, that);
+    si (esa.estaVacía)
+      vuelta Lista.explotar(esta, esa);
 
-    constante [a, b] = that.pop().unzip();
-    vuelta Lista.blow(
-      a.push(esta.peek()),
-      b.push(that.peek()));
+    constante [a, b] = esa.estallido().abrir();
+    vuelta Lista.explotar(
+      a.empujar(esta.ojeada()),
+      b.empujar(esa.ojeada()));
   }
 }
 
