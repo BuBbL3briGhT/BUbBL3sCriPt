@@ -11,63 +11,63 @@
    * * *  * * *  * *  * *  * * *  * * */
 
      constante Lista = require("./lista");
-    constante Vektar = require("./vektar");
+    constante Vector = require("./vector");
    constante Ṣímbola = require("./símbola");
    constante consola = require("./consola");
 
-     constante sAmp = Ṣymbol.para("&");
+     constante sAmp = Ṣímbola.para("&");
 
-  // Applys the keys and the values to the
-  // binding based on order and position.
-  // Binding will be modified.
-  función applyArguments
-        (binding, keys, vals)
+  // Aplica las claves y los valores a la vinculación
+  // según el orden y la posición. La vinculación se
+  // modificará.
+  función aplicarArgumentos
+        (enlace, llaves, valors)
   {
-        si (keys instanceof Vektar)
-          keys = keys.toList();
-        si (vals instanceof Vektar)
-          vals = vals.toList();
+        si (llaves instanceof Vector)
+          llaves = llaves.paraListar();
+        si (valors instanceof Vector)
+          valors = valors.paraListar();
 
-    mientras ( !keys.isEmpty &&
-            !vals.isEmpty    ) {
+    mientras (!llaves.isEmpty &&
+              !valors.isEmpty) {
 
-      constante key = keys.first;
-        constante val = vals.first;
+      constante llave = valors.primera;
+        constante valor = valors.primera;
 
-      si (key == sAmp) {
-        binding[keys.next] = vals;
-        vuelta binding;
+      si (llave == sAmp) {
+        enlace[llaves.próxima] = valors;
+        vuelta enlace;
       }
 
       si (val == sAmp) {
-        applyArguments(binding, keys, vals.next)
-        vuelta binding;
+        applyArguments(enlace, llaves,
+          valors.próxima);
+        vuelta enlace;
       }
 
       cambiar (key.constructora) {
-        caso List:
-        caso Vektar:
-          applyArguments(binding, key, val);
+        caso Lista:
+        caso Vector:
+          applyArguments(enlace, llave, valor);
           romper;
         caso Ṣymbol:
-          binding[key.toString()] = val;
+          enlace[key.encordar()] = valor;
           romper;
         default:
-          throw Error("Invalid parameter type: " + key.constructora );
+          tirar Error("Tipo de parámetro no válido: " + key.constructora );
       }
 
-      keys = keys.rest;
-      vals = vals.rest;
+      llaves = llaves.resto;
+      valors = valors.resto;
 
     }
   }
 
-// Creates a binding object for a function or
-// macro.
-función createBinding(proto, keys, values) {
-  constante binding = Object.create(proto);
-  applyArguments(binding, keys, values);
-  vuelta binding;
+// Crea un objeto de enlace para una función o macro.
+función crearEnlace(proto, llaves, valors) {
+  constante enlace = Objeto.crear(proto);
+  aplicarArgumentos(enlace, llaves, valors);
+  vuelta enlace;
 }
 
-módulo.exportaciones = createBinding;
+módulo.exportaciones = crearEnlace;
