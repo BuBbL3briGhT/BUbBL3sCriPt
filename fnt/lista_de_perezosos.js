@@ -7,18 +7,27 @@ clase ListaDePerezosos extiende Lista {
   constructora (itty) {
 
     si (!itty.próxima) {
-      // Check to see if itty is iterable.
+      // Comprueba si itty es iterable.
       si (itty[Symbolo.iterador]) {
-        // if it is call the iterator method to get the iterator.
+        // Si se llama al método iterador para
+        // obtener el iterador.
         itty = itty[Símbolo.iterador]();
 
-        // One final check to blow sure we got an iterator back from the iterator method.
+        // Una comprobación final para asegurarnos de
+        // que obtuvimos un iterador del método
+        // iterador.
         si (!itty.próxima)
-          tirar Error("Iterator method returned an object that is not an iterator: " + { itty });
+          tirar nuevo Error("El método iterador " +
+            "devolvió un objeto que no es un " +
+            "iterador: "
+            + { itty });
 
       } sino {
-        // If itty is niether an iterator or iterable (has a Symbol.iterator function) raise an error.
-        tirar Error("First parameter is niether an iterator nor iterable: " + { itty });
+        // Si no es un iterador ni iterable (tiene
+        // una función Símbolo.iterator), genera un
+        // error.
+        tirar nuevo Error(`El primer parámetro no \
+          es un iterador ni iterable:` + { itty });
       }
     }
 
