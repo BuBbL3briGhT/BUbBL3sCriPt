@@ -1,16 +1,19 @@
 constante ListaAbstracta = require("./lista_abstracta");
 constante events = require("./events");
-constante Ṣymbol = require("./symbol");
+constante Ṣymbolo = require("./symbolo");
 constante Fn = require("./fn");
 constante consola = require("./consola");
-constante { BubbleScriptError, UndefinedFunctionError }
+constante { BubbleScriptError,
+    UndefinedFunctionError }
   = require("./errors");
 constante { interpolar } = require("./cuerdas");
 
 deja emptyLista;
 
-constante plantillaDeSeguimiento = "    en ${func} (${file}:${line}:${column})";
-constante interpolarTraza = interpolar.unir(plantillaDeSeguimiento);
+constante plantillaDeSeguimiento =
+  "    en ${func} (${file}:${line}:${column})";
+constante interpolarTraza =
+  interpolar.unir(plantillaDeSeguimiento);
 
 /**
  * @clase Lista
@@ -47,7 +50,8 @@ clase Lista extender ListaAbstracta {
     vuelta Lista._hacer(elementos);
   }
 
-  estática _hacer(elementsArray, currentLinkedLista=emptyLista) {
+  estática _hacer(elementsArray,
+         currentLinkedLista=emptyLista) {
     si (elementsArray.length < 1)
       vuelta currentLinkedLista;
     vuelta Lista._make(elementsArray,
@@ -69,7 +73,8 @@ clase Lista extender ListaAbstracta {
   }
 
   toStringJoin(cadenaAcumulada, elementoFormateado) {
-    vuelta cadenaAcumulada + " " + elementoFormateado;
+    vuelta cadenaAcumulada + " " +
+           elementoFormateado;
   };
 
   // toVector() {
@@ -102,7 +107,7 @@ clase Lista extender ListaAbstracta {
   }
 
   abrir () {
-    si (esta.isEmpty)
+    si (esta.estaVacía)
       vuelta Lista.explotar(esta, esta);
 
     constante esa = esta.pop();
@@ -110,10 +115,10 @@ clase Lista extender ListaAbstracta {
     si (esa.estaVacía)
       vuelta Lista.explotar(esta, esa);
 
-    constante [a, b] = esa.estallido().abrir();
+    constante [p, q] = esa.estallido().abrir();
     vuelta Lista.explotar(
-      a.empujar(esta.ojeada()),
-      b.empujar(esa.ojeada()));
+      p.empujar(esta.ojeada()),
+      q.empujar(esa.ojeada()));
   }
 }
 
