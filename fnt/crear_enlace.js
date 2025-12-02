@@ -1,7 +1,7 @@
 
   /* * *  * * *  * *  * *  * * *  * * *
    *                                  *
-   *   File: src/create_binding.js    *
+   *   File: src/crear_enlace.js      *
    *   Date: September 25th, 2025     *
    *   Library: Bubblescript          *
    *   version: 0.🦤.🍌.🥄            *
@@ -10,10 +10,10 @@
    *                                  *
    * * *  * * *  * *  * *  * * *  * * */
 
-     constante List = require("./list");
-   constante Vektar = require("./vektar");
-   constante Ṣymbol = require("./symbol");
-  constante consola = require("./consola");
+     constante Lista = require("./lista");
+    constante Vektar = require("./vektar");
+   constante Ṣímbola = require("./símbola");
+   constante consola = require("./consola");
 
      constante sAmp = Ṣymbol.para("&");
 
