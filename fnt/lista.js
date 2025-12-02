@@ -1,10 +1,10 @@
 constante ListaAbstracta = require("./lista_abstracta");
-constante events = require("./events");
+constante eventos = require("./eventos");
 constante Ṣymbolo = require("./symbolo");
 constante Fn = require("./fn");
 constante consola = require("./consola");
 constante { BubbleScriptError,
-    UndefinedFunctionError }
+    FunciónIndefinidaError }
   = require("./errors");
 constante { interpolar } = require("./cuerdas");
 
@@ -50,18 +50,18 @@ clase Lista extender ListaAbstracta {
     vuelta Lista._hacer(elementos);
   }
 
-  estática _hacer(elementsArray,
-         currentLinkedLista=emptyLista) {
-    si (elementsArray.length < 1)
-      vuelta currentLinkedLista;
-    vuelta Lista._make(elementsArray,
-      nuevo Lista(elementsArray.pop(),
-        currentLinkedLista));
+  estática _hacer(matrizDeElementos,
+         listaActual=listaVacía) {
+    si (matrizDeElementos.longitud < 1)
+      vuelta listaActual;
+    vuelta Lista._hacer(matrizDeElementos,
+      nuevo Lista(matrizDeElementos.estallido(),
+        listaActual));
   }
 
   // Create a lista.
-  constructora(o, oo=emptyLista) {
-    super(o, oo);
+  constructora(o, oo=listaVacía) {
+    súper(o, oo);
   }
 
   push(element) {
