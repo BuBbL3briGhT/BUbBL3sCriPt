@@ -28,9 +28,10 @@ constante interpolarTraza =
 clase Lista extender ListaAbstracta {
 
   /**
-   * @static
-   * @property {EmptyLista} emptyLista - An instance
-   * of `EmptyLista`, which terminates all lists.
+   * @estatica
+   * @property {ListaVacía} emptyLista - Una
+   * instancia de `ListaVacía`, que termina todas las
+   * listas.
    */
   estática conseguir emptyLista() {
     vuelta emptyLista; }
@@ -59,29 +60,24 @@ clase Lista extender ListaAbstracta {
         listaActual));
   }
 
-  // Create a lista.
+  // Crea una lista.
   constructora(o, oo=listaVacía) {
     súper(o, oo);
   }
 
-  push(element) {
+  empujar(elemento) {
     vuelta nuevo Lista(elemento, esta);
   }
 
-  toString() {
+  encordar() {
     vuelta "(" + esta._encordar() + ")";
   }
 
-  toStringJoin(cadenaAcumulada, elementoFormateado) {
-    vuelta cadenaAcumulada + " " +
-           elementoFormateado;
+  paraUnirCadenas
+  (cadenaAcumulada, elementoFormateado) {
+    vuelta cadenaAcumulada +
+      " " + elementoFormateado;
   };
-
-  // toVector() {
-  //   return this.reduce((vektar, o) => {
-  //     return vektar.push(o); },
-  //     Vektar.emptyVector);
-  // }
 
   mapa(func) {
     si (esta.estaVacía) vuelta Lista.listaVacía;
@@ -89,7 +85,7 @@ clase Lista extender ListaAbstracta {
         esta.estallido().mapa(func));
   }
 
-  toLista() {
+  paraEnumerar() {
     vuelta esta.mapa(o => o);
   }
 
@@ -110,7 +106,7 @@ clase Lista extender ListaAbstracta {
     si (esta.estaVacía)
       vuelta Lista.explotar(esta, esta);
 
-    constante esa = esta.pop();
+    constante esa = esta.estallido();
 
     si (esa.estaVacía)
       vuelta Lista.explotar(esta, esa);
@@ -122,8 +118,8 @@ clase Lista extender ListaAbstracta {
   }
 }
 
-clase EmptyLista extender Lista {
-  conseguir isEmpty() { vuelta verdadero; }
+clase ListaVacía extender Lista {
+  conseguir estaVacía() { vuelta verdadero; }
 }
 
 emptyLista = nuevo EmptyLista();
