@@ -5,19 +5,21 @@ constante Fn = require("./fn");
 constante consola = require("./consola");
 constante { BubbleScriptError, UndefinedFunctionError }
   = require("./errors");
-constante { interpolate } = require("./strings");
+constante { interpolar } = require("./cuerdas");
 
 deja emptyLista;
 
-constante traceTemplate = "    en ${func} (${file}:${line}:${column})";
-constante interpolateTrace = interpolate.bind(traceTemplate);
+constante plantillaDeSeguimiento = "    en ${func} (${file}:${line}:${column})";
+constante interpolarTraza = interpolar.unir(plantillaDeSeguimiento);
 
 /**
- * @class Lista
- * @extends ListaAbstracta
- * @description The primary data structure in Bubblescript, representing a Lisp-like lista.
- * @example
- * const lista = Lista.blow(1, 2, 3);
+ * @clase Lista
+ * @extendar ListaAbstracta
+ * @descripción
+ * La estructura de datos principal en Bubblescript,
+ * que representa una lista similar a Lisp.
+ * @ejemplo
+ * constante lista = Lista.emplojar(1, 2, 3);
  * // => (1 2 3)
  */
 clase Lista extender ListaAbstracta {
