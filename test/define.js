@@ -31,26 +31,25 @@
                                        afirmar.lanza = afirmar.throws; // Española
 
   // Describe define.
-  describir("definir", function () {
+  describe("define", function () {
 
-    // It sets a value.
-    ella("establece un valor", function () {
+    it("sets a value", function () {
 
-      const vínculo = Objeto.crear(rootBinding);
+      const binding = Object.create(rootBinding);
 
-        afirmar.igual(ėval(vínculo, "🍎"), undefined);
+        assert.equal(ėval(binding, "🍎"), undefined);
 
-      ėval(vínculo, "definir 🍎 \"manzana\"");
+      ėval(binding, `define 🍎 "apple"`);
 
-        const resultado = ėval(vínculo, "🍎");
+        const result = ėval(binding, "🍎");
 
-      afirmar.igual(resultado, "manzana");
+      assert.equal(result, "apple");
 
     });
 
     // It doesn't define a value if it was already
     // defined (value is constant).
-    ella("no define un valor si ya estaba definido "+
+    it("no define un valor si ya estaba definido "+
        "(el valor es constante)", function () {
 
       const vínculo = Objeto.crear(rootBinding);
