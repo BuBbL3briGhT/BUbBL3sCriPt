@@ -48,8 +48,7 @@ const rootBinding = {
 
   define: specialForm(function(list) {
 
-    const   key = list.peek();
-    const value = list.pop();
+    const [key, value] = list.plop();
 
     // If the key turns out to be a list, then
     // we do a function definition using the
