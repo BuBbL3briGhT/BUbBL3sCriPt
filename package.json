@@ -1,0 +1,24 @@
+{
+  "name": "bubblescript",
+  "version": "0.1.6",
+  "scripts": {
+    "test": "mocha ./test/*.js ./test/**/*.js"
+  },
+  "bin": {
+    "bubls": "bin/bubls"
+  },
+  "dependencies": {
+    "chai-subset": "^1.6.0",
+    "chia": "^0.0.1",
+    "debounce": "^2.2.0",
+    "parinfer": "^3.13.1"
+  },
+  "devDependencies": {
+    "chai": "^5.1.2",
+    "docco": "^0.9.2",
+    "mocha": "^11.0.1",
+    "prettier": "^3.6.2",
+    "sinon": "^19.0.2",
+    "yaml": "^2.7.0"
+  }
+}
