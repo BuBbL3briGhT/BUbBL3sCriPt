@@ -1,33 +1,31 @@
 
   /* * *  * * *  * *  * *  * * *  * * *  * *  * *
    *                                            *
-   *        File: src/root_binding.js           *
-   *        Date: November 10th, 2025           *
+   *        File: src/binding.js                *
+   *        Date: December 2025                 *
    *        Library: Bubblescript               *
-   *        version: 0.🦤.🍌.🥄                 *
-   *        Version: 0.1.6                      *
+   *        version:                            *
+   *        Version:                            *
    *        Author(s): BaMbii                   *
    *                                            *
    * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
-                 const List = require("./list");
-               const Vektar = require("./vektar");
-            const ObjectMap = require("./object_map");
+             const { List, Vektar, ObjectMap, Ditz }
+                            = require("./list");
                    const Fn = require("./fn");
                const Ṣymbol = require("./symbol");
             const { Macro } = require("./macro");
             const { ëval, evalEach, evalExpression }
                             = require("./eval");
                 const Range = require("./range");
-             const Ditz = require("./ditz");
           const { specialForm, specialFormP }
                             = require("./special_form");
-              const reqůire = require("./reqůire");
+              const reqůire = require("./require");
               const consola = require("./consola");
         const createBinding = require("./create_binding.js");
-
-           const starSymbol = Ṣymbol.for("*");
-
+const starSymbol = Ṣymbol.for("*");
+                 const sAmp = Ṣymbol.for("&");
+     const sAmp = Ṣymbol.for("&");
 function ensureKeyNotDefined(binding, key) {
   if (Object.hasOwn(binding, key))
     throw new Error("const " + key +
@@ -408,4 +406,60 @@ rootBinding.muf = rootBinding.define;
 rootBinding.def = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
 
-module.exports = { rootBinding };
+
+
+// Applys the keys and the values to the
+// binding based on order and position.
+// Binding will be modified.
+function applyArguments
+      (binding, keys, vals)
+{
+      if (keys instanceof Vektar)
+        keys = keys.toList();
+      if (vals instanceof Vektar)
+        vals = vals.toList();
+
+  while ( !keys.isEmpty &&
+          !vals.isEmpty    ) {
+
+    const key = keys.first;
+      const val = vals.first;
+
+    if (key == sAmp) {
+      binding[keys.next] = vals;
+      return binding;
+    }
+
+    if (val == sAmp) {
+      applyArguments(binding, keys, vals.next)
+      return binding;
+    }
+
+    switch (key.constructor) {
+      case List:
+      case Vektar:
+        applyArguments(binding, key, val);
+        break;
+      case Ṣymbol:
+        binding[key.toString()] = val;
+        break;
+      default:
+        throw Error("Invalid parameter type: " + key.constructor );
+    }
+
+    keys = keys.rest;
+    vals = vals.rest;
+
+  }
+}
+
+// Creates a binding object for a function or
+// macro.
+function createBinding(proto, keys, values) {
+  const binding = Object.create(proto);
+  applyArguments(binding, keys, values);
+  return binding;
+}
+
+
+module.exports = { rootBinding, createBinding };
