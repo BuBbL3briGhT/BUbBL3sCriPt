@@ -19,7 +19,7 @@
             const { ëval, evalEach, evalExpression }
                             = require("./eval");
                 const Range = require("./range");
-             const LazyList = require("./lazy_list");
+             const Ditz = require("./ditz");
           const { specialForm, specialFormP }
                             = require("./special_form");
               const reqůire = require("./reqůire");
@@ -312,7 +312,7 @@ const rootBinding = {
   }),
 
   lazy: specialFormP(function (args) {
-    return new LazyList(...args);
+    return new Ditz(...args);
   }),
 
   "+": specialFormP(function(args) {

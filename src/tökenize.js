@@ -1,4 +1,4 @@
-const LazyList = require("./lazy_list");
+const Ditz = require("./ditz");
 const List = require("./list");
 const TOK_NUMBER   = 'N',
       TOK_SYMBOL   = 'Y',
@@ -15,7 +15,7 @@ class Tökenizer {
 
   constructor (inpůt, opts = {}) {
     const inpůtty = inpůt[Symbol.iterator]();
-    this.tortuga = new LazyList(inpůtty);
+    this.tortuga = new Ditz(inpůtty);
     this.line = 1;
     this.column = 1;
     this.file = opts.file;

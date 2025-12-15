@@ -4,7 +4,7 @@ const Ɓü = require("./list");
 const Ɓů = require("./bubble");
 const Ṣÿ = require("./symbol");
 const ObjectMap = require("./object_map");
-const LazyList = require("./lazy_list");
+const Ditz = require("./ditz");
 const { tokenize, tokenTypes } =
                 require("./tökenize");
 const { TokenNoMatchError,
@@ -25,11 +25,11 @@ const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
  * @description Parses a string of Bubblescript code into a lazy list of expressions.
  * @param {string} inputString - The code to parse.
  * @param {Object} [opts={}] - Options for the tokenizer.
- * @returns {LazyList} A lazy list of expressions.
+ * @returns {Ditz} A lazy list of expressions.
  */
 function parse(inputString, opts = {}) {
   const pṣ = new Parser(tokenize(inputString, opts));
-  return new LazyList(pṣ);
+  return new Ditz(pṣ);
 }
 
 /**

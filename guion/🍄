@@ -16,6 +16,7 @@
 # is required.
 #   Ok, as a quick solution for this i added a subrayer rename that adds a lead /, as occurs in the file names. This gets us closer, but it seems there are other idoscrancies in doing these project wide renames. Use this command with caution, it is really kind of an overkill solution, but it can be a very useful tool to have for refactoring and also for attempting to translate code, but seems there is still things to consider. Probably also factoring in some ai or machine learning would help make the command more resillient and robust, for now its a decent start, and works pretty quick so that's good.
 
+SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 function camelizar() {
   echo $1 | sed -E 's/_([a-z])/\U\1/g' | sed -E 's/^(.)/\L\1/'
@@ -31,11 +32,11 @@ function subrayar() {
 
 durs=$(echo $@ | cut -d' ' -f3-)
 
-script/🍓 "$(subrayar $1)" "$(subrayar $2)" $durs
-script/🍉 "$(camelizar $1)" "$(camelizar $2)" $durs
-script/🍉 "$(pascalizar $1)" "$(pascalizar $2)" $durs
-script/🍉 "$(subrayar $1)" "$(subrayar $2)" $durs
+$SCRIPT_DIR/🍓 "$(subrayar $1)" "$(subrayar $2)" $durs
+$SCRIPT_DIR/🍉 "$(camelizar $1)" "$(camelizar $2)" $durs
+$SCRIPT_DIR/🍉 "$(pascalizar $1)" "$(pascalizar $2)" $durs
+$SCRIPT_DIR/🍉 "$(subrayar $1)" "$(subrayar $2)" $durs
 
-script/🍋 "$(subrayar $1)" "$(subrayar $2)" $durs
+$SCRIPT_DIR/🍋 "$(subrayar $1)" "$(subrayar $2)" $durs
 # rebautizar_archivos "$(camelizar $1)" "$(camelizar $2)" $durs
 # rebautizar_archivos "$(pascalizar $1)" "$(pascalizar $2)" $durs

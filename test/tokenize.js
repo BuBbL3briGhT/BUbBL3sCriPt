@@ -1,5 +1,5 @@
 const assert = require("assert");
-const LazyList = require("../src/lazy_list");
+const Ditz = require("../src/ditz");
 
 const { tokenize, tokenTypes } = require("../src/tökenize");
 const Vektar = require("../src/vektar");
