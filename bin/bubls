@@ -3,7 +3,7 @@
 // Error.stackTraceLimit = 20;
 // Error.stackTraceLimit = 100;
 
-const bubls = require('../src/bubls');
+const bubls = require('../src/index');
 const { rootBinding } = require('../src/root_binding');
 const { getReqůireFor } = require("../src/reqůire");
 const { ėval } = require("../src/eval");
