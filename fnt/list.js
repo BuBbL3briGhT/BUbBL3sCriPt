@@ -445,6 +445,8 @@ class Ditz extends List {
   set o(o) {};
   set oo(oo) {}
 
+  toList() { return this.map(o => o); }
+
 }
 
 

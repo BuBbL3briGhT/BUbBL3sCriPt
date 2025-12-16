@@ -1,6 +1,5 @@
 const assert = require("assert");
-const Ditz = require("../src/ditz.js");
-const List = require("../src/list.js");
+const { Ditz, List } = require("../fnt/list.js");
 
 describe("Ditz", function () {
   it("is a lazzzy list", function () {
@@ -14,8 +13,8 @@ describe("Ditz", function () {
   describe("#toList", function () {
     it("renders the lazy list as a list", function () {
       // const lazy = new Ditz([1,2,3][Symbol.iterator]());
-      const lazy = new Ditz([1,2,3]);
-      const actual = lazy.toList();
+      const ditz = new Ditz([1,2,3]);
+      const actual = ditz.toList();
       const expected = List.blow(1, 2, 3);
       assert.deepEqual(actual, expected);
     });
