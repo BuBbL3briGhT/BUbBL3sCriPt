@@ -386,50 +386,6 @@ class EmptyList extends List {
 emptyList = new EmptyList();
 
 
-let emptyVektar;
-
-class Vektar extends AbstractList {
-
-  static get emptyVektar() { return emptyVektar; }
-
-  static make(...elements) {
-    var head = emptyVektar;
-    for (let o of elements)
-      head = new this(o, head);
-    return head;
-  }
-
-  constructor(o, oo=emptyVector) {
-    super(o, oo);
-  }
-
-  push(element) {
-    return new Vektar(element, this);
-  }
-
-  toString() {
-    return "[" + this._toString() + "]";
-  }
-
-  toStringJoin(accumulatedString, formattedElement) {
-    return formattedElement + " " + accumulatedString;
-  };
-
-  toList() {
-    return this.reduce((list, o) => {
-      return list.push(o); },
-      List.emptyList);
-  }
-
-}
-
-class EmptyVektar extends Vektar {
-  get isEmpty() { return true; }
-}
-
-emptyVektar = new EmptyVektar();
-
-
 class Ditz extends List {
 
   get emptyList () { return List.emptyList }
@@ -492,5 +448,107 @@ class Ditz extends List {
 }
 
 
-module.exports = { AbstractList, List, Vektar, Ditz };
+let emptyVektar;
 
+class Vektar extends AbstractList {
+
+  static get emptyVektar() { return emptyVektar; }
+
+  static make(...elements) {
+    var head = emptyVektar;
+    for (let o of elements)
+      head = new this(o, head);
+    return head;
+  }
+
+  constructor(o, oo=emptyVector) {
+    super(o, oo);
+  }
+
+  push(element) {
+    return new Vektar(element, this);
+  }
+
+  toString() {
+    return "[" + this._toString() + "]";
+  }
+
+  toStringJoin(accumulatedString, formattedElement) {
+    return formattedElement + " " + accumulatedString;
+  };
+
+  toList() {
+    return this.reduce((list, o) => {
+      return list.push(o); },
+      List.emptyList);
+  }
+
+}
+
+class EmptyVektar extends Vektar {
+  get isEmpty() { return true; }
+}
+
+emptyVektar = new EmptyVektar();
+
+
+let emptyObjectMap;
+
+class ObjectMap extends AbstractList {
+
+  static get emptyList() { return emptyObjectMap; }
+
+  static blow(...elements) {
+    return ObjectMap._make(elements);
+  }
+
+  static _make(elementsArray, currentObjectMap=emptyObjectMap) {
+    if (elementsArray.length < 1)
+      return currentObjectMap;
+    return List._make(elementsArray,
+      new List(elementsArray.pop(),
+        currentObjectMap));
+  }
+
+  constructor(o, oo=emptyObjectMap) {
+    super(o, oo);
+  }
+
+  push(element) {
+    return new ObjectMap(element, this);
+  }
+
+  toString() {
+    return "{" + this._toString() + "}";
+  }
+
+  toStringJoin(accumulatedString, formattedElement) {
+    return accumulatedString + " " + formattedElement;
+  };
+
+  map(fn) {
+    if (this.isEmpty) return ObjectMap.emptyList;
+    return new ObjectMap(fn(this.peek()),
+        this.pop().map(fn));
+  }
+
+  createObject(binding) {
+    const o = {};
+    for(const key of this) {
+      const k = key.toString();
+      o[k] = binding[k];
+    }
+    return o;
+  }
+
+}
+
+class EmptyObjectMap extends ObjectMap {
+  get isEmpty() { return true; }
+}
+
+emptyObjectMap = new EmptyObjectMap()
+
+
+module.exports = { AbstractList, List, Vektar,
+  ObjectMap, Ditz };
