@@ -347,7 +347,7 @@ class List extends AbstractList {
   }
 
   toList() {
-    return this.map(o => o);
+    return this;
   }
 
   zip (list) {
@@ -385,5 +385,50 @@ class EmptyList extends List {
 
 emptyList = new EmptyList();
 
-module.exports = { AbstractList, List };
+
+let emptyVektar;
+
+class Vektar extends AbstractList {
+
+  static get emptyVektar() { return emptyVektar; }
+
+  static make(...elements) {
+    var head = emptyVektar;
+    for (let o of elements)
+      head = new this(o, head);
+    return head;
+  }
+
+  constructor(o, oo=emptyVector) {
+    super(o, oo);
+  }
+
+  push(element) {
+    return new Vektar(element, this);
+  }
+
+  toString() {
+    return "[" + this._toString() + "]";
+  }
+
+  toStringJoin(accumulatedString, formattedElement) {
+    return formattedElement + " " + accumulatedString;
+  };
+
+  toList() {
+    return this.reduce((list, o) => {
+      return list.push(o); },
+      List.emptyList);
+  }
+
+}
+
+class EmptyVektar extends Vektar {
+  get isEmpty() { return true; }
+}
+
+emptyVektar = new EmptyVektar();
+
+
+module.exports = { AbstractList, List, Vektar };
 
