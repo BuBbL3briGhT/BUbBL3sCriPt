@@ -2,7 +2,7 @@
   "name": "bubblescript",
   "version": "0.1.6",
   "scripts": {
-    "test": "mocha ./test/*.js ./test/**/*.js"
+    "prueba": "mocha ./prueba/*.js ./prueba/**/*.js"
   },
   "bin": {
     "bubls": "bin/bubls"
