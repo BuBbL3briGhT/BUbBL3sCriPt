@@ -386,7 +386,7 @@ class EmptyList extends List {
 emptyList = new EmptyList();
 
 
-class Ditz extends List {
+class LazyList extends List {
 
   get emptyList () { return List.emptyList }
 
@@ -424,7 +424,7 @@ class Ditz extends List {
 
   get oo() {
     if ( !this.isEmpty )
-      this.set({ oo: new Ditz(this.itty) });
+      this.set({ oo: new LazyList(this.itty) });
 
     return this.oo;
   }
@@ -552,5 +552,5 @@ class EmptyObjectMap extends ObjectMap {
 emptyObjectMap = new EmptyObjectMap()
 
 
-module.exports = { AbstractList, List, Vektar,
-  ObjectMap, Ditz };
+module.exports = { AbstractList, List, LazyList,
+  Vektar, ObjectMap };

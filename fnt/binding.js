@@ -10,7 +10,7 @@
    *                                            *
    * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
-             const { List, Vektar, ObjectMap, Ditz }
+             const { List, Vektar, ObjectMap, LazyList }
                             = require("./list");
                    const Fn = require("./fn");
                const Ṣymbol = require("./symbol");
@@ -310,7 +310,7 @@ const rootBinding = {
   }),
 
   lazy: specialFormP(function (args) {
-    return new Ditz(...args);
+    return new LazyList(...args);
   }),
 
   "+": specialFormP(function(args) {

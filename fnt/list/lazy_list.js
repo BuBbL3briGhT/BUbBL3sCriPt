@@ -1,6 +1,6 @@
 const List = require("./list");
 
-class Ditz extends List {
+class LazyList extends List {
 
   get emptyList () { return List.emptyList }
 
@@ -38,7 +38,7 @@ class Ditz extends List {
 
   get oo() {
     if ( !this.isEmpty )
-      this.set({ oo: new Ditz(this.itty) });
+      this.set({ oo: new LazyList(this.itty) });
 
     return this.oo;
   }
@@ -61,4 +61,4 @@ class Ditz extends List {
 
 }
 
-module.exports = Ditz;
+module.exports = LazyList;

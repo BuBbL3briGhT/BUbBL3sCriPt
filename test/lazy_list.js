@@ -1,20 +1,20 @@
 const assert = require("assert");
-const { Ditz, List } = require("../fnt/list.js");
+const { LazyList, List } = require("../fnt/list.js");
 
-describe("Ditz", function () {
+describe("LazyList", function () {
   it("is a lazzzy list", function () {
     const expects = [1, 2, 3];
     const itty = expects[Symbol.iterator]();
-    const lazy = new Ditz(itty);
+    const lazy = new LazyList(itty);
     assert.deepEqual(expects, [...lazy]);
   });
 
 
   describe("#toList", function () {
     it("renders the lazy list as a list", function () {
-      // const lazy = new Ditz([1,2,3][Symbol.iterator]());
-      const ditz = new Ditz([1,2,3]);
-      const actual = ditz.toList();
+      // const lazy = new LazyList([1,2,3][Symbol.iterator]());
+      const lazyList = new LazyList([1,2,3]);
+      const actual = lazyList.toList();
       const expected = List.blow(1, 2, 3);
       assert.deepEqual(actual, expected);
     });
@@ -24,7 +24,7 @@ describe("Ditz", function () {
 // for(const o of list) {
 // }
 // const itty = [1, 2, 3];
-// const list = new Ditz([1, 2, 3]);
+// const list = new LazyList([1, 2, 3]);
 // assert.deepEqual([...lazy
 // for(const o of list) {
 // }
