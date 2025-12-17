@@ -1,18 +1,17 @@
 
   /* * *  * * *  * *  * *  * * *  * * *
    *                                  *
-   *   File: test/list.js             *
-   *   Date: September 25th, 2025     *
+   *   File: prueba/list.js           *
+   *   Date: Decenber 2025            *
    *   Library: Bubblescript          *
-   *   version: 0.🦤.🍌.🥄            *
-   *   Version: 0.1.6                 *
    *   Author(s): BaMbii              *
    *                                  *
    * * *  * * *  * *  * *  * * *  * * */
 
   const assert = require("assert");
 
-    const List = require("../src/list");
+    const { List, LazyList }
+               = require("../src/list");
   const Ṣymbol = require("../src/symbol");
 
 describe("List", () => {
@@ -530,4 +529,23 @@ describe("List", () => {
   //     let result = list.toObject();
   //   });
   // });
+});
+
+describe("LazyList", function () {
+  it("is a lazzzy list", function () {
+    const expects = [1, 2, 3];
+    const itty = expects[Symbol.iterator]();
+    const lazy = new LazyList(itty);
+    assert.deepEqual(expects, [...lazy]);
+  });
+
+  describe("#toList", function () {
+    it("renders the lazy list as a list", function () {
+      // const lazy = new LazyList([1,2,3][Symbol.iterator]());
+      const lazyList = new LazyList([1,2,3]);
+      const actual = lazyList.toList();
+      const expected = List.blow(1, 2, 3);
+      assert.deepEqual(actual, expected);
+    });
+  });
 });
