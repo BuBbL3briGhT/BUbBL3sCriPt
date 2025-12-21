@@ -1,9 +1,12 @@
 
-  const assert = require("assert");
+import { it, describe } from "node:test";
+import assert from "node:assert";
 
-    const { List, LazyList }
-               = require("../src/list");
-  const Ṣymbol = require("../src/symbol");
+import { list } from "bubblescript";
+
+
+const { List, LazyList } = require("../src/list");
+const Ṣymbol = require("../src/symbol");
 
 describe("List", () => {
 
