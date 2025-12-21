@@ -3,7 +3,7 @@
 // will serve as the abstract base class for `List`
 // and `Vektar`. All shared functionality between
 // `List` and `Vektar` is centralized here.
-class AbstractList {
+export default class AbstractList {
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
@@ -208,3 +208,5 @@ class AbstractList {
     }
   }
 }
+
+

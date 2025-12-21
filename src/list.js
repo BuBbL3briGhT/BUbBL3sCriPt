@@ -1,12 +1,10 @@
 
 import AbstractList from './abstract_list.js';
 
-    const { interpolate } = require("./strings");
+import { interpolate } from "./strings.js";
 
-    const { BubbleScriptError,
-            UndefinedFunctionError }
-                 = require("./errors");
-
+import { BubbleScriptError,
+         UndefinedFunctionError } from "./errors.js";
 
 let emptyList;
 
@@ -23,7 +21,7 @@ const interpolateTrace =
  * const list = List.blow(1, 2, 3);
  * // => (1 2 3)
  */
-class List extends AbstractList {
+export class List extends AbstractList {
 
   /**
    * @static
@@ -193,7 +191,7 @@ class Vektar extends AbstractList {
     return head;
   }
 
-  constructor(o, oo=emptyVector) {
+  constructor(o, oo=emptyVektar) {
     super(o, oo);
   }
 
@@ -282,5 +280,5 @@ class EmptyObjectMap extends ObjectMap {
 emptyObjectMap = new EmptyObjectMap()
 
 
-module.exports = { AbstractList, List, LazyList,
-  Vektar, ObjectMap };
+// module.exports = { AbstractList, List, LazyList,
+//   Vektar, ObjectMap };
