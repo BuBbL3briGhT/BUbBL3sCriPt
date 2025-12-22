@@ -77,7 +77,7 @@ export default class AbstractList {
     return this.pop().reduce(
       (accumulator, currentElement) => {
         return accumulator.push(currentElement);
-      }, this.constructor.blow(this.peek()));
+      }, this.constructor.make(this.peek()));
   }
 
   // Conjunta una lista con esta lista.
@@ -158,13 +158,13 @@ export default class AbstractList {
     if (this.isEmpty)
       return this;
     if (value == this.head)
-      return this.constructor.blow();
+      return this.constructor.make();
     else
       return new this.constructor(this.head, this.tail.until(value));
   }
 
   split(value) {
-    let result = this.constructor.blow();
+    let result = this.constructor.make();
     let sub = this.find(value);
     if (sub) {
       sub = sub.pop();
@@ -196,7 +196,7 @@ export default class AbstractList {
   // #LongLivePlop! ✨️
   plop() {
     return this.constructor.
-      blow(this.peek(), this.pop());
+      make(this.peek(), this.pop());
   }
 
 
@@ -226,7 +226,7 @@ const interpolateTrace =
  * @extends AbstractList
  * @description The primary data structure in Bubblescript, representing a Lisp-like list.
  * @example
- * const list = List.blow(1, 2, 3);
+ * const list = List.make(1, 2, 3);
  * // => (1 2 3)
  */
 export class List extends AbstractList {
@@ -301,15 +301,15 @@ export class List extends AbstractList {
 
   unzip () {
     if (this.isEmpty)
-      return List.blow(this, this);
+      return List.make(this, this);
 
     const that = this.pop();
 
     if (that.isEmpty)
-      return List.blow(this, that);
+      return List.make(this, that);
 
     const [a, b] = that.pop().unzip();
-    return List.blow(
+    return List.make(
       a.push(this.peek()),
       b.push(that.peek()));
   }
@@ -334,7 +334,7 @@ export class LazyList extends List {
         // if it is call the iterator method to get the iterator.
         itty = itty[Symbol.iterator]();
 
-        // One final check to blow sure we got an iterator back from the iterator method.
+        // One final check to make sure we got an iterator back from the iterator method.
         if (!itty.next)
           throw Error("Iterator method returned an object that is not an iterator: " + { itty });
 
@@ -436,7 +436,7 @@ class ObjectMap extends AbstractList {
 
   static get emptyList() { return emptyObjectMap; }
 
-  static blow(...elements) {
+  static make(...elements) {
     return ObjectMap._make(elements);
   }
 
