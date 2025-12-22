@@ -196,7 +196,7 @@ describe("List", () => {
 
       let add7 = (o) => { return o + 7 };
 
-      result = list.map(add7);
+      let result = list.map(add7);
       assert.equal(result, List.emptyList);
 
       list = List.make(1);
