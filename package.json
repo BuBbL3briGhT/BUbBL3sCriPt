@@ -4,7 +4,8 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "prueba": "mocha ./prueba/*.js ./prueba/**/*.js"
+    "prueba": "mocha ./prueba/*.js ./prueba/**/*.js",
+    "test": "node --test"
   },
   "bin": {
     "bubls": "bin/bubls"
