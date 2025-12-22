@@ -485,8 +485,4 @@ class EmptyObjectMap extends ObjectMap {
   get isEmpty() { return true; }
 }
 
-emptyObjectMap = new EmptyObjectMap()
-
-
-// module.exports = { AbstractList, List, LazyList,
-//   Vektar, ObjectMap };
+emptyObjectMap = new EmptyObjectMap();
