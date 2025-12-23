@@ -1,14 +1,14 @@
-const assert = require("assert");
+import assert from "node:assert";
+import { it, describe } from "node:test";
 
-const { Macro } = require("../src/macro");
-const Vektar = require("../src/vektar");
-const List = require("../src/list");
+import { Macro } from "../src/macro.js";
+import { List, Vektar } from "../src/list.js";
 
 describe("Macro", function () {
   describe("new Macro()", function () {
     it("✨️ creates a new macro", function () {
       let bnd = {};
-      let args = Vektar.blow(1,2);
+      let args = Vektar.make(1,2);
       let body = List.emptyList;
       let macro = new Macro(bnd, args, body);
       assert.equal(macro.binding, bnd);

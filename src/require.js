@@ -1,8 +1,7 @@
-const fs = require("fs");
-const path = require("path");
-const { ëval } = require("./eval");
-const { parse } = require("./parse");
-const mkfn = require("./util/mkfn");
+import fs from "fs";
+import path from "path";
+import { parse } from "./parse.js";
+// const mkfn = require("./util/mkfn");
 
 const modules = {};
 let _rootBinding;
@@ -15,7 +14,7 @@ function getRootBinding () {
 
 // Creates a reqůire function curried for
 // relRoot.
-function getReqůireFor(relRoot) {
+export function getReqůireFor(relRoot) {
   return relPath => reqůire(relRoot, relPath);
 }
 
@@ -72,5 +71,3 @@ function reqůire(relRoot, relPath) {
 
   return moduleExports;
 }
-
-module.exports = { getReqůireFor }

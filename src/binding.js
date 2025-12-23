@@ -15,14 +15,14 @@ import { List, Vektar, ObjectMap, LazyList }
 import Fn from "./fn.js";
 import Ṣymbol from "./symbol.js";
 import { Macro } from "./macro.js";
-import { ëval, evalEach, evalExpression }
+import { ėval, evalEach, evalExpression }
                               from "./eval.js";
 import Range from "./range.js";
 import { specialForm, specialFormP }
                       from "./special_form.js";
 
-import consola from "./consola.js";
-import reqůire from "./require.js";
+// import consola from "./consola.js";
+// import reqůire from "./require.js";
 
 const starSymbol = Ṣymbol.for("*");
 const sAmp = Ṣymbol.for("&");
@@ -37,11 +37,11 @@ function ensureKeyNotDefined(binding, key) {
 // what'll you have? The man says,
 // something strong, my head is killing
 // me. 🍸
-const rootBinding = {
-  console, consola,
+export const rootBinding = {
+  // console, consola,
   // Js require
-  ["reqūire"]: require,
-  __dirname: __dirname,
+  // ["reqūire"]: require,
+  __dirname: import.meta.dirname,
 
   /* Special form functions */
 
@@ -167,7 +167,7 @@ const rootBinding = {
   jsfn: specialForm(function(args) {
     const binding = this;
     const x = args.push(Ṣymbol.for('fn'));
-    const fn = ëval(binding, x);
+    const fn = evalExpression(binding, x);
     return function(...args) {
       return fn.invoke(List.from(args));
     }
@@ -456,11 +456,9 @@ function applyArguments
 
 // Creates a binding object for a function or
 // macro.
-function createBinding(proto, keys, values) {
+export function createBinding(proto, keys, values) {
   const binding = Object.create(proto);
   applyArguments(binding, keys, values);
   return binding;
 }
 
-
-module.exports = { rootBinding, createBinding };

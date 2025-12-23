@@ -2,20 +2,18 @@
   /* * *  * * *  * *  * *  * * *  * * *
    *                                  *
    *   File: src/fn.js                *
-   *   Date: September 25th, 2025     *
+   *   Date: December, 2025           *
    *   Library: Bubblescript          *
-   *   version: 0.🦤.🍌.🥄            *
-   *   Version: 0.1.6                 *
+   *   version:                       *
+   *   Version:                       *
    *   Author(s): BaMbii              *
    *                                  *
    * * *  * * *  * *  * *  * * *  * * */
 
-            const createBinding = require("./create_binding.js");
-                   const Ṣymbol = require("./symbol");
-                  const consola = require("./consola");
-                   const events = require("./events");
+import { createBinding } from "./binding.js";
+import Ṣymbol from "./symbol.js";
 
-class Fn {
+export default class Fn {
   constructor(binding, params, body, opts={}) {
     Object.assign(this, { binding, params, body });
     Object.assign(this, opts);
@@ -52,5 +50,3 @@ class Fn {
   }
 
 }
-
-module.exports = Fn;

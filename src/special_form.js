@@ -1,4 +1,4 @@
-const { mapEval } = require("./eval");
+import { mapEval } from "./eval.js";
 
 // Special Form Function
 
@@ -15,7 +15,7 @@ const { mapEval } = require("./eval");
 // be evaluated against the binding before being
 // passed to the special form function. This
 // value defaults to false.
-class SpecialForm {
+export class SpecialForm {
 
   constructor(fn, opts={ evaluateParams: false }) {
     this.fn = fn;
@@ -32,7 +32,7 @@ class SpecialForm {
 
 }
 
-class SpecialFormP extends SpecialForm {
+export class SpecialFormP extends SpecialForm {
   constructor(fn) {
     super(function (params) {
       return fn.call(this,
@@ -43,15 +43,12 @@ class SpecialFormP extends SpecialForm {
 
 // Helper creates a Special Form (Function)
 // without evaluated params.
-function specialForm(fn) {
+export function specialForm(fn) {
   return new SpecialForm(fn);
 }
 
 // Helper creates a Special Form (Function)
 // with evaluated params.
-function specialFormP(funkatron) {
+export function specialFormP(funkatron) {
   return new SpecialFormP(funkatron);
 }
-
-module.exports = { SpecialForm, specialForm,
-  specialFormP };

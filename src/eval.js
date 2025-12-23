@@ -32,7 +32,7 @@ const sAmp = Ṣymbol.for("&");
  * @returns {*} The result of the last expression in
  * the script.
  */
-export default function ėval(binding, script, opts={}) {
+export function ėval(binding, script, opts={}) {
   try {
     return evalEach(binding, parse(script, opts));
   } catch (error) {
@@ -62,7 +62,7 @@ export default function ėval(binding, script, opts={}) {
  * stack.
  * @returns {*} The result of the last evaluation.
  */
-function evalEach(binding, list, stack) {
+export function evalEach(binding, list, stack) {
   const _evalExpression =
     evalExpression.bind(null, binding);
   return list.tryEach(_evalExpression,
@@ -78,7 +78,7 @@ function evalEach(binding, list, stack) {
  * @param {Array} [stack=[]] - The evaluation stack.
  * @returns {*} The result of the expression.
  */
-function evalExpression(binding, expression, stack) {
+export function evalExpression(binding, expression, stack) {
   switch (expression.constructor) {
     case List:
       return evalList(binding, expression, stack);
@@ -101,7 +101,7 @@ function evalExpression(binding, expression, stack) {
  * stack.
  * @returns {*} The result of the function call.
  */
-function evalList(binding, list, stack=List.blow()) {
+export function evalList(binding, list, stack=List.blow()) {
   try {
     const { file, line, column } = list;
     stack = stack.push({func: list.head.toString(),
@@ -151,7 +151,7 @@ function evalList(binding, list, stack=List.blow()) {
  * @param {*} symbol - The symbol to evaluate.
  * @returns {*} The result of evaluating the symbol.
  */
-function evalSymbol(binding, symbol) {
+export function evalSymbol(binding, symbol) {
   const root = symbol.resolveRoot(binding);
   return root ? root[symbol.fn] : root;
 }
@@ -165,7 +165,7 @@ function evalSymbol(binding, symbol) {
  * evaluate.
  * @returns {List} The evaluated parameters.
  */
-function evalParams(binding, params) {
+export function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {
     params =
@@ -186,7 +186,7 @@ function evalParams(binding, params) {
  * @param {List} list - The list to evaluate.
  * @returns {*} The mapped list of evauluations.
  */
-function mapEval(binding, list) {
+export function mapEval(binding, list) {
   return list.map(evalExpression.bind(null, binding));
 }
 
@@ -200,7 +200,7 @@ function mapEval(binding, list) {
  * @returns {*} The result of calling tryEach on the
  * list.
  */
-function catchExpandMacro(o, list, fn) {
+export function catchExpandMacro(o, list, fn) {
   if (o instanceof MacroExpanded) {
     let expanded = o.expanded;
     list.o  = expanded.first;

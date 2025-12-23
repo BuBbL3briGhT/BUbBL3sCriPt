@@ -1,5 +1,5 @@
-const assert = require("assert");
-const Range = require("../src/range");
+import assert from "node:assert";
+import Range from "../src/range.js";
 
 describe("Range", function () {
 

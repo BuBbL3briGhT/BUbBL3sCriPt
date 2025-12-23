@@ -1,6 +1,6 @@
-const { Sequence } = require("./sequence");
+import { Sequence } from "./sequence.js";
 
-class Range extends Sequence {
+export default class Range extends Sequence {
 
   constructor (endstart, end, step=1) {
     super();
@@ -24,5 +24,3 @@ class Range extends Sequence {
   }
 
 }
-
-module.exports = Range;

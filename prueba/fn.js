@@ -1,7 +1,8 @@
-const assert = require("assert");
-const Fn = require("../src/fn");
-const { List } = require("../src/list");
-const Ṣymbol = require("../src/symbol");
+import assert from "node:assert";
+import { it, describe } from "node:test";
+import Fn from "../src/fn.js"
+import { List } from "../src/list.js";
+import Ṣymbol from "../src/symbol.js";
 
 describe("Fn", function () {
   describe("toString", function () {

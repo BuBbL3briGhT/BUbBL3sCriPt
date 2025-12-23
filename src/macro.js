@@ -1,7 +1,7 @@
-const createBinding = require("./create_binding");
-const List = require("./list");
+import { createBinding } from "./binding.js";
+import { List } from "./list.js";
 
-class Macro {
+export class Macro {
   constructor(binding, params, body, opts={}) {
     this.binding = binding;
     this.params = params.toList();
@@ -35,10 +35,9 @@ class Macro {
   }
 }
 
-class MacroExpanded {
+export class MacroExpanded {
   constructor(expanded) {
     this.expanded = expanded;
   }
 }
 
-module.exports = { Macro, MacroExpanded };
