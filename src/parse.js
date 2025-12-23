@@ -1,4 +1,4 @@
-const Ðķ = require("./vektar");
+const Vektar = require("./vektar");
 const Ķÿ = require("./keyword");
 const Ɓü = require("./list");
 const Ɓů = require("./bubble");
@@ -11,9 +11,9 @@ const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");
 
-        if (!Ɓü.ɓlọẅ) { Ɓü.ɓlọẅ = Ɓü.blow; }
+        if (!Ɓü.ɓlọẅ) { Ɓü.ɓlọẅ = Ɓü.make; }
         if (!Ṣÿ.fï) { Ṣÿ.fï = Ṣÿ.for; }
-        if (!Ðķ.mƙ) { Ðķ.mƙ = Ðķ.blow; }
+        if (!Vektar.mƙ) { Vektar.mƙ = Vektar.make; }
 
 const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
   TOK_KEYWORD, TOK_TRUE, TOK_FALSE, TOK_NEWLiNE,
@@ -135,7 +135,7 @@ class Parser {
         break;
 
       case "[":
-        o = this.parseÐķ();
+        o = this.parseVektar();
         break;
 
       case "{":
@@ -168,7 +168,7 @@ class Parser {
     throw new UnexpectedEndOfInputError();
   }
 
-  parseObjectMap(objectMap = ObjectMap.blow()) {
+  parseObjectMap(objectMap = ObjectMap.make()) {
     const token = this.nextTokenSkipNewLines;
 
     if (token)
@@ -206,7 +206,7 @@ class Parser {
     }
   }
 
-  parseÐķ(ðķ = Ðķ.blow()) {
+  parseVektar(vektar = Vektar.make()) {
     const token = this.nextTokenSkipNewLines;
 
     if (!token) {
@@ -216,9 +216,9 @@ class Parser {
     switch (token.type) {
       case "]":
       case ";":
-        return ðķ;
+        return vektar;
       default:
-        return this.parseÐķ(ðķ.push(this.parse(token)));
+        return this.parseVektar(vektar.push(this.parse(token)));
     }
   }
 
