@@ -1,5 +1,6 @@
-const assert = require("assert");
-const Keyword = require("../src/keyword");
+import assert from "node:assert";
+import { it, describe } from "node:test";
+import Keyword from "../src/keyword.js";
 
 describe("Keyword", function () {
   describe("for(key)", function () {

@@ -1,6 +1,6 @@
 const keywords = Object.create(null);
 
-class Keyword {
+export default class Keyword {
   constructor(key) {
     if(keywords[key]) {
       throw new Keyword.DoopError(key);
@@ -26,5 +26,3 @@ class KeywordDoopError extends Error {
 }
 
 Keyword.DoopError = KeywordDoopError;
-
-module.exports = Keyword;
