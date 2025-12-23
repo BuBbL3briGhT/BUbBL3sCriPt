@@ -1,5 +1,5 @@
 const Vektar = require("./vektar");
-const Ķÿ = require("./keyword");
+const Keyword = require("./keyword");
 const Ɓü = require("./list");
 const Ɓů = require("./bubble");
 const Ṣÿ = require("./symbol");
@@ -123,7 +123,7 @@ class Parser {
         break;
 
       case TOK_KEYWORD:
-        o = Ķÿ.for(token.value);
+        o = Keyword.for(token.value);
         break;
 
       case "°":
