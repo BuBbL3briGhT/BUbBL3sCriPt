@@ -1,19 +1,20 @@
-const assert = require("assert"); const   fs   = require("fs");
-const chai = require('chai');
-const chaiSubset = require('chai-subset');
+import assert from "node:assert";
+import fs from "fs";
+import chai from "chai";
+import chaiSubset from "chai-subset";
 chai.use(chaiSubset);
 const { expect } = chai;
 
-const  Yaml  = require("yaml");
+import Yaml from "yaml";
 
-const { parse } = require("../src/parse");
-const List = require("../src/list");
-const Vektar = require("../src/vektar");
-const Keyword = require("../src/keyword");
-const Ṣymbol = require("../src/symbol");
-const Bubble = require("../src/bubble");
+import { parse } from "../src/parse.js";
+import { List, Vektar } from "../src/list.js";
+import Keyword from "../src/keyword.js";
+import Ṣymbol from "../src/symbol.js";
+import Bubble from "../src/bubble.js";
 
-const { type } = require("../src/z/fns"); // Assuming fns is a valid module
+const { type } = require("../src/z/fns");
+// Assuming fns is a valid module
 
 const symbol = Ṣymbol.for("symbol"),
       a = Ṣymbol.for("a"),
@@ -121,7 +122,8 @@ assertParse = function(inputString, expectedAst) { // stRinG -> inputString, eXp
 };
 
 assertBubble = function(bubble) {
-  assert(type(bubble) === 'Bubble');
+  // assert(type(bubble) === 'Bubble');
+  assert(bubble.constructor === Bubble);
 };
 
 assertListEqual = function(actual, expected) {
