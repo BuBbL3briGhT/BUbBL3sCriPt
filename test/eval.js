@@ -1,13 +1,13 @@
-const assert = require("assert");
-const sinon = require("sinon");
+import assert from "node:assert";
+import { it, describe } from "node:test";
+import sinon from "sinon";
 
-const List = require("../src/list");
-const { parse } = require("../src/parse");
-const Vektar = require("../src/vektar");
-const Keyword = require("../src/keyword");
-const rootBinding = require("../src/root_binding");
+import { List, Vektar } from "../src/list.js";
+import { parse } from "../src/parse.js";
+import Keyword from "../src/keyword.js";
+import { rootBinding } from "../src/binding.js";
 
-const { ėval, evalEach } = require("../src/eval");
+import { ėval, evalEach } from "../src/eval.js";
 
 // const { List, Vektar, rootBinding,
 //   ėval, ëval, parse, Keyword } =
