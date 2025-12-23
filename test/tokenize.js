@@ -153,6 +153,7 @@ describe("tokenize(string)", function() {
   );
 });
 
+
 // expectedTokenObjectsList is a List of token objects {type, value, line, column}
 function itTokenizes(s, ...expectedTokens) {
   // If expected is just one item and not a list, wrap it for consistency if Vektar.make doesn't handle single items.
