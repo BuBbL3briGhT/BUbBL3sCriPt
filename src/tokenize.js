@@ -301,7 +301,7 @@ class Char {
 }
 
 export function tokenize (input, opts = {}) {
-  return new Tökenizer(input, opts);
+  return new Tokenizer(input, opts);
 }
 
 export const tokenTypes = {

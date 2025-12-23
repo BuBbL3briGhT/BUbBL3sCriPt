@@ -214,6 +214,10 @@ export default class AbstractList {
   }
 }
 
+// Aliases
+const prototype = AbstractList.prototype;
+prototype["includes?"] = prototype.find;
+
 let emptyList;
 
 const traceTemplate =
