@@ -1,4 +1,4 @@
-class Bubble {
+export default class Bubble {
   constructor(o) {
     this.o = o;
   }
@@ -15,5 +15,3 @@ class Bubble {
     return "°" + this.o.inspect;
   }
 }
-
-module.exports = Bubble;

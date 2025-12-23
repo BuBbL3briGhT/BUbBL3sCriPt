@@ -1,5 +1,6 @@
-const assert = require("assert");
-const { Bubble } = require("../src/BubbleScript");
+import assert from "node:assert";
+import { it, describe } from "node:test";
+import Bubble from "../src/bubble.js";
 
 describe("Bubble", () => {
   describe("new", () => {
