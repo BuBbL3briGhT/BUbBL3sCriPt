@@ -1,6 +1,8 @@
-const assert = require("assert");
-const Keyword = require("../src/keyword");
-const { rootBinding, List} = require("../src/BubbleScript");
+import assert from "node:assert";
+import { it, describe } from "node:test";
+import Keyword from "../src/keyword.js";
+import { rootBinding } from "../src/binding.js";
+import { List } from "../src/list.js";
 
 describe("rootBinding", function () {
 
@@ -9,25 +11,25 @@ describe("rootBinding", function () {
        let obj = { name: { first: "Kermit" }};
        assert.equal(rootBinding
          .get.call(rootBinding,
-           (List.blow(obj, "name", "first"))),
+           (List.make(obj, "name", "first"))),
          "Kermit");
        assert.deepEqual(rootBinding.get
           .call(rootBinding,
-                List.blow(obj, "name")),
+                List.make(obj, "name")),
            { first: "Kermit" });
      });
    });
 
   describe("send", function () {
     it("sends messages to objects", function () {
-      const list = List.blow(1, Keyword.for("toString"))
+      const list = List.make(1, Keyword.for("toString"))
       assert.equal(rootBinding.send(...list), "1");
     });
 
     it("sends messages to objects", function () {
       let meatballsCalled = false;
 
-      const list = List.blow(
+      const list = List.make(
         {
           meatballs: function () {
             meatballsCalled = true;
