@@ -2,28 +2,26 @@
   /* * *  * * *  * *  * *  * * *  * * *  * *  * *
    *                                            *
    *        File: src/eval.js                   *
-   *        Date: November 8th, 2025            *
+   *        Date: December, 2025                *
    *        Library: Bubblescript               *
-   *        version: 0.🦤.🍌.🥄                 *
-   *        Version: 0.1.6                      *
    *        Author(s): BaMbii                   *
    *                                            *
    * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
-                                     const List = require("./list");
-                                   const Ṣymbol = require("./symbol");
-                                   const Bubble = require("./bubble");
-                                       const Fn = require("./fn");
-                                const { parse } = require("./parse");
-                                   const events = require("./events");
-                                  const consola = require("./consola");
-                          const { interpolate } = require("./strings");
-                        const { MacroExpanded } = require("./macro");
-               const { UndefinedFunctionError } = require("./errors");
+const List = require("./list");
+const Ṣymbol = require("./symbol");
+const Bubble = require("./bubble");
+const Fn = require("./fn");
+const { parse } = require("./parse");
+const events = require("./events");
+const consola = require("./consola");
+const { interpolate } = require("./strings");
+const { MacroExpanded } = require("./macro");
+const { UndefinedFunctionError } = require("./errors");
 
-        const traceTemplate = "    en (${file}:${line}:${column})";
-     const interpolateTrace = interpolate.bind(traceTemplate);
-                 const sAmp = Ṣymbol.for("&");
+const traceTemplate = "    en (${file}:${line}:${column})";
+const interpolateTrace = interpolate.bind(traceTemplate);
+const sAmp = Ṣymbol.for("&");
 
 /**
  * @function ėval
