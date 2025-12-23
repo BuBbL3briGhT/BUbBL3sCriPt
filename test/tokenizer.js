@@ -5,6 +5,128 @@ import { Tokenizer } from "../src/tokenize.js";
 
 describe("Tokenizer", function () {
 
+  it("tokenizes the number 1", function () {
+    const tokenizer = new Tokenizer("1");
+    assert.deepEqual([
+      { type: 'N', value: 1,
+        line: 1, column: 1 }
+    ], [...tokenizer]);
+  });
+
+  it("tokenizes the number 12", function () {
+    const tokenizer = new Tokenizer("12");
+    assert.deepEqual([
+      { type: 'N', value: 12,
+        line: 1, column: 1 }
+    ], [...tokenizer]);
+  });
+
+  it("tokenizes numbers", function () {
+    (function (assert = assertTokenizesNumber) {
+      assert("0", 0);
+      assert("1", 1);
+      assert("2", 2);
+      assert("3", 3);
+      assert("4", 4);
+      assert("5", 5);
+      assert("6", 6);
+      assert("7", 7);
+      assert("8", 8);
+      assert("9", 9);
+      assert("1234567890", 1234567890);
+      assert("0123456789", 123456789);
+
+      // Deciminals
+      assert("0.1", 0.1);
+      assert("1.1", 1.1);
+      assert("22.22", 22.22);
+      assert("333.333", 333.333);
+    }());
+  });
+
+  it("tokenizes a symbol", function () {
+    (function (assert = assertTokenizesSymbol) {
+      assert("symbol", "symbol");
+      assert("lobmys", "lobmys");
+      assert("SyMBoL", "SyMBoL");
+      assert("SYMBOL", "SYMBOL");
+      assert("symbol123", "symbol123");
+    })();
+  });
+
+  it("tokenizes a symbol", function () {
+    let tokenizer = new Tokenizer('symbol');
+    assert.deepEqual([
+      {
+        type: 'Y', value: 'symbol',
+        line: 1, column: 1
+      }
+    ], [...tokenizer]);
+  });
+
+  it("tokenizes (", function () {
+    assertTokenizes('(', {
+      type: "(", value: "(",
+      line: 1, column: 1
+    });
+  });
+
+  it("tokenizes )", function () {
+    assertTokenizes(')', {
+      type: ")", value: ")",
+      line: 1, column: 1
+    });
+  });
+
+  it("tokenizes ,", function () {
+    assertTokenizes(',', {
+      type: ",", value: ",",
+      line: 1, column: 1
+    });
+    assertTokenizes('a,', {
+        type: "Y", value: "a",
+        line: 1, column: 1
+      }, {
+        type: ",", value: ",",
+        line: 1, column: 2
+      });
+  });
+
+  it("tokenizes ;", function () {
+    assertTokenizes(';', {
+      type: ";", value: ";",
+      line: 1, column: 1
+    });
+    assertTokenizes('a;', {
+        type: "Y", value: "a",
+        line: 1, column: 1
+      }, {
+        type: ";", value: ";",
+        line: 1, column: 2
+      });
+  });
+
+  it("tokenizes [", function () {
+    assertTokenizes('[', {
+      type: "[", value: "[",
+      line: 1, column: 1
+    });
+  });
+
+  it("tokenizes ]", function () {
+    assertTokenizes(']', {
+      type: "]", value: "]",
+      line: 1, column: 1
+    });
+  });
+
+  it("tokenizes °", function () {
+    assertTokenizes('°', {
+      type: "°", value: "°",
+      line: 1, column: 1
+    });
+  });
+
   it("tokenizes ()[]{}.°", function () {
     let tokenizer = new Tokenizer("()[]{}.°");
     assert.deepEqual([
@@ -68,15 +190,7 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 
-  it("tokenizes a symbol", function () {
-    let tokenizer = new Tokenizer('symbol');
-    assert.deepEqual([
-      {
-        type: 'Y', value: 'symbol',
-        line: 1, column: 1
-      }
-    ], [...tokenizer]);
-  });
+  it("throw error for unterminated strings");
 
   it("tokenizes true", function () {
     let tokenizer = new Tokenizer('true');
@@ -222,3 +336,22 @@ describe("Tokenizer", function () {
     ], [...tokenizer]);
   });
 });
+
+
+function assertTokenizes(input, ...expects) {
+  const tokenizer = new Tokenizer(input);
+  assert.deepEqual(expects,
+    [...tokenizer]);
+}
+
+function assertTokenizesNumber(input, expects) {
+  assertTokenizes(input,
+    { type: 'N', value: expects,
+      line: 1, column: 1 });
+}
+
+function assertTokenizesSymbol(input, expects) {
+  assertTokenizes(input,
+    { type: 'Y', value: expects,
+      line: 1, column: 1 });
+}
