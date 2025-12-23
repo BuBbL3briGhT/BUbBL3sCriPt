@@ -10,22 +10,23 @@
    *                                            *
    * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
-             const { List, Vektar, ObjectMap, LazyList }
-                            = require("./list");
-                   const Fn = require("./fn");
-               const Ṣymbol = require("./symbol");
-            const { Macro } = require("./macro");
-            const { ëval, evalEach, evalExpression }
-                            = require("./eval");
-                const Range = require("./range");
-          const { specialForm, specialFormP }
-                            = require("./special_form");
-              const reqůire = require("./require");
-              const consola = require("./consola");
-        const createBinding = require("./create_binding.js");
+import { List, Vektar, ObjectMap, LazyList }
+        from "./list.js";
+import Fn from "./fn.js";
+import Ṣymbol from "./symbol.js";
+import { Macro } from "./macro.js";
+import { ëval, evalEach, evalExpression }
+        from "./eval.js";
+import Range from "./range.js";
+import { specialForm, specialFormP }
+        from "./special_form.js";
+
+import consola from "./consola.js";
+import reqůire from "./require.js";
+
 const starSymbol = Ṣymbol.for("*");
-                 const sAmp = Ṣymbol.for("&");
-     const sAmp = Ṣymbol.for("&");
+const sAmp = Ṣymbol.for("&");
+
 function ensureKeyNotDefined(binding, key) {
   if (Object.hasOwn(binding, key))
     throw new Error("const " + key +
