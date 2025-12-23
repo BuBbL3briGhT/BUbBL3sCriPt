@@ -44,9 +44,8 @@ export default class Fn {
   // }
 
   toString() {
-    return this.body.push(this.params)
-      .push(Ṣymbol.for("fn"))
-      .toString()
+    return this.body.push(
+      this.params.push(Ṣymbol.for("fn"))) .toString();
   }
 
 }
