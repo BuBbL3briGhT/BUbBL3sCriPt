@@ -1,9 +1,10 @@
-const assert = require("assert");
-const { evalExpression } = require("../src/eval");
-const Ṣymbol = require("../src/symbol");
-const Bubble = require("../src/bubble");
-const List = require("../src/list");
-const { rootBinding } = require("../src/root_binding");
+import assert from "node:assert";
+import { it, describe } from "node:test";
+import { evalExpression } from "../src/eval.js";
+import Ṣymbol from "../src/symbol.js";
+import Bubble from "../src/bubble.js";
+import { List } from "../src/list.js";
+import { rootBinding } from "../src/binding.js";
 
 describe("evalExpression", function () {
   it("evaluates an expression", function () {
@@ -25,7 +26,7 @@ describe("evalExpression", function () {
   });
 
   it("evaluates a List", function () {
-    const list = List.blow(Ṣymbol.for("+"), 1, 2);
+    const list = List.make(Ṣymbol.for("+"), 1, 2);
     const result = evalExpression(rootBinding, list);
     assert.equal(result, 3);
   });
