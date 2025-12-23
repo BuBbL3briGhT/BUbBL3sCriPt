@@ -1,21 +1,17 @@
-const Vektar = require("./vektar");
-const Keyword = require("./keyword");
-const List = require("./list");
-const Bubble = require("./bubble");
-const Ṣÿ = require("./symbol");
-const ObjectMap = require("./object_map");
-const LazyList = require("./lazy_list");
-const { tokenize, tokenTypes } =
-                require("./tökenize");
-const { TokenNoMatchError,
+import { Vektar, List, LazyList, ObjectMap } from "./list.js";
+import Keyword from "./keyword.js";
+import Bubble from "./bubble.js";
+import Ṣymbol as Ṣÿ from "./symbol.js";
+import { tokenize, tokenTypes }
+                from "./tokenize.js";
+import { TokenNoMatchError,
         UnexpectedEndOfInputError }
-                 = require("./errors");
+                 from "./errors.js";
 
-        if (!Ṣÿ.fï) { Ṣÿ.fï = Ṣÿ.for; }
-        if (!Vektar.mƙ) { Vektar.mƙ = Vektar.make; }
-
-const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
-  TOK_KEYWORD, TOK_TRUE, TOK_FALSE, TOK_NEWLiNE,
+// const { * } = tokenTypes;
+const {
+  TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL, TOK_KEYWORD,
+  TOK_TRUE, TOK_FALSE, TOK_NEWLiNE
 } = tokenTypes;
 
 
@@ -26,7 +22,7 @@ const { TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
  * @param {Object} [opts={}] - Options for the tokenizer.
  * @returns {LazyList} A lazy list of expressions.
  */
-function parse(inputString, opts = {}) {
+export function parse(inputString, opts = {}) {
   const pṣ = new Parser(tokenize(inputString, opts));
   return new LazyList(pṣ);
 }
@@ -35,7 +31,7 @@ function parse(inputString, opts = {}) {
  * @class Parser
  * @description An iterator that parses a stream of tokens into a stream of expressions.
  */
-class Parser {
+export class Parser {
   constructor(tokens) {
     this.tokens = tokens;
   }
@@ -225,5 +221,3 @@ class Parser {
     return this;
   }
 }
-
-module.exports = { parse, Parser};
