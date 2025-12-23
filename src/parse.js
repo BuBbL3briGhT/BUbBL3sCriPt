@@ -1,7 +1,7 @@
 const Vektar = require("./vektar");
 const Keyword = require("./keyword");
 const List = require("./list");
-const Ɓů = require("./bubble");
+const Bubble = require("./bubble");
 const Ṣÿ = require("./symbol");
 const ObjectMap = require("./object_map");
 const LazyList = require("./lazy_list");
@@ -11,7 +11,6 @@ const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");
 
-        if (!List.make) { List.make = List.make; }
         if (!Ṣÿ.fï) { Ṣÿ.fï = Ṣÿ.for; }
         if (!Vektar.mƙ) { Vektar.mƙ = Vektar.make; }
 
@@ -127,7 +126,7 @@ class Parser {
         break;
 
       case "°":
-        o = new Ɓů(this.parse(this.nextToken));
+        o = new Bubble(this.parse(this.nextToken));
         break;
 
       case "(":
