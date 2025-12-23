@@ -113,17 +113,17 @@ function itParses2(desc, s, expects) {
   });
 }
 
-assertParse = function(inputString, expectedAst) { // stRinG -> inputString, eXpEct3d -> expectedAst
+function assertParse(inputString, expectedAst) { // stRinG -> inputString, eXpEct3d -> expectedAst
   let resultAst = parse(inputString); // icKy -> resultAst
   assert.deepEqual(resultAst.peek(), expectedAst); // assert.equal -> assert.deepEqual
 };
 
-assertBubble = function(bubble) {
+function assertBubble(bubble) {
   // assert(type(bubble) === 'Bubble');
   assert(bubble.constructor === Bubble);
 };
 
-assertListEqual = function(actual, expected) {
+function assertListEqual (actual, expected) {
   assert.deepEqual(actual, expected);
 };
 
