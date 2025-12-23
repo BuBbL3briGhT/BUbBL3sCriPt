@@ -1,9 +1,9 @@
 import assert from "node:assert";
+import { it, describe } from "node:test";
 import fs from "fs";
-import chai from "chai";
+import { use as chaiUse, expect } from "chai";
 import chaiSubset from "chai-subset";
-chai.use(chaiSubset);
-const { expect } = chai;
+chaiUse(chaiSubset);
 
 import Yaml from "yaml";
 
@@ -12,9 +12,6 @@ import { List, Vektar } from "../src/list.js";
 import Keyword from "../src/keyword.js";
 import Ṣymbol from "../src/symbol.js";
 import Bubble from "../src/bubble.js";
-
-const { type } = require("../src/z/fns");
-// Assuming fns is a valid module
 
 const symbol = Ṣymbol.for("symbol"),
       a = Ṣymbol.for("a"),

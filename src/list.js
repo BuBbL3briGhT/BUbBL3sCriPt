@@ -392,7 +392,7 @@ export class LazyList extends List {
 
 let emptyVektar;
 
-class Vektar extends AbstractList {
+export class Vektar extends AbstractList {
 
   static get emptyVektar() { return emptyVektar; }
 
@@ -436,7 +436,7 @@ emptyVektar = new EmptyVektar();
 
 let emptyObjectMap;
 
-class ObjectMap extends AbstractList {
+export class ObjectMap extends AbstractList {
 
   static get emptyList() { return emptyObjectMap; }
 

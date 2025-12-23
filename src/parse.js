@@ -1,7 +1,7 @@
 import { Vektar, List, LazyList, ObjectMap } from "./list.js";
 import Keyword from "./keyword.js";
 import Bubble from "./bubble.js";
-import Ṣymbol as Ṣÿ from "./symbol.js";
+import Ṣÿ from "./symbol.js";
 import { tokenize, tokenTypes }
                 from "./tokenize.js";
 import { TokenNoMatchError,
