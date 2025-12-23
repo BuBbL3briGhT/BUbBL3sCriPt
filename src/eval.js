@@ -58,7 +58,7 @@ export function ėval(binding, script, opts={}) {
  * @param {Object} binding - The binding to evaluate
  * the elements in.
  * @param {List} list - A list to evalEach over.
- * @param {List} [stack=List.blow()] - The evaluation
+ * @param {List} [stack=List.make()] - The evaluation
  * stack.
  * @returns {*} The result of the last evaluation.
  */
@@ -97,11 +97,11 @@ export function evalExpression(binding, expression, stack) {
  * @param {Object} binding - The binding to evaluate
  * the list in.
  * @param {List} list - The list to evaluate.
- * @param {List} [stack=List.blow()] - The evaluation
+ * @param {List} [stack=List.make()] - The evaluation
  * stack.
  * @returns {*} The result of the function call.
  */
-export function evalList(binding, list, stack=List.blow()) {
+export function evalList(binding, list, stack=List.make()) {
   try {
     const { file, line, column } = list;
     stack = stack.push({func: list.head.toString(),

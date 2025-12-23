@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { it, describe } from "node:test";
+import { it, describe, afterEach } from "node:test";
 import sinon from "sinon";
 
 import { List, Vektar } from "../src/list.js";
@@ -187,7 +187,7 @@ describe("ėval", function () {
     // how the are define, or what the are
     // composed of, which we are going to need
     // to dig into identify and probably
-    // classify in order to blow the system
+    // classify in order to make the system
     // that much more robust.
       // assert.equal(ėval(
       //   "((fn [a b & c] (console.log & c)) 1 2 3)")
