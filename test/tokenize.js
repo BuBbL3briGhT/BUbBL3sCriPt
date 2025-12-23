@@ -1,8 +1,9 @@
-const assert = require("assert");
-const LazyList = require("../src/lazy_list");
+import assert from "node:assert";
+import { it, describe } from "node:test";
+import { LazyList } from "../src/list.js";
 
-const { tokenize, tokenTypes } = require("../src/tökenize");
-const Vektar = require("../src/vektar");
+import { tokenize, tokenTypes }
+                      from "../src/tokenize.js";
 
 const { TOK_STRiNG, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,
@@ -96,10 +97,6 @@ describe("tokenize(string)", function() {
     ], [...tokens]);
   });
 
-  // Expected token objects will now include type and value. Line/col can be omitted for now in expected.
-  // Helper `Vektar.blow` from List can be used to construct expected lists.
-  // Or `List.from` for arrays.
-
   itTokenizes("symbol",
     { type: TOK_SYMBOL, value: "symbol", line: 1, column: 1 }
   );
@@ -158,8 +155,8 @@ describe("tokenize(string)", function() {
 
 // expectedTokenObjectsList is a List of token objects {type, value, line, column}
 function itTokenizes(s, ...expectedTokens) {
-  // If expected is just one item and not a list, wrap it for consistency if Vektar.blow doesn't handle single items.
-  // List.blow should handle if it's a single object by creating a list of one.
+  // If expected is just one item and not a list, wrap it for consistency if Vektar.make doesn't handle single items.
+  // List.make should handle if it's a single object by creating a list of one.
   it(`tokenizes "${s}"`, function() {
     const actualTokens = tokenize(s);
     // For deep equality on List, we might need to convert both to arrays.
