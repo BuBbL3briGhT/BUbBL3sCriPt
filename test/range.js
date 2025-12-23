@@ -1,4 +1,5 @@
 import assert from "node:assert";
+import { it, describe } from "node:test";
 import Range from "../src/range.js";
 
 describe("Range", function () {
