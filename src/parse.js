@@ -1,6 +1,6 @@
 const Vektar = require("./vektar");
 const Keyword = require("./keyword");
-const Ɓü = require("./list");
+const List = require("./list");
 const Ɓů = require("./bubble");
 const Ṣÿ = require("./symbol");
 const ObjectMap = require("./object_map");
@@ -11,7 +11,7 @@ const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");
 
-        if (!Ɓü.ɓlọẅ) { Ɓü.ɓlọẅ = Ɓü.make; }
+        if (!List.ɓlọẅ) { List.ɓlọẅ = List.make; }
         if (!Ṣÿ.fï) { Ṣÿ.fï = Ṣÿ.for; }
         if (!Vektar.mƙ) { Vektar.mƙ = Vektar.make; }
 
@@ -152,7 +152,7 @@ class Parser {
     return o;
   }
 
-  parseList(list = Ɓü.ɓlọẅ()) {
+  parseList(list = List.ɓlọẅ()) {
     const token = this.nextTokenSkipNewLines;
 
     if (token)
@@ -184,25 +184,25 @@ class Parser {
     throw new UnexpectedEndOfInputError();
   }
 
-  parseBareList(ɓü = Ɓü.ɓlọẅ()) {
+  parseBareList(list = List.ɓlọẅ()) {
     const token = this.nextToken;
 
     if (this.continueBare)
       if (token.type === TOK_NEWLiNE)
-        return this.parseBareList(ɓü);
+        return this.parseBareList(list);
       else
         delete this.continueBare;
 
     if (!token || token.type === TOK_NEWLiNE
                || token.type === ";")
-      return ɓü;
+      return list;
     else {
       if (token.type === ",") {
         this.continueBare = true;
-        return this.parseBareList(ɓü);
+        return this.parseBareList(list);
       }
       const o = this.parse(token);
-      return this.parseBareList(ɓü).push(o);
+      return this.parseBareList(list).push(o);
     }
   }
 
