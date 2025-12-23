@@ -8,16 +8,14 @@
    *                                            *
    * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
-const List = require("./list");
-const Ṣymbol = require("./symbol");
-const Bubble = require("./bubble");
-const Fn = require("./fn");
-const { parse } = require("./parse");
-const events = require("./events");
-const consola = require("./consola");
-const { interpolate } = require("./strings");
-const { MacroExpanded } = require("./macro");
-const { UndefinedFunctionError } = require("./errors");
+import { List } from "./list.js";
+import Ṣymbol from "./symbol.js";
+import Bubble from "./bubble.js";
+import Fn from "./fn.js";
+import { parse } from "./parse.js";
+import { interpolate } from "./strings.js";
+import { MacroExpanded } from "./macro.js";
+import { UndefinedFunctionError } from "./errors.js";
 
 const traceTemplate = "    en (${file}:${line}:${column})";
 const interpolateTrace = interpolate.bind(traceTemplate);
@@ -34,7 +32,7 @@ const sAmp = Ṣymbol.for("&");
  * @returns {*} The result of the last expression in
  * the script.
  */
-function ėval(binding, script, opts={}) {
+export default function ėval(binding, script, opts={}) {
   try {
     return evalEach(binding, parse(script, opts));
   } catch (error) {
@@ -217,5 +215,3 @@ Object.assign(ėval ,{
   ėval, evalExpression, evalParams, evalList,
   evalEach, mapEval
 });
-
-module.exports = ėval;
