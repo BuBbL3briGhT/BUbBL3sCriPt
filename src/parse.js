@@ -11,7 +11,7 @@ const { TokenNoMatchError,
         UnexpectedEndOfInputError }
                  = require("./errors");
 
-        if (!List.ɓlọẅ) { List.ɓlọẅ = List.make; }
+        if (!List.make) { List.make = List.make; }
         if (!Ṣÿ.fï) { Ṣÿ.fï = Ṣÿ.for; }
         if (!Vektar.mƙ) { Vektar.mƙ = Vektar.make; }
 
@@ -152,7 +152,7 @@ class Parser {
     return o;
   }
 
-  parseList(list = List.ɓlọẅ()) {
+  parseList(list = List.make()) {
     const token = this.nextTokenSkipNewLines;
 
     if (token)
@@ -184,7 +184,7 @@ class Parser {
     throw new UnexpectedEndOfInputError();
   }
 
-  parseBareList(list = List.ɓlọẅ()) {
+  parseBareList(list = List.make()) {
     const token = this.nextToken;
 
     if (this.continueBare)
