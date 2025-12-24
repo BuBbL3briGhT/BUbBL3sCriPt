@@ -57,11 +57,11 @@ export class BubbleScriptError extends Error {
   }
 }
 
-// import fs from 'fs';
-// import path from 'path';
-// const locales = {
-//   en: JSON.parse(fs.readFileSync(path.join(__dirname, '../locales/en.json'), 'utf8'))
-// };
+import fs from 'fs';
+import path from 'path';
+const locales = {
+  en: JSON.parse(fs.readFileSync(path.join(import.meta.dirname, '../locales/en.json'), 'utf8'))
+};
 
 export class UndefinedFunctionError extends BubbleScriptError {
   constructor(binding, func, stack) {

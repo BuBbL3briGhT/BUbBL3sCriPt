@@ -8,12 +8,6 @@ import { rootBinding } from "../src/binding.js";
 
 import { ėval, evalEach } from "../src/eval.js";
 
-// const { List, Vektar, rootBinding,
-//   ėval, ëval, parse, Keyword } =
-//   require("../src/BubbleScript");
-
-
-
 describe("evalEach", function () {
 
   it("evaluates a keyword", function() {
@@ -35,13 +29,13 @@ describe("ėval", function () {
     assert.equal(result, Keyword.for("keyword"));
   });
 
-  it.only("runs script top to bottom", function () {
+  it("runs script top to bottom", function () {
     const binding = Object.create(rootBinding);
     sinon.replace(console, "log", sinon.fake())
     // ėval("(muf puts (fn [a] (console.log a))) " +
     //      "(puts 1) (puts 2) (puts 3)");
     ėval(binding,
-      "(muf puts (fn [a] (console.log a)))\n" +
+      "(define puts ((fn a) (console.log a)))\n" +
          "(puts 1)\n(puts 2)\n(puts 3)");
     // ėval("(puts 1)\n(puts 2)\n(puts 3)");
     // ėval("(puts 3)\n(puts 2)\n(puts 1)\n(muf puts (fn [a] (console.log a)))"); // fyi: Pass with this under reverse execution.
@@ -116,7 +110,7 @@ describe("ėval", function () {
       "((puts \"Monkey\"))");
   });
 
-  it.only("expands a more complex macro", function () {
+  it("expands a more complex macro", function () {
     let bnd = Object.create(rootBinding);
 
     // Override puts with noop function.
