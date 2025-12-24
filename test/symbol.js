@@ -1,7 +1,7 @@
 'use strict'
 
 import assert from "node:assert";
-import { describe, it } from "node:test";
+import { describe, it } from "mocha";
 import Ṣymbol from "../src/symbol.js";
 
 describe("Ṣymbol", function () {

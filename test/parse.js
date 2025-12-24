@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { it, describe } from "node:test";
+import { it, describe } from "mocha";
 import fs from "fs";
 import { use as chaiUse, expect } from "chai";
 import chaiSubset from "chai-subset";

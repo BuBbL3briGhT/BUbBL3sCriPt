@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { it, describe } from "node:test";
+import { it, describe } from "mocha";
 import Keyword from "../src/keyword.js";
 import { rootBinding } from "../src/binding.js";
 import { List } from "../src/list.js";

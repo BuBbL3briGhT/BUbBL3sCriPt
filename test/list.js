@@ -1,5 +1,5 @@
 
-import { it, describe } from "node:test";
+import { it, describe } from "mocha";
 import assert from "node:assert";
 
 import { List, LazyList } from "../src/list.js";

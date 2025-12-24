@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { it, describe } from "node:test";
+import { it, describe } from "mocha";
 
 import { Macro } from "../src/macro.js";
 import { List, Vektar } from "../src/list.js";

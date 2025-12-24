@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { it, describe } from "node:test";
+import { it, describe } from "mocha";
 import { evalExpression } from "../src/eval.js";
 import Ṣymbol from "../src/symbol.js";
 import Bubble from "../src/bubble.js";
