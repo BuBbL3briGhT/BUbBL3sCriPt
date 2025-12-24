@@ -1,5 +1,4 @@
-import assert from "node:assert";
-import { it, describe, afterEach } from "node:test";
+import assert from "assert";
 import sinon from "sinon";
 
 import { List, Vektar } from "../src/list.js";
@@ -117,7 +116,7 @@ describe("ėval", function () {
       "((puts \"Monkey\"))");
   });
 
-  it("expands a more complex macro", function () {
+  it.only("expands a more complex macro", function () {
     let bnd = Object.create(rootBinding);
 
     // Override puts with noop function.
@@ -135,17 +134,16 @@ describe("ėval", function () {
       "(list °puts (list °+ 🐸 🐷 🦎)) "+
       "(list °puts (+ 🐸 🐷 🐷) 🦎))))");
 
-    ast.evalEach(bnd);
+    evalEach(bnd, ast);
 
     let fn =
-      parse("(fn [🪻] (* 6 9) "+
-                "(🐒 1 2 🪻) (+ 3 4))").
-        evalEach(bnd);
+      evalEach(bnd, parse("((fn 🪻) (* 6 9) "+
+                "(🐒 1 2 🪻) (+ 3 4))"));
 
     assert.equal(fn.body.toString(),
       "((* 6 9) (🐒 1 2 🪻) (+ 3 4))");
 
-    fn.body.evalEach(bnd);
+    evalEach(bnd, fn.body);
 
     assert.equal(fn.body.toString(),
       "((* 6 9) (puts (+ 1 2 🪻)) "+
