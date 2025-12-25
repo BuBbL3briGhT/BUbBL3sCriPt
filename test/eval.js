@@ -70,23 +70,23 @@ describe("ėval", function () {
 
     // Parse a macro to be used for our test..
     const ast =
-      parse('(muf 🐒 (macro []   '+
+      parse('(define 🐒 (macro []   '+
             '  °(puts "Monkey")))');
 
     // Call toString() on our parsed macro to
     // ensure it is as we expect, asserting it
     // is equal with a comparison.
     assert.equal(ast.toString(),
-      '((muf 🐒 (macro [] °(puts "Monkey"))))');
+      '((define 🐒 (macro [] °(puts "Monkey"))))');
 
     // Evaluate our test macro against or test
     // binding to store it in the binding t
     // for use in the remainder of test.
-    ast.evalEach(bnd);
+    evalEach(bnd, ast);
 
     // Parse and evaulate a function that uses the
     // macro.
-    const fn = parse("(fn [] (🐒))").evalEach(bnd);
+    const fn = evalEach(bnd, parse("((fn) (🐒))"));
 
     // Check that the function body looks like we
     // expect.
@@ -95,7 +95,7 @@ describe("ėval", function () {
     // Simulate a function invokation by
     // evaulating the body of the function against
     // our test body which contains the macro.
-    fn.body.evalEach(bnd);
+    evalEach(bnd, fn.body);
 
     // Confirm that the function body is now
     // changed and now contains the macro's
@@ -105,7 +105,7 @@ describe("ėval", function () {
 
     // Simulate another invokation of the
     // function.
-    fn.body.evalEach(bnd);
+    evalEach(bnd, fn.body);
 
     // Check the body, once again, confirming this
     // time it has not changed.
