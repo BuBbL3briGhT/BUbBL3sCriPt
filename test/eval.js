@@ -167,11 +167,12 @@ describe("ėval", function () {
       //     .toString(), "(3)");
     });
     it("destructures", function () {
-      assert.equal(ėval(
-        "((fn [a b] (list a b b)) 1 [2 3])")
+      const bnd = Object.create(rootBinding);
+      assert.equal(ėval(bnd,
+        "(((fn a b) (list a b b)) 1 [2 3])")
           .toString(), "(1 [2 3] [2 3])");
-      assert.equal(ėval(
-        "((fn [a [b c]] (list a b c)) 1 [2 3])")
+      assert.equal(ėval(bnd,
+        "(((fn a [b c]) (list a b c)) 1 [2 3])")
           .toString(), "(1 2 3)");
     });
     it("splats for outbound functions");
