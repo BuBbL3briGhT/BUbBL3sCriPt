@@ -124,14 +124,14 @@ describe("ėval", function () {
     bnd.puts = function () {};
 
     let ast =
-      parse("(muf 🐒 (macro [🐸 🐷 🦎] "+
+      parse("(define 🐒 ((macro 🐸 🐷 🦎) "+
             "  (list °puts             "+
             "    (list °+ 🐸 🐷 🦎))   "+
             "  (list °puts             "+
             "    (+ 🐸 🐷 🐷) 🦎)))    ");
 
     assert.equal(ast.toString(),
-      "((muf 🐒 (macro [🐸 🐷 🦎] "+
+      "((define 🐒 ((macro 🐸 🐷 🦎) "+
       "(list °puts (list °+ 🐸 🐷 🦎)) "+
       "(list °puts (+ 🐸 🐷 🐷) 🦎))))");
 
