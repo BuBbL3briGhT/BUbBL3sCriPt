@@ -169,7 +169,7 @@ export function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {
     params =
-      splits.next.peek().eval(binding)
+      evalEach(binding, splits.next)
         .conj(mapEval(binding, splits.first));
   } else {
     params = mapEval(binding, params);

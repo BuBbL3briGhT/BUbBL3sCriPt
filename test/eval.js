@@ -68,16 +68,20 @@ describe("ėval", function () {
     const bnd = Object.create(rootBinding);
 
 
+    sinon.replace(console, "log", sinon.fake())
+    ėval(bnd, "(define (puts & msgs) (console.log & msgs))");
+
+
     // Parse a macro to be used for our test..
     const ast =
-      parse('(define 🐒 (macro []   '+
+      parse('(define 🐒 ((macro)   '+
             '  °(puts "Monkey")))');
 
     // Call toString() on our parsed macro to
     // ensure it is as we expect, asserting it
     // is equal with a comparison.
     assert.equal(ast.toString(),
-      '((define 🐒 (macro [] °(puts "Monkey"))))');
+      '((define 🐒 ((macro) °(puts "Monkey"))))');
 
     // Evaluate our test macro against or test
     // binding to store it in the binding t

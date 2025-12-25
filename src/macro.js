@@ -9,13 +9,13 @@ export class Macro {
     this.name = opts.name;
   }
 
-  expand(params) {
+  expand(params, ėval) {
     // console.log("params", params);
     // console.log("this.params", this.params);
     let binding = createBinding(this.binding,
       this.params, params);
 
-    return this.body.mapEval(binding);
+    return ėval.mapEval(binding, this.body);
   }
 
   // this is a guess but seems about right, will
@@ -24,8 +24,8 @@ export class Macro {
   // need to be passed int the expansion. this may
   // be an over sight, and it maybe be correct as
   // is.
-  call(binding, params) {
-    const expanded = this.expand(params);
+  call(binding, params, pila, ėval) {
+    const expanded = this.expand(params, ėval);
     throw new MacroExpanded(expanded);
   }
 
