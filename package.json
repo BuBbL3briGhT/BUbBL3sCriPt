@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "prueba": "mocha ./prueba/*.js ./prueba/**/*.js",
-    "test": "node --test"
+    "test": "mocha ./test/*.js ./test/**/*.js"
   },
   "bin": {
     "bubls": "bin/bubls"
