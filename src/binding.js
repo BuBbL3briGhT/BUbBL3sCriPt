@@ -38,7 +38,7 @@ function ensureKeyNotDefined(binding, key) {
 // something strong, my head is killing
 // me. 🍸
 export const rootBinding = {
-  // console, consola,
+  console, // consola,
   // Js require
   // ["reqūire"]: require,
   __dirname: import.meta.dirname,
