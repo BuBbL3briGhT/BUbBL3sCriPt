@@ -45,7 +45,8 @@ describe("ėval", function () {
   });
 
   it("evaluates BubbleScript", function () {
-    assert.equal(ėval("(+ 45 87)"), 132);
+    const binding = Object.create(rootBinding);
+    assert.equal(ėval(binding, "(+ 45 87)"), 132);
   });
 
   it("can console.log", function () {
