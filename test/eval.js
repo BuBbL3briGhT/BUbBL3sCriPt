@@ -50,13 +50,15 @@ describe("ėval", function () {
   });
 
   it("can console.log", function () {
+    const binding = Object.create(rootBinding);
     sinon.replace(console, "log", sinon.fake())
-    ėval('(console.log "Bonjour Marbre")');
+    ėval(binding, '(console.log "Bonjour Marbre")');
     assert(console.log.calledWith("Bonjour Marbre"));
   });
 
   it("evaluates a vektar with ease", function () {
-    let result = ėval("[1 2 3]");
+    const binding = Object.create(rootBinding);
+    let result = ėval(binding, "[1 2 3]");
     assert(result instanceof Vektar);
   });
 
