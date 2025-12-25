@@ -22,6 +22,8 @@ if (path === "-v" || path ==="--version") {
 const binding = Object.create(rootBinding);
 // binding.reqůire = reqůire;
 
+import readline from 'readline';
+
 if (path) {
 
   const fs = require('fs');
@@ -45,8 +47,6 @@ if (path) {
   });
 
 } else {
-
-  const readline = require('readline');
 
   const rl = readline.createInterface({
     input: process.stdin,
