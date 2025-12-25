@@ -149,14 +149,15 @@ describe("ėval", function () {
 
   describe("function parameters", function () {
     it("splats", function () {
-      assert.equal(ėval(
-        "((fn [a b c] (list b c a)) 1 2 3)")
+      const bnd = Object.create(rootBinding);
+      assert.equal(ėval(bnd,
+        "(((fn a b c) (list b c a)) 1 2 3)")
           .toString(), "(2 3 1)");
-      assert.equal(ėval(
-        "((fn [a & b] (list a b)) 1 2 3)")
+      assert.equal(ėval(bnd,
+        "(((fn a & b) (list a b)) 1 2 3)")
           .toString(), "(1 (2 3))");
-      assert.equal(ėval(
-        "((fn [& a] (send a :pop)) 1 2 3)")
+      assert.equal(ėval(bnd,
+        "(((fn & a) (send a :pop)) 1 2 3)")
           .toString(), "(2 3)");
       // assert.equal(ėval(
       //   "((fn [& a] (pop a)) 1 2 3)")
