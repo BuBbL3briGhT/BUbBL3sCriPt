@@ -8,7 +8,7 @@ import { BubbleScriptError,
 // will serve as the abstract base class for `List`
 // and `Vektar`. All shared functionality between
 // `List` and `Vektar` is centralized here.
-export default class AbstractList {
+export class AbstractList {
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);

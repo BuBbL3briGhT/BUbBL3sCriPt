@@ -3,12 +3,11 @@
 // Error.stackTraceLimit = 20;
 // Error.stackTraceLimit = 100;
 
-const bubls = require('../src/index');
-const { rootBinding } = require('../src/root_binding');
-const { getReqůireFor } = require("../src/reqůire");
-const { ėval } = require("../src/eval");
-const { BubbleScriptError } = require("../src/errors");
-const consola = require("../src/consola");
+import bubls from '../src/index.js';
+import { rootBinding } from '../src/binding.js';
+// import { getReqůireFor } from "../src/require.js";
+import { ėval } from "../src/eval.js";
+import { BubbleScriptError } from "../src/errors.js";
 
 let path = process.argv[2];
 
@@ -19,9 +18,9 @@ if (path === "-v" || path ==="--version") {
   process.exit();
 }
 
-const reqůire = getReqůireFor(process.cwd());
+// const reqůire = getReqůireFor(process.cwd());
 const binding = Object.create(rootBinding);
-binding.reqůire = reqůire;
+// binding.reqůire = reqůire;
 
 if (path) {
 
@@ -36,9 +35,9 @@ if (path) {
       ėval(binding, xoxo, { file: path });
     } catch (error) {
       if (error instanceof BubbleScriptError) {
-        consola.registro(error.name +
+        console.log(error.name +
           ": " + error.message);
-        consola.registro(error.stack);
+        console.log(error.stack);
       } else {
         console.log(error);
       }
