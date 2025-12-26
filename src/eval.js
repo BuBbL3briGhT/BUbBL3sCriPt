@@ -8,7 +8,7 @@
    *                                            *
    * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
-import { List } from "./list.js";
+import { List, LazyList } from "./list.js";
 import Ṣymbol from "./symbol.js";
 import Bubble from "./bubble.js";
 import Fn from "./fn.js";
@@ -65,6 +65,11 @@ export function ėval(binding, script, opts={}) {
 export function evalEach(binding, list, stack) {
   const _evalExpression =
     evalExpression.bind(null, binding);
+
+  // We can't expand macros on a lazy list right now, so need to convert to a list right now, If we add support for maxlcro expansion, we won't need to do this. That should be possible.
+  if (list.constructor === LazyList)
+    list = list.toList();
+
   return list.tryEach(_evalExpression,
     catchExpandMacro, stack);
 }
