@@ -1,9 +1,0 @@
-This directory holds scripts which are based off of the contents of the Structure and Interpretation of Computer Programs book which are meant to be passed to the bubblescript interpreter so that the results can be anylized and verified.
-
-Currently the best know way of doing this is to cat the files and pipe that into the interpreter like so.
-
-    cat chapter1 | ../bin/bubls
-
-This will echo the input and show the results.
-
-A little crude, but working for purpose.
