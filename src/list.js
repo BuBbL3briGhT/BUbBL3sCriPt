@@ -215,8 +215,9 @@ export class AbstractList {
 }
 
 // Aliases
-const prototype = AbstractList.prototype;
-prototype["includes?"] = prototype.find;
+(function (prototype) {
+  prototype["includes?"] = prototype.find;
+})(AbstractList.prototype);
 
 let emptyList;
 
