@@ -145,7 +145,6 @@ export class Tokenizer {
       case '0':
         token = this.tokenizeNumber();
         token.value = -token.value;
-        console.log({token});
         break;
       case " ":
       case "\n":

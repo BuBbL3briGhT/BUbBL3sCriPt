@@ -206,11 +206,11 @@ export const rootBinding = {
    */
   if: specialForm(function([condition, thenBranch, elseBranch]) {
     const conditionValue =
-              evalExpression.call(this, condition);
+              evalExpression(this, condition);
     if (conditionValue)
-      return evalExpression.call(this, thenBranch);
+      return evalExpression(this, thenBranch);
     else if (elseBranch)
-      return evalExpression.call(this, elseBranch);
+      return evalExpression(this, elseBranch);
   }),
 
   /**
@@ -221,11 +221,11 @@ export const rootBinding = {
    */
   unless: specialForm(function([condition, elseBranch, thenBranch]) {
     const conditionValue =
-              evalExpression.call(this, condition);
+              evalExpression(this, condition);
     if (!conditionValue)
-      return evalExpression.call(this, elseBranch);
+      return evalExpression(this, elseBranch);
     else if (thenBranch)
-      return evalExpression.call(this, thenBranch);
+      return evalExpression(this, thenBranch);
   }),
 
   blert: specialForm(function(msgs) {
