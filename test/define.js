@@ -24,51 +24,45 @@ describe("define", function () {
 
   });
 
-  // It doesn't define a value if it was already
-  // defined (value is constant).
-  it("no define un valor si ya estaba definido "+
-     "(el valor es constante)", function () {
+  it(`doesn't define a value if it was already \
+      defined (value is constant).`, function () {
 
-    const vínculo = Objeto.crear(rootBinding);
+    const binding = Object.create(rootBinding);
 
-      ėval(vínculo, "definir 🍎 \"manzana\"");
+    ėval(binding, `define 🍎 "apple"`);
 
-    afirmar.lanza(function () {
-
-       ėval(vínculo, "definir 🍎 \"manzana\"");
-
+    assert.throws(function () {
+      ėval(binding, `define 🍎 "apple"`);
     }, Error);
 
   });
 
-  // It creates and sets a function when passed a
-  // list as the first parameter, and uses the
-  // remainder of the list as the body.
-  yona("Idala futhi isetha umsebenzi lapho "+
-       "idlulisa uhlu njengepharamitha yokuqala, "+
-       "futhi isebenzisa ingxenye esele yohlu "+
-       "njengomzimba."
-       , function () {
+  it(`creates and sets a function when passed a \
+      list as the first parameter, and uses the \
+      remainder of the list as the body.`,
+    function () {
 
 
-    const vínculo = Into.dala(rootBinding);
+    const binding = Object.create(rootBinding);
 
-       vínculo["💜"] = sinon.fake();
+    binding["💜"] = sinon.fake();
 
-     ėval(vínculo, "definir (🐟) (💜)");
+    ėval(binding, "define (🐟) (💜)");
 
-       qinisa.ngokulinganayo(vínculo["🐟"].constructor, Fn);
+    assert.equal(binding["🐟"].constructor, Fn);
 
-     ėval(vínculo, "(🐟)");
+    ėval(binding, "(🐟)");
 
-       qinisa.kulungile(vínculo["💜"].called,
-         "💜 bekufanele ngabe ngibizwe.");
+    assert.ok(binding["💜"].called,
+       "💜 should have been called.");
 
   });
 
 
-  it.skip("extracts all key values from an ObjectMap in the current binding with *", function () {
-    const vínculo = Object.create(rootBinding);
+  it.skip(`extracts all key values from an \
+           ObjectMap in the current binding \
+           with *`, function () {
+    const binding = Object.create(rootBinding);
     // TODO: Implement test.
   });
 
