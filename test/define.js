@@ -2,7 +2,7 @@
 import assert from "assert";
 import sinon from "sinon";
 import { ėval } from "../src/eval.js";
-import { rootBinding } from "../src/binding.js";
+import { createBinding } from "../src/binding.js";
 import { List } from "../src/list.js"
 import Fn from "../src/fn.js";
 
@@ -41,7 +41,7 @@ describe("define", function () {
 
   it("sets a value", function () {
 
-    const binding = Object.create(rootBinding);
+    const binding = createBinding();
 
     assert.equal(ėval(binding, "🍎"), undefined);
 
@@ -56,7 +56,7 @@ describe("define", function () {
   it(`doesn't define a value if it was already
       defined (value is constant).`, function () {
 
-    const binding = Object.create(rootBinding);
+    const binding = createBinding();
 
     ėval(binding, `define 🍎 "apple"`);
 
@@ -71,8 +71,7 @@ describe("define", function () {
       remainder of the list as the body.`,
     function () {
 
-
-    const binding = Object.create(rootBinding);
+    const binding = createBinding();
 
     binding["💜"] = sinon.fake();
 
@@ -88,7 +87,12 @@ describe("define", function () {
   });
 
 
-  // it(
+  it("destructures objects", function () {
+    const bnd = createBinding();
+    // ėval(bnd, `define { value } (obj :value 5)`);
+    ėval(bnd, `define { value } (obj "value" 5)`);
+    assert.equal(ėval(bnd, "value"), 5);
+  });
 
   // it.skip(`extracts all key values from an
   //          ObjectMap in the current binding

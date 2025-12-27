@@ -63,6 +63,14 @@ export const rootBinding = {
           file: key.file,
           line: key.line,
           column: key.column });
+    } else if (key instanceof ObjectMap) {
+      const o = evalEach(this, value);
+      for (const k of key) {
+        const _k = k.toString();
+        this[_k] = o[_k];
+        // console.log({ _k, k, "this": this, o });
+      }
+      return true;
     } else {
       const sKey = key.toString();
       ensureKeyNotDefined(this, sKey);
@@ -456,9 +464,9 @@ function applyArguments
 
 // Creates a binding object for a function or
 // macro.
-export function createBinding(proto, keys, values) {
+export function createBinding(proto=rootBinding, keys, values) {
   const binding = Object.create(proto);
-  applyArguments(binding, keys, values);
+  if (keys) applyArguments(binding, keys, values);
   return binding;
 }
 
