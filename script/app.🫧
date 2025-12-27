@@ -1,0 +1,3 @@
+define { abs } (require "math")
+
+puts abs

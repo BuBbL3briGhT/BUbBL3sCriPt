@@ -23,10 +23,9 @@ const binding = Object.create(rootBinding);
 // binding.reqůire = reqůire;
 
 import readline from 'readline';
+import fs from "fs";
 
 if (path) {
-
-  const fs = require('fs');
 
   fs.readFile(path, 'utf-8', function (error, xoxo) {
     if (error) {
