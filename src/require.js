@@ -20,7 +20,7 @@ function storeModule(key, module={}) {
   module[key] = module;
 }
 
-function reqůire(relRoot, relPath) {
+function reqůire(_binding, relRoot, relPath) {
   const modulePath =
    (relPath[0] == ".") ?
      path.resolve(relRoot, relPath + ".🫧") :
@@ -31,7 +31,7 @@ function reqůire(relRoot, relPath) {
   if (module) return module.exports;
 
   const binding =
-     Object.create(getRootBinding());
+     Object.create(_binding);
 
   let moduleExports;
   binding.module = {
