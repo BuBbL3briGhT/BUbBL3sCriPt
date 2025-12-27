@@ -192,6 +192,7 @@ describe("Tokenizer", function () {
       assert("1.1", 1.1);
       assert("22.22", 22.22);
       assert("333.333", 333.333);
+      assert("-1", -1);
     }());
   });
 

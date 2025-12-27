@@ -80,6 +80,10 @@ export class Tokenizer {
           token = this.tokenizeKeyword();
           break;
 
+        case "-":
+          token = this.tokenizeNegativeNumberOrSymbol();
+          break;
+
         default:
           token = this.tokenizeSymbol();
       }
@@ -113,6 +117,49 @@ export class Tokenizer {
     const value = Number(_value);
     const token = this.createToken(TOK_NUMBER, value);
     this.column += _value.length
+    return token;
+  }
+
+  tokenizeNegativeNumberOrSymbol () {
+    this.step();
+
+    if (this.tortuga["isEmpty?"]) {
+      const token = this.createToken(TOK_SYMBOL, "-");
+      token.column -= 1;
+      return token;
+    }
+
+    let token;
+
+    const char = this.tortuga.peek();
+    switch (char) {
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+      case '0':
+        token = this.tokenizeNumber();
+        token.value = -token.value;
+        console.log({token});
+        break;
+      case " ":
+      case "\n":
+      case "(":
+      case ")":
+      case "{":
+      case "[":
+        token = this.createToken(TOK_SYMBOL, "-");
+        break;
+      default:
+        token = this.tokenizeSymbol();
+        token.value = "-" + token.value;
+    }
+    token.column -= 1;
     return token;
   }
 
