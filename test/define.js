@@ -23,16 +23,16 @@ import { it as _it } from "mocha";
 //     Hello, how are you doing
 //                    today my friend?
 //
-//     console.log(formatString(value));
+//     console.log(fixWhitespace(value));
 //
 //     Hello, how are you doing today my friend?";
 //
-function formatString(string) {
-  return string.replace(/\W+/g, " ");
+function fixWhitespace(string) {
+  return string.replace(/\s+/g, " ");
 }
 
 function it(title, ...etc) {
-  return _it(formatString(title), ...etc);
+  return _it(fixWhitespace(title), ...etc);
 }
 
 
