@@ -46,7 +46,7 @@ function reqůire(relRoot, relPath) {
   // provide it to the binding.
   const _reqůire =
     getReqůireFor(binding, path.dirname(modulePath));
-  binding.reqůire = specialForm(o => _reqůire(...o));
+  binding.require = specialForm(o => _reqůire(...o));
 
   const parseTree =
     parse(fs.readFileSync(modulePath, 'utf-8'));
