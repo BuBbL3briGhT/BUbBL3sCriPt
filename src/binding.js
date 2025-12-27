@@ -67,8 +67,8 @@ export const rootBinding = {
       const o = evalEach(this, value);
       for (const k of key) {
         const _k = k.toString();
+
         this[_k] = o[_k];
-        // console.log({ _k, k, "this": this, o });
       }
       return true;
     } else {
@@ -414,7 +414,6 @@ export const rootBinding = {
 rootBinding.muf = rootBinding.define;
 rootBinding.def = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
-
 
 
 // Applys the keys and the values to the

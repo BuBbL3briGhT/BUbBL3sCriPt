@@ -36,7 +36,7 @@ function reqůire(_binding, relRoot, relPath) {
   let moduleExports;
   binding.module = {
     exports: function(exports) {
-      moduleExports = exports;
+      moduleExports = exports.createObject(binding);
     }
   }
 
