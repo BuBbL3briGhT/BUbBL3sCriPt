@@ -38,15 +38,10 @@ language inspired✨️ for Java☕️script.
 
 **Create a function**
 
-    (mufn coolbeans [beans]
+    (define (coolbeans beans)
       (puts beans))
 
     (coolbeans "yes!")
-
-**Setting locals**
-
-    (let [luckynumber 777]
-      (puts luckynumber))
 
 **Looping**
 
