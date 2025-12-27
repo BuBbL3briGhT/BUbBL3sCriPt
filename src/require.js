@@ -1,21 +1,15 @@
 import fs from "fs";
 import path from "path";
 import { parse } from "./parse.js";
-// const mkfn = require("./util/mkfn");
+import { evalEach } from "./eval.js";
+import { specialForm } from "./special_form.js";
 
-const modules = {};
-let _rootBinding;
-
-// Require rootBinding dynamically.
-function getRootBinding () {
-  return _rootBinding ||=
-      require("./root_binding").rootBinding;
-}
+const modules = Object.create(null);
 
 // Creates a reqůire function curried for
 // relRoot.
-export function getReqůireFor(relRoot) {
-  return relPath => reqůire(relRoot, relPath);
+export function getReqůireFor(binding, relRoot) {
+  return reqůire.bind(null, binding, relRoot);
 }
 
 function getModule(key) {
@@ -30,11 +24,10 @@ function reqůire(relRoot, relPath) {
   const modulePath =
    (relPath[0] == ".") ?
      path.resolve(relRoot, relPath + ".🫧") :
-     path.resolve(__dirname, "../lib",
+     path.resolve(import.meta.dirname, "../lib",
        relPath + ".🫧");
 
-
-  let module = getModule(modulePath);
+  const module = getModule(modulePath);
   if (module) return module.exports;
 
   const binding =
@@ -52,13 +45,13 @@ function reqůire(relRoot, relPath) {
   // as a bubblescript function, finally,
   // provide it to the binding.
   const _reqůire =
-    getReqůireFor(path.dirname(modulePath));
-  binding.reqůire = mkfn(o => _reqůire(...o));
+    getReqůireFor(binding, path.dirname(modulePath));
+  binding.reqůire = specialForm(o => _reqůire(...o));
 
   const parseTree =
     parse(fs.readFileSync(modulePath, 'utf-8'));
   try {
-    parseTree.eval(binding);
+    evalEach(binding, parseTree);
   } catch (error) {
     console.log("Error evaluating " + modulePath);
     throw error;
@@ -66,8 +59,6 @@ function reqůire(relRoot, relPath) {
 
   storeModule(modulePath,
        { exports: moduleExports });
-
-  // console.log("moduleExports", moduleExports);
 
   return moduleExports;
 }
