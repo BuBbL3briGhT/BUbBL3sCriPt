@@ -82,29 +82,29 @@ BubbleScript.eval = ėval.bind(null, rootBinding);
 
 export default BubbleScript;
 
-// import fs from 'fs';
-// import path from 'path';
+import fs from 'fs';
+import path from 'path';
 
-// BubbleScript.load = function (filePath) {
-//   filePath = path.join(import.meta.dirname, filePath);
-//   return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
-// }
+BubbleScript.load = function (filePath) {
+  filePath = path.join(import.meta.dirname, filePath);
+  return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
+}
 
-// BubbleScript.load("../lib/core.🫧");
+BubbleScript.load("../lib/core.🫧");
 
-// function configure(config) {
-//   let rëqůire = config.require
-//   let dirname = config.__dirname;
-//   let { rootBinding } = BubbleScript;
+function configure(config) {
+  const _require = config.require
+  const _dirname = config.dirname;
+  const { rootBinding } = BubbleScript;
 
-//   if (rëqůire)
-//     rootBinding.require = rëqůire;
+  if (_require)
+    rootBinding.require = _require;
 
-//   if (dirname)
-//     BubbleScript.load = function (filePath) {
-//       filePath = path.join(dirname, filePath);
-//       return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
-//     }
-// }
+  if (_dirname)
+    BubbleScript.load = function (filePath) {
+      filePath = path.join(_dirname, filePath);
+      return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
+    }
+}
 
-// BubbleScript.configure = configure;
+BubbleScript.configure = configure;
