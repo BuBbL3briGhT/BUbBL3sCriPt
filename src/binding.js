@@ -47,7 +47,7 @@ export const rootBinding = {
 
   define: specialForm(function(list) {
 
-    const [key, value] = list.plop();
+    const [key, value] = list.values;
 
     // If the key turns out to be a list, then
     // we do a function definition using the
@@ -188,7 +188,7 @@ export const rootBinding = {
    * @returns {*} The result of the last expression in the body.
    */
   let: specialForm(function(list) {
-    const [params, body] = list.plop();
+    const [params, body] = list.tuple;
     const binding = createBinding(this);
     params.toList().partition(2)
       .each(([key, value]) => {
@@ -233,7 +233,7 @@ export const rootBinding = {
   }),
 
   expandmacro: specialForm(function(list) {
-    const [head, tail] = list.plop();
+    const [head, tail] = list.tuple;
     const macro = ëval(this, head);
     return macro.expand(tail);
   }),
@@ -245,7 +245,7 @@ export const rootBinding = {
    * @returns {*} The result of the last expression in the loop body.
    */
   loop: specialForm(function(list) {
-    const [params, body] = list.plop(),
+    const [params, body] = list.tuple,
           scope = Object.create(this);
 
     var recurCalled,
