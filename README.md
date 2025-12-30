@@ -1,4 +1,3 @@
-# Bubblescript
 
                                           o
      .       .   .   .     o                 .
@@ -11,9 +10,11 @@
 
 What is Bubblescript?
 ---------------------
-Bubblescript is a small Clojure-like lisp-inspired language that runs on Node.js.
-It provides a concise s-expression syntax and a tiny standard library for working
-with lists, maps, functions, and the usual functional primitives.
+Bubblescript is a small Clojure-like lisp-inspired
+language that runs on Node.js.  It provides a concise
+s-expression syntax and a tiny standard library for
+working with lists, maps, functions, and the usual
+functional primitives.
 
 Install
 -------
@@ -54,9 +55,11 @@ Looping
 
 Modules and require
 -------------------
-Bubblescript supports modular code via the `require` mechanism.
+Bubblescript supports modular code via the `require`
+mechanism.
 
-- You can `require` a module from `lib/` by its basename:
+- You can `require` a module from `lib/` by its
+basename:
     (const list (require "list"))
 
 - You can extract specific exports:
@@ -86,7 +89,9 @@ Developer setup
 ---------------
 Clone, install dev deps and run tests:
 
-    git clone git@github.com:BuBbL3briGhT/BUbBL3sCriPt.git bubblescript
+    git clone \
+      git@github.com:BuBbL3briGhT/BUbBL3sCriPt.git \
+      bubblescript
     cd bubblescript
     npm install
     npm test
@@ -96,12 +101,22 @@ Running specific tests:
 
 Notes & suggestions
 -------------------
-- lib/list.🫧 cleaned and a pure-BubbleScript `bubblesort` implementation was added;
-  a JS fallback (lib/list.js) is provided for Node-side consumers/tests.
-- The comparator convention: comparator(a b) returns true when a < b (default comparator uses numeric/string <).
-- For runtime bootstrapping the tests use `require('../src/index')` (⛄️ branch).
-- Consider normalizing non-ASCII names in a stable release; aliases can be provided for backward compatibility.
+- lib/list.🫧 cleaned and a pure-BubbleScript
+  `bubblesort` implementation was added; a JS
+  fallback (lib/list.js) is provided for Node-side
+  consumers/tests.
+- The comparator convention: comparator(a b) returns
+  true when a < b (default comparator uses
+  numeric/string <).
+- For runtime bootstrapping the tests use
+  `require('../src/index')` (⛄️ branch).
+- Consider normalizing non-ASCII names in a stable
+  release; aliases can be provided for backward
+  compatibility.
 
 Contributing
 ------------
-If you want me to push these changes and open the PR, I can do that once you confirm and provide push rights, or you can apply the patch locally using the commands below.
+If you want me to push these changes and open the PR,
+I can do that once you confirm and provide push
+rights, or you can apply the patch locally using the
+commands below.
