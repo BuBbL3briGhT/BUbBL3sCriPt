@@ -189,13 +189,13 @@ export const rootBinding = {
    */
   let: specialForm(function(list) {
     const [params, body] = list.plop();
-    const binding = Object.create(this);
+    const binding = createBinding(this);
     params.toList().partition(2)
       .each(([key, value]) => {
         binding[key] =
-         evalExpression.call(binding, value);
+         evalExpression(binding, value);
       });
-    return body.evalEach(binding);
+    return evalEach(binding, body);
   }),
 
   /**
@@ -413,6 +413,7 @@ export const rootBinding = {
 // Aliases
 rootBinding.muf = rootBinding.define;
 rootBinding.def = rootBinding.define;
+rootBinding.const = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
 
 
