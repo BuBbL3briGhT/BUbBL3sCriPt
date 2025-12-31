@@ -413,6 +413,7 @@ rootBinding.def = rootBinding.define;
 rootBinding.const = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
 
+Object.freeze(rootBinding);
 
 // Applys the keys and the values to the
 // binding based on order and position.
