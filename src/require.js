@@ -6,10 +6,10 @@ import { specialForm } from "./special_form.js";
 
 const modules = Object.create(null);
 
-// Creates a reqůire function curried for
+// Creates a require function curried for
 // relRoot.
-export function getReqůireFor(binding, relRoot) {
-  return reqůire.bind(null, binding, relRoot);
+export function getRequireFor(binding, relRoot) {
+  return require.bind(null, binding, relRoot);
 }
 
 function getModule(key) {
@@ -20,7 +20,7 @@ function storeModule(key, module={}) {
   module[key] = module;
 }
 
-function reqůire(_binding, relRoot, relPath) {
+function require(_binding, relRoot, relPath) {
   const modulePath =
    (relPath[0] == ".") ?
      path.resolve(relRoot, relPath + ".🫧") :
@@ -44,9 +44,9 @@ function reqůire(_binding, relRoot, relPath) {
   // the module path, wrap in mkfn for invoking
   // as a bubblescript function, finally,
   // provide it to the binding.
-  const _reqůire =
-    getReqůireFor(binding, path.dirname(modulePath));
-  binding.require = specialForm(o => _reqůire(...o));
+  const _require =
+    getRequireFor(binding, path.dirname(modulePath));
+  binding.require = specialForm(o => _require(...o));
 
   const parseTree =
     parse(fs.readFileSync(modulePath, 'utf-8'));

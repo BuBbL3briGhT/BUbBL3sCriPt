@@ -21,9 +21,6 @@ import Range from "./range.js";
 import { specialForm, specialFormP }
                       from "./special_form.js";
 
-// import consola from "./consola.js";
-// import reqůire from "./require.js";
-
 const starSymbol = Ṣymbol.for("*");
 const sAmp = Ṣymbol.for("&");
 

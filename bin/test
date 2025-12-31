@@ -1,8 +1,8 @@
 #! /usr/bin/env node
 'use strict';
 
-const { getReqůireFor } =
-            require("../src/reqůire");
+const { getRequireFor } =
+            require("../src/require");
 
 const [,,relTestPath] = process.argv;
 
@@ -27,8 +27,8 @@ fs.readFile(testPath, 'utf-8', function(error, xoxo) {
   }
   try {
 
-    const _reqůire =
-      getReqůireFor(path.dirname(testPath));
+    const _require =
+      getRequireFor(path.dirname(testPath));
     const binding = Object.create(rootBinding);
 
     // binding.describe =
@@ -43,7 +43,7 @@ fs.readFile(testPath, 'utf-8', function(error, xoxo) {
     //     // console.log(fn);
     //   });
 
-    binding.reqůire =  mkfn(o => _reqůire(...o));
+    binding.require =  mkfn(o => _require(...o));
 
 
     parse(xoxo).eval(binding);
