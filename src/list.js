@@ -32,6 +32,12 @@ export class AbstractList {
   get next() { return this.pop().peek(); }
   get last() { return !this.pop().isEmpty ?
       this.pop().last : this.peek(); }
+  // Returns a tuple of first and rest as an array.
+  get tuple() { return [this.first, this.rest]; }
+
+  // values can be used to acheive the same purposes
+  // of tuple and #plop, but perhaps more idomatic.
+  get values() { return Object.values(this); }
 
   count() { return this.reduce(i => i+1, 0); }
 
@@ -198,7 +204,6 @@ export class AbstractList {
     return this.constructor.
       make(this.peek(), this.pop());
   }
-
 
   join(delimiter="") {
     return this.reduce((memo,i) =>
