@@ -18,16 +18,12 @@ import { Parser, parse } from "./parse.js";
 import { ėval, evalEach, evalExpression }
                               from "./eval.js";
 import { rootBinding } from "./binding.js";
-import { getRequireFor } from "./require.js";
 
 const BubbleScript = {
   List, Vektar, Ṣymbol, Keyword, Bubble, Fn, Macro,
   tokenize, Parser, parse, ėval, evalEach,
   evalExpression, rootBinding
 }
-
-rootBinding.require = getRequireFor(rootBinding,
-  rootBinding.__dirname);
 
 BubbleScript.eval = ėval.bind(null, rootBinding);
 
@@ -94,21 +90,21 @@ BubbleScript.load = function (filePath) {
   return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
 }
 
-BubbleScript.load("../lib/core.🫧");
+// BubbleScript.load("../lib/core.🫧");
 
-function configure(config) {
-  const _require = config.require
-  const _dirname = config.dirname;
-  const { rootBinding } = BubbleScript;
+// function configure(config) {
+//   const _require = config.require
+//   const _dirname = config.dirname;
+//   const { rootBinding } = BubbleScript;
 
-  if (_require)
-    rootBinding.require = _require;
+//   if (_require)
+//     rootBinding.require = _require;
 
-  if (_dirname)
-    BubbleScript.load = function (filePath) {
-      filePath = path.join(_dirname, filePath);
-      return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
-    }
-}
+//   if (_dirname)
+//     BubbleScript.load = function (filePath) {
+//       filePath = path.join(_dirname, filePath);
+//       return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
+//     }
+// }
 
-BubbleScript.configure = configure;
+// BubbleScript.configure = configure;
