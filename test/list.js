@@ -579,3 +579,15 @@ describe('lib/list.🫧 (BubbleScript bubblesort)', function () {
     assert.ok(s.includes('1') && s.includes('2') && s.includes('3') && s.includes('4') && s.includes('5'));
   });
 });
+
+// (describe 'lib/list.🫧 (BubbleScript bubblesort)' (do
+//   (it 'bubblesort sorts a BubbleScript list' (do
+//     (const result (do
+//       (const { bubblesort } (require "list"))
+//       (const xs °(5 1 4 2 3))
+//       (bubblesort xs)))
+
+//     # Basic check via string representation; adapt if list API differs
+//     (const s (result.toString))
+//     (assert.equal s "(1 2 3 4 5)")
+// ;
