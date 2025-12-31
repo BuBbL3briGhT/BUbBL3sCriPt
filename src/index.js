@@ -18,12 +18,16 @@ import { Parser, parse } from "./parse.js";
 import { ėval, evalEach, evalExpression }
                               from "./eval.js";
 import { rootBinding } from "./binding.js";
+import { getRequireFor } from "./require.js";
 
 const BubbleScript = {
   List, Vektar, Ṣymbol, Keyword, Bubble, Fn, Macro,
   tokenize, Parser, parse, ėval, evalEach,
   evalExpression, rootBinding
 }
+
+rootBinding.require = getRequireFor(rootBinding,
+  rootBinding.__dirname);
 
 BubbleScript.eval = ėval.bind(null, rootBinding);
 

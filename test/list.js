@@ -565,7 +565,6 @@ describe('lib/list.js (JS fallback)', function () {
 // On the ⛄️ branch the runtime is bootstrapped through src/index.js
 
 import bubls from '../src/index.js';
-// import { ėval } from '../src/eval.js';
 
 describe('lib/list.🫧 (BubbleScript bubblesort)', function () {
   it('bubblesort sorts a BubbleScript list', function () {
@@ -574,7 +573,6 @@ describe('lib/list.🫧 (BubbleScript bubblesort)', function () {
       (const xs °(5 1 4 2 3))
       (bubblesort xs)
     `;
-    // const result = ėval(script);
     const result = bubls.eval(script);
     // Basic check via string representation; adapt if list API differs
     const s = result.toString();
