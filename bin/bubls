@@ -5,7 +5,6 @@
 
 import bubls from '../src/index.js';
 import { rootBinding } from '../src/binding.js';
-import { getReqůireFor } from "../src/require.js";
 import { ėval } from "../src/eval.js";
 import { BubbleScriptError } from "../src/errors.js";
 
@@ -19,8 +18,7 @@ if (path === "-v" || path ==="--version") {
 }
 
 const binding = Object.create(rootBinding);
-binding.require =
-  getReqůireFor(binding, process.cwd());
+binding.__dirname = process.cwd();
 
 import readline from 'readline';
 import fs from "fs";

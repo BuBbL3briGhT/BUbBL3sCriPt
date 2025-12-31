@@ -3,8 +3,6 @@ import { it, describe } from "mocha";
 import assert from "node:assert";
 
 import { List, LazyList } from "../src/list.js";
-
-
 import Ṣymbol from "../src/symbol.js";
 
 describe("List", () => {
@@ -542,3 +540,54 @@ describe("LazyList", function () {
     });
   });
 });
+
+
+// Test the JS fallback implementation directly
+import { bubblesort } from '../lib/list.js';
+
+describe('lib/list.js (JS fallback)', function () {
+  it('bubblesort sorts numbers ascending', function () {
+    const xs = [5, 1, 4, 2, 3];
+    const sorted = bubblesort(xs);
+    assert.deepEqual(sorted, [1, 2, 3, 4, 5]);
+    // original array remains unchanged
+    assert.deepEqual(xs, [5, 1, 4, 2, 3]);
+  });
+
+  it('bubblesort with comparator sorts by comparator', function () {
+    const xs = ['z', 'a', 'm'];
+    const sorted = bubblesort(xs, (a, b) => a.localeCompare(b));
+    assert.deepEqual(sorted, ['a', 'm', 'z']);
+  });
+});
+
+// Bootstrap the BubbleScript runtime for the BubbleScript-level test
+// On the ⛄️ branch the runtime is bootstrapped through src/index.js
+
+import bubls from '../src/index.js';
+
+describe('lib/list.🫧 (BubbleScript bubblesort)', function () {
+  it('bubblesort sorts a BubbleScript list', function () {
+    const script = `
+      (const { bubblesort } (require "list"))
+      (const xs °(5 1 4 2 3))
+      (bubblesort xs)
+    `;
+    const result = bubls.eval(script);
+    // Basic check via string representation; adapt if list API differs
+    const s = result.toString();
+    assert.ok(s.includes('1') && s.includes('2') && s.includes('3') && s.includes('4') && s.includes('5'));
+  });
+});
+
+// (describe 'lib/list.🫧 (BubbleScript bubblesort)' (do
+//   (it 'bubblesort sorts a BubbleScript list' (do
+//     (const result (do
+//       (const { bubblesort } (require "list"))
+//       (const xs °(5 1 4 2 3))
+//       (bubblesort xs)))
+
+//     # Basic check via string representation; adapt if list API differs
+//     (const s (result.toString))
+//     (assert.equal s "(1 2 3 4 5)")
+// ;

@@ -21,8 +21,9 @@ import Range from "./range.js";
 import { specialForm, specialFormP }
                       from "./special_form.js";
 
-// import consola from "./consola.js";
-// import reqůire from "./require.js";
+import { parse } from "./parse.js";
+import path from "path";
+import fs from "fs";
 
 const starSymbol = Ṣymbol.for("*");
 const sAmp = Ṣymbol.for("&");
@@ -32,6 +33,21 @@ function ensureKeyNotDefined(binding, key) {
     throw new Error("const " + key +
       " already set");
 }
+
+const { getModule, storeModule } =
+  (function () {
+    const modules = Object.create(null);
+
+    function getModule(key) {
+      return modules[key];
+    }
+
+    function storeModule(key, module={}) {
+      module[key] = module;
+    }
+
+    return { getModule, storeModule };
+  })();
 
 // A man walks into a bar. Bartender says
 // what'll you have? The man says,
@@ -189,13 +205,13 @@ export const rootBinding = {
    */
   let: specialForm(function(list) {
     const [params, body] = list.plop();
-    const binding = Object.create(this);
+    const binding = createBinding(this);
     params.toList().partition(2)
       .each(([key, value]) => {
         binding[key] =
-         evalExpression.call(binding, value);
+         evalExpression(binding, value);
       });
-    return body.evalEach(binding);
+    return evalEach(binding, body);
   }),
 
   /**
@@ -352,6 +368,44 @@ export const rootBinding = {
 
   /* Non-Special form functions */
 
+  require: function(name) {
+
+    const modulePath =
+     (name[0] == ".") ?
+       path.resolve(this.__dirname, name + ".🫧") :
+       path.resolve(import.meta.dirname, "../lib",
+         name + ".🫧");
+
+    const module = getModule(modulePath);
+    if (module) return module.exports;
+
+
+    let moduleExports;
+    const binding = createBinding(this);
+
+    binding.__dirname = path.dirname(modulePath);
+
+    binding.module = {
+      exports: function(exports) {
+        moduleExports = exports.createObject(binding);
+      }
+    }
+
+    const parseTree =
+      parse(fs.readFileSync(modulePath, 'utf-8'));
+    try {
+      evalEach(binding, parseTree);
+    } catch (error) {
+      console.log("Error evaluating " + modulePath);
+      throw error;
+    }
+
+    storeModule(modulePath,
+         { exports: moduleExports });
+
+    return moduleExports;
+  },
+
   do: function(args) {
     return args.eval(this);
   },
@@ -413,8 +467,10 @@ export const rootBinding = {
 // Aliases
 rootBinding.muf = rootBinding.define;
 rootBinding.def = rootBinding.define;
+rootBinding.const = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
 
+// Object.freeze(rootBinding);
 
 // Applys the keys and the values to the
 // binding based on order and position.
