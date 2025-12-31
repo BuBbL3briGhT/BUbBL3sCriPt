@@ -1,8 +1,29 @@
-(🫧 (describe title fn)
-  (puts '  ' title)
-  (fn))
+const { [it _it] describe }
+  (require "mocha")
 
-(🫧 (it title fn)
+
+(describe "My t e st"
+  ..
+)
+
+(describe "" ((jsfn)
+  ...
+  )
+
+(dmac (desc title test)
+  (do °(describe title test)))
+
+(dmac (desc title & test)
+  (do (list °describe title test)))
+
+(dmac (desc title & test)
+  (do (list °describe title (push test °(jsfn))))
+
+(dmac (it title & test)
+  (do (list °it  title (push test °(jsfn))))
+
+(defmacro (it title test)
+
   (fn)
   (puts '    -' title))
 
