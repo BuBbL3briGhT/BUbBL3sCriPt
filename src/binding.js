@@ -373,7 +373,7 @@ export const rootBinding = {
     const modulePath =
      (name[0] == ".") ?
        path.resolve(this.__dirname, name + ".🫧") :
-       path.resolve(import.meta.dirname, "../lib",
+       path.resolve(import.meta.dirname, "../🫧",
          name + ".🫧");
 
     const module = getModule(modulePath);
