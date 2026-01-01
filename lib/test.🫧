@@ -1,5 +1,3 @@
-(const mocha (require :mocha))
-
 import :mocha
 
 (dmac (desc title & body)
