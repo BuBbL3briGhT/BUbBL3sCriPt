@@ -1,4 +1,6 @@
-const mocha (require "mocha")
+(const mocha (require :mocha))
+
+import :mocha
 
 (dmac (desc title & body)
   (list mocha.describe title (push body °(jsfn))))
@@ -6,4 +8,4 @@ const mocha (require "mocha")
 (dmac (it title & body)
   (list mocha.it title (push body °(jsfn))))
 
-module.exports { desc it }
+(module.exports { desc it })
