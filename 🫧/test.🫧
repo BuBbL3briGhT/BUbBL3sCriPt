@@ -1,4 +1,4 @@
-import [define-macro] :macro
+import {define-macro} :macro
 import :mocha
 
 (define-macro (desc title & body)
@@ -7,4 +7,4 @@ import :mocha
 (define-macro (it title & body)
   (list mocha.it title (push body °(jsfn))))
 
-module.exports [desc it]
+module.exports {desc it}
