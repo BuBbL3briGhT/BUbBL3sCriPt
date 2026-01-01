@@ -1,9 +1,22 @@
 const { [it _it] describe } (require "mocha")
 
 (dmac (desc title & body)
-  (do (list °describe title (push body °(jsfn))))
+  (do (list °describe title (push body °(jsfn)))))
 
 (dmac (it title & body)
-  (do (list °it  title (push body °(jsfn))))
+  (do (list °it title (push body °(jsfn)))))
+
+(dmac (desc title & body)
+  (list °mocha.describe title (push body °(jsfn))))
+
+(dmac (it title & body)
+  (list °mocha.it title (push body °(jsfn))))
+
+
+(dmac (desc title & body)
+  (list describe title (push body °(jsfn))))
+
+(dmac (it title & body)
+  (list _it title (push body °(jsfn))))
 
 module.exports { desc it }
