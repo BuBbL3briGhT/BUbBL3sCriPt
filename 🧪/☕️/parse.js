@@ -20,7 +20,7 @@ const symbol = Ṣymbol.for("symbol"),
 
 const keyword = Keyword.for("keyword");
 
-let data = fs.readFileSync("test/fixtures/parser.yml", 'utf8');
+let data = fs.readFileSync("🧪/☕️/fixtures/parser.yml", 'utf8');
 let fixtures = Yaml.parse(data);
 
 describe("parse(string)", () => {
