@@ -1,10 +1,10 @@
 
 import assert from "assert";
 import sinon from "sinon";
-import { ėval } from "../src/eval.js";
-import { createBinding } from "../src/binding.js";
-import { List } from "../src/list.js"
-import Fn from "../src/fn.js";
+import { ėval } from "./src/eval.js";
+import { createBinding } from "./src/binding.js";
+import { List } from "./src/list.js"
+import Fn from "./src/fn.js";
 
 import { it as _it } from "mocha";
 

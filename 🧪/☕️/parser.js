@@ -4,16 +4,16 @@ import { use as chaiUse, expect } from "chai";
 import chaiSubset from "chai-subset";
 chaiUse(chaiSubset);
 
-import { Parser, parse } from "../src/parse.js";
-import Keyword from "../src/keyword.js";
-import { Tokenizer } from "../src/tokenize.js";
-import { List, Vektar } from "../src/list.js";
-import Bubble from "../src/bubble.js";
-import Ṣÿ from "../src/symbol.js";
+import { Parser, parse } from "./src/parse.js";
+import Keyword from "./src/keyword.js";
+import { Tokenizer } from "./src/tokenize.js";
+import { List, Vektar } from "./src/list.js";
+import Bubble from "./src/bubble.js";
+import Ṣÿ from "./src/symbol.js";
 
 import { TokenNoMatchError,
         UnexpectedEndOfInputError }
-                    from "../src/errors.js";
+                    from "./src/errors.js";
 
 
 describe("Parser", function () {

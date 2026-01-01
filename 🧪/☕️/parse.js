@@ -7,11 +7,11 @@ chaiUse(chaiSubset);
 
 import Yaml from "yaml";
 
-import { parse } from "../src/parse.js";
-import { List, Vektar } from "../src/list.js";
-import Keyword from "../src/keyword.js";
-import Ṣymbol from "../src/symbol.js";
-import Bubble from "../src/bubble.js";
+import { parse } from "./src/parse.js";
+import { List, Vektar } from "./src/list.js";
+import Keyword from "./src/keyword.js";
+import Ṣymbol from "./src/symbol.js";
+import Bubble from "./src/bubble.js";
 
 const symbol = Ṣymbol.for("symbol"),
       a = Ṣymbol.for("a"),

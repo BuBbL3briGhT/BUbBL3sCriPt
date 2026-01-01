@@ -2,8 +2,8 @@
 import { it, describe } from "mocha";
 import assert from "node:assert";
 
-import { List, LazyList } from "../src/list.js";
-import Ṣymbol from "../src/symbol.js";
+import { List, LazyList } from "./src/list.js";
+import Ṣymbol from "./src/symbol.js";
 
 describe("List", () => {
 
@@ -564,7 +564,7 @@ describe('lib/list.js (JS fallback)', function () {
 // Bootstrap the BubbleScript runtime for the BubbleScript-level test
 // On the ⛄️ branch the runtime is bootstrapped through src/index.js
 
-import bubls from '../src/index.js';
+import bubls from './src/index.js';
 
 describe('lib/list.🫧 (BubbleScript bubblesort)', function () {
   it('bubblesort sorts a BubbleScript list', function () {

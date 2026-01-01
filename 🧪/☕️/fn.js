@@ -1,8 +1,8 @@
 import assert from "node:assert";
 import { it, describe } from "mocha";
-import Fn from "../src/fn.js"
-import { List } from "../src/list.js";
-import Ṣymbol from "../src/symbol.js";
+import Fn from "./src/fn.js"
+import { List } from "./src/list.js";
+import Ṣymbol from "./src/symbol.js";
 
 describe("Fn", function () {
   describe("toString", function () {
