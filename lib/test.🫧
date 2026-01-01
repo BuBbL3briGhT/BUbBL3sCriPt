@@ -1,4 +1,4 @@
-import { dmac } from :macro
+import { [define-macro dmac] } from :macro
 import :mocha
 
 (dmac (desc title & body)
