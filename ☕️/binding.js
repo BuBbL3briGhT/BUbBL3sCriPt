@@ -24,6 +24,8 @@ import { specialForm, specialFormP }
 import { parse } from "./parse.js";
 import path from "path";
 import fs from "fs";
+import { createRequire } from "module";
+
 
 const starSymbol = Ṣymbol.for("*");
 const sAmp = Ṣymbol.for("&");
@@ -56,7 +58,7 @@ const { getModule, storeModule } =
 export const rootBinding = {
   console, // consola,
   // Js require
-  // ["reqūire"]: require,
+  ["require-☕️"]: createRequire(import.meta.url),
   __dirname: import.meta.dirname,
 
   /* Special form functions */
