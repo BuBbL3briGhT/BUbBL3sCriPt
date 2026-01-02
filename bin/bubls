@@ -3,10 +3,10 @@
 // Error.stackTraceLimit = 20;
 // Error.stackTraceLimit = 100;
 
-import bubls from '../src/index.js';
-import { rootBinding } from '../src/binding.js';
-import { ėval } from "../src/eval.js";
-import { BubbleScriptError } from "../src/errors.js";
+import bubls from '../☕️/index.js';
+import { rootBinding } from '../☕️/binding.js';
+import { ėval } from "../☕️/eval.js";
+import { BubbleScriptError } from "../☕️/errors.js";
 
 let path = process.argv[2];
 
