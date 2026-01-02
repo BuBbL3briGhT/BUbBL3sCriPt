@@ -543,7 +543,7 @@ describe("LazyList", function () {
 
 
 // Test the JS fallback implementation directly
-import { bubblesort } from '../lib/list.js';
+import { bubblesort } from './src/lib/list.js';
 
 describe('lib/list.js (JS fallback)', function () {
   it('bubblesort sorts numbers ascending', function () {
