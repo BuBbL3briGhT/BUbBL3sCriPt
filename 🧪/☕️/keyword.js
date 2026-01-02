@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import { it, describe } from "mocha";
-import Keyword from "./src/keyword.js";
+import Keyword from "../../☕️/keyword.js";
 
 describe("Keyword", function () {
   describe("for(key)", function () {

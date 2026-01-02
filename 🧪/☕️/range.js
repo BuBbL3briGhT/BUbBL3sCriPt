@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import { it, describe } from "mocha";
-import Range from "./src/range.js";
+import Range from "../../☕️/range.js";
 
 describe("Range", function () {
 

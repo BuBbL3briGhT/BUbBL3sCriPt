@@ -2,7 +2,7 @@
 
 import assert from "node:assert";
 import { describe, it } from "mocha";
-import Ṣymbol from "./src/symbol.js";
+import Ṣymbol from "../../☕️/symbol.js";
 
 describe("Ṣymbol", function () {
    describe(".for(key)", function () {
