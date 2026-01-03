@@ -172,10 +172,10 @@ export const rootBinding = {
     alert(this.concat(msgs));
   }),
 
-  expandmacro: specialForm(function(list) {
-    const [head, tail] = list.plop();
-    const macro = ëval(this, head);
-    return macro.expand(tail);
+  ["expand-macro"]: specialForm(function(list) {
+    const [name, params] = list.tuple;
+    const macro = ėval(this, name);
+    return macro.expand(params);
   }),
 
   /**

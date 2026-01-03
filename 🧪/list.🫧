@@ -1,6 +1,6 @@
 (const { desc it } (require "test"))
 
-(desc 'lib/list.🫧 (BubbleScript bubblesort)'
+(desc "lib/list.🫧 (BubbleScript bubblesort)"
   (it 'bubblesort sorts a BubbleScript list'
     (const result (do
       (const { bubblesort } (require "list"))
