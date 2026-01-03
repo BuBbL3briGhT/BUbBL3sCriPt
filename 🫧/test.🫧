@@ -1,7 +1,5 @@
-# import {define-macro} :macro
-# import :mocha
-
 (🫧 mocha (require-☕️ "mocha"))
+(🫧 { push } (require "list"))
 
 (define-macro (desc title & body)
   (list mocha.describe title (push body °(jsfn))))

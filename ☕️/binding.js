@@ -101,8 +101,15 @@ export const rootBinding = {
 
   macro: specialForm(function(params) {
     return specialForm(function (body) {
-      return new Macro(this, params, body)
+      return new Macro(this, params, body);
     });
+  }),
+
+  ["define-macro"]: specialForm(function(list) {
+    const [signature, body] = list.tuple;
+    const [name, params] = signature.tuple;
+    return this[name.toString()] =
+        new Macro(this, params, body);
   }),
 
   jsfn: specialForm(function(args) {
