@@ -172,11 +172,11 @@ export const rootBinding = {
     alert(this.concat(msgs));
   }),
 
-  ["expand-macro"]: specialForm(function(list) {
-    const [name, params] = list.tuple;
-    const macro = ėval(this, name);
-    return macro.expand(params);
-  }),
+  // ["expand-macro"]: specialForm(function(list) {
+  //   const [name, params] = list.tuple;
+  //   // const macro = ėval(this, name);
+  //   return macro.expand(params);
+  // }),
 
   /**
    * @specialForm loop
@@ -330,8 +330,9 @@ export const rootBinding = {
     return moduleExports;
   },
 
-  do: function(args) {
-    return args.eval(this);
+  do: function(list) {
+    console.log({list}, "binding:334");
+    return evalEach(this, list);
   },
 
   /**
