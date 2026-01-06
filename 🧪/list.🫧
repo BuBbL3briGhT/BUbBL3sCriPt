@@ -1,7 +1,7 @@
 (const { desc it it-only } (require "test"))
 (const assert (require-☕️ "assert"))
 
-(desc "lib/list.🫧 (BubbleScript bubblesort)"
+(expand-macro desc "lib/list.🫧 (BubbleScript bubblesort)"
   (it-only 'bubblesort sorts a BubbleScript list'
     # (const result (do))
       # (const { bubblesort } (require "list"))))
