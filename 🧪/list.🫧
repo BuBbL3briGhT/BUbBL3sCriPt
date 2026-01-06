@@ -1,7 +1,7 @@
 (const { desc it it-only } (require "test"))
 (const assert (require-☕️ "assert"))
 
-(expand-macro desc "lib/list.🫧 (BubbleScript bubblesort)"
+(console.log (send (expand-macro desc "lib/list.🫧 (BubbleScript bubblesort)"
   (it-only 'bubblesort sorts a BubbleScript list'
     # (const result (do))
       # (const { bubblesort } (require "list"))))
@@ -12,4 +12,5 @@
     # (const s (result.toString))
     # (assert.equal s "(1 2 3 4 5)")
     (assert.ok false)
-))
+
+)) :toString))
