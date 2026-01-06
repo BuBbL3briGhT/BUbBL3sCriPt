@@ -174,9 +174,9 @@ export const rootBinding = {
 
   ["expand-macro"]: specialForm(function(list) {
     const [name, params] = list.tuple;
-    console.log({ name, params });
-    const macro = evalEach(this, name);
-    return macro.expand(params);
+    // console.log({ name, params });
+    const macro = evalExpression(this, name);
+    return macro.expand(params, ėval);
     // console.log(macro);
     // console.log(macro.expand(params));
     // return List.make();

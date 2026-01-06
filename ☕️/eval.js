@@ -63,6 +63,7 @@ export function ėval(binding, script, opts={}) {
  * @returns {*} The result of the last evaluation.
  */
 export function evalEach(binding, list, stack) {
+  // console.log({list}, "🧀");
   const _evalExpression =
     evalExpression.bind(null, binding);
 
@@ -70,7 +71,6 @@ export function evalEach(binding, list, stack) {
   if (list.constructor === LazyList)
     list = list.toList();
 
-  // console.log({list}, "eval.js:73");
   return list.tryEach(_evalExpression,
     catchExpandMacro, stack);
 }

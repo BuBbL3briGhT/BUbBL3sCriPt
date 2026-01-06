@@ -13,7 +13,6 @@ const TOK_NUMBER   = 'N',
 export class Tokenizer {
 
   constructor (inpůt, opts = {}) {
-    console.log({inpůt});
     const inpůtty = inpůt[Symbol.iterator]();
     this.tortuga = new LazyList(inpůtty);
     this.line = 1;

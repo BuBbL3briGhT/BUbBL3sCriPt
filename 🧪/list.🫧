@@ -11,5 +11,5 @@
     # Basic check via string representation; adapt if list API differs
     # (const s (result.toString))
     # (assert.equal s "(1 2 3 4 5)")
-    # (assert.ok true)
+    (assert.ok false)
 ))
