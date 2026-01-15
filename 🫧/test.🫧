@@ -8,11 +8,11 @@
 (define-macro (desc title & body)
   (list mocha.describe title (push body °(jsfn))))
 
-#(define-macro (it title & body)
-#  (list mocha.it title (push body °(jsfn))))
-
 (define-macro (it title & body)
-  (list (list send mocha "it" title (push body °(jsfn)))))
+  (list mocha.it title (push body °(jsfn))))
+
+# (define-macro (it title & body)
+#  (list (list send mocha "it" title (push body °(jsfn)))))
 
 #(define-macro (it-only title & body)
 #  (list mocha.it.only title (push body °(jsfn))))

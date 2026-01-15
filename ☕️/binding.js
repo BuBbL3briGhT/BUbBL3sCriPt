@@ -102,9 +102,10 @@ export const rootBinding = {
   jsfn: specialForm(function(params) {
     return specialForm(function(body) {
       const fn = new Fn(this, params, body);
-      return function(...args) {
+      return function(...params) {
+        console.log({params});
         return fn.call(this,
-          List.from(args), [], ėval);
+          List.from(params), [], ėval);
       }
     })
   }),
@@ -351,7 +352,7 @@ export const rootBinding = {
   send: function(recipient, message, ...params) {
     if (message.key) message = message.key;
 
-    console.log({recipient, message, params});
+    // console.log({recipient, message, params});
     return recipient[message](...params);
   },
 
