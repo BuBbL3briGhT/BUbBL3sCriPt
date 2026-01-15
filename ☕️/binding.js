@@ -99,6 +99,37 @@ export const rootBinding = {
     })
   }),
 
+  jsfn: specialForm(function(params) {
+    return specialForm(function(body) {
+      const fn = new Fn(this, params, body);
+      return function(...args) {
+        return fn.call(List.from(args));
+      }
+    })
+  }),
+
+  // jsfn: specialForm(function(params) {
+  //   const binding = this;
+  //   return specialForm(function(body) {
+  //     return function(...args) {
+  //       const fnBinding = createBinding(binding,
+  //         params,
+  //         ėval.mapEval(binding, params));
+
+  //       return ėval.evalEach(fnBinding, body);
+  //     }
+  //   })
+  // }),
+
+  // jsfn: specialForm(function(params) {
+  //   const binding = this;
+  //   const x = args.push(Ṣymbol.for('fn'));
+  //   const fn = evalExpression(binding, x);
+  //   return function(...args) {
+  //     return fn.invoke(List.from(args));
+  //   }
+  // }),
+
   macro: specialForm(function(params) {
     return specialForm(function (body) {
       return new Macro(this, params, body);
@@ -110,15 +141,6 @@ export const rootBinding = {
     const [name, params] = signature.tuple;
     return this[name.toString()] =
         new Macro(this, params, body);
-  }),
-
-  jsfn: specialForm(function(args) {
-    const binding = this;
-    const x = args.push(Ṣymbol.for('fn'));
-    const fn = evalExpression(binding, x);
-    return function(...args) {
-      return fn.invoke(List.from(args));
-    }
   }),
 
   /**
