@@ -2,13 +2,14 @@
 (const assert (require-☕️ "assert"))
 (const {puts} (require "core"))
 
-#(desc "lib/list.🫧 (BubbleScript bubblesort)"
-#  (it-only 'bubblesort sorts a BubbleScript list'
-#    (assert.ok true)))
+(desc "lib/list.🫧 (BubbleScript bubblesort)"
+  (it-only 'bubblesort sorts a BubbleScript list'
+    (assert.ok true)))
 
-(define-macro (puts-to-string body)
-  (list °puts (list °send body :toString)))
+# (define-macro (puts-to-string body)
+#   (list °puts (list °send body :toString)))
 
-(puts-to-string (expand-macro it-only 'bubblesort sorts a BubbleScript list'
-  (assert.ok true)))
+# (puts-to-string (expand-macro it-only
+#   "bubblesort sorts a BubbleScript list"
+#   (assert.ok true)))
 
