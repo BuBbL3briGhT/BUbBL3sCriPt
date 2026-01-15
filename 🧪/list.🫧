@@ -23,9 +23,9 @@
 #(it "lib/list.🫧 (BubbleScript bubblesort)"
 #  (assert.ok true))
 
- (desc "lib/list.🫧 (BubbleScript bubblesort)"
-   (it "bubblesort sorts a BubbleScript list"
-     (assert.ok true)))
+(desc "lib/list.🫧 (BubbleScript bubblesort)"
+  (it "bubblesort sorts a BubbleScript list"
+    (assert.ok true)))
 
 # (desc "lib/list.🫧 (BubbleScript bubblesort)"
 #   (it-only "bubblesort sorts a BubbleScript list"
