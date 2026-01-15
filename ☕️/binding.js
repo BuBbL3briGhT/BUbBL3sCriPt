@@ -103,7 +103,8 @@ export const rootBinding = {
     return specialForm(function(body) {
       const fn = new Fn(this, params, body);
       return function(...args) {
-        return fn.call(List.from(args));
+        return fn.call(this,
+          List.from(args), [], ėval);
       }
     })
   }),
@@ -350,6 +351,7 @@ export const rootBinding = {
   send: function(recipient, message, ...params) {
     if (message.key) message = message.key;
 
+    console.log({recipient, message, params});
     return recipient[message](...params);
   },
 
@@ -388,8 +390,8 @@ export const rootBinding = {
   parse: function(s) {
     return parse(s);
   },
-  "new": function(constructor, args) {
-      return new constructor(...args.toArray());
+  "new": function(constructor, ...params) {
+      return new constructor(...params);
   }
 };
 

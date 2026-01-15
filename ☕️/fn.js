@@ -27,7 +27,9 @@ export default class Fn {
         // console.log({params}, "🧀");
         // console.log({params: params.toString()});
         // console.log({fn: fn.toString()});
-        return fn.call(binding, ...params);
+        // return fn.call(binding, ...params);
+        // console.log("🦆", fn.prototype);
+        return fn(...params);
     }
 
     return fn.call(binding, params, pila, ėval);
