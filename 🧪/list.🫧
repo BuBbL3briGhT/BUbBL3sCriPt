@@ -14,18 +14,12 @@
   "../node_modules/mocha/lib/cli/cli")
   "main" [] {})
 
-(puts "grep" mocha.grep)
-(puts "fgrep" mocha.fgrep)
+# (it "lib/list.🫧 (BubbleScript bubblesort)"
+#  (assert.ok true))
 
-(puts "run" mocha.run)
-(mocha.run)
-
-(it "lib/list.🫧 (BubbleScript bubblesort)"
-  (assert.ok true))
-
-# (desc "lib/list.🫧 (BubbleScript bubblesort)"
-#   (it-only "bubblesort sorts a BubbleScript list"
-#     (assert.ok true)))
+(desc "lib/list.🫧 (BubbleScript bubblesort)"
+  (it-only "bubblesort sorts a BubbleScript list"
+    (assert.ok true)))
 
 # (puts-to-string (expand-macro it-only
 #   "bubblesort sorts a BubbleScript list"
