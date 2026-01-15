@@ -25,6 +25,8 @@ export default class Fn {
         // console.log({params});
         params = ėval.evalParams(binding, params);
         // console.log({params}, "🧀");
+        console.log({params: params.toString()});
+        console.log({fn: fn.toString()});
         return fn.call(binding, ...params);
     }
 
