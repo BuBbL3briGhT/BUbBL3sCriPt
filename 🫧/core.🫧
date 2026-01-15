@@ -6,3 +6,5 @@
 #   empty? invert shift peek poot push slap
 #   stick pluck && PARTY!!!! #spank
 # };
+
+(module.exports { puts })
