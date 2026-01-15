@@ -103,7 +103,7 @@ export const rootBinding = {
     return specialForm(function(body) {
       const fn = new Fn(this, params, body);
       return function(...params) {
-        console.log({params});
+        // console.log({params});
         return fn.call(this,
           List.from(params), [], ėval);
       }
