@@ -17,4 +17,14 @@
 #(define-macro (it-only title & body)
 #  (list mocha.it.only title (push body °(jsfn))))
 
+
+
+
+const { runMocha } (require-☕️
+  "../node_modules/mocha/lib/cli/run-helpers")
+(runMocha mocha-instance)
+
+
 (module.exports {desc it it-only})
+
+
