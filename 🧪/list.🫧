@@ -1,10 +1,11 @@
+(🫧 mocha (require-☕️ "mocha"))
 (const { desc it it-only } (require "test"))
 (const assert (require-☕️ "assert"))
 (const {puts} (require "core"))
 
 (desc "lib/list.🫧 (BubbleScript bubblesort)"
-  (it-only 'bubblesort sorts a BubbleScript list'
-    (assert.ok true)))
+ (it-only "bubblesort sorts a BubbleScript list"
+   (assert.ok true)))
 
 # (define-macro (puts-to-string body)
 #   (list °puts (list °send body :toString)))
