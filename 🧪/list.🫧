@@ -35,3 +35,8 @@
 #   "bubblesort sorts a BubbleScript list"
 #   (assert.ok true)))
 
+
+
+const { runMocha } (require-☕️
+  "../node_modules/mocha/lib/cli/run-helpers")
+(puts runMocha)
