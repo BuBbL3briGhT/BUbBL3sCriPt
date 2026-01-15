@@ -10,7 +10,10 @@
 (define-macro (puts-macro & macro)
   (list °puts-to-string (push macro °expand-macro)))
 
-(puts-macro it "lib/list.🫧 (BubbleScript bubblesort)"
+(puts "grep" mocha.grep)
+(puts "run" mocha.run)
+
+(it "lib/list.🫧 (BubbleScript bubblesort)"
   (assert.ok true))
 
 # (desc "lib/list.🫧 (BubbleScript bubblesort)"
