@@ -10,8 +10,15 @@
 (define-macro (puts-macro & macro)
   (list °puts-to-string (push macro °expand-macro)))
 
+(send (require-☕️
+  "../node_modules/mocha/lib/cli/cli")
+  "main" [] {})
+
 (puts "grep" mocha.grep)
+(puts "fgrep" mocha.fgrep)
+
 (puts "run" mocha.run)
+(mocha.run)
 
 (it "lib/list.🫧 (BubbleScript bubblesort)"
   (assert.ok true))
