@@ -32,6 +32,7 @@ export default class Fn {
         return fn(...params);
     }
 
+    console.log({fn});
     return fn.call(binding, params, pila, ėval);
   }
 
