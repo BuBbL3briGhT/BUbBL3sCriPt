@@ -11,23 +11,8 @@
 (define-macro (it title & body)
   (list mocha.it title (push body °(jsfn))))
 
-# (define-macro (it title & body)
-#  (list (list send mocha "it" title (push body °(jsfn)))))
 
-#(define-macro (it-only title & body)
-#  (list mocha.it.only title (push body °(jsfn))))
-
-
-
-
-(const { runMocha } (require-☕️
-  "../node_modules/mocha/lib/cli/run-helpers"))
-
-# (console.log "run" mocha-instance.run)
-# (runMocha mocha-instance)
-# (mocha-instance.run null)
 (send mocha-instance "run" null)
-
 
 (module.exports {desc it it-only})
 
