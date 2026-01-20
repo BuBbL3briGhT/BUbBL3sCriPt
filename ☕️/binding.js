@@ -220,6 +220,10 @@ export const rootBinding = {
     return result;
   }),
 
+  do: specialForm(function(list) {
+    return evalEach(this, list);
+  }),
+
   /* Special forms with evaulated input
    * parameters. */
 
@@ -296,6 +300,7 @@ export const rootBinding = {
     return args.reduce((a,b) => a/b);
   }),
 
+
   /* Non-Special form functions */
 
   require: function(name) {
@@ -334,11 +339,6 @@ export const rootBinding = {
          { exports: moduleExports });
 
     return moduleExports;
-  },
-
-  do: function(list) {
-    // console.log({list}, "binding:334");
-    return evalEach(this, list);
   },
 
   /**

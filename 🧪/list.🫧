@@ -9,6 +9,7 @@
       (bubblesort xs)))
 
     # Basic check via string representation; adapt if list API differs
-    (🫧 s (result.toString))
+    # (🫧 s (result.toString))
+    (🫧 s (send result "toString"))
     (assert.equal s "(1 2 3 4 5)")
 ))

@@ -21,6 +21,8 @@ const traceTemplate = "    en (${file}:${line}:${column})";
 const interpolateTrace = interpolate.bind(traceTemplate);
 const sAmp = Ṣymbol.for("&");
 
+const debug = console.debug;
+
 /**
  * @function ėval
  * @description Evaluates a string of Bubblescript
@@ -71,6 +73,7 @@ export function evalEach(binding, list, stack) {
   if (list.constructor === LazyList)
     list = list.toList();
 
+  // debug({ list });
   return list.tryEach(_evalExpression,
     catchExpandMacro, stack);
 }
