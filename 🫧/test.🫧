@@ -1,10 +1,19 @@
 (🫧 mocha (require-☕️ "mocha"))
 (🫧 { push } (require "list"))
 
+(const mocha-instance (new mocha))
+(send mocha-instance.suite
+  "emit" "pre-require" {} "" mocha-instance)
+
 (define-macro (desc title & body)
   (list mocha.describe title (push body °(jsfn))))
 
 (define-macro (it title & body)
   (list mocha.it title (push body °(jsfn))))
 
-(module.exports {desc it})
+
+(send mocha-instance "run" null)
+
+(module.exports {desc it it-only})
+
+

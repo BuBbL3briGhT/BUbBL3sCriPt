@@ -63,6 +63,7 @@ export function ėval(binding, script, opts={}) {
  * @returns {*} The result of the last evaluation.
  */
 export function evalEach(binding, list, stack) {
+  // console.log({list}, "🧀");
   const _evalExpression =
     evalExpression.bind(null, binding);
 
@@ -108,10 +109,13 @@ export function evalExpression(binding, expression, stack) {
  */
 export function evalList(binding, list, stack=List.make()) {
   try {
+    // console.log({list: list.toString()});
     const { file, line, column } = list;
     stack = stack.push({func: list.head.toString(),
         file, line, column});
 
+    // console.debug("eval.js:117",
+    //   { "list.head": list.head });
     const fn = evalExpression(binding, list.head);
 
     if (fn == undefined) {
@@ -119,6 +123,7 @@ export function evalList(binding, list, stack=List.make()) {
       throw new Error(binding, list.head, stack);
     }
 
+    // console.log("eval.js:124", {fn});
     return Fn.call(binding, fn, list.tail, stack, ėval);
 
   } catch (error) {

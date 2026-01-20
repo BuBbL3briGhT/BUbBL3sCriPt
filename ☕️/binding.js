@@ -99,6 +99,17 @@ export const rootBinding = {
     })
   }),
 
+  jsfn: specialForm(function(params) {
+    return specialForm(function(body) {
+      const fn = new Fn(this, params, body);
+      return function(...params) {
+        // console.log({params});
+        return fn.call(this,
+          List.from(params), [], ėval);
+      }
+    })
+  }),
+
   macro: specialForm(function(params) {
     return specialForm(function (body) {
       return new Macro(this, params, body);
@@ -110,15 +121,6 @@ export const rootBinding = {
     const [name, params] = signature.tuple;
     return this[name.toString()] =
         new Macro(this, params, body);
-  }),
-
-  jsfn: specialForm(function(args) {
-    const binding = this;
-    const x = args.push(Ṣymbol.for('fn'));
-    const fn = evalExpression(binding, x);
-    return function(...args) {
-      return fn.invoke(List.from(args));
-    }
   }),
 
   /**
@@ -172,10 +174,14 @@ export const rootBinding = {
     alert(this.concat(msgs));
   }),
 
-  expandmacro: specialForm(function(list) {
-    const [head, tail] = list.plop();
-    const macro = ëval(this, head);
-    return macro.expand(tail);
+  ["expand-macro"]: specialForm(function(list) {
+    const [name, params] = list.tuple;
+    // console.log({ name, params });
+    const macro = evalExpression(this, name);
+    return macro.expand(params, ėval);
+    // console.log(macro);
+    // console.log(macro.expand(params));
+    // return List.make();
   }),
 
   /**
@@ -330,8 +336,9 @@ export const rootBinding = {
     return moduleExports;
   },
 
-  do: function(args) {
-    return args.eval(this);
+  do: function(list) {
+    // console.log({list}, "binding:334");
+    return evalEach(this, list);
   },
 
   /**
@@ -345,6 +352,7 @@ export const rootBinding = {
   send: function(recipient, message, ...params) {
     if (message.key) message = message.key;
 
+    // console.log({recipient, message, params});
     return recipient[message](...params);
   },
 
@@ -383,8 +391,8 @@ export const rootBinding = {
   parse: function(s) {
     return parse(s);
   },
-  "new": function(constructor, args) {
-      return new constructor(...args.toArray());
+  "new": function(constructor, ...params) {
+      return new constructor(...params);
   }
 };
 

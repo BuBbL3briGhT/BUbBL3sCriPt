@@ -22,10 +22,18 @@ export default class Fn {
   static call(binding, fn, params, pila, ėval) {
     switch (fn.constructor) {
       case Function:
+        // console.log({params});
         params = ėval.evalParams(binding, params);
-        return fn.call(binding, ...params);
+        // console.log({params}, "🧀");
+        // console.log({params: params.toString()});
+        // console.log({fn: fn.toString()});
+        // return fn.call(binding, ...params);
+        // console.log("🦆", fn.prototype);
+        return fn(...params);
     }
 
+    // console.log({fn});
+    // console.log({"fn.call": fn.call});
     return fn.call(binding, params, pila, ėval);
   }
 
