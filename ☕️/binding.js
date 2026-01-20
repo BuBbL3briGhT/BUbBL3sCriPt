@@ -227,8 +227,8 @@ export const rootBinding = {
   /* Special forms with evaulated input
    * parameters. */
 
-  eval: specialFormP(function(args) {
-    return args.eval(this);
+  eval: specialFormP(function(params) {
+    return params.eval(this);
   }),
 
   list: specialFormP(function(params) {
@@ -259,45 +259,45 @@ export const rootBinding = {
    * @param {List} list - A list containing the object and the keys to access.
    * @returns {*} The value at the specified path, or undefined if not found.
    */
-  get: specialFormP(function(args) {
-    return args.reduce(
+  get: specialFormP(function(params) {
+    return params.reduce(
         (memo,key) => memo && memo[key]);
   }),
 
-  range: specialFormP(function (args) {
-    return new Range(...args);
+  range: specialFormP(function (params) {
+    return new Range(...params);
   }),
 
-  lazy: specialFormP(function (args) {
-    return new LazyList(...args);
+  lazy: specialFormP(function (params) {
+    return new LazyList(...params);
   }),
 
-  "+": specialFormP(function(args) {
-    return args.reduce((a,b) => a+b);
+  "+": specialFormP(function(params) {
+    return params.reduce((a,b) => a+b);
   }),
 
-  "-": specialFormP(function(args) {
-    return args.reduce((a,b) => a-b);
+  "-": specialFormP(function(params) {
+    return params.reduce((a,b) => a-b);
   }),
 
-  "*": specialFormP(function(args) {
-    return args.reduce((a,b) => a*b);
+  "*": specialFormP(function(params) {
+    return params.reduce((a,b) => a*b);
   }),
 
-  and: specialFormP(function(args) {
-    return args.reduce((a,b) => a && b);
+  and: specialFormP(function(params) {
+    return params.reduce((a,b) => a && b);
   }),
 
-  or: specialFormP(function(args) {
-    return args.reduce((a,b) => a || b);
+  or: specialFormP(function(params) {
+    return params.reduce((a,b) => a || b);
   }),
 
-  concat: specialFormP(function(args) {
-    return args.join('');
+  concat: specialFormP(function(params) {
+    return params.join('');
   }),
 
-  "/": specialFormP(function(args) {
-    return args.reduce((a,b) => a/b);
+  "/": specialFormP(function(params) {
+    return params.reduce((a,b) => a/b);
   }),
 
 
