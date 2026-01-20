@@ -1,4 +1,3 @@
-# (🫧 Mocha (require-☕️ "mocha"))
 (const { desc it it-only } (require "test"))
 (const assert (require-☕️ "assert"))
 (const {puts} (require "core"))
@@ -10,27 +9,7 @@
 (define-macro (puts-macro & macro)
   (list °puts-to-string (push macro °expand-macro)))
 
-# (send (require-☕️
-#   "../node_modules/mocha/lib/cli/cli")
-#   "main" [] {})
-
-# (puts "grep" mocha.grep)
-# (puts "fgrep" mocha.fgrep)
-#
-# (puts "run" mocha.run)
-# (puts "prototype" mocha.prototype)
-
-#(it "lib/list.🫧 (BubbleScript bubblesort)"
-#  (assert.ok true))
-
 (desc "lib/list.🫧 (BubbleScript bubblesort)"
   (it "bubblesort sorts a BubbleScript list"
     (assert.ok true)))
 
-# (desc "lib/list.🫧 (BubbleScript bubblesort)"
-#   (it-only "bubblesort sorts a BubbleScript list"
-#     (assert.ok true)))
-
-# (puts-to-string (expand-macro it-only
-#   "bubblesort sorts a BubbleScript list"
-#   (assert.ok true)))
