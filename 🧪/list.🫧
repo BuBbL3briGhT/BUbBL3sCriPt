@@ -3,5 +3,12 @@
 
 (desc "lib/list.🫧 (BubbleScript bubblesort)"
   (it "bubblesort sorts a BubbleScript list"
-    (assert.ok true)))
+    (🫧 result (do
+      (🫧 { bubblesort } (require "list"))
+      (🫧 xs °(5 1 4 2 3))
+      (bubblesort xs)))
 
+    # Basic check via string representation; adapt if list API differs
+    (🫧 s (result.toString))
+    (assert.equal s "(1 2 3 4 5)")
+))
