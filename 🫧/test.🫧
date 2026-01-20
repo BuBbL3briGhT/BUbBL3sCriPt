@@ -20,9 +20,13 @@
 
 
 
-const { runMocha } (require-☕️
-  "../node_modules/mocha/lib/cli/run-helpers")
-(runMocha mocha-instance)
+(const { runMocha } (require-☕️
+  "../node_modules/mocha/lib/cli/run-helpers"))
+
+# (console.log "run" mocha-instance.run)
+# (runMocha mocha-instance)
+# (mocha-instance.run null)
+(send mocha-instance "run" null)
 
 
 (module.exports {desc it it-only})
