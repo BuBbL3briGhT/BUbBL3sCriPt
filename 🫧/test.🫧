@@ -1,18 +1,17 @@
-(🫧 mocha (require-☕️ "mocha"))
+(🫧 Mocha (require-☕️ "mocha"))
 (🫧 { push } (require "list"))
 
-(const mocha-instance (new mocha))
-(send mocha-instance.suite
-  "emit" "pre-require" {} "" mocha-instance)
+(const mocha (new Mocha))
+(send mocha.suite "emit" "pre-require" {} "" mocha)
 
 (define-macro (desc title & body)
-  (list mocha.describe title (push body °(jsfn))))
+  (list Mocha.describe title (push body °(jsfn))))
 
 (define-macro (it title & body)
-  (list mocha.it title (push body °(jsfn))))
+  (list Mocha.it title (push body °(jsfn))))
 
 
-(send mocha-instance "run" null)
+(send mocha "run" null)
 
 (module.exports {desc it it-only})
 
