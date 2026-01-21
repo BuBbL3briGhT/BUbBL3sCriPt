@@ -11,7 +11,11 @@
 # Yeah Baby!! 🍼👶
 (send mocha.suite "emit" "pre-require" {} "" mocha)
 
-(each files require)
+# (each files require)
+# (send files "forEach" require)
+(send files "forEach"
+  ((jsfn f) (puts (+ "./" f))))
+  #((jsfn f) (require (+ "./" f))))
 
 # Use the mocha.run method to get those tests
 # running. Need to use send here because the dot
