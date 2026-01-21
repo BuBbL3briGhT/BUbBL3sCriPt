@@ -15,7 +15,7 @@
 # (send files "forEach" require)
 (let [files
       (map (from files) (fn f) (+ "./" f))]
-  (puts files))
+  (puts (send files "toString")))
 
 # (send files "forEach"
 #   ((jsfn f) (puts (+ "./" f))))
