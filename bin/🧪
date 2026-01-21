@@ -1,0 +1,5 @@
+(🫧 { puts } (require "core"))
+
+(🫧 files (send process.argv "slice" 3))
+(puts files)
+(process.exit 1)

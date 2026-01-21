@@ -7,7 +7,7 @@
     "test": "npm run 🧪",
     "🧪": "npm run 🧪☕️; npm run 🧪🫧",
     "🧪☕️": "mocha ./🧪/☕️/*.js ./🧪/☕️/**/*.js",
-    "🧪🫧": "bin/🫧 🧪/list.🫧"
+    "🧪🫧": "bin/🫧 bin/🧪 🧪/*.🫧"
   },
   "bin": {
     "bubls": "bin/bubls",
