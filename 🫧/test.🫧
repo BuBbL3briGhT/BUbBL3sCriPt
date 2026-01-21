@@ -18,7 +18,7 @@
 # which has advantages, but mean this is null. Using
 # send resolves this issue. Will neex to revist how
 # that works and if we can improve this.
-(send mocha "run" null)
+(send mocha "run" ((jsfn code) (process.exit code)))
 
 (module.exports {desc it it-only})
 

@@ -56,6 +56,7 @@ export const rootBinding = {
   // Js require
   ["require-☕️"]: createRequire(import.meta.url),
   __dirname: import.meta.dirname,
+  process: process,
 
   /* Special form functions */
 
