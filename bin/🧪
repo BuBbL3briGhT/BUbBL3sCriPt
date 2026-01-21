@@ -1,6 +1,6 @@
 (🫧 { puts } (require "core"))
 (🫧 Mocha (require-☕️ "mocha"))
-(🫧 { each } (require "list"))
+(🫧 { each map from } (require "list"))
 
 (🫧 files (send process.argv "slice" 3))
 
@@ -13,9 +13,13 @@
 
 # (each files require)
 # (send files "forEach" require)
-(send files "forEach"
-  ((jsfn f) (puts (+ "./" f))))
-  #((jsfn f) (require (+ "./" f))))
+(let [files
+      (map (from files) (fn f) (+ "./" f))]
+  (puts files))
+
+# (send files "forEach"
+#   ((jsfn f) (puts (+ "./" f))))
+#   #((jsfn f) (require (+ "./" f))))
 
 # Use the mocha.run method to get those tests
 # running. Need to use send here because the dot

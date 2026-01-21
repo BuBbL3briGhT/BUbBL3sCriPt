@@ -25,6 +25,9 @@
 (🫧 (each list fn)
   (send list "each" fn))
 
+(🫧 (from array)
+  (send List "from" array))
+
 (🫧 (map list fn)
   (if (empty? list)
     list
@@ -78,6 +81,7 @@
       (push (bubblesort (remove-first l m cmp) cmp) m))))
 
 module.exports {
-  each empty? invert map peek pop push reduce reverse shift
-  list-length list-min remove-first bubblesort
+  each empty? invert map peek pop push reduce reverse
+  from shift list-length list-min remove-first
+  bubblesort
 }
