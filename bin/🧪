@@ -1,5 +1,25 @@
 (🫧 { puts } (require "core"))
+(🫧 Mocha (require-☕️ "mocha"))
+(🫧 { each } (require "list"))
 
 (🫧 files (send process.argv "slice" 3))
+
 (puts files)
-(process.exit 1)
+
+(const mocha (new Mocha))
+# Must emit pre-require event to setup the context.
+# Yeah Baby!! 🍼👶
+(send mocha.suite "emit" "pre-require" {} "" mocha)
+
+(each files require)
+
+# Use the mocha.run method to get those tests
+# running. Need to use send here because the dot
+# notation treats it as an independent function,
+# which has advantages, but mean this is null. Using
+# send resolves this issue. Will neex to revist how
+# that works and if we can improve this.
+(send mocha "run"
+  ((jsfn code) (process.exit code)))
+
+# (process.exit 1)
