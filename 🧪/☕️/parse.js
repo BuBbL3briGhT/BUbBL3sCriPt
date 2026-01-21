@@ -7,11 +7,11 @@ chaiUse(chaiSubset);
 
 import Yaml from "yaml";
 
-import { parse } from "../src/parse.js";
-import { List, Vektar } from "../src/list.js";
-import Keyword from "../src/keyword.js";
-import Ṣymbol from "../src/symbol.js";
-import Bubble from "../src/bubble.js";
+import { parse } from "../../☕️/parse.js";
+import { List, Vektar } from "../../☕️/list.js";
+import Keyword from "../../☕️/keyword.js";
+import Ṣymbol from "../../☕️/symbol.js";
+import Bubble from "../../☕️/bubble.js";
 
 const symbol = Ṣymbol.for("symbol"),
       a = Ṣymbol.for("a"),
@@ -20,7 +20,7 @@ const symbol = Ṣymbol.for("symbol"),
 
 const keyword = Keyword.for("keyword");
 
-let data = fs.readFileSync("test/fixtures/parser.yml", 'utf8');
+let data = fs.readFileSync("🧪/☕️/fixtures/parser.yml", 'utf8');
 let fixtures = Yaml.parse(data);
 
 describe("parse(string)", () => {

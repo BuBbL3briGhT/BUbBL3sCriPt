@@ -21,6 +21,8 @@ const traceTemplate = "    en (${file}:${line}:${column})";
 const interpolateTrace = interpolate.bind(traceTemplate);
 const sAmp = Ṣymbol.for("&");
 
+const debug = console.debug;
+
 /**
  * @function ėval
  * @description Evaluates a string of Bubblescript
@@ -63,6 +65,7 @@ export function ėval(binding, script, opts={}) {
  * @returns {*} The result of the last evaluation.
  */
 export function evalEach(binding, list, stack) {
+  // console.log({list}, "🧀");
   const _evalExpression =
     evalExpression.bind(null, binding);
 
@@ -70,6 +73,7 @@ export function evalEach(binding, list, stack) {
   if (list.constructor === LazyList)
     list = list.toList();
 
+  // debug({ list });
   return list.tryEach(_evalExpression,
     catchExpandMacro, stack);
 }
@@ -108,10 +112,13 @@ export function evalExpression(binding, expression, stack) {
  */
 export function evalList(binding, list, stack=List.make()) {
   try {
+    // console.log({list: list.toString()});
     const { file, line, column } = list;
     stack = stack.push({func: list.head.toString(),
         file, line, column});
 
+    // console.debug("eval.js:117",
+    //   { "list.head": list.head });
     const fn = evalExpression(binding, list.head);
 
     if (fn == undefined) {
@@ -119,6 +126,7 @@ export function evalList(binding, list, stack=List.make()) {
       throw new Error(binding, list.head, stack);
     }
 
+    // console.log("eval.js:124", {fn});
     return Fn.call(binding, fn, list.tail, stack, ėval);
 
   } catch (error) {

@@ -90,21 +90,21 @@ BubbleScript.load = function (filePath) {
   return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
 }
 
-BubbleScript.load("../lib/core.🫧");
+// BubbleScript.load("../lib/core.🫧");
 
-function configure(config) {
-  const _require = config.require
-  const _dirname = config.dirname;
-  const { rootBinding } = BubbleScript;
+// function configure(config) {
+//   const _require = config.require
+//   const _dirname = config.dirname;
+//   const { rootBinding } = BubbleScript;
 
-  if (_require)
-    rootBinding.require = _require;
+//   if (_require)
+//     rootBinding.require = _require;
 
-  if (_dirname)
-    BubbleScript.load = function (filePath) {
-      filePath = path.join(_dirname, filePath);
-      return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
-    }
-}
+//   if (_dirname)
+//     BubbleScript.load = function (filePath) {
+//       filePath = path.join(_dirname, filePath);
+//       return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
+//     }
+// }
 
-BubbleScript.configure = configure;
+// BubbleScript.configure = configure;

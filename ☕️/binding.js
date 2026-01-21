@@ -21,8 +21,11 @@ import Range from "./range.js";
 import { specialForm, specialFormP }
                       from "./special_form.js";
 
-// import consola from "./consola.js";
-// import reqůire from "./require.js";
+import { parse } from "./parse.js";
+import path from "path";
+import fs from "fs";
+import { createRequire } from "module";
+
 
 const starSymbol = Ṣymbol.for("*");
 const sAmp = Ṣymbol.for("&");
@@ -33,15 +36,27 @@ function ensureKeyNotDefined(binding, key) {
       " already set");
 }
 
-// A man walks into a bar. Bartender says
-// what'll you have? The man says,
-// something strong, my head is killing
-// me. 🍸
+const { getModule, storeModule } =
+  (function () {
+    const modules = Object.create(null);
+
+    function getModule(key) {
+      return modules[key];
+    }
+
+    function storeModule(key, module={}) {
+      module[key] = module;
+    }
+
+    return { getModule, storeModule };
+  })();
+
 export const rootBinding = {
   console, // consola,
   // Js require
-  // ["reqūire"]: require,
+  ["require-☕️"]: createRequire(import.meta.url),
   __dirname: import.meta.dirname,
+  process: process,
 
   /* Special form functions */
 
@@ -79,106 +94,34 @@ export const rootBinding = {
 
   }),
 
-  // define: specialForm(function(args) {
-  //   let key = args.peek();
-  //   let val = args.pop();
-
-  //   // If the key turns out to be a list, then
-  //   // we do a function definition using the
-  //   // first item of the list as the key and the
-  //   // rest as the paramter list, otherwise do a
-  //   // normal key value definition.
-  //   if (key instanceof List) {
-  //     let name = key.peek().toString();
-  //     return this[key.peek().toString()]
-  //       = new Fn(this, key.pop(), val, { name,
-  //         file: key.file,
-  //         line: key.line,
-  //         column: key.column });
-  //   } else {
-  //     return this[key.toString()]
-  //       = evalExpression.call(this, val.peek());
-  //   }
-  // }),
-
-  // const: specialForm(function (list) {
-  //   const key   = list.peek();
-  //   const value = list.pop();
-  //   let o;
-
-  //   if (key === starSymbol) {
-  //     o = value.eval(this);
-
-  //     for (const k in o) {
-  //       this[k] = o[k];
-  //     }
-  //     return;
-  //   }
-
-  //   switch (key.constructor) {
-  //     case List:
-  //       // List sets a function
-  //       break;
-  //     case ObjectMap:
-  //       o = value.eval(this);
-  //       for (const k of key) {
-  //         const _k = k.toString();
-  //         this[_k] = o[_k];
-  //       }
-  //       break;
-  //     case Vektar:
-  //       // Vektar destructures
-  //       o = value.eval(this);
-  //       // console.log("value", value);
-  //       // console.log("o", o);
-  //       for (const k of key) {
-  //         const sKey = k.toString();
-  //         if (Object.hasOwn(this, sKey))
-  //           throw new Error("const " + sKey + " already set");
-
-  //         this[sKey] = o[sKey];
-  //         // console.log(sKey);
-  //       }
-  //       break;
-  //     default:
-  //       // Symbol sets
-  //       const sKey = key.toString();
-  //       if (Object.hasOwn(this, sKey))
-  //         throw new Error("const " + sKey + " already set");
-  //       // return this[sKey]
-  //       //   = ëval(this, value.peek());
-  //       return this[sKey] = value.eval(this);
-  //   }
-  // }),
-
-  // fn: specialForm(function(list) {
-  //   return new Fn(this, list.first.toList(),
-  //                       list.rest)
-  // }),
-
   fn: specialForm(function(params) {
     return specialForm(function(body) {
       return new Fn(this, params, body);
     })
   }),
 
-  // macro: specialForm(function(args) {
-  //   return new Macro(this, args.first, args.rest)
-  // }),
+  jsfn: specialForm(function(params) {
+    return specialForm(function(body) {
+      const fn = new Fn(this, params, body);
+      return function(...params) {
+        // console.log({params});
+        return fn.call(this,
+          List.from(params), [], ėval);
+      }
+    })
+  }),
 
   macro: specialForm(function(params) {
     return specialForm(function (body) {
-      return new Macro(this, params, body)
+      return new Macro(this, params, body);
     });
   }),
 
-  jsfn: specialForm(function(args) {
-    const binding = this;
-    const x = args.push(Ṣymbol.for('fn'));
-    const fn = evalExpression(binding, x);
-    return function(...args) {
-      return fn.invoke(List.from(args));
-    }
+  ["define-macro"]: specialForm(function(list) {
+    const [signature, body] = list.tuple;
+    const [name, params] = signature.tuple;
+    return this[name.toString()] =
+        new Macro(this, params, body);
   }),
 
   /**
@@ -189,13 +132,13 @@ export const rootBinding = {
    */
   let: specialForm(function(list) {
     const [params, body] = list.plop();
-    const binding = Object.create(this);
+    const binding = createBinding(this);
     params.toList().partition(2)
       .each(([key, value]) => {
         binding[key] =
-         evalExpression.call(binding, value);
+         evalExpression(binding, value);
       });
-    return body.evalEach(binding);
+    return evalEach(binding, body);
   }),
 
   /**
@@ -232,10 +175,14 @@ export const rootBinding = {
     alert(this.concat(msgs));
   }),
 
-  expandmacro: specialForm(function(list) {
-    const [head, tail] = list.plop();
-    const macro = ëval(this, head);
-    return macro.expand(tail);
+  ["expand-macro"]: specialForm(function(list) {
+    const [name, params] = list.tuple;
+    // console.log({ name, params });
+    const macro = evalExpression(this, name);
+    return macro.expand(params, ėval);
+    // console.log(macro);
+    // console.log(macro.expand(params));
+    // return List.make();
   }),
 
   /**
@@ -274,11 +221,15 @@ export const rootBinding = {
     return result;
   }),
 
+  do: specialForm(function(list) {
+    return evalEach(this, list);
+  }),
+
   /* Special forms with evaulated input
    * parameters. */
 
-  eval: specialFormP(function(args) {
-    return args.eval(this);
+  eval: specialFormP(function(params) {
+    return params.eval(this);
   }),
 
   list: specialFormP(function(params) {
@@ -309,51 +260,86 @@ export const rootBinding = {
    * @param {List} list - A list containing the object and the keys to access.
    * @returns {*} The value at the specified path, or undefined if not found.
    */
-  get: specialFormP(function(args) {
-    return args.reduce(
+  get: specialFormP(function(params) {
+    return params.reduce(
         (memo,key) => memo && memo[key]);
   }),
 
-  range: specialFormP(function (args) {
-    return new Range(...args);
+  range: specialFormP(function (params) {
+    return new Range(...params);
   }),
 
-  lazy: specialFormP(function (args) {
-    return new LazyList(...args);
+  lazy: specialFormP(function (params) {
+    return new LazyList(...params);
   }),
 
-  "+": specialFormP(function(args) {
-    return args.reduce((a,b) => a+b);
+  "+": specialFormP(function(params) {
+    return params.reduce((a,b) => a+b);
   }),
 
-  "-": specialFormP(function(args) {
-    return args.reduce((a,b) => a-b);
+  "-": specialFormP(function(params) {
+    return params.reduce((a,b) => a-b);
   }),
 
-  "*": specialFormP(function(args) {
-    return args.reduce((a,b) => a*b);
+  "*": specialFormP(function(params) {
+    return params.reduce((a,b) => a*b);
   }),
 
-  and: specialFormP(function(args) {
-    return args.reduce((a,b) => a && b);
+  and: specialFormP(function(params) {
+    return params.reduce((a,b) => a && b);
   }),
 
-  or: specialFormP(function(args) {
-    return args.reduce((a,b) => a || b);
+  or: specialFormP(function(params) {
+    return params.reduce((a,b) => a || b);
   }),
 
-  concat: specialFormP(function(args) {
-    return args.join('');
+  concat: specialFormP(function(params) {
+    return params.join('');
   }),
 
-  "/": specialFormP(function(args) {
-    return args.reduce((a,b) => a/b);
+  "/": specialFormP(function(params) {
+    return params.reduce((a,b) => a/b);
   }),
+
 
   /* Non-Special form functions */
 
-  do: function(args) {
-    return args.eval(this);
+  require: function(name) {
+
+    const modulePath =
+     (name[0] == ".") ?
+       path.resolve(this.__dirname, name + ".🫧") :
+       path.resolve(import.meta.dirname, "../🫧",
+         name + ".🫧");
+
+    const module = getModule(modulePath);
+    if (module) return module.exports;
+
+
+    let moduleExports;
+    const binding = createBinding(this);
+
+    binding.__dirname = path.dirname(modulePath);
+
+    binding.module = {
+      exports: function(exports) {
+        moduleExports = exports.createObject(binding);
+      }
+    }
+
+    const parseTree =
+      parse(fs.readFileSync(modulePath, 'utf-8'));
+    try {
+      evalEach(binding, parseTree);
+    } catch (error) {
+      console.log("Error evaluating " + modulePath);
+      throw error;
+    }
+
+    storeModule(modulePath,
+         { exports: moduleExports });
+
+    return moduleExports;
   },
 
   /**
@@ -367,6 +353,7 @@ export const rootBinding = {
   send: function(recipient, message, ...params) {
     if (message.key) message = message.key;
 
+    // console.log({recipient, message, params});
     return recipient[message](...params);
   },
 
@@ -405,16 +392,18 @@ export const rootBinding = {
   parse: function(s) {
     return parse(s);
   },
-  "new": function(constructor, args) {
-      return new constructor(...args.toArray());
+  "new": function(constructor, ...params) {
+      return new constructor(...params);
   }
 };
 
 // Aliases
 rootBinding.muf = rootBinding.define;
 rootBinding.def = rootBinding.define;
+rootBinding.const = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
 
+// Object.freeze(rootBinding);
 
 // Applys the keys and the values to the
 // binding based on order and position.

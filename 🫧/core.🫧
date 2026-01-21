@@ -1,0 +1,18 @@
+(🫧 { push } (require "list"))
+
+(define (puts & msg)
+  (console.log & msg))
+
+(define-macro (puts-to-string body)
+  (list °puts (list °send body :toString)))
+
+(define-macro (puts-macro & macro)
+  (list °puts-to-string (push macro °expand-macro)))
+
+# if module (module.exports {
+#   pop puts each reverse reverseCowgirl
+#   empty? invert shift peek poot push slap
+#   stick pluck && PARTY!!!! #spank
+# };
+
+(module.exports { puts puts-to-string puts-macro })

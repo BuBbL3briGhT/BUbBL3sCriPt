@@ -32,6 +32,7 @@ export class AbstractList {
   get next() { return this.pop().peek(); }
   get last() { return !this.pop().isEmpty ?
       this.pop().last : this.peek(); }
+  get tuple() { return [this.o, this.oo] }
 
   count() { return this.reduce(i => i+1, 0); }
 

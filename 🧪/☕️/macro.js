@@ -1,8 +1,8 @@
 import assert from "node:assert";
 import { it, describe } from "mocha";
 
-import { Macro } from "../src/macro.js";
-import { List, Vektar } from "../src/list.js";
+import { Macro } from "../../☕️/macro.js";
+import { List, Vektar } from "../../☕️/list.js";
 
 describe("Macro", function () {
   describe("new Macro()", function () {

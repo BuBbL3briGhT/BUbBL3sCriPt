@@ -1,10 +1,10 @@
 import assert from "node:assert";
 import { it, describe } from "mocha";
-import { evalExpression } from "../src/eval.js";
-import Ṣymbol from "../src/symbol.js";
-import Bubble from "../src/bubble.js";
-import { List } from "../src/list.js";
-import { rootBinding } from "../src/binding.js";
+import { evalExpression } from "../../☕️/eval.js";
+import Ṣymbol from "../../☕️/symbol.js";
+import Bubble from "../../☕️/bubble.js";
+import { List } from "../../☕️/list.js";
+import { rootBinding } from "../../☕️/binding.js";
 
 describe("evalExpression", function () {
   it("evaluates an expression", function () {

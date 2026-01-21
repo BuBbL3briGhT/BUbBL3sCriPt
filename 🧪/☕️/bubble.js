@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import { it, describe } from "mocha";
-import Bubble from "../src/bubble.js";
+import Bubble from "../../☕️/bubble.js";
 
 describe("Bubble", () => {
   describe("new", () => {

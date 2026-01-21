@@ -1,9 +1,9 @@
 import assert from "node:assert";
 import { it, describe } from "mocha";
-import { LazyList } from "../src/list.js";
+import { LazyList } from "../../☕️/list.js";
 
 import { tokenize, tokenTypes, Tokenizer }
-                      from "../src/tokenize.js";
+                      from "../../☕️/tokenize.js";
 
 const { TOK_STRiNG, TOK_NUMBER,
   TOK_SYMBOL, TOK_KEYWORD, TOK_TRUE,

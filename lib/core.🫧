@@ -1,8 +1,0 @@
-(define (puts & msg)
-  (console.log & msg))
-
-# if module (module.exports {
-#   pop puts each reverse reverseCowgirl
-#   empty? invert shift peek poot push slap
-#   stick pluck && PARTY!!!! #spank
-# };

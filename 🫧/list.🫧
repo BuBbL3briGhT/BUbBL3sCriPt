@@ -1,0 +1,83 @@
+# Cleaned list helpers and a pure-BubbleScript bubblesort (selection-extraction style)
+# Comparator returns true when a < b (default comparator uses <)
+
+(🫧 (pop list)
+  (send list "pop"))
+
+(🫧 (peek list)
+  (send list "peek"))
+
+(🫧 (push list item)
+  (send list "push" item))
+
+(🫧 (shift list)
+  (send list "shift"))
+
+(🫧 (invert list)
+  (send list "invert"))
+
+(🫧 (reverse list)
+  (invert list))
+
+(🫧 (empty? list)
+  (get list "isEmpty"))
+
+(🫧 (each list fn)
+  (send list "each" fn))
+
+(🫧 (map list fn)
+  (if (empty? list)
+    list
+    (push
+      (map (pop list) fn)
+      (fn (peek list)))))
+
+(🫧 (reduce list fn memo)
+  (if (empty? list) memo
+    (reduce (pop list) fn (fn memo (peek list)))))
+
+# Default comparator: returns true when a < b
+(🫧 (default-cmp a b)
+  (< a b))
+
+# Equality via comparator: not (a<b) and not (b<a)
+(🫧 (eq? a b cmp)
+  (and (not (cmp a b)) (not (cmp b a))))
+
+# Length of list (recursive)
+(🫧 (list-length l)
+  (if (empty? l)
+    0
+    (+ 1 (list-length (pop l)))))
+
+# Find minimum element according to comparator
+(🫧 (list-min l cmp)
+  (if (empty? (pop l))
+    (peek l)
+    (let [head (peek l)
+          rest-min (list-min (pop l) cmp)]
+      (if (cmp head rest-min)
+        head
+        rest-min))))
+
+# Remove the first occurrence of value 'val' using comparator semantics
+(🫧 (remove-first l val cmp)
+  (if (empty? l)
+    l
+    (let [head (peek l)]
+      (if (eq? head val cmp)
+        (pop l)
+        (push (remove-first (pop l) val cmp) head)))))
+
+# Bubblesort implemented as repeated extraction of minimum (stable-ish selection-based)
+(🫧 (bubblesort l cmp)
+  (if (empty? l)
+    l
+    (let [cmp (or cmp default-cmp)
+          m (list-min l cmp)]
+      (push (bubblesort (remove-first l m cmp) cmp) m))))
+
+module.exports {
+  each empty? invert map peek pop push reduce reverse shift
+  list-length list-min remove-first bubblesort
+}

@@ -1,12 +1,12 @@
 import assert from "assert";
 import sinon from "sinon";
 
-import { List, Vektar } from "../src/list.js";
-import { parse } from "../src/parse.js";
-import Keyword from "../src/keyword.js";
-import { rootBinding } from "../src/binding.js";
+import { List, Vektar } from "../../☕️/list.js";
+import { parse } from "../../☕️/parse.js";
+import Keyword from "../../☕️/keyword.js";
+import { rootBinding } from "../../☕️/binding.js";
 
-import { ėval, evalEach } from "../src/eval.js";
+import { ėval, evalEach } from "../../☕️/eval.js";
 
 describe("evalEach", function () {
 

@@ -1,3 +1,4 @@
+
                                           o
      .       .   .   .     o                 .
      |  o    |   |   |          °      o     |
@@ -7,73 +8,115 @@
                      °      o
                o
 
-## What is Bubblescript?
+What is Bubblescript?
+---------------------
+Bubblescript is a small Clojure-like lisp-inspired
+language that runs on Node.js.  It provides a concise
+s-expression syntax and a tiny standard library for
+working with lists, maps, functions, and the usual
+functional primitives.
 
-Bubble🫧script is a
-[Clojure](https://clojure.org/)-like
-language inspired✨️ for Java☕️script.
-
-## Install
-
+Install
+-------
     npm install -g bubblescript
 
-## Get a prompt and run some code
-
+Run the REPL
+------------
     $ bubls
-    %< (console.log "Hola Mundo")
-    Hola Mundo
+    %< (console.log "Hello Bubble")
+    Hello Bubble
     undefined
     %< .exit
-    $
 
-## Examples
-
-**Some math**
-
+Quick examples
+--------------
+Some math
     (+ 1 2)
     (+ 1 2 3)
     (- 5 2)
     (/ 8 2)
     (* 7 8 9)
 
-**Create a function**
+Define a function
+    (mufn greet [name]
+      (puts name))
 
-    (define (coolbeans beans)
-      (puts beans))
+    (greet "Hi!")
 
-    (coolbeans "yes!")
+Locals
+    (let [n 777]
+      (puts n))
 
-**Looping**
-
+Looping
     (loop [i 0]
-      (puts "🥰")
+      (puts "tick")
       (if (< i 3)
         (recur [i (+ i 1)])))
 
-## Dev Setup
+Modules and require
+-------------------
+Bubblescript supports modular code via the `require`
+mechanism.
 
-    git clone git@github.com:BuBbL3briGhT/BUbBL3sCriPt.git bubblescript
+- You can `require` a module from `lib/` by its
+basename:
+    (const list (require "list"))
+
+- You can extract specific exports:
+    (const { map reduce } (require "list"))
+
+Example: create a module (lib/hello.🫧)
+    (module.exports {
+      say-hello
+    })
+
+    (🫧 (say-hello name)
+      (puts "Hello," name))
+
+Then from your script:
+    (const hello (require "hello"))
+    (hello.say-hello "Bubbly")
+
+Example: using list/bubblesort
+------------------------------
+(Assuming lib/list exports `bubblesort`.)
+
+    (const { bubblesort } (require "list"))
+    (const xs °(3 1 2 7 4))
+    (puts (bubblesort xs)) ; -> °(1 2 3 4 7)
+
+Developer setup
+---------------
+Clone, install dev deps and run tests:
+
+    git clone \
+      git@github.com:BuBbL3briGhT/BUbBL3sCriPt.git \
+      bubblescript
     cd bubblescript
     npm install
     npm test
 
-## Tips
+Running specific tests:
+    npx mocha test/list.js
 
-You can run a single test suite file using `npx mocha`
+Notes & suggestions
+-------------------
+- lib/list.🫧 cleaned and a pure-BubbleScript
+  `bubblesort` implementation was added; a JS
+  fallback (lib/list.js) is provided for Node-side
+  consumers/tests.
+- The comparator convention: comparator(a b) returns
+  true when a < b (default comparator uses
+  numeric/string <).
+- For runtime bootstrapping the tests use
+  `require('../src/index')` (⛄️ branch).
+- Consider normalizing non-ASCII names in a stable
+  release; aliases can be provided for backward
+  compatibility.
 
-    npx mocha <path to test.js>
-
-You can run all the test suits in adirectory in same way by passing the directory path here.
-
-    # Run the function test suites
-    npx mocha test/f
-    # Run the object test suites
-    npx mocha test/o
-    # Run function and object test suites
-    npx mocha test/f test/o
-    # Or more simply
-    npx mocha test/{f,o}
-
-Listen to The few, the smart, The Mathaletes
-by kaNdii on #SoundCloud
-https://on.soundcloud.com/Yb7vK2PmzYSTfzUS6
+Contributing
+------------
+If you want me to push these changes and open the PR,
+I can do that once you confirm and provide push
+rights, or you can apply the patch locally using the
+commands below.
