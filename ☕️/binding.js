@@ -404,6 +404,7 @@ rootBinding.def = rootBinding.define;
 rootBinding.const = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
 rootBinding.req = rootBinding.require;
+rootBinding["要求"] = rootBinding.require;
 rootBinding["require-☕️"] = rootBinding["☕️"];
 
 // Object.freeze(rootBinding);

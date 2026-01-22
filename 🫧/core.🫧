@@ -11,12 +11,6 @@
 (define-macro (puts-macro & macro)
   (list °puts-to-string (push macro °expand-macro)))
 
-# if module (module.exports {
-#   pop puts each reverse reverseCowgirl
-#   empty? invert shift peek poot push slap
-#   stick pluck && PARTY!!!! #spank
-# };
-
-(module.exports {
+module.exports {
   puts curry puts-encodar puts-macro
-})
+}
