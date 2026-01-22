@@ -9,28 +9,22 @@
 
 (require "../🧪/list.🫧")
 
+# (🫧 files (send process.argv "slice" 3))
 
+# (puts files)
 
+# # (each files require)
+# # (send files "forEach" require)
+# (let [files
+#       (map (from files) (fn f) (+ "./" f))]
+#   (puts (send files "toString")))
 
-(🫧 files (send process.argv "slice" 3))
-
-(puts files)
-
-# (each files require)
-# (send files "forEach" require)
-(let [files
-      (map (from files) (fn f) (+ "./" f))]
-  (puts (send files "toString")))
-
-(🫧 fileList (map (from files) (curry + "./")))
-(puts (encodar fileList))
+# (🫧 fileList (map (from files) (curry + "./")))
+# (puts (encodar fileList))
 
 # (send files "forEach"
 #   ((jsfn f) (puts (+ "./" f))))
 #   #((jsfn f) (require (+ "./" f))))
-
-
-
 
 
 # Use the mocha.run method to get those tests
