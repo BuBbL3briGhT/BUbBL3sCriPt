@@ -8,6 +8,7 @@
 (send mocha.suite "emit" "pre-require" {} "" mocha)
 
 (require "../🧪/list.🫧")
+(require "../🧪/math.🫧")
 
 # (🫧 files (send process.argv "slice" 3))
 
