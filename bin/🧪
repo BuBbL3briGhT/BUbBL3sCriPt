@@ -1,38 +1,18 @@
-(🫧 { puts encodar curry } (require "core"))
-(🫧 Mocha (require-☕️ "mocha"))
-(🫧 { each map from } (require "list"))
 
-(const mocha (new Mocha))
-# Must emit pre-require event to setup the context.
-# Yeah Baby!! 🍼👶
-(send mocha.suite "emit" "pre-require" {} "" mocha)
+  🫧 { puts encodar curry } (require "core")
+       🫧 { each map from } (require "list")
 
-(require "../🧪/list.🫧")
-(require "../🧪/math.🫧")
+                🫧 Mocha (☕️ "mocha")
 
-# (🫧 files (send process.argv "slice" 3))
+             🫧 mocha (new Mocha)
 
-# (puts files)
+      # Emit pre-require event,
+      # sets context.
+      send mocha.suite "emit",
+        "pre-require" {} "" mocha
 
-# # (each files require)
-# # (send files "forEach" require)
-# (let [files
-#       (map (from files) (fn f) (+ "./" f))]
-#   (puts (send files "toString")))
+  req "../🧪/list.🫧"; req "../🧪/math.🫧"
 
-# (🫧 fileList (map (from files) (curry + "./")))
-# (puts (encodar fileList))
-
-# (send files "forEach"
-#   ((jsfn f) (puts (+ "./" f))))
-#   #((jsfn f) (require (+ "./" f))))
-
-
-# Use the mocha.run method to get those tests
-# running. Need to use send here because the dot
-# notation treats it as an independent function,
-# which has advantages, but mean this is null. Using
-# send resolves this issue. Will neex to revist how
-# that works and if we can improve this.
-(send mocha "run"
-  ((jsfn code) (process.exit code)))
+  # Kick off mocha to run tests 🦶🏈
+  send mocha "run",
+    ((jsfn $?) (process.exit $?))

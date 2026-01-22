@@ -55,7 +55,7 @@ export const rootBinding = {
   console, // consola,
   process, List,
   // Js require
-  ["require-☕️"]: createRequire(import.meta.url),
+  ["☕️"]: createRequire(import.meta.url),
   __dirname: import.meta.dirname,
 
   /* Special form functions */
@@ -403,6 +403,8 @@ rootBinding.muf = rootBinding.define;
 rootBinding.def = rootBinding.define;
 rootBinding.const = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
+rootBinding.req = rootBinding.require;
+rootBinding["require-☕️"] = rootBinding["☕️"];
 
 // Object.freeze(rootBinding);
 
