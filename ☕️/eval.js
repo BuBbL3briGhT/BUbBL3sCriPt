@@ -88,16 +88,17 @@ export function evalEach(binding, list, stack) {
  * @returns {*} The result of the expression.
  */
 export function evalExpression(binding, expression, stack) {
-  switch (expression.constructor) {
-    case List:
-      return evalList(binding, expression, stack);
-    case Ṣymbol:
-      return evalSymbol(binding, expression);
-    case Bubble:
-      return expression.pop();
-    default:
-      return expression;
-  }
+  if (expression)
+    switch (expression.constructor) {
+      case List:
+        return evalList(binding, expression, stack);
+      case Ṣymbol:
+        return evalSymbol(binding, expression);
+      case Bubble:
+        return expression.pop();
+      default:
+        return expression;
+    }
 }
 
 /**
