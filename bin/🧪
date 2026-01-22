@@ -17,6 +17,9 @@
       (map (from files) (fn f) (+ "./" f))]
   (puts (send files "toString")))
 
+(🫧 fileList (from files))
+(puts "fileList" fileList)
+
 # (send files "forEach"
 #   ((jsfn f) (puts (+ "./" f))))
 #   #((jsfn f) (require (+ "./" f))))
