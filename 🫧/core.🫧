@@ -3,6 +3,8 @@
 (define (puts & msg)
   (console.log & msg))
 
+(🫧 (encodar o) (send o "toString"))
+
 (define-macro (puts-encodar body)
   (list °puts (list °send body :toString)))
 
@@ -15,4 +17,6 @@
 #   stick pluck && PARTY!!!! #spank
 # };
 
-(module.exports { puts puts-encodar puts-macro })
+(module.exports {
+  puts encodar puts-encodar puts-macro
+})

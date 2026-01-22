@@ -1,4 +1,4 @@
-(🫧 { puts puts-encodar } (require "core"))
+(🫧 { puts encodar } (require "core"))
 (🫧 Mocha (require-☕️ "mocha"))
 (🫧 { each map from } (require "list"))
 
@@ -18,7 +18,7 @@
   (puts (send files "toString")))
 
 (🫧 fileList (from files))
-(puts-encodar fileList)
+(puts (encodar fileList))
 
 # (send files "forEach"
 #   ((jsfn f) (puts (+ "./" f))))
