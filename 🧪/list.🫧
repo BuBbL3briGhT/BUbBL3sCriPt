@@ -1,6 +1,6 @@
 (const { desc it it-only } (require "test"))
 (const assert (require-☕️ "assert"))
-(🫧 { encodar } (req "core"))
+(🫧 { enc } (req "string"))
 (🫧 { conj } (req "list"))
 
 (desc "List"
@@ -13,7 +13,7 @@
   (desc "conj"
     (it "conjoins two lists"
       (assert.equal
-        (encodar (conj °(4 5 6) °(1 2 3)))
+        (enc (conj °(4 5 6) °(1 2 3)))
         "(1 2 3 4 5 6)")))
 
   (desc "lib/list.🫧 (BubbleScript bubblesort)"
