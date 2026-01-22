@@ -403,6 +403,7 @@ rootBinding.muf = rootBinding.define;
 rootBinding.def = rootBinding.define;
 rootBinding.const = rootBinding.define;
 rootBinding["🫧"] = rootBinding.define;
+rootBinding["定義"] = rootBinding.define;
 rootBinding.req = rootBinding.require;
 rootBinding["要求"] = rootBinding.require;
 rootBinding["require-☕️"] = rootBinding["☕️"];

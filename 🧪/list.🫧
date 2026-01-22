@@ -1,7 +1,16 @@
-🫧 { desc it it-only } (要求 "test")
-             🫧 assert (☕️ "assert")
-            🫧 { enc } (要求 "string")
-           🫧 { conj } (要求 "list")
+定義 { desc it it-only } (要求 "test")
+             定義 assert (☕️ "assert")
+            定義 { enc } (要求 "string")
+           定義 { conj } (要求 "list")
+
+         #           定
+         #           義
+         #   { desc it it-only }
+         #           (
+         #           要
+         #           求
+         #         "test"
+         #           )
 
 (desc "List"
   # (desc "conj"
