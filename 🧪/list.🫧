@@ -3,19 +3,21 @@ definir { desc it it-only } (requerir "test")
             定義 { enc } (要求 "string")
       definir { conj } (requerir "list")
 
-         #    定
-         #    義
-         #    ︷
-         #    描
-         #    述
+         #  定
+         #  義
+         #  ︷
+         #  描
+         #  述
          #
-         #    它
-         #    ︸
-         #    ︵
-         #    要
-         #    求
-         #  "test"
-         #    ︶
+         #  它
+         #  ︸
+         #  ︵
+         #  要
+         #  求
+         #
+         # "測
+         #  試"
+         #  ︶
 
 (desc "List"
   # (desc "conj"
