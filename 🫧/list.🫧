@@ -35,6 +35,9 @@
       (map (pop list) fn)
       (fn (peek list)))))
 
+(🫧 (conj ching chong)
+  (send ching "conj" chong))
+
 (🫧 (reduce list fn memo)
   (if (empty? list) memo
     (reduce (pop list) fn (fn memo (peek list)))))
@@ -81,7 +84,7 @@
       (push (bubblesort (remove-first l m cmp) cmp) m))))
 
 module.exports {
-  each empty? invert map peek pop push reduce reverse
+  each empty? invert map conj peek pop push reduce reverse
   from shift list-length list-min remove-first
   bubblesort
 }

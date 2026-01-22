@@ -1,9 +1,12 @@
-(🫧 { push } (require "list"))
+(🫧 { push conj } (require "list"))
 
 (define (puts & msg)
   (console.log & msg))
 
 (🫧 (encodar o) (send o "toString"))
+
+(🫧 (curry function & tit)
+  ((fn & tat) (function & (conj tit tat))))
 
 (define-macro (puts-encodar body)
   (list °puts (list °send body :toString)))
@@ -18,5 +21,5 @@
 # };
 
 (module.exports {
-  puts encodar puts-encodar puts-macro
+  puts encodar curry puts-encodar puts-macro
 })
