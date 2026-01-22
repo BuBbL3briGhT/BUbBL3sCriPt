@@ -1,7 +1,7 @@
-定義 { desc it it-only } (要求 "test")
+definir { desc it it-only } (requerir "test")
              定義 assert (☕️ "assert")
             定義 { enc } (要求 "string")
-           定義 { conj } (要求 "list")
+      definir { conj } (requerir "list")
 
          #           定
          #           義

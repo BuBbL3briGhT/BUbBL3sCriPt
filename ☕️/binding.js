@@ -408,6 +408,12 @@ rootBinding.req = rootBinding.require;
 rootBinding["要求"] = rootBinding.require;
 rootBinding["require-☕️"] = rootBinding["☕️"];
 
+// Español
+(function (o) {
+  o.requerir = o.require;
+   o.definir = o.define;
+})(rootBinding);
+
 // Object.freeze(rootBinding);
 
 // Applys the keys and the values to the
