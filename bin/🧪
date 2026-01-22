@@ -17,7 +17,7 @@
       (map (from files) (fn f) (+ "./" f))]
   (puts (send files "toString")))
 
-(🫧 fileList (from files))
+(🫧 fileList (map (from files) 1))
 (puts (encodar fileList))
 
 # (send files "forEach"
