@@ -5,8 +5,8 @@
 
 (🫧 (encodar o) (send o "toString"))
 
-(🫧 (curry function & tit)
-  ((fn & tat) (function & (conj tit tat))))
+(🫧 (curry fun & x)
+  ((fn & o) (fun & (conj x o))))
 
 (define-macro (puts-encodar body)
   (list °puts (list °send body :toString)))

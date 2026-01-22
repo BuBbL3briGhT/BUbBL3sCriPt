@@ -2,14 +2,19 @@
 (🫧 Mocha (require-☕️ "mocha"))
 (🫧 { each map from } (require "list"))
 
-(🫧 files (send process.argv "slice" 3))
-
-(puts files)
-
 (const mocha (new Mocha))
 # Must emit pre-require event to setup the context.
 # Yeah Baby!! 🍼👶
 (send mocha.suite "emit" "pre-require" {} "" mocha)
+
+(require "../🧪/list.🫧")
+
+
+
+
+(🫧 files (send process.argv "slice" 3))
+
+(puts files)
 
 # (each files require)
 # (send files "forEach" require)
@@ -24,6 +29,10 @@
 #   ((jsfn f) (puts (+ "./" f))))
 #   #((jsfn f) (require (+ "./" f))))
 
+
+
+
+
 # Use the mocha.run method to get those tests
 # running. Need to use send here because the dot
 # notation treats it as an independent function,
@@ -32,5 +41,3 @@
 # that works and if we can improve this.
 (send mocha "run"
   ((jsfn code) (process.exit code)))
-
-# (process.exit 1)
