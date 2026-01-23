@@ -115,8 +115,8 @@ export function evalList(binding, list, stack=List.make()) {
   try {
     // console.log({list: list.toString()});
     const { file, line, column } = list;
-    stack = stack.push({func: list.head.toString(),
-        file, line, column});
+    // stack = stack.push({func: list.head.toString(),
+    //     file, line, column});
 
     // console.debug("eval.js:117",
     //   { "list.head": list.head });
