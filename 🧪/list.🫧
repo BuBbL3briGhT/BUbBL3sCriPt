@@ -72,9 +72,11 @@
  #             ︶   ︵
  #             ︶   2
  #                  3
- #                ︶  ︶
- #
- #
+ #                  ︶
+ #                  ︶
+ #                  ︶
+ #                  ︶
+ #                  ︶
  #
 
   (desc "lib/list.🫧 (BubbleScript bubblesort)"
