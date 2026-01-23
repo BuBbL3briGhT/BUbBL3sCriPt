@@ -56,6 +56,22 @@
       (定 列 °(1 2 3))
       (比 (樂 列) °(2 3))))
 
+
+ #   ︵
+ #   述   ︵         (比
+ #  "樂"  它
+ #            (定     (樂
+ #       "流
+ #        行   列      列)
+ #        🎉
+ #             °(      °(
+ #        列   1       2
+ #        表"   2       3
+ #             3       )
+ #             ))       )))
+ #
+
+
   (desc "lib/list.🫧 (BubbleScript bubblesort)"
     (it "bubblesort sorts a BubbleScript list"
       (🫧 result (do
