@@ -163,19 +163,23 @@ export class Tokenizer {
   }
 
   tokenizeKeyword () {
-    let line = this.line;
-    let column = this.column;
-    this.step();
+
+      const line = this.line;
+    const column = this.column;
+
+      this.step();
 
     const matcher = new SymbolMatcher(this.tortuga);
-    const value = matcher.match;
-    this.tortuga = matcher.tortuga;
+      const value = matcher.match;
+     this.tortuga = matcher.tortuga;
 
-    let token;
-    token = this.createToken(TOK_KEYWORD, value, line, column);
-    this.column += value.length;
+      const token = this.createToken(TOK_KEYWORD,
+                      value, line, column);
+
+     this.column += value.length;
 
     return token;
+
   }
 
   tokenizeSymbol () {
