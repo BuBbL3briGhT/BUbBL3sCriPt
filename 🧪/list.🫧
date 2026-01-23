@@ -58,20 +58,20 @@
 
  #
  #   ︵
- #   述   ︵         (比
+ #   述   ︵
  #        它   ︵
- #  "樂"       定     (樂
- #       "流
- #        行   列      列)
- #        🎉
- #             °     °(
- #        列   ︵    2
- #        表"  1       3
- #             2     )
- #             3       )))
- #             ︶
- #             ︶
- #
+ #  "樂"       定
+ #       "流        (比
+ #        行   列
+ #        🎉         (樂
+ #             °
+ #        列   ︵     列)
+ #        表"  1
+ #             2    °(
+ #             3    2
+ #             ︶     3
+ #             ︶   )
+ #                    )))
 
   (desc "lib/list.🫧 (BubbleScript bubblesort)"
     (it "bubblesort sorts a BubbleScript list"
