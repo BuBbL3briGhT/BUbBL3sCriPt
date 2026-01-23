@@ -3,25 +3,6 @@ definir { desc it it-only } (requerir "test")
             定義 { enc } (要求 "string")
       definir { conj } (requerir "list")
 
-  # # # # # # # # # # # # #
-  #                       #
-  #  定   定   定   定    #
-  #  義   義   義   義    #
-  #  ︷        ︷   ︷    #
-  #  描   斷   編   連    #
-  #  述   言   碼   接    #
-  #       ︵   ︸   ︸    #
-  #  它   要   ︵   ︵    #
-  #  ︸   求   要   要    #
-  #  ︵        求   求    #
-  #  要  "斷              #
-  #  求   言" "細  "清    #
-  #       ︶   繩"  單"   #
-  # "測        ︶   ︶    #
-  #  試"                  #
-  #  ︶                   #
-  # # # # # # # # # # # # #
-
 (desc "List"
   # (desc "conj"
   #   (it "conjoins two lists")
@@ -46,6 +27,27 @@ definir { desc it it-only } (requerir "test")
       # (🫧 s (result.toString))
       (🫧 s (send result "toString"))
       (assert.equal s "(1 2 3 4 5)")
-  ))
-)
+
+;
+
+
+  # # # # # # # # # # # # #
+  #                       #
+  #  定   定   定   定    #
+  #  義   義   義   義    #
+  #  ︷        ︷   ︷    #
+  #  描   斷   編   連    #
+  #  述   言   碼   接    #
+  #       ︵   ︸   ︸    #
+  #  它   要   ︵   ︵    #
+  #  ︸   求   要   要    #
+  #  ︵        求   求    #
+  #  要  "斷              #
+  #  求   言" "細  "清    #
+  #       ︶   繩"  單"   #
+  # "測        ︶   ︶    #
+  #  試"                  #
+  #  ︶                   #
+  # # # # # # # # # # # # #
+
 
