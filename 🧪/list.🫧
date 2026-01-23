@@ -1,7 +1,8 @@
 definir { desc it it-only } (requerir "test")
              定義 assert (☕️ "assert")
             定義 { enc } (要求 "string")
-      definir { conj } (requerir "list")
+      definir { conj pop },
+                         (requerir "list")
 
   #
   #  定   定   定   定
@@ -27,11 +28,22 @@ definir { desc it it-only } (requerir "test")
   #       (conj °(4 5 6) °(1 2 3))
   #       °(1 2 3 4 5 6)))
 
+  # (desc "connect"
+  #   (it "connects two lists"
+  #     (assert.equal
+  #       (connect °(4 5 6) °(1 2 3))
+  #       "(1 2 3 4 5 6)")))
+
   (desc "conj"
     (it "conjoins two lists"
       (assert.equal
         (enc (conj °(4 5 6) °(1 2 3)))
         "(1 2 3 4 5 6)")))
+
+  (desc "pop"
+    (it "pops the list"
+      (定義 miLista °(1 2 3))
+      (assert.equal (pop miLista) °(2 3))))
 
   (desc "lib/list.🫧 (BubbleScript bubblesort)"
     (it "bubblesort sorts a BubbleScript list"

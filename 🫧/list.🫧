@@ -1,5 +1,7 @@
-# Cleaned list helpers and a pure-BubbleScript bubblesort (selection-extraction style)
-# Comparator returns true when a < b (default comparator uses <)
+# Cleaned list helpers and a pure-BubbleScript
+# bubblesort (selection-extraction style)
+# Comparator returns true when a < b (default
+# comparator uses <)
 
 (🫧 (pop list)
   (send list "pop"))
