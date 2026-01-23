@@ -1,8 +1,10 @@
-definir { desc it it-only } (requerir "test")
+     definir { desc it } (requerir "test")
              定義 assert (☕️ "assert")
             定義 { enc } (要求 "string")
       definir { conj pop },
                          (requerir "list")
+
+
 
   #
   #  定   定   定   定
@@ -40,10 +42,13 @@ definir { desc it it-only } (requerir "test")
         (enc (conj °(4 5 6) °(1 2 3)))
         "(1 2 3 4 5 6)")))
 
-  (desc "pop"
-    (it "pops the list"
-      (定義 miLista °(1 2 3))
-      (assert.equal (pop miLista) °(2 3))))
+  (列 述 desc)
+  (列 它 it)
+
+  (述 "樂"
+    (它 "流行🎉 列表"
+      (定 列 °(1 2 3))
+      (assert.equal (樂 列) °(2 3))))
 
   (desc "lib/list.🫧 (BubbleScript bubblesort)"
     (it "bubblesort sorts a BubbleScript list"
