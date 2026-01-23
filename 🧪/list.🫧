@@ -47,10 +47,14 @@
   (定 它 it)
   (定 樂 pop)
 
+  # Perfoms a string comparison of two items.
+  (定 (比 蘋 橘)
+    (assert.equal (enc 蘋) (enc 橘)))
+
   (述 "樂"
     (它 "流行🎉 列表"
       (定 列 °(1 2 3))
-      (assert.equal (樂 列) °(2 3))))
+      (比 (樂 列) °(2 3))))
 
   (desc "lib/list.🫧 (BubbleScript bubblesort)"
     (it "bubblesort sorts a BubbleScript list"
