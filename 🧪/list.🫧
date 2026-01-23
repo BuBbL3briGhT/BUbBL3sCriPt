@@ -23,7 +23,7 @@
   #  試"
   #  ︶
 
-(desc "List"
+(desc "列 (list)"
   # (desc "conj"
   #   (it "conjoins two lists")
   #     (assert.equal
@@ -51,7 +51,7 @@
   (定 (比 蘋 橘)
     (assert.equal (enc 蘋) (enc 橘)))
 
-  (述 "樂"
+  (述 "樂 (happy 😃 pop 🎉🐉)"
     (它 "流行🎉 列表"
       (定 列 °(1 2 3))
       (比 (樂 列) °(2 3))))
