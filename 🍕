@@ -1,0 +1,3 @@
+: { puts } (require "core")
+: 👋 "¡Hola, Mucho Gusto, Ron Burgandy!"
+puts 👋
