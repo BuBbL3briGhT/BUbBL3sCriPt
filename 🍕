@@ -1,5 +1,2 @@
-: { puts } (require "core")
 : 👋 "¡Hola, Mucho Gusto, Ron Burgandy!"
-puts 👋
-
-(new Array 1 2 3)
+: 🧁 (new Array 1 2 3)
