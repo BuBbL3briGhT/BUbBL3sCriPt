@@ -169,16 +169,29 @@ export class Tokenizer {
 
       this.step();
 
-    const matcher = new SymbolMatcher(this.tortuga);
-      const value = matcher.match;
-     this.tortuga = matcher.tortuga;
+    if (this.tortuga["isEmpty?"]) {
 
-      const token = this.createToken(TOK_KEYWORD,
-                      value, line, column);
+          return this.createToken(
 
-     this.column += value.length;
+              TOK_SYMBOL, ":",
+              line, column
 
-    return token;
+          );
+
+    } else {
+
+      const matcher = new SymbolMatcher(this.tortuga);
+        const value = matcher.match;
+       this.tortuga = matcher.tortuga;
+
+        const token = this.createToken(TOK_KEYWORD,
+                        value, line, column);
+
+       this.column += value.length;
+
+      return token;
+
+    }
 
   }
 
