@@ -52,12 +52,13 @@ if (path) {
 
   function r3pL() {
     rl.question("%< ", (xoxo) => {
-      try {
+      if (xoxo.trim() != "") try {
         if (xoxo == ".exit") {
           rl.close();
           return;
         }
-        let result = ėval(binding, xoxo);
+
+        const result = ėval(binding, xoxo);
         if (result && result.toString) {
           // console.log(result);
           try {
