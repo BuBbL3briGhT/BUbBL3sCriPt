@@ -1,15 +1,101 @@
-(const { desc it it-only } (require "test"))
-(const assert (require-☕️ "assert"))
+     definir { desc it } (requerir "test")
+             定義 assert (☕️ "assert")
+            定義 { enc } (要求 "string")
+      definir { conj pop },
+                         (requerir "list")
 
-(desc "lib/list.🫧 (BubbleScript bubblesort)"
-  (it "bubblesort sorts a BubbleScript list"
-    (🫧 result (do
-      (🫧 { bubblesort } (require "list"))
-      (🫧 xs °(5 1 4 2 3))
-      (bubblesort xs)))
 
-    # Basic check via string representation; adapt if list API differs
-    # (🫧 s (result.toString))
-    (🫧 s (send result "toString"))
-    (assert.equal s "(1 2 3 4 5)")
-))
+
+  #
+  #  定   定   定   定
+  #  義   義   義   義
+  #  ︷        ︷   ︷
+  #  描   斷   編   連
+  #  述   言   碼   接
+  #       ︵   ︸   ︸
+  #  它   要   ︵   ︵
+  #  ︸   求   要   要
+  #  ︵        求   求
+  #  要  "斷
+  #  求   言" "細  "清
+  #       ︶   繩"  單"
+  # "測        ︶   ︶
+  #  試"
+  #  ︶
+
+(desc "列 (list)"
+  # (desc "conj"
+  #   (it "conjoins two lists")
+  #     (assert.equal
+  #       (conj °(4 5 6) °(1 2 3))
+  #       °(1 2 3 4 5 6)))
+
+  # (desc "connect"
+  #   (it "connects two lists"
+  #     (assert.equal
+  #       (connect °(4 5 6) °(1 2 3))
+  #       "(1 2 3 4 5 6)")))
+
+
+
+  (desc "conj"
+    (it "conjoins two lists"
+      (assert.equal
+        (enc (conj °(4 5 6) °(1 2 3)))
+        "(1 2 3 4 5 6)")))
+
+  (🫧 定 definir)
+  (定 述 desc)
+  (定 它 it)
+  (定 樂 pop)
+
+  # Perfoms a string comparison of two items.
+  (定 (比 蘋 橘)
+    (assert.equal (enc 蘋) (enc 橘)))
+
+
+  (述 "樂 (happy 😃 pop 🎉🐉)"
+    (它 "流行🎉 列表"
+      (定 列 °(1 2 3))
+      (比 (樂 列) °(2 3))))
+
+ #
+ #          (述 "樂 (happy 😃 pop 🎉🐉)"
+ #            (它 "流行🎉 列表"
+ #              (定 列 °(1 2 3))
+ #   ︵         (比 (樂 列) °(2 3))))
+ #   述   ︵
+ #        它   ︵
+ #  "樂"       定   ︵     #
+ #       "流        比     #  定   定
+ #        行   列          #  義   義
+ #        🎉        ︵     #  ︷
+ #             °    樂     #  描   斷
+ #        列   ︵          #  述   言
+ #        表"  1    列     #       ︵
+ #             2           #  它   要
+ #             3    °      #  ︸   求
+ #             ︶   ︵     #  ︵
+ #             ︶   2      #  要  "斷
+ #                  3      #  求   言" "
+ #                  ︶     #       ︶
+ #                  ︶     # "測
+ #                  ︶     #  試"
+ #                  ︶     #  ︶
+ #                  ︶
+ #
+
+  (desc "lib/list.🫧 (BubbleScript bubblesort)"
+    (it "bubblesort sorts a BubbleScript list"
+      (🫧 result (do
+        (🫧 { bubblesort } (require "list"))
+        (🫧 xs °(5 1 4 2 3))
+        (bubblesort xs)))
+
+      # Basic check via string representation; adapt if list API differs
+      # (🫧 s (result.toString))
+      (🫧 s (send result "toString"))
+      (assert.equal s "(1 2 3 4 5)")))
+
+)
+

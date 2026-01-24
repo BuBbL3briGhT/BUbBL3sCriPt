@@ -53,14 +53,14 @@ const { getModule, storeModule } =
 
 export const rootBinding = {
   console, // consola,
+  process, List,
   // Js require
-  ["require-☕️"]: createRequire(import.meta.url),
+  ["☕️"]: createRequire(import.meta.url),
   __dirname: import.meta.dirname,
-  process: process,
 
   /* Special form functions */
 
-  define: specialForm(function(list) {
+  [':']: specialForm(function(list) {
 
     const [key, value] = list.plop();
 
@@ -308,7 +308,8 @@ export const rootBinding = {
 
     const modulePath =
      (name[0] == ".") ?
-       path.resolve(this.__dirname, name + ".🫧") :
+       // path.resolve(import.meta.dirname, name + ".🫧") :
+       path.resolve(import.meta.dirname, name) :
        path.resolve(import.meta.dirname, "../🫧",
          name + ".🫧");
 
@@ -397,11 +398,22 @@ export const rootBinding = {
   }
 };
 
-// Aliases
-rootBinding.muf = rootBinding.define;
-rootBinding.def = rootBinding.define;
-rootBinding.const = rootBinding.define;
-rootBinding["🫧"] = rootBinding.define;
+                         // Aliases
+            rootBinding.muf = rootBinding[':'];
+         rootBinding.define = rootBinding[':'];
+            rootBinding.def = rootBinding[':'];
+          rootBinding.const = rootBinding[':'];
+          rootBinding["🫧"] = rootBinding[':'];
+        rootBinding["定義"] = rootBinding[':'];
+            rootBinding.req = rootBinding.require;
+        rootBinding["要求"] = rootBinding.require;
+  rootBinding["require-☕️"] = rootBinding["☕️"];
+
+// Española
+(function (o) {
+  o.requerir = o.require;
+   o.definir = o.define;
+})(rootBinding);
 
 // Object.freeze(rootBinding);
 

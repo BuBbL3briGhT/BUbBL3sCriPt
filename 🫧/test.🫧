@@ -1,25 +1,13 @@
 (🫧 Mocha (require-☕️ "mocha"))
 (🫧 { push } (require "list"))
 
-(const mocha (new Mocha))
-# Must emit pre-require event to setup the context.
-# Yeah Baby!! 🍼👶
-(send mocha.suite "emit" "pre-require" {} "" mocha)
-
 (define-macro (desc title & body)
-  (list Mocha.describe title (push body °(jsfn))))
+  (list Mocha.describe title
+    (push body °(jsfn))))
 
 (define-macro (it title & body)
-  (list Mocha.it title (push body °(jsfn))))
-
-# Use the mocha.run method to get those tests
-# running. Need to use send here because the dot
-# notation treats it as an independent function,
-# which has advantages, but mean this is null. Using
-# send resolves this issue. Will neex to revist how
-# that works and if we can improve this.
-(send mocha "run" ((jsfn code) (process.exit code)))
+  (list Mocha.it title
+    (if body (push body °(jsfn)))))
 
 (module.exports {desc it it-only})
-
 

@@ -11,6 +11,23 @@ const { TOK_STRiNG, TOK_NUMBER,
 
 describe("tokenize(string)", function() {
 
+  it("tokenizes (:)", function () {
+    const tokens = tokenize('(:)');
+    assert.deepEqual([
+      { type: '(', value: '(', line: 1, column: 1 },
+      { type: TOK_SYMBOL, value: ":", line: 1,
+        column: 2 },
+      { type: ')', value: ')', line: 1, column: 3 }
+    ], [...tokens]);
+  });
+
+  it("tokenizes :", function () {
+    let tokenList = tokenize(":");
+    assert.deepEqual([...tokenList],
+      [{ type: TOK_SYMBOL, value: ":",
+        line: 1, column: 1}]);
+  });
+
   it("tokenizes true", function () {
     let tokenList = tokenize("true");
     assert.deepEqual([...tokenList],
@@ -19,7 +36,7 @@ describe("tokenize(string)", function() {
   });
 
   it("tokenizes not true", function () {
-    let tokens = tokenize('(not true)');
+    const tokens = tokenize('(not true)');
     assert.deepEqual([
       { type: '(', value: '(', line: 1, column: 1 },
       { type: 'Y', value: 'not', line: 1, column: 2 },

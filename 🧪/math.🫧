@@ -1,0 +1,20 @@
+(const { desc it } (require "test"))
+(const assert (require-☕️ "assert"))
+
+(desc "Math"
+  (desc "+"
+    (it "adds two numbers"
+      (assert.equal (+ 1 1) 2)))
+
+  (desc "-"
+    (it "subtracts"
+      (assert.equal (- 2 1) 1)))
+
+  (desc "÷"
+    (it "divides"
+      (assert.equal (/ 2 1) 2)))
+
+  (desc "*"
+    (it "multiplies"
+      (assert.equal (* 2 2) 4)))
+)

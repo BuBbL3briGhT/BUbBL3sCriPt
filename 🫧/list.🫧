@@ -1,5 +1,53 @@
-# Cleaned list helpers and a pure-BubbleScript bubblesort (selection-extraction style)
-# Comparator returns true when a < b (default comparator uses <)
+# Cleaned list helpers and a pure-BubbleScript
+# bubblesort (selection-extraction style)
+# Comparator returns true when a < b (default
+# comparator uses <)
+
+  #  (🫧 (peek list)
+  #    (get list 0)
+  #
+  #  (🫧 (pop list)
+  #    (get list 1)
+  #
+  #  (🫧 (peek list) (0 list))
+  #  (🫧 (pop list) (1 list))
+  #
+  #  (定 (窺視 它) (0 它))
+  #  (定 (述 它) (1 它))
+  #
+  #  (: (窺視 它) (0 它))
+  #  (: (述 它) (1 它))
+  #
+  #  (: (窺視 &) (0 &))
+  #  (: (述 &) (1 &))
+  #
+  #  (: (窺 &) (0 &))
+  #  (: (述 &) (1 &))
+  #
+  #  (: (窺 .) (0 .))
+  #  (: (述 .) (1 .))
+  #
+  #    #
+  #    # Peep and pop in terms of an array,
+  #    #   tuple or pair of values.
+  #    #
+  #    # 以陣列、元組或值對的形式進行預覽和彈出操作。
+  #    #
+  #
+  #      (: (窺 ○) (0 ○))
+  #      (: (述 ○) (1 ○))
+  #
+  #      : (窺 ○) (0 ○)
+  #      : (述 ○) (1 ○)
+  #
+  #        •• ••
+  #        窺 窺
+  #        —— ——
+  #        ︵
+  #        •• ••
+  #        窺 窺
+  #        —— ——
+  #
 
 (🫧 (pop list)
   (send list "pop"))
@@ -25,12 +73,18 @@
 (🫧 (each list fn)
   (send list "each" fn))
 
+(🫧 (from array)
+  (send List "from" array))
+
 (🫧 (map list fn)
   (if (empty? list)
     list
     (push
       (map (pop list) fn)
       (fn (peek list)))))
+
+(🫧 (conj ching chong)
+  (send ching "conj" chong))
 
 (🫧 (reduce list fn memo)
   (if (empty? list) memo
@@ -78,6 +132,7 @@
       (push (bubblesort (remove-first l m cmp) cmp) m))))
 
 module.exports {
-  each empty? invert map peek pop push reduce reverse shift
-  list-length list-min remove-first bubblesort
+  each empty? invert map conj peek pop push reduce reverse
+  from shift list-length list-min remove-first
+  bubblesort
 }

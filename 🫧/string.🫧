@@ -1,0 +1,4 @@
+
+🫧 (enc o) (send o "toString")
+
+module.exports { enc }

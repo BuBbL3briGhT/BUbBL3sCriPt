@@ -88,16 +88,17 @@ export function evalEach(binding, list, stack) {
  * @returns {*} The result of the expression.
  */
 export function evalExpression(binding, expression, stack) {
-  switch (expression.constructor) {
-    case List:
-      return evalList(binding, expression, stack);
-    case Ṣymbol:
-      return evalSymbol(binding, expression);
-    case Bubble:
-      return expression.pop();
-    default:
-      return expression;
-  }
+  if (expression)
+    switch (expression.constructor) {
+      case List:
+        return evalList(binding, expression, stack);
+      case Ṣymbol:
+        return evalSymbol(binding, expression);
+      case Bubble:
+        return expression.pop();
+      default:
+        return expression;
+    }
 }
 
 /**
@@ -114,8 +115,8 @@ export function evalList(binding, list, stack=List.make()) {
   try {
     // console.log({list: list.toString()});
     const { file, line, column } = list;
-    stack = stack.push({func: list.head.toString(),
-        file, line, column});
+    // stack = stack.push({func: list.head.toString(),
+    //     file, line, column});
 
     // console.debug("eval.js:117",
     //   { "list.head": list.head });
