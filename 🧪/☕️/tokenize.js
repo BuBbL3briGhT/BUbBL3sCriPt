@@ -19,7 +19,6 @@ describe("tokenize(string)", function() {
     ], [...tokens]);
   });
 
-
   it("tokenizes (:)", function () {
     const tokens = tokenize('(:)');
     assert.deepEqual([
