@@ -11,6 +11,13 @@ const { TOK_STRiNG, TOK_NUMBER,
 
 describe("tokenize(string)", function() {
 
+  it("tokenizes :", function () {
+    let tokenList = tokenize(":");
+    assert.deepEqual([...tokenList],
+      [{ type: TOK_SYMBOL, value: ":",
+        line: 1, column: 1}]);
+  });
+
   it("tokenizes true", function () {
     let tokenList = tokenize("true");
     assert.deepEqual([...tokenList],
