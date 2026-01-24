@@ -53,7 +53,7 @@ const { getModule, storeModule } =
 
 export const rootBinding = {
   console, // consola,
-  process, List,
+  process, List, Array,
   // Js require
   ["☕️"]: createRequire(import.meta.url),
   __dirname: import.meta.dirname,

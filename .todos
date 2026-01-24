@@ -1,0 +1,4 @@
+- 0 is not being parse correctly.
+- ("string") requires
+- (0 list) accessor
+

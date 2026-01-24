@@ -12,6 +12,8 @@ import { List, Vektar } from "../../☕️/list.js";
 import Keyword from "../../☕️/keyword.js";
 import Ṣymbol from "../../☕️/symbol.js";
 import Bubble from "../../☕️/bubble.js";
+import Debug from "debug";
+const debug = Debug("bubls:parse");
 
 const symbol = Ṣymbol.for("symbol"),
       a = Ṣymbol.for("a"),
@@ -24,6 +26,11 @@ let data = fs.readFileSync("🧪/☕️/fixtures/parser.yml", 'utf8');
 let fixtures = Yaml.parse(data);
 
 describe("parse(string)", () => {
+
+  it("parse 0", () => {
+    const ast = parse("0");
+    assert.equal(ast.peek(), 0);
+  });
 
   it("parses (1 2 3) into the correct AST structure", () => {
     const ast = parse("(1 2 3)");
