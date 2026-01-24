@@ -21,8 +21,6 @@ const traceTemplate = "    en (${file}:${line}:${column})";
 const interpolateTrace = interpolate.bind(traceTemplate);
 const sAmp = Ṣymbol.for("&");
 
-const debug = console.debug;
-
 /**
  * @function ėval
  * @description Evaluates a string of Bubblescript
@@ -120,7 +118,7 @@ export function evalList(binding, list, stack=List.make()) {
     // stack = stack.push({func: list.head.toString(),
     //     file, line, column});
 
-    debug({ "list.head": list.head });
+    // debug({ "list.head": list.head });
     const fn = evalExpression(binding, list.head);
 
     if (fn == undefined) {

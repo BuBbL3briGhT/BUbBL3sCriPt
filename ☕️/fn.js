@@ -31,7 +31,7 @@ export default class Fn {
         // console.log("🦆", fn.prototype);
         return fn(...params);
       case Number:
-        console.debug({params});
+        // debug({params});
         return params[0][fn];
     }
 
