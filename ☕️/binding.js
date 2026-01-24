@@ -409,7 +409,7 @@ export const rootBinding = {
         rootBinding["要求"] = rootBinding.require;
   rootBinding["require-☕️"] = rootBinding["☕️"];
 
-// Español
+// Española
 (function (o) {
   o.requerir = o.require;
    o.definir = o.define;
