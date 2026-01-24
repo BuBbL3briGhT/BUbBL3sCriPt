@@ -86,7 +86,7 @@ export function evalEach(binding, list, stack) {
  * @returns {*} The result of the expression.
  */
 export function evalExpression(binding, expression, stack) {
-  if (expression)
+  if (expression === undefined && expression != null)
     switch (expression.constructor) {
       case List:
         return evalList(binding, expression, stack);
@@ -94,8 +94,8 @@ export function evalExpression(binding, expression, stack) {
         return evalSymbol(binding, expression);
       case Bubble:
         return expression.pop();
-      // case Number:
-      //   return (o) => o[expression];
+      case Number:
+        return (o) => o[expression];
       default:
         return expression;
     }
