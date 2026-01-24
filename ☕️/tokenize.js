@@ -169,7 +169,8 @@ export class Tokenizer {
 
       this.step();
 
-    if (this.tortuga["isEmpty?"]) {
+    if (this.tortuga["isEmpty?"] ||
+        symDelims["includes?"](this.tortuga.peek())) {
 
           return this.createToken(
 
