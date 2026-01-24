@@ -68,6 +68,10 @@ export class Tokenizer {
           this.step();
           break;
 
+        case "`":
+          token = this.tokenizeSuperString();
+          break;
+
         case Char.isNum(char):
           token = this.tokenizeNumber();
           break;
@@ -228,6 +232,23 @@ export class Tokenizer {
     this.step();
     char = this.tortuga.peek();
     while (char && char !== '"') {
+      value += char;
+      this.step();
+      char = this.tortuga.peek();
+    }
+    this.step();
+
+    return this.createToken(TOK_STRiNG, value, line, column);
+  }
+
+  tokenizeSuperString () {
+    let value = "";
+    let { line, column } = this;
+
+    let char = this.tortuga.peek();
+    this.step();
+    char = this.tortuga.peek();
+    while (char && char !== '`') {
       value += char;
       this.step();
       char = this.tortuga.peek();

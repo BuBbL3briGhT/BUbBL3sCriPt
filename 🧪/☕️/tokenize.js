@@ -11,6 +11,12 @@ const { TOK_STRiNG, TOK_NUMBER,
 
 describe("tokenize(string)", function() {
 
+  it("tekenizes ```string\n  string```", function {
+
+    const tokens = tokenize("hai");
+
+  });
+
   it("tokenizes (:)", function () {
     const tokens = tokenize('(:)');
     assert.deepEqual([
