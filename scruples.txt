@@ -1,8 +1,0 @@
-
-
-
-Fri Sep  5 20:49:32 EDT 2025
-Parameters are reversed when calling puts. This
-is probably related to the apersand stuff.
-(puts 1 2 3)
-=> 3 2 1

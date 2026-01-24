@@ -1,0 +1,18 @@
+define { abs } (require "math")
+
+
+🫧 { list-length bubblesort reverse } (require "list")
+
+puts list-length
+puts (send list-length :toString)
+🫧 l °(1 2 123 8 0)
+puts (send l "toString")
+puts (list-length l)
+#puts (send (bubblesort l) :toString)
+(let [sorted (bubblesort l)
+      ts :toString]
+  (puts (send sorted ts))
+  (puts (send (reverse sorted) ts)))
+
+
+puts (abs -5)

@@ -1,3 +1,0 @@
-#! /usr/bin/node bin/bubls
-
-(console.log "Hello, world!")

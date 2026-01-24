@@ -1,0 +1,18 @@
+
+  🫧 { puts encodar curry } (require "core")
+       🫧 { each map from } (require "list")
+
+                🫧 Mocha (☕️ "mocha")
+
+             🫧 mocha (new Mocha)
+
+      # Emit pre-require event,
+      # sets context.
+      send mocha.suite "emit",
+        "pre-require" {} "" mocha
+
+  req "../🧪/list.🫧"; req "../🧪/math.🫧"
+
+  # Kick off mocha to run tests 🦶🏈
+  send mocha "run",
+    ((jsfn $?) (process.exit $?))

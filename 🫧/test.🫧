@@ -1,0 +1,13 @@
+(🫧 Mocha (require-☕️ "mocha"))
+(🫧 { push } (require "list"))
+
+(define-macro (desc title & body)
+  (list Mocha.describe title
+    (push body °(jsfn))))
+
+(define-macro (it title & body)
+  (list Mocha.it title
+    (if body (push body °(jsfn)))))
+
+(module.exports {desc it it-only})
+
