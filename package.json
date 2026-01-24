@@ -5,7 +5,7 @@
   "main": "☕️/index.js",
   "scripts": {
     "test": "npm run 🧪",
-    "🧪": "npm run 🧪☕️; npm run 🧪🫧",
+    "🧪": "npm run 🧪☕️ && npm run 🧪🫧",
     "🧪☕️": "mocha ./🧪/☕️/*.js ./🧪/☕️/**/*.js",
     "🧪🫧": "bin/🫧 bin/🧪 🧪/*.🫧"
   },

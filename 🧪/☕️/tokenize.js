@@ -16,6 +16,7 @@ describe("tokenize(string)", function() {
     assert.deepEqual([...tokenList],
       [{ type: TOK_SYMBOL, value: ":",
         line: 1, column: 1}]);
+    assert.ok(0);
   });
 
   it("tokenizes true", function () {
