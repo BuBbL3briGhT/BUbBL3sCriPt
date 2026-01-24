@@ -30,9 +30,13 @@ export default class Fn {
         // return fn.call(binding, ...params);
         // console.log("🦆", fn.prototype);
         return fn(...params);
+      case Number:
+        console.debug({params});
+        return params[0][fn];
     }
 
     // console.log({fn});
+    // console.log(fn.constructor);
     // console.log({"fn.call": fn.call});
     return fn.call(binding, params, pila, ėval);
   }

@@ -1,5 +1,5 @@
-(const { desc it } (require "test"))
-(const assert (require-☕️ "assert"))
+(const { desc it } ("test"))
+(const assert (☕️ "assert"))
 
 (desc "Math"
   (desc "+"
