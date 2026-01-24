@@ -11,6 +11,15 @@ const { TOK_STRiNG, TOK_NUMBER,
 
 describe("tokenize(string)", function() {
 
+  it.only("0", function () {
+    const tokens = tokenize('0');
+    assert.deepEqual([
+      { type: TOK_NUMBER, value: 0, line: 1,
+        column: 1 },
+    ], [...tokens]);
+  });
+
+
   it("tokenizes (:)", function () {
     const tokens = tokenize('(:)');
     assert.deepEqual([

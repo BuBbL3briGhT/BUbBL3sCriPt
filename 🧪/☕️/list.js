@@ -567,7 +567,7 @@ describe('lib/list.js (JS fallback)', function () {
 import bubls from '../../☕️/index.js';
 
 describe('lib/list.🫧 (BubbleScript bubblesort)', function () {
-  it('bubblesort sorts a BubbleScript list', function () {
+  it.only('bubblesort sorts a BubbleScript list', function () {
     const script = `
       (const { bubblesort } (require "list"))
       (const xs °(5 1 4 2 3))

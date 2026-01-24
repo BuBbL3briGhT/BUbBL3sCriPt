@@ -40,14 +40,14 @@ export function ėval(binding, script, opts={}) {
   } catch (error) {
     switch (error.constructor){
       case UndefinedFunctionError:
-        if (error.__memo) {
-          const memo = error.__memo;
-          error.stack += interpolateTrace({
-            file: memo.file,
-            line: memo.line,
-            column: memo.column
-          });
-        }
+        // if (error.__memo) {
+        //   const memo = error.__memo;
+        //   error.stack += interpolateTrace({
+        //     file: memo.file,
+        //     line: memo.line,
+        //     column: memo.column
+        //   });
+        // }
     }
     throw error;
   }
@@ -96,6 +96,8 @@ export function evalExpression(binding, expression, stack) {
         return evalSymbol(binding, expression);
       case Bubble:
         return expression.pop();
+      // case Number:
+      //   return (o) => o[expression];
       default:
         return expression;
     }
@@ -118,8 +120,7 @@ export function evalList(binding, list, stack=List.make()) {
     // stack = stack.push({func: list.head.toString(),
     //     file, line, column});
 
-    // console.debug("eval.js:117",
-    //   { "list.head": list.head });
+    debug({ "list.head": list.head });
     const fn = evalExpression(binding, list.head);
 
     if (fn == undefined) {
