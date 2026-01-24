@@ -60,7 +60,7 @@ export const rootBinding = {
 
   /* Special form functions */
 
-  define: specialForm(function(list) {
+  [':']: specialForm(function(list) {
 
     const [key, value] = list.plop();
 
@@ -398,17 +398,18 @@ export const rootBinding = {
   }
 };
 
-// Aliases
-rootBinding.muf = rootBinding.define;
-rootBinding.def = rootBinding.define;
-rootBinding.const = rootBinding.define;
-rootBinding["🫧"] = rootBinding.define;
-rootBinding["定義"] = rootBinding.define;
-rootBinding.req = rootBinding.require;
-rootBinding["要求"] = rootBinding.require;
-rootBinding["require-☕️"] = rootBinding["☕️"];
+                         // Aliases
+            rootBinding.muf = rootBinding[':'];
+         rootBinding.define = rootBinding[':'];
+            rootBinding.def = rootBinding[':'];
+          rootBinding.const = rootBinding[':'];
+          rootBinding["🫧"] = rootBinding[':'];
+        rootBinding["定義"] = rootBinding[':'];
+            rootBinding.req = rootBinding.require;
+        rootBinding["要求"] = rootBinding.require;
+  rootBinding["require-☕️"] = rootBinding["☕️"];
 
-// Español
+// Española
 (function (o) {
   o.requerir = o.require;
    o.definir = o.define;
