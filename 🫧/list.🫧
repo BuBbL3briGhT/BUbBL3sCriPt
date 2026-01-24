@@ -3,6 +3,9 @@
 # Comparator returns true when a < b (default
 # comparator uses <)
 
+(: (peek list)
+  (0 list))
+
   #  (🫧 (peek list)
   #    (get list 0)
   #
@@ -52,8 +55,8 @@
 (🫧 (pop list)
   (send list "pop"))
 
-(🫧 (peek list)
-  (send list "peek"))
+# (🫧 (peek list)
+#   (send list "peek"))
 
 (🫧 (push list item)
   (send list "push" item))
