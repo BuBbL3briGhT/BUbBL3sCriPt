@@ -398,20 +398,21 @@ export const rootBinding = {
   }
 };
 
-                         // Aliases
-            rootBinding.muf = rootBinding[':'];
-         rootBinding.define = rootBinding[':'];
-            rootBinding.def = rootBinding[':'];
-          rootBinding.const = rootBinding[':'];
-          rootBinding["🫧"] = rootBinding[':'];
-        rootBinding["定義"] = rootBinding[':'];
-            rootBinding.req = rootBinding.require;
-        rootBinding["要求"] = rootBinding.require;
-  rootBinding["require-☕️"] = rootBinding["☕️"];
+ // Aliases
+(function () {
 
-              (function () {
-                 this["✨️"] = this.new;
-              }).call(rootBinding);
+            this["✨️"] = this.new;
+              this.muf = this[':'];
+           this.define = this[':'];
+              this.def = this[':'];
+            this.const = this[':'];
+            this["🫧"] = this[':'];
+          this["定義"] = this[':'];
+              this.req = this.require;
+          this["要求"] = this.require;
+    this["require-☕️"] = this["☕️"];
+
+}).call(rootBinding);
 
 // Española
 (function (o) {
