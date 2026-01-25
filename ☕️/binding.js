@@ -401,16 +401,20 @@ export const rootBinding = {
  // Aliases
 (function () {
 
-            this["✨️"] = this.new;
-              this.muf = this[':'];
-           this.define = this[':'];
-              this.def = this[':'];
-            this.const = this[':'];
-            this["🫧"] = this[':'];
-          this["定義"] = this[':'];
-              this.req = this.require;
-          this["要求"] = this.require;
-    this["require-☕️"] = this["☕️"];
+  const { ":": define } = this;
+
+  Object.assign(this, {
+              "✨️": this.new,
+              "🫧": define,
+          ["定義"]: this[':'],
+          ["要求"]: this.require,
+               muf: this[':'],
+            define: this[':'],
+               def: this[':'],
+             const: this[':'],
+               req: this.require,
+    ["require-☕️"]: this["☕️"]
+  });
 
 }).call(rootBinding);
 
