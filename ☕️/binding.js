@@ -408,9 +408,8 @@ export const rootBinding = {
               "🫧": define,
           ["定義"]: this[':'],
           ["要求"]: this.require,
-               muf: this[':'],
+    ["muf", "def"]: define,
             define: this[':'],
-               def: this[':'],
              const: this[':'],
                req: this.require,
     ["require-☕️"]: this["☕️"]
