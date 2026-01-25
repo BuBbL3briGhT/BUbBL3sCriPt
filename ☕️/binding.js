@@ -393,7 +393,7 @@ export const rootBinding = {
   parse: function(s) {
     return parse(s);
   },
-  "new": function(constructor, ...params) {
+  new: function(constructor, ...params) {
       return new constructor(...params);
   }
 };
@@ -408,6 +408,10 @@ export const rootBinding = {
             rootBinding.req = rootBinding.require;
         rootBinding["要求"] = rootBinding.require;
   rootBinding["require-☕️"] = rootBinding["☕️"];
+
+              (function () {
+                 this["✨️"] = this.new;
+              }).call(rootBinding);
 
 // Española
 (function (o) {
