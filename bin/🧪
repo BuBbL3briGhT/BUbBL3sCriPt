@@ -1,8 +1,8 @@
 
 
-      🫧 { encodar curry } (require "core")
-      🫧 { puts } (require "io")
-           🫧 { each map from } (require "list")
+      🫧 { encodar curry } ("core")
+      🫧 { puts } ("io")
+           🫧 { each map from } ("list")
 
                     🫧 Mocha (☕️ "mocha")
 
@@ -13,11 +13,13 @@
           send mocha.suite "emit",
             "pre-require" {} "" mocha
 
-      req "../🧪/list.🫧"; req "../🧪/math.🫧"
+      ("../🧪/list.🫧")
+      ("../🧪/math.🫧")
 
       # Kick off mocha to run tests 🦶🏈
       send mocha "run",
         ((jsfn $?) (process.exit $?))
+
 
 
 

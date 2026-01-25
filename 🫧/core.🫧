@@ -1,5 +1,5 @@
-(🫧 { push conj } ("list"))
-(🫧 { puts } ("io"))
+🫧 { push conj } ("list")
+🫧 { puts } ("io")
 
 (🫧 (curry fun & x)
   ((fn & o) (fun & (conj x o))))
