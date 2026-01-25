@@ -30,6 +30,11 @@ export default class Fn {
         // return fn.call(binding, ...params);
         // console.log("🦆", fn.prototype);
         return fn(...params);
+      case String:
+        const path = fn;
+        fn = function() {
+          this.require(path)
+        };
     }
 
     // console.log({fn});
