@@ -18,11 +18,12 @@ import { Parser, parse } from "./parse.js";
 import { ėval, evalEach, evalExpression }
                               from "./eval.js";
 import { rootBinding } from "./binding.js";
+import load from "./load.js"
 
 const BubbleScript = {
   List, Vektar, Ṣymbol, Keyword, Bubble, Fn, Macro,
   tokenize, Parser, parse, ėval, evalEach,
-  evalExpression, rootBinding
+  evalExpression, rootBinding, load
 }
 
 BubbleScript.eval = ėval.bind(null, rootBinding);

@@ -23,27 +23,7 @@ binding.__dirname = process.cwd();
 import readline from 'readline';
 import fs from "fs";
 
-if (path) {
-
-  fs.readFile(path, 'utf-8', function (error, xoxo) {
-    if (error) {
-      console.log(error);
-      return;
-    }
-    try {
-      ėval(binding, xoxo, { file: path });
-    } catch (error) {
-      if (error instanceof BubbleScriptError) {
-        console.log(error.name +
-          ": " + error.message);
-        console.log(error.stack);
-      } else {
-        console.log(error);
-      }
-    }
-  });
-
-} else {
+if (path) { bubls.load(path); } else {
 
   const rl = readline.createInterface({
     input: process.stdin,

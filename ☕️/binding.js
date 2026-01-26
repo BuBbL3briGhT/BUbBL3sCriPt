@@ -25,7 +25,7 @@ import { parse } from "./parse.js";
 import path from "path";
 import fs from "fs";
 import { createRequire } from "module";
-
+import load from "./load.js"
 
 const starSymbol = Ṣymbol.for("*");
 const sAmp = Ṣymbol.for("&");
@@ -83,6 +83,7 @@ export const rootBinding = {
       for (const k of key) {
         const _k = k.toString();
 
+        console.log({o, _k});
         this[_k] = o[_k];
       }
       return true;
@@ -328,14 +329,7 @@ export const rootBinding = {
       }
     }
 
-    const parseTree =
-      parse(fs.readFileSync(modulePath, 'utf-8'));
-    try {
-      evalEach(binding, parseTree);
-    } catch (error) {
-      console.log("Error evaluating " + modulePath);
-      throw error;
-    }
+    load(modulePath);
 
     storeModule(modulePath,
          { exports: moduleExports });
