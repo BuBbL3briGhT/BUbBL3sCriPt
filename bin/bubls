@@ -23,7 +23,7 @@ binding.__dirname = process.cwd();
 import readline from 'readline';
 import fs from "fs";
 
-if (path) { bubls.load(path); } else {
+if (path) { bubls.load(path, fs, ėval); } else {
 
   const rl = readline.createInterface({
     input: process.stdin,
