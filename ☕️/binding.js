@@ -329,7 +329,7 @@ export const rootBinding = {
       }
     }
 
-    load(modulePath, fs, ėval);
+    load(binding, modulePath, fs, ėval);
 
     storeModule(modulePath,
          { exports: moduleExports });

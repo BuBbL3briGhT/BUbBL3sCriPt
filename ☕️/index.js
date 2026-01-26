@@ -86,10 +86,10 @@ export default BubbleScript;
 import fs from 'fs';
 import path from 'path';
 
-BubbleScript.load = function (filePath) {
-  filePath = path.join(import.meta.dirname, filePath);
-  return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
-}
+// BubbleScript.load = function (filePath) {
+//   filePath = path.join(import.meta.dirname, filePath);
+//   return BubbleScript.eval(fs.readFileSync(filePath, 'utf-8'))
+// }
 
 // BubbleScript.load("../lib/core.🫧");
 

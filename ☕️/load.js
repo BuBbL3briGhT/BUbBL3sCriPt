@@ -11,10 +11,10 @@ function logError(error) {
   }
 }
 
-export default function load(path, fs, ėval) {
+export default function load(binding, path, fs, ėval) {
   fs.readFile(path, 'utf-8',
     function (error, xoxo) {
-      if (error) { log(error) && return; }
+      if (error) { return log(error); }
       try { ėval(binding, xoxo, { file: path });
       } catch (error) { logError(error); }
   });
