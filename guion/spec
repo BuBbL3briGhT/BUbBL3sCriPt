@@ -1,0 +1,103 @@
+#! /usr/bin/env node
+
+// - Determine specs that need to be
+// compiled.
+//
+// - For each spec
+//   - Parse
+//   - compile
+
+const fs = require("fs");
+
+const file = process.argv[2];
+
+const describe =
+  /^\/\/ (#+ )(Describe )?(.*)( #+)?$/i;
+const it = /^\/\/ (It )?(.*)$/i;
+
+fs.readFile(file, 'utf8',
+(err, data) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  let lines = data.split("\n");
+  let indentLevel = 0;
+  let indent = "";
+  let inIt = false; // in an it block?
+  let gap = 0;
+  let completeIt = false;
+
+  for (line of lines) {
+    let match = line.match(describe);
+    if(match) {
+      if (inIt) {
+        indentLevel--;
+        indent = "  ".repeat(indentLevel);
+        console.log(indent + "});");
+        inIt = false;
+      }
+      let level = match[1].length - 2;
+      while (indentLevel > level) {
+        indentLevel--;
+        indent = "  ".repeat(indentLevel);
+        console.log(indent + "});");
+      }
+      while(gap>0) {
+        console.log("");
+        gap--;
+      }
+      indent = "  ".repeat(level);
+      console.log(`${indent}describe("${match[3]}", () => {`);
+      indent = indent + "  ";
+      indentLevel++
+      continue;
+    }
+    match = line.match(it);
+    if (match) {
+      if (inIt && !completeIt) {
+        indentLevel--;
+        indent = "  ".repeat(indentLevel);
+        console.log(indent + "});");
+      }
+      while(gap>0) {
+        console.log("");
+        gap--;
+      }
+      if (!inIt) {
+        write(`${indent}it("${match[2]}"`);
+        indent = indent + "  ";
+        indentLevel++
+        inIt = true;
+        completeIt = true;
+      } else {
+        write(` +\n${indent} "${match[2]}"`);
+      }
+      continue;
+    }
+
+    if (line=="") {
+      gap++;
+    } else {
+      if (completeIt) {
+        console.log(", () => {");
+        completeIt = false;
+      }
+      console.log(indent + line);
+    }
+
+  }
+  while (indentLevel > 0) {
+    indentLevel--;
+    indent = "  ".repeat(indentLevel);
+    console.log(indent + "});");
+  }
+
+});
+
+function write(string) {
+  process.stdout.write(string);
+}
+
+
