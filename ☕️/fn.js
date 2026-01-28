@@ -10,7 +10,7 @@
    *                                  *
    * * *  * * *  * *  * *  * * *  * * */
 
-import { whats } from "./helpers.js";
+const { debug, log, trace } = console;
 import { createBinding } from "./binding.js";
 import Ṣymbol from "./symbol.js";
 

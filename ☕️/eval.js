@@ -16,13 +16,11 @@ import { parse } from "./parse.js";
 import { interpolate } from "./strings.js";
 import { MacroExpanded } from "./macro.js";
 import { UndefinedFunctionError } from "./errors.js";
-import { whats } from "./helpers.js";
+const { debug, log, trace } = console;
 
 const traceTemplate = "    en (${file}:${line}:${column})";
 const interpolateTrace = interpolate.bind(traceTemplate);
 const sAmp = Ṣymbol.for("&");
-
-const debug = console.debug;
 
 /**
  * @function ėval

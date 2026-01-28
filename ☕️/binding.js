@@ -26,7 +26,8 @@ import path from "path";
 import fs from "fs";
 import { createRequire } from "module";
 import load from "./load.js"
-import { whats } from "./helpers.js";
+
+const { debug, log, trace } = console;
 
 const starSymbol = Ṣymbol.for("*");
 const sAmp = Ṣymbol.for("&");
@@ -62,7 +63,9 @@ export const rootBinding = {
   /* Special form functions */
 
   [':']: specialForm(function(list) {
-    const [key, value] = list.plop();
+    debug(1, list.toString());
+
+    const { head: key, tail: value } = list;
 
     // If the key turns out to be a list, then
     // we do a function definition using the
