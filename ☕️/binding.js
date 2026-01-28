@@ -63,7 +63,7 @@ export const rootBinding = {
   /* Special form functions */
 
   [':']: specialForm(function(list) {
-    debug(1, list.toString());
+    // debug(1, list.toString());
 
     const { head: key, tail: value } = list;
 
@@ -82,10 +82,11 @@ export const rootBinding = {
           line: key.line,
           column: key.column });
     } else if (key instanceof ObjectMap) {
+      // debug(3, {key: key.toString(), value: value.toString()});
       const o = evalEach(this, value);
       for (const k of key) {
         const _k = k.toString();
-
+        // debug(2, {_k, k, o});
         this[_k] = o[_k];
       }
       return true;
@@ -331,10 +332,12 @@ export const rootBinding = {
       }
     }
 
+    debug({ modulePath });
     load(binding, modulePath, fs, ėval);
 
     storeModule(modulePath,
          { exports: moduleExports });
+    debug({ moduleExports });
 
     return moduleExports;
   },

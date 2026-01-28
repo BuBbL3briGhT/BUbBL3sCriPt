@@ -123,8 +123,12 @@ export function evalList(binding, list, stack=List.make()) {
     //
     const { head } = list;
 
-    if (typeof(list.head) === "string")
+    if (typeof(head) === "string") {
+      debug("YO", { head,
+        resolved: binding.require(head) });
+
       return binding.require(head);
+    }
 
     const fn = evalExpression(binding, head);
 
