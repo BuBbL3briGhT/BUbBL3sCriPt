@@ -26,11 +26,10 @@ import path from "path";
 import fs from "fs";
 import { createRequire } from "module";
 import load from "./load.js"
+import { whats } from "./helpers.js";
 
 const starSymbol = Ṣymbol.for("*");
 const sAmp = Ṣymbol.for("&");
-
-const whats = console.debug;
 
 function ensureKeyNotDefined(binding, key) {
   if (Object.hasOwn(binding, key))
@@ -65,9 +64,10 @@ export const rootBinding = {
   [':']: specialForm(function(list) {
 
     // whats({key, value, list});
-    whats(list);
+    whats(5, list.toString());
 
     const [key, value] = list.plop();
+    whats(2, {key});
 
     // If the key turns out to be a list, then
     // we do a function definition using the
@@ -94,7 +94,7 @@ export const rootBinding = {
       }
       return true;
     } else {
-      // whats({key});
+      whats(1, {key});
       const sKey = key.toString();
       ensureKeyNotDefined(this, sKey);
       return this[sKey] = evalEach(this, value);

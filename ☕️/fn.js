@@ -10,6 +10,7 @@
    *                                  *
    * * *  * * *  * *  * *  * * *  * * */
 
+import { whats } from "./helpers.js";
 import { createBinding } from "./binding.js";
 import Ṣymbol from "./symbol.js";
 
@@ -34,7 +35,9 @@ export default class Fn {
         const path = fn;
         fn = function(...params) {
           // console.log("this", this, this[":"]);
-          return this[":"].call(this, ...params);
+
+          whats(3, params.toString());
+          return this[":"].call(this, List.make(path));
         };
     }
 

@@ -16,6 +16,7 @@ import { parse } from "./parse.js";
 import { interpolate } from "./strings.js";
 import { MacroExpanded } from "./macro.js";
 import { UndefinedFunctionError } from "./errors.js";
+import { whats } from "./helpers.js";
 
 const traceTemplate = "    en (${file}:${line}:${column})";
 const interpolateTrace = interpolate.bind(traceTemplate);
@@ -127,7 +128,7 @@ export function evalList(binding, list, stack=List.make()) {
       throw new Error(binding, list.head, stack);
     }
 
-    // console.log("eval.js:124", {fn});
+    whats(4, {fn});
     return Fn.call(binding, fn, list.tail, stack, ėval);
 
   } catch (error) {
