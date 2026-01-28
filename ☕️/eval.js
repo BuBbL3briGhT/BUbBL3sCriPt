@@ -74,7 +74,7 @@ export function evalEach(binding, list, stack) {
   if (list.constructor === LazyList)
     list = list.toList();
 
-  // debug({ list });
+  debug({ list });
   return list.tryEach(_evalExpression,
     catchExpandMacro, stack);
 }
@@ -128,7 +128,12 @@ export function evalList(binding, list, stack=List.make()) {
       throw new Error(binding, list.head, stack);
     }
 
-    whats(4, {fn});
+    // whats(4, {fn});
+    switch (fn.constructor) {
+      case String:
+        return binding.require(fn);
+    }
+
     return Fn.call(binding, fn, list.tail, stack, ėval);
 
   } catch (error) {

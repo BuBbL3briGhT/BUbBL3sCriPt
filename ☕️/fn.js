@@ -31,14 +31,6 @@ export default class Fn {
         // return fn.call(binding, ...params);
         // console.log("🦆", fn.prototype);
         return fn(...params);
-      case String:
-        const path = fn;
-        fn = function(...params) {
-          // console.log("this", this, this[":"]);
-
-          whats(3, params.toString());
-          return this[":"].call(this, List.make(path));
-        };
     }
 
     // console.log({fn});
