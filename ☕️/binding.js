@@ -62,12 +62,7 @@ export const rootBinding = {
   /* Special form functions */
 
   [':']: specialForm(function(list) {
-
-    // whats({key, value, list});
-    whats(5, list.toString());
-
     const [key, value] = list.plop();
-    whats(2, {key});
 
     // If the key turns out to be a list, then
     // we do a function definition using the
@@ -84,17 +79,14 @@ export const rootBinding = {
           line: key.line,
           column: key.column });
     } else if (key instanceof ObjectMap) {
-      // whats({value: value.toString()});
       const o = evalEach(this, value);
       for (const k of key) {
         const _k = k.toString();
 
-        // whats({o, _k});
         this[_k] = o[_k];
       }
       return true;
     } else {
-      whats(1, {key});
       const sKey = key.toString();
       ensureKeyNotDefined(this, sKey);
       return this[sKey] = evalEach(this, value);

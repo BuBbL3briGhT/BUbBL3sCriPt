@@ -74,7 +74,7 @@ export function evalEach(binding, list, stack) {
   if (list.constructor === LazyList)
     list = list.toList();
 
-  debug({ list });
+  // debug({ list });
   return list.tryEach(_evalExpression,
     catchExpandMacro, stack);
 }
