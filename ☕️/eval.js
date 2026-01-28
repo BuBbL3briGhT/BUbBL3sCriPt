@@ -121,18 +121,24 @@ export function evalList(binding, list, stack=List.make()) {
 
     // console.debug("eval.js:117",
     //   { "list.head": list.head });
-    const fn = evalExpression(binding, list.head);
+    //
+    //
+    const { head } = list;
+
+    if (typeof(list.head) === "string")
+      return binding.require(head);
+
+    const fn = evalExpression(binding, head);
 
     if (fn == undefined) {
       const Error = UndefinedFunctionError;
-      throw new Error(binding, list.head, stack);
+      throw new Error(binding, head, stack);
     }
 
-    // whats(4, {fn});
-    switch (fn.constructor) {
-      case String:
-        return binding.require(fn);
-    }
+    // switch (fn.constructor) {
+    //   case String:
+    //     return binding.require(fn);
+    // }
 
     return Fn.call(binding, fn, list.tail, stack, ėval);
 
