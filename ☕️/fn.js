@@ -32,8 +32,9 @@ export default class Fn {
         return fn(...params);
       case String:
         const path = fn;
-        fn = function() {
-          this.require(path)
+        fn = function(...params) {
+          // console.log("this", this, this[":"]);
+          return this[":"].call(this, ...params);
         };
     }
 

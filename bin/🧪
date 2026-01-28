@@ -1,6 +1,7 @@
 
 
-      🫧 { encodar curry } ("core")
+      🫧 { curry } ("core")
+      🫧 { encodar } ("string")
       🫧 { puts } ("io")
            🫧 { each map from } ("list")
 

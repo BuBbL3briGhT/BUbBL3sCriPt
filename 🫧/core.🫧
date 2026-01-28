@@ -10,7 +10,4 @@
 (define-macro (puts-macro & macro)
   (list °puts-to-string (push macro °expand-macro)))
 
-module.exports {
-  curry
-  puts-encodar puts-macro
-}
+module.exports { curry puts-encodar puts-macro }
