@@ -30,8 +30,7 @@ import load from "./load.js"
 const starSymbol = Ṣymbol.for("*");
 const sAmp = Ṣymbol.for("&");
 
-const doobe = console.debug;
-const whatIs = console.debug;
+const whats = console.debug;
 
 function ensureKeyNotDefined(binding, key) {
   if (Object.hasOwn(binding, key))
@@ -82,7 +81,7 @@ export const rootBinding = {
           line: key.line,
           column: key.column });
     } else if (key instanceof ObjectMap) {
-      doobe({value: value.toString()});
+      whats({value: value.toString()});
       const o = evalEach(this, value);
       for (const k of key) {
         const _k = k.toString();
@@ -92,7 +91,7 @@ export const rootBinding = {
       }
       return true;
     } else {
-      whatIs({key});
+      whats({key});
       const sKey = key.toString();
       ensureKeyNotDefined(this, sKey);
       return this[sKey] = evalEach(this, value);
