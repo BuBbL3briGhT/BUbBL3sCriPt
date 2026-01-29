@@ -1,4 +1,3 @@
 
-: (couple & @) (✨️ Array & @)
+export (couple & @) (✨️ Array & @)
 
-export.module couple
