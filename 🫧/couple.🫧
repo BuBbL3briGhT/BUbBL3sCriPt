@@ -1,4 +1,4 @@
 
-: (couple $ @) (✨️ Array :coupling $ @)
+: (couple & @) (✨️ Array & @)
 
 export.module couple
