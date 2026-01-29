@@ -112,22 +112,13 @@ export function evalExpression(binding, expression, stack) {
  */
 export function evalList(binding, list, stack=List.make()) {
   try {
-    // console.log({list: list.toString()});
-    const { file, line, column } = list;
-    // stack = stack.push({func: list.head.toString(),
-    //     file, line, column});
+    const { head, file, line, column } = list;
 
-    // console.debug("eval.js:117",
-    //   { "list.head": list.head });
-    //
-    //
-    const { head } = list;
-
-    if (typeof(head) === "string") {
-      // debug("YO", { head,
-      //   resolved: binding.require(head) });
-
-      return binding.require(head);
+    switch (typeof(head)) {
+      case "string":
+        return binding.require(head);
+      case "number":
+        return list.next[head];
     }
 
     const fn = evalExpression(binding, head);
@@ -136,11 +127,6 @@ export function evalList(binding, list, stack=List.make()) {
       const Error = UndefinedFunctionError;
       throw new Error(binding, head, stack);
     }
-
-    // switch (fn.constructor) {
-    //   case String:
-    //     return binding.require(fn);
-    // }
 
     return Fn.call(binding, fn, list.tail, stack, ėval);
 
