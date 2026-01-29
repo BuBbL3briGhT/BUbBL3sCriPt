@@ -1,8 +1,7 @@
 
-: { desc it it-only } ("test")
+: { desc it it-only assert } ("test")
 : { array } ("array")
 : { encodar } ("string")
-: assert ("assert")
 
 # desc "array"
 #   it "creates an array"

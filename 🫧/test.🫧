@@ -1,5 +1,6 @@
 (🫧 Mocha (require-☕️ "mocha"))
 (🫧 { push } (require "list"))
+: assert ("assert")
 
 (define-macro (desc title & body)
   (list Mocha.describe title
@@ -13,5 +14,5 @@
   (list Mocha.it.only title
     (if body (push body °(jsfn)))))
 
-(module.exports {desc it it-only})
+(module.exports {desc it it-only assert})
 
