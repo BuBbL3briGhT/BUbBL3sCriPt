@@ -3,6 +3,10 @@
 # Comparator returns true when a < b (default
 # comparator uses <)
 
+
+# : (peek list) (0 list)
+# : (pop list) (1 list)
+
   #  (🫧 (peek list)
   #    (get list 0)
   #
