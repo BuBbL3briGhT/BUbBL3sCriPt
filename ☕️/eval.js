@@ -125,14 +125,19 @@ export function evalList(binding, list, stack=List.make()) {
         return indexed[$head];
       case "object":
       case "function":
-        switch ($head.constructor) {
-          case Fn:
-          case Function:
+        // console.log(1,$head.constructor.name.toString())
+        switch ($head.constructor.name.toString()) {
+          case "Fn":
+          case "Function":
+          case "SpecialForm":
+          case "SpecialFormP":
+          case "Macro":
             return Fn.call(binding, $head, list.tail, stack, ėval);
           default: // object
             list = list.rest;
             const prop =
               evalExpression(binding, list.first);
+            console.log({$head, prop});
             return $head[prop](...list.rest);
         }
       default:
