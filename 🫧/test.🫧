@@ -9,5 +9,9 @@
   (list Mocha.it title
     (if body (push body °(jsfn)))))
 
+(define-macro (it-only title & body)
+  (list Mocha.it.only title
+    (if body (push body °(jsfn)))))
+
 (module.exports {desc it it-only})
 

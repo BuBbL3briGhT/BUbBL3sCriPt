@@ -1,5 +1,5 @@
 
-: { desc it } ("test")
+: { desc it it-only } ("test")
 : { array } ("array")
 : { encodar } ("string")
 : assert ("assert")
@@ -12,7 +12,12 @@
 (desc "array"
   (it "creates an array"
     (: a (array 1 2 3))
-    (assert.equal (encodar a) "1,2,3")))
+    (assert.equal (encodar a) "1,2,3"))
+
+  (desc "accessor"
+    (it-only "gets value by index"
+      (: a (array 1 2 3))
+      (assert.equal (1 a)  2))))
 
 
 
