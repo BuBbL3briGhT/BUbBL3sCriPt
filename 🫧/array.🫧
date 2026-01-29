@@ -1,0 +1,4 @@
+
+: (array & values) (✨️ Array & values)
+
+module.exports { array }

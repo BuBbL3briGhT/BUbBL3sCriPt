@@ -328,7 +328,13 @@ export const rootBinding = {
 
     binding.module = {
       exports: function(exports) {
-        moduleExports = exports.createObject(binding);
+        switch (exports.constructor) {
+          case ObjectMap:
+            moduleExports = exports.createObject(binding);
+            break;
+          default:
+            moduleExports = exports;
+        }
       }
     }
 

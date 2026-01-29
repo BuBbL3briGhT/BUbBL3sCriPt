@@ -16,11 +16,9 @@
 
       ("../🧪/list.🫧")
       ("../🧪/math.🫧")
+      ("../🧪/array.🫧")
 
       # Kick off mocha to run tests 🦶🏈
       send mocha "run",
         ((jsfn $?) (process.exit $?))
-
-
-
 
