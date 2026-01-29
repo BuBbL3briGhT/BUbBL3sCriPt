@@ -114,24 +114,31 @@ export function evalList(binding, list, stack=List.make()) {
   try {
     const { head, file, line, column } = list;
 
-    switch (typeof(head)) {
+    const $head = evalExpression(binding, head);
+
+    switch (typeof($head)) {
       case "string":
-        return binding.require(head);
+        return binding.require($head);
       case "number":
         const indexed =
           evalExpression(binding, list.next)
-        return indexed[head];
-
+        return indexed[$head];
+      case "object":
+      case "function":
+        switch ($head.constructor) {
+          case Fn:
+          case Function:
+            return Fn.call(binding, $head, list.tail, stack, ėval);
+          default: // object
+            list = list.rest;
+            const prop =
+              evalExpression(binding, list.first);
+            return $head[prop](...list.rest);
+        }
+      default:
+        const Error = UndefinedFunctionError;
+        throw new Error(binding, $head, stack);
     }
-
-    const fn = evalExpression(binding, head);
-
-    if (fn == undefined) {
-      const Error = UndefinedFunctionError;
-      throw new Error(binding, head, stack);
-    }
-
-    return Fn.call(binding, fn, list.tail, stack, ėval);
 
   } catch (error) {
     switch (error.constructor){
