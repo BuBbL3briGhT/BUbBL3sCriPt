@@ -15,7 +15,7 @@
     (assert.equal (encodar a) "1,2,3"))
 
   (desc "accessor"
-    (it-only "gets value by index"
+    (it "gets value by index"
       (: a (array 1 2 3))
       (assert.equal (1 a)  2))))
 

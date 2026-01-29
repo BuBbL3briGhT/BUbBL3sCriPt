@@ -118,8 +118,6 @@ export function evalList(binding, list, stack=List.make()) {
       case "string":
         return binding.require(head);
       case "number":
-        // debug({ head, list, t: typeof(head) });
-        // debug({v: list.next});
         const indexed =
           evalExpression(binding, list.next)
         return indexed[head];
