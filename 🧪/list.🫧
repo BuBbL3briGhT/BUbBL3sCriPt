@@ -1,6 +1,6 @@
      definir { desc it } (requerir "test")
              定義 assert (☕️ "assert")
-            定義 { enc } (要求 "string")
+        定義 { encodar } (要求 "string")
       definir { conj pop },
                          (requerir "list")
 
@@ -41,7 +41,7 @@
   (desc "conj"
     (it "conjoins two lists"
       (assert.equal
-        (enc (conj °(4 5 6) °(1 2 3)))
+        (encodar (conj °(4 5 6) °(1 2 3)))
         "(1 2 3 4 5 6)")))
 
   (🫧 定 definir)
@@ -51,7 +51,7 @@
 
   # Perfoms a string comparison of two items.
   (定 (比 蘋 橘)
-    (assert.equal (enc 蘋) (enc 橘)))
+    (assert.equal (encodar 蘋) (encodar 橘)))
 
 
   (述 "樂 (happy 😃 pop 🎉🐉)"

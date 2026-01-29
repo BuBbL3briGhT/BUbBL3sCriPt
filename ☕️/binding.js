@@ -332,12 +332,12 @@ export const rootBinding = {
       }
     }
 
-    debug({ modulePath });
+    // debug({ modulePath });
     load(binding, modulePath, fs, ėval);
 
     storeModule(modulePath,
          { exports: moduleExports });
-    debug({ moduleExports });
+    // debug({ moduleExports });
 
     return moduleExports;
   },
