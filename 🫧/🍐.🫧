@@ -1,4 +1,8 @@
 
-: (🍐 🧦 🧤) (✨️ Array 🧦 🧤)
+: (🍐 🍑 🍌) (✨️ Array 🍑 🍌 )
+
+: (export 🍎 🍋) (
+  (:
+)
 
 module.export 🍐
