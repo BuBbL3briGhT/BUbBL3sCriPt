@@ -126,14 +126,14 @@ describe("List", () => {
     it("create a new list for your fun and profit.", () => {
       var list;
       list = new List();
-      assert.equal(list.get(), undefined);
+      assert.equal(list.at(), undefined);
       assert.equal(list.pop(), List.emptyList);
 
       list = new List(1);
-      assert.equal(list.get(), 1);
+      assert.equal(list.at(), 1);
       list = new List(2, list);
-      assert.equal(list.get(), 2);
-      assert.equal(list.get(1), 1);
+      assert.equal(list.at(), 2);
+      assert.equal(list.at(1), 1);
     });
   });
 
@@ -141,9 +141,9 @@ describe("List", () => {
     it("makes a list", () => {
       assert.equal(List.make(), List.emptyList);
       let list = List.make(1, 2, 3);
-      assert.equal(list.get(0), 1);
-      assert.equal(list.get(1), 2);
-      assert.equal(list.get(2), 3);
+      assert.equal(list.at(0), 1);
+      assert.equal(list.at(1), 2);
+      assert.equal(list.at(2), 3);
     });
   });
 
@@ -154,12 +154,12 @@ describe("List", () => {
     });
   });
 
-  describe("get(index)", () => {
+  describe("at(index)", () => {
     it("gets value at index", () => {
       let list = List.make(6,7,8);
-      assert.equal(list.get(0), 6);
-      assert.equal(list.get(1), 7);
-      assert.equal(list.get(2), 8);
+      assert.equal(list.at(0), 6);
+      assert.equal(list.at(1), 7);
+      assert.equal(list.at(2), 8);
     });
   });
 
@@ -199,17 +199,17 @@ describe("List", () => {
 
       list = List.make(1);
       list = list.map(add7);
-      assert.equal(list.get(), 8);
+      assert.equal(list.at(), 8);
 
       list = list.push(2); list = list.map(add7);
-      assert.equal(list.get(), 9);
-      assert.equal(list.get(1), 15);
+      assert.equal(list.at(), 9);
+      assert.equal(list.at(1), 15);
 
       list = list.push(3);
       list = list.map(add7);
-      assert.equal(list.get(), 10);
-      assert.equal(list.get(1), 16);
-      assert.equal(list.get(2), 22);
+      assert.equal(list.at(), 10);
+      assert.equal(list.at(1), 16);
+      assert.equal(list.at(2), 22);
     });
   });
 
@@ -218,12 +218,12 @@ describe("List", () => {
       var list = List.make();
 
       list = list.push(1);
-      assert.equal(list.get(), 1)
+      assert.equal(list.at(), 1)
       assert.equal(list.skip(1), List.emptyList);
 
       list = list.push(2);
-      assert.equal(list.get(), 2)
-      assert.equal(list.get(1), 1)
+      assert.equal(list.at(), 2)
+      assert.equal(list.at(1), 1)
       assert.equal(list.skip(2), List.emptyList);
     });
   });

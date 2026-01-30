@@ -42,7 +42,7 @@ export class AbstractList {
       this.pop().map(fn));
   }
 
-  get(i) { return this.skip(i).peek(); }
+  at(i) { return this.skip(i).peek(); }
 
   take(count) {
     if (this.isEmpty)

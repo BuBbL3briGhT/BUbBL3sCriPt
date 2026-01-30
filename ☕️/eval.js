@@ -121,7 +121,8 @@ export function evalList(binding, list, stack=List.make()) {
       case "number":
         const indexed =
           evalExpression(binding, list.next)
-        return indexed[$head];
+        // return indexed[$head];
+        return indexed.at($head);
       case "object":
       case "function":
         // console.log(1,$head.constructor.name.toString())
