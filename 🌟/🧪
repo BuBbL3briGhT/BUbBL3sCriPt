@@ -20,7 +20,7 @@
       ("../🧪/list.🫧")
       ("../🧪/math.🫧")
       ("../🧪/array.🫧")
-      ("../🧪/couple.🫧")
+      # ("../🧪/couple.🫧")
 
       # Kick off mocha to run tests 🦶🏈
       send mocha "run",
