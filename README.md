@@ -67,23 +67,44 @@ Run the REPL
 Quick examples
 --------------
 Some math
+
     (+ 1 2)
     (+ 1 2 3)
     (- 5 2)
     (/ 8 2)
     (* 7 8 9)
 
-Define a function
-    (mufn greet [name]
-      (puts name))
+Define a constant value.  As a best pratice, all
+values in bubblescript as assumed to be constant.
+Once the have been set, they cannot be changed within
+the current scope, but the can be shadowed with new
+values in a nested scope. Defining a constant is done
+with the `:` symbol like so.
+
+    (: value 22)
+
+Defining a function can be done simply with the `:`
+symbol, where the first parameter is a symbol that
+will serve as the constant which the function will be
+stored within in the local scope, followed by the
+symbol names refering to the input parameter for the
+function. The remaining values in the list will be
+received as the functions body.
+
+    (: (greet name) (puts name))
+
+Functions are invoked by evaluating a list where the
+function, something that resolves to the function is
+the first item in the list. In this case, where have
+defined the sysmbol greet as a reference to our
+function, so we will evalute a list where greet is
+the first item and the parameters follow, simply by
+wrapping the list in parantesis.
 
     (greet "Hi!")
 
-Locals
-    (let [n 777]
-      (puts n))
-
 Looping
+
     (loop [i 0]
       (puts "tick")
       (if (< i 3)
@@ -91,34 +112,37 @@ Looping
 
 Modules and require
 -------------------
-Bubblescript supports modular code via the `require`
-mechanism.
+Bubblescript supports modular code!
 
-- You can `require` a module from `lib/` by its
-basename:
-    (const list (require "list"))
+- You can require a module from `lib/` evaluating a
+  list where the first item is or resolves to a
+  string.
 
-- You can extract specific exports:
-    (const { map reduce } (require "list"))
+    (: list ("list"))
+
+- You can extract specific exports using an object
+  map.
+
+    (: { map reduce } ("list"))
 
 Example: create a module (lib/hello.🫧)
-    (module.exports {
-      say-hello
-    })
+
+    (module.exports { say-hello })
 
     (🫧 (say-hello name)
       (puts "Hello," name))
 
 Then from your script:
-    (const hello (require "hello"))
+
+    (: hello ("hello"))
     (hello.say-hello "Bubbly")
 
 Example: using list/bubblesort
 ------------------------------
 (Assuming lib/list exports `bubblesort`.)
 
-    (const { bubblesort } (require "list"))
-    (const xs °(3 1 2 7 4))
+    (: { bubblesort } ("list"))
+    (: xs °(3 1 2 7 4))
     (puts (bubblesort xs)) ; -> °(1 2 3 4 7)
 
 Developer setup
