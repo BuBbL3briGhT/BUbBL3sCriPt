@@ -116,6 +116,7 @@ export function evalList(binding, list, stack=List.make()) {
 
     const $head = evalExpression(binding, head);
 
+    // console.log(typeof($head));
     switch (typeof($head)) {
       case "string":
         return binding.require($head);
@@ -140,14 +141,17 @@ export function evalList(binding, list, stack=List.make()) {
             console.log({$head, prop});
             return $head[prop](...list.rest);
         }
-      default:
-        const Error = UndefinedFunctionError;
-        throw new Error(binding, $head, stack);
+      // default:
+      //   const Error = UndefinedFunctionError;
+      //   throw new Error(binding, $head, stack);
     }
 
   } catch (error) {
+    // console.log(error);
+    throw error;
     switch (error.constructor){
       case UndefinedFunctionError:
+        // console.log(1, list);
         if (error.__memo) {
           const memo = error.__memo;
           error.stack += interpolateTrace({

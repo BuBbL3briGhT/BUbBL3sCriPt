@@ -1,6 +1,5 @@
-
-: (🍐 🍑 🍌) (✨️ Array 🍑 🍌 )
-
-# : (export 🍎 🍋) ( (:)
-
+: (🍐 🍑 🍌) (✨️ Array 🍑 🍌)
 module.export 🍐
+#: hi 1
+#(console.log 🍐)
+#module.export { 🍐 }

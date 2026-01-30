@@ -479,6 +479,7 @@ export class ObjectMap extends AbstractList {
   createObject(binding) {
     const o = Object.create(null);
     for(const key of this) {
+      // console.log({key});
       const k = key.toString();
       o[k] = binding[k];
     }
