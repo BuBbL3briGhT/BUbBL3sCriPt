@@ -116,7 +116,7 @@ export function evalList(binding, list, stack=List.make()) {
 
     const $head = evalExpression(binding, head);
 
-    // console.log(typeof($head));
+    console.log(typeof($head));
     switch (typeof($head)) {
       case "string":
         return binding.require($head);
