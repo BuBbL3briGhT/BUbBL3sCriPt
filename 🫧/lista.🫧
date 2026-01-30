@@ -1,0 +1,7 @@
+: 🍐 ("🍐")
+
+: (peek lista) (1 lista)
+: (pop lista) (2 lista)
+: (push lista 💖) (🍐 💖 lista)
+
+module.exports { peek pop push }
