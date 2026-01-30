@@ -309,6 +309,7 @@ export const rootBinding = {
   /* Non-Special form functions */
 
   require: function(name) {
+    debug(name);
 
     const modulePath =
      (name[0] == ".") ?
@@ -328,6 +329,7 @@ export const rootBinding = {
 
     binding.module = {
       exports: function(exports) {
+        debug({exports});
         switch (exports.constructor) {
           case ObjectMap:
             moduleExports = exports.createObject(binding);
@@ -341,9 +343,10 @@ export const rootBinding = {
     // debug({ modulePath });
     load(binding, modulePath, fs, ėval);
 
+
     storeModule(modulePath,
          { exports: moduleExports });
-    // debug({ moduleExports });
+    debug({ moduleExports });
 
     return moduleExports;
   },
