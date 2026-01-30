@@ -25,6 +25,12 @@ let fixtures = Yaml.parse(data);
 
 describe("parse(string)", () => {
 
+  it.only("parses the number 0 correctly", function () {
+    const ast = parse("0");
+    // console.log(...ast);
+    expect(ast.peek()).to.equal(0);
+  });
+
   it("parses (1 2 3) into the correct AST structure", () => {
     const ast = parse("(1 2 3)");
     const expectedAst = List.make(1, 2, 3);
