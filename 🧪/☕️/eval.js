@@ -6,7 +6,16 @@ import { parse } from "../../☕️/parse.js";
 import Keyword from "../../☕️/keyword.js";
 import { rootBinding } from "../../☕️/binding.js";
 
-import { ėval, evalEach } from "../../☕️/eval.js";
+import { ėval, evalEach, evalExpression }
+                            from "../../☕️/eval.js";
+
+describe("evalExpression", function () {
+  it("evaluates zero", function () {
+    const result = evalExpression(null, "0");
+    assert.equal(result, 0);
+  });
+});
+
 
 describe("evalEach", function () {
 

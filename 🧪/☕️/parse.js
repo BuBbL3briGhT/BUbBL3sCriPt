@@ -25,7 +25,7 @@ let fixtures = Yaml.parse(data);
 
 describe("parse(string)", () => {
 
-  it.only("parses the number 0 correctly", function () {
+  it("parses the number 0 correctly", function () {
     const ast = parse("0");
     // console.log(...ast);
     expect(ast.peek()).to.equal(0);

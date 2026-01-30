@@ -218,7 +218,7 @@ describe("Tokenizer", function () {
 
   });
 
-  it.only("tokenizes the number zero", function () {
+  it("tokenizes the number zero", function () {
     const input = "0";
     const tokenizer = new Tokenizer(input);
     console.log([...tokenizer]);

@@ -72,7 +72,6 @@ export function evalEach(binding, list, stack) {
   if (list.constructor === LazyList)
     list = list.toList();
 
-  // debug({ list });
   return list.tryEach(_evalExpression,
     catchExpandMacro, stack);
 }
@@ -87,17 +86,16 @@ export function evalEach(binding, list, stack) {
  * @returns {*} The result of the expression.
  */
 export function evalExpression(binding, expression, stack) {
-  if (expression)
-    switch (expression.constructor) {
-      case List:
-        return evalList(binding, expression, stack);
-      case Ṣymbol:
-        return evalSymbol(binding, expression);
-      case Bubble:
-        return expression.pop();
-      default:
-        return expression;
-    }
+  switch (expression?.constructor) {
+    case List:
+      return evalList(binding, expression, stack);
+    case Ṣymbol:
+      return evalSymbol(binding, expression);
+    case Bubble:
+      return expression.pop();
+    default:
+      return expression;
+  }
 }
 
 /**
