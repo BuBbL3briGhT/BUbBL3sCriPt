@@ -215,6 +215,15 @@ describe("Tokenizer", function () {
       assert("333.333", 333.333);
       assert("-1", -1);
     }());
+
+  });
+
+  it.only("tokenizes the number zero", function () {
+    const input = "0";
+    const tokenizer = new Tokenizer(input);
+    console.log([...tokenizer]);
+    // assert.deepEqual(expects,
+    //   [...tokenizer]);
   });
 
   it("tokenizes a symbol", function () {
