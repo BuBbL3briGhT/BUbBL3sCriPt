@@ -232,9 +232,17 @@ export const rootBinding = {
   /* Special forms with evaulated input
    * parameters. */
 
-  eval: specialFormP(function(params) {
-    return params.eval(this);
-  }),
+  // eval: specialFormP(function(params) {
+  //   return evalEach(this, params);
+  // }),
+
+  // eval: function(string) {
+  //   return ėval(this, string);
+  // },
+
+  // parse: function(string) {
+  //   return parse(string);
+  // },
 
   list: specialFormP(function(params) {
     return params;
