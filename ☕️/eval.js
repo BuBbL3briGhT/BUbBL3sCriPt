@@ -138,7 +138,7 @@ export function evalList(binding, list, stack=List.make()) {
             list = list.rest;
             const prop =
               evalExpression(binding, list.first);
-            console.log({$head, prop});
+            // console.log({$head, prop});
             return $head[prop](...list.rest);
         }
       // default:
