@@ -35,7 +35,7 @@ const sAmp = Ṣymbol.for("&");
  */
 export function ėval(binding, script, opts={}) {
   try {
-    return evalEach(binding, parse(script, opts));
+    return do(binding, parse(script, opts));
   } catch (error) {
     switch (error.constructor){
       case UndefinedFunctionError:
@@ -53,18 +53,17 @@ export function ėval(binding, script, opts={}) {
 }
 
 /**
- * @method evalEach
+ * @method do
  * @description Evaluates each element of the list
  * and returns the result of the last evaluation.
  * @param {Object} binding - The binding to evaluate
  * the elements in.
- * @param {List} list - A list to evalEach over.
+ * @param {List} list - A list to "do".
  * @param {List} [stack=List.make()] - The evaluation
  * stack.
  * @returns {*} The result of the last evaluation.
  */
-export function evalEach(binding, list, stack) {
-  // console.log({list}, "🧀");
+export function do(binding, list, stack) { // evalEach
   const _evalExpression =
     evalExpression.bind(null, binding);
 
@@ -201,7 +200,7 @@ export function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {
     params =
-      evalEach(binding, splits.next)
+      do(binding, splits.next)
         .conj(mapEval(binding, splits.first));
   } else {
     params = mapEval(binding, params);
@@ -245,5 +244,5 @@ export function catchExpandMacro(o, list, fn) {
 
 Object.assign(ėval ,{
   ėval, evalExpression, evalParams, evalList,
-  evalEach, mapEval
+  do, mapEval
 });
