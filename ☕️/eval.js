@@ -22,6 +22,13 @@ const traceTemplate = "    en (${file}:${line}:${column})";
 const interpolateTrace = interpolate.bind(traceTemplate);
 const sAmp = Ṣymbol.for("&");
 
+if (!Object.ctor)
+  // Object.ctor = Object.constructor;
+  Object.defineProperty(Object.prototype, "ctor",
+    function () {
+      return this.constructor;
+    });
+
 /**
  * @function ėval
  * @description Evaluates a string of Bubblescript
@@ -63,12 +70,12 @@ export function ėval(binding, script, opts={}) {
  * stack.
  * @returns {*} The result of the last evaluation.
  */
-export function do(binding, list, stack) { // evalEach
+export function do(binding, list) { // evalEach
   const _evalExpression =
     evalExpression.bind(null, binding);
 
   // We can't expand macros on a lazy list right now, so need to convert to a list right now, If we add support for maxlcro expansion, we won't need to do this. That should be possible.
-  if (list.constructor === LazyList)
+  if (list.ctor === LazyList)
     list = list.toList();
 
   return list.tryEach(_evalExpression,
