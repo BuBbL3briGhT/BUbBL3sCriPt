@@ -51,7 +51,7 @@ export class BubbleScriptError extends Error {
           func: func?.fn, file: point.file,
           line: point.line, column: point.column }})
         .map(interpolateTrace).join("\n")
-        .replace(/en  \(/g, 'en (');
+        .replace(/en {2}\(/g, 'en (');
 
     return stackTrace;
   }
