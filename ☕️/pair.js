@@ -1,12 +1,12 @@
 const { assign } = Object;
 
-export default class Pair {
-  constructor(x,o) { assign(this, {x,o}); }
-  toString() {
-    const {x,o} = this;
-    return `⟅${x}:${o}⟆`;
-  }
-}
+// export default class Pair {
+//   constructor(x,o) { assign(this, {x,o}); }
+//   toString() {
+//     const {x,o} = this;
+//     return `⟅${x}:${o}⟆`;
+//   }
+// }
 
 export default function Pair(x,o) {
   return assign(this, {x,o});
@@ -26,4 +26,4 @@ assign(Pair.prototype, {
 //
 
 // Escapes pair values for string encoding.
-export escape(value) { return value };
+// export function escape(value) { return value };
