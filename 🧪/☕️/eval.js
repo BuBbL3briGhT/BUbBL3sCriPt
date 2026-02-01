@@ -1,3 +1,4 @@
+import { it, describe } from "mocha";
 import assert from "assert";
 import sinon from "sinon";
 

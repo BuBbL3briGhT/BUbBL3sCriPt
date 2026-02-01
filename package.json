@@ -4,6 +4,7 @@
   "type": "module",
   "main": "☕️/index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "npm run 🧪",
     "🧪": "npm run 🧪☕️ && npm run 🧪🫧",
     "🧪☕️": "mocha ./🧪/☕️/*.js ./🧪/☕️/**/*.js",
