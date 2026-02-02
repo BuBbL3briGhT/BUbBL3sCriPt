@@ -24,5 +24,19 @@
 
 : (conj l) (if l (conj (push (pop l) (peek l))))
 
+: (empty? l) (!! l)
+
+: (each 🫧 fn),
+  (: 🍎 (fn (🫣 🫧)))
+  (? (🎉 🫧)
+    (each (🎉 🫧) fn)
+    🍎
+
+
+
+
+
+
+
 
 module.exports { peek pop push }
