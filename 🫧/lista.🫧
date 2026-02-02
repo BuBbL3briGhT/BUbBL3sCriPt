@@ -26,11 +26,24 @@
 
 : (empty? l) (!! l)
 
-: (each 🫧 fn),
+(: (each 🫧 fn)
   (: 🍎 (fn (🫣 🫧)))
-  (? (🎉 🫧)
-    (each (🎉 🫧) fn)
-    🍎
+  (: 🍌 (🎉 🫧))
+  (? 🍌 (each 🍌 fn) 🍎))
+
+(: (each 🫧 ⚡️)
+  (: 🍎 (⚡️ (🫣 🫧)))
+  (: 🍌 (🎉 🫧))
+  (? 🍌 (each 🍌 ⚡️) 🍎))
+
+# With some named association
+(: (each 🫧 fn⚡️)
+  (: result🍎 (fn⚡️ (peek🫣 🫧)))
+  (: 🍌 (pop🎉 🫧))
+  (? 🍌 (each 🍌 fn⚡️) 🍎))
+
+
+(: (from & .) (list & (Array "from" & .))
 
 
 
