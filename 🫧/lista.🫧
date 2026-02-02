@@ -5,6 +5,11 @@
 : (pop lista) (1 lista)
 : (push lista 💖) (list 💖 lista)
 
+# (define-macro (-> & list)
+#   (reduce list (fn (memo, item)
+#     (list item memo))))
+
+
 # (: (shift lista)
 #   (invert (pop (invert lista))))
 
