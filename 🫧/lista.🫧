@@ -45,8 +45,13 @@
 
 (: (from & .) (list & (Array "from" & .))
 
+(: (map 🫧 ⚡️)
+  (if 🫧
+    (🫷 (map (🎉 🫧) ⚡️) (⚡️ (🫣 🫧)))
+    🫧))
 
-
+(: (map l fn)
+  (if (✨️ List (fn (peek l)) (map (pop l) fn)))
 
 
 
