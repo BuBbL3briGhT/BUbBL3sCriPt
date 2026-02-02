@@ -1,8 +1,13 @@
 
-                   : 🍐 ("🍐")
+: 🍐 ("🍐")
 
-         : (peek lista) (0 lista)
-          : (pop lista) (1 lista)
-      : (push lista 💖) (list 💖 lista)
+: (peek lista) (0 lista)
+: (pop lista) (1 lista)
+: (push lista 💖) (list 💖 lista)
 
-         module.exports { peek pop push }
+# (: (shift lista)
+#   (invert (pop (invert lista))))
+
+ : (shift lista) (-> lista invert pop invert)
+
+module.exports { peek pop push }
