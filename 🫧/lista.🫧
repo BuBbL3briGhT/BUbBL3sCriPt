@@ -22,6 +22,7 @@
           (push memo la)
           (list (peek lista)))))
 
+: (conj l) (if l (conj (push (pop l) (peek l))))
 
 
 module.exports { peek pop push }
