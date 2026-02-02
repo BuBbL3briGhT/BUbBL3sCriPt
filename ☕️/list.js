@@ -8,19 +8,19 @@ import { BubbleScriptError,
 // will serve as the abstract base class for `List`
 // and `Vektar`. All shared functionality between
 // `List` and `Vektar` is centralized here.
-export class AbstractList {
+export class AbstractList extends Array {
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
     return this.make(...array);
   }
 
-  constructor(o, oo) {
-    Object.assign(this, {o, oo});
-  }
+  // constructor(o, oo) {
+  //   Object.assign(this, {o, oo});
+  // }
 
-  peek() { return this.o; }
-  pop()  { return this.oo; }
+  peek() { return this[0]; }
+  pop()  { return this[1]; }
 
   get isEmpty() { return false; }
   get ["isEmpty?"]() { return this.isEmpty; }
@@ -32,7 +32,7 @@ export class AbstractList {
   get next() { return this.pop().peek(); }
   get last() { return !this.pop().isEmpty ?
       this.pop().last : this.peek(); }
-  get tuple() { return [this.o, this.oo] }
+  get tuple() { return this; }
 
   count() { return this.reduce(i => i+1, 0); }
 
