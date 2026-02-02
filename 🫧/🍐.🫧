@@ -1,2 +1,9 @@
+# (class Pair Array)
+#
+# (class 🍐 [:extend Array]
+#   (: (escape) ()))
+#
+# : Pair (extend Array)
+
 : (🍐 🍑 🍌) (✨️ Array 🍑 🍌)
 module.exports 🍐
