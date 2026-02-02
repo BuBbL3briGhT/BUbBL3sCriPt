@@ -13,6 +13,15 @@
 # (: (shift lista)
 #   (invert (pop (invert lista))))
 
- : (shift lista) (-> lista invert pop invert)
+: (shift lista) (-> lista invert pop invert)
+
+: (invert lista),
+    (if lista
+      (reduce (pop lista)
+        ((fn memo la)
+          (push memo la)
+          (list (peek lista)))))
+
+
 
 module.exports { peek pop push }
