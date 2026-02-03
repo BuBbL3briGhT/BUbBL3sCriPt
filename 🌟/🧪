@@ -24,7 +24,7 @@
       # Process each file from argv.
       (: tests (pop (pop (pop
         (from (get process "argv"))))))
-      (puts tests)
+      (puts (encodar tests))
       # (puts ((fn)))
       # (each tests ((fn file) (puts file)))
       # (each (pop (from (process "argv")))
