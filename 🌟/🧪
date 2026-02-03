@@ -1,5 +1,4 @@
 
-
       🫧 { curry } ("core")
       🫧 { encodar } ("string")
       🫧 { puts } ("io")
@@ -16,10 +15,20 @@
 
       # : argv (from (process "argv"))
       # 🍐 files (pop argv)
+      # (each files ((fn file) (file)))
+
+
+      # : argv (from (process "argv"))
+      # 🍐 files (pop argv)
+
+      # Process each file from argv.
+      (each (pop (from (process "argv")))
+        ((fn file) (file)))
+
       # (loop [] (
-      ("../🧪/list.🫧")
-      ("../🧪/math.🫧")
-      ("../🧪/array.🫧")
+      # ("../🧪/list.🫧")
+      # ("../🧪/math.🫧")
+      # ("../🧪/array.🫧")
       # ("../🧪/couple.🫧")
 
       # Kick off mocha to run tests 🦶🏈
