@@ -209,8 +209,8 @@ export class AbstractList extends Array {
   *[Symbol.iterator]() {
     let currentNode = this;
     while (!currentNode.isEmpty) {
-      yield currentNode.o;
-      currentNode = currentNode.oo;
+      yield currentNode[0];
+      currentNode = currentNode[1];
     }
   }
 }
@@ -266,9 +266,9 @@ export class List extends AbstractList {
   }
 
   // Create a list.
-  constructor(o, oo=emptyList) {
-    super(o, oo);
-  }
+  // constructor(o, oo=emptyList) {
+  //   super(o, oo);
+  // }
 
   push(element) {
     return new List(element, this);
