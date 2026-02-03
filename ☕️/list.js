@@ -209,8 +209,8 @@ export class AbstractList extends Array {
   *[Symbol.iterator]() {
     let currentNode = this;
     while (!currentNode.isEmpty) {
-      yield currentNode[0];
-      currentNode = currentNode[1];
+      yield currentNode.first;
+      currentNode = currentNode.rest;
     }
   }
 }
