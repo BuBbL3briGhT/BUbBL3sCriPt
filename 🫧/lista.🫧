@@ -15,44 +15,44 @@
 
 : (shift lista) (-> lista invert pop invert)
 
-: (invert lista),
-    (if lista
-      (reduce (pop lista)
-        ((fn memo la)
-          (push memo la)
-          (list (peek lista)))))
-
-: (conj l) (if l (conj (push (pop l) (peek l))))
-
-: (empty? l) (!! l)
-
-(: (each 🫧 fn)
-  (: 🍎 (fn (🫣 🫧)))
-  (: 🍌 (🎉 🫧))
-  (? 🍌 (each 🍌 fn) 🍎))
-
-(: (each 🫧 ⚡️)
-  (: 🍎 (⚡️ (🫣 🫧)))
-  (: 🍌 (🎉 🫧))
-  (? 🍌 (each 🍌 ⚡️) 🍎))
-
-# With some named association
-(: (each 🫧 fn⚡️)
-  (: result🍎 (fn⚡️ (peek🫣 🫧)))
-  (: 🍌 (pop🎉 🫧))
-  (? 🍌 (each 🍌 fn⚡️) 🍎))
-
-
-(: (from & .) (list & (Array "from" & .))
-
-(: (map 🫧 ⚡️)
-  (if 🫧
-    (🫷 (map (🎉 🫧) ⚡️) (⚡️ (🫣 🫧)))
-    🫧))
-
-(: (map l fn)
-  (if (✨️ List (fn (peek l)) (map (pop l) fn)))
-
+# : (invert lista),
+#     (if lista
+#       (reduce (pop lista)
+#         ((fn memo la)
+#           (push memo la)
+#           (list (peek lista)))))
+#
+# : (conj l) (if l (conj (push (pop l) (peek l))))
+#
+# : (empty? l) (!! l)
+#
+# (: (each 🫧 fn)
+#   (: 🍎 (fn (🫣 🫧)))
+#   (: 🍌 (🎉 🫧))
+#   (? 🍌 (each 🍌 fn) 🍎))
+#
+# (: (each 🫧 ⚡️)
+#   (: 🍎 (⚡️ (🫣 🫧)))
+#   (: 🍌 (🎉 🫧))
+#   (? 🍌 (each 🍌 ⚡️) 🍎))
+#
+# # With some named association
+# (: (each 🫧 fn⚡️)
+#   (: result🍎 (fn⚡️ (peek🫣 🫧)))
+#   (: 🍌 (pop🎉 🫧))
+#   (? 🍌 (each 🍌 fn⚡️) 🍎))
+#
+#
+# (: (from & .) (list & (Array "from" & .))
+#
+# (: (map 🫧 ⚡️)
+#   (if 🫧
+#     (🫷 (map (🎉 🫧) ⚡️) (⚡️ (🫣 🫧)))
+#     🫧))
+#
+# (: (map l fn)
+#   (if (✨️ List (fn (peek l)) (map (pop l) fn)))
+#
 
 
 

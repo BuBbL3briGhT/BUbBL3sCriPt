@@ -1,0 +1,19 @@
+
+: { desc it assert } ("test")
+: { * } ("test")
+: * ("test")
+
+: { shift } ("lista")
+: lista ("lista")
+
+import lista
+
+define-macro (import module),
+  (list °: °module (list (encodar module)))
+
+lista/shift
+
+(desc "lista"
+  (desc "/shift"
+    (it "")))
+
