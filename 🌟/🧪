@@ -2,7 +2,7 @@
       🫧 { curry } ("core")
       🫧 { encodar } ("string")
       🫧 { puts } ("io")
-           🫧 { each map from } ("list")
+           🫧 { each map from pop } ("list")
 
                     🫧 Mocha (☕️ "mocha")
 
@@ -22,8 +22,13 @@
       # 🍐 files (pop argv)
 
       # Process each file from argv.
-      (each (pop (from (process "argv")))
-        ((fn file) (file)))
+      (: tests (pop (pop (pop
+        (from (get process "argv"))))))
+      (puts tests)
+      # (puts ((fn)))
+      # (each tests ((fn file) (puts file)))
+      # (each (pop (from (process "argv")))
+      #   ((fn file) (file)))
 
       # (loop [] (
       # ("../🧪/list.🫧")
