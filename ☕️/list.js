@@ -133,6 +133,7 @@ export class AbstractList {
 
   each(fn) {
     const result = fn(this.peek());
+    // const result = fn.call(this, this.peek(), null, ėval);
     if (this.pop().isEmpty) return result;
     return this.pop().each(fn);
   }
