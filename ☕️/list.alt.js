@@ -8,19 +8,21 @@ import { BubbleScriptError,
 // will serve as the abstract base class for `List`
 // and `Vektar`. All shared functionality between
 // `List` and `Vektar` is centralized here.
-export class AbstractList {
+export class AbstractList extends Array {
 
   static from(arrayLike, mapFn, thisArg) {
     let array = Array.from(arrayLike, mapFn, thisArg);
     return this.make(...array);
   }
 
-  constructor(o, oo) {
-    Object.assign(this, {o, oo});
-  }
+  // constructor(o, oo) {
+  //   Object.assign(this, {o, oo});
+  // }
 
-  peek() { return this.o; }
-  pop()  { return this.oo; }
+  get o() { return this[0]; }
+  get oo() { return this[1]; }
+  peek() { return this[0]; }
+  pop()  { return this[1]; }
 
   get isEmpty() { return false; }
   get ["isEmpty?"]() { return this.isEmpty; }
@@ -32,7 +34,7 @@ export class AbstractList {
   get next() { return this.pop().peek(); }
   get last() { return !this.pop().isEmpty ?
       this.pop().last : this.peek(); }
-  get tuple() { return [this.o, this.oo] }
+  get tuple() { return this; }
 
   count() { return this.reduce(i => i+1, 0); }
 
@@ -209,8 +211,8 @@ export class AbstractList {
   *[Symbol.iterator]() {
     let currentNode = this;
     while (!currentNode.isEmpty) {
-      yield currentNode.o;
-      currentNode = currentNode.oo;
+      yield currentNode.first;
+      currentNode = currentNode.rest;
     }
   }
 }
@@ -359,21 +361,38 @@ export class LazyList extends List {
     return this.isEmpty;
   }
 
+  // get o() {
+  //   this.wakeUp();
+  //   return this.o;
+  // }
+
   get o() {
     this.wakeUp();
-    return this.o;
+    return this[0];
   }
 
+  // get oo() {
+  //   if ( !this.isEmpty )
+  //     this.set({ oo: new LazyList(this.itty) });
+
+  //   return this.oo;
+  // }
   get oo() {
     if ( !this.isEmpty )
-      this.set({ oo: new LazyList(this.itty) });
+      // this.set({ oo: new LazyList(this.itty) });
+      this[1] = new LazyList(this.itty);
 
-    return this.oo;
+    return this[1];
   }
 
+  // wakeUp() {
+  //   const o = this.itty.next();
+  //   this.set({ o: o.value, isEmpty: o.done });
+  // }
   wakeUp() {
     const o = this.itty.next();
-    this.set({ o: o.value, isEmpty: o.done });
+    this[0] = o.value;
+    this.set({ isEmpty: o.done });
   }
 
   set(props) {
