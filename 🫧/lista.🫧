@@ -1,6 +1,8 @@
 
 : 🍐 ("🍐")
 
+: ? if
+
 : (peek lista) (0 lista)
 : (pop lista) (1 lista)
 : (push lista 💖) (list 💖 lista)
@@ -31,16 +33,19 @@
 #   (: 🍌 (🎉 🫧))
 #   (? 🍌 (each 🍌 fn) 🍎))
 #
+
 # (: (each 🫧 ⚡️)
 #   (: 🍎 (⚡️ (🫣 🫧)))
 #   (: 🍌 (🎉 🫧))
 #   (? 🍌 (each 🍌 ⚡️) 🍎))
-#
-# # With some named association
-# (: (each 🫧 fn⚡️)
-#   (: result🍎 (fn⚡️ (peek🫣 🫧)))
-#   (: 🍌 (pop🎉 🫧))
-#   (? 🍌 (each 🍌 fn⚡️) 🍎))
+
+
+# With some named association
+(: (each 🫧 fn⚡️)
+  (: result🍎 (fn⚡️ (peek🫣 🫧)))
+  (: 🍌 (pop🎉 🫧))
+  (? 🍌 (each 🍌 fn⚡️) 🍎))
+
 #
 #
 # (: (from & .) (list & (Array "from" & .))
@@ -57,4 +62,4 @@
 
 
 
-module.exports { peek pop push }
+module.exports { peek pop push each shift }

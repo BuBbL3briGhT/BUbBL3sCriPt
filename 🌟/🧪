@@ -2,7 +2,8 @@
       🫧 { curry } ("core")
       🫧 { encodar } ("string")
       🫧 { puts } ("io")
-           🫧 { each map from pop } ("list")
+      🫧 { each map from pop } ("list")
+      🫧 lista ("lista")
 
                     🫧 Mocha (☕️ "mocha")
 
@@ -28,9 +29,14 @@
       # (puts (encodar tests))
       # (puts ((fn)))
       # (each tests ((fn file) (puts file)))
-      (each tests ((jsfn file) (puts file)))
       # (each (pop (from (process "argv")))
       #   ((fn file) (file)))
+
+
+      # (each tests ((jsfn file) (puts file)))
+      # (each tests ((jsfn file) (file)))
+      (each tests ((jsfn file) ((+ "../" file))))
+      # (lista.each tests ((fn file) (puts file)))
 
       # (loop [] (
       # ("../🧪/list.🫧")
