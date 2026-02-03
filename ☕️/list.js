@@ -266,9 +266,9 @@ export class List extends AbstractList {
   }
 
   // Create a list.
-  // constructor(o, oo=emptyList) {
-  //   super(o, oo);
-  // }
+  constructor(o, oo=emptyList) {
+    super(o, oo);
+  }
 
   push(element) {
     return new List(element, this);
