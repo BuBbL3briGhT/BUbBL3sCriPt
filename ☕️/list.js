@@ -19,6 +19,8 @@ export class AbstractList extends Array {
   //   Object.assign(this, {o, oo});
   // }
 
+  get o() { return this[0]; }
+  get oo() { return this[1]; }
   peek() { return this[0]; }
   pop()  { return this[1]; }
 
@@ -359,21 +361,38 @@ export class LazyList extends List {
     return this.isEmpty;
   }
 
+  // get o() {
+  //   this.wakeUp();
+  //   return this.o;
+  // }
+
   get o() {
     this.wakeUp();
-    return this.o;
+    return this[0];
   }
 
+  // get oo() {
+  //   if ( !this.isEmpty )
+  //     this.set({ oo: new LazyList(this.itty) });
+
+  //   return this.oo;
+  // }
   get oo() {
     if ( !this.isEmpty )
-      this.set({ oo: new LazyList(this.itty) });
+      // this.set({ oo: new LazyList(this.itty) });
+      this[1] = new LazyList(this.itty);
 
-    return this.oo;
+    return this[1];
   }
 
+  // wakeUp() {
+  //   const o = this.itty.next();
+  //   this.set({ o: o.value, isEmpty: o.done });
+  // }
   wakeUp() {
     const o = this.itty.next();
-    this.set({ o: o.value, isEmpty: o.done });
+    this[0] = o.value;
+    this.set({ isEmpty: o.done });
   }
 
   set(props) {
