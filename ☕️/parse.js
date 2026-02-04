@@ -114,7 +114,7 @@ export class Parser {
         break;
 
       case TOK_SYMBOL:
-        o = Ṣÿ.for(token.value);
+        o = this.parseSymbol(token)
         break;
 
       case TOK_KEYWORD:
@@ -145,6 +145,10 @@ export class Parser {
       { line, column, file });
 
     return o;
+  }
+
+  parseSymbol(token) {
+    return Ṣÿ.for(token.value);
   }
 
   parseList(list = List.make()) {
