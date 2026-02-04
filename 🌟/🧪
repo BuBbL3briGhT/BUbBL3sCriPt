@@ -39,6 +39,9 @@
       (each tests ((jsfn file)
         (puts "Loading:" file)
         ((+ "../" file))))
+      # (lista.each tests ((fn file)
+      #   (puts "Loading:" file)
+      #   ((+ "../" file))))
 
 
       # (lista.each tests ((fn file) (puts file)))
