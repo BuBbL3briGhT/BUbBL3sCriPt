@@ -59,4 +59,7 @@
       The place to start is on parsing the dot notation.
       Will need to meditate on this. 🧘
 
+    - Just making a note that we will not be able to infer the correct means of parsing dot noyation in
+    a symbol during the parser phase. This will need to be done in the evaluator like a macro.
+    consider it dynamic parsing. We need to know the context of evaluation inorder to infer the meaning.
 
