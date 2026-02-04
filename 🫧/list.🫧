@@ -76,10 +76,16 @@
 
 # (🫧 (each list fn)
 #   (send list "each" fn))
+# (🫧 (each list fn)
+#   (list.each fn)) # -> (send list "each" fn))
 
 : ? if
-: (🫣 .) ("o" .) # Peek-a-boo
-: (🎉 .) ("oo" .) # Pop
+# : (🫣 .) ("o" .) # Peek-a-boo
+# : (🎉 .) ("oo" .) # Pop
+# : (🫣 .) (get . "o")
+# : (🎉 .) (get . "oo")
+: (🫣 list) (get list "o")
+: (🎉 list) (get list "oo")
 
 (: (each 🫧 ⚡️)
   (: 🍎 (⚡️ (🫣 🫧)))
