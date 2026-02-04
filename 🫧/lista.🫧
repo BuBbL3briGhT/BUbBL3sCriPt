@@ -11,6 +11,9 @@
 : (🫣 lista) (get lista "o")
 : (🎉 lista) (get lista "oo")
 
+# : (🫣 lista) (lista "o")
+# : (🎉 lista) (lista "oo")
+
 # (define-macro (-> & list)
 #   (reduce list (fn (memo, item)
 #     (list item memo))))

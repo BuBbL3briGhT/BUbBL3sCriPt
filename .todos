@@ -1,2 +1,40 @@
 - Support for ```
-- Fix build
+- Try so that evaluation of a list with an object as
+  the first item, and items in the list is a call to
+  get essentially, if a function is returned, then
+  you can call as the outer paren, however this would
+  be different then sending the message, and evaluating in the context of the object.
+  need to think about it further.
+
+    (console.log "hello") -> ((console "log") "hello")
+      Note, that this would not work, because we are
+      first accessing the function, that serves as a
+      method, then invoking it out of the context of
+      the orginal object. Although, i do believe the
+      two stataments are actually equvelent based upon
+      the current code, so this would probably be a big improvment
+      if translatzd at the parszr.
+    -> ((get console "log") "hello")
+    versus -> (send console "log" "hello")
+    (console.log.log "hi")
+    -> (send (console "log") "log" "hi")
+    So this shows that we can use send for the outer for invokation
+    And confirms we should use accessing fpr the inpart. Also note:
+    (console.lo.lo.lo "woah")
+    -> (send (console "lo" "lo") "lo" "woah")
+    This is if we called get, which would be a niceity. Anyway
+    Without would deconstruct to
+    -> (send ((console "lo") "lo") "lo" "woah")
+    which is equally valid.
+    (console.log.log) -> (console "log" "log")
+    -> (get console "log" "log")
+
+    These are all hypotheticals. Need to get into code to
+    see what is really up. Nice ideas though. Little fuzzy at the
+    edges, so that is what we will discover in code.
+    Where the rubber meets the road.
+
+
+    (console.log "hello") -> (send console "log" "hamburger")
+
+
