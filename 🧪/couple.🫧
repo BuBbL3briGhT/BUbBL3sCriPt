@@ -1,9 +1,11 @@
 
-: { desc it array } ("test")
-: { encodar } ("string")
-: { couple } ("couple")
+# : { desc it array } ("test")
+# : { encodar } ("string")
+# : { couple } ("couple")
+#
+# (desc "couple"
+#   (it "creates a coupling"
+#     (: two (couple 1 2))
+#     (assert.equal (encodar two) "1,2")))
 
-(desc "couple"
-  (it "creates a coupling"
-    (: two (couple 1 2))
-    (assert.equal (encodar two) "1,2")))
+{}

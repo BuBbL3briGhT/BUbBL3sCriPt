@@ -147,7 +147,7 @@ export function evalList(binding, list, stack=List.make()) {
 
   } catch (error) {
     // console.log(error);
-    throw error;
+    // throw error;
     switch (error.constructor){
       case UndefinedFunctionError:
         // console.log(1, list);
