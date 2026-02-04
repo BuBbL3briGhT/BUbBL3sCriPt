@@ -271,14 +271,14 @@ export class List extends AbstractList {
     super(o, oo);
   }
 
-  at(index) {
-    switch (index) {
-      case 0: return this.o;
-      case 1: return this.oo;
-      default:
-        throw Error("Invaild index: " + index);
-    }
-  }
+  // at(index) {
+  //   switch (index) {
+  //     case 0: return this.o;
+  //     case 1: return this.oo;
+  //     default:
+  //       throw Error("Invaild index: " + index);
+  //   }
+  // }
 
   push(element) {
     return new List(element, this);

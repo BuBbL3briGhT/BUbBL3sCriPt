@@ -4,12 +4,12 @@
 
 : ? if
 
-: (peek lista) (0 lista)
-: (pop lista) (1 lista)
+: (peek lista) (get lista "o")
+: (pop lista) (get lista "oo")
 : (push lista 💖) (list 💖 lista)
 
-: (🫣 lista) (0 lista)
-: (🎉 lista) (1 lista)
+: (🫣 lista) (get lista "o")
+: (🎉 lista) (get lista "oo")
 
 # (define-macro (-> & list)
 #   (reduce list (fn (memo, item)
