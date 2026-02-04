@@ -37,4 +37,26 @@
 
     (console.log "hello") -> (send console "log" "hamburger")
 
+    UPDATE:
+      .K.O i think have a solution. I've been giving it somethought,
+      and everything seems doable. The one iffy thing is how to
+      interete a bare reference to object in the first
+      position of a list. There are a couple different
+      ways to imahine it, but the big two is it a
+      get or a send. My solution is to interprete this
+      as a send. If using dot notation, those will be decomposed
+      into intermeatary gets. To do a get, simply reverse
+      the order  starting with the string key, just like
+      with an index look up. This differey from a module load where there are
+      no parameters. Multiple parameters are done recerusivly. So
+      ("string" objects) -> object["string"]
+      ("string1" "string2" object) -> object["string2"]["string1"]
+        : i don't know, perhaps an explict call to get is
+          a little easier to undzrstand.
+
+      It's a thought.
+
+      The place to start is on parsing the dot notation.
+      Will need to meditate on this. 🧘
+
 
