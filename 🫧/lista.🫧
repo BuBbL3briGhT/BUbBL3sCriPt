@@ -68,6 +68,4 @@
 #
 
 
-
-
 module.exports { peek pop push each shift }

@@ -74,8 +74,17 @@
 (🫧 (empty? list)
   (get list "isEmpty"))
 
-(🫧 (each list fn)
-  (send list "each" fn))
+# (🫧 (each list fn)
+#   (send list "each" fn))
+
+: ? if
+: (🫣 .) ("o" .) # Peek-a-boo
+: (🎉 .) ("oo" .) # Pop
+
+(: (each 🫧 ⚡️)
+  (: 🍎 (⚡️ (🫣 🫧)))
+  (: 🍌 (🎉 🫧))
+  (? (empty? 🍌) 🍎 (each 🍌 ⚡️)))
 
 (🫧 (from array)
   (send List "from" array))
