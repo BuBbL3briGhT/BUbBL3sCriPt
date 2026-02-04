@@ -85,12 +85,13 @@ export function evalEach(binding, list, stack) {
  * @param {Array} [stack=[]] - The evaluation stack.
  * @returns {*} The result of the expression.
  */
-export function evalExpression(binding, expression, stack) {
+export function evalExpression(binding, expression, options={}) {
+  const { context } = options;
   switch (expression?.constructor) {
     case List:
-      return evalList(binding, expression, stack);
+      return evalList(binding, expression);
     case Ṣymbol:
-      return evalSymbol(binding, expression);
+      return evalSymbol(binding, expression, { context });
     case Bubble:
       return expression.pop();
     default:
@@ -108,11 +109,11 @@ export function evalExpression(binding, expression, stack) {
  * stack.
  * @returns {*} The result of the function call.
  */
-export function evalList(binding, list, stack=List.make()) {
+export function evalList(binding, list, options={}) {
   try {
     const { head, file, line, column } = list;
 
-    const $head = evalExpression(binding, head);
+    const $head = evalExpression(binding, head, { context: "list" });
 
     // console.log(typeof($head));
     switch (typeof($head)) {
@@ -142,7 +143,7 @@ export function evalList(binding, list, stack=List.make()) {
         }
       default:
         const Error = UndefinedFunctionError;
-        throw new Error(binding, $head, stack);
+        throw new Error(binding, $head);
     }
 
   } catch (error) {
@@ -183,9 +184,18 @@ export function evalList(binding, list, stack=List.make()) {
  * @param {*} symbol - The symbol to evaluate.
  * @returns {*} The result of evaluating the symbol.
  */
-export function evalSymbol(binding, symbol) {
-  const root = symbol.resolveRoot(binding);
-  return root ? root[symbol.fn] : root;
+export function evalSymbol(binding, symbol, context) {
+  if (context === "list") {
+    // Context: "list" indicates this is being evaluated as
+    // the first item in a list, therefore is should convert to
+    // a send, with the last segment being the message. Parameters
+    // will be appended in evalList.
+    // TODO: Implement.
+
+  } else {
+    const root = symbol.resolveRoot(binding);
+    return root ? root[symbol.fn] : root;
+  }
 }
 
 /**
