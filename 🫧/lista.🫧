@@ -7,6 +7,9 @@
 : (pop lista) (1 lista)
 : (push lista 💖) (list 💖 lista)
 
+: (🫣 lista) (0 lista)
+: (🎉 lista) (1 lista)
+
 # (define-macro (-> & list)
 #   (reduce list (fn (memo, item)
 #     (list item memo))))
@@ -35,6 +38,7 @@
 #
 
 (: (each 🫧 ⚡️)
+  # (puts 🫣)
   (: 🍎 (⚡️ (🫣 🫧)))
   (: 🍌 (🎉 🫧))
   (? 🍌 (each 🍌 ⚡️) 🍎))

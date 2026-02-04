@@ -140,9 +140,9 @@ export function evalList(binding, list, stack=List.make()) {
             // console.log({$head, prop});
             return $head[prop](...list.rest);
         }
-      // default:
-      //   const Error = UndefinedFunctionError;
-      //   throw new Error(binding, $head, stack);
+      default:
+        const Error = UndefinedFunctionError;
+        throw new Error(binding, $head, stack);
     }
 
   } catch (error) {

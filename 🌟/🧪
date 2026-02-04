@@ -2,8 +2,8 @@
       🫧 { curry } ("core")
       🫧 { encodar } ("string")
       🫧 { puts } ("io")
-      🫧 { each map from pop } ("list")
-      🫧 lista ("lista")
+      🫧 { map from pop } ("list")
+      🫧 { each } ("lista")
 
                     🫧 Mocha (☕️ "mocha")
 
@@ -36,12 +36,12 @@
       # (each tests ((jsfn file) (puts file)))
       # (each tests ((jsfn file) (file)))
 
-      (each tests ((jsfn file)
-        (puts "Loading:" file)
-        ((+ "../" file))))
-      # (lista.each tests ((fn file)
+      # (each tests ((jsfn file)
       #   (puts "Loading:" file)
       #   ((+ "../" file))))
+      (each tests ((fn file)
+        (puts "Loading:" file)
+        ((+ "../" file))))
 
 
       # (lista.each tests ((fn file) (puts file)))
