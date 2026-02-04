@@ -1,5 +1,6 @@
 
 : 🍐 ("🍐")
+: { empty? } ("list")
 
 : ? if
 
@@ -41,7 +42,7 @@
   # (puts 🫣)
   (: 🍎 (⚡️ (🫣 🫧)))
   (: 🍌 (🎉 🫧))
-  (? 🍌 (each 🍌 ⚡️) 🍎))
+  (? (empty? 🍌) 🍎 (each 🍌 ⚡️)))
 
 
 # # With some named association
