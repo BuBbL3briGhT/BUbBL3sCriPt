@@ -156,7 +156,8 @@ export function evalList(binding, list) {
             // console.debug({fn});
             switch(fn.constructor.name.toString()) {
               case "Function":
-                return fn(...tail.tail);
+                // return fn(...tail.tail);
+                return fn(...evalParams(binding, tail.tail));
               default:
                 return fn.call(head,
                   ...tail.tail);

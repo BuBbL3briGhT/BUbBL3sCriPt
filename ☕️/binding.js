@@ -314,7 +314,9 @@ export const rootBinding = {
   }),
 
 
-  /* Non-Special form functions */
+  /*                          * *
+   * Non-Special form functions *
+   * *                          */
 
   require: function(name) {
     // debug(name);
