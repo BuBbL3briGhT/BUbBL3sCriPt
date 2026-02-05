@@ -111,54 +111,9 @@ export function evalExpression(binding, expression) {
  */
 export function evalList(binding, list, options={}) {
   try {
-    const { head, file, line, column } = list;
 
-    switch (head.constructor) {
-      case Ṣymbol:
-        const s = head;
-        if (s.message) {
-          s.sendMessage(binding, list.tail, ėval);
-        } else {
-          const fn = s.resolveFn(binding);
-          return Fn.call(binding, fn, list.tail,
-            stack, ėval);
-        }
-
-
-    const $head = evalExpression(binding, head);
-
-    switch (head.fn
-
-    // console.log(typeof($head));
-    switch (typeof($head)) {
-      case "string":
-        return binding.require($head);
-      case "number":
-        const indexed =
-          evalExpression(binding, list.next)
-        // return indexed[$head];
-        return indexed.at($head);
-      case "object":
-      case "function":
-        // console.log(1,$head.constructor.name.toString())
-        switch ($head.constructor.name.toString()) {
-          case "Fn":
-          case "Function":
-          case "SpecialForm":
-          case "SpecialFormP":
-          case "Macro":
-            return Fn.call(binding, $head, list.tail, stack, ėval);
-          default: // object
-            list = list.rest;
-            const prop =
-              evalExpression(binding, list.first);
-            // console.log({$head, prop});
-            return $head[prop](...list.rest);
-        }
-      default:
-        const Error = UndefinedFunctionError;
-        throw new Error(binding, $head);
-    }
+    const { head, tail, file, line, column } = list;
+    return _evalList(binding, head, tail);
 
   } catch (error) {
     // console.log(error);
@@ -187,6 +142,51 @@ export function evalList(binding, list, options={}) {
         }).call(list);
     }
     throw error;
+  }
+}
+
+function _evalList(binding, head, tail) {
+  switch(typeof(head)) {
+    case "string":
+      return binding.require(head);
+    case "number":
+      const indexed =
+        evalExpression(binding, list.next)
+      return indexed.at(head);
+    case "object":
+    case "function":
+      switch (head.constructor.name.toString()) {
+        case "Ṣymbol":
+          const s = head;
+          if (s.message) {
+            const o = s.resolveSegments();
+            return _evalList(binding, o,
+              tail.push(s.message));
+          } else {
+            const _ = s.resolve(binding);
+            return _evalList(binding, _, tail);
+          }
+        case "Fn":
+        case "Function":
+        case "SpecialForm":
+        case "SpecialFormP":
+        case "Macro":
+          return Fn.call(binding, head, tail, stack, ėval);
+        default: // object
+          const prop =
+            evalExpression(binding, tail.head);
+          const fn = head[prop];
+          switch(fn.constructor.name.toString()) {
+            case Function:
+              return head[prop](...tail.tail);
+            default:
+              return head[prop].call(head,
+                ...tail.tail);
+          }
+      }
+    default:
+      const Error = UndefinedFunctionError;
+      throw new Error(binding, head);
   }
 }
 

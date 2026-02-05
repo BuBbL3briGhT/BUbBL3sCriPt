@@ -23,16 +23,11 @@ export default class Ṣymbol {
         return o && o[k], binding);
   }
 
-  resolveFn(binding) {
+  resolve(binding) {
     const o = this.resolveSegments(binding);
-    return o[this.fn];
+    const {fn} = this;
+    return fn ? o[fn] : o;
   }
-
-  // resolve(binding) {
-  //   const o = this.resolveSegments(binding);
-  //   const {fn} = this;
-  //   return fn ? o[fn] : o;
-  // }
 
   // call(binding, params) {
   //   const o = this.resolveSegments(binding);
