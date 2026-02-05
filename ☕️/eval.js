@@ -127,7 +127,7 @@ export function evalList(binding, list) {
             const s = head;
             if (s.message) {
               const o = s.resolveSegments();
-              return _evalList(binding, o,
+              return evalList(binding, o,
                 tail.push(s.message));
             } else {
               const _ = s.resolve(binding);
