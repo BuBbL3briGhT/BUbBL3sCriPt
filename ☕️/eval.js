@@ -110,6 +110,7 @@ export function evalExpression(binding, expression) {
  */
 export function evalList(binding, list) {
   try {
+    // console.debug({list});
 
     const { head, tail, file, line, column } = list;
 
@@ -127,8 +128,8 @@ export function evalList(binding, list) {
             const s = head;
             if (s.message) {
               const o = s.resolveSegments(binding);
-              return evalList(binding, o,
-                tail.push(s.message));
+              return evalList(binding,
+                tail.push(s.message).push(o));
             } else {
               const _ = s.resolve(binding);
               return evalList(binding, tail.push(_));
