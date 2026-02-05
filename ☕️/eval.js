@@ -88,6 +88,7 @@ export function evalEach(binding, list, stack) {
 export function evalExpression(binding, expression) {
   switch (expression?.constructor) {
     case List:
+      // console.debug(1, expression.toString());
       return evalList(binding, expression);
     case Ṣymbol:
       return expression.resolve(binding);
@@ -110,8 +111,8 @@ export function evalExpression(binding, expression) {
  */
 export function evalList(binding, list) {
   try {
-    console.debug({list});
-    console.debug(1, list.toString());
+    // console.debug({list});
+    // console.debug(1, list.toString());
 
     const { head, tail, file, line, column } = list;
 
@@ -141,6 +142,9 @@ export function evalList(binding, list) {
           case "SpecialFormP":
           case "Macro":
             return Fn.call(binding, head, tail, null, ėval);
+          case "List":
+            return evalList(binding,
+              tail.push(evalList(binding, head)));
           default: // object
             // console.debug({head});
             // console.debug("tail", tail.toString());
