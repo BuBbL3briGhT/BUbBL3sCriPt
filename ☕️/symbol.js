@@ -5,8 +5,12 @@ const parseṢymbol = (str) => str.split('/')
 
 export default class Ṣymbol {
   constructor(value) {
-    [segments, fn] = parseṢymbol(value);
-    Object.assign(this, {value, segments, fn});
+    let message;
+    const [segments, fn] = parseṢymbol(value);
+    if (!fn && segments.length > 1)
+      message = segments.pop();
+    Object.assign(this,
+      { value, segments, fn, message });
     this.freeze();
     return symbols[value] = this;
   };
@@ -17,6 +21,11 @@ export default class Ṣymbol {
     return this.segments
       .reduce((o,k) => // object, key
         return o && o[k], binding);
+  }
+
+  resolveFn(binding) {
+    const o = this.resolveSegments(binding);
+    return o[this.fn];
   }
 
   // resolve(binding) {

@@ -85,13 +85,13 @@ export function evalEach(binding, list, stack) {
  * @param {Array} [stack=[]] - The evaluation stack.
  * @returns {*} The result of the expression.
  */
-export function evalExpression(binding, expression, options={}) {
+export function evalExpression(binding, expression) {
   const { context } = options;
   switch (expression?.constructor) {
     case List:
       return evalList(binding, expression);
     case Ṣymbol:
-      return evalSymbol(binding, expression, { context });
+      return expression.resolveRoot(binding);
     case Bubble:
       return expression.pop();
     default:
@@ -113,7 +113,21 @@ export function evalList(binding, list, options={}) {
   try {
     const { head, file, line, column } = list;
 
-    const $head = evalExpression(binding, head, { context: "list" });
+    switch (head.constructor) {
+      case Ṣymbol:
+        const s = head;
+        if (s.message) {
+          s.sendMessage(binding, list.tail, ėval);
+        } else {
+          const fn = s.resolveFn(binding);
+          return Fn.call(binding, fn, list.tail,
+            stack, ėval);
+        }
+
+
+    const $head = evalExpression(binding, head);
+
+    switch (head.fn
 
     // console.log(typeof($head));
     switch (typeof($head)) {
@@ -184,7 +198,20 @@ export function evalList(binding, list, options={}) {
  * @param {*} symbol - The symbol to evaluate.
  * @returns {*} The result of evaluating the symbol.
  */
-export function evalSymbol(binding, symbol, context) {
+export function evalSymbol(binding, symbol, params) {
+  const o = symbol.resolve(binding);
+  const fnKey = symbol.fn
+  if (fnKey) {
+    const fn = o[fnKey];
+    return fn.call(binding, ...params);
+  } else {
+    switch (fn.constructor) {
+      case Fn:
+      case Function:
+        return fn(...params);
+
+  }
+
   if (context === "list") {
     // Context: "list" indicates this is being evaluated as
     // the first item in a list, therefore is should convert to
