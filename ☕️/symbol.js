@@ -11,16 +11,15 @@ export default class Ṣymbol {
       message = segments.pop();
     Object.assign(this,
       { value, segments, fn, message });
-    this.freeze();
+    Object.freeze(this);
     return symbols[value] = this;
   };
 
   toString() { return this.value; }
 
   resolveSegments(binding) {
-    return this.segments
-      .reduce((o,k) => // object, key
-        return o && o[k], binding);
+    return this.segments // object, key
+      .reduce((o,k) => o && o[k], binding);
   }
 
   resolve(binding) {

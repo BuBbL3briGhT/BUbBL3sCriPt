@@ -86,12 +86,11 @@ export function evalEach(binding, list, stack) {
  * @returns {*} The result of the expression.
  */
 export function evalExpression(binding, expression) {
-  const { context } = options;
   switch (expression?.constructor) {
     case List:
       return evalList(binding, expression);
     case Ṣymbol:
-      return expression.resolveRoot(binding);
+      return expression.resolve(binding);
     case Bubble:
       return expression.pop();
     default:
@@ -139,7 +138,7 @@ export function evalList(binding, list) {
           case "SpecialForm":
           case "SpecialFormP":
           case "Macro":
-            return Fn.call(binding, head, tail, stack, ėval);
+            return Fn.call(binding, head, tail, null, ėval);
           default: // object
             const prop =
               evalExpression(binding, tail.head);
@@ -187,39 +186,39 @@ export function evalList(binding, list) {
   }
 }
 
-/**
- * @function evalSymbol
- * @description Evaluates a single symbol.
- * @param {object} symbol - A binding to evalute the
- * symbol with.
- * @param {*} symbol - The symbol to evaluate.
- * @returns {*} The result of evaluating the symbol.
- */
-export function evalSymbol(binding, symbol, params) {
-  const o = symbol.resolve(binding);
-  const fnKey = symbol.fn
-  if (fnKey) {
-    const fn = o[fnKey];
-    return fn.call(binding, ...params);
-  } else {
-    switch (fn.constructor) {
-      case Fn:
-      case Function:
-        return fn(...params);
+// /**
+//  * @function evalSymbol
+//  * @description Evaluates a single symbol.
+//  * @param {object} symbol - A binding to evalute the
+//  * symbol with.
+//  * @param {*} symbol - The symbol to evaluate.
+//  * @returns {*} The result of evaluating the symbol.
+//  */
+// export function evalSymbol(binding, symbol, params) {
+//   const o = symbol.resolve(binding);
+//   const fnKey = symbol.fn
+//   if (fnKey) {
+//     const fn = o[fnKey];
+//     return fn.call(binding, ...params);
+//   } else {
+//     switch (fn.constructor) {
+//       case Fn:
+//       case Function:
+//         return fn(...params);
 
-  }
+//   }
 
-  if (context === "list") {
-    // Context: "list" indicates this is being evaluated as
-    // the first item in a list, therefore is should convert to
-    // a send, with the last segment being the message. Parameters
-    // will be appended in evalList.
-    // TODO: Implement.
-  } else {
-    const root = symbol.resolveRoot(binding);
-    return root ? root[symbol.fn] : root;
-  }
-}
+//   if (context === "list") {
+//     // Context: "list" indicates this is being evaluated as
+//     // the first item in a list, therefore is should convert to
+//     // a send, with the last segment being the message. Parameters
+//     // will be appended in evalList.
+//     // TODO: Implement.
+//   } else {
+//     const root = symbol.resolveRoot(binding);
+//     return root ? root[symbol.fn] : root;
+//   }
+// }
 
 /**
  * @function evalParams
