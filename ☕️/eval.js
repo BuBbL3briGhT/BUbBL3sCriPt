@@ -126,7 +126,7 @@ export function evalList(binding, list) {
           case "Ṣymbol":
             const s = head;
             if (s.message) {
-              const o = s.resolveSegments();
+              const o = s.resolveSegments(binding);
               return evalList(binding, o,
                 tail.push(s.message));
             } else {
@@ -144,7 +144,7 @@ export function evalList(binding, list) {
               evalExpression(binding, tail.head);
             const fn = head[prop];
             switch(fn.constructor.name.toString()) {
-              case Function:
+              case "Function":
                 return head[prop](...tail.tail);
               default:
                 return head[prop].call(head,
@@ -175,12 +175,12 @@ export function evalList(binding, list) {
         error.__memo = { file, line, column }
         break;
       default:
-        (function () {
-          const { head, file, line, column } = list;
-          error.stack += "\n" + interpolateTrace({
-            func: head, file, line, column
-          });
-        }).call(list);
+        // (function () {
+        //   const { head, file, line, column } = list;
+        //   error.stack += "\n" + interpolateTrace({
+        //     func: head, file, line, column
+        //   });
+        // }).call(list);
     }
     throw error;
   }
