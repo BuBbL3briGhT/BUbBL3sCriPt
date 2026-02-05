@@ -191,7 +191,6 @@ export function evalSymbol(binding, symbol, context) {
     // a send, with the last segment being the message. Parameters
     // will be appended in evalList.
     // TODO: Implement.
-
   } else {
     const root = symbol.resolveRoot(binding);
     return root ? root[symbol.fn] : root;
