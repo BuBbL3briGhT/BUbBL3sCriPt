@@ -110,7 +110,8 @@ export function evalExpression(binding, expression) {
  */
 export function evalList(binding, list) {
   try {
-    // console.debug({list});
+    console.debug({list});
+    console.debug(1, list.toString());
 
     const { head, tail, file, line, column } = list;
 
@@ -141,14 +142,17 @@ export function evalList(binding, list) {
           case "Macro":
             return Fn.call(binding, head, tail, null, ėval);
           default: // object
-            const prop =
-              evalExpression(binding, tail.head);
-            const fn = head[prop];
+            // console.debug({head});
+            // console.debug("tail", tail.toString());
+            // const prop =
+            //   evalExpression(binding, tail.head);
+            const fn = head[tail.head];
+            // console.debug({head, prop, fn});
             switch(fn.constructor.name.toString()) {
               case "Function":
-                return head[prop](...tail.tail);
+                return fn(...tail.tail);
               default:
-                return head[prop].call(head,
+                return fn.call(head,
                   ...tail.tail);
             }
         }
