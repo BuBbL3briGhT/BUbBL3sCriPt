@@ -29,16 +29,6 @@ export default class Ṣymbol {
     return fn ? o[fn] : o;
   }
 
-  // call(binding, params) {
-  //   const o = this.resolveSegments(binding);
-  //   const {fn} = this;
-  //   if (fn) {
-  //     o[fn].call(binding, ...params)
-  //   } else {
-  //     o(...params)
-  //   }
-  // }
-
   static for(key) {
     return symbols[key] || new Ṣymbol(key);
   }
