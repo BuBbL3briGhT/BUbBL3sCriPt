@@ -127,6 +127,7 @@ export class Parser {
 
       case "(":
         o = this.parseList();
+        Object.assign(o, { line, column, file });
         break;
 
       case "[":
@@ -141,8 +142,8 @@ export class Parser {
         throw new TokenNoMatchError(token);
     }
 
-    if (o) Object.assign(o,
-      { line, column, file });
+    // if (o) Object.assign(o,
+    //   { line, column, file });
 
     return o;
   }
