@@ -145,13 +145,15 @@ export function evalList(binding, list) {
           case "List":
             return evalList(binding,
               tail.push(evalList(binding, head)));
-          default: // object
+          default: // object: Send (message with params to object.
             // console.debug({head});
             // console.debug("tail", tail.toString());
             // const prop =
             //   evalExpression(binding, tail.head);
             const fn = head[tail.head];
+
             // console.debug({head, prop, fn});
+            // console.debug({fn});
             switch(fn.constructor.name.toString()) {
               case "Function":
                 return fn(...tail.tail);

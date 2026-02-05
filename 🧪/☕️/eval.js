@@ -38,7 +38,7 @@ describe("ėval", function () {
     assert.equal(result, Keyword.for("keyword"));
   });
 
-  it.only("runs script top to bottom", function () {
+  it("runs script top to bottom", function () {
     const binding = Object.create(rootBinding);
     sinon.replace(console, "log", sinon.fake())
     // ėval("(muf puts (fn [a] (console.log a))) " +
