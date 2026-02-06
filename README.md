@@ -152,6 +152,8 @@ literally defined in the second position.
 
 Therefore: `console.log` is equvelent to `("log" console)`
 
+a.b.c 🎀 may also be written as 🎀 ("c" ("b" a))
+
 Example: using list/bubblesort
 ------------------------------
 (Assuming lib/list exports `bubblesort`.)
