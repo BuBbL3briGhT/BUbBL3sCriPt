@@ -180,20 +180,16 @@ describe("Parser", function () {
     const input = "°r2d2";
     const tokenizer = new Tokenizer(input);
     const parser = new Parser(tokenizer);
-    assert.deepEqual([ /* Bubble */ {
-        column: 1,
-        file: undefined,
-        line: 1,
-        o: /* Ṣymbol */ {
-          callPattern: 1,
-          column: 2,
-          file: undefined,
-          fn: 'r2d2',
-          line: 1,
-          segments: [],
-          value: 'r2d2'
-        }
-      }], [...parser]);
+    assert.deepEqual( [ /* Bubble */ {
+      o: /* Ṣymbol */ {
+        fn: undefined,
+        message: undefined,
+        segments: [
+          'r2d2'
+        ],
+        value: 'r2d2'
+      }
+    }], [...parser]);
   });
 
   it("parses a list", function () {
