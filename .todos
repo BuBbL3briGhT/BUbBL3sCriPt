@@ -1,4 +1,12 @@
 - Support for ```
+- Continue input for open brackets on new line in repl
+- No error for empty lines sent to evaliator
+- Allow empty modules that don't export with no error.
+  - Files shouldn't need code not to cause errors.
+    These are errors with our implementation, not
+    their's. Error's should be helpful, and where they
+    are not that should be handeled approraitly or
+    avoided. Project mentality. Goals.
 - Try so that evaluation of a list with an object as
   the first item, and items in the list is a call to
   get essentially, if a function is returned, then
