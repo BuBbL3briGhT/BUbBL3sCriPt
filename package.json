@@ -5,6 +5,8 @@
   "main": "☕️/index.js",
   "scripts": {
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,ts,html,css,md,json}\"",
     "test": "npm run 🧪",
     "🧪": "npm run 🧪☕️ && npm run 🧪🫧",
     "🧪☕️": "mocha ./🧪/☕️/*.js ./🧪/☕️/**/*.js",
