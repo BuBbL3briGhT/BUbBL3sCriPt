@@ -6,7 +6,7 @@ export default defineConfig([
   {
     files: ['**/*.{js,mjs,cjs}'],
     plugins: { js },
-    extends: ['js/recommended', 'prettier'],
+    extends: ['eslint:recommended', 'prettier'],
     languageOptions: { globals: globals.node },
   },
 ]);
