@@ -118,7 +118,11 @@ export function evalList(binding, list) {
 
     switch(typeof(head)) {
       case "string":
-        return binding.require(head);
+        if(tail.empty)
+          return binding.require(head);
+        else
+          return evalExpression(binding,
+            tail.peek())[head];
       case "number":
         const indexed =
           evalExpression(binding, list.next)
