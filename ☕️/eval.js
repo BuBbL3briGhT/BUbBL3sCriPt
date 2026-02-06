@@ -118,7 +118,7 @@ export function evalList(binding, list) {
 
     switch(typeof(head)) {
       case "string":
-        if(tail.empty)
+        if(tail.isEmpty)
           return binding.require(head);
         else
           return evalExpression(binding,
