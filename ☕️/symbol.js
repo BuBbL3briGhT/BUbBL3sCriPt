@@ -24,8 +24,8 @@ export default class Ṣymbol {
 
   resolve(binding) {
     const o = this.resolveSegments(binding);
-    const {fn} = this;
-    return fn ? o[fn] : o;
+    const {message,fn} = this;
+    return message ? o[message] : (fn ? o[fn] : o);
   }
 
   static for(key) {
