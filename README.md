@@ -137,6 +137,21 @@ Then from your script:
     (: hello ("hello"))
     (hello.say-hello "Bubbly")
 
+Symbols
+------------
+
+Symbols may contain any character, however dots and the
+forward slash have speさial meanibngs
+
+Accessing a property.
+
+Evaluating a list where the first item is a string,
+and the list contains at least one other item denotes
+accessing the property of an object, referenced by or
+literally defined in the second position.
+
+Therefore: `console.log` is equvelent to `("log" console)`
+
 Example: using list/bubblesort
 ------------------------------
 (Assuming lib/list exports `bubblesort`.)
