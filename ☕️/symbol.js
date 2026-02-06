@@ -12,7 +12,7 @@ export default class Ṣymbol {
 
       if (!fn && segments.length > 1)
         message = segments.pop();
-    } // else [segments, fn] = [[]];
+    } else [segments, fn] = [[value]];
 
 
     Object.assign(this,
@@ -24,7 +24,7 @@ export default class Ṣymbol {
   toString() { return this.value; }
 
   resolveSegments(binding) {
-    if (!this.segments) return binding;
+    // if (!this.segments) return binding;
     return this.segments // object, key
       .reduce((o,k) => o && o[k], binding);
   }

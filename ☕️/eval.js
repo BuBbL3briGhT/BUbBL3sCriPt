@@ -125,6 +125,7 @@ export function evalList(binding, list) {
         return indexed.at(head);
       case "object":
       case "function":
+        // console.log(3, head.constructor.name.toString());
         switch (head.constructor.name.toString()) {
           case "Ṣymbol":
             const s = head;
@@ -133,7 +134,9 @@ export function evalList(binding, list) {
               return evalList(binding,
                 tail.push(s.message).push(o));
             } else {
+              // console.debug({s});
               const _ = s.resolve(binding);
+              // console.debug({_});
               return evalList(binding, tail.push(_));
             }
           case "Fn":
