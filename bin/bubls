@@ -6,6 +6,7 @@
 import bubls from '../☕️/index.js';
 import { rootBinding } from '../☕️/binding.js';
 import { ėval } from "../☕️/eval.js";
+import { parse } from "../☕️/parse.js";
 import { BubbleScriptError } from "../☕️/errors.js";
 
 let path = process.argv[2];
@@ -30,7 +31,14 @@ if (path) { bubls.load(binding, path, fs, ėval); } else {
     output: process.stdout
   });
 
+  // function completeExpression(input) {
+  function isExpressionComplete(input) {
+    try { [...parse(input)]; return 1; }
+    catch (error) { return 0; }
+  }
+
   function r3pL() {
+    let oxox = "";
     rl.question("%< ", (xoxo) => {
       if (xoxo.trim() != "") try {
         if (xoxo == ".exit") {
@@ -38,18 +46,23 @@ if (path) { bubls.load(binding, path, fs, ėval); } else {
           return;
         }
 
-        const result = ėval(binding, xoxo);
-        if (result && result.toString) {
-          // console.log(result);
-          try {
-            console.log(result.toString());
-          } catch (error) {
-            console.log(error);
-            console.log("Error rendering with toString on result, falling back.");
+        oxox += " " + xoxo;
+
+        if (isExpressionComplete(oxox)) {
+          const result = ėval(binding, oxox);
+          if (result && result.toString) {
+            // console.log(result);
+            try {
+              console.log(result.toString());
+            } catch (error) {
+              console.log(error);
+              console.log("Error rendering with toString on result, falling back.");
+              console.log(result);
+            }
+          } else {
             console.log(result);
           }
-        } else {
-          console.log(result);
+          oxox = "";
         }
       } catch (error) {
         console.log(error);

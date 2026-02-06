@@ -389,8 +389,6 @@ describe("List", () => {
 
   });
 
-
-
   describe("Symbol.iterator", () => {
     it("should not yield any values for an empty linkedList (LinkedList.air)", () => {
       const emptyList = List.emptyList;
