@@ -1,68 +1,64 @@
+/* * *  * * *  * *  * *  * * *  * * *  * *  * *
+ *                                            *
+ *        File: src/binding.js                *
+ *        Date: December 2025                 *
+ *        Library: Bubblescript               *
+ *        version:                            *
+ *        Version:                            *
+ *        Author(s): BaMbii                   *
+ *                                            *
+ * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
-  /* * *  * * *  * *  * *  * * *  * * *  * *  * *
-   *                                            *
-   *        File: src/binding.js                *
-   *        Date: December 2025                 *
-   *        Library: Bubblescript               *
-   *        version:                            *
-   *        Version:                            *
-   *        Author(s): BaMbii                   *
-   *                                            *
-   * * *  * * *  * *  * *  * * *  * * *  * *  * */
+import { List, Vektar, ObjectMap, LazyList } from './list.js';
+import Fn from './fn.js';
+import Ṣymbol from './symbol.js';
+import { Macro } from './macro.js';
+import { ėval, evalEach, evalExpression } from './eval.js';
+import Range from './range.js';
+import { specialForm, specialFormP } from './special_form.js';
 
-import { List, Vektar, ObjectMap, LazyList }
-                              from "./list.js";
-import Fn from "./fn.js";
-import Ṣymbol from "./symbol.js";
-import { Macro } from "./macro.js";
-import { ėval, evalEach, evalExpression }
-                              from "./eval.js";
-import Range from "./range.js";
-import { specialForm, specialFormP }
-                      from "./special_form.js";
-
-import { parse } from "./parse.js";
-import path from "path";
-import fs from "fs";
-import { createRequire } from "module";
-import load from "./load.js"
+import { parse } from './parse.js';
+import path from 'path';
+import fs from 'fs';
+import { createRequire } from 'module';
+import load from './load.js';
 
 const { debug, log, trace } = console;
 
-const starSymbol = Ṣymbol.for("*");
-const sAmp = Ṣymbol.for("&");
+const starSymbol = Ṣymbol.for('*');
+const sAmp = Ṣymbol.for('&');
 
 function ensureKeyNotDefined(binding, key) {
   if (Object.hasOwn(binding, key))
-    throw new Error("const " + key +
-      " already set");
+    throw new Error('const ' + key + ' already set');
 }
 
-const { getModule, storeModule } =
-  (function () {
-    const modules = Object.create(null);
+const { getModule, storeModule } = (function () {
+  const modules = Object.create(null);
 
-    function getModule(key) {
-      return modules[key];
-    }
+  function getModule(key) {
+    return modules[key];
+  }
 
-    function storeModule(key, module={}) {
-      module[key] = module;
-    }
+  function storeModule(key, module = {}) {
+    module[key] = module;
+  }
 
-    return { getModule, storeModule };
-  })();
+  return { getModule, storeModule };
+})();
 
 export const rootBinding = {
   console, // consola,
-  process, List, Array,
+  process,
+  List,
+  Array,
   // Js require
-  ["☕️"]: createRequire(import.meta.url),
+  ['☕️']: createRequire(import.meta.url),
   __dirname: import.meta.dirname,
 
   /* Special form functions */
 
-  [':']: specialForm(function(list) {
+  [':']: specialForm(function (list) {
     // debug(1, list.toString());
 
     const { head: key, tail: value } = list;
@@ -75,12 +71,12 @@ export const rootBinding = {
     if (key instanceof List) {
       const sKey = key.peek().toString();
       ensureKeyNotDefined(this, sKey);
-      return this[sKey]
-        = new Fn(this, key.pop(), value, {
-          name: sKey,
-          file: key.file,
-          line: key.line,
-          column: key.column });
+      return (this[sKey] = new Fn(this, key.pop(), value, {
+        name: sKey,
+        file: key.file,
+        line: key.line,
+        column: key.column,
+      }));
     } else if (key instanceof ObjectMap) {
       // debug(3, {key: key.toString(), value: value.toString()});
       const o = evalEach(this, value);
@@ -93,39 +89,36 @@ export const rootBinding = {
     } else {
       const sKey = key.toString();
       ensureKeyNotDefined(this, sKey);
-      return this[sKey] = evalEach(this, value);
+      return (this[sKey] = evalEach(this, value));
     }
-
   }),
 
-  fn: specialForm(function(params) {
-    return specialForm(function(body) {
+  fn: specialForm(function (params) {
+    return specialForm(function (body) {
       return new Fn(this, params, body);
-    })
+    });
   }),
 
-  jsfn: specialForm(function(params) {
-    return specialForm(function(body) {
+  jsfn: specialForm(function (params) {
+    return specialForm(function (body) {
       const fn = new Fn(this, params, body);
-      return function(...params) {
+      return function (...params) {
         // console.log({params});
-        return fn.call(this,
-          List.from(params), [], ėval);
-      }
-    })
+        return fn.call(this, List.from(params), [], ėval);
+      };
+    });
   }),
 
-  macro: specialForm(function(params) {
+  macro: specialForm(function (params) {
     return specialForm(function (body) {
       return new Macro(this, params, body);
     });
   }),
 
-  ["define-macro"]: specialForm(function(list) {
+  ['define-macro']: specialForm(function (list) {
     const [signature, body] = list.tuple;
     const [name, params] = signature.tuple;
-    return this[name.toString()] =
-        new Macro(this, params, body);
+    return (this[name.toString()] = new Macro(this, params, body));
   }),
 
   /**
@@ -134,13 +127,14 @@ export const rootBinding = {
    * @param {List} list - A list containing the bindings and the body.
    * @returns {*} The result of the last expression in the body.
    */
-  let: specialForm(function(list) {
+  let: specialForm(function (list) {
     const [params, body] = list.plop();
     const binding = createBinding(this);
-    params.toList().partition(2)
+    params
+      .toList()
+      .partition(2)
       .each(([key, value]) => {
-        binding[key] =
-         evalExpression(binding, value);
+        binding[key] = evalExpression(binding, value);
       });
     return evalEach(binding, body);
   }),
@@ -151,13 +145,10 @@ export const rootBinding = {
    * @param {List} list - A list containing the condition, the then-branch, and the optional else-branch.
    * @returns {*} The result of the executed branch.
    */
-  if: specialForm(function([condition, thenBranch, elseBranch]) {
-    const conditionValue =
-              evalExpression(this, condition);
-    if (conditionValue)
-      return evalExpression(this, thenBranch);
-    else if (elseBranch)
-      return evalExpression(this, elseBranch);
+  if: specialForm(function ([condition, thenBranch, elseBranch]) {
+    const conditionValue = evalExpression(this, condition);
+    if (conditionValue) return evalExpression(this, thenBranch);
+    else if (elseBranch) return evalExpression(this, elseBranch);
   }),
 
   /**
@@ -166,20 +157,17 @@ export const rootBinding = {
    * @param {List} list - A list containing the condition, the else-branch, and the optional then-branch.
    * @returns {*} The result of the executed branch.
    */
-  unless: specialForm(function([condition, elseBranch, thenBranch]) {
-    const conditionValue =
-              evalExpression(this, condition);
-    if (!conditionValue)
-      return evalExpression(this, elseBranch);
-    else if (thenBranch)
-      return evalExpression(this, thenBranch);
+  unless: specialForm(function ([condition, elseBranch, thenBranch]) {
+    const conditionValue = evalExpression(this, condition);
+    if (!conditionValue) return evalExpression(this, elseBranch);
+    else if (thenBranch) return evalExpression(this, thenBranch);
   }),
 
-  blert: specialForm(function(msgs) {
+  blert: specialForm(function (msgs) {
     alert(this.concat(msgs));
   }),
 
-  ["expand-macro"]: specialForm(function(list) {
+  ['expand-macro']: specialForm(function (list) {
     const [name, params] = list.tuple;
     // console.log({ name, params });
     const macro = evalExpression(this, name);
@@ -195,24 +183,25 @@ export const rootBinding = {
    * @param {List} list - A list containing the initial bindings and the loop body.
    * @returns {*} The result of the last expression in the loop body.
    */
-  loop: specialForm(function(list) {
+  loop: specialForm(function (list) {
     const [params, body] = list.plop(),
-          scope = Object.create(this);
+      scope = Object.create(this);
 
-    var recurCalled,
-          result;
+    var recurCalled, result;
 
-    params.toList().partition(2)
+    params
+      .toList()
+      .partition(2)
       .each(([key, value]) => {
-        scope[key] =
-         evalExpression.call(scope, value);
+        scope[key] = evalExpression.call(scope, value);
       });
 
-    scope.recur = function(params) {
-      params.toList().partition(2)
+    scope.recur = function (params) {
+      params
+        .toList()
+        .partition(2)
         .each(([key, value]) => {
-          scope[key] =
-           evalExpression.call(scope, value);
+          scope[key] = evalExpression.call(scope, value);
         });
       recurCalled = true;
     };
@@ -220,12 +209,12 @@ export const rootBinding = {
     do {
       recurCalled = false;
       result = body.evalEach(scope);
-    } while(recurCalled);
+    } while (recurCalled);
 
     return result;
   }),
 
-  do: specialForm(function(list) {
+  do: specialForm(function (list) {
     return evalEach(this, list);
   }),
 
@@ -244,24 +233,23 @@ export const rootBinding = {
   //   return parse(string);
   // },
 
-  list: specialFormP(function(params) {
+  list: specialFormP(function (params) {
     return params;
   }),
 
-  vektar: specialFormP(function(list) {
+  vektar: specialFormP(function (list) {
     return list.toVector();
   }),
 
-  obj: specialFormP(function(list) {
-    return list.partition(2).reduce(
-      function(memo, [key, val]) {
-        memo[key] = val;
-        return memo;
-      }, {});
+  obj: specialFormP(function (list) {
+    return list.partition(2).reduce(function (memo, [key, val]) {
+      memo[key] = val;
+      return memo;
+    }, {});
   }),
 
-  print: specialFormP(function(vals) {
-    return vals.each(function(value) {
+  print: specialFormP(function (vals) {
+    return vals.each(function (value) {
       document.body.append(value);
     });
   }),
@@ -272,9 +260,8 @@ export const rootBinding = {
    * @param {List} list - A list containing the object and the keys to access.
    * @returns {*} The value at the specified path, or undefined if not found.
    */
-  get: specialFormP(function(params) {
-    return params.reduce(
-        (memo,key) => memo && memo[key]);
+  get: specialFormP(function (params) {
+    return params.reduce((memo, key) => memo && memo[key]);
   }),
 
   range: specialFormP(function (params) {
@@ -285,52 +272,49 @@ export const rootBinding = {
     return new LazyList(...params);
   }),
 
-  "+": specialFormP(function(params) {
-    return params.reduce((a,b) => a+b);
+  '+': specialFormP(function (params) {
+    return params.reduce((a, b) => a + b);
   }),
 
-  "-": specialFormP(function(params) {
-    return params.reduce((a,b) => a-b);
+  '-': specialFormP(function (params) {
+    return params.reduce((a, b) => a - b);
   }),
 
-  "*": specialFormP(function(params) {
-    return params.reduce((a,b) => a*b);
+  '*': specialFormP(function (params) {
+    return params.reduce((a, b) => a * b);
   }),
 
-  and: specialFormP(function(params) {
-    return params.reduce((a,b) => a && b);
+  and: specialFormP(function (params) {
+    return params.reduce((a, b) => a && b);
   }),
 
-  or: specialFormP(function(params) {
-    return params.reduce((a,b) => a || b);
+  or: specialFormP(function (params) {
+    return params.reduce((a, b) => a || b);
   }),
 
-  concat: specialFormP(function(params) {
+  concat: specialFormP(function (params) {
     return params.join('');
   }),
 
-  "/": specialFormP(function(params) {
-    return params.reduce((a,b) => a/b);
+  '/': specialFormP(function (params) {
+    return params.reduce((a, b) => a / b);
   }),
-
 
   /*                          * *
    * Non-Special form functions *
    * *                          */
 
-  require: function(name) {
+  require: function (name) {
     // debug(name);
 
     const modulePath =
-     (name[0] == ".") ?
-       // path.resolve(import.meta.dirname, name + ".🫧") :
-       path.resolve(import.meta.dirname, name) :
-       path.resolve(import.meta.dirname, "../🫧",
-         name + ".🫧");
+      name[0] == '.'
+        ? // path.resolve(import.meta.dirname, name + ".🫧") :
+          path.resolve(import.meta.dirname, name)
+        : path.resolve(import.meta.dirname, '../🫧', name + '.🫧');
 
     const module = getModule(modulePath);
     if (module) return module.exports;
-
 
     let moduleExports;
     const binding = createBinding(this);
@@ -338,7 +322,7 @@ export const rootBinding = {
     binding.__dirname = path.dirname(modulePath);
 
     binding.module = {
-      exports: function(exports) {
+      exports: function (exports) {
         // debug({exports});
         switch (exports.constructor) {
           case ObjectMap:
@@ -347,15 +331,13 @@ export const rootBinding = {
           default:
             moduleExports = exports;
         }
-      }
-    }
+      },
+    };
 
     // debug({ modulePath });
     load(binding, modulePath, fs, ėval);
 
-
-    storeModule(modulePath,
-         { exports: moduleExports });
+    storeModule(modulePath, { exports: moduleExports });
     // debug({ moduleExports });
 
     return moduleExports;
@@ -369,7 +351,7 @@ export const rootBinding = {
    * @param {...*} params - The arguments to pass to the method.
    * @returns {*} The result of the method invocation.
    */
-  send: function(recipient, message, ...params) {
+  send: function (recipient, message, ...params) {
     if (message.key) message = message.key;
 
     // console.log({recipient, message, params});
@@ -392,54 +374,52 @@ export const rootBinding = {
    * @param {*} value - The value to export.
    * @returns {*} The exported value.
    */
-  export: function(target, name, value) {
-    return target[name] = value;
+  export: function (target, name, value) {
+    return (target[name] = value);
   },
 
-  "=": function(a, b) {
+  '=': function (a, b) {
     return a == b;
   },
-  not: function(value) {
+  not: function (value) {
     return !value;
   },
-  '>': (a,b) => {
+  '>': (a, b) => {
     return a > b;
   },
-  '<': (a,b) => {
+  '<': (a, b) => {
     return a < b;
   },
-  parse: function(s) {
+  parse: function (s) {
     return parse(s);
   },
-  new: function(constructor, ...params) {
-      return new constructor(...params);
-  }
+  new: function (constructor, ...params) {
+    return new constructor(...params);
+  },
 };
 
- // Aliases
+// Aliases
 (function () {
-
-  const { ":": define } = this;
+  const { ':': define } = this;
 
   Object.assign(this, {
-              "✨️": this.new,
-              "🫧": define,
-          ["定義"]: this[':'],
-          ["要求"]: this.require,
-           ["muf"]: define,
-           ["def"]: define,
-            define: this[':'],
-             const: this[':'],
-               req: this.require,
-    ["require-☕️"]: this["☕️"]
+    '✨️': this.new,
+    '🫧': define,
+    ['定義']: this[':'],
+    ['要求']: this.require,
+    ['muf']: define,
+    ['def']: define,
+    define: this[':'],
+    const: this[':'],
+    req: this.require,
+    ['require-☕️']: this['☕️'],
   });
-
 }).call(rootBinding);
 
 // Española
 (function (o) {
   o.requerir = o.require;
-   o.definir = o.define;
+  o.definir = o.define;
 })(rootBinding);
 
 // Object.freeze(rootBinding);
@@ -447,19 +427,13 @@ export const rootBinding = {
 // Applys the keys and the values to the
 // binding based on order and position.
 // Binding will be modified.
-function applyArguments
-      (binding, keys, vals)
-{
-      if (keys instanceof Vektar)
-        keys = keys.toList();
-      if (vals instanceof Vektar)
-        vals = vals.toList();
+function applyArguments(binding, keys, vals) {
+  if (keys instanceof Vektar) keys = keys.toList();
+  if (vals instanceof Vektar) vals = vals.toList();
 
-  while ( !keys.isEmpty &&
-          !vals.isEmpty    ) {
-
+  while (!keys.isEmpty && !vals.isEmpty) {
     const key = keys.first;
-      const val = vals.first;
+    const val = vals.first;
 
     if (key == sAmp) {
       binding[keys.next] = vals;
@@ -467,7 +441,7 @@ function applyArguments
     }
 
     if (val == sAmp) {
-      applyArguments(binding, keys, vals.next)
+      applyArguments(binding, keys, vals.next);
       return binding;
     }
 
@@ -480,20 +454,18 @@ function applyArguments
         binding[key.toString()] = val;
         break;
       default:
-        throw Error("Invalid parameter type: " + key.constructor );
+        throw Error('Invalid parameter type: ' + key.constructor);
     }
 
     keys = keys.rest;
     vals = vals.rest;
-
   }
 }
 
 // Creates a binding object for a function or
 // macro.
-export function createBinding(proto=rootBinding, keys, values) {
+export function createBinding(proto = rootBinding, keys, values) {
   const binding = Object.create(proto);
   if (keys) applyArguments(binding, keys, values);
   return binding;
 }
-

@@ -1,26 +1,25 @@
+/* * *  * * *  * *  * *  * * *  * * *  * *  * *
+ *                                            *
+ *        File: src/eval.js                   *
+ *        Date: December, 2025                *
+ *        Library: Bubblescript               *
+ *        Author(s): BaMbii                   *
+ *                                            *
+ * * *  * * *  * *  * *  * * *  * * *  * *  * */
 
-  /* * *  * * *  * *  * *  * * *  * * *  * *  * *
-   *                                            *
-   *        File: src/eval.js                   *
-   *        Date: December, 2025                *
-   *        Library: Bubblescript               *
-   *        Author(s): BaMbii                   *
-   *                                            *
-   * * *  * * *  * *  * *  * * *  * * *  * *  * */
-
-import { List, LazyList } from "./list.js";
-import Ṣymbol from "./symbol.js";
-import Bubble from "./bubble.js";
-import Fn from "./fn.js";
-import { parse } from "./parse.js";
-import { interpolate } from "./strings.js";
-import { MacroExpanded } from "./macro.js";
-import { UndefinedFunctionError } from "./errors.js";
+import { List, LazyList } from './list.js';
+import Ṣymbol from './symbol.js';
+import Bubble from './bubble.js';
+import Fn from './fn.js';
+import { parse } from './parse.js';
+import { interpolate } from './strings.js';
+import { MacroExpanded } from './macro.js';
+import { UndefinedFunctionError } from './errors.js';
 const { debug, log, trace } = console;
 
-const traceTemplate = "    en (${file}:${line}:${column})";
+const traceTemplate = '    en (${file}:${line}:${column})';
 const interpolateTrace = interpolate.bind(traceTemplate);
-const sAmp = Ṣymbol.for("&");
+const sAmp = Ṣymbol.for('&');
 
 /**
  * @function ėval
@@ -33,18 +32,18 @@ const sAmp = Ṣymbol.for("&");
  * @returns {*} The result of the last expression in
  * the script.
  */
-export function ėval(binding, script, opts={}) {
+export function ėval(binding, script, opts = {}) {
   try {
     return evalEach(binding, parse(script, opts));
   } catch (error) {
-    switch (error.constructor){
+    switch (error.constructor) {
       case UndefinedFunctionError:
         if (error.__memo) {
           const memo = error.__memo;
           error.stack += interpolateTrace({
             file: memo.file,
             line: memo.line,
-            column: memo.column
+            column: memo.column,
           });
         }
     }
@@ -65,15 +64,12 @@ export function ėval(binding, script, opts={}) {
  */
 export function evalEach(binding, list, stack) {
   // console.log({list}, "🧀");
-  const _evalExpression =
-    evalExpression.bind(null, binding);
+  const _evalExpression = evalExpression.bind(null, binding);
 
   // We can't expand macros on a lazy list right now, so need to convert to a list right now, If we add support for maxlcro expansion, we won't need to do this. That should be possible.
-  if (list.constructor === LazyList)
-    list = list.toList();
+  if (list.constructor === LazyList) list = list.toList();
 
-  return list.tryEach(_evalExpression,
-    catchExpandMacro, stack);
+  return list.tryEach(_evalExpression, catchExpandMacro, stack);
 }
 
 /**
@@ -116,42 +112,36 @@ export function evalList(binding, list) {
 
     const { head, tail, file, line, column } = list;
 
-    switch(typeof(head)) {
-      case "string":
-        if(tail.isEmpty)
-          return binding.require(head);
-        else
-          return evalExpression(binding,
-            tail.peek())[head];
-      case "number":
-        const indexed =
-          evalExpression(binding, list.next)
+    switch (typeof head) {
+      case 'string':
+        if (tail.isEmpty) return binding.require(head);
+        else return evalExpression(binding, tail.peek())[head];
+      case 'number':
+        const indexed = evalExpression(binding, list.next);
         return indexed.at(head);
-      case "object":
-      case "function":
+      case 'object':
+      case 'function':
         // console.log(3, head.constructor.name.toString());
         switch (head.constructor.name.toString()) {
-          case "Ṣymbol":
+          case 'Ṣymbol':
             const s = head;
             if (s.message) {
               const o = s.resolveSegments(binding);
-              return evalList(binding,
-                tail.push(s.message).push(o));
+              return evalList(binding, tail.push(s.message).push(o));
             } else {
               // console.debug({s});
               const _ = s.resolve(binding);
               // console.debug({_});
               return evalList(binding, tail.push(_));
             }
-          case "Fn":
-          case "Function":
-          case "SpecialForm":
-          case "SpecialFormP":
-          case "Macro":
+          case 'Fn':
+          case 'Function':
+          case 'SpecialForm':
+          case 'SpecialFormP':
+          case 'Macro':
             return Fn.call(binding, head, tail, null, ėval);
-          case "List":
-            return evalList(binding,
-              tail.push(evalList(binding, head)));
+          case 'List':
+            return evalList(binding, tail.push(evalList(binding, head)));
           default: // object: Send (message with params to object.
             // console.debug({head});
             // console.debug("tail", tail.toString());
@@ -161,45 +151,44 @@ export function evalList(binding, list) {
 
             // console.debug({head, prop, fn});
             // console.debug({fn});
-            switch(fn.constructor.name.toString()) {
-              case "Function":
+            switch (fn.constructor.name.toString()) {
+              case 'Function':
                 // return fn(...tail.tail);
                 return fn(...evalParams(binding, tail.tail));
               default:
-                return fn.call(head,
-                  ...tail.tail);
+                return fn.call(head, ...tail.tail);
             }
         }
       default:
         const Error = UndefinedFunctionError;
         throw new Error(binding, head);
     }
-
   } catch (error) {
     // console.log(error);
     // throw error;
-    switch (error.constructor){
+    switch (error.constructor) {
       case UndefinedFunctionError:
         // console.log(1, list);
         if (error.__memo) {
           const memo = error.__memo;
-          error.stack += interpolateTrace({
-            func: list.head,
-            file: memo.file,
-            line: memo.line,
-            column: memo.column
-          }) + "\n";
+          error.stack +=
+            interpolateTrace({
+              func: list.head,
+              file: memo.file,
+              line: memo.line,
+              column: memo.column,
+            }) + '\n';
         }
         const { file, line, column } = list;
-        error.__memo = { file, line, column }
+        error.__memo = { file, line, column };
         break;
       default:
-        // (function () {
-        //   const { head, file, line, column } = list;
-        //   error.stack += "\n" + interpolateTrace({
-        //     func: head, file, line, column
-        //   });
-        // }).call(list);
+      // (function () {
+      //   const { head, file, line, column } = list;
+      //   error.stack += "\n" + interpolateTrace({
+      //     func: head, file, line, column
+      //   });
+      // }).call(list);
     }
     throw error;
   }
@@ -251,9 +240,9 @@ export function evalList(binding, list) {
 export function evalParams(binding, params) {
   const splits = params.split(sAmp);
   if (splits.count() > 1) {
-    params =
-      evalEach(binding, splits.next)
-        .conj(mapEval(binding, splits.first));
+    params = evalEach(binding, splits.next).conj(
+      mapEval(binding, splits.first),
+    );
   } else {
     params = mapEval(binding, params);
   }
@@ -286,7 +275,7 @@ export function mapEval(binding, list) {
 export function catchExpandMacro(o, list, fn) {
   if (o instanceof MacroExpanded) {
     let expanded = o.expanded;
-    list.o  = expanded.first;
+    list.o = expanded.first;
     list.oo = list.rest.conj(expanded.rest.invert());
     return list.tryEach(fn, catchExpandMacro);
   } else {
@@ -294,7 +283,11 @@ export function catchExpandMacro(o, list, fn) {
   }
 }
 
-Object.assign(ėval ,{
-  ėval, evalExpression, evalParams, evalList,
-  evalEach, mapEval
+Object.assign(ėval, {
+  ėval,
+  evalExpression,
+  evalParams,
+  evalList,
+  evalEach,
+  mapEval,
 });

@@ -8,15 +8,15 @@ const { assign } = Object;
 //   }
 // }
 
-export default function Pair(x,o) {
-  return assign(this, {x,o});
+export default function Pair(x, o) {
+  return assign(this, { x, o });
 }
 
 assign(Pair.prototype, {
   toString: function () {
-    const {x,o} = this;
+    const { x, o } = this;
     return `⟅${x}:${o}⟆`;
-  }
+  },
 });
 
 // What is nice about the second option is it

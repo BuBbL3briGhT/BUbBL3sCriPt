@@ -1,7 +1,6 @@
 const symbols = Object.create(null);
 
-const parseṢymbol = (str) => str.split('/')
-  .map(part => part.split('.'));
+const parseṢymbol = (str) => str.split('/').map((part) => part.split('.'));
 
 export default class Ṣymbol {
   constructor(value) {
@@ -10,29 +9,28 @@ export default class Ṣymbol {
     if (value.length > 2) {
       [segments, fn] = parseṢymbol(value);
 
-      if (!fn && segments.length > 1)
-        message = segments.pop();
+      if (!fn && segments.length > 1) message = segments.pop();
     } else [segments, fn] = [[value]];
 
-
-    Object.assign(this,
-      { value, segments, fn, message });
+    Object.assign(this, { value, segments, fn, message });
     Object.freeze(this);
-    return symbols[value] = this;
-  };
+    return (symbols[value] = this);
+  }
 
-  toString() { return this.value; }
+  toString() {
+    return this.value;
+  }
 
   resolveSegments(binding) {
     // if (!this.segments) return binding;
     return this.segments // object, key
-      .reduce((o,k) => o && o[k], binding);
+      .reduce((o, k) => o && o[k], binding);
   }
 
   resolve(binding) {
     const o = this.resolveSegments(binding);
-    const {message,fn} = this;
-    return message ? o[message] : (fn ? o[fn] : o);
+    const { message, fn } = this;
+    return message ? o[message] : fn ? o[fn] : o;
   }
 
   resolveFn(binding) {
@@ -47,4 +45,3 @@ export default class Ṣymbol {
     return symbols[key] || new Ṣymbol(key);
   }
 }
-

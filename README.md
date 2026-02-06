@@ -1,4 +1,3 @@
-
         ¡Hola! Caio! Kon'nichiwa! こんにちは！
 
           Friends, family, a musuers.
@@ -44,28 +43,28 @@
                      °      o
                o
 
-What is Bubblescript?
----------------------
+## What is Bubblescript?
+
 Bubblescript is a small Clojure-like lisp-inspired
-language that runs on Node.js.  It provides a concise
+language that runs on Node.js. It provides a concise
 s-expression syntax and a tiny standard library for
 working with lists, maps, functions, and the usual
 functional primitives.
 
-Install
--------
+## Install
+
     npm install -g bubblescript
 
-Run the REPL
-------------
+## Run the REPL
+
     $ bubls
     %< (console.log "Hello Bubble")
     Hello Bubble
     undefined
     %< .exit
 
-Quick examples
---------------
+## Quick examples
+
 Some math
 
     (+ 1 2)
@@ -74,7 +73,7 @@ Some math
     (/ 8 2)
     (* 7 8 9)
 
-Define a constant value.  As a best pratice, all
+Define a constant value. As a best pratice, all
 values in bubblescript as assumed to be constant.
 Once the have been set, they cannot be changed within
 the current scope, but the can be shadowed with new
@@ -110,20 +109,20 @@ Looping
       (if (< i 3)
         (recur [i (+ i 1)])))
 
-Modules and require
--------------------
+## Modules and require
+
 Bubblescript supports modular code!
 
 - You can require a module from `lib/` evaluating a
   list where the first item is or resolves to a
   string.
 
-    (: list ("list"))
+  (: list ("list"))
 
 - You can extract specific exports using an object
   map.
 
-    (: { map reduce } ("list"))
+  (: { map reduce } ("list"))
 
 Example: create a module (lib/hello.🫧)
 
@@ -137,8 +136,7 @@ Then from your script:
     (: hello ("hello"))
     (hello.say-hello "Bubbly")
 
-Symbols
-------------
+## Symbols
 
 Symbols may contain any character, however dots and the
 forward slash have speさial meanibngs
@@ -154,16 +152,16 @@ Therefore: `console.log` is equvelent to `("log" console)`
 
 a.b.c 🎀 may also be written as 🎀 ("c" ("b" a))
 
-Example: using list/bubblesort
-------------------------------
+## Example: using list/bubblesort
+
 (Assuming lib/list exports `bubblesort`.)
 
     (: { bubblesort } ("list"))
     (: xs °(3 1 2 7 4))
     (puts (bubblesort xs)) ; -> °(1 2 3 4 7)
 
-Developer setup
----------------
+## Developer setup
+
 Clone, install dev deps and run tests:
 
     git clone \
@@ -174,10 +172,10 @@ Clone, install dev deps and run tests:
     npm test
 
 Running specific tests:
-    npx mocha test/list.js
+npx mocha test/list.js
 
-Notes & suggestions
--------------------
+## Notes & suggestions
+
 - lib/list.🫧 cleaned and a pure-BubbleScript
   `bubblesort` implementation was added; a JS
   fallback (lib/list.js) is provided for Node-side
@@ -191,8 +189,8 @@ Notes & suggestions
   release; aliases can be provided for backward
   compatibility.
 
-Contributing
-------------
+## Contributing
+
 If you want me to push these changes and open the PR,
 I can do that once you confirm and provide push
 rights, or you can apply the patch locally using the

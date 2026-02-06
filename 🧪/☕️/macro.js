@@ -1,14 +1,14 @@
-import assert from "node:assert";
-import { it, describe } from "mocha";
+import assert from 'node:assert';
+import { it, describe } from 'mocha';
 
-import { Macro } from "../../☕️/macro.js";
-import { List, Vektar } from "../../☕️/list.js";
+import { Macro } from '../../☕️/macro.js';
+import { List, Vektar } from '../../☕️/list.js';
 
-describe("Macro", function () {
-  describe("new Macro()", function () {
-    it("✨️ creates a new macro", function () {
+describe('Macro', function () {
+  describe('new Macro()', function () {
+    it('✨️ creates a new macro', function () {
       let bnd = {};
-      let args = Vektar.make(1,2);
+      let args = Vektar.make(1, 2);
       let body = List.emptyList;
       let macro = new Macro(bnd, args, body);
       assert.equal(macro.binding, bnd);
@@ -17,10 +17,9 @@ describe("Macro", function () {
     });
   });
 
-  describe("toString", function () {
+  describe('toString', function () {
     // it("returns macro as bubblescript string", function () {
     //   assert.equal
     // });
   });
-
 });

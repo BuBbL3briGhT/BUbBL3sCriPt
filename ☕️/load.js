@@ -1,10 +1,10 @@
-import { BubbleScriptError } from "./errors.js";
+import { BubbleScriptError } from './errors.js';
 
 const log = console.log;
 
 function logError(error) {
   if (error instanceof BubbleScriptError) {
-    log(error.name + ": " + error.message);
+    log(error.name + ': ' + error.message);
     log(error.stack);
   } else {
     log(error);
@@ -23,5 +23,4 @@ function logError(error) {
 export default function syncLoad(binding, path, fs, ėval) {
   const xoxo = fs.readFileSync(path, 'utf-8');
   ėval(binding, xoxo, { file: path });
-};
-
+}

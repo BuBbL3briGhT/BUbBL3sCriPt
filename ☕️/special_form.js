@@ -1,4 +1,4 @@
-import { mapEval } from "./eval.js";
+import { mapEval } from './eval.js';
 
 // Special Form Function
 
@@ -16,8 +16,7 @@ import { mapEval } from "./eval.js";
 // passed to the special form function. This
 // value defaults to false.
 export class SpecialForm {
-
-  constructor(fn, opts={ evaluateParams: false }) {
+  constructor(fn, opts = { evaluateParams: false }) {
     this.fn = fn;
   }
 
@@ -26,17 +25,14 @@ export class SpecialForm {
   }
 
   toString() {
-    return this.constructor.name +
-      " " + this.fn.toString();
+    return this.constructor.name + ' ' + this.fn.toString();
   }
-
 }
 
 export class SpecialFormP extends SpecialForm {
   constructor(fn) {
     super(function (params) {
-      return fn.call(this,
-        mapEval(this, params));
+      return fn.call(this, mapEval(this, params));
     });
   }
 }

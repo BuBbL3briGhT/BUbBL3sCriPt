@@ -1,18 +1,17 @@
-import { interpolate } from "./strings.js";
+import { interpolate } from './strings.js';
 
 export class TokenNoMatchError extends Error {
-  name = "NoMatchError";
+  name = 'NoMatchError';
 
-  constructor(token){
-    super("No match for token " +
-      JSON.stringify(token));
+  constructor(token) {
+    super('No match for token ' + JSON.stringify(token));
   }
 }
 
 export class ParsingError extends Error {
   constructor(message, token) {
     super(message);
-    this.name = "ParsingError";
+    this.name = 'ParsingError';
     if (token) {
       // Ensure the message includes token details if a token is provided
       this.message = `${message} (at line ${token.line}, column ${token.column}, value: '${token.value}')`;
@@ -21,9 +20,9 @@ export class ParsingError extends Error {
 }
 
 export class NoMatchError extends ParsingError {
-  constructor(message, token){
+  constructor(message, token) {
     super(message, token); // Pass token to parent for enriched message
-    this.name = "NoMatchError";
+    this.name = 'NoMatchError';
     if (token) {
       this.token = token; // Attach token for better error reporting
       this.message = `${message} (at line ${token.line}, column ${token.column}, value: '${token.value}')`;
@@ -31,27 +30,34 @@ export class NoMatchError extends ParsingError {
   }
 }
 
-const traceTemplate = "    en ${func} (${file}:${line}:${column})";
+const traceTemplate = '    en ${func} (${file}:${line}:${column})';
 const interpolateTrace = interpolate.bind(traceTemplate);
 
 export class BubbleScriptError extends Error {
   constructor(binding, message, stack) {
     super(message);
     // this.stack = this.getStackTrace(stack);
-    this.stack = "";
+    this.stack = '';
   }
 
   getStackTrace(stack) {
-    const funcs = stack.select("fn");
-    const codepoints = stack.select("file", "line", "column");
+    const funcs = stack.select('fn');
+    const codepoints = stack.select('file', 'line', 'column');
 
-    const stackTrace =
-      codepoints.zip(funcs.pop()).partition(2)
-        .map(([point,func]) => { return {
-          func: func?.fn, file: point.file,
-          line: point.line, column: point.column }})
-        .map(interpolateTrace).join("\n")
-        .replace(/en {2}\(/g, 'en (');
+    const stackTrace = codepoints
+      .zip(funcs.pop())
+      .partition(2)
+      .map(([point, func]) => {
+        return {
+          func: func?.fn,
+          file: point.file,
+          line: point.line,
+          column: point.column,
+        };
+      })
+      .map(interpolateTrace)
+      .join('\n')
+      .replace(/en {2}\(/g, 'en (');
 
     return stackTrace;
   }
@@ -60,7 +66,12 @@ export class BubbleScriptError extends Error {
 import fs from 'fs';
 import path from 'path';
 const locales = {
-  en: JSON.parse(fs.readFileSync(path.join(import.meta.dirname, '../locales/en.json'), 'utf8'))
+  en: JSON.parse(
+    fs.readFileSync(
+      path.join(import.meta.dirname, '../locales/en.json'),
+      'utf8',
+    ),
+  ),
 };
 
 export class UndefinedFunctionError extends BubbleScriptError {
@@ -70,11 +81,9 @@ export class UndefinedFunctionError extends BubbleScriptError {
   }
 }
 
-
 export class UnexpectedEndOfInputError extends ParsingError {
   constructor() {
-    super("Unexpected end of input");
-    this.name = "UnexpectedEndOfInputError";
+    super('Unexpected end of input');
+    this.name = 'UnexpectedEndOfInputError';
   }
 }
-

@@ -1,21 +1,20 @@
-
-  /* * *  * * *  * *  * *  * * *  * * *
-   *                                  *
-   *   File: src/fn.js                *
-   *   Date: December, 2025           *
-   *   Library: Bubblescript          *
-   *   version:                       *
-   *   Version:                       *
-   *   Author(s): BaMbii              *
-   *                                  *
-   * * *  * * *  * *  * *  * * *  * * */
+/* * *  * * *  * *  * *  * * *  * * *
+ *                                  *
+ *   File: src/fn.js                *
+ *   Date: December, 2025           *
+ *   Library: Bubblescript          *
+ *   version:                       *
+ *   Version:                       *
+ *   Author(s): BaMbii              *
+ *                                  *
+ * * *  * * *  * *  * *  * * *  * * */
 
 const { debug, log, trace } = console;
-import { createBinding } from "./binding.js";
-import Ṣymbol from "./symbol.js";
+import { createBinding } from './binding.js';
+import Ṣymbol from './symbol.js';
 
 export default class Fn {
-  constructor(binding, params, body, opts={}) {
+  constructor(binding, params, body, opts = {}) {
     Object.assign(this, { binding, params, body });
     Object.assign(this, opts);
   }
@@ -39,9 +38,11 @@ export default class Fn {
   }
 
   call(vínculo, params, pila, ėval) {
-    const fnBinding = createBinding(this.binding,
+    const fnBinding = createBinding(
+      this.binding,
       this.params,
-      ėval.mapEval(vínculo, params));
+      ėval.mapEval(vínculo, params),
+    );
 
     return ėval.evalEach(fnBinding, this.body, pila);
   }
@@ -53,8 +54,6 @@ export default class Fn {
   // }
 
   toString() {
-    return this.body.push(
-      this.params.push(Ṣymbol.for("fn"))) .toString();
+    return this.body.push(this.params.push(Ṣymbol.for('fn'))).toString();
   }
-
 }
