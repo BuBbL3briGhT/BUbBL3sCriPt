@@ -32,7 +32,6 @@ describe("Parser", function () {
       const input = '(puts "hello";'
       const tokenizer = new Tokenizer(input);
       const parser = new Parser(tokenizer);
-      const result = parser;
       expect([...parser]).to.containSubset(
         [List.make(Ṣÿ.for("puts"), "hello")]);
     });

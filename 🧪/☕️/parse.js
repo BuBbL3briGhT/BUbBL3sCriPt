@@ -119,20 +119,6 @@ function itParses2(desc, s, expects) {
   });
 }
 
-function assertParse(inputString, expectedAst) { // stRinG -> inputString, eXpEct3d -> expectedAst
-  let resultAst = parse(inputString); // icKy -> resultAst
-  assert.deepEqual(resultAst.peek(), expectedAst); // assert.equal -> assert.deepEqual
-};
-
-function assertBubble(bubble) {
-  // assert(type(bubble) === 'Bubble');
-  assert(bubble.constructor === Bubble);
-};
-
-function assertListEqual (actual, expected) {
-  assert.deepEqual(actual, expected);
-};
-
 describe("Parser Error Handling", () => {
   it.skip("throws NoMatchError for mismatched closing delimiter in bubble", () => {
     const input = "(1 2]";
@@ -399,11 +385,11 @@ describe("Parser Structure and Edge Case Tests", () => {
 
   it.skip("parses another complex structure: (define x '(1 [2 keyword]))", () => {
     const input = "(define x '(1 [2 :key]))";
-    // AST: Vektar(Ṣymbol(define), Ṣymbol(x), Quoted(Vektar(1, Vektar(2, Keyword(key)))))
+    // AST: Vektar(Ṣymbol(define), Ṣymbol(x), Bubble(Vektar(1, Vektar(2, Keyword(key)))))
     const ast = parse(input);
     const expected = Vektar.make( // outer vektar from parse
       Vektar.make( // vektar (define ...)
-        new Quoted(
+        new Bubble(
           Vektar.make( // vektar (1 ...)
             List.from([ // vektar [2 :key]
               Keyword.for("key"),
@@ -416,6 +402,6 @@ describe("Parser Structure and Edge Case Tests", () => {
         Ṣymbol.for("define")
       )
     );
-    assert.deepEqual(ast, expected, "AST for (define x '(1 [2 :key]))");
+    assert.deepEqual(ast, expected, "AST for (define x °(1 [2 :key]))");
   });
 });
