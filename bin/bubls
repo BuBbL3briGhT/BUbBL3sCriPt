@@ -37,8 +37,7 @@ if (path) { bubls.load(binding, path, fs, ėval); } else {
     catch (error) { return 0; }
   }
 
-  function r3pL() {
-    let oxox = "";
+  function r3pL(oxox="") {
     rl.question("%< ", (xoxo) => {
       if (xoxo.trim() != "") try {
         if (xoxo == ".exit") {
@@ -46,9 +45,11 @@ if (path) { bubls.load(binding, path, fs, ėval); } else {
           return;
         }
 
-        oxox += " " + xoxo;
+        oxox += xoxo + "\n";
+        process.stdout.write(oxox);
 
         if (isExpressionComplete(oxox)) {
+          console.log("complete");
           const result = ėval(binding, oxox);
           if (result && result.toString) {
             // console.log(result);
@@ -67,7 +68,7 @@ if (path) { bubls.load(binding, path, fs, ėval); } else {
       } catch (error) {
         console.log(error);
       }
-      r3pL();
+      r3pL(oxox);
     });
   }
 
