@@ -1,0 +1,73 @@
+- Support for ```
+- Continue input for open brackets on new line in repl
+- No error for empty lines sent to evaliator
+- Allow empty modules that don't export with no error.
+  - Files shouldn't need code not to cause errors.
+    These are errors with our implementation, not
+    their's. Error's should be helpful, and where they
+    are not that should be handeled approraitly or
+    avoided. Project mentality. Goals.
+- Try so that evaluation of a list with an object as
+  the first item, and items in the list is a call to
+  get essentially, if a function is returned, then
+  you can call as the outer paren, however this would
+  be different then sending the message, and evaluating in the context of the object.
+  need to think about it further.
+
+    (console.log "hello") -> ((console "log") "hello")
+      Note, that this would not work, because we are
+      first accessing the function, that serves as a
+      method, then invoking it out of the context of
+      the orginal object. Although, i do believe the
+      two stataments are actually equvelent based upon
+      the current code, so this would probably be a big improvment
+      if translatzd at the parszr.
+    -> ((get console "log") "hello")
+    versus -> (send console "log" "hello")
+    (console.log.log "hi")
+    -> (send (console "log") "log" "hi")
+    So this shows that we can use send for the outer for invokation
+    And confirms we should use accessing fpr the inpart. Also note:
+    (console.lo.lo.lo "woah")
+    -> (send (console "lo" "lo") "lo" "woah")
+    This is if we called get, which would be a niceity. Anyway
+    Without would deconstruct to
+    -> (send ((console "lo") "lo") "lo" "woah")
+    which is equally valid.
+    (console.log.log) -> (console "log" "log")
+    -> (get console "log" "log")
+
+    These are all hypotheticals. Need to get into code to
+    see what is really up. Nice ideas though. Little fuzzy at the
+    edges, so that is what we will discover in code.
+    Where the rubber meets the road.
+
+
+    (console.log "hello") -> (send console "log" "hamburger")
+
+    UPDATE:
+      .K.O i think have a solution. I've been giving it somethought,
+      and everything seems doable. The one iffy thing is how to
+      interete a bare reference to object in the first
+      position of a list. There are a couple different
+      ways to imahine it, but the big two is it a
+      get or a send. My solution is to interprete this
+      as a send. If using dot notation, those will be decomposed
+      into intermeatary gets. To do a get, simply reverse
+      the order  starting with the string key, just like
+      with an index look up. This differey from a module load where there are
+      no parameters. Multiple parameters are done recerusivly. So
+      ("string" objects) -> object["string"]
+      ("string1" "string2" object) -> object["string2"]["string1"]
+        : i don't know, perhaps an explict call to get is
+          a little easier to undzrstand.
+
+      It's a thought.
+
+      The place to start is on parsing the dot notation.
+      Will need to meditate on this. 🧘
+
+    - Just making a note that we will not be able to infer the correct means of parsing dot noyation in
+    a symbol during the parser phase. This will need to be done in the evaluator like a macro.
+    consider it dynamic parsing. We need to know the context of evaluation inorder to infer the meaning.
+

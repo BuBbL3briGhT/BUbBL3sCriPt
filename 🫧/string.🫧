@@ -1,4 +1,4 @@
 
-🫧 (enc o) (send o "toString")
+🫧 (encodar o) (send o "toString")
 
-module.exports { enc }
+module.exports { encodar }

@@ -1,21 +1,21 @@
-'use strict'
+'use strict';
 
-import assert from "node:assert";
-import { describe, it } from "mocha";
-import Ṣymbol from "../../☕️/symbol.js";
+import assert from 'node:assert';
+import { describe, it } from 'mocha';
+import Ṣymbol from '../../☕️/symbol.js';
 
-describe("Ṣymbol", function () {
-   describe(".for(key)", function () {
-     it("return symbol for key", function () {
-       const symbol = Ṣymbol.for("symbol");
-       assert(symbol instanceof Ṣymbol);
-       assert.equal(symbol.value, "symbol");
-     });
+describe('Ṣymbol', function () {
+  describe('.for(key)', function () {
+    it('return symbol for key', function () {
+      const symbol = Ṣymbol.for('symbol');
+      assert(symbol instanceof Ṣymbol);
+      assert.equal(symbol.value, 'symbol');
+    });
 
-     it("return symbol for key (toString, special case)", function () {
-       const symbol = Ṣymbol.for("toString");
-       assert(symbol instanceof Ṣymbol);
-       assert.equal(symbol.value, "toString");
-     });
-   });
+    it('return symbol for key (toString, special case)', function () {
+      const symbol = Ṣymbol.for('toString');
+      assert(symbol instanceof Ṣymbol);
+      assert.equal(symbol.value, 'toString');
+    });
+  });
 });

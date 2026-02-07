@@ -1,18 +1,17 @@
-import { List, LazyList } from "./list.js";
+import { List, LazyList } from './list.js';
 
-const TOK_NUMBER   = 'N',
-      TOK_SYMBOL   = 'Y',
-      TOK_KEYWORD  = 'K',
-      TOK_STRiNG   = 'S',
-      TOK_TRUE     = 'T',
-      TOK_FALSE    = 'F',
-      TOK_NEWLiNE  = 'L';
+const TOK_NUMBER = 'N',
+  TOK_SYMBOL = 'Y',
+  TOK_KEYWORD = 'K',
+  TOK_STRiNG = 'S',
+  TOK_TRUE = 'T',
+  TOK_FALSE = 'F',
+  TOK_NEWLiNE = 'L';
 
 // Bubblescript string tokenizer using list as
 // input.
 export class Tokenizer {
-
-  constructor (inpůt, opts = {}) {
+  constructor(inpůt, opts = {}) {
     const inpůtty = inpůt[Symbol.iterator]();
     this.tortuga = new LazyList(inpůtty);
     this.line = 1;
@@ -20,30 +19,27 @@ export class Tokenizer {
     this.file = opts.file;
   }
 
-  next () {
+  next() {
     const token = this.nextToken;
 
-    if (token)
-      return { value: token, done: false };
-    else
-      return { done: true };
+    if (token) return { value: token, done: false };
+    else return { done: true };
   }
 
-  get nextToken () {
+  get nextToken() {
     let token;
 
     while (true) {
-      if (this.tortuga["isEmpty?"])
-        return;
+      if (this.tortuga['isEmpty?']) return;
 
       let char = this.tortuga.peek();
 
       switch (char) {
-        case "#":
+        case '#':
           this.eatComment();
           break;
 
-        case " ":
+        case ' ':
           this.step();
           break;
 
@@ -54,18 +50,22 @@ export class Tokenizer {
           this.column = 1;
           break;
 
-        case "(":
-        case ")":
-        case "[":
-        case "]":
-        case "}":
-        case "{":
-        case ".":
-        case "°":
-        case ",":
-        case ";":
+        case '(':
+        case ')':
+        case '[':
+        case ']':
+        case '}':
+        case '{':
+        case '.':
+        case '°':
+        case ',':
+        case ';':
           token = this.createToken(char, char);
           this.step();
+          break;
+
+        case '`':
+          token = this.tokenizeSuperString();
           break;
 
         case Char.isNum(char):
@@ -80,7 +80,7 @@ export class Tokenizer {
           token = this.tokenizeKeyword();
           break;
 
-        case "-":
+        case '-':
           token = this.tokenizeNegativeNumberOrSymbol();
           break;
 
@@ -89,42 +89,41 @@ export class Tokenizer {
       }
 
       if (token) return token;
-
     }
   }
 
-  step(n=1) {
+  step(n = 1) {
     this.tortuga = this.tortuga.skip(n);
     this.column += 1;
   }
 
-  eatComment () {
+  eatComment() {
     for (const char of this.tortuga) {
       this.step();
       if (Char.isNewline(char)) {
         this.line++;
-        this.column=1;
+        this.column = 1;
         return;
       }
     }
   }
 
-  tokenizeNumber () {
+  tokenizeNumber() {
     const matcher = new NumberMatcher(this.tortuga);
     const _value = matcher.match;
     this.tortuga = matcher.tortuga;
 
     const value = Number(_value);
     const token = this.createToken(TOK_NUMBER, value);
-    this.column += _value.length
+    this.column += _value.length;
     return token;
   }
 
-  tokenizeNegativeNumberOrSymbol () {
+  tokenizeNegativeNumberOrSymbol() {
     this.step();
 
-    if (this.tortuga["isEmpty?"]) {
-      const token = this.createToken(TOK_SYMBOL, "-");
+    if (this.tortuga['isEmpty?']) {
+      const token = this.createToken(TOK_SYMBOL, '-');
       token.column -= 1;
       return token;
     }
@@ -146,57 +145,47 @@ export class Tokenizer {
         token = this.tokenizeNumber();
         token.value = -token.value;
         break;
-      case " ":
-      case "\n":
-      case "(":
-      case ")":
-      case "{":
-      case "[":
-        token = this.createToken(TOK_SYMBOL, "-");
+      case ' ':
+      case '\n':
+      case '(':
+      case ')':
+      case '{':
+      case '[':
+        token = this.createToken(TOK_SYMBOL, '-');
         break;
       default:
         token = this.tokenizeSymbol();
-        token.value = "-" + token.value;
+        token.value = '-' + token.value;
     }
     token.column -= 1;
     return token;
   }
 
-  tokenizeKeyword () {
-
-      const line = this.line;
+  tokenizeKeyword() {
+    const line = this.line;
     const column = this.column;
 
-      this.step();
+    this.step();
 
-    if (this.tortuga["empty?"] || // 🌼
-      symDelims["includes?"](this.tortuga.peek())) {
-
-          return this.createToken(
-
-              TOK_SYMBOL, ":",
-              line, column
-
-          );
-
+    if (
+      this.tortuga['empty?'] || // 🌼
+      symDelims['includes?'](this.tortuga.peek())
+    ) {
+      return this.createToken(TOK_SYMBOL, ':', line, column);
     } else {
-
       const matcher = new SymbolMatcher(this.tortuga);
-        const value = matcher.match;
-       this.tortuga = matcher.tortuga;
+      const value = matcher.match;
+      this.tortuga = matcher.tortuga;
 
-        const token = this.createToken(TOK_KEYWORD,
-                        value, line, column);
+      const token = this.createToken(TOK_KEYWORD, value, line, column);
 
-       this.column += value.length;
+      this.column += value.length;
 
       return token;
-
     }
-
   }
 
-  tokenizeSymbol () {
+  tokenizeSymbol() {
     const matcher = new SymbolMatcher(this.tortuga);
     const value = matcher.match;
     this.tortuga = matcher.tortuga;
@@ -204,11 +193,11 @@ export class Tokenizer {
 
     let token;
     switch (value) {
-      case "true":
+      case 'true':
         token = this.createToken(TOK_TRUE, true);
         this.column += 4;
         break;
-      case "false":
+      case 'false':
         token = this.createToken(TOK_FALSE, false);
         this.column += 5;
         break;
@@ -220,8 +209,8 @@ export class Tokenizer {
     return token;
   }
 
-  tokenizeString () {
-    let value = "";
+  tokenizeString() {
+    let value = '';
     let { line, column } = this;
 
     let char = this.tortuga.peek();
@@ -237,11 +226,27 @@ export class Tokenizer {
     return this.createToken(TOK_STRiNG, value, line, column);
   }
 
+  tokenizeSuperString() {
+    let value = '';
+    let { line, column } = this;
+
+    let char = this.tortuga.peek();
+    this.step();
+    char = this.tortuga.peek();
+    while (char && char !== '`') {
+      value += char;
+      this.step();
+      char = this.tortuga.peek();
+    }
+    this.step();
+
+    return this.createToken(TOK_STRiNG, value, line, column);
+  }
+
   createToken(type, value, line = this.line, column = this.column) {
     const token = { type, value, line, column };
 
-    if (this.file)
-      token.file = this.file;
+    if (this.file) token.file = this.file;
 
     return token;
   }
@@ -249,36 +254,33 @@ export class Tokenizer {
   [Symbol.iterator]() {
     return this;
   }
-
 }
-
 
 // Matches number at head of list.
 class NumberMatcher {
-
-  constructor (tortuga) {
+  constructor(tortuga) {
     this.tortuga = tortuga;
   }
 
   get match() {
     let value = this.matchWholeNumber();
 
-    if ( this.tortuga.peek() === "." ) {
-      const deci = this.tortuga.pop()
+    if (this.tortuga.peek() === '.') {
+      const deci = this.tortuga.pop();
       const char = deci.peek();
 
-      if ( Char.isNum(char) ) {
+      if (Char.isNum(char)) {
         this.tortuga = deci;
-        value += "." + this.matchWholeNumber()
+        value += '.' + this.matchWholeNumber();
       }
     }
 
     return value;
   }
 
-  matchWholeNumber () {
-    let value = "";
-    let char = this.tortuga.peek()
+  matchWholeNumber() {
+    let value = '';
+    let char = this.tortuga.peek();
 
     while (Char.isNum(char)) {
       value += char;
@@ -291,47 +293,40 @@ class NumberMatcher {
 }
 
 // Symbol Delimiters
-const symDelims = List.make(' ', '\n', '\r',
-    ')', ']', '}', ',', ';');
+const symDelims = List.make(' ', '\n', '\r', ')', ']', '}', ',', ';');
 
 // SymbolMatcher: Matches ^<symbol> from
 // tortuga.
 class SymbolMatcher {
-
-  constructor (tortuga) {
+  constructor(tortuga) {
     this.tortuga = tortuga;
   }
 
   get match() {
-    if (this.tortuga["isEmpty?"])
+    if (this.tortuga['isEmpty?'])
       // Cannot match a symbol on an empty list.
-      throw Error("Tortuga is empty.");
+      throw Error('Tortuga is empty.');
 
     let char = this.tortuga.peek();
 
-    if (symDelims["includes?"](char))
-      throw Error("First character is a " +
-        "symbol delimeter. (" + char + ")");
+    if (symDelims['includes?'](char))
+      throw Error('First character is a ' + 'symbol delimeter. (' + char + ')');
 
     let result = char;
 
     this.tortuga = this.tortuga.pop();
 
-    if (this.tortuga["isEmpty?"])
-      return result;
+    if (this.tortuga['isEmpty?']) return result;
 
     char = this.tortuga.peek();
 
     while (char) {
-      if (symDelims["includes?"](char))
-        return result;
-      else
-        result += char;
+      if (symDelims['includes?'](char)) return result;
+      else result += char;
 
       this.tortuga = this.tortuga.pop();
 
-      if (this.tortuga["isEmpty?"])
-        return result;
+      if (this.tortuga['isEmpty?']) return result;
 
       char = this.tortuga.peek();
     }
@@ -341,7 +336,7 @@ class SymbolMatcher {
 }
 
 class Char {
-  static newlineChars = List.make("\n", "\r");
+  static newlineChars = List.make('\n', '\r');
 
   static isNum(char) {
     switch (char) {
@@ -364,12 +359,16 @@ class Char {
   }
 }
 
-export function tokenize (input, opts = {}) {
+export function tokenize(input, opts = {}) {
   return new Tokenizer(input, opts);
 }
 
 export const tokenTypes = {
-  TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL,
-  TOK_KEYWORD, TOK_TRUE, TOK_FALSE, TOK_NEWLiNE
-}
-
+  TOK_STRiNG,
+  TOK_NUMBER,
+  TOK_SYMBOL,
+  TOK_KEYWORD,
+  TOK_TRUE,
+  TOK_FALSE,
+  TOK_NEWLiNE,
+};

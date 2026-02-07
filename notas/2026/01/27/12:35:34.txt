@@ -1,0 +1,161 @@
+Thought i'd make some notes.
+
+A tought it would be helpful to elaborate on things
+which  im' thinking 'bout and which are hap'n. 😀
+
+Lot's of fun stuff is planned [link F.U.N.]
+
+To start off, here is the current error i'm get'n
+whilst trying to kick off the 🫧 test suite, for
+reference:
+
+bubblescript 🍀 npm run 🧪🫧
+
+    > bubblescript@0.1.6.⛄️.testing 🧪🫧
+    > bin/🫧 bin/🧪 🧪/*.🫧
+
+    { o: undefined, _k: 'encodar' }
+    TypeError: Cannot read properties of undefined (reading 'encodar')
+        at Object.<anonymous> (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/binding.js:87:21)
+        at SpecialForm.call (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/special_form.js:25:20)
+        at Fn.call (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/fn.js:42:15)
+        at evalList (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/eval.js:131:15)
+        at evalExpression (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/eval.js:94:16)
+        at List.tryEach (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/list.js:143:20)
+        at evalEach (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/eval.js:77:15)
+        at ėval (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/eval.js:39:12)
+        at file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/load.js:18:13
+        at FSReqCallback.readFileAfterClose [as oncomplete] (node:internal/fs/read/context:68:3)
+        en (::)
+    { o: undefined, _k: 'push' }
+    TypeError: Cannot read properties of undefined (reading 'push')
+        at Object.<anonymous> (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/binding.js:87:21)
+        at SpecialForm.call (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/special_form.js:25:20)
+        at Fn.call (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/fn.js:42:15)
+        at evalList (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/eval.js:131:15)
+        at evalExpression (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/eval.js:94:16)
+        at List.tryEach (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/list.js:143:20)
+        at evalEach (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/eval.js:77:15)
+        at ėval (file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/eval.js:39:12)
+        at file:///data/data/com.termux/files/home/bubblescript/%E2%98%95%EF%B8%8F/load.js:18:13
+        at FSReqCallback.readFileAfterClose [as oncomplete] (node:internal/fs/read/context:68:3)
+        en (::)
+    bubblescript
+
+This error is probably the result of a minor oversight
+in the code, i havn't dug into too much just yet. It
+has been persistant for a minute or so, because i did a refactor
+the i feel really makes a substantial improvement,
+pretaining to loading bubblescript files.
+
+Loading was being done in two places with two dirivatives
+of essential the same instruction set. I collasped these
+into a single "load" function, which is the singular
+"default" export from the load module, which by convention
+is located in ☕️/load.js. This is the current state of
+the application, but all matters remain pending
+to change for over-all improvment.
+
+I like how it came out, and i'm happy with it for
+now, as the goal of unifying the code, and simplifying
+has been reached.
+
+This error which predated the refactor, we now arrive back
+at, so we've gone ful circle, and have the opportunity,
+now to revist, and knock it out.
+
+Attacking things one at a time, making atomic commits
+where possible, and elaborating in the comment text.
+I also tend to do checkpoint commits for large problems,
+or when i even don't really understand what is going
+on, to avoid losing work, track progress, and show
+execution flow for documentation and teaching knowledge
+exchange purposes.
+
+In order to create this note, it was neccesary to bring
+over the sources from the guión directory
+in the bubblescript-es project. It was dropped for
+the moment inorder to simplofy the overall project
+structure. There was really know use in translating
+the project if it was turning into junk because
+of over loading. We've really come a long way, and
+now it was neccesary to bring it back. So horay!
+
+I created this note using tomar_nota, which is spanish
+for make note, as you might have guessed or known.
+
+It is become apparent, that going forward there won't
+be a huge concern to have individual language projects
+as the code base is converging onto a single language
+that supports all languages, through a multiplicity
+if aliases. You can name anything anything, and swap
+things as needed. The underlying code neccisities are mostly
+there are serve to bootstrap the project. Eventually, through
+compilation/decompilitaion, translating any underlying
+code peices into any language should for the most part
+ve a trivial manner, and so hopefully, won't spend
+too much time concerning our selves with an immediate
+solution for now. The code is working, and that should
+remain the primary indicator as to wether we are
+making progress or not. The test cases are what proves
+this, without which we are all but completly blind, and
+incapable of any movement beyound a single point. So
+we are on the right path, and will continue to trust
+greatly in that.
+
+A revelation that has come in the design of the system,
+and lisp in general, with a focus on immutability and
+functional design, in the design of the underlying list
+structure is the everything, dictionaries/objects, included
+is that everything is really built around pairs, or "couples.
+A list is a linked list, which is a head and tail, or first
+and a rwdt, or a cdr and a car, whichever terminoly you use, this is
+a set of two. Dictionary/objects as well are pair/couples in
+the key value relation ship. An object can essentially be represented
+as a list of couples. Language can be transcended as well through
+graph built through this prime data structe. Which can be called
+a tuple, which is known comp-sci lexicon. We will look
+to improve our list implementation using the conceptial
+framework, and believe it will represent a huge over improvement
+a simplification all around bring great benifits. By know
+mean do i believe we are the first to discover this, indeed,
+"couple" as meaning two or, or to connect is a relevent
+concept which stiches together even our very human fabric
+lives, time, all matters, even quantum physics , being based upon the
+theory of entaglement exists between couples. So we imagine this will represent
+some form of convergene, when or how is in the air, we go forward.
+As we peel back the layers, we get to the origin, of what we
+have concieved in the project, retian our identity through our
+journey towards the ends there in. In the pursuit of happiness!
+
+ne otjer thing i wanted to mention, probably as the final
+comment for now, is that because we are doing lisp,
+we can benifit, and certinly will thrpugh dropping
+dot notation, which is something we carried over from the js roots of c.
+We can probably retain it in some form as a fun simplity
+with the underlying js, but it appears right now
+the prefered means wiñl be done through list. To
+invoke a method on an object or rather to send in a
+massage as the would say in ruby or small talk can, would
+be done easily by placing the reciepient object as the prime
+element of the lust, the head, and the message followed by
+the parameters az the remainder  so...
+
+    (hello.mom "how are you")
+
+    becomes
+
+    (hello :mom "how are you")
+
+Just as an example.
+
+Anyway, this is just some budding ideas, it will
+be interesting to see how they develop.
+
+Keep programming F.U.N!
+
+KanDii ✨️☕️🫧
+
+
+
+

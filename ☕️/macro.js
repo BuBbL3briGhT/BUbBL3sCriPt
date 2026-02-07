@@ -1,8 +1,8 @@
-import { createBinding } from "./binding.js";
-import { List } from "./list.js";
+import { createBinding } from './binding.js';
+import { List } from './list.js';
 
 export class Macro {
-  constructor(binding, params, body, opts={}) {
+  constructor(binding, params, body, opts = {}) {
     this.binding = binding;
     this.params = params.toList();
     this.body = body;
@@ -12,8 +12,7 @@ export class Macro {
   expand(params, ėval) {
     // console.log("params", params);
     // console.log("this.params", this.params);
-    let binding = createBinding(this.binding,
-      this.params, params);
+    let binding = createBinding(this.binding, this.params, params);
 
     return ėval.mapEval(binding, this.body);
   }
@@ -30,8 +29,7 @@ export class Macro {
   }
 
   toString() {
-    return "(macro " + this.args.toString() +
-      this.body.toString() + ")";
+    return '(macro ' + this.args.toString() + this.body.toString() + ')';
   }
 }
 
@@ -40,4 +38,3 @@ export class MacroExpanded {
     this.expanded = expanded;
   }
 }
-

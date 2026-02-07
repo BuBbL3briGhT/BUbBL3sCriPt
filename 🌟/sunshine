@@ -1,0 +1,18 @@
+#! /usr/bin/node bin/bubls
+(muf puts
+  (fn [msg]
+    (console.log msg)))
+(puts "Hello Sunshine!")
+(puts 1234)
+(puts (+ 12 34))
+(puts "hiya")
+
+(let [a 5
+      b 7]
+  (console.log (+ a a))
+  (console.log (+ a b a)))
+
+(loop [a 0]
+  (puts a)
+  (unless (> a 5)
+    (recur [a (+ a 1)])))

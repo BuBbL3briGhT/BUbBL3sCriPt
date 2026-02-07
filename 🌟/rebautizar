@@ -1,0 +1,405 @@
+#! /usr/bin/env bash
+
+# alias eco=echo
+
+declare -A mapaDeSimbolos=(
+  # Palabras clave de JavaScript
+  ["if"]="si"
+  ["let"]="dejar"
+  ["new"]="nueva" # ["new"]="nuevo"
+  ["for"]="para"
+  ["case"]="caso"
+  ["this"]="esta" # ["this"]="esto"
+  ["null"]="nula" # ["null"]="nulo"
+  ["else"]="demás"
+  ["while"]="mientras"
+  ["yield"]="producir"
+  ["class"]="clase"
+  ["const"]="const"
+  ["switch"]="cambiar"
+  ["typeof"]="tipode"
+  ["return"]="devolver"
+  ["static"]="estática" # ["static"]="estático"
+  ["default"]="porDefecto"
+  ["function"]="función"
+  ["undefined"]="indefinida" # ["undefined"]="indefinido"
+
+  ["constructor"]="constructora" # ["constructor"]="constructoro"
+  ["toString"]="encodar"
+  ["require"]="requerir"
+
+  ["string"]="cadena"
+  ["symbol"]="símbolo"
+  ["module"]="módulo"
+  ["keyFor"]="clavePara"
+  ["exports"]="exportaciones"
+  ["do"]="hacer"
+
+  # ["a"]="a"
+  # ["i"]="i"
+  # ["o"]="o"
+  # ["n"]="n"
+  # ["s"]="s"
+  # ["0"]="0"
+
+  ["oo"]="oo"
+  ["fn"]="fn"
+  ["is"]="es"
+  ["to"]="a"
+  ["pop"]="estallido"
+  ["get"]="consiguir"
+  ["sub"]="sus"
+  ["the"]="la" # ["the"]="el"
+  ["map"]="mapa"
+  ["and"]="y"
+  ["init"]="inicio"
+  ["peek"]="ojeada"
+  ["push"]="empujar"
+  ["find"]="encontrar"
+  ["memo"]="memo"
+  ["make"]="hacer"
+  ["list"]="lista"
+  ["head"]="cabeza"
+  ["tail"]="cola"
+  ["skip"]="saltar"
+  ["take"]="llevar"
+  ["each"]="cada"
+  ["last"]="última" # ["last"]="último"
+  ["into"]="en"
+  ["ëval"]="ëval"
+  ["bubls"]="bubls"
+  ["count"]="contar"
+  ["value"]="valor"
+  ["array"]="formación"
+  ["until"]="hasta"
+  ["which"]="cual"
+  ["split"]="dividir"
+  ["result"]="resultados"
+  ["reduce"]="reducir"
+  ["events"]="eventos"
+  ["invert"]="invertir"
+  ["include"]="incluir"
+  ["binding"]="vinculante"
+  ["include"]="incluir"
+  ["includes"]="incluye"
+  ["prototype"]="prototipo"
+  ["partition"]="repartirPara"
+  ["accumulator"]="acumulador"
+  ["memorandum"]="memorándum"
+
+  ["AbstractList"]="ListaAbstracta"
+
+  ["mapFn"]="mapaFn"
+  ["isEmpty"]="estaVacio"
+  ["toArray"]="formaUnaMatriz"
+  ["mapEval"]="evaluaciónDMapa"
+  ["thisArg"]="estaArg" # ["thisArg"]="esteArg"
+  ["sourceList"]="listaDeFuentes"
+  ["currentNode"]="nodoActual"
+  ["toStringJoin"]="paraUnirCuerdas"
+  ["evalExpression"]="evaluarLaExpresión"
+  ["currentElement"]="elementoActual"
+  ["toStringFormat"]="alFormatoDeCadena"
+
+  ["be"]="ser"
+  ["up"]="arriba"
+  ["time"]="tiempo"
+  ["that"]="esa" # ["that"]="ese"
+  ["skim"]="desnatar"
+  ["from"]="de"
+  ["bind"]="unir"
+  ["List"]="Lista"
+  ["will"]="voluntad"
+  ["what"]="qué"
+  ["rest"]="descansar"
+  ["shift"]="cambio"
+  ["serve"]="atender"
+  ["shared"]="compartida" # ["shared"]="compartido"
+  ["serving"]="servicio"
+  ["returns"]="regresa"
+  ["purpose"]="objetico"
+  ["arrayLike"]="matrizComo"
+  ["purposes"]="propósitos"
+  ["plop"]="plaf"
+  ["otherwise"]="de la contrario"
+  ["or"]="o"
+  ["on"]="en"
+  ["next"]="próxima" # ["next"]="próximo"
+  ["my"]="mi"
+  ["more"]="más"
+  ["might"]="podría"
+  ["method"]="método"
+  ["manipulated"]="manipulada" # ["manipulated"]="maniulado"
+  ["locals"]="lugareños"
+  ["little"]="pequeña" # ["little"]="pequeño"
+  ["just"]="justa" # ["just"]="justo"
+  ["iterator"]="itarador"
+  ["init"]="inicio"
+  ["here"]="aquí"
+  ["functionality"]="funcionalidad"
+  ["first"]="premera" # ["first"]="premero"
+  ["false"]="falsa" # ["false"]="falso"
+  ["evalEach"]="evaluarCadaUno"
+  ["empty"]="vacía" # ["empty"]="vacío"
+  ["destructed"]="destruida" # ["destructed"]="destruido"
+  ["destructured"]="desestructurada" # ["destructured"]="desestructurado"
+  ["define"]="definir"
+  ["conventional"]="convencional"
+  ["conjoin"]="unir"
+  ["conj"]="unir"
+  ["centralized"]="centralizada" # ["centralized"]="centralizado"
+  ["can"]="poder"
+  ["but"]="pero"
+  ["broken"]="rota" # ["broken"]="roto"
+  ["between"]="entre"
+  ["begin"]="comenzar"
+  ["base"]="base"
+  ["as"]="como"
+  ["abstract"]="abstracta" # ["abstract"]="abstracto"
+
+  ["_toString"]="_encordar"
+  ["Use"]="usar"
+  ["There"]="Allá"
+  ["Simple"]="Sencilla" # ["Simple"]="Sencillo"
+  ["LongLivePlop"]="LargaVidaAlPlop"
+  ["Let"]="Dejar"
+  ["Array"]="Formación"
+  ["All"]="Toda" # ["All"]="Todo"
+  ["Aliases"]="Alias"
+  ["Vector"]="Vector"
+  ["Symbol"]="Símbolo"
+)
+
+
+function buscar_y_reemplazar_símbolo() {
+  # echo "$1" ":" "$2" "->" "$3"
+
+    # archivo="$1"
+    # simbolo="$2"
+  # reemplazo="$3"
+
+  # echo "$archivo" ":" "$simbolo" "->" "$reemplazo"
+
+  # Loop through the file line by line
+  while IFS= read -r linea; do
+    # echo "$linea"
+    # Extrae las palabras de esta línea y
+    # colócalas en una matriz.
+    # Extract the words for this line and put them
+    # into an array
+    palabras=($(grep -oP '\w+' <<< "$linea"))
+    # echo "${palabras[*]}"
+
+    # # Extrae las palabras no literales de esta
+    # # línea y colócalas en una matriz.
+    # # Extract the non-words for this line and put
+    # # them into an array
+    # sin_palabras=($(grep -oP '\W+' <<< "$linea"))
+    # sin_palabras=($(grep -oP '\W+' <<< "$linea"))
+    # https://stackoverflow.com/a/32931403/30654127
+    mapfile -t sin_palabras < <(grep -oP '\W+' <<< "$linea")
+    # grep -oP '\W+' <<< "$linea"
+    # echo "${sin_palabras[*]}"
+
+    # # Buscar y reemplazar tokens
+    # # Find and replace tokens.
+    for i in "${!palabras[@]}"; do
+      for s in "${!mapaDeSimbolos[@]}"; do
+        if [[ "${palabras[i]}" == "$s" ]]; then
+          palabras[i]="${mapaDeSimbolos[$s]}"
+        fi
+      done
+    done
+
+    # echo "${palabras[*]}"
+
+    # Reconstruir la linea.
+    # Reconstruct the line.
+    nueva_linea=""
+
+    # echo "$linea"
+    if [[ "$linea" =~ ^[a-zA-Z] ]]; then
+      # Line started with word characters
+      # zip "$paralbras" "$sin_paralabras"
+      # echo "palabras"
+
+      for i in "${!palabras[@]}"; do
+          nueva_linea+="${palabras[i]}"
+          # Append the corresponding non-word token
+          # if it exists
+          if [[ -n "${sin_palabras[i]}" ]]; then
+              nueva_linea+="${sin_palabras[i]}"
+          fi
+      done
+
+      # Manejar el token final que no es una
+      # palabra si existe
+      # Handle the trailing non-word token if it
+      # exists
+      if [[ "${#palabras[@]}" -lt "${#sin_palabras[@]}" ]]; then
+          nueva_linea+="${sin_palabras[-1]}"
+      fi
+
+    else
+      # Line started with non-word characters
+      # echo "sin palabras"
+      for i in "${!sin_palabras[@]}"; do
+          nueva_linea+="${sin_palabras[i]}"
+          # Append the corresponding word token
+          # if it exists
+          if [[ -n "${palabras[i]}" ]]; then
+              nueva_linea+="${palabras[i]}"
+          fi
+      done
+
+      # Manejar el token de palabra final si
+      # existe
+      # Handle the trailing word token if it
+      # exists
+      if [[ "${#sin_palabras[@]}" -lt "${#palabras[@]}" ]]; then
+          nueva_linea+="${palabras[-1]}"
+      fi
+    fi
+
+    echo "$nueva_linea"
+    # salida
+
+
+    # for i in "${!palabras[@]}"; do
+    #     nueva_linea+="${palabras[i]}"
+    #     # Append the corresponding non-word token
+    #     # if it exists
+    #     if [[ -n "${sin_palabras[i]}" ]]; then
+    #         nueva_linea+="${sin_palabras[i]}"
+    #     fi
+    # done
+
+    # Handle the trailing non-word token if it exists
+    # if [[ "${#words[@]}" -lt "${#non_words[@]}" ]]; then
+    #     reconstructed_line+="${non_words[-1]}"
+    # fi
+
+    # echo "$reconstructed_line"
+
+  # done < "$archivo"
+  done
+
+}
+
+cat "./src/en/abstract_list.js" | \
+  # head -n20 | \
+  buscar_y_reemplazar_símbolo
+
+
+# cat "./src/abstract_list.js" | \
+#   head -n5
+
+# buscar_y_reemplazar_símbolo \
+#   "./src/abstract_list.js" \
+#   "AbstractList" \
+#   "ListaAbstracta"
+
+# cat "./src/abstract_list.js" | \
+#   head -n5 | \
+#   buscar_y_reemplazar_símbolo \
+#     "" \
+#     "AbstractList" \
+#     "ListaAbstracta"
+
+# cat "./src/abstract_list.js" | \
+#   head -n5 | \
+#   buscar_y_reemplazar_símbolo \
+#     "" \
+#     "function" \
+#     "función"
+
+# cat "./src/abstract_list.js" | \
+#   # head -n20 | \
+#   buscar_y_reemplazar_símbolo \
+#     "" \
+#     "AbstractList" \
+#     "ListaAbstracta"
+
+exit
+
+# TODO: Dry run option
+# TODO implement limit to xirectory
+# TODO: Check for issues, files that already exist, warn
+# TODo: Add directories to ignore option.
+# TODO: Needs to renames symbol tokens, not
+# partial tokens, so Bubble -> Quote shouldn't
+# change BubbleScript, match symbol delimiters on
+# the outside of symbol being rename (){}[] \nEOT"
+
+# rename original nuevo [dir]
+
+function camelizar() {
+  echo $1 | sed -E 's/_([a-z])/\U\1/g' | sed -E 's/^(.)/\L\1/'
+}
+
+function pascalizar() {
+  echo $1 | sed -E 's/_([a-z])/\U\1/g' | sed -E 's/^(.)/\U\1/'
+}
+
+function subrayar() {
+  echo $1 | sed -E 's/([A-Z])/_\L\1/g' | sed -E 's/^_//'
+}
+
+function rebautizar() {
+  git grep -l $1 | xargs sed -i -e "s/$1/$2/g"
+
+  # File renaming.
+  files=$(git ls-tree --full-tree --name-only -r HEAD)
+  # Filter file list by orginal text
+  files=$(echo "$files" | grep "$1")
+
+  # IFS=$"\n"
+  # for file in "${files[@]}"; do
+  for file in $files; do
+    echo "Renaming: $file"
+    # get new path
+    new_path=$(echo "$file" | sed "s/$1/$2/g")
+    # new_path=$(echo "$file" | sed "s/([ ()\[\]{}])$1(/\1$2/g")
+    echo "$new_path"
+    # get dir
+    directory_path=$(dirname "$new_path")
+    mkdir -p "$directory_name"
+    # rename old to new
+    mv "$file" "$new_path"
+  done
+  # IFS=$" \t\n"e
+}
+
+rebautizar "$(camelizar $1)" "$(camelizar $2)"
+rebautizar "$(pascalizar $1)" "$(pascalizar $2)"
+rebautizar "$(subrayar $1)" "$(subrayar $2)"
+exit
+
+
+camelloVieja="$(camelizar \"$1\")"
+camelloNuevo="$(camelizar \"$2\")"
+
+# orginal_texto = $1;
+# nuevo_texto
+# echo $1 $2
+# git grep -l $1 | xargs sed -i -e "s/$1/$2/g"
+
+# File renaming.
+files=$(git ls-tree --full-tree --name-only -r HEAD)
+# Filter file list by orginal text
+files=$(echo "$files" | grep "$1")
+
+# IFS=$"\n"
+# for file in "${files[@]}"; do
+for file in $files; do
+  echo "Renaming: $file"
+  # get new path
+  new_path=$(echo "$file" | sed "s/$1/$2/g")
+  echo "$new_path"
+  # get dir
+  # directory_path=$(dirname "$new_path")
+  # mkdir -p "$directory_name"
+  # rename old to new
+  # mv "$file" "$new_path"
+done
+# IFS=$" \t\n"e

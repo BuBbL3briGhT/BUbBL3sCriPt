@@ -1,19 +1,20 @@
-import { Vektar, List, LazyList, ObjectMap } from "./list.js";
-import Keyword from "./keyword.js";
-import Bubble from "./bubble.js";
-import Ṣÿ from "./symbol.js";
-import { tokenize, tokenTypes }
-                from "./tokenize.js";
-import { TokenNoMatchError,
-        UnexpectedEndOfInputError }
-                 from "./errors.js";
+import { Vektar, List, LazyList, ObjectMap } from './list.js';
+import Keyword from './keyword.js';
+import Bubble from './bubble.js';
+import Ṣÿ from './symbol.js';
+import { tokenize, tokenTypes } from './tokenize.js';
+import { TokenNoMatchError, UnexpectedEndOfInputError } from './errors.js';
 
 // const { * } = tokenTypes;
 const {
-  TOK_STRiNG, TOK_NUMBER, TOK_SYMBOL, TOK_KEYWORD,
-  TOK_TRUE, TOK_FALSE, TOK_NEWLiNE
+  TOK_STRiNG,
+  TOK_NUMBER,
+  TOK_SYMBOL,
+  TOK_KEYWORD,
+  TOK_TRUE,
+  TOK_FALSE,
+  TOK_NEWLiNE,
 } = tokenTypes;
-
 
 /**
  * @function parse
@@ -39,10 +40,12 @@ export class Parser {
   next() {
     const token = this.nextTokenSkipNewLines;
 
-    if (!token) { return { done: true } }
+    if (!token) {
+      return { done: true };
+    }
 
     // Skip semi-colon tokens
-    if (token.type === ";") {
+    if (token.type === ';') {
       delete this.sticky; // Blow sure to clear the sticky.
       return this.next();
     }
@@ -52,21 +55,16 @@ export class Parser {
     if (this.sticky) delete this.sticky;
 
     const oo = this.nextToken;
-    if (!oo || oo.type === TOK_NEWLiNE)
-      return { value: o, done: false };
+    if (!oo || oo.type === TOK_NEWLiNE) return { value: o, done: false };
     else
-
       return ((oo) => {
-         const ooo =
-           this.parseBareList()
-               .push(oo).push(o);
+        const ooo = this.parseBareList().push(oo).push(o);
 
-         if (this.sticky) delete this.sticky;
+        if (this.sticky) delete this.sticky;
 
-         return { value: ooo, done: false };
-       })(this.parse(oo));
+        return { value: ooo, done: false };
+      })(this.parse(oo));
   }
-
 
   get nextToken() {
     return this.getNextToken();
@@ -83,9 +81,8 @@ export class Parser {
 
     let token = this.tokens.next();
 
-    if ( opts.skip ) {
-      while (token && token.value
-        && token.value.type === opts.skip) {
+    if (opts.skip) {
+      while (token && token.value && token.value.type === opts.skip) {
         token = this.tokens.next();
       }
     }
@@ -93,8 +90,7 @@ export class Parser {
     // Remember ; colon token as sticky and
     // return always as next token until
     // explictly cleared.
-    if (token.value && token.value.type === ";")
-      this.sticky = token.value;
+    if (token.value && token.value.type === ';') this.sticky = token.value;
 
     return token.value;
   }
@@ -114,26 +110,27 @@ export class Parser {
         break;
 
       case TOK_SYMBOL:
-        o = Ṣÿ.for(token.value);
+        o = this.parseSymbol(token);
         break;
 
       case TOK_KEYWORD:
         o = Keyword.for(token.value);
         break;
 
-      case "°":
+      case '°':
         o = new Bubble(this.parse(this.nextToken));
         break;
 
-      case "(":
+      case '(':
         o = this.parseList();
+        Object.assign(o, { line, column, file });
         break;
 
-      case "[":
+      case '[':
         o = this.parseVektar();
         break;
 
-      case "{":
+      case '{':
         o = this.parseObjectMap();
         break;
 
@@ -141,10 +138,14 @@ export class Parser {
         throw new TokenNoMatchError(token);
     }
 
-    if (o) Object.assign(o,
-      { line, column, file });
+    // if (o) Object.assign(o,
+    //   { line, column, file });
 
     return o;
+  }
+
+  parseSymbol(token) {
+    return Ṣÿ.for(token.value);
   }
 
   parseList(list = List.make()) {
@@ -152,8 +153,8 @@ export class Parser {
 
     if (token)
       switch (token.type) {
-        case ")":
-        case ";":
+        case ')':
+        case ';':
           return list;
         default:
           const o = this.parse(token);
@@ -168,8 +169,8 @@ export class Parser {
 
     if (token)
       switch (token.type) {
-        case "}":
-        case ";":
+        case '}':
+        case ';':
           return objectMap;
         default:
           const o = this.parse(token);
@@ -183,16 +184,12 @@ export class Parser {
     const token = this.nextToken;
 
     if (this.continueBare)
-      if (token.type === TOK_NEWLiNE)
-        return this.parseBareList(list);
-      else
-        delete this.continueBare;
+      if (token.type === TOK_NEWLiNE) return this.parseBareList(list);
+      else delete this.continueBare;
 
-    if (!token || token.type === TOK_NEWLiNE
-               || token.type === ";")
-      return list;
+    if (!token || token.type === TOK_NEWLiNE || token.type === ';') return list;
     else {
-      if (token.type === ",") {
+      if (token.type === ',') {
         this.continueBare = true;
         return this.parseBareList(list);
       }
@@ -209,8 +206,8 @@ export class Parser {
     }
 
     switch (token.type) {
-      case "]":
-      case ";":
+      case ']':
+      case ';':
         return vektar;
       default:
         return this.parseVektar(vektar.push(this.parse(token)));

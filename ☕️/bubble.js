@@ -8,10 +8,10 @@ export default class Bubble {
   }
 
   toString() {
-    return "°" + this.o;
+    return '°' + this.o;
   }
 
   inspect() {
-    return "°" + this.o.inspect;
+    return '°' + this.o.inspect;
   }
 }

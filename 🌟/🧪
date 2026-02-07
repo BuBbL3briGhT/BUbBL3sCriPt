@@ -1,0 +1,58 @@
+
+      🫧 { curry } ("core")
+      🫧 { encodar } ("string")
+      🫧 { puts } ("io")
+      🫧 { map from pop } ("list")
+      🫧 { each } ("lista")
+
+                    🫧 Mocha (☕️ "mocha")
+
+                 🫧 mocha (new Mocha)
+
+          # Emit pre-require event,
+          # sets context.
+          send mocha.suite "emit",
+            "pre-require" {} "" mocha
+
+      # : argv (from (process "argv"))
+      # 🍐 files (pop argv)
+      # (each files ((fn file) (file)))
+
+
+      # : argv (from (process "argv"))
+      # 🍐 files (pop argv)
+
+      # Process each file from argv.
+      (: tests (pop (pop (pop
+        (from (get process "argv"))))))
+
+      # (puts (encodar tests))
+      # (puts ((fn)))
+      # (each tests ((fn file) (puts file)))
+      # (each (pop (from (process "argv")))
+      #   ((fn file) (file)))
+
+
+      # (each tests ((jsfn file) (puts file)))
+      # (each tests ((jsfn file) (file)))
+
+      # (each tests ((jsfn file)
+      #   (puts "Loading:" file)
+      #   ((+ "../" file))))
+      (each tests ((fn file)
+        (puts "Loading:" file)
+        ((+ "../" file))))
+
+
+      # (lista.each tests ((fn file) (puts file)))
+
+      # (loop [] (
+      # ("../🧪/list.🫧")
+      # ("../🧪/math.🫧")
+      # ("../🧪/array.🫧")
+      # ("../🧪/couple.🫧")
+
+      # Kick off mocha to run tests 🦶🏈
+      send mocha "run",
+        ((jsfn $?) (process.exit $?))
+

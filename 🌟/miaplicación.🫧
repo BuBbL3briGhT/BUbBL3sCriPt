@@ -1,0 +1,77 @@
+# This is here for testing purposes.
+#
+# To run:
+#
+#    bin/bubls myapp.🫧
+#
+
+(consola.registro "Hola")
+
+(🫧 (😄)
+   (😊))
+
+🫧 (😊),
+  # (no.no.no)
+  (puts "hello")
+
+(😄)
+
+# (no)
+
+# const no { no: (fn [] (consola.log "Hola Cola")) }
+# const no (obj [:no (fn [] (consola.log "Hola Cola"))])
+#🫧 no (obj [:no (fn [] (consola.log "Hola Cola"))])
+#🫧 no (obj :no (fn [] (puts "Hola Cola")))
+🫧 no (obj "no" (funk [] (puts "Hola Cola")))
+# 🫧 no (obj "no" (funk (puts $1)))
+
+(no.no)
+
+
+(🫧 (toString o) (send o :toString))
+
+(consola.registro {toString})
+
+(🫧 (++ n) (+ n 1))
+
+#/* puts ++ */
+#/* puts (toString ++) */
+
+puts (++ 5)
+
+(🫧 (map list fn)
+  (if (empty? list)
+    list
+    (push
+      (map (pop list) fn)
+      (fn (peek list)))
+;
+
+🫧 puts (let { puts }
+  (fn [& list] (puts & list)))
+
+puts map
+
+(stop)
+puts puts
+puts +
+
+stop
+
+
+(🫧 import (macro [what from where]
+  (list °const what (list °reqůire where))))
+
+(import * from "list")
+
+# puts (map (range 3) ++)
+# puts (toString (map (range 3) ++))
+
+(puts (-> (range 3) (map ++) toString))
+
+(defMacro (-> head & tail)
+  (reduce tail (fn [memo i]
+    (let [fn (peek i)]
+      (push (push (pop i) memo) fn))
+    head))
+

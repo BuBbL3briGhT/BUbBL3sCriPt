@@ -1,0 +1,7 @@
+: 👋 "¡Hola, Mucho Gusto, Ron Burgandy!"
+
+: (array & _) (✨️ Array & _)
+
+: 🧁 (array 1 2 3)
+
+: { puts } ("io")

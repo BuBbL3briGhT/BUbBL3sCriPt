@@ -1,6 +1,5 @@
-(🫧 { push conj } (require "list"))
-
-🫧 (puts & msg) (console.log & msg)
+🫧 { push conj } ("list")
+🫧 { puts } ("io")
 
 (🫧 (curry fun & x)
   ((fn & o) (fun & (conj x o))))
@@ -11,6 +10,4 @@
 (define-macro (puts-macro & macro)
   (list °puts-to-string (push macro °expand-macro)))
 
-module.exports {
-  puts curry puts-encodar puts-macro
-}
+module.exports { curry puts-encodar puts-macro }

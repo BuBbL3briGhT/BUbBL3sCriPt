@@ -6,6 +6,7 @@
 import bubls from '../☕️/index.js';
 import { rootBinding } from '../☕️/binding.js';
 import { ėval } from "../☕️/eval.js";
+import { parse } from "../☕️/parse.js";
 import { BubbleScriptError } from "../☕️/errors.js";
 
 let path = process.argv[2];
@@ -23,52 +24,45 @@ binding.__dirname = process.cwd();
 import readline from 'readline';
 import fs from "fs";
 
-if (path) {
-
-  fs.readFile(path, 'utf-8', function (error, xoxo) {
-    if (error) {
-      console.log(error);
-      return;
-    }
-    try {
-      ėval(binding, xoxo, { file: path });
-    } catch (error) {
-      if (error instanceof BubbleScriptError) {
-        console.log(error.name +
-          ": " + error.message);
-        console.log(error.stack);
-      } else {
-        console.log(error);
-      }
-    }
-  });
-
-} else {
+if (path) { bubls.load(binding, path, fs, ėval); } else {
 
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   });
 
+  // function completeExpression(input) {
+  function isExpressionComplete(input) {
+    try { [...parse(input)]; return 1; }
+    catch (error) { return 0; }
+  }
+
   function r3pL() {
+    let oxox = "";
     rl.question("%< ", (xoxo) => {
-      try {
+      if (xoxo.trim() != "") try {
         if (xoxo == ".exit") {
           rl.close();
           return;
         }
-        let result = ėval(binding, xoxo);
-        if (result && result.toString) {
-          // console.log(result);
-          try {
-            console.log(result.toString());
-          } catch (error) {
-            console.log(error);
-            console.log("Error rendering with toString on result, falling back.");
+
+        oxox += " " + xoxo;
+
+        if (isExpressionComplete(oxox)) {
+          const result = ėval(binding, oxox);
+          if (result && result.toString) {
+            // console.log(result);
+            try {
+              console.log(result.toString());
+            } catch (error) {
+              console.log(error);
+              console.log("Error rendering with toString on result, falling back.");
+              console.log(result);
+            }
+          } else {
             console.log(result);
           }
-        } else {
-          console.log(result);
+          oxox = "";
         }
       } catch (error) {
         console.log(error);

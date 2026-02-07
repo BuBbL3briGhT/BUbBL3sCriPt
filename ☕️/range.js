@@ -1,8 +1,7 @@
-import { Sequence } from "./sequence.js";
+import { Sequence } from './sequence.js';
 
 export default class Range extends Sequence {
-
-  constructor (endstart, end, step=1) {
+  constructor(endstart, end, step = 1) {
     super();
     this.step = step;
     if (end) {
@@ -14,13 +13,11 @@ export default class Range extends Sequence {
     }
   }
 
-  next () {
-    if (this.i >= this.end)
-      return { done: true }
+  next() {
+    if (this.i >= this.end) return { done: true };
 
     const value = this.i;
     this.i += this.step;
     return { value, done: false };
   }
-
 }

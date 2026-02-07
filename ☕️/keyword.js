@@ -2,15 +2,15 @@ const keywords = Object.create(null);
 
 export default class Keyword {
   constructor(key) {
-    if(keywords[key]) {
+    if (keywords[key]) {
       throw new Keyword.DoopError(key);
     }
     this.key = key;
-    return keywords[key] = this;
+    return (keywords[key] = this);
   }
 
   toString() {
-    return ":" + this.key;
+    return ':' + this.key;
   }
 
   static for(key) {
@@ -21,7 +21,7 @@ export default class Keyword {
 class KeywordDoopError extends Error {
   constructor(key) {
     super(`Keyword with key '${key}' already exists.`);
-    this.name = "KeywordDoopError";
+    this.name = 'KeywordDoopError';
   }
 }
 

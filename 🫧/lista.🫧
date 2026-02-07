@@ -1,0 +1,71 @@
+
+: 🍐 ("🍐")
+: { empty? reduce } ("list")
+
+: ? if
+
+: (peek lista) (get lista "o")
+: (pop lista) (get lista "oo")
+: (push lista 💖) (list 💖 lista)
+
+: (🫣 lista) (get lista "o")
+: (🎉 lista) (get lista "oo")
+
+# : (🫣 lista) (lista "o")
+# : (🎉 lista) (lista "oo")
+
+# (define-macro (-> & list)
+#   (reduce list (fn (memo, item)
+#     (list item memo))))
+
+
+# (: (shift lista)
+#   (invert (pop (invert lista))))
+
+: (shift lista) (-> lista invert pop invert)
+
+: (invert lista),
+    (if lista
+      (reduce (pop lista)
+        ((fn memo la)
+          (push memo la)
+          (list (peek lista)))))
+
+# : (conj l) (if l (conj (push (pop l) (peek l))))
+#
+# : (empty? l) (!! l)
+#
+# (: (each 🫧 fn)
+#   (: 🍎 (fn (🫣 🫧)))
+#   (: 🍌 (🎉 🫧))
+#   (? 🍌 (each 🍌 fn) 🍎))
+#
+
+(: (each 🫧 ⚡️)
+  # (puts 🫣)
+  (: 🍎 (⚡️ (🫣 🫧)))
+  (: 🍌 (🎉 🫧))
+  (? (empty? 🍌) 🍎 (each 🍌 ⚡️)))
+
+
+# # With some named association
+# (: (each 🫧 fn⚡️)
+#   (: result🍎 (fn⚡️ (peek🫣 🫧)))
+#   (: 🍌 (pop🎉 🫧))
+#   (? 🍌 (each 🍌 fn⚡️) 🍎))
+
+#
+#
+# (: (from & .) (list & (Array "from" & .))
+#
+# (: (map 🫧 ⚡️)
+#   (if 🫧
+#     (🫷 (map (🎉 🫧) ⚡️) (⚡️ (🫣 🫧)))
+#     🫧))
+#
+# (: (map l fn)
+#   (if (✨️ List (fn (peek l)) (map (pop l) fn)))
+#
+
+
+module.exports { peek pop push each shift invert }

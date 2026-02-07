@@ -3,6 +3,10 @@
 # Comparator returns true when a < b (default
 # comparator uses <)
 
+
+# : (peek list) (0 list)
+# : (pop list) (1 list)
+
   #  (🫧 (peek list)
   #    (get list 0)
   #
@@ -70,8 +74,23 @@
 (🫧 (empty? list)
   (get list "isEmpty"))
 
-(🫧 (each list fn)
-  (send list "each" fn))
+# (🫧 (each list fn)
+#   (send list "each" fn))
+# (🫧 (each list fn)
+#   (list.each fn)) # -> (send list "each" fn))
+
+: ? if
+# : (🫣 .) ("o" .) # Peek-a-boo
+# : (🎉 .) ("oo" .) # Pop
+# : (🫣 .) (get . "o")
+# : (🎉 .) (get . "oo")
+: (🫣 list) (get list "o")
+: (🎉 list) (get list "oo")
+
+(: (each 🫧 ⚡️)
+  (: 🍎 (⚡️ (🫣 🫧)))
+  (: 🍌 (🎉 🫧))
+  (? (empty? 🍌) 🍎 (each 🍌 ⚡️)))
 
 (🫧 (from array)
   (send List "from" array))

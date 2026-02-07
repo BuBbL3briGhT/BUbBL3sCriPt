@@ -1,54 +1,47 @@
 const symbols = Object.create(null);
 
-// `Ṣymbol`s are language symbols. Alternatively
-// to avoid name clash with the built-in
-// Javascript `Symbol` class/object.
+const parseṢymbol = (str) => str.split('/').map((part) => part.split('.'));
+
 export default class Ṣymbol {
-
   constructor(value) {
-    if(symbols[value]) {
-      throw new Error("Duplicate symbol initalization");
-    }
+    let message, segments, fn;
 
-    this.value = value;
+    if (value.length > 2) {
+      [segments, fn] = parseṢymbol(value);
 
-    var fn, segments,
-      callPattern = 1;
+      if (!fn && segments.length > 1) message = segments.pop();
+    } else [segments, fn] = [[value]];
 
-    if (value !== "/")
-      [value, fn] = value.split('/');
-    segments = value.split('.');
-
-    if (segments.length == 1 && !fn)
-      fn = segments.pop();
-
-    if (!fn)
-      [fn, callPattern] = [segments.pop(), 2];
-
-    this.fn = fn;
-    this.segments = segments;
-    this.callPattern = callPattern;
-
-    return symbols[value] = this;
+    Object.assign(this, { value, segments, fn, message });
+    Object.freeze(this);
+    return (symbols[value] = this);
   }
 
   toString() {
     return this.value;
   }
 
-  valueOf() {
-    return this.value;
+  resolveSegments(binding) {
+    // if (!this.segments) return binding;
+    return this.segments // object, key
+      .reduce((o, k) => o && o[k], binding);
   }
 
-  resolveRoot(binding) {
-    return this.segments
-      .reduce(function(e, f) {
-        return e && e[f]
-      }, binding)
+  resolve(binding) {
+    const o = this.resolveSegments(binding);
+    const { message, fn } = this;
+    return message ? o[message] : fn ? o[fn] : o;
+  }
+
+  resolveFn(binding) {
+    return this.resolveSegments(binding)[this.fn];
+  }
+
+  resolveMessage(binding) {
+    return this.resolveSegments(binding)[this.message];
   }
 
   static for(key) {
     return symbols[key] || new Ṣymbol(key);
   }
-
 }

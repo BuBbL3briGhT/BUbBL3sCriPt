@@ -1,0 +1,28 @@
+
+: { desc it assert } ("test")
+# : { * } ("test")
+# : * ("test")
+
+# : { invert } ("lista")
+: { invert } ("../🫧/lista.🫧")
+# : lista ("lista")
+
+# import lista
+
+# define-macro (import module),
+#   (list °: °module (list (encodar module)))
+
+# lista/shift
+
+: ? if
+
+(desc "lista"
+  (desc "invert"
+    (it "inverts a list"
+      (assert.deepEqual
+        (invert °(1 2 3))
+        °(3 2 1)))))
+
+  # (desc "/shift"
+  #   (it "")))
+
