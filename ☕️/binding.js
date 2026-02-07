@@ -277,7 +277,7 @@ export const rootBinding = {
   }),
 
   '-': specialFormP(function (params) {
-    return params.reduce((a, b) => a - b);
+    return params.reduce((a, b) => a - b, 0);
   }),
 
   '*': specialFormP(function (params) {
