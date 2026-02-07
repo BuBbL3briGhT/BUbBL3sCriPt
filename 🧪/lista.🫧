@@ -17,7 +17,7 @@
 : ? if
 
 (desc "lista"
-  (desc "/invert"
+  (desc "invert"
     (it "inverts a list"
       (assert.deepEqual
         (invert °(1 2 3))

@@ -1,6 +1,6 @@
 
 : 🍐 ("🍐")
-: { empty? } ("list")
+: { empty? reduce } ("list")
 
 : ? if
 
@@ -24,13 +24,13 @@
 
 : (shift lista) (-> lista invert pop invert)
 
-# : (invert lista),
-#     (if lista
-#       (reduce (pop lista)
-#         ((fn memo la)
-#           (push memo la)
-#           (list (peek lista)))))
-#
+: (invert lista),
+    (if lista
+      (reduce (pop lista)
+        ((fn memo la)
+          (push memo la)
+          (list (peek lista)))))
+
 # : (conj l) (if l (conj (push (pop l) (peek l))))
 #
 # : (empty? l) (!! l)
@@ -68,4 +68,4 @@
 #
 
 
-module.exports { peek pop push each shift }
+module.exports { peek pop push each shift invert }
