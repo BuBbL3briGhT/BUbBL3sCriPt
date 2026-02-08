@@ -10,6 +10,13 @@
 (🫧 (shift list)
   (send list "shift"))
 
+(: (shift list)
+  (invert (pop (invert list))))
+
+: (shift list) (-> list invert pop invert)
+
+: (shift .) (-> . invert pop invert)
+
 (🫧 (invert list)
   (send list "invert"))
 
