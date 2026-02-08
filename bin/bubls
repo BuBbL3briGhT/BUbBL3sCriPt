@@ -46,10 +46,10 @@ if (path) { bubls.load(binding, path, fs, ėval); } else {
         }
 
         oxox += xoxo + "\n";
-        process.stdout.write(oxox);
+        // process.stdout.write(oxox);
 
         if (isExpressionComplete(oxox)) {
-          console.log("complete");
+          // console.log("complete");
           const result = ėval(binding, oxox);
           if (result && result.toString) {
             // console.log(result);
@@ -66,6 +66,7 @@ if (path) { bubls.load(binding, path, fs, ėval); } else {
           oxox = "";
         }
       } catch (error) {
+        oxox = "";
         console.log(error);
       }
       r3pL(oxox);
