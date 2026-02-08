@@ -3,8 +3,8 @@
 : {puts} ("io")
 : {puts-macro puts-encodar} ("core")
 
-(puts-macro desc "Math"
-  (desc "+"
+(desc "Math"
+  (puts-macro desc "+"
     (it "adds two numbers"
       (assert.equal (+ 1 1) 2)))
 
