@@ -1,19 +1,16 @@
 (const { desc it } (require "test"))
-(const assert (require-☕️ "assert"))
+(const assert ("assert"))
 : {puts} ("io")
 : {puts-macro puts-encodar} ("core")
 
 (desc "Math"
   (desc "+"
     (it "adds two numbers"
-      (puts "yo")
-      (assert "ok" false)
-      (throw 🥜)
       (assert.equal (+ 1 1) 2)))
 
   (desc "-"
     (it "subtracts"
-      (assert.equal (- 2 1) -3)))
+      (assert.equal (- 2 1) 1)))
 
   (desc "÷"
     (it "divides"

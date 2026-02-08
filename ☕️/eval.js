@@ -127,7 +127,9 @@ export function evalList(binding, list) {
             const s = head;
             if (s.message) {
               const o = s.resolveSegments(binding);
-              return evalList(binding, tail.push(s.message).push(o));
+              return evalList(binding,
+                tail.push(s.message).push(o)
+                .push(Ṣymbol.for("send")));
             } else {
               // console.debug({s});
               const _ = s.resolve(binding);
@@ -139,6 +141,7 @@ export function evalList(binding, list) {
           case 'SpecialForm':
           case 'SpecialFormP':
           case 'Macro':
+            // console.debug(head);
             return Fn.call(binding, head, tail, null, ėval);
           case 'List':
             return evalList(binding, tail.push(evalList(binding, head)));
@@ -153,9 +156,10 @@ export function evalList(binding, list) {
             // console.debug({fn});
             switch (fn.constructor.name.toString()) {
               case 'Function':
-                // return fn(...tail.tail);
+                // console.debug(fn);
                 return fn(...evalParams(binding, tail.tail));
               default:
+                // console.debug(fn);
                 return fn.call(head, ...tail.tail);
             }
         }
