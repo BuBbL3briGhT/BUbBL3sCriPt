@@ -1,58 +1,16 @@
 
-# : (peek .) ("o" .)
-# : (pop .) ("oo" .)
+# : (peek .) (0 .)
+# : (pop .) (-1 .)
+# : (push list .) (list.push .)
 
-: (peek .) (0 .)
-: (pop .) (-1 .)
 
-  #  (🫧 (peek list) (0 list))
-  #  (🫧 (pop list) (1 list))
-  #
-  #  (定 (窺視 它) (0 它))
-  #  (定 (述 它) (1 它))
-  #
-  #  (: (窺視 它) (0 它))
-  #  (: (述 它) (1 它))
-  #
-  #  (: (窺視 &) (0 &))
-  #  (: (述 &) (1 &))
-  #
-  #  (: (窺 &) (0 &))
-  #  (: (述 &) (1 &))
-  #
-  #  (: (窺 .) (0 .))
-  #  (: (述 .) (1 .))
-  #
-  #    #
-  #    # Peep and pop in terms of an array,
-  #    #   tuple or pair of values.
-  #    #
-  #    # 以陣列、元組或值對的形式進行預覽和彈出操作。
-  #    #
-  #
-  #      (: (窺 ○) (0 ○))
-  #      (: (述 ○) (1 ○))
-  #
-  #      : (窺 ○) (0 ○)
-  #      : (述 ○) (1 ○)
-  #
-  #        •• ••
-  #        窺 窺
-  #        —— ——
-  #        ︵
-  #        •• ••
-  #        窺 窺
-  #        —— ——
-  #
+: (peek .) ("o" .)
+: (pop .) ("oo" .)
+: (push list .) (✨️ List . list)
 
-# (🫧 (pop list)
-#   (send list "pop"))
-#
-# (🫧 (peek list)
-#   (send list "peek"))
 
-(🫧 (push list item)
-  (send list "push" item))
+# (🫧 (push list item)
+#   (send list "push" item))
 
 (🫧 (shift list)
   (send list "shift"))
