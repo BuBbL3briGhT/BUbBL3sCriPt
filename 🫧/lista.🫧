@@ -25,11 +25,11 @@
 : (shift lista) (-> lista invert pop invert)
 
 : (invert lista),
-    (if lista
+    (if (empty? lista)
+      lista
       (reduce (pop lista)
-        ((fn memo la)
-          (push memo la)
-          (list (peek lista)))))
+        ((fn memo la) (push memo la))
+        (list (peek lista))))
 
 # : (conj l) (if l (conj (push (pop l) (peek l))))
 #
