@@ -64,6 +64,7 @@ export class AbstractList {
   }
 
   at(i) {
+    if (i == -1) return this.pop();
     return this.skip(i).peek();
   }
 

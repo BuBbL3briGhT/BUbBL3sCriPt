@@ -1,18 +1,10 @@
-# Cleaned list helpers and a pure-BubbleScript
-# bubblesort (selection-extraction style)
-# Comparator returns true when a < b (default
-# comparator uses <)
 
+# : (peek .) ("o" .)
+# : (pop .) ("oo" .)
 
-: (peek .) ("o" .)
-: (pop .) ("oo" .)
+: (peek .) (0 .)
+: (pop .) (-1 .)
 
-  #  (🫧 (peek list)
-  #    (get list 0)
-  #
-  #  (🫧 (pop list)
-  #    (get list 1)
-  #
   #  (🫧 (peek list) (0 list))
   #  (🫧 (pop list) (1 list))
   #
@@ -115,6 +107,7 @@
 
 # (🫧 (reduce list & params)
 #   (send list "reduce" & params))
+
 
 # Default comparator: returns true when a < b
 (🫧 (default-cmp a b)
