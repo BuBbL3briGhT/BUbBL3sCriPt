@@ -4,8 +4,8 @@
 : {puts-macro puts-encodar} ("core")
 
 (desc "Math"
-  (puts-macro desc "+"
-    (it "adds two numbers"
+  (desc "+"
+    (puts-macro it "adds two numbers"
       (assert.equal (+ 1 1) 2)))
 
   (desc "-"
