@@ -1,7 +1,9 @@
 (const { desc it } (require "test"))
 (const assert (require-☕️ "assert"))
+: {puts} ("io")
+: {puts-macro puts-encodar} ("core")
 
-(desc "Math"
+(puts-macro desc "Math"
   (desc "+"
     (it "adds two numbers"
       (assert.equal (+ 1 1) 2)))
