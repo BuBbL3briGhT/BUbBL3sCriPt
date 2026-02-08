@@ -1,16 +1,11 @@
-
-# : (peek .) (0 .)
-# : (pop .) (-1 .)
-# : (push list .) (list.push .)
-
+: List (☕️ "../☕️/list.js")
 
 : (peek .) ("o" .)
 : (pop .) ("oo" .)
 : (push list .) (✨️ List . list)
 
-
-# (🫧 (push list item)
-#   (send list "push" item))
+: 🫣 peek
+: 🎉 pop
 
 (🫧 (shift list)
   (send list "shift"))
@@ -18,35 +13,18 @@
 (🫧 (invert list)
   (send list "invert"))
 
-(🫧 (reverse list)
-  (invert list))
+: reverse invert
 
-(🫧 (empty? list)
-  (get list "isEmpty"))
-
-# (🫧 (each list fn)
-#   (send list "each" fn))
-# (🫧 (each list fn)
-#   (list.each fn)) # -> (send list "each" fn))
+: (empty? .) ("isEmpty" .)
 
 (: ? if)
-
-# : (🫣 .) ("o" .) # Peek-a-boo
-# : (🎉 .) ("oo" .) # Pop
-
-# : (🫣 .) (get . "o")
-# : (🎉 .) (get . "oo")
-
-: (🫣 list) (get list "o")
-: (🎉 list) (get list "oo")
 
 (: (each 🫧 ⚡️)
   (: 🍎 (⚡️ (🫣 🫧)))
   (: 🍌 (🎉 🫧))
   (? (empty? 🍌) 🍎 (each 🍌 ⚡️)))
 
-(🫧 (from array)
-  (send List "from" array))
+: (from array) (List "from" array)
 
 (🫧 (map list fn)
   (if (empty? list)
