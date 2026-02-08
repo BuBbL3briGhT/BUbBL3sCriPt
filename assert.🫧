@@ -1,6 +1,0 @@
-# : {ok} ("assert")
-
-# (ok false)
-: assert ("assert")
-
-(assert.ok false)
