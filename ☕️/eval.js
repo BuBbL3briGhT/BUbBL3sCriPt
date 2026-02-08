@@ -121,7 +121,7 @@ export function evalList(binding, list) {
         return indexed.at(head);
       case 'object':
       case 'function':
-        // console.log(3, head.constructor.name.toString());
+        // console.log(3, head);
         switch (head.constructor.name.toString()) {
           case 'Ṣymbol':
             const s = head;

@@ -1,21 +1,25 @@
-: List (☕️ "../☕️/list.js")
+#: List (☕️ "../☕️/list.js")
+
+# : {puts} ("io")
+# puts (☕️ "../☕️/list.js")
 
 : (peek .) ("o" .)
 : (pop .) ("oo" .)
 : (push list .) (✨️ List . list)
+# : (push list .) (new List . list)
 
 : 🫣 peek
 : 🎉 pop
 
-(🫧 (shift list)
-  (send list "shift"))
+# (🫧 (shift list)
+#   (send list "shift"))
 
 (: (shift list)
   (invert (pop (invert list))))
 
-: (shift list) (-> list invert pop invert)
-
-: (shift .) (-> . invert pop invert)
+# : (shift list) (-> list invert pop invert)
+#
+# : (shift .) (-> . invert pop invert)
 
 (🫧 (invert list)
   (send list "invert"))
@@ -31,7 +35,7 @@
   (: 🍌 (🎉 🫧))
   (? (empty? 🍌) 🍎 (each 🍌 ⚡️)))
 
-: (from array) (List "from" array)
+: (from array) (send List "from" array)
 
 (🫧 (map list fn)
   (if (empty? list)
