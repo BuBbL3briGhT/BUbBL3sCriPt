@@ -48,7 +48,7 @@ if (path) { bubls.load(binding, path, fs, ėval); } else {
         oxox += xoxo + "\n";
         // process.stdout.write(oxox);
 
-        if (isExpressionComplete(oxox)) {
+        if (true || isExpressionComplete(oxox)) {
           // console.log("complete");
           const result = ėval(binding, oxox);
           if (result && result.toString) {

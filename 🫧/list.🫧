@@ -4,8 +4,8 @@
 # comparator uses <)
 
 
-# : (peek list) (0 list)
-# : (pop list) (1 list)
+: (peek .) ("o" .)
+: (pop .) ("oo" .)
 
   #  (🫧 (peek list)
   #    (get list 0)
@@ -53,11 +53,11 @@
   #        —— ——
   #
 
-(🫧 (pop list)
-  (send list "pop"))
-
-(🫧 (peek list)
-  (send list "peek"))
+# (🫧 (pop list)
+#   (send list "pop"))
+#
+# (🫧 (peek list)
+#   (send list "peek"))
 
 (🫧 (push list item)
   (send list "push" item))
@@ -79,11 +79,14 @@
 # (🫧 (each list fn)
 #   (list.each fn)) # -> (send list "each" fn))
 
-: ? if
+(: ? if)
+
 # : (🫣 .) ("o" .) # Peek-a-boo
 # : (🎉 .) ("oo" .) # Pop
+
 # : (🫣 .) (get . "o")
 # : (🎉 .) (get . "oo")
+
 : (🫣 list) (get list "o")
 : (🎉 list) (get list "oo")
 

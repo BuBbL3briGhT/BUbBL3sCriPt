@@ -10,6 +10,16 @@ describe('tokenize(string)', function () {
   //   const tokens = tokenize("hai");
   // });
 
+  it("tokenizes .", function () {
+    const tokens = tokenize(".");
+    assert.deepEqual(
+      [
+        { type: TOK_SYMBOL, value: '.', line: 1, column: 1 },
+      ],
+      [...tokens],
+    );
+  });
+
   it('tokenizes (:)', function () {
     const tokens = tokenize('(:)');
     assert.deepEqual(
@@ -403,17 +413,11 @@ describe('Tokenizer', function () {
           column: 6,
         },
         {
-          type: '.',
-          value: '.',
+          type: TOK_SYMBOL,
+          value: '.°',
           line: 1,
           column: 7,
-        },
-        {
-          type: '°',
-          value: '°',
-          line: 1,
-          column: 8,
-        },
+        }
       ],
       [...tokenizer],
     );
