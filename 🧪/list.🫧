@@ -2,6 +2,7 @@
 : assert ("assert")
 : { encodar } ("string")
 : { conj pop shift } ("list")
+: l ("list")
 
 
   #
@@ -38,7 +39,7 @@
     (it "shifts the list"
       (assert.equal
         (encodar °(1 2))
-        (encodar (shift °(1 2 3))))))
+        (encodar (l/shift °(1 2 3))))))
 
   (desc "conj"
     (it "conjoins two lists"
