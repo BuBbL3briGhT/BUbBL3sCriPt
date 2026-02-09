@@ -36,9 +36,8 @@
 
   (desc "shift"
     (it "shifts the list"
-      (assert.equal
-        (encodar °(1 2))
-        (encodar (l/shift °(1 2 3))))))
+      (: result (l/shift °(1 2 3)))
+      (assert.deepEqual result (list 1 2))))
 
   (desc "peek"
     (it "peeks at the list"
