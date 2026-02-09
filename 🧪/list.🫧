@@ -4,7 +4,6 @@
 : { conj pop shift } ("list")
 : l ("list")
 
-
   #
   #  定   定   定   定
   #  義   義   義   義
@@ -40,6 +39,11 @@
       (assert.equal
         (encodar °(1 2))
         (encodar (l/shift °(1 2 3))))))
+
+  (desc "peek"
+    (it "peeks at the list"
+      (assert.equal 3
+        (l/peek °(3 2 1)))))
 
   (desc "conj"
     (it "conjoins two lists"
