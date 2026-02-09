@@ -4,6 +4,7 @@
       🫧 { puts } ("io")
       🫧 { map from pop } ("list")
       🫧 { each } ("lista")
+      🫧 { it desc it-only } ("test")
 
                     🫧 Mocha (☕️ "mocha")
 
