@@ -1,4 +1,4 @@
-#: List (☕️ "../☕️/list.js")
+: { List } (☕️ "../☕️/list.js")
 
 # : {puts} ("io")
 # puts (☕️ "../☕️/list.js")
