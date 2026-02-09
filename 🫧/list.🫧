@@ -6,13 +6,9 @@
 : (peek .) ("o" .)
 : (pop .) ("oo" .)
 : (push list .) (✨️ List . list)
-# : (push list .) (new List . list)
 
 : 🫣 peek
 : 🎉 pop
-
-# (🫧 (shift list)
-#   (send list "shift"))
 
 (: (shift list)
   (invert (pop (invert list))))
