@@ -46,9 +46,9 @@
 
   (desc "conj"
     (it "conjoins two lists"
-      (assert.equal
-        (encodar (conj °(4 5 6) °(1 2 3)))
-        "(1 2 3 4 5 6)")))
+      (assert.deepEqual
+        (conj (list 4 5 6) (list 1 2 3))
+        (list 1 2 3 4 5 6))))
 
   (🫧 定 definir)
   (定 述 desc)
