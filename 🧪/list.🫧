@@ -36,7 +36,8 @@
 
   (puts assert.equal)
   (desc "shift"
-    (it "shifts the list"
+    (it.only "shifts the list"
+    (it/only "shifts the list"
       (: result (l/shift °(1 2 3)))
       (assert.deepEqual result (list 1 2))))
 
